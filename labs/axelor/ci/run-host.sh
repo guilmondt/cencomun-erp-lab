@@ -31,10 +31,13 @@ print('Sanitized evidence directory:',target)
 if int(sys.argv[3]):
     candidates=[target/name for name in ['app-restart.log','app-first.log','frozen-build.log','full-build.log','init-scope.log','module-tests.log','setup.log']]
     log=next((p for p in candidates if p.exists() and p.stat().st_size),None)
-    detail='\n'.join(log.read_text(errors='replace').splitlines()[-80:]) if log else 'No runner log available'
+    # GitHub truncates annotation messages around 4 KiB. Keep the client error
+    # first, plus the failing-stage tail, rather than losing the exception.
+    detail=''
     if (target/'container.log').exists():
-        detail+='\nContainer summary:\n'+'\n'.join((target/'container.log').read_text(errors='replace').splitlines()[-25:])
-    detail=detail[-50000:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+        detail='Container tail:\n'+'\n'.join((target/'container.log').read_text(errors='replace').splitlines()[-12:])[-2200:]
+    detail+='\nFailing stage:\n'+ ('\n'.join(log.read_text(errors='replace').splitlines()[-30:])[-1400:] if log else 'No runner log available')
+    detail=detail.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
     print('::error title=Axelor full-stack failure::'+detail)
 else:
     evidence={name:json.loads((target/name).read_text()) for name in ['upstream-tests.json','smoke-first.json','smoke-restart.json']}

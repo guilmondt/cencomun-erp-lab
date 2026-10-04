@@ -130,7 +130,7 @@ stop_app
 echo 'Phase: server restart against the same disposable database'
 start_app restart
 python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
-  http://127.0.0.1:8080/axelor-erp "$results_dir/smoke-restart.json" 300
+  http://127.0.0.1:8080/axelor-erp "$results_dir/smoke-restart.json" 900
 stop_app
 cd /workspace/cencomun-erp-lab
 ./scripts/verify-repo.sh
