@@ -62,6 +62,8 @@ not runtime integration with every AOS module.
 | Lockfile generation and frozen validation | Passed; final frozen run 15 seconds, 9 tasks executed |
 | Available application task discovery | Passed; embedded Tomcat `run` task registered |
 | Saved start instructions after environment reconnection | Passed; compilation/JAR and 2 tests rerun in 18 seconds |
+| Independent checkout with corrected bootstrap and no Gradle cache | Passed; compilation/JAR and both tests in 1m 41s |
+| `verify-clean-setup.sh` from committed source, completely empty runtime/cache | Passed; compilation/JAR and 2 tests in 1m 33s; checkout clean |
 | `versions.lock` diff, host and AOS tracked diffs | Empty; pins and upstream source unchanged |
 | PostgreSQL, HTTP startup/functional request, all AOS tests, frontend build | Unrun; dedicated runner scope |
 
@@ -115,8 +117,10 @@ bootstrap did not receive them. Retained Gradle files had hidden this failure.
    Gradle 8.14.3 bootstrap and package/distribution checks.
 3. Added `verify-clean-setup.sh` to exercise committed source and an empty
    dependency directory, including compilation/JAR and both module tests.
-   This is the regression procedure for the bootstrap failure; its latest
-   complete outcome is reported with the subsequent verification.
+   The complete regression passed from source commit
+   `4feec60211f03fc99b43fafaeff9d4ffbbaa200e`: first installation, verified
+   wrapper download, compilation/JAR, 2 passing tests and a clean checkout.
+   Evidence was retained in `/tmp/ccm-axelor-clean-setup.eA53uT` for this run.
 
 ## Networking, saved configuration and limits
 
@@ -147,6 +151,13 @@ generated caches/results stay outside source control. Issue closure is outside
 this setup's scope.
 The active configuration and retained files were verified after reconnection;
 restoration in an independently created new task has not been tested.
+
+The baseline and bootstrap fix were committed and pushed to the requested
+GitHub branch `lab/axelor-baseline`, without changing the other laboratory
+platform or merging branches. Clean setup reproduces from committed source on
+the current machine; this does not establish new-task snapshot restoration.
+The environment repository reference must be advanced to the final remote
+commit and published through the interface for future tasks to select it.
 
 Full-stack requirements and untested startup commands are documented separately
 in `labs/axelor/FULL_STACK_RUNNER.md`.
