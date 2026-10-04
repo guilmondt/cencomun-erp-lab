@@ -1,0 +1,26 @@
+plugins {
+  id 'com.axelor.app'
+}
+
+group = 'com.cencomun'
+version = '0.1.0'
+
+dependencyLocking {
+  lockAllConfigurations()
+  lockMode = LockMode.STRICT
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+axelor {
+  title = 'Cencomun Baseline'
+  description = 'Isolated Cencomun extension module; no business features.'
+}
+
+test {
+  useJUnitPlatform()
+}
