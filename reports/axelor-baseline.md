@@ -2,7 +2,8 @@
 
 Date: 2026-10-04. Branch: `lab/axelor-baseline`. Cloud compilation and custom
 module unit validation completed after Issue #1. Full-stack readiness is not
-claimed.
+claimed by the cloud-only checks below. A subsequent external runner passed the
+full-stack baseline; see the follow-up at the end and `axelor-full-stack.md`.
 
 ## Verified references and tool versions
 
@@ -161,3 +162,31 @@ commit and published through the interface for future tasks to select it.
 
 Full-stack requirements and untested startup commands are documented separately
 in `labs/axelor/FULL_STACK_RUNNER.md`.
+
+## External runner follow-up — 2026-10-04
+
+The user delegated runner selection; GitHub Actions was prepared and executed
+on `lab/axelor-baseline`, with Issue #1 preflight before every Task 020 job.
+Source commit `cdc57c8656940fc6c4eed381244fbb514e702fcf`, run
+[37228746936](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37228746936),
+passed in 18m 23s: full original-settings AOS/frontend/WAR and embedded launcher,
+2 Cencomun plus 16 existing upstream unit cases, strict-lock offline Gradle
+replay, PostgreSQL 16.15 initialization, framework login and authenticated
+module metadata reads, then server restart with the same database. Both smokes
+found 33 modules with AOS 9.1.8, AOP 8.2.3 and Cencomun 0.1.0. Initial readiness
+422.42s; restarted readiness 315.44s. Final tracked laboratory/host/AOS diffs were
+empty. Cencomun business features/LOC and original upstream pins remain unchanged.
+
+`reports/axelor-full-stack.md` contains immutable runner references, current-run
+evidence, diagnosed setup errors, numbered corrections and limitations. Its
+successful authenticated metadata workflow does not establish the Core Test,
+all AOS tests or ERP business correctness. The original cloud-only results above
+remain scoped to Cloud; services ran solely on the external Docker host.
+
+The reusable cloud installation instructions are preserved. The draft's complete
+startup instructions now include the tested CI semantic/lifecycle checks and
+point future tasks to the external-runner report. Networking remains restricted
+with `package_managers`; only the two Action log/artifact hosts that actually
+returned proxy 403 were added to the draft, preserving existing custom domains.
+The updated repository reference/draft still needs user review/save/publication;
+that does not imply independent new-task restoration has been verified.

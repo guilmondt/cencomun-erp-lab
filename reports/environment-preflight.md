@@ -50,3 +50,22 @@ Repository guardrails, custom compilation and two named tests passed;
 `versions.lock` and upstream tracked files remain unchanged. The available
 cloud development workflow and installation repeatability are validated;
 full-stack/database/server checks remain unrun.
+## External runner continuation — 2026-10-04
+
+Issue #1 preflight and guardrails were rerun before the GitHub Actions harness
+and before every external Task 020 job. Only Axelor was configured. Cloud's
+compiler/wrapper/module workflow passed again; full-stack services were run
+exclusively on the external hosted Docker runner. Run 37228746936 passed 18 unit
+cases, full AOS/frontend/WAR, PostgreSQL 16.15 authenticated metadata API and
+server restart. See `reports/axelor-full-stack.md` for exact references/results.
+
+GitHub Git reads/push and Actions metadata work with existing authentication.
+Cloud log/artifact downloads proved proxy CONNECT 403 for
+`results-receiver.actions.githubusercontent.com` and
+`productionresultssa11.blob.core.windows.net`. Those exact hosts were added only
+to the restricted-network draft, preserving `package_managers`, `api.github.com`
+and `repository.axelor.com`; no secret requirement or wildcard was added.
+Draft saving does not apply networking or publish. Complete parsed current-run
+results were obtained through supported GitHub check annotations. The user must
+review/save/publish the updated configuration to activate its final reference
+and allow downloading the full evidence in future tasks.

@@ -37,3 +37,27 @@
 - Evidence/tests: `reports/environment-preflight.md`,
   `reports/axelor-baseline.md`; 2 tests passed, 0 failed/errors/skipped;
   repeated setup and frozen-lock compile/test/JAR validation passed.
+
+## ADR-002 — GitHub Actions for Axelor full-stack validation
+
+- Date: 2026-10-04
+- Platform: Axelor
+- Status: Accepted; full-stack baseline validated on the hosted runner
+- Context: Cloud setup reserves full ERP/database/service tests for an external
+  runner. The user delegated the choice and repository GitHub Actions works.
+- Options considered: hosted GitHub Actions; a maintained self-hosted server.
+- Decision: use a branch-triggered workflow and disposable PostgreSQL/build
+  containers on an actual hosted Docker VM. Fix official image/action/runtime
+  references; keep the existing AOS/AOP commits, wrapper and Cencomun module.
+- Consequences: no server administration or production secrets needed. Preserve
+  source, frozen frontend installation and external per-run dependency locks;
+  publish sanitized logs/test artifacts and authenticated read-only API evidence.
+  Full-suite Maven locks are evidence of each run, not yet a completely frozen
+  branch dependency replay. Cloud networking remains restricted and separate.
+- Upgrade impact: changing an image/runtime/upstream reference requires its own
+  checksum/reference checks and rerunning compilation, API smoke and restart.
+- Evidence/tests: `reports/axelor-full-stack.md`,
+  `reports/axelor-full-stack-exec-plan.md`, `.github/workflows/axelor-full-stack.yml`;
+  run 37228746936 passed full compilation/WAR, 18 unit cases, strict offline
+  Gradle replay, PostgreSQL authenticated metadata API and server restart with
+  33 modules. First startup 422.42s, restart 315.44s; tracked upstream diffs empty.
