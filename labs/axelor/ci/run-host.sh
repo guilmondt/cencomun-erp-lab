@@ -28,6 +28,12 @@ if target.resolve() != (state/'results').resolve():
     shutil.copytree(state/'results',target,dirs_exist_ok=True)
 print('Runner exit status:',sys.argv[3])
 print('Sanitized evidence directory:',target)
+if int(sys.argv[3]):
+    candidates=[target/name for name in ['full-build.log','module-tests.log','setup.log','container.log']]
+    log=next((p for p in candidates if p.exists() and p.stat().st_size),None)
+    detail='\n'.join(log.read_text(errors='replace').splitlines()[-80:]) if log else 'No runner log available'
+    detail=detail[-50000:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+    print('::error title=Axelor full-stack failure::'+detail)
 PY
   exit "$status"
 }
