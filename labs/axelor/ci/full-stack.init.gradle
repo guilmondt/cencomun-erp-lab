@@ -1,4 +1,14 @@
 // Runtime configuration only. Original settings/build/module sources stay intact.
+gradle.beforeProject { p ->
+  if (p.rootProject.name != 'axelor-erp') return
+  // Some AOP configuration resolves runtimeClasspath during project evaluation.
+  // Locks must be configured before any project build script can resolve it.
+  p.dependencyLocking {
+    lockAllConfigurations()
+    lockMode = LockMode.STRICT
+    lockFile = new File(System.getenv('CCM_CI_STATE'), "locks/${p.name}.lockfile")
+  }
+}
 gradle.projectsEvaluated {
   def root = gradle.rootProject
   // Init scripts also run for buildSrc/included builds. Configure only the host.
@@ -15,13 +25,6 @@ gradle.projectsEvaluated {
   }
   root.tasks.named('run') {
     jvmArgs '-Xmx3g'
-  }
-  root.allprojects { p ->
-    p.dependencyLocking {
-      lockAllConfigurations()
-      lockMode = LockMode.STRICT
-      lockFile = new File(System.getenv('CCM_CI_STATE'), "locks/${p.name}.lockfile")
-    }
   }
 }
 gradle.taskGraph.whenReady { graph ->
