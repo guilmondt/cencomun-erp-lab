@@ -1,5 +1,10 @@
 # Issue #2 — Frappe/ERPNext baseline
 
+This report records the initial DB-free baseline. The later user-authorized
+real-site validation is documented in `frappe-integral.md` and
+`frappe-integral-evidence.json`; its results supersede the service availability
+and unrun full-stack statements below.
+
 Prepared on `lab/frappe-baseline` after Issue #1 acceptance was documented.
 Date: 2026-10-04. App: `cencomun_erp` 0.0.1; namespace: `Cencomun ERP`.
 

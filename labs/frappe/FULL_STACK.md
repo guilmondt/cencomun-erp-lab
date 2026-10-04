@@ -1,8 +1,20 @@
 # Frappe dedicated-runner validation
 
-This workflow is separate from Codex Cloud onboarding. It has not been run
-in the cloud machine. The cloud checks exercise the custom package without
-loading Frappe, using a site, or connecting to MariaDB/Redis.
+The initial baseline covered DB-free packaging only. The user subsequently
+authorized real-site validation in the cloud machine. That workflow now
+passes with MariaDB, Redis and the installed app; see
+`../../reports/frappe-integral.md` for actual results and limitations.
+
+The tested Debian 13 amd64 workflow is:
+
+```sh
+cd /workspace/cencomun-erp-lab
+bash scripts/frappe-integral/install.sh
+bash scripts/frappe-integral/run.sh
+```
+
+The commands below remain a general dedicated-runner guide. The tested
+scripts and locks are the reproducible reference for the executed cloud run.
 
 ## Prerequisites
 
@@ -62,9 +74,14 @@ No complete full-stack dependency lock or tested runner image is supplied yet.
      -r "$CCM_LAB_CHECKOUT/labs/frappe/requirements-build.lock" --require-hashes
    ./env/bin/python -m pip install --no-build-isolation --no-deps \
      -e apps/cencomun_erp
-   if ! rg -qx cencomun_erp sites/apps.txt; then
-     echo cencomun_erp >> sites/apps.txt
-   fi
+   ./env/bin/python - <<'PY'
+   from pathlib import Path
+   p = Path('sites/apps.txt')
+   apps = p.read_text().splitlines()
+   if 'cencomun_erp' not in apps:
+       apps.append('cencomun_erp')
+   p.write_text('\n'.join(apps) + '\n')
+   PY
    ```
 
 5. Start MariaDB and the Bench-configured Redis/services. In a separate

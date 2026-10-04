@@ -32,3 +32,23 @@
 - Evidence/tests: five tests against the editable package and the same five
   against a clean installed wheel; wheel built from sdist. See
   `reports/frappe-baseline.md` and `labs/frappe/FULL_STACK.md`.
+
+## ADR-002 — User-authorized real-site validation in cloud
+- Date: 2026-10-04
+- Platform: Frappe
+- Status: Accepted for the explicitly requested integral validation
+- Context: the user requested real MariaDB/Redis/site validation equivalent
+  to the completed Axelor validation, expanding the earlier DB-free setup.
+- Decision: run isolated, loopback services under a user-owned `/workspace`
+  prefix; use exact upstream commits, Python/Node/tool pins and dependency
+  locks. Generate only local synthetic credentials and use supported Frappe
+  document/authentication/queue APIs; implement no Cencomun business features.
+- Consequences: full-stack setup works without root or Docker-in-Docker.
+  MariaDB uses libaio fallback because cloud io_uring is unavailable. Preserve
+  upstream source/locks; resolve banking frontend dependencies outside its
+  checkout with a frozen local lock. No cross-branch merge is performed.
+- Upgrade impact: retain these service/runtime pins and rerun real-site tests
+  before any later upgrade. This is no accounting/production-readiness claim.
+- Evidence/tests: 39 functional checks, real app/module registration, assets,
+  worker execution, graceful restart/persistence and five skeleton tests passed.
+  See `reports/frappe-integral.md` and `reports/frappe-integral-evidence.json`.
