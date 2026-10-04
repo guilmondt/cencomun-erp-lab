@@ -21,19 +21,19 @@ jobs:
   baseline:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
-    env:
-      CCM_CI_RESULTS: ${{ runner.temp }}/ccm-axelor-results
     steps:
       - name: Checkout laboratory
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+      - name: Validate workflow semantics
+        run: bash labs/axelor/ci/check-workflow.sh
       - name: Issue 1 preflight before Task 020 validation
         run: |
           ./scripts/preflight.sh
           ./scripts/verify-repo.sh
       - name: Full-stack baseline on disposable external runner
-        run: bash labs/axelor/ci/run-host.sh
+        run: CCM_CI_RESULTS="$RUNNER_TEMP/ccm-axelor-results" bash labs/axelor/ci/run-host.sh
       - name: Upload sanitized evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
