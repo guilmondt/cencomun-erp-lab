@@ -1,6 +1,8 @@
 // Runtime configuration only. Original settings/build/module sources stay intact.
 gradle.projectsEvaluated {
   def root = gradle.rootProject
+  // Init scripts also run for buildSrc/included builds. Configure only the host.
+  if (root.name != 'axelor-erp') return
   def base = root.project(':modules:axelor-base')
   def node = base.extensions.getByName('node')
   assert node.version.get() == '24.5.0'
@@ -23,6 +25,7 @@ gradle.projectsEvaluated {
   }
 }
 gradle.taskGraph.whenReady { graph ->
+  if (gradle.rootProject.name != 'axelor-erp') return
   def forbidden = graph.allTasks.findAll {
     it.name in ['build', 'formatCode', 'spotlessApply'] || it.name.endsWith('SpotlessApply')
   }

@@ -14,7 +14,7 @@ cleanup() {
   trap - EXIT
   docker logs "$prefix-db" > "$state_dir/private/postgres.log" 2>&1 || true
   docker logs "$prefix-app" > "$state_dir/private/container.log" 2>&1 || true
-  docker rm --force "$prefix-app" "$prefix-db" > /dev/null 2>&1 || true
+  docker rm --force --volumes "$prefix-app" "$prefix-db" > /dev/null 2>&1 || true
   docker network rm "$prefix" > /dev/null 2>&1 || true
   python3 - "$state_dir" "$results_dir" "$status" <<'PY'
 import json,shutil,sys
@@ -29,11 +29,19 @@ if target.resolve() != (state/'results').resolve():
 print('Runner exit status:',sys.argv[3])
 print('Sanitized evidence directory:',target)
 if int(sys.argv[3]):
-    candidates=[target/name for name in ['full-build.log','module-tests.log','setup.log','container.log']]
+    candidates=[target/name for name in ['app-restart.log','app-first.log','frozen-build.log','full-build.log','init-scope.log','module-tests.log','setup.log']]
     log=next((p for p in candidates if p.exists() and p.stat().st_size),None)
     detail='\n'.join(log.read_text(errors='replace').splitlines()[-80:]) if log else 'No runner log available'
+    if (target/'container.log').exists():
+        detail+='\nContainer summary:\n'+'\n'.join((target/'container.log').read_text(errors='replace').splitlines()[-25:])
     detail=detail[-50000:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
     print('::error title=Axelor full-stack failure::'+detail)
+else:
+    evidence={name:json.loads((target/name).read_text()) for name in ['upstream-tests.json','smoke-first.json','smoke-restart.json']}
+    evidence['postgres']=(target/'postgres-version.txt').read_text().strip()
+    evidence['lab_commit']=(target/'lab-commit.txt').read_text().strip()
+    evidence['war_sha256']=(target/'war-sha256.txt').read_text().strip().split()[0]
+    print('::notice title=Axelor full-stack evidence::'+json.dumps(evidence))
 PY
   exit "$status"
 }

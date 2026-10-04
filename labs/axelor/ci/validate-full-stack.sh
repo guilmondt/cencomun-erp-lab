@@ -26,6 +26,14 @@ state=Path(sys.argv[1])
 password=(state/'private/postgres.env').read_text().split('POSTGRES_PASSWORD=',1)[1].splitlines()[0]
 for path in (state/'private').glob('*.log'):
     (state/'results'/path.name).write_text(path.read_text(errors='replace').replace(password,'[REDACTED]'))
+import shutil
+if (state/'locks').exists():
+    shutil.copytree(state/'locks',state/'results/locks',dirs_exist_ok=True)
+for base in [Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline'),
+             state/'runtime/open-suite-webapp/modules/axelor-open-suite/axelor-base']:
+    for report in (base/'build/test-results/test').glob('TEST-*.xml'):
+        content=report.read_text(errors='replace').replace(password,'[REDACTED]')
+        (state/'results'/report.name).write_text(content)
 PY
   chmod -R a+rX "$results_dir"
   exit "$status"
@@ -34,6 +42,9 @@ trap finish EXIT
 echo 'Phase: exact cloud baseline setup and two custom module tests'
 bash labs/axelor/scripts/setup-cloud.sh > "$state_dir/private/setup.log" 2>&1
 bash labs/axelor/scripts/validate.sh > "$state_dir/private/module-tests.log" 2>&1
+echo '::notice title=Axelor module tests::Exactly 2 Cencomun tests passed; compilation, JAR metadata and source checks passed.'
+bash labs/axelor/ci/check-init-scope.sh > "$state_dir/private/init-scope.log" 2>&1
+echo '::notice title=Axelor init regression::The host init script passes in an isolated buildSrc fixture without application projects.'
 
 echo 'Phase: checksum-verified frontend runtimes'
 mkdir -p "$runtime_dir/node" "$runtime_dir/yarn"
@@ -76,6 +87,13 @@ assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), 
 (results/'upstream-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
 print('Upstream representative suite: 16 tests passed, no failures/errors/skips')
 PY
+echo '::notice title=Axelor full build::Full AOS/frontend WAR and embedded launcher compiled; 16 upstream unit cases passed.'
+echo 'Phase: replay Gradle targets with generated strict dependency locks'
+bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
+  :war :generateRunner :modules:axelor-base:test \
+  --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
+  --offline > "$state_dir/private/frozen-build.log" 2>&1
+echo '::notice title=Axelor frozen dependencies::Gradle targets replayed offline with strict generated dependency locks; no lock refresh.'
 
 export AXELOR_CONFIG="$state_dir/private/axelor-ci.properties"
 python3 - "$AXELOR_CONFIG" <<'PY'
