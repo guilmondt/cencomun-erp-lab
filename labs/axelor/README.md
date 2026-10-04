@@ -47,6 +47,18 @@ The helper activates the local JDK and translates the existing proxy host/port
 into Java system properties without saving credentials. Global Gradle is not
 used. Java TLS trust and distribution/package checks remain enabled.
 
+To check installation from an empty runtime/cache, use the regression workflow:
+
+```bash
+bash labs/axelor/scripts/verify-clean-setup.sh
+```
+
+It creates an independent temporary checkout of the exact committed HEAD and
+runs installation plus the two module tests with an empty dependency directory.
+Logs remain in the printed temporary directory. This detects first-download
+wrapper/proxy failures that a retained Gradle distribution can hide. It is a
+clean setup test on the current machine, not a new cloud task restoration test.
+
 Do not run the host's `build`, `formatCode` or `spotlessApply` tasks during this
 baseline: its `build` task invokes formatting which can change upstream source.
 

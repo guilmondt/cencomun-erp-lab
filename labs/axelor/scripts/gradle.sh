@@ -35,6 +35,9 @@ if test "${CCM_AXELOR_FULL_STACK:-0}" != 1; then
   settings_flags=(--settings-file "$runtime_dir/open-suite-webapp/ccm-cloud.settings.gradle")
 fi
 
+# The wrapper must receive JVM properties before project/settings arguments,
+# so the very first distribution download uses the proxy too.
 exec "$runtime_dir/verified-wrapper/gradlew" \
+  "${proxy_flags[@]}" \
   -p "$runtime_dir/open-suite-webapp" \
-  "${settings_flags[@]}" "${proxy_flags[@]}" --no-daemon --max-workers=2 --console=plain "$@"
+  "${settings_flags[@]}" --no-daemon --max-workers=2 --console=plain "$@"

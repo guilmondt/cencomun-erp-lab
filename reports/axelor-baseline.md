@@ -104,6 +104,20 @@ The pinned build and local alternate-settings mechanism emit Gradle deprecation
 warnings for Gradle 9. Keep 8.14.3; any future wrapper migration needs a separate
 upgrade validation. These warnings did not fail the selected tasks.
 
+**A subsequent setup with an empty Gradle cache failed on the first wrapper
+download with `UnknownHostException: services.gradle.org`.** Java proxy
+properties were passed after project/settings arguments, so distribution
+bootstrap did not receive them. Retained Gradle files had hidden this failure.
+
+1. Moved proxy JVM properties before the project/settings arguments in the
+   helper, retaining the same restricted networking, TLS trust and checksum.
+2. Repeated first-download installation with the corrected helper; verified
+   Gradle 8.14.3 bootstrap and package/distribution checks.
+3. Added `verify-clean-setup.sh` to exercise committed source and an empty
+   dependency directory, including compilation/JAR and both module tests.
+   This is the regression procedure for the bootstrap failure; its latest
+   complete outcome is reported with the subsequent verification.
+
 ## Networking, saved configuration and limits
 
 Networking remains restricted with the `package_managers` preset. Existing
