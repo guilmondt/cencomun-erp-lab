@@ -1,0 +1,32 @@
+// Runtime configuration only. Original settings/build/module sources stay intact.
+gradle.projectsEvaluated {
+  def root = gradle.rootProject
+  def base = root.project(':modules:axelor-base')
+  def node = base.extensions.getByName('node')
+  assert node.version.get() == '24.5.0'
+  assert node.yarnVersion.get() == '1.22.19'
+  // Use checksum-verified executables on PATH; do not download another runtime.
+  node.download.set(false)
+  node.yarnVersion.set('')
+  base.tasks.named('installFrontDeps') {
+    args = ['install', '--frozen-lockfile', '--non-interactive']
+  }
+  root.tasks.named('run') {
+    jvmArgs '-Xmx3g'
+  }
+  root.allprojects { p ->
+    p.dependencyLocking {
+      lockAllConfigurations()
+      lockMode = LockMode.STRICT
+      lockFile = new File(System.getenv('CCM_CI_STATE'), "locks/${p.name}.lockfile")
+    }
+  }
+}
+gradle.taskGraph.whenReady { graph ->
+  def forbidden = graph.allTasks.findAll {
+    it.name in ['build', 'formatCode', 'spotlessApply'] || it.name.endsWith('SpotlessApply')
+  }
+  if (!forbidden.empty) {
+    throw new GradleException("Source-writing tasks prohibited: ${forbidden*.path}")
+  }
+}

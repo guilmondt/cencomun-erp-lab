@@ -1,5 +1,50 @@
 # Dedicated Axelor full-stack runner
 
+## GitHub Actions harness
+
+The user's selected default is GitHub Actions. The branch workflow
+`.github/workflows/axelor-full-stack.yml` executes `ci/run-host.sh` on an
+`ubuntu-24.04` Docker host, outside Codex Cloud. It is triggered by Axelor code,
+CI or pin changes pushed to `lab/axelor-baseline`; it does not require merging
+the workflow into main. Manual dispatch becomes available when the workflow is
+present on the default branch. No production secret or maintained server is
+required. Official actions are fixed to commit hashes.
+
+`ci/pins.sh` fixes Debian 13.7 slim and PostgreSQL 16.15 bookworm images by
+immutable OCI digests, the exact Debian JDK/compiler patch, Node 24.5.0's
+official SHA-256 and Yarn 1.22.19's official npm SHA-512 integrity. Debian slim's
+CA bundle is initially bootstrapped with signed APT metadata before HTTPS
+installation. Helper OS packages are recorded in an installed-package manifest.
+
+The harness keeps the original host settings/all modules and substitutes only
+local runtime configuration: verified frontend executables, frozen Yarn
+installation, bounded Java heaps and external dependency locks. It rejects
+source-writing formatting/build tasks. The first full build writes locks to a
+temporary runner directory; subsequent startup uses the generated embedded
+launcher. These per-run lock artifacts describe the resolved dependency graph;
+they do not turn the branch into a fully locked replay of all upstream Maven
+dependencies. The custom source lockfile is preserved.
+
+The planned checks are: two Cencomun tests; full host/AOS/frontend compilation
+and WAR; 16 cases in the existing `TestTaxNumberHelper` suite; real PostgreSQL
+initialization; public API response, framework login, authenticated REST reads
+of Cencomun/AOS module metadata; and a server restart with the same ephemeral
+database. The tax-number suite is a unit suite, not a PostgreSQL test or a
+Venezuelan localization evaluation. No Core Test business feature is added.
+
+Only the isolated Docker network exposes the app/database. PostgreSQL gets a
+random test credential from a temporary file; the upstream synthetic initial
+administrator is used solely for framework login within that network. No host
+GitHub token is passed to the container. Credential/configuration files and
+database volumes are excluded from artifacts; password-redacted logs, result
+JSON/XML, package/image manifests, dependency locks and WAR checksum are retained
+for 14 days. The harness removes its containers/network on completion.
+
+Execution evidence and diagnosed blockers will be recorded in
+`reports/axelor-full-stack.md`. Until that report records a passing run, these
+checks remain unverified. The following original cloud-baseline observations
+are historical and do not establish the external runner's result.
+
 These are runner requirements and candidate commands, not a record of a
 full-stack test. No PostgreSQL database, server startup, API request, ERP
 initialization or upstream AOS test suite was executed in this cloud baseline.
