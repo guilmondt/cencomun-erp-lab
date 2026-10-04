@@ -1,0 +1,1 @@
+"""App page-template namespace."""
