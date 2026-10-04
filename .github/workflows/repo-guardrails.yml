@@ -1,0 +1,12 @@
+name: repo-guardrails
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/verify-repo.sh
+      - run: ./scripts/preflight.sh

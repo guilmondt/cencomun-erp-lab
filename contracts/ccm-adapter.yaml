@@ -1,0 +1,35 @@
+openapi: 3.1.0
+info:
+  title: Cencomun ERP Adapter Contract
+  version: 0.1.0
+paths:
+  /products/search:
+    get:
+      operationId: searchProducts
+      responses:
+        '200': { description: Product search results }
+  /inventory/{productId}:
+    get:
+      operationId: getInventory
+      responses:
+        '200': { description: Inventory availability }
+  /customers/{customerId}/balance:
+    get:
+      operationId: getCustomerBalance
+      responses:
+        '200': { description: Customer balance }
+  /purchases/drafts:
+    post:
+      operationId: createPurchaseDraft
+      responses:
+        '201': { description: Draft created }
+  /cash/status:
+    get:
+      operationId: getCashStatus
+      responses:
+        '200': { description: Current cash status }
+  /cashea/orders:
+    post:
+      operationId: createCasheaOrder
+      responses:
+        '201': { description: Cashea order created }
