@@ -270,3 +270,27 @@
   warehouses isolate economic snapshots; technical IDs are mapped separately.
   Benchmark IDs vary deterministically to measure real NEW creations rather
   than idempotent replays. These choices preserve the reviewed business oracle.
+
+## ADR-011 — Correct mandatory Core Test coverage without changing business rules
+
+- Date: 2026-10-05
+- Status: Accepted by explicit user instruction
+- Decision: Require parsed, useful before/after snapshots and reasons for
+  state transitions, purchase approval/revision, cash confirmation, manual rate
+  authorization and bank reconciliation. Automated steps use explicit LAB-only
+  technical reasons; manual decisions retain the actor's supplied note.
+- Coverage: Add unknown-state, preacceptance delivery, missing WEB guide and
+  APPROVED/PREPARING cancellation cases. Test eight forbidden MCP actions on
+  eligible objects through unavailable tools and the native RPC boundary;
+  independently verify denial audit and unchanged native effects. Compare full
+  API/MCP results in six routes and both creation/replay directions. Successfully
+  deliver events before restarting the consumer and prove persisted deduplication
+  using distinct reception/application counters.
+- Reproducibility: The shared coverage revision 2 supplement fixes added IDs,
+  inputs and expected outcomes for both ERP. Existing fixture/oracle bytes stay
+  unchanged. Missing or prior-revision mandatory evidence cannot remain PASS;
+  verified archival clears stale outputs before another complete run. Original
+  attempts and evidence are preserved. This adds no production business policy.
+- Limits: Patch criterion remains BLOCKED, dependent cases UNRUN; the incomplete
+  official integration suite is documented separately from its four passing
+  utility unit tests. No changes to main, Axelor, production or upstream source.

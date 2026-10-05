@@ -570,3 +570,38 @@ Las instrucciones y el runner se conservan en scripts/core-test/README.md.
 Resultado Frappe: 28 grupos PASS; 13/14 criterios PASS, 0 FAIL, 1 BLOCKED
 (patch compatible pendiente). Casos de patch UNRUN. No aprobación integral
 14/14 ni resultados nuevos de Axelor. Véase reports/frappe-core-test.md.
+
+### Corrección acotada autorizada de cobertura — revisión 2
+
+El usuario solicitó corregir auditoría y comprobar omisiones concretas. El
+resultado anterior de 28 grupos es histórico; no acredita estas aserciones
+añadidas. El oráculo económico, los importes y las reglas LAB aprobadas no cambian.
+
+- [x] Registrar y validar semánticamente actor/fecha/objeto/motivo/correlación y
+  JSON antes/después de estados, aprobación/revisión, caja, tasa y conciliación.
+- [x] Rechazar estados desconocidos, entrega sin aceptación y WEB sin guía,
+  comprobando igualdad de snapshots nativos; cancelar desde APPROVED y PREPARING
+  mediante cancelación nativa, sin salida, factura ni pago.
+- [x] Denegar a MCP aprobación, entrega/despacho, liquidación, caja, tasa manual
+  y conciliación sobre objetos elegibles; comprobar auditoría y ausencia de efectos.
+- [x] Comparar el resultado completo API/MCP de las seis rutas, incluyendo
+  creaciones y reintentos en ambos sentidos. Solo se excluye metadata de transporte;
+  replay se comprueba por separado y los IDs nativos deben ser iguales.
+- [x] Entregar un evento con éxito, verificar un efecto, reiniciar el consumidor,
+  comprobar persistencia y repetir el mismo evento: dos recepciones, una aplicación.
+- [x] Reejecutar suites afectadas y copia restaurada, regenerar evidencias y matriz.
+
+El suplemento LAB y el contrato de 34 grupos obligatorios se versionan en
+`fixtures/ccm-core-v1/coverage-required.json` y su SHA256 en el manifiesto. Los
+fixtures anteriores conservan sus bytes. Caso ausente o evidencia de revisión
+anterior quedan UNRUN; fallos y bloqueos nunca se convierten en PASS. La revisión
+2 exige además nueva reproducción de las suites nativas. El bloqueo del patch y
+la limitación de la suite oficial se conservan sin cambios de alcance. PR borrador;
+sin modificar main, producción, Axelor o upstream.
+
+Ejecución de revisión 2: 34 grupos PASS, ocho negativas MCP con ocho auditorías
+de denegación y cero efectos de éxito, ocho pares equivalentes API/MCP, 109
+comprobaciones semánticas de auditoría y 28 eventos con dos recepciones pero una
+aplicación tras reiniciar el consumidor. La copia restaurada repitió 13 grupos
+de negocio y cinco de finanzas. El criterio 13 permanece BLOCKED y sus seis
+escenarios UNRUN; la matriz final es la publicada en el informe.

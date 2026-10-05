@@ -1,8 +1,8 @@
 # Core Test de Frappe/ERPNext — LAB-ONLY-v1
 
-**CERRADO_CON_LIMITACIONES: PASS 13/14, FAIL 0/14, BLOCKED 1/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.
+**CERRADO_CON_LIMITACIONES: PASS 13/14, FAIL 0/14, BLOCKED 1/14, UNRUN 0/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.
 
-Se ejecutaron 28 grupos de comprobaciones: 28 PASS, 0 FAIL. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13.
+Cobertura obligatoria: 34 grupos; 34 PASS, 0 FAIL, 0 UNRUN. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13. [coverage.json](evidence/frappe-core/coverage.json) impide conservar PASS con casos ausentes o evidencia anterior a la corrección.
 
 | Criterio | Estado | Evidencia reproducible |
 | --- | --- | --- |
@@ -12,14 +12,30 @@ Se ejecutaron 28 grupos de comprobaciones: 28 PASS, 0 FAIL. Cada grupo conserva 
 | 4. Transiciones válidas y atómicas | PASS | [audit.json](evidence/frappe-core/audit.json), [business.json](evidence/frappe-core/business.json), [http.json](evidence/frappe-core/http.json), [recovery.json](evidence/frappe-core/recovery.json) |
 | 5. Dinero determinista y TAX01 nativo | PASS | [audit.json](evidence/frappe-core/audit.json), [business.json](evidence/frappe-core/business.json), [finance.json](evidence/frappe-core/finance.json), [http.json](evidence/frappe-core/http.json) |
 | 6. Caja inmutable y auditada | PASS | [audit.json](evidence/frappe-core/audit.json), [finance.json](evidence/frappe-core/finance.json), [http.json](evidence/frappe-core/http.json), [recovery.json](evidence/frappe-core/recovery.json) |
-| 7. Compras por umbral | PASS | [audit.json](evidence/frappe-core/audit.json), [finance.json](evidence/frappe-core/finance.json), [recovery.json](evidence/frappe-core/recovery.json) |
+| 7. Compras por umbral | PASS | [audit.json](evidence/frappe-core/audit.json), [finance.json](evidence/frappe-core/finance.json), [http.json](evidence/frappe-core/http.json), [recovery.json](evidence/frappe-core/recovery.json) |
 | 8. Banco idempotente | PASS | [audit.json](evidence/frappe-core/audit.json), [finance.json](evidence/frappe-core/finance.json), [http.json](evidence/frappe-core/http.json) |
 | 9. API sin DB directa | PASS | [audit.json](evidence/frappe-core/audit.json), [http.json](evidence/frappe-core/http.json), [recovery.json](evidence/frappe-core/recovery.json) |
-| 10. MCP vía adaptador | PASS | [http.json](evidence/frappe-core/http.json) |
+| 10. MCP vía adaptador | PASS | [audit.json](evidence/frappe-core/audit.json), [http.json](evidence/frappe-core/http.json) |
 | 11. Fixtures compartidos cargados | PASS | [audit.json](evidence/frappe-core/audit.json), [business.json](evidence/frappe-core/business.json), [finance.json](evidence/frappe-core/finance.json), [benchmark.json](evidence/frappe-core/benchmark.json) |
 | 12. Búsqueda completa | PASS | [http.json](evidence/frappe-core/http.json) |
 | 13. Regresión tras patch | BLOCKED | [patch.json](evidence/frappe-core/patch.json) |
 | 14. Setup reproducible | PASS | [audit.json](evidence/frappe-core/audit.json), [recovery.json](evidence/frappe-core/recovery.json), [reproducibility.json](evidence/frappe-core/reproducibility.json) |
+
+## Corrección de cobertura — revisión 2
+
+Contrato compartido: [coverage-required.json](../fixtures/ccm-core-v1/coverage-required.json). El oráculo económico y los bytes de los fixtures anteriores se conservan.
+
+| Grupo obligatorio | Estado | Comprobación adicional |
+| --- | --- | --- |
+| AUDIT01-03-NATIVE | PASS | Motivo y JSON antes/después útiles; secuencia de estados, montos, notas y vínculos nativos de compras/caja/tasa/banco; inmutabilidad. |
+| STATE-UNKNOWN-ATOMIC | PASS | Estado desconocido por API y Select nativo: rechazo, snapshot de efectos sin cambios. |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS | STORE/WEB desde NEW/REVIEWED y WEB saltando PREPARING: 409 sin efectos. |
+| STATE-WEB-NO-GUIDE | PASS | PREPARING→SHIPPED sin guía: 422, sin salida, factura, pago o evento nuevo. |
+| STATE-CANCEL-BEFORE-HANDOVER | PASS | Cancelaciones APPROVED STORE/WEB y PREPARING WEB: SO nativo cancelado, stock intacto, sin factura/entrega/pago; motivo y antes/después exactos. |
+| MCP01-06-STDIO | PASS | Equivalencia completa API/MCP en seis rutas; creaciones y replays en ambos sentidos con los mismos IDs. Metadata excluida y replay verificado por separado. |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | PASS | Ocho negativas en objetos elegibles: tool -32602 y RPC 403 para aprobación, entrega/despacho, liquidación, caja, tasa y banco. |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | PASS | Snapshots nativos inalterados, ocho auditorías de denegación y ausencia de auditorías/eventos de éxito. |
+| IDEM04-EVENTS-RECOVERY | PASS | Éxito antes de reiniciar consumidor; efecto persistido; mismos event_id repetidos después: recepciones2 y aplicaciones1. |
 
 ## Casos económicos y TAX01
 
@@ -42,9 +58,9 @@ Caja: USD -2.00, VES +10.00, POS/transferencia 0; pendiente Cashea 125.00 separa
 
 | Operación | Muestras | p50 ms | p95 ms | p99 ms | Errores |
 | --- | --- | --- | --- | --- | --- |
-| search | 1000 | 13.93223 | 18.30527 | 68.01272 | 0 |
-| inventory | 1000 | 13.20916 | 18.83025 | 74.26556 | 0 |
-| create | 1000 | 24.19097 | 32.79425 | 84.53232 | 0 |
+| search | 1000 | 16.50107 | 19.97382 | 59.80712 | 0 |
+| inventory | 1000 | 15.19665 | 17.39143 | 63.15145 | 0 |
+| create | 1000 | 27.39561 | 31.72523 | 68.79645 | 0 |
 
 Tiempos crudos, consultas y tiempo DB por muestra: [benchmark-raw.csv](evidence/frappe-core/benchmark-raw.csv). Recursos y metodología: [benchmark.json](evidence/frappe-core/benchmark.json). El recorder nativo mide dentro del servicio RPC; HTTP/autenticación externa están incluidos solamente en el tiempo extremo a extremo. No se grabaron SQL crudos ni credenciales.
 
@@ -52,13 +68,13 @@ Tiempos crudos, consultas y tiempo DB por muestra: [benchmark-raw.csv](evidence/
 
 Ejecutar `bash scripts/core-test/run.sh` siguiendo [README](../scripts/core-test/README.md). El runner respalda/restaura únicamente sitios ficticios marcados, carga fixtures por Document APIs, mantiene pruebas independientes y publica comandos/códigos de salida. Regenera evidencia e IDs técnicos, conservando el oráculo.
 
-Aplicación: 46 archivos Python/JSON, 2977 líneas informativas. Diez DocTypes versionados, campos nativos con Custom Field, Workflow, DocPerm, Property Setter y hooks; SQL de negocio manual: 0. No requiere configuración crítica exclusiva de UI. `bench migrate` sincroniza los modelos y ejecuta `core.setup.install` idempotente; no se añade patch manual ni se altera versions.lock.
+Aplicación: 46 archivos Python/JSON, 3019 líneas informativas. Diez DocTypes versionados, campos nativos con Custom Field, Workflow, DocPerm, Property Setter y hooks; SQL de negocio manual: 0. No requiere configuración crítica exclusiva de UI. `bench migrate` sincroniza los modelos y ejecuta `core.setup.install` idempotente; no se añade patch manual ni se altera versions.lock.
 
 Por venta STORE se usan 5 acciones del servicio; WEB 6. Nativos: un Sales Order, una Delivery Note, una Sales Invoice y dos Payment Entry. Una llamada ERP RPC por acción del adaptador. MCP stdio JSON-RPC ejecutó las mismas seis rutas, usando un actor sin aprobaciones ni movimientos financieros directos.
 
 Subconjunto oficial de plataforma: 4 tests PASS; alcance: utilidades unitarias. Los cinco tests de registro/paquete también se ejecutan en el runner. Los grupos de negocio son integración real sobre MariaDB/Redis, incluidos HTTP, permisos y concurrencia. No se presenta esto como la suite completa upstream ni como regresión posterior a un patch.
 
-El sitio de reproducción separado restauró el checkpoint y repitió los 14 grupos nativos de negocio/finanzas sin modificar el sitio medido. Credenciales, encryption_key, dumps y logs completos permanecen privados, fuera del repositorio. Solo se publican hashes/metadatos y evidencias ficticias.
+El sitio de reproducción separado restauró el checkpoint y repitió 13 grupos de negocio y 5 de finanzas sin modificar el sitio medido. Credenciales, encryption_key, dumps y logs completos permanecen privados, fuera del repositorio. Solo se publican hashes/metadatos y evidencias ficticias.
 
 ## Limitaciones, diagnóstico y resolución
 

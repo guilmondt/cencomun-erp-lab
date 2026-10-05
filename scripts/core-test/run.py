@@ -2,6 +2,7 @@
 
 import json, os, subprocess, time, datetime
 from pathlib import Path
+from coverage_rules import archive_evidence
 
 REPO = Path(__file__).resolve().parents[2]
 ROOT = Path("/workspace/.local/frappe-integral")
@@ -70,10 +71,7 @@ step("prepare-site", [PYTHON, "scripts/core-test/prepare_site.py"])
 step("http-stop", [PYTHON, "scripts/core-test/http_services.py", "stop"])
 # Preserve previous evidence and synthetic consumer DB before resetting the marked lab.
 archive = OUT / "runs" / RUN
-archive.mkdir(parents=True, exist_ok=True)
-for f in OUT.iterdir():
-    if f.is_file():
-        (archive / f.name).write_bytes(f.read_bytes())
+archive_evidence(OUT, archive)
 consumer = ROOT / "core-consumer.sqlite"
 if consumer.exists():
     hist = ROOT / "core-consumer-history"
@@ -116,5 +114,6 @@ step(
 )
 step("guardrails", ["bash", "scripts/verify-repo.sh"], False)
 step("diff-check", ["git", "diff", "--check"], False)
+step("coverage-regression", [PYTHON, "-m", "unittest", "discover", "-s", "scripts/core-test/tests", "-v"], False)
 step("build", [PYTHON, "scripts/core-test/build.py"], False)
 step("publish", [PYTHON, "scripts/core-test/publish.py"], False)

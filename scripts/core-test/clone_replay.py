@@ -108,6 +108,7 @@ environment["CCM_CORE_SITE"] = SITE
 original = {
     name: (OUT / (name + ".json")).read_bytes() for name in ["business", "finance"]
 }
+replayed_counts = {}
 try:
     for script in ["seed", "business_cases", "finance_cases"]:
         run(
@@ -122,6 +123,10 @@ try:
     for name in ["business", "finance"]:
         result = json.loads((OUT / (name + ".json")).read_text())
         assert all(c["status"] == "PASS" for c in result["cases"]), name
+        contract = json.loads((REPO / "fixtures/ccm-core-v1/coverage-required.json").read_text())
+        required = {r["case"] for r in contract["requirements"] if r["source"] == name}
+        assert required <= {c["case"] for c in result["cases"]}, name
+        replayed_counts[name] = len(result["cases"])
         (OUT / ("replayed-" + name + ".json")).write_text(
             json.dumps(result, indent=2) + "\n"
         )
@@ -153,6 +158,8 @@ run(
     json.dumps(
         {
             "status": "PASS",
+            "coverage_revision": 2,
+            "replayed_case_counts": replayed_counts,
             "source_checkpoint_sha256": checkpoint["sha256"],
             "target_site": SITE,
             "target_database": "ccm_core_recovery",

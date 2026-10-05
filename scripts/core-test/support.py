@@ -24,6 +24,7 @@ def check(identifier, criteria, fn):
                 "case": identifier,
                 "criteria": criteria,
                 "status": "PASS",
+                "coverage_revision": 2,
                 "actual": actual,
                 "seconds": round(time.monotonic() - t, 4),
             }
@@ -37,6 +38,7 @@ def check(identifier, criteria, fn):
                 "case": identifier,
                 "criteria": criteria,
                 "status": "FAIL",
+                "coverage_revision": 2,
                 "error": type(exc).__name__ + ": " + str(exc),
                 "trace": traceback.format_exc(),
                 "seconds": round(time.monotonic() - t, 4),
@@ -131,6 +133,31 @@ def order_doc(identifier):
             "CCM Cashea Order", {"company": COMPANY, "external_id": identifier}, "name"
         ),
     )
+
+
+def order_effects(identifier):
+    """Independent native snapshot excluding audit attempts, which may increase."""
+    doc = order_doc(identifier)
+    vouchers = [x for x in [doc.delivery_note, doc.sales_invoice,
+                            *json.loads(doc.payments or "[]")] if x]
+    return {
+        "order": b.normalized(doc),
+        "guide": doc.guide,
+        "sales_order": doc.sale_order,
+        "sales_order_docstatus": frappe.db.get_value("Sales Order", doc.sale_order, "docstatus")
+        if doc.sale_order else None,
+        "delivery": doc.delivery_note,
+        "invoice": doc.sales_invoice,
+        "payments": json.loads(doc.payments or "[]"),
+        "stock": [{"id": i, "qty": str(int(b.stock(i, doc.warehouse).actual_qty)),
+                   "value": money(b.stock(i, doc.warehouse).stock_value)}
+                  for i in ["P001", "P002", "P003"]],
+        "native_stock_entries": frappe.db.count("Stock Ledger Entry", {"warehouse": doc.warehouse}),
+        "native_gl_entries": frappe.db.count("GL Entry", {"voucher_no": ["in", vouchers]}) if vouchers else 0,
+        "success_events": sorted(frappe.get_all("CCM Event", filters={
+            "company": COMPANY, "payload": ["like", '%"object_id": "' + identifier + '"%']},
+            pluck="external_id")),
+    }
 
 
 def balances(order):

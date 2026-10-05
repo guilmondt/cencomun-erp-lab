@@ -85,7 +85,10 @@ def create_purchase(payload):
         company,
         "purchase.draft",
         request,
-        after={"native_order": doc.name, "approval_amount": request.approval_amount},
+        before={"exists": False},
+        after={"state": request.workflow_state, "native_order": doc.name,
+               "approval_amount": request.approval_amount},
+        reason="LAB purchase draft created without approval",
     )
     return {
         "id": request.external_id,
@@ -108,7 +111,9 @@ def purchase_action(payload):
     with frappe.cache.lock("ccm-purchase:" + name, timeout=300, blocking_timeout=110):
         frappe.db.commit()
         doc = frappe.get_doc("CCM Purchase Request", name)
-        before = doc.workflow_state
+        before = {"state": doc.workflow_state, "amount": doc.approval_amount,
+                  "native_order": doc.purchase_order,
+                  "decision_version": doc.decision_version}
         action = payload["action"]
         po = frappe.get_doc("Purchase Order", doc.purchase_order)
         if action == "Approve":
@@ -154,8 +159,10 @@ def purchase_action(payload):
             doc.company,
             "purchase." + action.lower(),
             doc,
-            {"state": before},
-            {"state": doc.workflow_state, "amount": doc.approval_amount},
+            before,
+            {"state": doc.workflow_state, "amount": doc.approval_amount,
+             "native_order": doc.purchase_order, "decision_version": doc.decision_version},
+            reason=payload.get("reason") or "LAB purchase workflow: " + action,
         )
         return {
             "id": doc.external_id,
@@ -222,7 +229,8 @@ def create_closing(payload):
             "state": "DRAFT",
         }
     )
-    audit(company, "cash.prepared", doc, after=data)
+    audit(company, "cash.prepared", doc, before={"exists": False},
+          after={"state": doc.state, **data}, reason="LAB native-ledger cash snapshot")
     return {"id": doc.external_id, "state": doc.state, **data}
 
 
@@ -253,7 +261,7 @@ def confirm_closing(payload):
             doc.company,
             "cash.confirmed",
             doc,
-            {"state": "DRAFT"},
+            {"state": "DRAFT", **data},
             {"state": "CONFIRMED", **data},
             doc.note or "Synthetic closing matches native ledger",
         )
@@ -406,10 +414,12 @@ def _import_bank(payload):
             company,
             "bank.imported",
             match,
+            before={"exists": False},
             after={
                 "classification": classification,
                 "reconciled": bool(match.reconciled),
             },
+            reason="LAB deterministic bank classification: " + classification,
         )
     result = {
         "rows": len(rows),
@@ -444,12 +454,20 @@ def reconcile_bank(payload):
         frappe.throw("Manual bank decision requires a reason")
     if payload["payment"] not in candidates:
         frappe.throw("Not an eligible candidate")
+    before = {"reconciled": bool(doc.reconciled), "payment": doc.matched_payment,
+              "native_transaction": doc.bank_transaction,
+              "unallocated_amount": money(frappe.db.get_value(
+                  "Bank Transaction", doc.bank_transaction, "unallocated_amount"))}
     reconcile(doc, payload["payment"])
     audit(
         doc.company,
         "bank.reconciled",
         doc,
-        after={"payment": doc.matched_payment},
+        before=before,
+        after={"reconciled": bool(doc.reconciled), "payment": doc.matched_payment,
+               "native_transaction": doc.bank_transaction,
+               "unallocated_amount": money(frappe.db.get_value(
+                   "Bank Transaction", doc.bank_transaction, "unallocated_amount"))},
         reason=payload["reason"],
     )
     return {"key": doc.transaction_key, "reconciled": True}
@@ -492,7 +510,9 @@ def authorize_rate(payload):
         doc.company,
         "rate.authorized",
         doc,
-        after={"date": payload["date"], "rate": str(rate)},
+        before={"state": "MISSING", "date": payload["date"], "rate": None},
+        after={"state": "AUTHORIZED", "date": payload["date"], "rate": str(rate),
+               "native_rate": native.name},
         reason=payload["reason"],
     )
     return {"date": payload["date"], "rate": str(rate)}

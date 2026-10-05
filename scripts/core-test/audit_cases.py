@@ -77,6 +77,10 @@ def audits():
             ("cashea.", "cash.", "purchase.", "rate.", "bank.", "request.")
         ):
             assert row.actor and row.occurred_at and row.correlation_id
+            assert row.object_type and row.object_id and row.reason.strip()
+            before, after = json.loads(row.before_state), json.loads(row.after_state)
+            assert isinstance(before, dict) and before, row.action
+            assert isinstance(after, dict) and after, row.action
     kinds = {r.action for r in rows}
     for kind in [
         "cashea.approved",
@@ -88,9 +92,76 @@ def audits():
         "request.denied",
     ]:
         assert kind in kinds, kind
+    checked_semantics = []
+    chains = {}
     for row in rows:
-        if row.action in ["cash.confirmed", "rate.authorized", "bank.reconciled"]:
-            assert row.object_id and row.after_state and row.reason
+        before, after = json.loads(row.before_state), json.loads(row.after_state)
+        if row.action.startswith("cashea."):
+            if row.action == "cashea.created":
+                expect(before, {"exists": False})
+                expect(after["status"], "NEW")
+            else:
+                expect(before, chains[row.object_id])
+                expect(after["status"], row.action.split(".")[1].upper())
+                paths = {
+                    "NEW": ["REVIEWED", "REJECTED", "CANCELLED"],
+                    "REVIEWED": ["APPROVED", "REJECTED", "CANCELLED"],
+                    "APPROVED": ["PREPARING", "CANCELLED"] if after["channel"] == "WEB" else ["FULFILLED", "CANCELLED"],
+                    "PREPARING": ["SHIPPED", "CANCELLED"], "FULFILLED": ["SETTLED"], "SHIPPED": ["SETTLED"],
+                }
+                assert after["status"] in paths[before["status"]]
+            chains[row.object_id] = after
+            checked_semantics.append(row.name)
+        elif row.action in ["purchase.approve", "purchase.revise"]:
+            assert before["native_order"] and after["native_order"]
+            assert decimal(before["amount"]) > 0 and decimal(after["amount"]) > 0
+            if row.action == "purchase.approve":
+                assert before["state"].startswith("Pending ")
+                expect(after["state"], "Approved")
+                expect(after["amount"], before["amount"])
+                expect(row.reason, "LAB purchase workflow: Approve")
+            else:
+                expect(before["state"], "Approved")
+                expect(after["state"], "Draft")
+                expect(after["decision_version"], before["decision_version"] + 1)
+                expect(before["amount"], "200.00")
+                expect(after["amount"], "200.01")
+                expect(row.reason, "LAB purchase workflow: Revise")
+            checked_semantics.append(row.name)
+        elif row.action == "cash.confirmed":
+            expect(before["state"], "DRAFT")
+            expect(after["state"], "CONFIRMED")
+            expect({k: v for k, v in before.items() if k != "state"},
+                   {k: v for k, v in after.items() if k != "state"})
+            doc = frappe.get_doc("CCM Cash Closing", row.object_id)
+            expect(doc.confirmed_by, row.actor)
+            expect(json.loads(doc.snapshot), {k: v for k, v in after.items() if k != "state"})
+            expect(row.reason, doc.note or "Synthetic closing matches native ledger")
+            checked_semantics.append(row.name)
+        elif row.action == "rate.authorized":
+            expect(before, {"state": "MISSING", "date": after["date"], "rate": None})
+            expect(after["state"], "AUTHORIZED")
+            native = frappe.get_doc("Currency Exchange", after["native_rate"])
+            expect(decimal(native.exchange_rate), decimal(after["rate"]))
+            expect(str(native.date), after["date"])
+            auth_doc = frappe.get_doc("CCM Rate Authorization", row.object_id)
+            expect(row.reason, auth_doc.reason)
+            expect(row.actor, auth_doc.authorized_by)
+            checked_semantics.append(row.name)
+        elif row.action == "bank.reconciled":
+            expect(before["reconciled"], False)
+            assert not before["payment"] and decimal(before["unallocated_amount"]) > 0
+            expect(after["reconciled"], True)
+            expect(after["unallocated_amount"], "0.00")
+            expect(after["native_transaction"], before["native_transaction"])
+            match = frappe.get_doc("CCM Bank Match", row.object_id)
+            expect(after["payment"], match.matched_payment)
+            expect(row.reason, "Synthetic bank decision")
+            checked_semantics.append(row.name)
+        elif row.action.startswith("request."):
+            expect(before["state"], "attempted")
+            expect(after["state"], "rejected")
+            assert after.get("code", after.get("status")) in [403, 409, 422, 417]
     doc = frappe.get_doc("CCM Audit", rows[0].name)
     frappe.set_user("manager@example.invalid")
     doc.reason = "Attempt overwrite"
@@ -111,11 +182,64 @@ def audits():
         "count": len(rows),
         "kinds": sorted(kinds),
         "immutable": True,
+        "semantic_before_after_reason_checks": checked_semantics,
         "records": rows,
     }
 
 
 check("AUDIT01-03-NATIVE", [3, 6, 7, 8], audits)
+
+
+def mcp_denial_effects():
+    baseline = json.loads((OUT / "http-mapping.json").read_text())["mcp_denial_baseline"]
+    http = json.loads((OUT / "http.json").read_text())["cases"]
+    proof = next(c for c in http if c["case"] == "MCP-FORBIDDEN-CRITICAL-ACTIONS")
+    expect(proof["status"], "PASS")
+    after = {}
+    for identifier, original in baseline["orders"].items():
+        after[identifier] = order_effects(identifier)
+        expect(after[identifier], original)
+    closing = frappe.get_doc("CCM Cash Closing", frappe.db.get_value(
+        "CCM Cash Closing", {"external_id": baseline["closing"]["id"]}, "name"))
+    expect(closing.state, "DRAFT")
+    assert not closing.confirmed_by and not closing.confirmed_at
+    expect(frappe.db.exists("Currency Exchange", {"date": baseline["rate"]["date"],
+        "from_currency": "USD", "to_currency": "VES"}), None)
+    expect(frappe.db.count("CCM Rate Authorization", {"payment_date": baseline["rate"]["date"]}), 0)
+    bank = frappe.get_doc("CCM Bank Match", frappe.db.get_value(
+        "CCM Bank Match", {"transaction_key": baseline["bank"]["key"]}, "name"))
+    expect(bool(bank.reconciled), False)
+    assert not bank.matched_payment
+    expect(money(frappe.db.get_value("Bank Transaction", bank.bank_transaction, "unallocated_amount")), "40.00")
+    purchase = frappe.get_doc("CCM Purchase Request", frappe.db.get_value(
+        "CCM Purchase Request", {"external_id": "MCP-PO"}, "name"))
+    expect(purchase.workflow_state, "Pending Buyer")
+    expect(frappe.db.get_value("Purchase Order", purchase.purchase_order, "docstatus"), 0)
+    audits = []
+    for denied_action in proof["actual"]["denied"]:
+        records = frappe.get_all("CCM Audit", filters={"actor": "mcp@example.invalid",
+            "correlation_id": denied_action["native_error"]["correlation_id"]},
+            fields=["action", "before_state", "after_state", "reason", "object_id"])
+        expect(len(records), 1)
+        expect(records[0].action, "request.denied")
+        expect(json.loads(records[0].after_state)["code"], 403)
+        assert records[0].reason and records[0].object_id
+        audits.append(records[0])
+    expect(len(audits), 8)
+    expect(frappe.db.count("CCM Audit", {"actor": "mcp@example.invalid", "action": ["in", [
+        "cashea.fulfilled", "cashea.shipped", "cashea.settled", "purchase.approve",
+        "cash.confirmed", "rate.authorized", "bank.reconciled"]]}), 0)
+    for kind, identifier in [("cash.closing.confirmed", closing.external_id), ("purchase.approved", "MCP-PO")]:
+        expect(frappe.db.count("CCM Event", {"event_type": kind,
+            "payload": ["like", '%"object_id": "' + identifier + '"%']}), 0)
+    return {"orders_before": baseline["orders"], "orders_after": after,
+            "closing_unchanged": True, "rate_absent": True,
+            "bank_unallocated": "40.00", "purchase_state": purchase.workflow_state,
+            "denial_audits": audits, "successful_critical_audits": 0,
+            "cash_purchase_success_events": 0}
+
+
+check("MCP-DENIALS-NATIVE-EFFECTS-AUDIT", [3, 4, 5, 6, 7, 8, 10], mcp_denial_effects)
 
 
 def concurrency_ledgers():

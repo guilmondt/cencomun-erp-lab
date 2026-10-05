@@ -22,4 +22,7 @@ m.specifications = lambda: {
     ],
 }
 os.environ["CCM_ENABLE_FAULTS"] = "1"
-getattr(m, sys.argv[1])(["adapter", "consumer"])
+names = sys.argv[2:] or ["adapter", "consumer"]
+if any(name not in ["adapter", "consumer"] for name in names):
+    raise SystemExit("Only private LAB adapter/consumer services are supported")
+getattr(m, sys.argv[1])(names)

@@ -69,6 +69,16 @@ def post(doc):
 def audit(
     company, action, obj=None, before=None, after=None, reason="", correlation=None
 ):
+    critical = action in [
+        "cash.confirmed", "purchase.approve", "purchase.revise",
+        "rate.authorized", "bank.reconciled",
+    ] or (action.startswith("cashea.") and action != "cashea.created")
+    if critical and (
+        not isinstance(before, dict) or not before
+        or not isinstance(after, dict) or not after
+        or not isinstance(reason, str) or not reason.strip()
+    ):
+        frappe.throw("Critical LAB audit requires before, after and reason")
     insert(
         {
             "doctype": "CCM Audit",
@@ -311,7 +321,8 @@ def create_order(payload):
             "accounting_profit": money(revenue - cost - commission - shipping),
         }
     )
-    audit(company, "cashea.created", doc, after=normalized(doc))
+    audit(company, "cashea.created", doc, before={"exists": False},
+          after=normalized(doc), reason="LAB order captured without acceptance")
     return normalized(doc)
 
 
@@ -506,7 +517,18 @@ def transition_order(payload):
             native.cancel()
         doc.status = target
         save(doc)
-        audit(doc.company, "cashea." + target.lower(), doc, before, normalized(doc))
+        reason = payload.get("reason") or {
+            "REVIEWED": "LAB technical validation",
+            "APPROVED": "LAB acceptance by authenticated Cashea simulator",
+            "PREPARING": "LAB web order preparation",
+            "FULFILLED": "LAB direct handover in store",
+            "SHIPPED": "LAB carrier handover with guide",
+            "SETTLED": "LAB settlement by authenticated Cashea simulator",
+            "REJECTED": "LAB rejection before physical handover",
+            "CANCELLED": "LAB cancellation before physical handover",
+        }[target]
+        audit(doc.company, "cashea." + target.lower(), doc, before,
+              normalized(doc), reason=reason)
         if target == "APPROVED":
             event(doc.company, "cashea.approved", doc)
         return normalized(doc)

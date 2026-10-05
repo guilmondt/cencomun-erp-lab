@@ -1,18 +1,10 @@
 {
   "status": "PASS",
-  "probe": "scripts/core-test/readiness.py",
+  "command": "scripts/core-test/readiness.py",
   "checks": [
-    "ccm_lab_enabled=1",
-    "ccm_measure_queries=0",
-    "authenticated adapter product P001 matches native Item price/id",
+    "LAB enabled",
+    "metrics off",
+    "authenticated adapter product/price matches native Item",
     "authenticated inventory matches native Bin"
-  ],
-  "attempts": [
-    {
-      "status": "FAIL",
-      "cause": "Startup probe initially assumed substring search returned only P001; benchmark identifiers also match P001.",
-      "resolution": "Select the unique exact functional ID from the valid search results; rerun authenticated probe.",
-      "resolved": true
-    }
   ]
 }

@@ -2,6 +2,7 @@
 
 import hashlib, json, re, subprocess, datetime, csv, statistics
 from pathlib import Path
+from coverage_rules import apply_contract, criterion_status
 
 REPO = Path(__file__).resolve().parents[2]
 ROOT = Path("/workspace/.local/frappe-integral")
@@ -17,6 +18,11 @@ for name in GROUPS:
             cases.append({**case, "evidence": str(p.relative_to(REPO))})
     else:
         missing.append(name)
+contract = json.loads((REPO / "fixtures/ccm-core-v1/coverage-required.json").read_text())
+cases, coverage_gaps = apply_contract(cases, contract)
+coverage = {"revision": contract["coverage_revision"], "required_groups": len(contract["requirements"]),
+            "gaps": coverage_gaps, "status": "UNRUN" if coverage_gaps else "PASS"}
+(OUT / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n")
 labels = [
     "Objetos soportados",
     "Core upstream intacto",
@@ -111,13 +117,7 @@ benchmark = (
 criteria = []
 for i, label in enumerate(labels, 1):
     linked = [c for c in cases if i in c.get("criteria", [])]
-    status = (
-        "FAIL"
-        if any(c["status"] == "FAIL" for c in linked)
-        else "PASS"
-        if linked and all(c["status"] == "PASS" for c in linked)
-        else "BLOCKED"
-    )
+    status = criterion_status(linked)
     if i == 2:
         status = (
             "PASS"
@@ -130,12 +130,12 @@ for i, label in enumerate(labels, 1):
         status = (
             "PASS"
             if repro.get("status") == "PASS"
-            and linked
-            and all(c["status"] == "PASS" for c in linked)
+            and repro.get("coverage_revision", 1) >= 2
+            and status == "PASS"
             else "FAIL"
             if repro.get("status") == "FAIL"
             or any(c["status"] == "FAIL" for c in linked)
-            else "BLOCKED"
+            else "UNRUN"
         )
     if i == 11 and benchmark.get("loaded", {}).get("counts") != {
         "products": 1000,
@@ -163,7 +163,7 @@ for i, label in enumerate(labels, 1):
     if i == 14:
         criteria[-1]["evidence"].append("reports/evidence/frappe-core/reproducibility.json")
 counts = {
-    s: sum(c["status"] == s for c in criteria) for s in ["PASS", "FAIL", "BLOCKED"]
+    s: sum(c["status"] == s for c in criteria) for s in ["PASS", "FAIL", "BLOCKED", "UNRUN"]
 }
 core_count = {
     s: sum(c["status"] == s for c in cases)
@@ -208,7 +208,8 @@ summary = {
     ).strip(),
     "profile": "LAB-ONLY-v1",
     "source_identity_note": "Execution used the working tree on this parent commit; exact application contents are recorded in source.hashes. The later publication commit includes this evidence.",
-    "report_state": "CERRADO_CON_LIMITACIONES",
+    "report_state": "COBERTURA_PENDIENTE" if coverage_gaps or counts["UNRUN"] else "CERRADO_CON_LIMITACIONES",
+    "coverage": coverage,
     "criteria": criteria,
     "counts": counts,
     "mandatory_approved": counts["PASS"] == 14
@@ -230,9 +231,9 @@ summary = {
 rows = [
     "# Core Test de Frappe/ERPNext — LAB-ONLY-v1",
     "",
-    f"**CERRADO_CON_LIMITACIONES: PASS {counts['PASS']}/14, FAIL {counts['FAIL']}/14, BLOCKED {counts['BLOCKED']}/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.",
+    f"**{summary['report_state']}: PASS {counts['PASS']}/14, FAIL {counts['FAIL']}/14, BLOCKED {counts['BLOCKED']}/14, UNRUN {counts['UNRUN']}/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.",
     "",
-    f"Se ejecutaron {len(cases)} grupos de comprobaciones: {core_count['PASS']} PASS, {core_count['FAIL']} FAIL. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13.",
+    f"Cobertura obligatoria: {len(cases)} grupos; {core_count['PASS']} PASS, {core_count['FAIL']} FAIL, {core_count['UNRUN']} UNRUN. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13. [coverage.json](evidence/frappe-core/coverage.json) impide conservar PASS con casos ausentes o evidencia anterior a la corrección.",
     "",
     "| Criterio | Estado | Evidencia reproducible |",
     "| --- | --- | --- |",
@@ -246,6 +247,24 @@ for c in criteria:
         )
         + " |"
     )
+rows += ["", "## Corrección de cobertura — revisión 2", "",
+         "Contrato compartido: [coverage-required.json](../fixtures/ccm-core-v1/coverage-required.json). El oráculo económico y los bytes de los fixtures anteriores se conservan.", "",
+         "| Grupo obligatorio | Estado | Comprobación adicional |",
+         "| --- | --- | --- |"]
+corrections = {
+    "AUDIT01-03-NATIVE": "Motivo y JSON antes/después útiles; secuencia de estados, montos, notas y vínculos nativos de compras/caja/tasa/banco; inmutabilidad.",
+    "STATE-UNKNOWN-ATOMIC": "Estado desconocido por API y Select nativo: rechazo, snapshot de efectos sin cambios.",
+    "STATE-DELIVERY-WITHOUT-ACCEPTANCE": "STORE/WEB desde NEW/REVIEWED y WEB saltando PREPARING: 409 sin efectos.",
+    "STATE-WEB-NO-GUIDE": "PREPARING→SHIPPED sin guía: 422, sin salida, factura, pago o evento nuevo.",
+    "STATE-CANCEL-BEFORE-HANDOVER": "Cancelaciones APPROVED STORE/WEB y PREPARING WEB: SO nativo cancelado, stock intacto, sin factura/entrega/pago; motivo y antes/después exactos.",
+    "MCP01-06-STDIO": "Equivalencia completa API/MCP en seis rutas; creaciones y replays en ambos sentidos con los mismos IDs. Metadata excluida y replay verificado por separado.",
+    "MCP-FORBIDDEN-CRITICAL-ACTIONS": "Ocho negativas en objetos elegibles: tool -32602 y RPC 403 para aprobación, entrega/despacho, liquidación, caja, tasa y banco.",
+    "MCP-DENIALS-NATIVE-EFFECTS-AUDIT": "Snapshots nativos inalterados, ocho auditorías de denegación y ausencia de auditorías/eventos de éxito.",
+    "IDEM04-EVENTS-RECOVERY": "Éxito antes de reiniciar consumidor; efecto persistido; mismos event_id repetidos después: recepciones2 y aplicaciones1.",
+}
+by_case = {c["case"]: c for c in cases}
+for name, description in corrections.items():
+    rows.append(f"| {name} | {by_case.get(name, {}).get('status', 'UNRUN')} | {description} |")
 rows += [
     "",
     "## Casos económicos y TAX01",
@@ -313,7 +332,7 @@ rows += [
     "",
     f"Subconjunto oficial de plataforma: {platform['tests']} tests {platform['status']}; alcance: utilidades unitarias. Los cinco tests de registro/paquete también se ejecutan en el runner. Los grupos de negocio son integración real sobre MariaDB/Redis, incluidos HTTP, permisos y concurrencia. No se presenta esto como la suite completa upstream ni como regresión posterior a un patch.",
     "",
-    "El sitio de reproducción separado restauró el checkpoint y repitió los 14 grupos nativos de negocio/finanzas sin modificar el sitio medido. Credenciales, encryption_key, dumps y logs completos permanecen privados, fuera del repositorio. Solo se publican hashes/metadatos y evidencias ficticias.",
+    f"El sitio de reproducción separado restauró el checkpoint y repitió {repro.get('replayed_case_counts', {}).get('business', 'UNRUN')} grupos de negocio y {repro.get('replayed_case_counts', {}).get('finance', 'UNRUN')} de finanzas sin modificar el sitio medido. Credenciales, encryption_key, dumps y logs completos permanecen privados, fuera del repositorio. Solo se publican hashes/metadatos y evidencias ficticias.",
     "",
     "## Limitaciones, diagnóstico y resolución",
     "",

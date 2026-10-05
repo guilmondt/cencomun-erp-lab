@@ -8,6 +8,7 @@
         9
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "reads": [
           {
@@ -31,8 +32,8 @@
               "page": 1,
               "page_size": 20,
               "_meta": {
-                "correlation_id": "4cc87109-8c21-4607-aeca-cc3ca1169690",
-                "server_ms": 3.1568
+                "correlation_id": "934b5c26-2a28-4b7e-bbc4-4e23e29c1b75",
+                "server_ms": 3.4502
               }
             }
           },
@@ -49,8 +50,8 @@
               "value": "150.00",
               "unit_cost": "30.00",
               "_meta": {
-                "correlation_id": "f58d7f23-bc1f-4bb1-ad72-9c780b74f912",
-                "server_ms": 14.9798
+                "correlation_id": "f8cb914e-2c13-4350-acfe-682bc90e61ce",
+                "server_ms": 15.686
               }
             }
           },
@@ -63,8 +64,8 @@
                 "USD": "0.00"
               },
               "_meta": {
-                "correlation_id": "422f663d-c833-461b-a188-2e29bf8628a0",
-                "server_ms": 5.7488
+                "correlation_id": "d1d3fe8c-0b1d-411f-bc46-c43b58cfa01e",
+                "server_ms": 5.2418
               }
             }
           },
@@ -123,8 +124,8 @@
               "cashea_pending": "125.00",
               "cashea_received": "0.00",
               "_meta": {
-                "correlation_id": "b6743b7e-3fb6-4580-ba0b-b286c14ce95f",
-                "server_ms": 2.3198
+                "correlation_id": "3ea0404d-1568-4f97-985c-280e04b147bb",
+                "server_ms": 2.2852
               }
             }
           }
@@ -136,8 +137,8 @@
           "native_order": "PUR-ORD-2026-00011",
           "replay": false,
           "_meta": {
-            "correlation_id": "4591e890-7902-4bac-9c9e-a2fcf5684141",
-            "server_ms": 147.0883
+            "correlation_id": "96fb3b9d-a63b-410d-85af-7370ea7a791c",
+            "server_ms": 159.4534
           }
         },
         "order": {
@@ -174,8 +175,8 @@
           ],
           "replay": false,
           "_meta": {
-            "correlation_id": "328e7562-95b7-4c91-8ad4-ec8b54787cd1",
-            "server_ms": 26.1836
+            "correlation_id": "db5c010c-f86c-4ebd-94de-368867504e54",
+            "server_ms": 23.1774
           }
         },
         "replay": {
@@ -212,13 +213,13 @@
           ],
           "replay": true,
           "_meta": {
-            "correlation_id": "a0204bac-7dd8-4b10-988b-3c19b1fee974",
-            "server_ms": 1.702
+            "correlation_id": "5d14b8dd-dbd5-4fb2-b778-7fffe6bf6b7a",
+            "server_ms": 2.6632
           }
         },
         "conflict": 409
       },
-      "seconds": 0.4528
+      "seconds": 0.5674
     },
     {
       "case": "IDEM01-02-CREATE-CONCURRENT",
@@ -228,6 +229,7 @@
         9
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "responses": [
           [
@@ -266,8 +268,8 @@
               ],
               "replay": true,
               "_meta": {
-                "correlation_id": "d54284c4-9015-4a65-a0d8-a80cf2513b59",
-                "server_ms": 103.6131
+                "correlation_id": "1e677fd7-9703-4b6e-a698-66f6c6eeddaa",
+                "server_ms": 102.6452
               }
             }
           ],
@@ -307,8 +309,8 @@
               ],
               "replay": false,
               "_meta": {
-                "correlation_id": "4444f799-fa59-41ab-ac3b-a710cfbe2cbb",
-                "server_ms": 20.0651
+                "correlation_id": "e92e337a-293f-4315-9770-9b72464f0d73",
+                "server_ms": 19.3255
               }
             }
           ]
@@ -316,7 +318,7 @@
         "replay_without_permissions": 403,
         "same_external_id_different_key": 409
       },
-      "seconds": 0.2216
+      "seconds": 0.1954
     },
     {
       "case": "PERM-API-NATIVE",
@@ -325,6 +327,7 @@
         9
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "neutral_errors": [
           401,
@@ -396,7 +399,7 @@
         ],
         "native_read_write_denials": true
       },
-      "seconds": 0.5234
+      "seconds": 0.5548
     },
     {
       "case": "CASH04-06-HTTP-IMMUTABLE",
@@ -406,26 +409,27 @@
         9
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
-        "native_closing": "gmll364dce",
+        "native_closing": "8ooobm72tb",
         "before": {
           "state": "CONFIRMED",
           "snapshot": "{\"channels\": [{\"channel\": \"USD\", \"currency\": \"USD\", \"expected\": \"100.00\", \"observed\": \"98.00\", \"difference\": \"-2.00\", \"vouchers\": [\"ACC-JV-2026-00001\", \"ACC-JV-2026-00002\", \"ACC-JV-2026-00003\", \"ACC-JV-2026-00004\"]}, {\"channel\": \"VES\", \"currency\": \"VES\", \"expected\": \"4000.00\", \"observed\": \"4010.00\", \"difference\": \"10.00\", \"vouchers\": [\"ACC-JV-2026-00005\", \"ACC-JV-2026-00006\"]}, {\"channel\": \"POS\", \"currency\": \"USD\", \"expected\": \"50.00\", \"observed\": \"50.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00007\"]}, {\"channel\": \"TRANSFER\", \"currency\": \"USD\", \"expected\": \"30.00\", \"observed\": \"30.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00008\"]}], \"cashea_pending\": \"125.00\", \"cashea_received\": \"0.00\"}",
           "note": "Synthetic difference acknowledged",
           "confirmed_by": "manager@example.invalid",
-          "confirmed_at": "2026-10-06 03:40:16.547482"
+          "confirmed_at": "2026-10-06 04:21:20.884366"
         },
         "after": {
           "state": "CONFIRMED",
           "snapshot": "{\"channels\": [{\"channel\": \"USD\", \"currency\": \"USD\", \"expected\": \"100.00\", \"observed\": \"98.00\", \"difference\": \"-2.00\", \"vouchers\": [\"ACC-JV-2026-00001\", \"ACC-JV-2026-00002\", \"ACC-JV-2026-00003\", \"ACC-JV-2026-00004\"]}, {\"channel\": \"VES\", \"currency\": \"VES\", \"expected\": \"4000.00\", \"observed\": \"4010.00\", \"difference\": \"10.00\", \"vouchers\": [\"ACC-JV-2026-00005\", \"ACC-JV-2026-00006\"]}, {\"channel\": \"POS\", \"currency\": \"USD\", \"expected\": \"50.00\", \"observed\": \"50.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00007\"]}, {\"channel\": \"TRANSFER\", \"currency\": \"USD\", \"expected\": \"30.00\", \"observed\": \"30.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00008\"]}], \"cashea_pending\": \"125.00\", \"cashea_received\": \"0.00\"}",
           "note": "Synthetic difference acknowledged",
           "confirmed_by": "manager@example.invalid",
-          "confirmed_at": "2026-10-06 03:40:16.547482"
+          "confirmed_at": "2026-10-06 04:21:20.884366"
         },
         "manager_edit": 403,
         "operator_edit": 403
       },
-      "seconds": 0.034
+      "seconds": 0.045
     },
     {
       "case": "SEARCH01-04-NATIVE",
@@ -434,6 +438,7 @@
         12
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "queries": [
           {
@@ -481,7 +486,7 @@
         "serial": "SER-P001-001",
         "serial_inventory_tracking_tested": false
       },
-      "seconds": 0.102
+      "seconds": 0.1093
     },
     {
       "case": "TAX02-04-IDEM-CONCURRENT",
@@ -492,6 +497,7 @@
         9
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": [
         {
           "id": "TAX-CONC-S",
@@ -576,7 +582,7 @@
             {
               "code": "409",
               "message": "Invalid state transition",
-              "correlation_id": "64e2c58e-1fff-45c2-b070-fcdec794726a"
+              "correlation_id": "343adb90-b9ae-4038-8e55-5a031ab1eda3"
             }
           ],
           "settlement": [
@@ -614,7 +620,7 @@
                     "unit_cost": "10.00"
                   }
                 ],
-                "replay": false
+                "replay": true
               }
             ],
             [
@@ -651,7 +657,7 @@
                     "unit_cost": "10.00"
                   }
                 ],
-                "replay": true
+                "replay": false
               }
             ]
           ]
@@ -739,7 +745,7 @@
             {
               "code": "409",
               "message": "Invalid state transition",
-              "correlation_id": "91888b19-06b4-40fa-b899-d31ce891d957"
+              "correlation_id": "8acf4a66-8074-415a-a9e6-7bbee5fbf367"
             }
           ],
           "settlement": [
@@ -777,7 +783,7 @@
                     "unit_cost": "10.00"
                   }
                 ],
-                "replay": true
+                "replay": false
               }
             ],
             [
@@ -814,13 +820,13 @@
                     "unit_cost": "10.00"
                   }
                 ],
-                "replay": false
+                "replay": true
               }
             ]
           ]
         }
       ],
-      "seconds": 1.5934
+      "seconds": 1.7982
     },
     {
       "case": "BANK-CONCURRENT-1000",
@@ -829,6 +835,7 @@
         9
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "responses": [
           {
@@ -844,7 +851,7 @@
         ],
         "expected_native_unique": 1000
       },
-      "seconds": 12.051
+      "seconds": 13.3635
     },
     {
       "case": "MCP01-06-STDIO",
@@ -854,6 +861,7 @@
         10
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "initialize": {
           "jsonrpc": "2.0",
@@ -899,8 +907,8 @@
               "page": 1,
               "page_size": 20,
               "_meta": {
-                "correlation_id": "42e0878c-48fe-4c62-8506-2dcbb08f8743",
-                "server_ms": 1.0223
+                "correlation_id": "e00ce01f-e829-4639-86ec-51be49d8a314",
+                "server_ms": 1.2514
               }
             }
           },
@@ -917,8 +925,8 @@
               "value": "150.00",
               "unit_cost": "30.00",
               "_meta": {
-                "correlation_id": "3b2b3e0b-8bdf-455d-8500-1b1e09f05b24",
-                "server_ms": 3.0222
+                "correlation_id": "d796c540-2943-48fb-bd2e-4bc664bf8f82",
+                "server_ms": 3.7331
               }
             }
           },
@@ -931,8 +939,8 @@
                 "USD": "0.00"
               },
               "_meta": {
-                "correlation_id": "e4c17f38-29f1-4cf8-98e1-8901900a8c32",
-                "server_ms": 1.4985
+                "correlation_id": "0f08232c-6826-42ae-b219-bdfc08d0b79d",
+                "server_ms": 1.5655
               }
             }
           },
@@ -991,8 +999,8 @@
               "cashea_pending": "125.00",
               "cashea_received": "0.00",
               "_meta": {
-                "correlation_id": "72c6829c-bdbc-44b7-b88d-bcc3721afaff",
-                "server_ms": 0.9095
+                "correlation_id": "c3334abf-0553-4528-8621-f114c46c6792",
+                "server_ms": 1.164
               }
             }
           },
@@ -1006,8 +1014,8 @@
               "native_order": "PUR-ORD-2026-00012",
               "replay": false,
               "_meta": {
-                "correlation_id": "36b3420c-2f3e-4b86-ab92-698fbcf4f3ad",
-                "server_ms": 48.1298
+                "correlation_id": "cd30c0b6-95cd-42d7-ba51-97dcf4ee07d0",
+                "server_ms": 57.1191
               }
             }
           },
@@ -1048,16 +1056,860 @@
               ],
               "replay": false,
               "_meta": {
-                "correlation_id": "4a241838-1f49-465f-aa1d-ef142f3699a8",
-                "server_ms": 16.2413
+                "correlation_id": "1fcf0681-2553-4609-8316-86f893adf25b",
+                "server_ms": 17.745
               }
             }
           }
         ],
         "replay": true,
-        "approval_denied": true
+        "approval_denied": true,
+        "equivalence": [
+          {
+            "tool": "searchProducts",
+            "direction": "MCP_then_API",
+            "api_status": 200,
+            "mcp_status": 200,
+            "api_result": {
+              "items": [
+                {
+                  "id": "P001",
+                  "name": "Equipo ficticio Alfa",
+                  "supplier_reference": "SUP-ALFA-01",
+                  "marketplace_enabled": true,
+                  "cashea_enabled": true,
+                  "price": "50.00",
+                  "warranty_quantity": 12,
+                  "warranty_unit": "MONTH",
+                  "condition": "NEW"
+                }
+              ],
+              "total": 1,
+              "page": 1,
+              "page_size": 20
+            },
+            "mcp_result": {
+              "items": [
+                {
+                  "id": "P001",
+                  "name": "Equipo ficticio Alfa",
+                  "supplier_reference": "SUP-ALFA-01",
+                  "marketplace_enabled": true,
+                  "cashea_enabled": true,
+                  "price": "50.00",
+                  "warranty_quantity": 12,
+                  "warranty_unit": "MONTH",
+                  "condition": "NEW"
+                }
+              ],
+              "total": 1,
+              "page": 1,
+              "page_size": 20
+            },
+            "equal": true
+          },
+          {
+            "tool": "getInventory",
+            "direction": "MCP_then_API",
+            "api_status": 200,
+            "mcp_status": 200,
+            "api_result": {
+              "product_id": "P001",
+              "warehouse": "WH-LAB-001-HTTP - CLAB",
+              "unit": "Nos",
+              "on_hand": "5",
+              "reserved": "0",
+              "available": "5",
+              "value": "150.00",
+              "unit_cost": "30.00"
+            },
+            "mcp_result": {
+              "product_id": "P001",
+              "warehouse": "WH-LAB-001-HTTP - CLAB",
+              "unit": "Nos",
+              "on_hand": "5",
+              "reserved": "0",
+              "available": "5",
+              "value": "150.00",
+              "unit_cost": "30.00"
+            },
+            "equal": true
+          },
+          {
+            "tool": "getCustomerBalance",
+            "direction": "MCP_then_API",
+            "api_status": 200,
+            "mcp_status": 200,
+            "api_result": {
+              "customer_id": "C002",
+              "balances": {
+                "USD": "0.00"
+              }
+            },
+            "mcp_result": {
+              "customer_id": "C002",
+              "balances": {
+                "USD": "0.00"
+              }
+            },
+            "equal": true
+          },
+          {
+            "tool": "getCashStatus",
+            "direction": "MCP_then_API",
+            "api_status": 200,
+            "mcp_status": 200,
+            "api_result": {
+              "id": "CS001",
+              "state": "CONFIRMED",
+              "channels": [
+                {
+                  "channel": "USD",
+                  "currency": "USD",
+                  "expected": "100.00",
+                  "observed": "98.00",
+                  "difference": "-2.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00001",
+                    "ACC-JV-2026-00002",
+                    "ACC-JV-2026-00003",
+                    "ACC-JV-2026-00004"
+                  ]
+                },
+                {
+                  "channel": "VES",
+                  "currency": "VES",
+                  "expected": "4000.00",
+                  "observed": "4010.00",
+                  "difference": "10.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00005",
+                    "ACC-JV-2026-00006"
+                  ]
+                },
+                {
+                  "channel": "POS",
+                  "currency": "USD",
+                  "expected": "50.00",
+                  "observed": "50.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00007"
+                  ]
+                },
+                {
+                  "channel": "TRANSFER",
+                  "currency": "USD",
+                  "expected": "30.00",
+                  "observed": "30.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00008"
+                  ]
+                }
+              ],
+              "cashea_pending": "125.00",
+              "cashea_received": "0.00"
+            },
+            "mcp_result": {
+              "id": "CS001",
+              "state": "CONFIRMED",
+              "channels": [
+                {
+                  "channel": "USD",
+                  "currency": "USD",
+                  "expected": "100.00",
+                  "observed": "98.00",
+                  "difference": "-2.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00001",
+                    "ACC-JV-2026-00002",
+                    "ACC-JV-2026-00003",
+                    "ACC-JV-2026-00004"
+                  ]
+                },
+                {
+                  "channel": "VES",
+                  "currency": "VES",
+                  "expected": "4000.00",
+                  "observed": "4010.00",
+                  "difference": "10.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00005",
+                    "ACC-JV-2026-00006"
+                  ]
+                },
+                {
+                  "channel": "POS",
+                  "currency": "USD",
+                  "expected": "50.00",
+                  "observed": "50.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00007"
+                  ]
+                },
+                {
+                  "channel": "TRANSFER",
+                  "currency": "USD",
+                  "expected": "30.00",
+                  "observed": "30.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00008"
+                  ]
+                }
+              ],
+              "cashea_pending": "125.00",
+              "cashea_received": "0.00"
+            },
+            "equal": true
+          },
+          {
+            "tool": "createPurchaseDraft",
+            "direction": "MCP_then_API",
+            "api_status": 200,
+            "mcp_status": 201,
+            "api_result": {
+              "id": "MCP-PO",
+              "state": "Draft",
+              "approval_amount": "199.99",
+              "native_order": "PUR-ORD-2026-00012"
+            },
+            "mcp_result": {
+              "id": "MCP-PO",
+              "state": "Draft",
+              "approval_amount": "199.99",
+              "native_order": "PUR-ORD-2026-00012"
+            },
+            "equal": true
+          },
+          {
+            "tool": "createPurchaseDraft",
+            "direction": "API_then_MCP",
+            "api_status": 201,
+            "mcp_status": 200,
+            "api_result": {
+              "id": "MCP-PO-API-FIRST",
+              "state": "Draft",
+              "approval_amount": "199.99",
+              "native_order": "PUR-ORD-2026-00013"
+            },
+            "mcp_result": {
+              "id": "MCP-PO-API-FIRST",
+              "state": "Draft",
+              "approval_amount": "199.99",
+              "native_order": "PUR-ORD-2026-00013"
+            },
+            "equal": true
+          },
+          {
+            "tool": "createCasheaOrder",
+            "direction": "MCP_then_API",
+            "api_status": 200,
+            "mcp_status": 201,
+            "api_result": {
+              "id": "MCP-CO",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "mcp_result": {
+              "id": "MCP-CO",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "equal": true
+          },
+          {
+            "tool": "createCasheaOrder",
+            "direction": "API_then_MCP",
+            "api_status": 201,
+            "mcp_status": 200,
+            "api_result": {
+              "id": "MCP-CO-API-FIRST",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "mcp_result": {
+              "id": "MCP-CO-API-FIRST",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "equal": true
+          }
+        ],
+        "ignored_transport_fields": [
+          "_meta",
+          "replay"
+        ]
       },
-      "seconds": 0.2446
+      "seconds": 0.5175
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "criteria": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": {
+        "denied": [
+          {
+            "tool": "approvePurchase",
+            "operation": "purchaseAction",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-PO",
+              "action": "Approve"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "8b6c9440-d0fe-4a64-927d-d1129936f60d"
+            }
+          },
+          {
+            "tool": "deliverOrder",
+            "operation": "transitionOrder",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-DELIVER-S",
+              "target": "FULFILLED"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "8ff96f7f-2c76-4205-ae2f-b5fa7efba63f"
+            }
+          },
+          {
+            "tool": "dispatchOrder",
+            "operation": "transitionOrder",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-DELIVER-W",
+              "target": "SHIPPED"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "5b803af5-4227-4fdd-93ec-93bcf8e47cf3"
+            }
+          },
+          {
+            "tool": "settleOrder",
+            "operation": "transitionOrder",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-SETTLE-S",
+              "target": "SETTLED"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "c6cddf83-cd33-4fe6-a65c-c7ec517e1ef1"
+            }
+          },
+          {
+            "tool": "settleWebOrder",
+            "operation": "transitionOrder",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-SETTLE-W",
+              "target": "SETTLED"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "bd442325-6d2e-41b2-b9f7-9c4349770ef4"
+            }
+          },
+          {
+            "tool": "confirmClosing",
+            "operation": "confirmClosing",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-CS",
+              "note": "Synthetic permission check"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "de667d8e-7e6e-4cc7-9a6f-420a7d8a001a"
+            }
+          },
+          {
+            "tool": "authorizeRate",
+            "operation": "authorizeRate",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-FX",
+              "date": "2026-10-04",
+              "rate": "42.000000",
+              "reason": "Synthetic permission check"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "68905917-3190-48f3-ba96-6f600b4b765f"
+            }
+          },
+          {
+            "tool": "reconcileBank",
+            "operation": "reconcileBank",
+            "payload": {
+              "company_id": "CCM-LAB-001",
+              "id": "MCP-DENY-BANK",
+              "key": "10fd1104201603a2bc1408911177596de0071439a80e4101f3d040055d481a93",
+              "payment": "ACC-PAY-2026-00016",
+              "reason": "Synthetic permission check"
+            },
+            "mcp_error": {
+              "code": -32602,
+              "message": "Invalid MCP method/tool/arguments"
+            },
+            "native_http": 403,
+            "native_error": {
+              "code": "403",
+              "message": "Role denied",
+              "correlation_id": "caac0155-3f80-481e-8787-ee38bd8e764e"
+            }
+          }
+        ],
+        "purchase_before": {
+          "id": "MCP-PO",
+          "state": "Pending Buyer",
+          "approval_amount": "199.99",
+          "native_order": "PUR-ORD-2026-00012",
+          "replay": false
+        },
+        "baseline": {
+          "orders": {
+            "MCP-DENY-DELIVER-S": {
+              "order": {
+                "id": "MCP-DENY-DELIVER-S",
+                "company_id": "CCM-LAB-001",
+                "status": "APPROVED",
+                "channel": "STORE",
+                "currency": "USD",
+                "gross": "125.00",
+                "revenue": "125.00",
+                "tax": "0.00",
+                "commission": "8.00",
+                "cost": "70.00",
+                "net": "117.00",
+                "indicator": "47.00",
+                "accounting_profit": "47.00",
+                "financed_amount": "75.00",
+                "shipping_expense": "0.00",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "50.00",
+                    "line_total": "100.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "25.00",
+                    "line_total": "25.00",
+                    "unit_cost": "10.00"
+                  }
+                ]
+              },
+              "guide": null,
+              "sales_order": "SAL-ORD-2026-00013",
+              "sales_order_docstatus": 1,
+              "delivery": null,
+              "invoice": null,
+              "payments": [],
+              "stock": [
+                {
+                  "id": "P001",
+                  "qty": "5",
+                  "value": "150.00"
+                },
+                {
+                  "id": "P002",
+                  "qty": "5",
+                  "value": "50.00"
+                },
+                {
+                  "id": "P003",
+                  "qty": "5",
+                  "value": "300.00"
+                }
+              ],
+              "native_stock_entries": 3,
+              "native_gl_entries": 0,
+              "success_events": [
+                "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57"
+              ]
+            },
+            "MCP-DENY-DELIVER-W": {
+              "order": {
+                "id": "MCP-DENY-DELIVER-W",
+                "company_id": "CCM-LAB-001",
+                "status": "PREPARING",
+                "channel": "WEB",
+                "currency": "USD",
+                "gross": "125.00",
+                "revenue": "125.00",
+                "tax": "0.00",
+                "commission": "10.50",
+                "cost": "70.00",
+                "net": "113.80",
+                "indicator": "43.80",
+                "accounting_profit": "43.80",
+                "financed_amount": "75.00",
+                "shipping_expense": "0.70",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "50.00",
+                    "line_total": "100.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "25.00",
+                    "line_total": "25.00",
+                    "unit_cost": "10.00"
+                  }
+                ]
+              },
+              "guide": "GUIDE-LAB-001",
+              "sales_order": "SAL-ORD-2026-00014",
+              "sales_order_docstatus": 1,
+              "delivery": null,
+              "invoice": null,
+              "payments": [],
+              "stock": [
+                {
+                  "id": "P001",
+                  "qty": "5",
+                  "value": "150.00"
+                },
+                {
+                  "id": "P002",
+                  "qty": "5",
+                  "value": "50.00"
+                },
+                {
+                  "id": "P003",
+                  "qty": "5",
+                  "value": "300.00"
+                }
+              ],
+              "native_stock_entries": 3,
+              "native_gl_entries": 0,
+              "success_events": [
+                "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290"
+              ]
+            },
+            "MCP-DENY-SETTLE-S": {
+              "order": {
+                "id": "MCP-DENY-SETTLE-S",
+                "company_id": "CCM-LAB-001",
+                "status": "FULFILLED",
+                "channel": "STORE",
+                "currency": "USD",
+                "gross": "125.00",
+                "revenue": "125.00",
+                "tax": "0.00",
+                "commission": "8.00",
+                "cost": "70.00",
+                "net": "117.00",
+                "indicator": "47.00",
+                "accounting_profit": "47.00",
+                "financed_amount": "75.00",
+                "shipping_expense": "0.00",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "50.00",
+                    "line_total": "100.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "25.00",
+                    "line_total": "25.00",
+                    "unit_cost": "10.00"
+                  }
+                ]
+              },
+              "guide": null,
+              "sales_order": "SAL-ORD-2026-00015",
+              "sales_order_docstatus": 1,
+              "delivery": "MAT-DN-2026-00005",
+              "invoice": "ACC-SINV-2026-00009",
+              "payments": [],
+              "stock": [
+                {
+                  "id": "P001",
+                  "qty": "3",
+                  "value": "90.00"
+                },
+                {
+                  "id": "P002",
+                  "qty": "4",
+                  "value": "40.00"
+                },
+                {
+                  "id": "P003",
+                  "qty": "5",
+                  "value": "300.00"
+                }
+              ],
+              "native_stock_entries": 5,
+              "native_gl_entries": 4,
+              "success_events": [
+                "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28"
+              ]
+            },
+            "MCP-DENY-SETTLE-W": {
+              "order": {
+                "id": "MCP-DENY-SETTLE-W",
+                "company_id": "CCM-LAB-001",
+                "status": "SHIPPED",
+                "channel": "WEB",
+                "currency": "USD",
+                "gross": "125.00",
+                "revenue": "125.00",
+                "tax": "0.00",
+                "commission": "10.50",
+                "cost": "70.00",
+                "net": "113.80",
+                "indicator": "43.80",
+                "accounting_profit": "43.80",
+                "financed_amount": "75.00",
+                "shipping_expense": "0.70",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "50.00",
+                    "line_total": "100.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "25.00",
+                    "line_total": "25.00",
+                    "unit_cost": "10.00"
+                  }
+                ]
+              },
+              "guide": "GUIDE-LAB-001",
+              "sales_order": "SAL-ORD-2026-00016",
+              "sales_order_docstatus": 1,
+              "delivery": "MAT-DN-2026-00006",
+              "invoice": "ACC-SINV-2026-00010",
+              "payments": [],
+              "stock": [
+                {
+                  "id": "P001",
+                  "qty": "3",
+                  "value": "90.00"
+                },
+                {
+                  "id": "P002",
+                  "qty": "4",
+                  "value": "40.00"
+                },
+                {
+                  "id": "P003",
+                  "qty": "5",
+                  "value": "300.00"
+                }
+              ],
+              "native_stock_entries": 5,
+              "native_gl_entries": 4,
+              "success_events": [
+                "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21"
+              ]
+            }
+          },
+          "closing": {
+            "id": "MCP-DENY-CS",
+            "state": "DRAFT"
+          },
+          "rate": {
+            "id": "MCP-DENY-FX",
+            "date": "2026-10-04",
+            "rate": null
+          },
+          "bank": {
+            "key": "10fd1104201603a2bc1408911177596de0071439a80e4101f3d040055d481a93",
+            "payment": "ACC-PAY-2026-00016",
+            "reconciled": false,
+            "unallocated_amount": "40.00",
+            "native_transaction": "ACC-BTN-2026-00006"
+          }
+        },
+        "expected_domain_effects": 0
+      },
+      "seconds": 0.1472
     }
   ]
 }

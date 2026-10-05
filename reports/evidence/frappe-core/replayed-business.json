@@ -12,6 +12,7 @@
         11
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "expected": {
           "gross": "125.00",
@@ -200,7 +201,7 @@
         ],
         "final_customer_balance": "0.00"
       },
-      "seconds": 2.0144
+      "seconds": 2.4558
     },
     {
       "case": "CO01-NATIVE",
@@ -212,6 +213,7 @@
         11
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "expected": {
           "gross": "125.00",
@@ -410,7 +412,7 @@
         ],
         "final_customer_balance": "0.00"
       },
-      "seconds": 0.8329
+      "seconds": 0.9496
     },
     {
       "case": "TAX01-S-NATIVE",
@@ -422,6 +424,7 @@
         11
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "expected": {
           "gross": "137.50",
@@ -620,7 +623,7 @@
         ],
         "final_customer_balance": "0.00"
       },
-      "seconds": 0.9005
+      "seconds": 0.9555
     },
     {
       "case": "TAX01-W-NATIVE",
@@ -632,6 +635,7 @@
         11
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "expected": {
           "gross": "137.50",
@@ -840,7 +844,7 @@
         ],
         "final_customer_balance": "0.00"
       },
-      "seconds": 0.9
+      "seconds": 0.9921
     },
     {
       "case": "PROD01-04",
@@ -850,6 +854,7 @@
         11
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "warranties": [
           [
@@ -888,7 +893,7 @@
           "ccm_condition"
         ]
       },
-      "seconds": 0.1118
+      "seconds": 0.1247
     },
     {
       "case": "VAL01-04",
@@ -897,6 +902,7 @@
         5
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": [
         {
           "case": "quantity",
@@ -932,7 +938,7 @@
           "native_error": "<strong>Stock Entry Detail</strong> Row #1: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>"
         }
       ],
-      "seconds": 0.2017
+      "seconds": 0.1954
     },
     {
       "case": "STATE01-04",
@@ -941,6 +947,7 @@
         4
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": [
         {
           "id": "STATE-STORE-REJECTED",
@@ -1079,7 +1086,1579 @@
           "replay": false
         }
       ],
-      "seconds": 0.338
+      "seconds": 0.2722
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "criteria": [
+        3,
+        4
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": [
+        {
+          "id": "STATE-UNKNOWN-STORE",
+          "target": "UNKNOWN-LAB",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "f6f80b54-8f19-4deb-af14-008d1d066b37"
+            },
+            "server_ms": 9.6357
+          },
+          "before": {
+            "order": {
+              "id": "STATE-UNKNOWN-STORE",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "after": {
+            "order": {
+              "id": "STATE-UNKNOWN-STORE",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "native_effects_unchanged": true,
+          "unknown_native_state_rejected": true
+        },
+        {
+          "id": "STATE-UNKNOWN-WEB",
+          "target": "UNKNOWN-LAB",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "9dd6bf96-8071-4346-ab48-517130c24f5a"
+            },
+            "server_ms": 9.7733
+          },
+          "before": {
+            "order": {
+              "id": "STATE-UNKNOWN-WEB",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "after": {
+            "order": {
+              "id": "STATE-UNKNOWN-WEB",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "native_effects_unchanged": true,
+          "unknown_native_state_rejected": true
+        }
+      ],
+      "seconds": 0.3262
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": [
+        {
+          "id": "STATE-NO-ACCEPT-STORE-NEW",
+          "target": "FULFILLED",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "c5454a42-b89f-4215-bebc-b3d11e9611be"
+            },
+            "server_ms": 8.1148
+          },
+          "before": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-STORE-NEW",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "after": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-STORE-NEW",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "native_effects_unchanged": true
+        },
+        {
+          "id": "STATE-NO-ACCEPT-STORE-REVIEWED",
+          "target": "FULFILLED",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "c806d9a1-cf17-4e51-8da1-510f8122c152"
+            },
+            "server_ms": 8.4351
+          },
+          "before": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-STORE-REVIEWED",
+              "company_id": "CCM-LAB-001",
+              "status": "REVIEWED",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "after": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-STORE-REVIEWED",
+              "company_id": "CCM-LAB-001",
+              "status": "REVIEWED",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "native_effects_unchanged": true
+        },
+        {
+          "id": "STATE-NO-ACCEPT-WEB-NEW",
+          "target": "SHIPPED",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "cdbc92ed-ab10-4e21-91a9-f85aa334913b"
+            },
+            "server_ms": 7.9997
+          },
+          "before": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-WEB-NEW",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "after": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-WEB-NEW",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "native_effects_unchanged": true
+        },
+        {
+          "id": "STATE-NO-ACCEPT-WEB-REVIEWED",
+          "target": "SHIPPED",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "8a496fb5-ce7d-4bf6-9317-52e43ad807ae"
+            },
+            "server_ms": 8.2999
+          },
+          "before": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-WEB-REVIEWED",
+              "company_id": "CCM-LAB-001",
+              "status": "REVIEWED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "after": {
+            "order": {
+              "id": "STATE-NO-ACCEPT-WEB-REVIEWED",
+              "company_id": "CCM-LAB-001",
+              "status": "REVIEWED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": null,
+            "sales_order_docstatus": null,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": []
+          },
+          "native_effects_unchanged": true
+        },
+        {
+          "id": "STATE-WEB-SKIP-PREPARING",
+          "target": "SHIPPED",
+          "expected_http": 409,
+          "response": {
+            "ok": false,
+            "status": 409,
+            "error": {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "65016b94-53cc-4962-a363-68712c7e2ba3"
+            },
+            "server_ms": 7.9626
+          },
+          "before": {
+            "order": {
+              "id": "STATE-WEB-SKIP-PREPARING",
+              "company_id": "CCM-LAB-001",
+              "status": "APPROVED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": "SAL-ORD-2026-00005",
+            "sales_order_docstatus": 1,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "e13352fa823f1d0470b0c3b3951660311b4e549b7fd9e83564c2c42dcdaa91c8"
+            ]
+          },
+          "after": {
+            "order": {
+              "id": "STATE-WEB-SKIP-PREPARING",
+              "company_id": "CCM-LAB-001",
+              "status": "APPROVED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": "SAL-ORD-2026-00005",
+            "sales_order_docstatus": 1,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "e13352fa823f1d0470b0c3b3951660311b4e549b7fd9e83564c2c42dcdaa91c8"
+            ]
+          },
+          "native_effects_unchanged": true
+        }
+      ],
+      "seconds": 0.8602
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": {
+        "id": "STATE-WEB-NO-GUIDE",
+        "target": "SHIPPED",
+        "expected_http": 422,
+        "response": {
+          "ok": false,
+          "status": 422,
+          "error": {
+            "code": "422",
+            "message": "WEB dispatch requires guide",
+            "correlation_id": "f00cbc93-6dbe-433e-8d99-779c6890fee8"
+          },
+          "server_ms": 7.9926
+        },
+        "before": {
+          "order": {
+            "id": "STATE-WEB-NO-GUIDE",
+            "company_id": "CCM-LAB-001",
+            "status": "PREPARING",
+            "channel": "WEB",
+            "currency": "USD",
+            "gross": "125.00",
+            "revenue": "125.00",
+            "tax": "0.00",
+            "commission": "10.50",
+            "cost": "70.00",
+            "net": "114.50",
+            "indicator": "44.50",
+            "accounting_profit": "44.50",
+            "financed_amount": "75.00",
+            "shipping_expense": "0.00",
+            "lines": [
+              {
+                "product_id": "P001",
+                "qty": "2",
+                "unit_price": "50.00",
+                "line_total": "100.00",
+                "unit_cost": "30.00"
+              },
+              {
+                "product_id": "P002",
+                "qty": "1",
+                "unit_price": "25.00",
+                "line_total": "25.00",
+                "unit_cost": "10.00"
+              }
+            ]
+          },
+          "guide": null,
+          "sales_order": "SAL-ORD-2026-00006",
+          "sales_order_docstatus": 1,
+          "delivery": null,
+          "invoice": null,
+          "payments": [],
+          "stock": [
+            {
+              "id": "P001",
+              "qty": "5",
+              "value": "150.00"
+            },
+            {
+              "id": "P002",
+              "qty": "5",
+              "value": "50.00"
+            },
+            {
+              "id": "P003",
+              "qty": "5",
+              "value": "300.00"
+            }
+          ],
+          "native_stock_entries": 3,
+          "native_gl_entries": 0,
+          "success_events": [
+            "bc98ba941c75e6b7e0245fd1bc851b07bd5af3b506b28caa349ad42a5bfd09c6"
+          ]
+        },
+        "after": {
+          "order": {
+            "id": "STATE-WEB-NO-GUIDE",
+            "company_id": "CCM-LAB-001",
+            "status": "PREPARING",
+            "channel": "WEB",
+            "currency": "USD",
+            "gross": "125.00",
+            "revenue": "125.00",
+            "tax": "0.00",
+            "commission": "10.50",
+            "cost": "70.00",
+            "net": "114.50",
+            "indicator": "44.50",
+            "accounting_profit": "44.50",
+            "financed_amount": "75.00",
+            "shipping_expense": "0.00",
+            "lines": [
+              {
+                "product_id": "P001",
+                "qty": "2",
+                "unit_price": "50.00",
+                "line_total": "100.00",
+                "unit_cost": "30.00"
+              },
+              {
+                "product_id": "P002",
+                "qty": "1",
+                "unit_price": "25.00",
+                "line_total": "25.00",
+                "unit_cost": "10.00"
+              }
+            ]
+          },
+          "guide": null,
+          "sales_order": "SAL-ORD-2026-00006",
+          "sales_order_docstatus": 1,
+          "delivery": null,
+          "invoice": null,
+          "payments": [],
+          "stock": [
+            {
+              "id": "P001",
+              "qty": "5",
+              "value": "150.00"
+            },
+            {
+              "id": "P002",
+              "qty": "5",
+              "value": "50.00"
+            },
+            {
+              "id": "P003",
+              "qty": "5",
+              "value": "300.00"
+            }
+          ],
+          "native_stock_entries": 3,
+          "native_gl_entries": 0,
+          "success_events": [
+            "bc98ba941c75e6b7e0245fd1bc851b07bd5af3b506b28caa349ad42a5bfd09c6"
+          ]
+        },
+        "native_effects_unchanged": true
+      },
+      "seconds": 0.2833
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "criteria": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": [
+        {
+          "id": "STATE-CANCEL-STORE-APPROVED",
+          "before": {
+            "order": {
+              "id": "STATE-CANCEL-STORE-APPROVED",
+              "company_id": "CCM-LAB-001",
+              "status": "APPROVED",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": "SAL-ORD-2026-00007",
+            "sales_order_docstatus": 1,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "5e2a471d72e39f0563f97393cfff791baa5b95654f1dbbd97f3063d336c44417"
+            ]
+          },
+          "after": {
+            "order": {
+              "id": "STATE-CANCEL-STORE-APPROVED",
+              "company_id": "CCM-LAB-001",
+              "status": "CANCELLED",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": null,
+            "sales_order": "SAL-ORD-2026-00007",
+            "sales_order_docstatus": 2,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "5e2a471d72e39f0563f97393cfff791baa5b95654f1dbbd97f3063d336c44417"
+            ]
+          },
+          "reason": "Synthetic cancellation from APPROVED before handover",
+          "audit": {
+            "before_state": "{\"id\": \"STATE-CANCEL-STORE-APPROVED\", \"company_id\": \"CCM-LAB-001\", \"status\": \"APPROVED\", \"channel\": \"STORE\", \"currency\": \"USD\", \"gross\": \"125.00\", \"revenue\": \"125.00\", \"tax\": \"0.00\", \"commission\": \"8.00\", \"cost\": \"70.00\", \"net\": \"117.00\", \"indicator\": \"47.00\", \"accounting_profit\": \"47.00\", \"financed_amount\": \"75.00\", \"shipping_expense\": \"0.00\", \"lines\": [{\"product_id\": \"P001\", \"qty\": \"2\", \"unit_price\": \"50.00\", \"line_total\": \"100.00\", \"unit_cost\": \"30.00\"}, {\"product_id\": \"P002\", \"qty\": \"1\", \"unit_price\": \"25.00\", \"line_total\": \"25.00\", \"unit_cost\": \"10.00\"}]}",
+            "after_state": "{\"id\": \"STATE-CANCEL-STORE-APPROVED\", \"company_id\": \"CCM-LAB-001\", \"status\": \"CANCELLED\", \"channel\": \"STORE\", \"currency\": \"USD\", \"gross\": \"125.00\", \"revenue\": \"125.00\", \"tax\": \"0.00\", \"commission\": \"8.00\", \"cost\": \"70.00\", \"net\": \"117.00\", \"indicator\": \"47.00\", \"accounting_profit\": \"47.00\", \"financed_amount\": \"75.00\", \"shipping_expense\": \"0.00\", \"lines\": [{\"product_id\": \"P001\", \"qty\": \"2\", \"unit_price\": \"50.00\", \"line_total\": \"100.00\", \"unit_cost\": \"30.00\"}, {\"product_id\": \"P002\", \"qty\": \"1\", \"unit_price\": \"25.00\", \"line_total\": \"25.00\", \"unit_cost\": \"10.00\"}]}",
+            "reason": "Synthetic cancellation from APPROVED before handover"
+          },
+          "replay": true
+        },
+        {
+          "id": "STATE-CANCEL-WEB-APPROVED",
+          "before": {
+            "order": {
+              "id": "STATE-CANCEL-WEB-APPROVED",
+              "company_id": "CCM-LAB-001",
+              "status": "APPROVED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": "SAL-ORD-2026-00008",
+            "sales_order_docstatus": 1,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "235f7e61e344ee5a25ebc151a637b6aac7e32e3d3d10f3e67f6defd308baee34"
+            ]
+          },
+          "after": {
+            "order": {
+              "id": "STATE-CANCEL-WEB-APPROVED",
+              "company_id": "CCM-LAB-001",
+              "status": "CANCELLED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": "SAL-ORD-2026-00008",
+            "sales_order_docstatus": 2,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "235f7e61e344ee5a25ebc151a637b6aac7e32e3d3d10f3e67f6defd308baee34"
+            ]
+          },
+          "reason": "Synthetic cancellation from APPROVED before handover",
+          "audit": {
+            "before_state": "{\"id\": \"STATE-CANCEL-WEB-APPROVED\", \"company_id\": \"CCM-LAB-001\", \"status\": \"APPROVED\", \"channel\": \"WEB\", \"currency\": \"USD\", \"gross\": \"125.00\", \"revenue\": \"125.00\", \"tax\": \"0.00\", \"commission\": \"10.50\", \"cost\": \"70.00\", \"net\": \"114.50\", \"indicator\": \"44.50\", \"accounting_profit\": \"44.50\", \"financed_amount\": \"75.00\", \"shipping_expense\": \"0.00\", \"lines\": [{\"product_id\": \"P001\", \"qty\": \"2\", \"unit_price\": \"50.00\", \"line_total\": \"100.00\", \"unit_cost\": \"30.00\"}, {\"product_id\": \"P002\", \"qty\": \"1\", \"unit_price\": \"25.00\", \"line_total\": \"25.00\", \"unit_cost\": \"10.00\"}]}",
+            "after_state": "{\"id\": \"STATE-CANCEL-WEB-APPROVED\", \"company_id\": \"CCM-LAB-001\", \"status\": \"CANCELLED\", \"channel\": \"WEB\", \"currency\": \"USD\", \"gross\": \"125.00\", \"revenue\": \"125.00\", \"tax\": \"0.00\", \"commission\": \"10.50\", \"cost\": \"70.00\", \"net\": \"114.50\", \"indicator\": \"44.50\", \"accounting_profit\": \"44.50\", \"financed_amount\": \"75.00\", \"shipping_expense\": \"0.00\", \"lines\": [{\"product_id\": \"P001\", \"qty\": \"2\", \"unit_price\": \"50.00\", \"line_total\": \"100.00\", \"unit_cost\": \"30.00\"}, {\"product_id\": \"P002\", \"qty\": \"1\", \"unit_price\": \"25.00\", \"line_total\": \"25.00\", \"unit_cost\": \"10.00\"}]}",
+            "reason": "Synthetic cancellation from APPROVED before handover"
+          },
+          "replay": true
+        },
+        {
+          "id": "STATE-CANCEL-WEB-PREPARING",
+          "before": {
+            "order": {
+              "id": "STATE-CANCEL-WEB-PREPARING",
+              "company_id": "CCM-LAB-001",
+              "status": "PREPARING",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": "SAL-ORD-2026-00009",
+            "sales_order_docstatus": 1,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "bf4c82a705ad33dbaddd914a221d79552d1122ff4ff4d2693d6b388c81ad5a94"
+            ]
+          },
+          "after": {
+            "order": {
+              "id": "STATE-CANCEL-WEB-PREPARING",
+              "company_id": "CCM-LAB-001",
+              "status": "CANCELLED",
+              "channel": "WEB",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "10.50",
+              "cost": "70.00",
+              "net": "114.50",
+              "indicator": "44.50",
+              "accounting_profit": "44.50",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ]
+            },
+            "guide": "GUIDE-LAB-STATE",
+            "sales_order": "SAL-ORD-2026-00009",
+            "sales_order_docstatus": 2,
+            "delivery": null,
+            "invoice": null,
+            "payments": [],
+            "stock": [
+              {
+                "id": "P001",
+                "qty": "5",
+                "value": "150.00"
+              },
+              {
+                "id": "P002",
+                "qty": "5",
+                "value": "50.00"
+              },
+              {
+                "id": "P003",
+                "qty": "5",
+                "value": "300.00"
+              }
+            ],
+            "native_stock_entries": 3,
+            "native_gl_entries": 0,
+            "success_events": [
+              "bf4c82a705ad33dbaddd914a221d79552d1122ff4ff4d2693d6b388c81ad5a94"
+            ]
+          },
+          "reason": "Synthetic cancellation from PREPARING before handover",
+          "audit": {
+            "before_state": "{\"id\": \"STATE-CANCEL-WEB-PREPARING\", \"company_id\": \"CCM-LAB-001\", \"status\": \"PREPARING\", \"channel\": \"WEB\", \"currency\": \"USD\", \"gross\": \"125.00\", \"revenue\": \"125.00\", \"tax\": \"0.00\", \"commission\": \"10.50\", \"cost\": \"70.00\", \"net\": \"114.50\", \"indicator\": \"44.50\", \"accounting_profit\": \"44.50\", \"financed_amount\": \"75.00\", \"shipping_expense\": \"0.00\", \"lines\": [{\"product_id\": \"P001\", \"qty\": \"2\", \"unit_price\": \"50.00\", \"line_total\": \"100.00\", \"unit_cost\": \"30.00\"}, {\"product_id\": \"P002\", \"qty\": \"1\", \"unit_price\": \"25.00\", \"line_total\": \"25.00\", \"unit_cost\": \"10.00\"}]}",
+            "after_state": "{\"id\": \"STATE-CANCEL-WEB-PREPARING\", \"company_id\": \"CCM-LAB-001\", \"status\": \"CANCELLED\", \"channel\": \"WEB\", \"currency\": \"USD\", \"gross\": \"125.00\", \"revenue\": \"125.00\", \"tax\": \"0.00\", \"commission\": \"10.50\", \"cost\": \"70.00\", \"net\": \"114.50\", \"indicator\": \"44.50\", \"accounting_profit\": \"44.50\", \"financed_amount\": \"75.00\", \"shipping_expense\": \"0.00\", \"lines\": [{\"product_id\": \"P001\", \"qty\": \"2\", \"unit_price\": \"50.00\", \"line_total\": \"100.00\", \"unit_cost\": \"30.00\"}, {\"product_id\": \"P002\", \"qty\": \"1\", \"unit_price\": \"25.00\", \"line_total\": \"25.00\", \"unit_cost\": \"10.00\"}]}",
+            "reason": "Synthetic cancellation from PREPARING before handover"
+          },
+          "replay": true
+        }
+      ],
+      "seconds": 1.6212
     },
     {
       "case": "INV01-03-INSUFFICIENT",
@@ -1088,13 +2667,14 @@
         5
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": {
         "state": "APPROVED",
         "stock": 5,
         "delivery_note": null,
         "sales_invoice": null
       },
-      "seconds": 0.2396
+      "seconds": 0.2471
     },
     {
       "case": "FX01-03-MONEY01-03",
@@ -1103,6 +2683,7 @@
         5
       ],
       "status": "PASS",
+      "coverage_revision": 2,
       "actual": [
         {
           "date": "2026-10-01",
@@ -1143,7 +2724,7 @@
           "replay": false
         }
       ],
-      "seconds": 0.809
+      "seconds": 0.8236
     }
   ]
 }

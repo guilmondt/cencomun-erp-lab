@@ -94,13 +94,51 @@ separadamente del operador físico. No hay consumidores ni mensajes externos.
 7. Outbox durable; consumidor SQLite local (no DB del ERP); fallo 503, reinicio,
    reintento y reentrega. Dos entregas conservan un efecto por event_id.
 8. Auditoría/immutabilidad/configuración; lectura y exportación de fixtures.
-9. Otro sitio restaurado repite las 14 agrupaciones nativas de negocio/finanzas.
+9. Otro sitio restaurado repite las 18 agrupaciones nativas de negocio/finanzas.
    Se cuentan 4 tests oficiales de utilidad **unit**, no suite completa upstream.
 10. Benchmark separado: 1000 productos, 100 clientes, 1000 NEW y 1000 filas;
     20 warmups + 1000 muestras seriales para búsqueda, stock y creación NEW.
     Datos de negocio fijos, IDs deterministas por muestra. Native recorder recoge
     consultas/tiempos DB dentro del RPC sin persistir SQL/headers. Sin SLA real.
 11. Registro/paquete, guardrails/diff, consulta de tags exacta y publicación.
+
+## Corrección de cobertura — revisión 2
+
+`fixtures/ccm-core-v1/coverage-required.json` define 34 grupos obligatorios y
+el suplemento ficticio para ejecutar los mismos casos en Axelor. No cambia
+ningún importe, costo, tasa o resultado del oráculo anterior. El publicador
+marca UNRUN si falta un grupo o sus aserciones pertenecen a una revisión anterior;
+FAIL y BLOCKED nunca cuentan como PASS. `coverage.json` identifica cada hueco.
+Siete tests de regresión verifican estas reglas de clasificación.
+
+- Auditoría: parsear JSON antes/después, exigir datos útiles y motivo, comprobar
+  secuencia de estados y, en compras/caja/tasa/banco, valores y vínculos nativos.
+  Una cadena literal `null` no demuestra estado anterior. Las transiciones
+  automáticas usan motivos expresamente LAB; las decisiones manuales conservan
+  la nota del actor. No se infiere una política real de motivos obligatorios.
+- Estados: desconocido por API y Select nativo, entrega sin aceptación en ambos
+  canales, WEB sin guía desde PREPARING y cancelaciones STORE/WEB desde APPROVED
+  y WEB desde PREPARING. Los rechazos comparan snapshots completos de efectos
+  nativos; las cancelaciones comprueban Sales Order cancelado y ausencia de
+  factura/entrega/pagos, conservando stock y eventos previos.
+- MCP: ocho intentos sobre objetos elegibles cubren aprobación, entrega STORE,
+  despacho WEB, liquidaciones STORE/WEB, caja, tasa manual y banco. Tool inexistente
+  devuelve -32602; intento por el RPC nativo con la misma credencial devuelve
+  403 y deja auditoría, sin efectos de éxito. El inspector nativo independiente
+  compara los estados, stock, asientos, saldos y eventos posteriores.
+- Equivalencia: comparar datos completos de las seis rutas API/MCP con la misma
+  credencial. Creación MCP→replay API y creación API→replay MCP conservan IDs y
+  resultados. Solo se excluye `_meta`; el indicador `replay` se verifica aparte.
+- Eventos: 503 sin efectos, primera entrega exitosa, snapshot de una aplicación,
+  reinicio **solo** del consumidor, persistencia previa al replay y reentrega de
+  los mismos event_id. Las recepciones suben a dos y la tabla SQLite de efectos
+  conserva una aplicación. Es un consumidor ficticio externo, no DB del ERP.
+
+La ejecución completa desde checkpoint evita mezclar replays con primeras
+creaciones. `run.sh` respalda el estado ficticio actual y conserva intentos y
+evidencias anteriores en `runs/`. Leer el estado final en el directorio raíz,
+no en los snapshots históricos. El bloqueo del patch y la colisión del bootstrap
+oficial Standard Buying siguen documentados; esta corrección no los aprueba.
 
 ## Problemas y pasos de resolución
 

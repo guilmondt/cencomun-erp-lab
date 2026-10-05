@@ -10,6 +10,9 @@ with sqlite3.connect(DB) as c:
     c.execute(
         "CREATE TABLE IF NOT EXISTS receipts(event_id TEXT PRIMARY KEY,payload TEXT NOT NULL,deliveries INTEGER NOT NULL)"
     )
+    c.execute(
+        "CREATE TABLE IF NOT EXISTS effects(event_id TEXT PRIMARY KEY,effect_type TEXT NOT NULL,object_id TEXT NOT NULL,applications INTEGER NOT NULL)"
+    )
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -23,10 +26,16 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             return
         with sqlite3.connect(DB) as c:
-            c.execute(
-                "INSERT INTO receipts VALUES(?,?,1) ON CONFLICT(event_id) DO UPDATE SET deliveries=deliveries+1",
+            first = c.execute(
+                "INSERT OR IGNORE INTO receipts VALUES(?,?,1)",
                 (data["event_id"], json.dumps(data)),
             )
+            if first.rowcount == 1:
+                c.execute("INSERT INTO effects VALUES(?,?,?,1)",
+                          (data["event_id"], data["type"], data["object_id"]))
+            else:
+                c.execute("UPDATE receipts SET deliveries=deliveries+1 WHERE event_id=?",
+                          (data["event_id"],))
         self.send_response(200)
         self.end_headers()
         self.wfile.write(b'{"accepted":true}')

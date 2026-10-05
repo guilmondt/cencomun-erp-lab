@@ -31,6 +31,37 @@ for src, identifier, warehouse_name in [
             "operator",
             identifier + ":PREPARING",
         )
+mcp_orders = {}
+for identifier, source, physical in [
+    ("MCP-DENY-DELIVER-S", orders[0], False),
+    ("MCP-DENY-DELIVER-W", orders[1], False),
+    ("MCP-DENY-SETTLE-S", orders[0], True),
+    ("MCP-DENY-SETTLE-W", orders[1], True),
+]:
+    case_wh = warehouse(identifier)
+    call("createCasheaOrder", payload({**source, "id": identifier}, case_wh))
+    path = ["REVIEWED", "APPROVED"]
+    if source["channel"] == "WEB":
+        path.append("PREPARING")
+    if physical:
+        path.append("SHIPPED" if source["channel"] == "WEB" else "FULFILLED")
+    for target in path:
+        call("transitionOrder", payload({"id": identifier, "target": target}),
+             "operator" if target in ["PREPARING", "FULFILLED", "SHIPPED"] else "simulator",
+             identifier + ":" + target)
+    mcp_orders[identifier] = order_effects(identifier)
+
+call("createClosing", payload({"id": "MCP-DENY-CS", "channels": []}),
+     "operator", "MCP-DENY-CS:create")
+bank = call("importBank", payload({"id": "MCP-DENY-BANK", "account_id": "BANK-USD-001",
+    "csv": "account,date,reference,currency,amount,description\nBANK-USD-001,2026-10-01,MCP-DENY-BANK,USD,40.00,Synthetic MCP permission target\n"}),
+    "operator", "MCP-DENY-BANK:import")
+row = bank["results"][0]
+expect(row["classification"], "AMBIGUOUS")
+payment = next(name for name in row["candidates"]
+               if frappe.db.get_value("Payment Entry", name, "reference_no") == "AMB-BOOK-B")
+expect(frappe.db.exists("Currency Exchange", {
+    "date": "2026-10-04", "from_currency": "USD", "to_currency": "VES"}), None)
 frappe.set_user("Administrator")
 if not frappe.db.exists("Serial No", "SER-P001-001"):
     frappe.get_doc(
@@ -50,6 +81,13 @@ frappe.db.commit()
             "lost_warehouse": lost,
             "concurrent": {"TAX-CONC-S": conc, "TAX-CONC-W": web},
             "invoice": order_doc("CO00").sales_invoice,
+            "mcp_denial_baseline": {
+                "orders": mcp_orders,
+                "closing": {"id": "MCP-DENY-CS", "state": "DRAFT"},
+                "rate": {"id": "MCP-DENY-FX", "date": "2026-10-04", "rate": None},
+                "bank": {"key": row["key"], "payment": payment, "reconciled": False,
+                         "unallocated_amount": "40.00", "native_transaction": row["native_transaction"]},
+            },
         },
         indent=2,
     )

@@ -88,6 +88,7 @@ def check(case, criteria, fn):
                 "case": case,
                 "criteria": criteria,
                 "status": "PASS",
+                "coverage_revision": 2,
                 "actual": actual,
                 "seconds": round(time.monotonic() - t, 4),
             }
@@ -99,6 +100,7 @@ def check(case, criteria, fn):
                 "case": case,
                 "criteria": criteria,
                 "status": "FAIL",
+                "coverage_revision": 2,
                 "error": type(e).__name__ + ": " + str(e),
                 "seconds": round(time.monotonic() - t, 4),
             }
@@ -621,6 +623,17 @@ def mcp():
                 ),
             ),
         ]
+        equivalence = []
+        routes = {
+            "searchProducts": "/products/search",
+            "getInventory": "/inventory/P001",
+            "getCustomerBalance": "/customers/C002/balance",
+            "getCashStatus": "/cash/status",
+            "createPurchaseDraft": "/purchases/drafts",
+            "createCasheaOrder": "/cashea/orders",
+        }
+        def functional(value):
+            return {k: v for k, v in value.items() if k not in ["_meta", "replay"]}
         for name, arg in args:
             answer = process.call("tools/call", {"name": name, "arguments": arg})[
                 "result"
@@ -635,6 +648,40 @@ def mcp():
                 else 200,
             )
             result.append({"tool": name, **body})
+            excluded = ["idempotency_key"] + (
+                ["product_id", "customer_id"] if not name.startswith("create") else [])
+            api_arg = {k: v for k, v in arg.items() if k not in excluded}
+            route = routes[name]
+            if name.startswith("create"):
+                api_status, api_result = req(route, api_arg, "mcp", arg["idempotency_key"])
+                expect(api_status, 200)
+                expect(api_result["replay"], True)
+                expect(body["result"]["replay"], False)
+            else:
+                api_status, api_result = req(route + "?" + urllib.parse.urlencode(api_arg), actor="mcp")
+                expect(api_status, body["status"])
+            expect(functional(api_result), functional(body["result"]))
+            equivalence.append({"tool": name, "direction": "MCP_then_API",
+                "api_status": api_status, "mcp_status": body["status"],
+                "api_result": functional(api_result), "mcp_result": functional(body["result"]),
+                "equal": True})
+            if name.startswith("create"):
+                api_first = {**api_arg, "id": api_arg["id"] + "-API-FIRST"}
+                key = api_first["id"]
+                api_status, created = req(route, api_first, "mcp", key)
+                expect(api_status, 201)
+                expect(created["replay"], False)
+                replayed = process.call("tools/call", {"name": name,
+                    "arguments": {**api_first, "idempotency_key": key}})["result"]
+                expect(replayed["isError"], False)
+                replay_body = json.loads(replayed["content"][0]["text"])
+                expect(replay_body["status"], 200)
+                expect(replay_body["result"]["replay"], True)
+                expect(functional(created), functional(replay_body["result"]))
+                equivalence.append({"tool": name, "direction": "API_then_MCP",
+                    "api_status": api_status, "mcp_status": replay_body["status"],
+                    "api_result": functional(created), "mcp_result": functional(replay_body["result"]),
+                    "equal": True})
         replay = process.call(
             "tools/call", {"name": "createCasheaOrder", "arguments": args[-1][1]}
         )["result"]
@@ -656,12 +703,53 @@ def mcp():
             "operations": result,
             "replay": True,
             "approval_denied": True,
+            "equivalence": equivalence,
+            "ignored_transport_fields": ["_meta", "replay"],
         }
     finally:
         process.stop()
 
 
 check("MCP01-06-STDIO", [3, 9, 10], mcp)
+
+
+def mcp_forbidden():
+    baseline = MAPPING["mcp_denial_baseline"]
+    status, purchase = ncall("purchaseAction", p({"id": "MCP-PO", "action": "Request Approval"}),
+                             "operator", "MCP-PO:request")
+    expect(status, 200)
+    expect(purchase["state"], "Pending Buyer")
+    cases = [
+        ("approvePurchase", "purchaseAction", {"id": "MCP-PO", "action": "Approve"}),
+        ("deliverOrder", "transitionOrder", {"id": "MCP-DENY-DELIVER-S", "target": "FULFILLED"}),
+        ("dispatchOrder", "transitionOrder", {"id": "MCP-DENY-DELIVER-W", "target": "SHIPPED"}),
+        ("settleOrder", "transitionOrder", {"id": "MCP-DENY-SETTLE-S", "target": "SETTLED"}),
+        ("settleWebOrder", "transitionOrder", {"id": "MCP-DENY-SETTLE-W", "target": "SETTLED"}),
+        ("confirmClosing", "confirmClosing", {"id": baseline["closing"]["id"], "note": "Synthetic permission check"}),
+        ("authorizeRate", "authorizeRate", {"id": baseline["rate"]["id"], "date": baseline["rate"]["date"],
+                                              "rate": "42.000000", "reason": "Synthetic permission check"}),
+        ("reconcileBank", "reconcileBank", {"id": "MCP-DENY-BANK", "key": baseline["bank"]["key"],
+                                              "payment": baseline["bank"]["payment"], "reason": "Synthetic permission check"}),
+    ]
+    process = MCP()
+    responses = []
+    try:
+        for tool, operation, data in cases:
+            rpc = process.call("tools/call", {"name": tool, "arguments": p(data)})
+            expect(rpc["error"]["code"], -32602)
+            status, body = ncall(operation, p(data), "mcp", "MCP-forbidden:" + tool)
+            expect(status, 403)
+            expect(body["code"], "403")
+            assert body["correlation_id"]
+            responses.append({"tool": tool, "operation": operation, "payload": p(data),
+                              "mcp_error": rpc["error"], "native_http": status, "native_error": body})
+        return {"denied": responses, "purchase_before": purchase,
+                "baseline": baseline, "expected_domain_effects": 0}
+    finally:
+        process.stop()
+
+
+check("MCP-FORBIDDEN-CRITICAL-ACTIONS", [3, 6, 7, 8, 9, 10], mcp_forbidden)
 if os.environ.get("CCM_HTTP_CASES") and (OUT / "http.json").exists():
     old = json.loads((OUT / "http.json").read_text())["cases"]
     updates = {c["case"]: c for c in CASES}

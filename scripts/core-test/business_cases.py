@@ -297,6 +297,114 @@ def states():
 check("STATE01-04", [3, 4], states)
 
 
+def state_order(identifier, channel, path=(), guide="GUIDE-LAB-STATE"):
+    wh = warehouse(identifier)
+    p = payload({**ORDERS[0], "id": identifier, "channel": channel,
+                 "guide": guide if channel == "WEB" else None}, wh)
+    call("createCasheaOrder", p)
+    for target in path:
+        call("transitionOrder", payload({"id": identifier, "target": target}),
+             "operator" if target == "PREPARING" else "simulator",
+             identifier + ":" + target)
+    return wh
+
+
+def reject_unchanged(identifier, target, actor, status):
+    before = order_effects(identifier)
+    response = denied("transitionOrder", payload({"id": identifier, "target": target}),
+                      actor, status, identifier + ":deny:" + target)
+    after = order_effects(identifier)
+    expect(after, before)
+    return {"id": identifier, "target": target, "expected_http": status,
+            "response": response, "before": before, "after": after,
+            "native_effects_unchanged": True}
+
+
+def unknown_states():
+    outputs = []
+    for channel in ["STORE", "WEB"]:
+        identifier = "STATE-UNKNOWN-" + channel
+        state_order(identifier, channel)
+        outputs.append(reject_unchanged(identifier, "UNKNOWN-LAB", "simulator", 409))
+        original = order_effects(identifier)
+        doc = order_doc(identifier)
+        doc.status = "UNKNOWN-LAB"
+        try:
+            b.save(doc)
+        except frappe.ValidationError:
+            frappe.db.rollback()
+        else:
+            raise AssertionError("Unknown persisted native state was accepted")
+        expect(order_effects(identifier), original)
+        outputs[-1]["unknown_native_state_rejected"] = True
+    return outputs
+
+
+check("STATE-UNKNOWN-ATOMIC", [3, 4], unknown_states)
+
+
+def delivery_without_acceptance():
+    outputs = []
+    for channel in ["STORE", "WEB"]:
+        for initial in ["NEW", "REVIEWED"]:
+            identifier = "STATE-NO-ACCEPT-" + channel + "-" + initial
+            state_order(identifier, channel, () if initial == "NEW" else ("REVIEWED",))
+            outputs.append(reject_unchanged(identifier,
+                "FULFILLED" if channel == "STORE" else "SHIPPED", "operator", 409))
+    identifier = "STATE-WEB-SKIP-PREPARING"
+    state_order(identifier, "WEB", ("REVIEWED", "APPROVED"))
+    outputs.append(reject_unchanged(identifier, "SHIPPED", "operator", 409))
+    return outputs
+
+
+check("STATE-DELIVERY-WITHOUT-ACCEPTANCE", [3, 4, 5], delivery_without_acceptance)
+
+
+def web_without_guide():
+    identifier = "STATE-WEB-NO-GUIDE"
+    state_order(identifier, "WEB", ("REVIEWED", "APPROVED", "PREPARING"), None)
+    return reject_unchanged(identifier, "SHIPPED", "operator", 422)
+
+
+check("STATE-WEB-NO-GUIDE", [3, 4, 5], web_without_guide)
+
+
+def cancellations():
+    outputs = []
+    for channel, initial in [("STORE", "APPROVED"), ("WEB", "APPROVED"), ("WEB", "PREPARING")]:
+        identifier = "STATE-CANCEL-" + channel + "-" + initial
+        path = ["REVIEWED", "APPROVED"] + (["PREPARING"] if initial == "PREPARING" else [])
+        state_order(identifier, channel, path)
+        before = order_effects(identifier)
+        reason = "Synthetic cancellation from " + initial + " before handover"
+        command = payload({"id": identifier, "target": "CANCELLED", "reason": reason})
+        result = call("transitionOrder", command, "simulator", identifier + ":cancel")
+        expect(result["status"], "CANCELLED")
+        expect(call("transitionOrder", command, "simulator", identifier + ":cancel")["replay"], True)
+        after = order_effects(identifier)
+        expect(before["sales_order_docstatus"], 1)
+        expect(after["sales_order_docstatus"], 2)
+        for key in ["stock", "native_stock_entries", "native_gl_entries", "success_events"]:
+            expect(after[key], before[key])
+        expect(after["delivery"], None)
+        expect(after["invoice"], None)
+        expect(after["payments"], [])
+        expect([r["qty"] for r in after["stock"]], ["5", "5", "5"])
+        doc = order_doc(identifier)
+        records = frappe.get_all("CCM Audit", filters={"object_id": doc.name, "action": "cashea.cancelled"},
+                                 fields=["before_state", "after_state", "reason"])
+        expect(len(records), 1)
+        expect(json.loads(records[0].before_state)["status"], initial)
+        expect(json.loads(records[0].after_state)["status"], "CANCELLED")
+        expect(records[0].reason, reason)
+        outputs.append({"id": identifier, "before": before, "after": after,
+                        "reason": reason, "audit": records[0], "replay": True})
+    return outputs
+
+
+check("STATE-CANCEL-BEFORE-HANDOVER", [1, 3, 4, 5], cancellations)
+
+
 def insufficient():
     wh = warehouse("INV")
     p = payload(

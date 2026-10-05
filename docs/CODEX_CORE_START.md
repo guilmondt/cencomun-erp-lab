@@ -20,14 +20,19 @@ no afirma paridad entre ambos ERP.
 ## Estado verificado y artefactos
 
 Leer `reports/frappe-core-test.md` y `reports/evidence/frappe-core/summary.json`:
-28 grupos PASS, 0 FAIL; 13/14 criterios PASS, 0 FAIL y criterio 13 BLOCKED.
+34 grupos PASS, 0 FAIL; 13/14 criterios PASS, 0 FAIL y criterio 13 BLOCKED.
 Los seis escenarios dependientes del patch quedan UNRUN. TAX01-S y TAX01-W
 incluyen impuesto sintético del 10% dentro del precio, comisiones sobre el
 total, separación contable nativa de ingreso/impuesto/gastos, concurrencia y
 replay después de reiniciar. La reproducción en otro sitio restaurado repitió
-14 grupos nativos de negocio/finanzas. Cuatro tests oficiales de utilidades
+18 grupos nativos de negocio/finanzas. Cuatro tests oficiales de utilidades
 unitarias y cinco tests de registro/paquete pasaron; no son la suite completa
 upstream. El wheel contiene los diez DocTypes JSON versionados y verificados.
+La revisión 2 exige motivos y JSON antes/después semánticos, rechazos de estados,
+cancelaciones nativas, ocho negativas MCP sobre objetos elegibles, equivalencia
+completa API/MCP y éxito de evento antes de reiniciar y reentregar. El contrato
+coverage-required.json impide PASS con casos obligatorios ausentes o antiguos.
+Siete tests de clasificación verifican FAIL/BLOCKED/UNRUN frente a cobertura.
 
 El baseline técnico anterior conserva su evidencia histórica de 39 checks en
 `reports/frappe-integral.md`; no sumar esos checks a los grupos del Core Test.
