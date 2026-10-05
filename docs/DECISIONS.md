@@ -52,3 +52,221 @@
 - Evidence/tests: 39 functional checks, real app/module registration, assets,
   worker execution, graceful restart/persistence and five skeleton tests passed.
   See `reports/frappe-integral.md` and `reports/frappe-integral-evidence.json`.
+
+## ADR-003 — Preserve warranty quantity and unit; zero means no warranty
+- Date: 2026-10-04 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Accepted by explicit user response
+- Context: the user-provided Cashea template separates warranty quantity from
+  its unit (Dias, Meses, Años). The initial Core Test field warranty_months
+  cannot preserve all those inputs faithfully.
+- Options considered: preserve quantity + unit; restrict the Core Test to
+  durations expressible in months. For zero: no warranty; invalid; dependent
+  on product policy.
+- Decision: the user selected quantity + unit and explicitly confirmed that
+  0 means no warranty. Use warranty_quantity and warranty_unit as the shared
+  field names, with a non-negative integer quantity and DAY/MONTH/YEAR units.
+  Preserve the source pair; 30 DAY is not silently rewritten as 1 MONTH.
+  Retain an accompanying unit for quantity zero without treating it as coverage.
+- Consequences: replace warranty_months in the shared specification and planned
+  fixtures. Apply identical input/output expectations to both platforms. Other
+  product, financing, pricing and supplier-reference decisions remain pending;
+  no warranty start date, claim handling or correction process is selected.
+- Upgrade impact: future persistence, API, export and regression checks must
+  retain both fields without changing units. No business schema has been
+  implemented, so this documentation change performs no database migration.
+- Evidence/tests: explicit user response in this conversation; Cashea template
+  structure recorded in tasks/100-ccm-core-test.md. Future cases include 30 DAY,
+  6 MONTH, 1 YEAR and zero quantities. Business tests are not implemented or run.
+
+## ADR-004 — Product financing, final price and supplier identifiers
+- Date: 2026-10-04 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Accepted by explicit user response
+- Decision: financing and marketplace visibility are independent. Product
+  prices are final USD prices including taxes; retain the configured price when
+  Cashea is disabled. Ordinary sale prices cannot be zero. Preserve internal
+  SKU and supplier reference separately when they differ.
+- Deferred exception: the user described manager-authorized zero-price bundle
+  accessories whose value is included in the main product cost, with inventory
+  discharge and comments on the principal fiscal item. The user explicitly
+  postponed studying this behavior. It is recorded, not implemented or treated
+  as an unrestricted zero-price sale or zero inventory cost.
+- Consequences: D01 is resolved; permissions for other business actions and
+  the bundle/fiscal design remain outside this decision.
+- Evidence/tests: user response in chat; documentation and planned fixtures
+  updated. No business tests, inventory changes or fiscal printing performed.
+
+## ADR-005 — Cashea commission components and merchant shipping expense
+- Date: 2026-10-04 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Accepted for the clarified core calculations; other workflow/payment decisions remain separate
+- Decision: base commission rate is 4% for store purchases and 6% for online
+  purchases, with an additional 4% of the financed amount in both channels.
+  In a follow-up response the user confirmed that the channel rate applies
+  to the total product price, including taxes. Thus store commission is
+  0.04 * product total + 0.04 * financed amount, and online commission is
+  0.06 * product total + 0.04 * financed amount. Keep both components explicit;
+  4% + 4% does not generally imply 8% of the financed amount.
+  Example: products 100 USD, financed 60 USD -> 6.40 USD store / 8.40 USD online.
+- Accepted formulas: gross = final product total; customer shipping charge = 0
+  because the user confirmed that Cencomun absorbs delivery;
+  net after commission = gross - commission. Product cost comes from the ERP; negative costs
+  are not allowed. The user clarified that commissions are expenses. Withdraw
+  the custom choice of cost at creation/approval/dispatch; use the native ERP
+  cost as the authoritative product cost. Keep commission and delivery expenses
+  separate from it. Result after selling expenses = gross - ERP product cost
+  - commission expense - merchant delivery expense; report amount and percentage
+  of sales. This does not assert that native ERP valuation can never change.
+- Shipping: Cashea charges Cencomun. The user supplied an MRW national weight
+  tariff in chat: amounts are USD and invoicing is VES at the official BCV rate.
+  Use the merchant-payable amount, not the full coupon value. Do not reproduce
+  the full vendor annex in the repository or infer a flat per-kg formula.
+  Reference cases include 0.500 kg -> 0.70 USD, 1.000 kg -> 1.40 USD,
+  7.000 kg -> 4.90 USD and 8.000 kg -> 5.60 USD. Handle the merchant expense
+  once. The customer pays only the products; there is no shipping revenue.
+  The user confirmed that Cashea deducts it from settlement. Net sale after
+  both deductions = gross - commission - delivery expense; result after selling
+  expenses = that net - ERP product cost. The deduction is payment of the one
+  shipping expense, not an additional expense/payment.
+- Quantity clarification (2026-10-05, America/Caracas): the user confirmed only
+  whole-unit quantities in Cashea orders; fractional lines are rejected.
+- Separate payment decisions: allocation of customer upfront payments versus
+  Cashea transfers belongs to the payment/cash scenarios and is not inferred
+  from the aggregate net-sale formula.
+- Scope: use known supplied tariff amounts for Core Test fixtures. Packing
+  rules, weight rounding and quotes outside the provided ranges would require
+  separate definition if an automated quotation engine is later requested;
+  such an engine is not required by the existing specification. Do not
+  extrapolate the tariff or expand the project to implement it now.
+- Evidence/tests: explicit user response and pasted annex. Conditional shared
+  scenarios are in the ExecPlan; no order/commission/shipping tests executed.
+
+## ADR-006 — Monetary precision, line rounding and payment-date exchange rate
+- Date: 2026-10-04 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Accepted; operational authorization details remain pending
+- Decision: prices and totals have at most two decimals; exchange rates up to
+  six. Round lines and sum rounded values using decimal half-up. Use the rate
+  of the payment date; entering a missing rate manually requires authorization.
+- Consequences: replace the earlier four-decimal unit-price proposal. A 0.005
+  USD unit-price input is outside the approved precision. Rounding may still
+  be needed on intermediate currency-conversion calculations. Freeze the
+  applied rate as transaction evidence; do not silently substitute an older
+  rate. This is not a decision on purchase approval rates before payment.
+- Pending: authorizing role, audit requirements, source for each general
+  operation and handling of payments across several dates. Shipping's BCV
+  source is specified by the supplied tariff.
+- Evidence/tests: explicit user response. Future cases must verify line sums,
+  ties and exchange-rate dates identically; no calculations run in either ERP.
+
+## ADR-007 — Cashea web dispatch versus direct store handover
+- Date: 2026-10-05 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Accepted operational clarification; exception mapping still pending
+- Context: the question about REJECTED states was unclear to the user and
+  conflated an internal test model with their actual shipping workflow.
+- Decision: record the user's channel-specific process. For Cashea web only,
+  receive the order with its guide from Cashea, then perform the shipment;
+  Cashea manages the shipping arrangements and guide. Ordinary Cashea sales
+  are sold and handed directly to the customer in the store. Do not require
+  a guide or carrier dispatch for store sales. Do not assume the merchant
+  chooses carrier rules or manually reviews/approves each order as proposed
+  in the earlier interview.
+- Consequences: keep the existing Core Test states and validation requirements,
+  but map them to real channel-specific actions/events before implementation.
+  CO00 represents direct store handover with no shipping expense; CO01 represents
+  web dispatch with the already agreed merchant-paid shipping expense. The user
+  has not approved particular production REJECTED/CANCELLED paths. The subsequent
+  user instruction in ADR-008 suspends the interview and substitutes explicitly
+  proposed laboratory assumptions for the technical comparison, preserving this
+  confirmed channel distinction.
+- Pending: what happens when a received web order cannot be dispatched, who can
+  cancel it, how web dispatch is recorded and the remaining state/event mapping
+  for each channel in production. The web shipping-exception question is
+  suspended, not answered by omission; laboratory mapping is proposed in the plan.
+- Evidence/tests: user's explanations and explicit distinction between Cashea
+  web and direct store sales in chat; documentation only. No carrier integration,
+  order workflow or acceptance test implemented.
+
+## ADR-008 — Bounded comparison with explicit laboratory assumptions
+- Date: 2026-10-05 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Evaluation method accepted by user instruction; LAB-ONLY-v1 proposed
+  for review; implementation not authorized
+- Context: exhaustive production-policy clarification was blocking a technical
+  comparison that can use deterministic synthetic cases. The user explicitly
+  stopped the questionnaire, required preservation of all prior answers, and
+  requested a bounded plan before implementation.
+- Decision: keep the seven existing Core Test blocks, 14 acceptance criteria
+  and comparison protocol. Preserve confirmed rules in ADR-003–007. Resolve
+  remaining evaluation details with one versioned synthetic LAB-ONLY-v1 profile
+  and identical fixtures/oracle for both ERPs; defer actual production decisions.
+  Do not ask again for already answered rules or for issues a lab assumption
+  can resolve. Review is not authorization to implement or production adoption.
+- Proposed profile: store FULFILLED versus web SHIPPED with guide; simulated
+  Cashea acceptance/settlement; native ERP inventory, cost, payments and expenses;
+  explicit cash formulas, purchase approval base, bank matching, roles, rates,
+  API/event/MCP contract, idempotency and deterministic benchmark dataset.
+  Exact assumptions and expected outcomes are in tasks/100-ccm-core-test.md.
+- Consequences: D04-A is suspended and requires no answer for this evaluation.
+  Former D03–D08/T01/T02 production questions are deferred, not accepted by
+  omission. No fake production policy, upstream changes, business SQL, relaxed
+  permissions or changed monetary rules to obtain parity. Technical mapping
+  targets existing ERPNext and Axelor entities/services; actual execution must
+  prove native inventory/accounting effects and record missing capabilities.
+- Completion: publish a terminal, reproducible result for every required case
+  in both ERPs and protocol metrics, using the closing policy subsequently
+  clarified in ADR-009. A failed or blocked platform criterion does not count
+  as passed; approving its Core Test requires all mandatory criteria to pass.
+  Preserve unsuccessful/unavailable results rather than changing the oracle.
+- Evidence/tests: user instruction in chat; local ERPNext v16.36.1 DocType JSON
+  and public Axelor v9.1.8 domain XML reviewed to verify target model names.
+  Documentation/expected arithmetic only; no Core Test, upgrade, schema, data,
+  contract implementation, Axelor branch or main change performed.
+
+## ADR-009 — Inclusive synthetic tax and reports closed with limitations
+- Date: 2026-10-05 (America/Caracas)
+- Platform: Shared / Frappe / Axelor
+- Status: Evaluation requirements accepted by user instruction; synthetic
+  scenario proposed for plan review; implementation remains suspended
+- Decision: add one common positive, price-inclusive tax scenario with store
+  and web variants. LAB tax 10%, total 137.50 USD = revenue 125.00 + tax
+  liability 12.50; financed 82.50 and ERP product cost 70.00. Commission uses
+  the tax-inclusive total: store 8.80, web 11.55; web shipping 0.70 separately.
+  Native ledger entries must distinguish revenue, tax payable, inventory/COGS,
+  commissions, shipping and payments, with identical expected effects per ERP.
+- Accounting distinction: preserve the confirmed gross-based Cashea indicator
+  but do not call it accounting profit when it contains collected tax. Native
+  accounting result excludes tax: 46.20 store / 42.75 web in the synthetic case.
+  No production tax rate, extra tax on fees, fiscal remittance or localization
+  rule is inferred. Exact fixtures, entries and repeat checks are in the plan.
+- Closing: the comparison report may conclude with justified technical
+  limitations, citing evidence, affected criteria/cases, diagnosis, supported
+  attempts, impact and steps to resolve/verify. BLOCKED never counts as PASS;
+  dependent UNRUN cases reference their blocker. Keep the denominator of 14
+  criteria and do not claim full parity or an approved ERP without all mandatory
+  checks passing. The common oracle is not relaxed for a blocked platform.
+- Evidence/tests: explicit user instruction; native tax-related field names
+  checked in ERPNext metadata and public Axelor domains. Documentation and
+  expected arithmetic only; no implementation, migration, ERP test or upgrade.
+
+
+## ADR-010 — Authorized Frappe Core Test with frozen LAB-only data
+
+- Date: 2026-10-05
+- Status: Accepted by explicit user instruction
+- Context: User approved the corrected ExecPlan including TAX01 and closure
+  with justified limitations, then explicitly requested implementation/execution.
+- Decision: Implement only Cencomun extensions and isolated synthetic sites
+  on lab/frappe-baseline. Freeze shared fixtures/oracle in fixtures/ccm-core-v1
+  for an identical future Axelor run. Never promote synthetic rules to business
+  policy. Do not modify main, the Axelor branch, production or upstream code.
+- Consequences: All 14 criteria get evidence/status. Technical blockers stay
+  BLOCKED and dependent scenarios UNRUN; independent tests continue. Previously
+  recorded user answers remain authoritative and are not asked again.
+- Implementation clarification: Native bank-book receipts use a distinct
+  synthetic counterparty CBANK so C002 retains the agreed zero balance. Individual
+  warehouses isolate economic snapshots; technical IDs are mapped separately.
+  Benchmark IDs vary deterministically to measure real NEW creations rather
+  than idempotent replays. These choices preserve the reviewed business oracle.

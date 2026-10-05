@@ -1,0 +1,187 @@
+{
+  "site": "ccm-core.test",
+  "profile": "LAB-ONLY-v1",
+  "cases": [
+    {
+      "case": "CO00-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '16184c0e-a471-4c76-8597-dd9aec5961eb'}, 'server_ms': 148.8237}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 37, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 11, in economic\n    result=call('createCasheaOrder',p)\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '16184c0e-a471-4c76-8597-dd9aec5961eb'}, 'server_ms': 148.8237}\n",
+      "seconds": 1.0792
+    },
+    {
+      "case": "CO01-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '5756506d-e8ce-422e-b554-da552b150b0d'}, 'server_ms': 22.1382}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 37, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 11, in economic\n    result=call('createCasheaOrder',p)\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '5756506d-e8ce-422e-b554-da552b150b0d'}, 'server_ms': 22.1382}\n",
+      "seconds": 0.1122
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '40774aec-831f-4749-9db1-18f641b25c5c'}, 'server_ms': 43.2743}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 37, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 11, in economic\n    result=call('createCasheaOrder',p)\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '40774aec-831f-4749-9db1-18f641b25c5c'}, 'server_ms': 43.2743}\n",
+      "seconds": 0.1382
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': 'd8e41063-2e4b-4e9c-b502-970176bf71a7'}, 'server_ms': 20.4657}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 37, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 11, in economic\n    result=call('createCasheaOrder',p)\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': 'd8e41063-2e4b-4e9c-b502-970176bf71a7'}, 'server_ms': 20.4657}\n",
+      "seconds": 0.1222
+    },
+    {
+      "case": "PROD01-04",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "warranties": [
+          [
+            30,
+            "DAY"
+          ],
+          [
+            6,
+            "MONTH"
+          ],
+          [
+            1,
+            "YEAR"
+          ],
+          [
+            0,
+            "DAY"
+          ],
+          [
+            0,
+            "MONTH"
+          ],
+          [
+            0,
+            "YEAR"
+          ]
+        ],
+        "retained_disabled_price": "50.00",
+        "native_fields": [
+          "marketplace_enabled",
+          "cashea_enabled",
+          "cashea_price",
+          "supplier_reference",
+          "warranty_quantity",
+          "warranty_unit",
+          "ccm_condition"
+        ]
+      },
+      "seconds": 0.1268
+    },
+    {
+      "case": "VAL01-04",
+      "criteria": [
+        4,
+        5
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "case": "quantity",
+          "code": 422
+        },
+        {
+          "case": "fractional",
+          "code": 422
+        },
+        {
+          "case": "negative",
+          "code": 422
+        },
+        {
+          "case": "price-zero",
+          "code": 422
+        },
+        {
+          "case": "price-negative",
+          "code": 422
+        },
+        {
+          "case": "price-precision",
+          "code": 422
+        },
+        {
+          "case": "disabled",
+          "code": 422
+        },
+        {
+          "case": "negative-native-cost",
+          "code": 422,
+          "native_error": "<strong>Stock Entry Detail</strong> Row #1: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>"
+        }
+      ],
+      "seconds": 0.1828
+    },
+    {
+      "case": "STATE01-04",
+      "criteria": [
+        3,
+        4
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '82b7c1cb-552b-42a9-beeb-afa2fa53f022'}, 'server_ms': 23.0536}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 72, in states\n    call('createCasheaOrder',p);denied('transitionOrder',payload({'id':p['id'],'target':'SETTLED'}),'simulator',409,p['id']+':skip')\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '82b7c1cb-552b-42a9-beeb-afa2fa53f022'}, 'server_ms': 23.0536}\n",
+      "seconds": 0.12
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "criteria": [
+        4,
+        5
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '8f172c4e-5ff5-43f5-a747-8655617ba29c'}, 'server_ms': 19.6629}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 80, in insufficient\n    call('createCasheaOrder',p)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '8f172c4e-5ff5-43f5-a747-8655617ba29c'}, 'server_ms': 19.6629}\n",
+      "seconds": 0.11
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "criteria": [
+        3,
+        5
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 422, 'error': {'code': '422', 'message': '[Sales Invoice, ACC-SINV-2026-00001]: selling_price_list, price_list_currency, plc_conversion_rate', 'correlation_id': 'ddedc156-cfd2-450b-86bd-0433f8ba8601'}, 'server_ms': 248.9428}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 90, in fx\n    p=payload({'id':identifier,'date':day,'lines':lines});r=call('currencyPayment',p);expect(r['total'],want);outputs.append(r)\n                                                            ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 422, 'error': {'code': '422', 'message': '[Sales Invoice, ACC-SINV-2026-00001]: selling_price_list, price_list_currency, plc_conversion_rate', 'correlation_id': 'ddedc156-cfd2-450b-86bd-0433f8ba8601'}, 'server_ms': 248.9428}\n",
+      "seconds": 0.2497
+    }
+  ]
+}

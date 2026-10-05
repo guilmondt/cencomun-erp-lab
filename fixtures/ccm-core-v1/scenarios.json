@@ -1,0 +1,101 @@
+{
+  "groups": [
+    "PROD01-04",
+    "VAL01-04",
+    "MONEY01-03",
+    "TAX01-04:STORE+WEB",
+    "FX01-03",
+    "STATE01-04",
+    "INV01-03",
+    "CASH00-06",
+    "PO01-09",
+    "BANK01-05",
+    "API/MCP01-06",
+    "AUDIT01-03",
+    "IDEM01-04",
+    "SEARCH01-04"
+  ],
+  "tax_oracle": "oracle.json",
+  "purchases_extra": [
+    {
+      "id": "PO07",
+      "amount": "180.00",
+      "charges": [
+        "15.00",
+        "10.00",
+        "-5.00"
+      ],
+      "expected_base": "200.00",
+      "role": "BUYER"
+    },
+    {
+      "id": "PO08",
+      "amount": "8000.00",
+      "currency": "VES",
+      "request_rate": "40.000000",
+      "expected_base": "200.00",
+      "role": "BUYER"
+    },
+    {
+      "id": "PO09",
+      "amount": "8000.40",
+      "currency": "VES",
+      "request_rate": "40.000000",
+      "expected_base": "200.01",
+      "role": "MANAGER"
+    }
+  ],
+  "idempotency": [
+    "same-key-same-payload",
+    "same-key-different-payload409",
+    "same-key-concurrent",
+    "different-key-same-transition-conflict409",
+    "committed-request-lost-response-process-exit",
+    "restart-database-cache-web-worker",
+    "outbox-delivery-failure-retry-replay",
+    "concurrent-create-first201-replay200-denied-replay403-duplicate-functional-id409"
+  ],
+  "search": {
+    "products": {
+      "P001": [
+        "P001"
+      ],
+      "Equipo ficticio Alfa": [
+        "P001"
+      ],
+      "SUP-BETA-02": [
+        "P002"
+      ],
+      "NOT-EXISTS": []
+    },
+    "customer": {
+      "name": "Cliente ficticio Alfa",
+      "phone": "+12025550101",
+      "expected": [
+        "C001"
+      ]
+    },
+    "invoice": {
+      "reference": "INV-CCM-001",
+      "expected": [
+        "CO00"
+      ]
+    },
+    "serial": {
+      "reference": "SER-P001-001",
+      "expected": [
+        "P001"
+      ]
+    }
+  },
+  "http_ids": [
+    "API-PO",
+    "API-CO",
+    "MCP-PO",
+    "MCP-CO",
+    "IDEM-CREATE",
+    "IDEM-LOST",
+    "TAX-CONC-S",
+    "TAX-CONC-W"
+  ]
+}

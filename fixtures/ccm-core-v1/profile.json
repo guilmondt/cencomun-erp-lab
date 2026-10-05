@@ -1,0 +1,39 @@
+{
+  "id": "LAB-ONLY-v1",
+  "production_policy": false,
+  "approved": "2026-10-05",
+  "company_id": "CCM-LAB-001",
+  "warehouse_id": "WH-LAB-001",
+  "date": "2026-10-01",
+  "currencies": [
+    "USD",
+    "VES"
+  ],
+  "quantity": "positive_integer",
+  "prices_scale": 2,
+  "rate_scale": 6,
+  "rounding": "ROUND_HALF_UP_PER_LINE",
+  "purchase_thresholds": {
+    "buyer_max": "200.00",
+    "manager_max": "1000.00"
+  },
+  "bank_date_window_days": 2,
+  "cash_difference": "observed_minus_expected",
+  "tax_rates": {
+    "BASE": "0.000000",
+    "TAX-LAB-10": "0.100000"
+  },
+  "rates": {
+    "2026-10-01": "40.000000",
+    "2026-10-02": "41.000000"
+  },
+  "benchmark": {
+    "products": 1000,
+    "customers": 100,
+    "orders": 1000,
+    "bank_rows": 1000,
+    "seed": 100,
+    "warmup": 20,
+    "samples": 1000
+  }
+}

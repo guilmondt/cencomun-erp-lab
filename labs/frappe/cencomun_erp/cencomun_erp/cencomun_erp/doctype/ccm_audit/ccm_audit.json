@@ -1,0 +1,95 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Audit",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "hash",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "actor",
+      "fieldtype": "Link",
+      "label": "Actor",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "action",
+      "fieldtype": "Data",
+      "label": "Action",
+      "reqd": 1
+    },
+    {
+      "fieldname": "object_type",
+      "fieldtype": "Data",
+      "label": "Object Type"
+    },
+    {
+      "fieldname": "object_id",
+      "fieldtype": "Data",
+      "label": "Object Id"
+    },
+    {
+      "fieldname": "before_state",
+      "fieldtype": "Long Text",
+      "label": "Before State"
+    },
+    {
+      "fieldname": "after_state",
+      "fieldtype": "Long Text",
+      "label": "After State"
+    },
+    {
+      "fieldname": "reason",
+      "fieldtype": "Small Text",
+      "label": "Reason"
+    },
+    {
+      "fieldname": "correlation_id",
+      "fieldtype": "Data",
+      "label": "Correlation Id"
+    },
+    {
+      "fieldname": "occurred_at",
+      "fieldtype": "Datetime",
+      "label": "Occurred At",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "CCM Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Director",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

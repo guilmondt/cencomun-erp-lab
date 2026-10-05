@@ -1,0 +1,882 @@
+{
+  "site": "ccm-core.test",
+  "profile": "LAB-ONLY-v1",
+  "cases": [
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "criteria": [
+        1,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "hashes": [
+          {
+            "file": "bank-book.json",
+            "sha256": "6b31864a97e10ef3ea64ac4983ca00653ba025421dfec817a2932dffe8d0e5cf"
+          },
+          {
+            "file": "bank.csv",
+            "sha256": "ba0e504b62c53a00df975c431ed6deed3fce0550f265fd084190d561ace16d41"
+          },
+          {
+            "file": "benchmark-bank.csv",
+            "sha256": "6d76456747041f69f4341e92f8940b6e9b61907b0a2191dfcbd51956523d0c82"
+          },
+          {
+            "file": "benchmark.json",
+            "sha256": "1d953120d1b4a19f657165e6c7ea2722961623116040177d2f247f3b281dfd19"
+          },
+          {
+            "file": "cash.json",
+            "sha256": "627c881f8c5dd12dface26ddb0ee1078dfbc9d652377612fa4c5e8fbe9a2f593"
+          },
+          {
+            "file": "customers.json",
+            "sha256": "66854b800846d4e05379d7cf8f25e9b42997d9deef3792cbf947f95d87c1b763"
+          },
+          {
+            "file": "fx.json",
+            "sha256": "1e124f65997c10339006ef5868ad4512e10e326d9740a018e30128bf22e0bec0"
+          },
+          {
+            "file": "oracle.json",
+            "sha256": "d6dd932042d622b7ec9d2e1f5438d0fd8636d405d0fbb1c3856809017e38ec64"
+          },
+          {
+            "file": "orders.json",
+            "sha256": "1991b9cd364c5c41b02758d6a83807078959ed99d7e597d42d7fc6cc88e1131b"
+          },
+          {
+            "file": "permissions.json",
+            "sha256": "5605b02d35e8e9e9957e57577e00fec9a7c70d96da2a2b106bf724fbc089fa34"
+          },
+          {
+            "file": "products.json",
+            "sha256": "144f8be07c7845fb5c67a6fb9e4ac9897416d5b72352df5b4446ab8bbd0a3c33"
+          },
+          {
+            "file": "profile.json",
+            "sha256": "b52aba30d7438e48233f6fe949d1d61c89cd300045757db1702cb1394ed4e310"
+          },
+          {
+            "file": "purchases.json",
+            "sha256": "1e7e96822ae55dddc7e35fd6d9583a432cf794241dec0ce527afbd47c8ae2386"
+          },
+          {
+            "file": "scenarios.json",
+            "sha256": "f164ace2ad1bd71a41e7b2875dc319b6e4cb275b5415346a59b2074339cb95ac"
+          },
+          {
+            "file": "states.json",
+            "sha256": "28e68ffbbabd196bc700a00f803a559dce879b2192426d15abd59b7b37809d1f"
+          }
+        ],
+        "manifest_sha256": "195b64c3687d8c39112bf7673cdc6f9e7a93b5f8beb54f4a26c2a2db9130b5f4",
+        "native_products": [
+          {
+            "id": "P001",
+            "name": "Equipo ficticio Alfa",
+            "price": "50.00",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          },
+          {
+            "id": "P002",
+            "name": "Accesorio ficticio Beta",
+            "price": "25.00",
+            "marketplace_enabled": false,
+            "cashea_enabled": true,
+            "supplier_reference": "SUP-BETA-02",
+            "warranty_quantity": 6,
+            "warranty_unit": "MONTH",
+            "condition": "REFURBISHED"
+          },
+          {
+            "id": "P003",
+            "name": "Equipo ficticio Gamma",
+            "price": "80.00",
+            "marketplace_enabled": true,
+            "cashea_enabled": false,
+            "supplier_reference": "SUP-GAMMA-03",
+            "warranty_quantity": 0,
+            "warranty_unit": "MONTH",
+            "condition": "USED"
+          }
+        ],
+        "native_customers": 3,
+        "loaded_roles": 9,
+        "native_currency_VES": true
+      },
+      "seconds": 0.4468
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "criteria": [
+        3,
+        6,
+        7,
+        8
+      ],
+      "status": "FAIL",
+      "error": "AssertionError: ",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/audit_cases.py\", line 30, in audits\n    if row.action in ['cash.confirmed','rate.authorized','bank.reconciled']:assert row.object_id and row.after_state and row.reason\n                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "seconds": 0.0147
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "criteria": [
+        1,
+        4,
+        5,
+        8,
+        9
+      ],
+      "status": "PASS",
+      "actual": {
+        "tax_concurrent": [
+          {
+            "id": "TAX-CONC-S",
+            "native_delivery": "MAT-DN-2026-00005",
+            "native_invoice": "ACC-SINV-2026-00009",
+            "native_payments": [
+              "ACC-PAY-2026-00017",
+              "ACC-PAY-2026-00018"
+            ],
+            "native_ledger": {
+              "account_effects": {
+                "income": "-125.00",
+                "cogs": "70.00",
+                "stock": "-70.00",
+                "receivable": "0.00",
+                "cash": "55.00",
+                "bank": "73.70",
+                "tax": "-12.50",
+                "commission": "8.80",
+                "shipping": "0.00"
+              },
+              "native_gl": [
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00018",
+                  "account": "CCM Commission - CLAB",
+                  "debit": 8.8,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 8.8,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00018",
+                  "account": "CCM Bank - CLAB",
+                  "debit": 73.7,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 73.7,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00018",
+                  "account": "Debtors - CLAB",
+                  "debit": 0.0,
+                  "credit": 82.5,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 82.5,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00017",
+                  "account": "Cash - CLAB",
+                  "debit": 55.0,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 55.0,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00017",
+                  "account": "Debtors - CLAB",
+                  "debit": 0.0,
+                  "credit": 55.0,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 55.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Sales Invoice",
+                  "voucher_no": "ACC-SINV-2026-00009",
+                  "account": "Sales - CLAB",
+                  "debit": 0.0,
+                  "credit": 125.0,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 125.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Sales Invoice",
+                  "voucher_no": "ACC-SINV-2026-00009",
+                  "account": "CCM Synthetic Tax - CLAB",
+                  "debit": 0.0,
+                  "credit": 12.5,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 12.5,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Sales Invoice",
+                  "voucher_no": "ACC-SINV-2026-00009",
+                  "account": "Debtors - CLAB",
+                  "debit": 137.5,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 137.5,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Delivery Note",
+                  "voucher_no": "MAT-DN-2026-00005",
+                  "account": "Cost of Goods Sold - CLAB",
+                  "debit": 70.0,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 70.0,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Delivery Note",
+                  "voucher_no": "MAT-DN-2026-00005",
+                  "account": "Stock In Hand - CLAB",
+                  "debit": 0.0,
+                  "credit": 70.0,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 70.0,
+                  "account_currency": "USD"
+                }
+              ],
+              "balanced_vouchers": [
+                "ACC-PAY-2026-00018",
+                "ACC-PAY-2026-00017",
+                "ACC-SINV-2026-00009",
+                "MAT-DN-2026-00005"
+              ]
+            },
+            "tax_passive": "12.50",
+            "effect_counts": {
+              "delivery": 1,
+              "invoice": 1,
+              "upfront_payment": 1,
+              "settlement_payment": 1,
+              "approval_event": 1
+            }
+          },
+          {
+            "id": "TAX-CONC-W",
+            "native_delivery": "MAT-DN-2026-00006",
+            "native_invoice": "ACC-SINV-2026-00010",
+            "native_payments": [
+              "ACC-PAY-2026-00019",
+              "ACC-PAY-2026-00020"
+            ],
+            "native_ledger": {
+              "account_effects": {
+                "income": "-125.00",
+                "cogs": "70.00",
+                "stock": "-70.00",
+                "receivable": "0.00",
+                "cash": "55.00",
+                "bank": "70.25",
+                "tax": "-12.50",
+                "commission": "11.55",
+                "shipping": "0.70"
+              },
+              "native_gl": [
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00020",
+                  "account": "CCM Delivery - CLAB",
+                  "debit": 0.7,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 0.7,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00020",
+                  "account": "CCM Commission - CLAB",
+                  "debit": 11.55,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 11.55,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00020",
+                  "account": "CCM Bank - CLAB",
+                  "debit": 70.25,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 70.25,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00020",
+                  "account": "Debtors - CLAB",
+                  "debit": 0.0,
+                  "credit": 82.5,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 82.5,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00019",
+                  "account": "Cash - CLAB",
+                  "debit": 55.0,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 55.0,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Payment Entry",
+                  "voucher_no": "ACC-PAY-2026-00019",
+                  "account": "Debtors - CLAB",
+                  "debit": 0.0,
+                  "credit": 55.0,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 55.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Sales Invoice",
+                  "voucher_no": "ACC-SINV-2026-00010",
+                  "account": "Sales - CLAB",
+                  "debit": 0.0,
+                  "credit": 125.0,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 125.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Sales Invoice",
+                  "voucher_no": "ACC-SINV-2026-00010",
+                  "account": "CCM Synthetic Tax - CLAB",
+                  "debit": 0.0,
+                  "credit": 12.5,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 12.5,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Sales Invoice",
+                  "voucher_no": "ACC-SINV-2026-00010",
+                  "account": "Debtors - CLAB",
+                  "debit": 137.5,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 137.5,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Delivery Note",
+                  "voucher_no": "MAT-DN-2026-00006",
+                  "account": "Cost of Goods Sold - CLAB",
+                  "debit": 70.0,
+                  "credit": 0.0,
+                  "debit_in_account_currency": 70.0,
+                  "credit_in_account_currency": 0.0,
+                  "account_currency": "USD"
+                },
+                {
+                  "voucher_type": "Delivery Note",
+                  "voucher_no": "MAT-DN-2026-00006",
+                  "account": "Stock In Hand - CLAB",
+                  "debit": 0.0,
+                  "credit": 70.0,
+                  "debit_in_account_currency": 0.0,
+                  "credit_in_account_currency": 70.0,
+                  "account_currency": "USD"
+                }
+              ],
+              "balanced_vouchers": [
+                "ACC-PAY-2026-00020",
+                "ACC-PAY-2026-00019",
+                "ACC-SINV-2026-00010",
+                "MAT-DN-2026-00006"
+              ]
+            },
+            "tax_passive": "12.50",
+            "effect_counts": {
+              "delivery": 1,
+              "invoice": 1,
+              "upfront_payment": 1,
+              "settlement_payment": 1,
+              "approval_event": 1
+            }
+          }
+        ],
+        "lost_order_count": 1,
+        "concurrent_bank_unique_count": 1000
+      },
+      "seconds": 0.0782
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "criteria": [
+        1,
+        3,
+        11,
+        14
+      ],
+      "status": "PASS",
+      "actual": {
+        "site": "ccm-core.test",
+        "lab_enabled": true,
+        "company": "CCM-LAB-001",
+        "bank_account": "CCM LAB Bank - CCM Fictional Bank",
+        "accounts": {
+          "bank": "CCM Bank - CLAB",
+          "cash": "Cash - CLAB",
+          "cash_ves": "CCM VES Cash - CLAB",
+          "cogs": "Cost of Goods Sold - CLAB",
+          "commission": "CCM Commission - CLAB",
+          "income": "Sales - CLAB",
+          "opening": "Cost of Goods Sold - CLAB",
+          "pos": "CCM POS Captured - CLAB",
+          "receivable": "Debtors - CLAB",
+          "shipping": "CCM Delivery - CLAB",
+          "stock": "Stock In Hand - CLAB",
+          "tax": "CCM Synthetic Tax - CLAB",
+          "transfer": "CCM Transfers - CLAB"
+        },
+        "types": {
+          "CCM Cashea Order": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Cash Closing": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Purchase Request": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Import": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Bank Match": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Audit": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Event": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Request Key": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Rate Authorization": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          },
+          "CCM Cashea Line": {
+            "custom": 0,
+            "module": "Cencomun ERP"
+          }
+        },
+        "workflow": {
+          "name": "CCM LAB Purchase",
+          "owner": "Administrator",
+          "creation": "2026-10-06 02:48:51.244277",
+          "modified": "2026-10-06 02:48:51.275722",
+          "modified_by": "Administrator",
+          "docstatus": 0,
+          "idx": 0,
+          "workflow_name": "CCM LAB Purchase",
+          "document_type": "CCM Purchase Request",
+          "is_active": 1,
+          "override_status": 0,
+          "send_email_alert": 0,
+          "enable_action_confirmation": 0,
+          "workflow_state_field": "workflow_state",
+          "workflow_data": null,
+          "doctype": "Workflow",
+          "states": [
+            {
+              "name": "iig6e2mnn8",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.244495",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 1,
+              "state": "Draft",
+              "doc_status": "0",
+              "update_field": null,
+              "update_value": null,
+              "evaluate_as_expression": 0,
+              "is_optional_state": 0,
+              "avoid_status_override": 0,
+              "next_action_email_template": null,
+              "allow_edit": "CCM Operator",
+              "send_email": 1,
+              "message": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "states",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Document State"
+            },
+            {
+              "name": "iigf7js07i",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.244949",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 2,
+              "state": "Pending Buyer",
+              "doc_status": "0",
+              "update_field": null,
+              "update_value": null,
+              "evaluate_as_expression": 0,
+              "is_optional_state": 0,
+              "avoid_status_override": 0,
+              "next_action_email_template": null,
+              "allow_edit": "CCM Buyer",
+              "send_email": 1,
+              "message": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "states",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Document State"
+            },
+            {
+              "name": "iigvjtprqj",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.245129",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 3,
+              "state": "Pending Manager",
+              "doc_status": "0",
+              "update_field": null,
+              "update_value": null,
+              "evaluate_as_expression": 0,
+              "is_optional_state": 0,
+              "avoid_status_override": 0,
+              "next_action_email_template": null,
+              "allow_edit": "CCM Manager",
+              "send_email": 1,
+              "message": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "states",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Document State"
+            },
+            {
+              "name": "iigqb01hvs",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.246063",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 4,
+              "state": "Pending Director",
+              "doc_status": "0",
+              "update_field": null,
+              "update_value": null,
+              "evaluate_as_expression": 0,
+              "is_optional_state": 0,
+              "avoid_status_override": 0,
+              "next_action_email_template": null,
+              "allow_edit": "CCM Director",
+              "send_email": 1,
+              "message": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "states",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Document State"
+            },
+            {
+              "name": "iig1nj94kv",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.246231",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 5,
+              "state": "Approved",
+              "doc_status": "0",
+              "update_field": null,
+              "update_value": null,
+              "evaluate_as_expression": 0,
+              "is_optional_state": 0,
+              "avoid_status_override": 0,
+              "next_action_email_template": null,
+              "allow_edit": "CCM Manager",
+              "send_email": 1,
+              "message": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "states",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Document State"
+            }
+          ],
+          "transitions": [
+            {
+              "name": "iig2hbqvqr",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.246374",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 1,
+              "state": "Draft",
+              "action": "Request Approval",
+              "next_state": "Pending Buyer",
+              "allowed": "CCM Operator",
+              "allow_self_approval": 1,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": "float(doc.approval_amount) <= 200",
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iig0lj29nb",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.246734",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 2,
+              "state": "Draft",
+              "action": "Request Approval",
+              "next_state": "Pending Manager",
+              "allowed": "CCM Operator",
+              "allow_self_approval": 1,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": "200 < float(doc.approval_amount) <= 1000",
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iigjnmch4h",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.247098",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 3,
+              "state": "Draft",
+              "action": "Request Approval",
+              "next_state": "Pending Director",
+              "allowed": "CCM Operator",
+              "allow_self_approval": 1,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": "float(doc.approval_amount) > 1000",
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iig8atth0v",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.247586",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 4,
+              "state": "Pending Buyer",
+              "action": "Approve",
+              "next_state": "Approved",
+              "allowed": "CCM Buyer",
+              "allow_self_approval": 0,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iig4fc6c6s",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.247766",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 5,
+              "state": "Pending Buyer",
+              "action": "Approve",
+              "next_state": "Approved",
+              "allowed": "CCM Manager",
+              "allow_self_approval": 0,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iignmpagr4",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.247913",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 6,
+              "state": "Pending Buyer",
+              "action": "Approve",
+              "next_state": "Approved",
+              "allowed": "CCM Director",
+              "allow_self_approval": 0,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iig21tfulg",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.248020",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 7,
+              "state": "Pending Manager",
+              "action": "Approve",
+              "next_state": "Approved",
+              "allowed": "CCM Manager",
+              "allow_self_approval": 0,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iighau14ce",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.248131",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 8,
+              "state": "Pending Manager",
+              "action": "Approve",
+              "next_state": "Approved",
+              "allowed": "CCM Director",
+              "allow_self_approval": 0,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iigtdebo32",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.248226",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 9,
+              "state": "Pending Director",
+              "action": "Approve",
+              "next_state": "Approved",
+              "allowed": "CCM Director",
+              "allow_self_approval": 0,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            },
+            {
+              "name": "iig0oeifba",
+              "owner": "Administrator",
+              "creation": "2026-10-06 02:48:51.244277",
+              "modified": "2026-10-06 02:48:51.275722",
+              "modified_by": "Administrator",
+              "docstatus": 0,
+              "idx": 10,
+              "state": "Approved",
+              "action": "Revise",
+              "next_state": "Draft",
+              "allowed": "CCM Operator",
+              "allow_self_approval": 1,
+              "send_email_to_creator": 0,
+              "transition_tasks": null,
+              "condition": null,
+              "workflow_builder_id": null,
+              "parent": "CCM LAB Purchase",
+              "parentfield": "transitions",
+              "parenttype": "Workflow",
+              "doctype": "Workflow Transition"
+            }
+          ]
+        },
+        "hooks": {
+          "after_migrate": "cencomun_erp.core.setup.install",
+          "guard": "cencomun_erp.core.guards.native_write_guard",
+          "permissions": "cencomun_erp.core.permissions"
+        },
+        "ui_only_configuration": 0
+      },
+      "seconds": 0.0475
+    }
+  ]
+}

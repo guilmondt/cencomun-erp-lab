@@ -1,0 +1,327 @@
+{
+  "site": "ccm-core.test",
+  "profile": "LAB-ONLY-v1",
+  "cases": [
+    {
+      "case": "CO00-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "AssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '50.00', 'bank': '67.00', 'tax': '0.00', 'commission': '8.00', 'shipping': '0.00'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-8.00', 'cash': '50.00', 'bank': '75.00', 'tax': '0.00', 'commission': '8.00', 'shipping': '0.00'}}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 39, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 31, in economic\n    expect(ledger['account_effects'],expected)\n    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 19, in expect\n    if actual!=expected:raise AssertionError({'expected':expected,'actual':actual})\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '50.00', 'bank': '67.00', 'tax': '0.00', 'commission': '8.00', 'shipping': '0.00'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-8.00', 'cash': '50.00', 'bank': '75.00', 'tax': '0.00', 'commission': '8.00', 'shipping': '0.00'}}\n",
+      "seconds": 1.8749
+    },
+    {
+      "case": "CO01-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "AssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '50.00', 'bank': '63.80', 'tax': '0.00', 'commission': '10.50', 'shipping': '0.70'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-11.20', 'cash': '50.00', 'bank': '75.00', 'tax': '0.00', 'commission': '10.50', 'shipping': '0.70'}}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 39, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 31, in economic\n    expect(ledger['account_effects'],expected)\n    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 19, in expect\n    if actual!=expected:raise AssertionError({'expected':expected,'actual':actual})\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '50.00', 'bank': '63.80', 'tax': '0.00', 'commission': '10.50', 'shipping': '0.70'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-11.20', 'cash': '50.00', 'bank': '75.00', 'tax': '0.00', 'commission': '10.50', 'shipping': '0.70'}}\n",
+      "seconds": 0.5862
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "AssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '55.00', 'bank': '73.70', 'tax': '-12.50', 'commission': '8.80', 'shipping': '0.00'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-8.80', 'cash': '55.00', 'bank': '82.50', 'tax': '-12.50', 'commission': '8.80', 'shipping': '0.00'}}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 39, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 31, in economic\n    expect(ledger['account_effects'],expected)\n    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 19, in expect\n    if actual!=expected:raise AssertionError({'expected':expected,'actual':actual})\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '55.00', 'bank': '73.70', 'tax': '-12.50', 'commission': '8.80', 'shipping': '0.00'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-8.80', 'cash': '55.00', 'bank': '82.50', 'tax': '-12.50', 'commission': '8.80', 'shipping': '0.00'}}\n",
+      "seconds": 0.5449
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "FAIL",
+      "error": "AssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '55.00', 'bank': '70.25', 'tax': '-12.50', 'commission': '11.55', 'shipping': '0.70'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-12.25', 'cash': '55.00', 'bank': '82.50', 'tax': '-12.50', 'commission': '11.55', 'shipping': '0.70'}}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 39, in <lambda>\n    for data in ORDERS:check(data['id']+'-NATIVE',[1,3,4,5,11],lambda data=data:economic(data))\n                                                                                ~~~~~~~~^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 31, in economic\n    expect(ledger['account_effects'],expected)\n    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 19, in expect\n    if actual!=expected:raise AssertionError({'expected':expected,'actual':actual})\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'expected': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '0.00', 'cash': '55.00', 'bank': '70.25', 'tax': '-12.50', 'commission': '11.55', 'shipping': '0.70'}, 'actual': {'income': '-125.00', 'cogs': '70.00', 'stock': '-70.00', 'receivable': '-12.25', 'cash': '55.00', 'bank': '82.50', 'tax': '-12.50', 'commission': '11.55', 'shipping': '0.70'}}\n",
+      "seconds": 0.5254
+    },
+    {
+      "case": "PROD01-04",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "warranties": [
+          [
+            30,
+            "DAY"
+          ],
+          [
+            6,
+            "MONTH"
+          ],
+          [
+            1,
+            "YEAR"
+          ],
+          [
+            0,
+            "DAY"
+          ],
+          [
+            0,
+            "MONTH"
+          ],
+          [
+            0,
+            "YEAR"
+          ]
+        ],
+        "retained_disabled_price": "50.00",
+        "native_fields": [
+          "marketplace_enabled",
+          "cashea_enabled",
+          "cashea_price",
+          "supplier_reference",
+          "warranty_quantity",
+          "warranty_unit",
+          "ccm_condition"
+        ]
+      },
+      "seconds": 0.1026
+    },
+    {
+      "case": "VAL01-04",
+      "criteria": [
+        4,
+        5
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "case": "quantity",
+          "code": 422
+        },
+        {
+          "case": "fractional",
+          "code": 422
+        },
+        {
+          "case": "negative",
+          "code": 422
+        },
+        {
+          "case": "price-zero",
+          "code": 422
+        },
+        {
+          "case": "price-negative",
+          "code": 422
+        },
+        {
+          "case": "price-precision",
+          "code": 422
+        },
+        {
+          "case": "disabled",
+          "code": 422
+        },
+        {
+          "case": "negative-native-cost",
+          "code": 422,
+          "native_error": "<strong>Stock Entry Detail</strong> Row #1: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>"
+        }
+      ],
+      "seconds": 0.1175
+    },
+    {
+      "case": "STATE01-04",
+      "criteria": [
+        3,
+        4
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "id": "STATE-STORE-REJECTED",
+          "company_id": "CCM-LAB-001",
+          "status": "REJECTED",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true
+        },
+        {
+          "id": "STATE-STORE-CANCELLED",
+          "company_id": "CCM-LAB-001",
+          "status": "CANCELLED",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true
+        },
+        {
+          "id": "STATE-WEB-REJECTED",
+          "company_id": "CCM-LAB-001",
+          "status": "REJECTED",
+          "channel": "WEB",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "10.50",
+          "cost": "70.00",
+          "net": "114.50",
+          "indicator": "44.50",
+          "accounting_profit": "44.50",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true
+        },
+        {
+          "id": "STATE-WEB-CANCELLED",
+          "company_id": "CCM-LAB-001",
+          "status": "CANCELLED",
+          "channel": "WEB",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "10.50",
+          "cost": "70.00",
+          "net": "114.50",
+          "indicator": "44.50",
+          "accounting_profit": "44.50",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true
+        }
+      ],
+      "seconds": 0.0357
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "criteria": [
+        4,
+        5
+      ],
+      "status": "PASS",
+      "actual": {
+        "state": "APPROVED",
+        "stock": 5,
+        "delivery_note": null,
+        "sales_invoice": null
+      },
+      "seconds": 0.0111
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "criteria": [
+        3,
+        5
+      ],
+      "status": "FAIL",
+      "error": "RuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '1a45c5c5-f53c-49ed-a2a7-996da2adb42c'}, 'server_ms': 218.1089}",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 14, in check\n    actual=fn();CASES.append({'case':identifier,'criteria':criteria,'status':'PASS','actual':actual,'seconds':round(time.monotonic()-t,4)});print(identifier,'PASS',flush=True);return actual\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/business_cases.py\", line 92, in fx\n    p=payload({'id':identifier,'date':day,'lines':lines});r=call('currencyPayment',p);expect(r['total'],want);outputs.append(r)\n                                                            ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cencomun-erp-lab/scripts/core-test/support.py\", line 25, in call\n    if not r.get('ok'):raise RuntimeError(r)\n                       ^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'ok': False, 'status': 500, 'error': {'code': '500', 'message': 'Internal LAB error; consult private site log', 'correlation_id': '1a45c5c5-f53c-49ed-a2a7-996da2adb42c'}, 'server_ms': 218.1089}\n",
+      "seconds": 0.2187
+    }
+  ]
+}

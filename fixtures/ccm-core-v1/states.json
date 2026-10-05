@@ -1,0 +1,31 @@
+{
+  "STORE": [
+    "NEW",
+    "REVIEWED",
+    "APPROVED",
+    "FULFILLED",
+    "SETTLED"
+  ],
+  "WEB": [
+    "NEW",
+    "REVIEWED",
+    "APPROVED",
+    "PREPARING",
+    "SHIPPED",
+    "SETTLED"
+  ],
+  "cancel_or_reject_before_physical": true,
+  "cancel_after_physical": false,
+  "insufficient_stock": {
+    "product_id": "P001",
+    "ordered": "6",
+    "available": "5",
+    "expected": {
+      "status": "APPROVED",
+      "stock": "5",
+      "invoice": null,
+      "delivery": null
+    }
+  },
+  "warehouse_isolation": "Each economic/negative scenario owns WH-LAB-001-<case>; initial stock 5/5/5, costs30/10/60. Never cumulative."
+}

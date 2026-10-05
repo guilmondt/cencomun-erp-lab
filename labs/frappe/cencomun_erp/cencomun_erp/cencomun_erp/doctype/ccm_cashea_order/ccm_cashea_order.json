@@ -1,0 +1,235 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Cashea Order",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "hash",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "label": "Customer",
+      "options": "Customer",
+      "reqd": 1
+    },
+    {
+      "fieldname": "warehouse",
+      "fieldtype": "Link",
+      "label": "Warehouse",
+      "options": "Warehouse",
+      "reqd": 1
+    },
+    {
+      "fieldname": "channel",
+      "fieldtype": "Select",
+      "label": "Channel",
+      "options": "STORE\nWEB",
+      "reqd": 1
+    },
+    {
+      "fieldname": "currency",
+      "fieldtype": "Link",
+      "label": "Currency",
+      "options": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "order_datetime",
+      "fieldtype": "Datetime",
+      "label": "Order Datetime",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "NEW\nREVIEWED\nAPPROVED\nPREPARING\nFULFILLED\nSHIPPED\nSETTLED\nCANCELLED\nREJECTED",
+      "default": "NEW"
+    },
+    {
+      "fieldname": "guide",
+      "fieldtype": "Data",
+      "label": "Guide"
+    },
+    {
+      "fieldname": "tax_rate",
+      "fieldtype": "Data",
+      "label": "Tax Rate"
+    },
+    {
+      "fieldname": "financed_amount",
+      "fieldtype": "Data",
+      "label": "Financed Amount"
+    },
+    {
+      "fieldname": "shipping_expense",
+      "fieldtype": "Data",
+      "label": "Shipping Expense"
+    },
+    {
+      "fieldname": "lines",
+      "fieldtype": "Table",
+      "label": "Lines",
+      "options": "CCM Cashea Line",
+      "reqd": 1
+    },
+    {
+      "fieldname": "gross",
+      "fieldtype": "Data",
+      "label": "Gross",
+      "read_only": 1
+    },
+    {
+      "fieldname": "revenue",
+      "fieldtype": "Data",
+      "label": "Revenue",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tax",
+      "fieldtype": "Data",
+      "label": "Tax",
+      "read_only": 1
+    },
+    {
+      "fieldname": "commission",
+      "fieldtype": "Data",
+      "label": "Commission",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cost",
+      "fieldtype": "Data",
+      "label": "Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "net",
+      "fieldtype": "Data",
+      "label": "Net",
+      "read_only": 1
+    },
+    {
+      "fieldname": "indicator",
+      "fieldtype": "Data",
+      "label": "Indicator",
+      "read_only": 1
+    },
+    {
+      "fieldname": "accounting_profit",
+      "fieldtype": "Data",
+      "label": "Accounting Profit",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sale_order",
+      "fieldtype": "Link",
+      "label": "Sale Order",
+      "options": "Sales Order",
+      "read_only": 1
+    },
+    {
+      "fieldname": "delivery_note",
+      "fieldtype": "Link",
+      "label": "Delivery Note",
+      "options": "Delivery Note",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sales_invoice",
+      "fieldtype": "Link",
+      "label": "Sales Invoice",
+      "options": "Sales Invoice",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payments",
+      "fieldtype": "Long Text",
+      "label": "Payments",
+      "read_only": 1
+    },
+    {
+      "fieldname": "decision_version",
+      "fieldtype": "Int",
+      "label": "Decision Version",
+      "default": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "CCM Reader",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Operator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Buyer",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Director",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Simulator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM MCP",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

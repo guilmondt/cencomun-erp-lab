@@ -1,0 +1,112 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Purchase Request",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "hash",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "purchase_order",
+      "fieldtype": "Link",
+      "label": "Purchase Order",
+      "options": "Purchase Order",
+      "reqd": 1
+    },
+    {
+      "fieldname": "approval_amount",
+      "fieldtype": "Data",
+      "label": "Approval Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "workflow_state",
+      "fieldtype": "Data",
+      "label": "Workflow State",
+      "default": "Draft",
+      "read_only": 1
+    },
+    {
+      "fieldname": "decision_version",
+      "fieldtype": "Int",
+      "label": "Decision Version",
+      "default": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "CCM Reader",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Operator",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Buyer",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Manager",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Director",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Simulator",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM MCP",
+      "read": 1,
+      "write": 1,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

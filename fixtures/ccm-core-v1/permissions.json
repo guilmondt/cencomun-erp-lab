@@ -1,0 +1,43 @@
+{
+  "reader": [
+    "reads"
+  ],
+  "operator": [
+    "product-edit",
+    "create",
+    "physical",
+    "prepare-cash",
+    "import-bank",
+    "payment"
+  ],
+  "buyer": [
+    "approve-purchase<=200"
+  ],
+  "manager": [
+    "approve-purchase<=1000",
+    "confirm-cash",
+    "authorize-rate",
+    "reconcile-bank"
+  ],
+  "director": [
+    "approve-any-purchase"
+  ],
+  "simulator": [
+    "cashea-review-approve-cancel-settle"
+  ],
+  "mcp": [
+    "six-adapter-routes"
+  ],
+  "selfbuyer": [
+    "operator",
+    "buyer",
+    "NO-self-approval"
+  ],
+  "other": [],
+  "statuses": {
+    "anonymous": 401,
+    "denied": 403,
+    "invalid": 422,
+    "conflict": 409
+  }
+}
