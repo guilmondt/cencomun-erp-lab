@@ -210,3 +210,28 @@ referencia está pendiente de repetir. B04 (visibilidad de secuencias) queda
 verificado para el incremento que antes fallaba, sin afirmar éxito económico.
 B05 quedó verificado: finalize publicó el blob base real, SHA256 de pins
 idénticos, 2+7+16 tests y diffs host/AOS cero. Sólo ese criterio 2 pasó.
+
+## B08 — clientes con compañía antes de configurar su contabilidad
+
+Run 37407761697, commit `d1b3930486b7be0480ae394a506e149e700f493c`:
+CO00 4.030 s, TAX01-W 0.222 s; ambos fallaron durante preparación con
+`Warning ! : You must configure account's information for the company Cencomun synthetic LAB`.
+La traza real apunta a `PartnerAccountRepository.save` →
+`AccountingSituationInitServiceImpl.createAccountingSituation` →
+`AccountConfigService.getAccountConfig`. Los clientes recién asociados a
+`companySet` requieren la configuración que nuestro caller creaba después.
+Es un defecto del orden del fixture; ningún gate llegó a consumir stock.
+La corrección de B07 no queda probada por este run. Los casos independientes
+también se intentaron; no se anticipa éxito de sus pasos no alcanzados.
+
+1. Crear chart, configuración contable, periodos, modos y secuencias después
+   de los productos y antes de guardar los clientes con su compañía.
+2. Conservar los repositorios nativos de Partner y su creación de situación
+   contable; no retirar la compañía ni desactivar su validación.
+3. Repetir compilación y tests, y después CI en una DB desechable nueva.
+4. Exigir preparación confirmada, entrada nativa PLANNED/REALIZED y lecturas
+   económicas posteriores al commit, incluidos impuestos por línea.
+
+Impacto: todavía no hay gates económicos aprobados. Comparación incompleta.
+Una descarga de logs de ese job fue rechazada en el host 14 de blobs; se
+registró sin añadir ni publicar ese dominio ni otros cambios de red.

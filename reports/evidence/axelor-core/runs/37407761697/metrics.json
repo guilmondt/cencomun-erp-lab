@@ -1,6 +1,6 @@
 {
-  "source": "actual structured CI notices and smoke stdout",
-  "smoke": [
+  "source": "complete structured Actions log; repeated failure-tail smoke output deduplicated",
+  "smokes": [
     {
       "status": "passed",
       "authenticated": true,
@@ -8,7 +8,7 @@
       "aos": "9.1.8",
       "cencomun": "0.1.0",
       "module_count": 33,
-      "seconds": 422.52,
+      "seconds": 422.47,
       "checks": [
         "public application API",
         "framework login",
@@ -24,7 +24,7 @@
       "aos": "9.1.8",
       "cencomun": "0.1.0",
       "module_count": 33,
-      "seconds": 318.44,
+      "seconds": 315.31,
       "checks": [
         "public application API",
         "framework login",
@@ -37,14 +37,30 @@
   "gates": [
     {
       "case": "CO00",
-      "seconds": 5.881
+      "seconds": 4.03,
+      "status": "FAIL",
+      "sequence": 1
     },
     {
       "case": "TAX01-W",
-      "seconds": 0.684
+      "seconds": 0.222,
+      "status": "FAIL",
+      "sequence": 2
     }
   ],
-  "benchmark": "UNRUN",
-  "http_samples": "retained in the CI result artifact; not reconstructed from incomplete logs",
-  "note": "Only first startup and one restart counted; repeated failure-tail smoke stdout is not another sample."
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 0.211,
+      "status": "FAIL",
+      "complete": false
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.044,
+      "status": "FAIL",
+      "complete": false
+    }
+  ],
+  "benchmark": "UNRUN"
 }

@@ -8,6 +8,23 @@ FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_legacy_preparation_failure_retains_explicit_reference_evidence(self):
+        import json
+        import tempfile
+        from extract_log_evidence import extract
+        from run import REFERENCE
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / "run.log"
+            failure = {"case": "CO00", "status": "FAIL", "error":
+                "('Fixture preparation failed', {'reference': '" + REFERENCE + "'})"}
+            missing_reference = {"case": "TAX01-W", "status": "PASS"}
+            log.write_text("\n".join("timestamp ##[notice]" + json.dumps(r)
+                for r in [failure, missing_reference]) + "\n")
+            result = extract(log, Path(tmp) / "results", "synthetic", "1" * 40, FIXTURES)
+            self.assertEqual({"FAIL": 1, "UNRUN": 33}, result["counts"])
+            saved = json.loads((Path(tmp) / "results/CO00-gate.json").read_text())
+            self.assertIn("native preparation error", saved["reference_evidence"])
+
     def test_log_extraction_does_not_infer_missing_native_or_build_proof(self):
         import tempfile
         from extract_log_evidence import extract
@@ -103,6 +120,19 @@ class EvidenceTests(unittest.TestCase):
                             {"code": "P002", "current_qty": "5", "avg_price": "10"},
                             {"code": "P003", "current_qty": "5", "avg_price": "60"}]}
         with self.assertRaises(AssertionError):
+            assert_native_economics(native, expected)
+
+    def test_invoice_total_does_not_hide_wrong_native_line_tax_allocation(self):
+        import json
+        expected = json.loads((FIXTURES / "oracle.json").read_bytes())["TAX01-W"]
+        native = {"stock": [{"code": code, "current_qty": qty, "avg_price": price} for code, qty, price in
+                  [("P001", "3", "30"), ("P002", "4", "10"), ("P003", "5", "60")]],
+                  "sale_order_ids": [1], "deliveries": [{"status": 3}],
+                  "invoices": [{"statusSelect": 3, "exTaxTotal": "125.00", "taxTotal": "12.50",
+                     "inTaxTotal": "137.50", "amountRemaining": "0.00",
+                     "lines": [{"code": "P001", "qty": "2", "ex_tax_total": "100.00", "in_tax_total": "119.00"},
+                               {"code": "P002", "qty": "1", "ex_tax_total": "25.00", "in_tax_total": "18.50"}]}]}
+        with self.assertRaisesRegex(AssertionError, "native invoice product line"):
             assert_native_economics(native, expected)
 
     def test_non_native_fixture_bytes_are_rejected(self):

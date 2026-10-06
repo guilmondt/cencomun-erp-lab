@@ -47,7 +47,15 @@ def extract(log, output, run_id, commit, fixtures):
             exports.setdefault(case, {"case": case})[item["section"]] = item["records"]
         if case in ("CO00", "TAX01-W") and "sequences" in item:
             (output / f"{case}-committed-sequences.json").write_text(json.dumps(item, indent=2) + "\n")
-        if case in ("CO00", "TAX01-W") and item.get("reference") == REFERENCE and "status" in item:
+        # The first runner fallback omitted top-level reference metadata. Its
+        # complete preparation error still contains the verified native reference.
+        # Recognize only that explicit legacy failure; never infer missing success.
+        legacy_preparation_failure = (item.get("reference") is None and item.get("status") == "FAIL"
+            and "Fixture preparation failed" in item.get("error", "")
+            and ("'reference': '" + REFERENCE + "'") in item.get("error", ""))
+        if case in ("CO00", "TAX01-W") and (item.get("reference") == REFERENCE or legacy_preparation_failure) and "status" in item:
+            if legacy_preparation_failure:
+                item["reference_evidence"] = "Exact pinned reference explicitly present in the complete native preparation error; legacy runner omitted top-level reference"
             gates[case] = item
             by_case[case + "-NATIVE"].update(status="UNRUN" if item["status"] == "PASS" else item["status"],
                 observed_revision=1, complete=False, partial_gate_status=item["status"],

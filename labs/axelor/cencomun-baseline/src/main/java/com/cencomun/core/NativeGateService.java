@@ -76,6 +76,9 @@ public class NativeGateService {
           "costPrice", dec(fixture, "cost"), "stockManaged", true, "costTypeSelect", 3, "productTypeSelect", "storable",
           "saleCurrency", usd, "purchaseCurrency", usd);
     }
+    // The native Partner repository initializes AccountingSituation for companySet.
+    // It requires the company's real AccountConfig before any associated partner save.
+    NativeFinance.configure(company);
     for (JsonNode fixture : FixtureBundle.json("customers.json")) {
       Model partner = one(BASE + "Partner", "self.partnerSeq = ?1", fixture.get("id").asText());
       if (partner == null) {
@@ -95,7 +98,6 @@ public class NativeGateService {
     if (one("com.axelor.apps.supplychain.db.SupplyChainConfig", "self.company = ?1", company) == null) {
       record("com.axelor.apps.supplychain.db.SupplyChainConfig", "company", company);
     }
-    NativeFinance.configure(company);
     NativeFinance.tax(company, BigDecimal.ZERO);
     NativeFinance.tax(company, new BigDecimal("0.10"));
     p.evidence.put("company_id", company.getId());
@@ -224,6 +226,14 @@ public class NativeGateService {
         inv.put("id", invoice.getId());
         for (String field : List.of("statusSelect", "exTaxTotal", "taxTotal", "inTaxTotal", "amountPaid", "amountRemaining"))
           inv.put(field, String.valueOf(get(invoice, field)));
+        List<Map<String, Object>> invoiceLines = new ArrayList<>();
+        for (Object item : (List<?>) get(invoice, "invoiceLineList")) {
+          Model product = (Model) get(item, "product");
+          if (product != null) invoiceLines.add(Map.of("id", ((Model) item).getId(), "product_id", product.getId(),
+              "code", get(product, "code"), "qty", get(item, "qty").toString(),
+              "ex_tax_total", get(item, "exTaxTotal").toString(), "in_tax_total", get(item, "inTaxTotal").toString()));
+        }
+        inv.put("lines", invoiceLines);
         List<Map<String, Object>> payments = new ArrayList<>();
         for (Model pay : list(ACCOUNT + "InvoicePayment", "self.invoice = ?1", invoice)) {
           payments.add(Map.of("id", pay.getId(), "amount", get(pay, "amount").toString(), "status", get(pay, "statusSelect")));

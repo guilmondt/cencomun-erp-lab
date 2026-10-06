@@ -147,6 +147,15 @@ def assert_native_economics(native, expected):
     assert int(invoice["statusSelect"]) == 3, invoice
     for key, field in [("revenue", "exTaxTotal"), ("tax", "taxTotal"), ("gross", "inTaxTotal"), ("customer_balance_final", "amountRemaining")]:
         assert Decimal(invoice[field]) == Decimal(expected[key]), (field, invoice[field], expected[key])
+    invoice_lines = invoice.get("lines", [])
+    assert len(invoice_lines) == 2, ("native invoice product lines", invoice_lines)
+    taxable = Decimal(expected["tax"]) != 0
+    expected_lines = {"P001": (Decimal(2), Decimal("100.00"), Decimal("110.00" if taxable else "100.00")),
+                      "P002": (Decimal(1), Decimal("25.00"), Decimal("27.50" if taxable else "25.00"))}
+    assert {line["code"] for line in invoice_lines} == set(expected_lines)
+    for line in invoice_lines:
+        actual = tuple(Decimal(line[field]) for field in ["qty", "ex_tax_total", "in_tax_total"])
+        assert actual == expected_lines[line["code"]], ("native invoice product line", line)
     assert len(invoice["payments"]) == 2 and all(p["status"] == 1 for p in invoice["payments"]), invoice["payments"]
     assert sum(Decimal(p["amount"]) for p in invoice["payments"]) == Decimal(expected["gross"])
     assert Decimal(invoice["amountPaid"]) == Decimal(expected["gross"])
@@ -304,17 +313,21 @@ def run(base, fixtures, output):
     # Explicit order, regardless of the ordering of rows in coverage-required.json.
     for case in ("CO00", "TAX01-W"):
         start = time.perf_counter()
+        prepared = None
+        phase = "fixture-preparation"
         try:
             prepared = client.action("ccm-core-native-prepare", case)
             (output / f"{case}-preparation.json").write_text(json.dumps(prepared, indent=2) + "\n")
             # A fresh request proves committed configuration before the native isolated increment.
             configuration = client.action("ccm-core-native-inspect", case)
             (output / f"{case}-prepared-export.json").write_text(json.dumps(configuration, indent=2) + "\n")
+            phase = "fixture-preparation-assertions"
             assert prepared.get("status") == "PASS", ("Fixture preparation failed", prepared)
             assert len(configuration["company_ids"]) == 1
             assert len(configuration["sequences"]) == 12, configuration["sequences"]
             assert all(s["id"] and len(s["versions"]) == 1 and s["versions"][0]["id"] for s in configuration["sequences"])
             print(f"::notice title=Native {case} committed sequences::" + json.dumps({"case": case, "sequences": configuration["sequences"]}), flush=True)
+            phase = "native-economic-gate"
             observed = client.action("ccm-core-native-gate", case)
             # Independent new HTTP request reads durable records, after any rollback.
             native = client.action("ccm-core-native-inspect", case)
@@ -332,9 +345,18 @@ def run(base, fixtures, output):
                 except Exception as error:
                     observed.update(status="FAIL", error=str(error), error_type=type(error).__name__, failed_stage="native-oracle-assertions")
         except AssertionError as error:
-            observed = {"case": case, "status": "FAIL", "error": str(error), "error_type": type(error).__name__}
+            if prepared is not None and prepared.get("status") != "PASS":
+                # Preserve the native failure and stack instead of burying both in
+                # a Python tuple string without reference/stage metadata.
+                observed = {**prepared, "status": "FAIL", "assertion_error": "Fixture preparation failed"}
+            else:
+                observed = {"case": case, "status": "FAIL", "error": str(error)[:2500], "error_type": type(error).__name__}
         except Exception as error:
-            observed = {"case": case, "status": "BLOCKED", "error": str(error)[:2500], "error_type": type(error).__name__}
+            observed = {"case": case, "status": exception_status(error), "error": str(error)[:2500], "error_type": type(error).__name__}
+        observed.setdefault("reference", REFERENCE)
+        observed.setdefault("actor", "admin")
+        if observed["status"] != "PASS":
+            observed.setdefault("failed_stage", phase)
         observed["seconds"] = round(time.perf_counter() - start, 3)
         observed["sequence"] = len(gates) + 1
         gates.append(observed)

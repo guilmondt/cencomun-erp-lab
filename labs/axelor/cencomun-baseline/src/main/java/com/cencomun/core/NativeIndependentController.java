@@ -20,10 +20,13 @@ import java.util.Map;
 /** Fixture-only setup; acceptance writes use authenticated native REST and native repositories. */
 public class NativeIndependentController {
   public static final String PROFILE = "com.cencomun.core.db.CcmProductProfile";
-  public void prepareProducts(ActionRequest request, ActionResponse response) throws Exception {
+  private static void fixtureAdmin() {
     if (!"1".equals(System.getenv("CCM_CORE_LAB")) || AuthUtils.getUser() == null
         || !"admin".equals(AuthUtils.getUser().getCode()))
       throw new SecurityException("Synthetic fixture setup requires the LAB administrator");
+  }
+  public void prepareProducts(ActionRequest request, ActionResponse response) throws Exception {
+    fixtureAdmin();
     NativeGateService.Progress progress = new NativeGateService.Progress();
     NativeGateService fixtures = Beans.get(NativeGateService.class);
     fixtures.activate(progress);
@@ -34,6 +37,7 @@ public class NativeIndependentController {
 
   @Transactional(rollbackOn = Exception.class)
   public Map<String, Object> configureProducts() throws Exception {
+    fixtureAdmin();
     FixtureBundle.verify();
     Model company = one("com.axelor.apps.base.db.Company", "self.code = ?1", "CCM-LAB-001");
     List<Map<String, Object>> profiles = new ArrayList<>();
