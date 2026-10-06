@@ -180,6 +180,9 @@ request_host() {
 # This dump is private: it can contain synthetic login hashes. Never upload it.
 # The snapshot precedes all Core fixtures, actors, orders and benchmark loads.
 request_host baseline-backup
+# Packaging only: repeat.py streams each complete original file once, plus a
+# small index. Avoid duplicating phase trees in earlier per-case fragments.
+export CCM_INDEXED_EVIDENCE=1
 for execution_phase in primary repeat; do
   phase_output="$results_dir/core-test"
   if test "$execution_phase" = repeat; then
@@ -234,6 +237,8 @@ PYRESTART
   fi
   stop_app
   python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/finalize.py /workspace/cencomun-erp-lab "$host_dir" "$phase_output" > "$state_dir/private/finalize-$execution_phase.log" 2>&1
+  python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/publish_phase_evidence.py \
+    "$results_dir" "$phase_output" "$smoke_output"
   if test "$phase_status" != 0; then core_status=$phase_status; fi
  done
 python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/repeat.py "$results_dir" /workspace/cencomun-erp-lab/fixtures/ccm-core-v1

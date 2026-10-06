@@ -1,0 +1,753 @@
+{
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "coverage_revision": 2,
+  "groups": [
+    {
+      "case": "CO00-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "partial_gate_status": "PASS",
+      "evidence": "CO00-NATIVE.json"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "CO01-NATIVE.json"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "TAX01-S-NATIVE.json"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "partial_gate_status": "PASS",
+      "evidence": "TAX01-W-NATIVE.json"
+    },
+    {
+      "case": "PROD01-04",
+      "source": "business",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Executed native operator CRUD with committed rereads",
+      "complete": true,
+      "evidence": "PROD01-04.json"
+    },
+    {
+      "case": "VAL01-04",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+      "complete": false,
+      "evidence": "VAL01-04.json"
+    },
+    {
+      "case": "STATE01-04",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "STATE01-04.json"
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "INV01-03-INSUFFICIENT.json"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "source": "business",
+      "criteria": [
+        3,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization",
+      "complete": true,
+      "evidence": "FX01-03-MONEY01-03.json",
+      "partial_conversion_status": "PASS"
+    },
+    {
+      "case": "PO01-09-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        7
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "PO01-09-NATIVE.json"
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "source": "finance",
+      "criteria": [
+        3,
+        7
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "PO07-09-REVISION-SELF.json"
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "",
+      "complete": false,
+      "evidence": "CASH00-06-NATIVE.json"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "source": "finance",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Four confirmed native advance payments with posted GL and unallocated balances",
+      "complete": true,
+      "evidence": "BANK-BOOK-FIXTURE.json"
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        8
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "BANK01-05-NATIVE.json"
+    },
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "API01-06-SIX-ROUTES.json"
+    },
+    {
+      "case": "IDEM01-02-CREATE-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "IDEM01-02-CREATE-CONCURRENT.json"
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "{'name': 'reader-CcmAudit-read', 'actor': 'ccm-reader', 'request': None, 'before': {'order': {'order': {'id': 'API-CO', 'native_id': 21, 'company_id': 'CCM-LAB-001', 'native_company_id': 1, 'state': 'NEW', 'channel': 'STORE', 'guide': None, 'creator': 'ccm-operator', 'saleOrder_id': None, 'delivery_id': None, 'invoice_id': None}, 'native_export': {'case': 'API-CO', 'stock': [], 'stock_move_ids': [], 'fixture_configuration': {'company_id': 1, 'legal_vat_system': 2, 'invoice_runtime_configuration': {'persisted_autoGenerateInvoicePrintingFileOnSaleInvoice': False, 'persisted_isVentilationSkipped': False, 'isVentilationSkipped': False, 'autoGenerateInvoicePrintingFileOnSaleInvoice': False, 'native_app_invoice_id': 1}, 'legal_partner_id': 1, 'accounts': [{'code': 'CCM-AR', 'vat_system': 1, 'id': 1}, {'code': 'CCM-AP', 'vat_system': 1, 'id': 2}, {'code': 'CCM-STOCK', 'vat_system': 1, 'id': 3}, {'code': 'CCM-REVENUE', 'vat_system': 1, 'id': 4}, {'code': 'CCM-COGS', 'vat_system': 1, 'id': 5}, {'code': 'CCM-COMMISSION', 'vat_system': 1, 'id': 6}, {'code': 'CCM-SHIPPING', 'vat_system': 1, 'id': 7}, {'code': 'CCM-TAX', 'vat_system': 1, 'id': 8}, {'code': 'CCM-CASH', 'vat_system': 1, 'id': 9}, {'code': 'CCM-BANK', 'vat_system': 1, 'id': 10}, {'code': 'CCM-OPENING', 'vat_system': 1, 'id': 11}, {'code': 'CCM-CASH-VES', 'vat_system': 1, 'id': 12}, {'code': 'CCM-POS', 'vat_system': 1, 'id': 13}, {'code': 'CCM-TRANSFER', 'vat_system': 1, 'id': 14}], 'customers': [{'partner_id': 2, 'invoicing_address_id': 3, 'code': 'C001'}, {'partner_id': 3, 'invoicing_address_id': 4, 'code': 'C002'}, {'partner_id': 4, 'invoicing_address_id': 5, 'code': 'CBANK'}]}, 'sale_order_ids': [], 'invoices': [], 'moves': [], 'fixture_opening_moves': [], 'deliveries': [], 'company_ids': [1]}, 'keys': [{'key': 'API-CO', 'hash': '20b216691acf89593ba2a97b12231b00593dc06f02162ff1ab052b18dbe881c3', 'domain': 'order.create', 'id': 106}], 'events': [], 'audit': [{'id': 257, 'actor': 'ccm-operator', 'actor_id': 2, 'created_on': '2026-10-06T11:16:25.193564', 'kind': 'order.created', 'correlation': 'API-CO', 'beforeState': '{\"exists\":false}', 'afterState': '{\"id\":\"API-CO\",\"native_id\":21,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'reason': 'Synthetic LAB create', 'rejected': False}, {'id': 258, 'actor': 'ccm-operator', 'actor_id': 2, 'created_on': '2026-10-06T11:16:25.320073', 'kind': 'order.denied', 'correlation': 'API-CO', 'beforeState': '{\"id\":\"API-CO\",\"native_id\":21,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'afterState': '{\"id\":\"API-CO\",\"native_id\":21,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'r",
+      "complete": false,
+      "evidence": "PERM-API-NATIVE.json"
+    },
+    {
+      "case": "CASH04-06-HTTP-IMMUTABLE",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "CASH04-06-HTTP-IMMUTABLE.json"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        12
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Native queries and complete nonduplicated pages under the real reader",
+      "complete": true,
+      "evidence": "SEARCH01-04-NATIVE.json"
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "TAX-CONC-S: [{'http_status': 500, 'response': {'error_type': 'org.hibernate.StaleObjectStateException', 'error': 'Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [com.cencomun.core.db.CcmOrder#27]', 'native_stack': ['com.cencomun.core.CoreOrderService.transition(CoreOrderService.java:117)', 'com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)', 'com.cencomun.core.CoreOrderResource.transition(CoreOrderResource.java:23)', 'com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)', 'com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)', 'com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)', 'com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)', 'com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)', 'com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)']}}, {'http_status': 200, 'response': {'id': 'TAX-CONC-S', 'native_id': 27, 'company_id': 'CCM-LAB-001', 'native_company_id': 1, 'state': 'FULFILLED', 'channel': 'STORE', 'guide': None, 'creator': 'ccm-operator', 'saleOrder_id': 17, 'saleOrder_status': 3, 'delivery_id': 51, 'delivery_status': 3, 'invoice_id': 14, 'invoice_status': 3, 'replayed': False, 'native_progress': {'sale_order_id': 17, 'delivery_id': 51, 'invoice_id': 14}, '_meta': {'source': 'Hibernate SessionEventListener JDBC execution callbacks', 'db_ms': 132.396751, 'boundary': 'authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads', 'server_ms': 825.105075, 'query_count': 720}}}]; TAX-CONC-W: [{'http_status': 200, 'response': {'id': 'TAX-CONC-W', 'native_id': 28, 'company_id': 'CCM-LAB-001', 'native_company_id': 1, 'state': 'SHIPPED', 'channel': 'WEB', 'guide': 'GUIDE-LAB-TAX-001', 'creator': 'ccm-operator', 'saleOrder_id': 18, 'saleOrder_status': 3, 'delivery_id': 53, 'delivery_status': 3, 'invoice_id': 15, 'invoice_status': 3, 'replayed': False, 'native_progress': {'sale_order_id': 18, 'delivery_id': 53, 'invoice_id': 15}, '_meta': {'source': 'Hibernate SessionEventListener JDBC execution callbacks', 'db_ms': 131.874554, 'boundary': 'authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads', 'server_ms': 946.256909, 'query_count': 715}}}, {'http_status': 500, 'response': {'error_type': 'org.hibernate.StaleObjectStateException', 'error': 'Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [com.cencomun.core.db.CcmOrder#28]', 'native_stack': ['com.cencomun.core.CoreOrderService.transition(CoreOrderService.java:117)', 'com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)', 'com.cencomun.core.CoreOrderResource.transition(CoreOrderResource.java:23)', 'com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)', 'com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilt",
+      "complete": false,
+      "evidence": "TAX02-04-IDEM-CONCURRENT.json"
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "source": "http",
+      "criteria": [
+        8,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "BANK-CONCURRENT-1000.json"
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "source": "http",
+      "criteria": [
+        3,
+        9,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "{'tool': 'createPurchaseDraft', 'direction': 'MCP_then_API', 'request': {'id': 'MCP-PO', 'amount': '199.99', 'idempotency_key': 'MCP-PO', 'company_id': 'CCM-LAB-001'}, 'mcp': {'http_status': 201, 'response': {'id': 'MCP-PO', 'native_id': 12, 'native_purchase_id': 12, 'company_id': 'CCM-LAB-001', 'native_company_id': 1, 'creator': 'ccm-mcp', 'state': 'Draft', 'native_status': 1, 'usd_base': '199.99', 'native_gross': '199.99', 'native_tax': '0.00', 'currency': 'USD', 'request_date': '2026-10-01', 'request_rate': '0', 'decision_revision': 1, 'approved_by': None, 'approved_at': None, 'native_validated_by': None, 'lines': [{'qty': '1', 'in_tax': '199.99', 'price': '199.99', 'native_purchase_id': 12, 'id': 14, 'discount': '0', 'ex_tax': '199.99'}], 'replay': False, 'approval_amount': '199.99'}, 'mcp_response': {'jsonrpc': '2.0', 'id': 7, 'result': {'content': [{'type': 'text', 'text': '{\"status\": 201, \"result\": {\"id\": \"MCP-PO\", \"native_id\": 12, \"native_purchase_id\": 12, \"company_id\": \"CCM-LAB-001\", \"native_company_id\": 1, \"creator\": \"ccm-mcp\", \"state\": \"Draft\", \"native_status\": 1, \"usd_base\": \"199.99\", \"native_gross\": \"199.99\", \"native_tax\": \"0.00\", \"currency\": \"USD\", \"request_date\": \"2026-10-01\", \"request_rate\": \"0\", \"decision_revision\": 1, \"approved_by\": null, \"approved_at\": null, \"native_validated_by\": null, \"lines\": [{\"qty\": \"1\", \"in_tax\": \"199.99\", \"price\": \"199.99\", \"native_purchase_id\": 12, \"id\": 14, \"discount\": \"0\", \"ex_tax\": \"199.99\"}], \"replay\": false, \"approval_amount\": \"199.99\"}}'}], 'isError': False}}}, 'after_first': {'purchase': {'id': 'MCP-PO', 'native_id': 12, 'native_purchase_id': 12, 'company_id': 'CCM-LAB-001', 'native_company_id': 1, 'creator': 'ccm-mcp', 'state': 'DRAFT', 'native_status': 1, 'usd_base': '199.99', 'native_gross': '199.990', 'native_tax': '0.000', 'currency': 'USD', 'request_date': '2026-10-01', 'request_rate': '0.000000', 'decision_revision': 1, 'approved_by': None, 'approved_at': None, 'native_validated_by': None, 'lines': [{'qty': '1', 'in_tax': '199.99', 'price': '199.99', 'native_purchase_id': 12, 'id': 14, 'discount': '0', 'ex_tax': '199.99'}]}, 'cash_close': {}, 'native_cash': {'expected': {'USD': '100.00', 'VES': '4000.00', 'POS': '50.00', 'TRANSFER': '30.00'}, 'sources': [{'channel': 'USD', 'lines': [{'move': {'company_code': 'CCM-LAB-001', 'status': 3, 'lines': [{'account_company_id': 1, 'account_code': 'CCM-CASH', 'account_id': 9, 'debit': '84.000', 'id': 173, 'credit': '0.000', 'remaining': '0', 'parent_move_id': 72}, {'account_company_id': 1, 'account_code': 'CCM-OPENING', 'account_id': 11, 'debit': '0.000', 'id': 174, 'credit': '84.000', 'remaining': '0', 'parent_move_id': 72}], 'company_id': 1, 'id': 72}, 'currency': 'USD', 'native_move_id': 72, 'account_id': 9, 'id': 173, 'native_currency_amount': '84.000', 'account': 'CCM-CASH'}, {'move': {'company_code': 'CCM-LAB-001', 'status': 3, 'lines': [{'account_company_id': 1, 'account_code': 'CCM-CASH', 'account_id': 9, 'debit': '0.000', 'id': 175, 'credit'",
+      "complete": false,
+      "evidence": "MCP01-06-STDIO.json"
+    },
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "source": "recovery",
+      "criteria": [
+        4,
+        9,
+        14
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Real process loss/restart and durable native/consumer reads verified",
+      "complete": true,
+      "evidence": "IDEM03-LOST-RESTART.json"
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "source": "recovery",
+      "criteria": [
+        3,
+        6,
+        7,
+        9,
+        14
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Real process loss/restart and durable native/consumer reads verified",
+      "complete": true,
+      "evidence": "IDEM04-EVENTS-RECOVERY.json"
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "source": "audit",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "16 bundled hashes and committed native products/customers/9 role metadata/USD+VES",
+      "complete": true,
+      "evidence": "FIXTURE-HASH-NATIVE-EXPORT.json"
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "source": "audit",
+      "criteria": [
+        3,
+        6,
+        7,
+        8
+      ],
+      "minimum_revision": 2,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "{'name': 'immutable-manager-edit', 'executed': True, 'status': 'FAIL', 'read_boundary': 'separate-http-after-business-commit-or-rollback', 'actor': 'manager', 'request': {'data': {'id': 1, 'reason': 'Attempt overwrite'}}, 'before': {'company_id': 1, 'company_code': 'CCM-LAB-001', 'audit': [{'id': 1, 'actor': 'ccm-operator', 'actor_id': 2, 'occurred_at': '2026-10-06T11:14:48.098865', 'object_id': 'CYCLE-CO00', 'kind': 'order.created', 'correlation': 'CYCLE-CO00-create', 'reason': 'Synthetic LAB create', 'beforeState': '{\"exists\":false}', 'afterState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'rejected': False}, {'id': 2, 'actor': 'ccm-operator', 'actor_id': 2, 'occurred_at': '2026-10-06T11:14:48.283042', 'object_id': 'CYCLE-CO00', 'kind': 'order.denied', 'correlation': 'CYCLE-CO00-create', 'reason': 'Idempotency payload conflict', 'beforeState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'afterState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'rejected': True}, {'id': 3, 'actor': 'ccm-operator', 'actor_id': 2, 'occurred_at': '2026-10-06T11:14:48.396354', 'object_id': 'CYCLE-CO00', 'kind': 'order.denied', 'correlation': 'CYCLE-CO00-second', 'reason': 'Functional order already exists', 'beforeState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'afterState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'rejected': True}, {'id': 4, 'actor': 'ccm-reader', 'actor_id': 3, 'occurred_at': '2026-10-06T11:14:48.568202', 'object_id': 'CYCLE-CO00', 'kind': 'order.denied', 'correlation': 'CYCLE-CO00-create', 'reason': 'Role denied for create: NEW', 'beforeState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'afterState': '{\"id\":\"CYCLE-CO00\",\"native_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}', 'rejected': True}, {'id': 5, 'actor': 'ccm-other', 'actor_id': 9, 'occurred_at': '2026-10-06T11:14:48.723242', 'object_id': 'CYCLE-CO00",
+      "complete": false,
+      "evidence": "AUDIT01-03-NATIVE.json"
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "source": "audit",
+      "criteria": [
+        1,
+        4,
+        5,
+        8,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "",
+      "complete": false,
+      "evidence": "IDEM-TAX-NATIVE-EFFECT-COUNTS.json"
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "source": "audit",
+      "criteria": [
+        1,
+        3,
+        11,
+        14
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native concurrency/audit/configuration reads checked",
+      "complete": true,
+      "evidence": "SUPPORTED-CONFIGURATION.json"
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "STATE-UNKNOWN-ATOMIC.json"
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "STATE-DELIVERY-WITHOUT-ACCEPTANCE.json"
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "STATE-WEB-NO-GUIDE.json"
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "Executed native service refuses required cancellation: observed functional contract failure, not environment blocker",
+      "complete": false,
+      "evidence": "STATE-CANCEL-BEFORE-HANDOVER.json"
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "MCP-FORBIDDEN-CRITICAL-ACTIONS.json"
+    },
+    {
+      "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+      "source": "audit",
+      "criteria": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT.json"
+    }
+  ],
+  "criteria": [
+    {
+      "criterion": 1,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "PO01-09-NATIVE",
+        "CASH00-06-NATIVE",
+        "BANK-BOOK-FIXTURE",
+        "BANK01-05-NATIVE",
+        "FIXTURE-HASH-NATIVE-EXPORT",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "SUPPORTED-CONFIGURATION",
+        "STATE-CANCEL-BEFORE-HANDOVER"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 2,
+      "status": "PASS",
+      "groups": [],
+      "reason": "Requires actual build suites, WAR hash, pins and clean pinned upstream diffs from this run"
+    },
+    {
+      "criterion": 3,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "STATE01-04",
+        "FX01-03-MONEY01-03",
+        "PO01-09-NATIVE",
+        "PO07-09-REVISION-SELF",
+        "CASH00-06-NATIVE",
+        "BANK01-05-NATIVE",
+        "API01-06-SIX-ROUTES",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "PERM-API-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "SEARCH01-04-NATIVE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "MCP01-06-STDIO",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "SUPPORTED-CONFIGURATION",
+        "STATE-UNKNOWN-ATOMIC",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 4,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "VAL01-04",
+        "STATE01-04",
+        "INV01-03-INSUFFICIENT",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "TAX02-04-IDEM-CONCURRENT",
+        "IDEM03-LOST-RESTART",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "STATE-UNKNOWN-ATOMIC",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 5,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "VAL01-04",
+        "INV01-03-INSUFFICIENT",
+        "FX01-03-MONEY01-03",
+        "CASH00-06-NATIVE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 6,
+      "status": "FAIL",
+      "groups": [
+        "CASH00-06-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 7,
+      "status": "FAIL",
+      "groups": [
+        "PO01-09-NATIVE",
+        "PO07-09-REVISION-SELF",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 8,
+      "status": "FAIL",
+      "groups": [
+        "BANK01-05-NATIVE",
+        "BANK-CONCURRENT-1000",
+        "AUDIT01-03-NATIVE",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 9,
+      "status": "FAIL",
+      "groups": [
+        "API01-06-SIX-ROUTES",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "PERM-API-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "BANK-CONCURRENT-1000",
+        "MCP01-06-STDIO",
+        "IDEM03-LOST-RESTART",
+        "IDEM04-EVENTS-RECOVERY",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 10,
+      "status": "FAIL",
+      "groups": [
+        "MCP01-06-STDIO",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 11,
+      "status": "UNRUN",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "BANK-BOOK-FIXTURE",
+        "FIXTURE-HASH-NATIVE-EXPORT",
+        "SUPPORTED-CONFIGURATION"
+      ],
+      "reason": "Benchmark/restored independent replay additional evidence not yet executed"
+    },
+    {
+      "criterion": 12,
+      "status": "UNRUN",
+      "groups": [
+        "SEARCH01-04-NATIVE"
+      ],
+      "reason": "Benchmark/restored independent replay additional evidence not yet executed"
+    },
+    {
+      "criterion": 13,
+      "status": "BLOCKED",
+      "groups": [],
+      "reason": "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
+    },
+    {
+      "criterion": 14,
+      "status": "UNRUN",
+      "groups": [
+        "IDEM03-LOST-RESTART",
+        "IDEM04-EVENTS-RECOVERY",
+        "SUPPORTED-CONFIGURATION"
+      ],
+      "reason": "Benchmark/restored independent replay additional evidence not yet executed"
+    }
+  ],
+  "counts": {
+    "PASS": 26,
+    "FAIL": 8
+  },
+  "patch_scenarios": {
+    "status": "UNRUN",
+    "count": 6
+  },
+  "scope": "Actual native gates. Policy unit tests do not mark native groups PASS.",
+  "build_evidence": "build-evidence.json"
+}

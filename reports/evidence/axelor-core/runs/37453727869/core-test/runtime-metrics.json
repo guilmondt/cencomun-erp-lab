@@ -1,0 +1,225 @@
+{
+  "metric_kind": "runtime",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "gates": [
+    {
+      "case": "CO00",
+      "seconds": 13.626,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-W",
+      "seconds": 6.647,
+      "status": "PASS"
+    }
+  ],
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 2.055,
+      "status": "PASS"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.456,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "seconds": 0.667,
+      "status": "PASS"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "seconds": 2.942,
+      "status": "PASS"
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "seconds": 0.048,
+      "status": "PASS"
+    },
+    {
+      "case": "CO00-NATIVE",
+      "seconds": 10.773,
+      "status": "PASS"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "seconds": 9.522,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "seconds": 9.018,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "seconds": 9.072,
+      "status": "PASS"
+    },
+    {
+      "case": "VAL01-04",
+      "seconds": 3.955,
+      "status": "FAIL"
+    },
+    {
+      "case": "STATE01-04",
+      "seconds": 2.262,
+      "status": "PASS"
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "seconds": 3.85,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "seconds": 1.214,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "seconds": 5.487,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "seconds": 3.847,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "seconds": 11.291,
+      "status": "FAIL"
+    },
+    {
+      "case": "PO01-09-NATIVE",
+      "seconds": 4.675,
+      "status": "PASS"
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "seconds": 0.491,
+      "status": "PASS"
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "seconds": 1.698,
+      "status": "FAIL"
+    },
+    {
+      "case": "CASH04-06-HTTP-IMMUTABLE",
+      "seconds": 0.213,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "seconds": 1.713,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "seconds": 16.718,
+      "status": "PASS"
+    },
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "seconds": 1.101,
+      "status": "PASS"
+    },
+    {
+      "case": "IDEM01-02-CREATE-CONCURRENT",
+      "seconds": 0.296,
+      "status": "PASS"
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "seconds": 10.264,
+      "status": "FAIL"
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "seconds": 0.769,
+      "status": "FAIL"
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "seconds": 20.526,
+      "status": "PASS"
+    },
+    {
+      "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "seconds": 9.804,
+      "status": "FAIL"
+    },
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "seconds": 0.803,
+      "status": "UNRUN"
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "seconds": 1.102,
+      "status": "PASS"
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "seconds": 2.17,
+      "status": "FAIL"
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "seconds": 0.244,
+      "status": "FAIL"
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "seconds": 0.119,
+      "status": "PASS"
+    }
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.41",
+  "cpu_count": 4,
+  "cpu_affinity": 4,
+  "disk_free_bytes": 86954049536,
+  "http_call_counts": {
+    "administrator": 799,
+    "product_operator": 30,
+    "search_reader": 16,
+    "fx_operator": 11,
+    "fx_manager": 4
+  },
+  "native_action_counts": {
+    "ccm-core-native-prepare": 2,
+    "ccm-core-native-inspect": 5,
+    "ccm-core-native-gate": 2,
+    "ccm-core-products-prepare": 1,
+    "ccm-core-products-inspect": 1,
+    "ccm-core-bank-book-prepare": 1,
+    "ccm-core-bank-book-post": 2,
+    "ccm-core-bank-book-inspect": 5,
+    "ccm-core-fx-prepare": 2,
+    "ccm-core-fixtures-prepare": 1,
+    "ccm-core-fixtures-inspect": 1,
+    "ccm-core-cycle-actors": 2,
+    "ccm-core-cycle-prepare": 36,
+    "ccm-core-cycle-seed": 36,
+    "ccm-core-cycle-inspect": 389,
+    "ccm-core-cycle-negative-cost": 1,
+    "ccm-core-cycle-enum-probe": 2,
+    "ccm-core-finance-prepare": 4,
+    "ccm-core-finance-inspect": 266,
+    "ccm-core-finance-cash-seed": 2,
+    "ccm-core-fx-inspect": 14,
+    "ccm-core-audit-inspect": 13
+  },
+  "benchmark": "UNRUN",
+  "note": "Gate timings are not the required 1000-sample benchmark"
+}

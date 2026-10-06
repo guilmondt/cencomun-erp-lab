@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
 """Review a second execution restored into a fresh owned CI database, same pins."""
-import json,sys
+import json,os,sys
 from pathlib import Path
 from run import REFERENCE,criteria_for,publish_complete_evidence,verified_build_status
 from benchmark import assert_benchmark
+from evidence_index import FORMAT,build_index,load_index,file_notices
 
-def assert_repeat(e,fixtures):
-    assert e['reference']==REFERENCE and e['status']=='PASS'
+def assert_repeat(e,fixtures,evidence_root=None):
+    if e.get('format')==FORMAT:
+        payload,_=load_index(e,evidence_root)
+        return assert_repeat_contents(payload,fixtures)
+    assert e['status']=='PASS'
+    return assert_repeat_contents(e,fixtures)
+
+def assert_repeat_contents(e,fixtures):
+    # The verdict is derived below, not trusted from an index's PASS label.
+    # These are the unchanged business assertions used for the legacy capsule.
+    assert e['reference']==REFERENCE
     restore=e['restore'];assert restore['source_database']=='ccm_axelor_ci' and restore['target_database']=='ccm_axelor_replay'
     assert restore['restore_exit_code']==0 and len(restore['backup_sha256'])==64
     first,second=e['primary'],e['repeat'];assert first['build_evidence']==second['build_evidence']
@@ -34,14 +44,19 @@ def assert_repeat(e,fixtures):
     return True
 
 def review(results,fixtures):
-    e={'case':'ISOLATED-FRESH-REPLAY','reference':REFERENCE,'revision':2,'status':'UNRUN','complete':False,'restore':json.loads((results/'isolated-restore.json').read_text())}
-    for phase,directory,smoke in [('primary','core-test','smoke-restart.json'),('repeat','core-test-repeat','smoke-repeat-restart.json')]:
-        root=results/directory;coverage=json.loads((root/'coverage.json').read_text())
-        e[phase]={'coverage':coverage,'build_evidence':json.loads((root/'build-evidence.json').read_text()),'benchmark':json.loads((root/'benchmark.json').read_text()),'smoke':json.loads((results/smoke).read_text()),'gates':{name:json.loads((root/(name+'-gate.json')).read_text()) for name in ('CO00','TAX01-W')},'groups':{row['case']:json.loads((root/(row['case']+'.json')).read_text()) for row in coverage['groups'] if (root/(row['case']+'.json')).exists()}}
-    try:e['status']='PASS';assert_repeat(e,fixtures);e['complete']=True
+    e={'case':'ISOLATED-FRESH-REPLAY','reference':REFERENCE,'revision':2,'status':'UNRUN','complete':False}
+    e.update(build_index(results,{'primary':(results/'core-test',results/'smoke-restart.json'),
+        'repeat':(results/'core-test-repeat',results/'smoke-repeat-restart.json')},results/'isolated-restore.json'))
+    payload,receipt=load_index(e,results);e['file_verification']=receipt
+    try:assert_repeat_contents(payload,fixtures);e.update(status='PASS',complete=True)
     except Exception as error:e.update(status='FAIL',error=type(error).__name__+': '+str(error))
-    root=results/'core-test';(root/'isolated-repeat.json').write_text(json.dumps(e,indent=2)+'\n');publish_complete_evidence(e)
-    coverage=e['primary']['coverage'];coverage['criteria']=criteria_for(coverage['groups'],e['primary']['build_evidence'],e['primary']['benchmark'],e,fixtures)
-    coverage['isolated_repeat_status']=e['status'];coverage['benchmark_status']=e['primary']['benchmark']['status'];(root/'coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
+    root=results/'core-test';(root/'isolated-repeat.json').write_text(json.dumps(e,indent=2)+'\n')
+    # CI already streams each phase immediately after its finalization, so a
+    # later startup failure cannot erase primary proofs. Only restore is new.
+    transport=e if os.environ.get('CCM_INDEXED_EVIDENCE')!='1' else {'reference':REFERENCE,'phases':{},'restore':e['restore']}
+    for notice in file_notices(transport,results):print('::notice title=Complete indexed evidence file::'+json.dumps(notice),flush=True)
+    publish_complete_evidence(e)
+    coverage=payload['primary']['coverage'];coverage['criteria']=criteria_for(coverage['groups'],payload['primary']['build_evidence'],payload['primary']['benchmark'],e,fixtures,results)
+    coverage['isolated_repeat_status']=e['status'];coverage['benchmark_status']=payload['primary']['benchmark']['status'];(root/'coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
 
 if __name__=='__main__':review(*map(Path,sys.argv[1:]))

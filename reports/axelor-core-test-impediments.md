@@ -867,3 +867,36 @@ Una prueba aislada inicial falló por constructor de repo sin Guice; se iniciali
 con los helpers nativos reales existentes y se repitió, sin ejecutar persistencia.
 Aceptación de nuevos eventos/auditoría/recuperación/benchmark/repetición todavía
 pendiente del CI siguiente. ZIP sa16 bloqueado una vez; red conservada.
+
+
+## B36 — Riesgo de empaquetado de la repetición
+
+Causa comprobada: el recibo de CI37448650654 referencia aproximadamente44,2MB
+de archivos. repeat.py del commit5660bc7 incluye ambas fases completas en otra
+cápsula. Duplicar ese volumen, añadir seis grupos y benchmark y guardarlo como
+un único JSON amenaza el límite GitHub100MiB; su emisión duplica los árboles
+ya publicados. No es un fallo económico ni justifica cambiar el oráculo.
+
+1. Sustituir únicamente la cápsula agregada por un índice de archivos completos
+   separados: ruta, bytes y SHA256, con cobertura original inmutable por fase.
+2. Archivar la cápsula legada completa fuera del árbol Git antes de extraerla;
+   comprobar copia, igualdad de los datos y hashes antes de reemplazarla.
+3. Cargar todos los referenciados y aplicar las mismas aserciones nativas; índice
+   solo, archivos faltantes, alterados o reutilizados entre fases no dan PASS.
+4. Transportar cada archivo original una vez y publicar el manifiesto de cada
+   fase antes del siguiente arranque. Conservar casos independientes si falla
+   la fase posterior. No reconstruir archivos auxiliares no recuperados del ZIP.
+5. Dejar terminar CI37453727869; recuperar y revisar su ejecución completa sin
+   repetir negocio por empaquetado. Comprobar tamaños reales antes de commit.
+
+Verificación local:74 regresiones Python y checks de shell/repositorio PASS.
+Incluyen identidad AST de aserciones con5660bc7, rechazo de falsos PASS, probes
+fallidos conservados y recuperación íntegra de dos fases o primaria solamente.
+Aceptación runtime y tamaños del nuevo resultado pendientes del CI activo.
+La red sigue restringida y sin publicación de ampliaciones pendientes.
+
+CI37453727869 ya recuperado íntegramente desde su cápsula/log:92archivos y
+60.654.190bytes con hashes y árboles iguales, agregado íntegro archivado.
+Primaria26PASS/8FAIL, réplica27PASS/7FAIL. La repetición quedaFAIL y las muestras
+de benchmarkUNRUN por getter inexistente. No se repitió negocio por empaquetado;
+las correcciones relevantes se agruparán en un solo siguiente CI.

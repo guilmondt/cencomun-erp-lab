@@ -9,12 +9,60 @@ import base64
 import hashlib
 import json
 import zlib
+import copy
+import shutil
 from collections import Counter
 from pathlib import Path
 from run import REFERENCE, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle, review_native_fixture
+from evidence_index import FORMAT,EvidenceUnavailable,descriptor,load_index,load_phase,recover_files
 
 
-def extract(log, output, run_id, commit, fixtures):
+def review_indexed(index,output,run_id,commit,fixtures,log,evidence_root=None):
+    if evidence_root and Path(evidence_root).resolve()!=output.resolve():
+        load_index(index,evidence_root)  # Check every source file before copying.
+        entries={e['path']:e for p in index['phases'].values() for e in p['files']}
+        entries[index['restore']['path']]=index['restore']
+        for relative in entries:
+            source=Path(evidence_root)/relative;target=output/relative;target.parent.mkdir(parents=True,exist_ok=True)
+            if target.exists():assert target.read_bytes()==source.read_bytes(),'Recovered/downloaded evidence differs'
+            else:shutil.copyfile(source,target)
+    payload,receipt=load_index(index,output)
+    return review_payload(payload,receipt,index,output,run_id,commit,fixtures,log)
+
+def review_payload(payload,receipt,index,output,run_id,commit,fixtures,log,full_repeat=True):
+    proof=payload['primary']['build_evidence'];assert proof['lab_commit']==commit,'Indexed build proof belongs to another commit'
+    bundle=verify_bundle(fixtures);results=copy.deepcopy(payload['primary']['coverage']);rows=results['groups']
+    assert index['reference']==results['reference']==REFERENCE
+    assert {r['case'] for r in rows}=={r['case'] for r in bundle['requirements']},'Frozen 34 groups required'
+    from order_cases import GROUP_CHECKS,review_order_group
+    from finance_cases import FINANCE_CHECKS,review_finance_group
+    from api_cases import API_CHECKS,review_api_group
+    from audit_cases import RUNTIME_CHECKS,review_runtime_group
+    from recovery_cases import RECOVERY_CHECKS,review_recovery_group
+    from run import review_native_fx
+    for row in rows:
+        evidence=payload['primary']['groups'][row['case']]
+        for cases,review in [(GROUP_CHECKS,review_order_group),(FINANCE_CHECKS,review_finance_group),(API_CHECKS,review_api_group),(RUNTIME_CHECKS,review_runtime_group),(RECOVERY_CHECKS,review_recovery_group)]:
+            if row['case'] in cases:review(row,evidence,fixtures)
+        if row['case']=='FX01-03-MONEY01-03':review_native_fx(row,evidence,json.loads((fixtures/'fx.json').read_bytes()))
+        if row['case']=='FIXTURE-HASH-NATIVE-EXPORT':review_native_fixture(row,evidence,fixtures)
+        row['evidence']=next(e['path'] for e in index['phases']['primary']['files'] if e.get('role')=='group:'+row['case'])
+    from repeat import assert_repeat_contents
+    reviewed={'status':'UNRUN','complete':False,**receipt}
+    if full_repeat:
+        try:assert_repeat_contents(payload,fixtures);reviewed.update(status='PASS',complete=True)
+        except Exception as error:reviewed.update(status='FAIL',error=type(error).__name__+': '+str(error))
+    else:reviewed['reason']='Complete primary files reviewed; complete second-phase/restore evidence unavailable'
+    results.update(source='Complete original indexed files recovered/downloaded and hash verified; native reviewers applied',
+        run_id=run_id,lab_commit=commit,reference=REFERENCE,coverage_revision=2,
+        log_sha256=hashlib.sha256(log.read_bytes()).hexdigest(),counts=dict(Counter(r['status'] for r in rows)),
+        criteria=criteria_for(rows,proof,payload['primary']['benchmark'],index if full_repeat else None,fixtures,output),repeat_review=reviewed)
+    (output/('isolated-repeat.json' if full_repeat else 'primary-phase-index.json')).write_text(json.dumps(index,indent=2)+'\n')
+    (output/'coverage.json').write_text(json.dumps(results,indent=2)+'\n')
+    return results
+
+
+def extract(log, output, run_id, commit, fixtures, evidence_root=None):
     output.mkdir(parents=True, exist_ok=True)
     objects = []
     decoder = json.JSONDecoder()
@@ -53,6 +101,29 @@ def extract(log, output, run_id, commit, fixtures):
             complete_groups[case] = item
         except (AssertionError, KeyError, TypeError, ValueError,zlib.error):
             continue  # No inferred result from missing, duplicate or altered fragments.
+    recover_files(objects,output,REFERENCE)
+    index=complete_groups.get('ISOLATED-FRESH-REPLAY')
+    if index and index.get('format')==FORMAT:
+        try:return review_indexed(index,output,run_id,commit,fixtures,log,evidence_root)
+        except EvidenceUnavailable:
+            pass  # Preserve the index and available primary notices; repeat remains unverified.
+        # A missing repeat fragment must not erase complete independent primary
+        # probes. Each used primary file still needs its exact indexed hash.
+        for entry in index['phases']['primary']['files']:
+            role=entry.get('role','')
+            if not (role.startswith('group:') or role=='benchmark'):continue
+            try:
+                actual=descriptor(output,output/entry['path'])
+                assert (actual['bytes'],actual['sha256'])==(entry['bytes'],entry['sha256'])
+                value=json.loads((output/entry['path']).read_bytes())
+                complete_groups[value['case']]=value
+            except (AssertionError,KeyError,ValueError,OSError):continue
+    phase_index=complete_groups.get('EVIDENCE-PHASE-primary')
+    if phase_index and phase_index.get('format')==FORMAT:
+        try:
+            primary,receipt=load_phase(phase_index,output,'primary')
+            return review_payload({'primary':primary},receipt,phase_index,output,run_id,commit,fixtures,log,False)
+        except EvidenceUnavailable:pass
     rows = rows_for(verify_bundle(fixtures))
     by_case = {r["case"]: r for r in rows}
     gates, exports, independent = {}, {}, {}
@@ -231,7 +302,7 @@ def extract(log, output, run_id, commit, fixtures):
     results = {"source": "complete structured Actions log notices; ZIP availability tracked separately",
         "run_id": run_id, "lab_commit": commit, "reference": REFERENCE, "coverage_revision": 2,
         "log_sha256": hashlib.sha256(log.read_bytes()).hexdigest(),
-        "groups": rows, "counts": dict(Counter(r["status"] for r in rows)), "criteria": criteria_for(rows, proof,benchmark,repeat,fixtures),
+        "groups": rows, "counts": dict(Counter(r["status"] for r in rows)), "criteria": criteria_for(rows, proof,benchmark,repeat,fixtures,evidence_root),
         "patch_scenarios": {"status": "UNRUN", "count": 6},
         "limitations": "No missing notice is inferred. Economic gates retain incomplete role/state/atomicity coverage. Full metrics/recovery evidence require their actual result files."}
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
@@ -245,6 +316,8 @@ if __name__ == "__main__":
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--commit", required=True)
     parser.add_argument("--fixtures", required=True, type=Path)
+    parser.add_argument("--evidence-root", type=Path,
+        help="Downloaded complete artifact root for indexed repeat verification; log index alone cannot prove PASS")
     args = parser.parse_args()
-    result = extract(args.log, args.output, args.run_id, args.commit, args.fixtures)
+    result = extract(args.log, args.output, args.run_id, args.commit, args.fixtures,args.evidence_root)
     print(json.dumps({"groups": result["counts"], "criteria": dict(Counter(r["status"] for r in result["criteria"]))}))

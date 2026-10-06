@@ -1,5 +1,118 @@
 # Core Test Axelor — ejecución en curso
 
+CI [37453727869](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37453727869),
+commit `5660bc7cedc30c910811691c16b0ef1f067068a3`, FAILURE, 39m45s.
+**Primaria:26 PASS / 8 FAIL / 0 BLOCKED / 0 UNRUN. Réplica:27 PASS / 7 FAIL.**
+Los 34 grupos fueron ejecutados en ambas fases; no se declara terminada la comparación.
+Criterios:12 FAIL / 1 PASS / 1 BLOCKED. Actualización aplazada (13); seis escenarios UNRUN.
+
+Fuente: log completo y revisores congelados del SHA; ZIP403 en
+`productionresultssa8.blob.core.windows.net`, un intento, red conservada.
+[Recibo de procedencia](evidence/axelor-core/runs/37453727869/evidence-source.json).
+[Índice de ambas fases](evidence/axelor-core/runs/37453727869/isolated-repeat.json):
+22.428bytes, 92 archivos cargados, 60.654.190bytes, todos los SHA256 verificados.
+Agregado original de65.662.508bytes archivado completo fuera del árbol Git;
+contenido de ambas fases conservado y comprobado igual. Archivo Git máximo5.076.576bytes.
+Revisión de empaquetado sin otra ejecución de negocio; repetición FAIL por resultados
+distintos entre fases y benchmark aún incompleto. Ver detalles en
+[empaquetado](axelor-core-evidence-packaging.md).
+
+Gates admin CO00/TAX01-W PASS en13,626/6,647s: stock3/4/5, valor430,
+COGS70, impuesto0/12,50, dos pagos nativos por factura, AR0 y GL ACCOUNTED.
+Los cuatro grupos económicos completos PASS incluyen roles, estados, replay y
+rollback503; no se sustituyen por estos gates. FX PASS con cuatro pagos reales
+y lecturas posteriores al commit, no sólo cálculos. SEARCH PASS con scopes.
+
+65 tests Java ejecutados, sin fallos/errores/skips, WAR del SHA y upstream
+limpio comprobados. Criterio2 deriva de esa evidencia. Arranques autenticados
+primaria365,16/272,90s y réplica269,96/275,86s; reinicios propios de Java/PG
+y restauración aislada ejecutados. Benchmark FAIL antes de muestras por
+`CcmBankRow.getReference/0, matches=0`; p50/p95/p99 UNRUN. No se usan timings
+de gates/arranque como benchmark.
+
+Hallazgos que se conservan y correcciones acotadas a validar:
+
+1. VAL01-04 y las tres cancelaciones confirmadas siguen FAIL funcional: coste
+   negativo aceptado y cancelación rechazada por el ERP. Expectativas intactas.
+2. Caja dio FAIL sólo en primaria: las mismas MoveLine nativas llegaron en otro
+   orden; confirmar igualdad por ID y estabilizar su export, sin cambiar importes.
+3. PERM y AUDIT fallaron porque CRUD AOP devuelve HTTP200, status=-1 y el mensaje
+   nativo de autorización. No hubo datos privados ni cambios en los probes
+   ejecutados, pero el grupo abortó antes de completar la matriz: seguridad FAIL.
+   Identificar causalmente el rechazo de autorización; jamás aceptar cualquier
+   status=-1 o error de fixture como denegación. Mantener API de seis rutas403.
+4. Concurrencia TAX devolvió un200 y un500 StaleObjectStateException por cada
+   pedido. Resolver la frontera de bloqueo/lectura de CcmOrder con mecanismos
+   JPA nativos; conservar dos sesiones, efectos únicos, replay y atomicidad.
+   Los conteos tributarios dependientes también FAIL; no se rebaja el oráculo.
+5. MCP compra devolvió request_rate0 numérico frente a "0" del otro recorrido.
+   Fijar serialización del mismo valor nativo en create/replay; comparar todo
+   el resultado y sus FK. El grupo permanece FAIL hasta ejecución nueva.
+6. Benchmark debe leer reference desde BankStatementLine de CcmBankRow,
+   conforme al modelo real; validar esa API y repetir las muestras congeladas.
+
+| Grupo completo | Primaria | Réplica |
+| --- | --- | --- |
+| CO00-NATIVE | PASS | PASS |
+| CO01-NATIVE | PASS | PASS |
+| TAX01-S-NATIVE | PASS | PASS |
+| TAX01-W-NATIVE | PASS | PASS |
+| PROD01-04 | PASS | PASS |
+| VAL01-04 | FAIL | FAIL |
+| STATE01-04 | PASS | PASS |
+| INV01-03-INSUFFICIENT | PASS | PASS |
+| FX01-03-MONEY01-03 | PASS | PASS |
+| PO01-09-NATIVE | PASS | PASS |
+| PO07-09-REVISION-SELF | PASS | PASS |
+| CASH00-06-NATIVE | FAIL | PASS |
+| BANK-BOOK-FIXTURE | PASS | PASS |
+| BANK01-05-NATIVE | PASS | PASS |
+| API01-06-SIX-ROUTES | PASS | PASS |
+| IDEM01-02-CREATE-CONCURRENT | PASS | PASS |
+| PERM-API-NATIVE | FAIL | FAIL |
+| CASH04-06-HTTP-IMMUTABLE | PASS | PASS |
+| SEARCH01-04-NATIVE | PASS | PASS |
+| TAX02-04-IDEM-CONCURRENT | FAIL | FAIL |
+| BANK-CONCURRENT-1000 | PASS | PASS |
+| MCP01-06-STDIO | FAIL | FAIL |
+| IDEM03-LOST-RESTART | PASS | PASS |
+| IDEM04-EVENTS-RECOVERY | PASS | PASS |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS | PASS |
+| AUDIT01-03-NATIVE | FAIL | FAIL |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | FAIL | FAIL |
+| SUPPORTED-CONFIGURATION | PASS | PASS |
+| STATE-UNKNOWN-ATOMIC | PASS | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS | PASS |
+| STATE-WEB-NO-GUIDE | PASS | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | PASS | PASS |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | PASS | PASS |
+
+| Criterio | Primaria revisada |
+| --- | --- |
+| 1 | FAIL |
+| 2 | PASS |
+| 3 | FAIL |
+| 4 | FAIL |
+| 5 | FAIL |
+| 6 | FAIL |
+| 7 | FAIL |
+| 8 | FAIL |
+| 9 | FAIL |
+| 10 | FAIL |
+| 11 | FAIL |
+| 12 | FAIL |
+| 13 | BLOCKED |
+| 14 | FAIL |
+
+Validación local de empaquetado:74Python y checks shell/repositorio PASS.
+El índice no aprueba negocio por etiquetas ni por hashes solos: carga todos
+los archivos y ejecuta las aserciones anteriores. Las correcciones de ejecución
+anteriores requieren una sola siguiente validación CI, sin duplicar jobs.
+
+## Historia — CI34192b3
+# Core Test Axelor — ejecución en curso
+
 Último CI revisado: [37448650654](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37448650654), commit `34192b3b7292dc69a31dda7c95014c2683afee2b`, FAILURE.
 **18 PASS / 9 FAIL / 1 BLOCKED / 6 UNRUN**. No se declara terminada la comparación.
 Fuente secundaria: notices completos del log, revisores congelados del SHA,

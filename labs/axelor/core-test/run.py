@@ -129,7 +129,7 @@ def verified_build_status(evidence):
     return "PASS"
 
 
-def criteria_for(rows, build_evidence=None, benchmark=None, repeat=None, fixtures=None):
+def criteria_for(rows, build_evidence=None, benchmark=None, repeat=None, fixtures=None, evidence_root=None):
     # Reject missing/obsolete evidence even if a caller supplied a PASS label.
     rows = [{**r, "status": "UNRUN" if r.get("observed_revision", 0) < r["minimum_revision"]
              or (r["status"] == "PASS" and (not r.get("complete") or not r.get("evidence"))) else r["status"]} for r in rows]
@@ -148,7 +148,10 @@ def criteria_for(rows, build_evidence=None, benchmark=None, repeat=None, fixture
                 try:
                     from benchmark import assert_benchmark
                     from repeat import assert_repeat
-                    assert_benchmark(benchmark,fixtures);assert_repeat(repeat,fixtures)
+                    from evidence_index import EvidenceUnavailable
+                    assert_benchmark(benchmark,fixtures);assert_repeat(repeat,fixtures,evidence_root)
+                except EvidenceUnavailable as error:
+                    status,reason='UNRUN','Complete repeat files unavailable for review: '+str(error)
                 except (AssertionError,KeyError,TypeError,ValueError):
                     status,reason="FAIL","Executed benchmark or independent restored replay did not satisfy frozen proof"
                 else:status,reason="PASS","All attached executed groups, frozen benchmark and fresh restored same-pin replay verified"
@@ -847,6 +850,9 @@ def publish_native_section(case, section, records):
 
 def publish_complete_evidence(evidence):
     """Hash-checked complete result fragments; truncated Actions notices cannot imply PASS."""
+    # Indexed CI emits the exact original files once after both phases. Retain
+    # legacy per-case notices for standalone diagnostics and older collectors.
+    if os.environ.get('CCM_INDEXED_EVIDENCE')=='1' and evidence['case']!='ISOLATED-FRESH-REPLAY' and not evidence['case'].startswith('EVIDENCE-PHASE-'):return
     raw = json.dumps(evidence, ensure_ascii=True, separators=(",", ":")).encode()
     encoded = base64.b64encode(zlib.compress(raw,9)).decode()
     parts = [encoded[i:i+2800] for i in range(0, len(encoded), 2800)]

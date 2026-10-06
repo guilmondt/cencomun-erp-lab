@@ -1,0 +1,3567 @@
+{
+  "case": "VAL01-04",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [
+    {
+      "name": "quantity-zero",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-QUANTITY-ZERO",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P001",
+            "qty": "0",
+            "unit_price": "50.00"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-QUANTITY-ZERO-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Quantity must be a positive integer",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderPolicy.input(CoreOrderPolicy.java:39)",
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:85)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-QUANTITY-ZERO",
+          "stock": [
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 26,
+              "avg_price": "60.0000000000"
+            },
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 24,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 25,
+              "avg_price": "10.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            17
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 123,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 47
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 124,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 47
+                }
+              ],
+              "company_id": 1,
+              "id": 47
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-QUANTITY-ZERO",
+          "stock": [
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 26,
+              "avg_price": "60.0000000000"
+            },
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 24,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 25,
+              "avg_price": "10.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            17
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 123,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 47
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 124,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 47
+                }
+              ],
+              "company_id": 1,
+              "id": 47
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 87,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:26.239926",
+            "kind": "order.denied",
+            "correlation": "VAL-QUANTITY-ZERO-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Quantity must be a positive integer",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "quantity-fraction",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-QUANTITY-FRACTION",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P001",
+            "qty": "0.5",
+            "unit_price": "50.00"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-QUANTITY-FRACTION-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Quantity must be a positive integer",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderPolicy.input(CoreOrderPolicy.java:39)",
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:85)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-QUANTITY-FRACTION",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 27,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 28,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 29,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            18
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 125,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 48
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 126,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 48
+                }
+              ],
+              "company_id": 1,
+              "id": 48
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-QUANTITY-FRACTION",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 27,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 28,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 29,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            18
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 125,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 48
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 126,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 48
+                }
+              ],
+              "company_id": 1,
+              "id": 48
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 88,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:26.669892",
+            "kind": "order.denied",
+            "correlation": "VAL-QUANTITY-FRACTION-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Quantity must be a positive integer",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "quantity-negative",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-QUANTITY-NEGATIVE",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P001",
+            "qty": "-1",
+            "unit_price": "50.00"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-QUANTITY-NEGATIVE-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Quantity must be a positive integer",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderPolicy.input(CoreOrderPolicy.java:39)",
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:85)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-QUANTITY-NEGATIVE",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 30,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 31,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 32,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            19
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 127,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 49
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 128,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 49
+                }
+              ],
+              "company_id": 1,
+              "id": 49
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-QUANTITY-NEGATIVE",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 30,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 31,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 32,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            19
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 127,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 49
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 128,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 49
+                }
+              ],
+              "company_id": 1,
+              "id": 49
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 89,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:27.144763",
+            "kind": "order.denied",
+            "correlation": "VAL-QUANTITY-NEGATIVE-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Quantity must be a positive integer",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "price-zero",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-PRICE-ZERO",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P001",
+            "qty": "2",
+            "unit_price": "0"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-PRICE-ZERO-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Positive price with at most two decimals required",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderPolicy.input(CoreOrderPolicy.java:40)",
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:85)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-PRICE-ZERO",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 33,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 34,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 35,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            20
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 129,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 50
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 130,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 50
+                }
+              ],
+              "company_id": 1,
+              "id": 50
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-PRICE-ZERO",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 33,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 34,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 35,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            20
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 129,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 50
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 130,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 50
+                }
+              ],
+              "company_id": 1,
+              "id": 50
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 90,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:27.585494",
+            "kind": "order.denied",
+            "correlation": "VAL-PRICE-ZERO-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Positive price with at most two decimals required",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "price-negative",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-PRICE-NEGATIVE",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P001",
+            "qty": "2",
+            "unit_price": "-1"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-PRICE-NEGATIVE-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Positive price with at most two decimals required",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderPolicy.input(CoreOrderPolicy.java:40)",
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:85)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-PRICE-NEGATIVE",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 36,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 37,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 38,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            21
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 131,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 51
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 132,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 51
+                }
+              ],
+              "company_id": 1,
+              "id": 51
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-PRICE-NEGATIVE",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 36,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 37,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 38,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            21
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 131,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 51
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 132,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 51
+                }
+              ],
+              "company_id": 1,
+              "id": 51
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 91,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:28.077508",
+            "kind": "order.denied",
+            "correlation": "VAL-PRICE-NEGATIVE-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Positive price with at most two decimals required",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "price-precision",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-PRICE-PRECISION",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P001",
+            "qty": "2",
+            "unit_price": "0.005"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-PRICE-PRECISION-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Positive price with at most two decimals required",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderPolicy.input(CoreOrderPolicy.java:40)",
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:85)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-PRICE-PRECISION",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 39,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 40,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 41,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            22
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 133,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 52
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 134,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 52
+                }
+              ],
+              "company_id": 1,
+              "id": 52
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-PRICE-PRECISION",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 39,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 40,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 41,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            22
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 133,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 52
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 134,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 52
+                }
+              ],
+              "company_id": 1,
+              "id": 52
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 92,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:28.477227",
+            "kind": "order.denied",
+            "correlation": "VAL-PRICE-PRECISION-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Positive price with at most two decimals required",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "disabled-product",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "id": "VAL-DISABLED-PRODUCT",
+        "customer_id": "C001",
+        "datetime": "2026-10-01T10:00:00-04:00",
+        "channel": "STORE",
+        "currency": "USD",
+        "tax_rate": "0",
+        "financed_amount": "75.00",
+        "shipping_expense": "0.00",
+        "guide": null,
+        "lines": [
+          {
+            "product_id": "P003",
+            "qty": "2",
+            "unit_price": "50.00"
+          },
+          {
+            "product_id": "P002",
+            "qty": "1",
+            "unit_price": "25.00"
+          }
+        ],
+        "company_id": "CCM-LAB-001",
+        "request_key": "VAL-DISABLED-PRODUCT-create"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Product not eligible for Cashea",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:100)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-DISABLED-PRODUCT",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 42,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 43,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 44,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            23
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 135,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 53
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 136,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 53
+                }
+              ],
+              "company_id": 1,
+              "id": 53
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-DISABLED-PRODUCT",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 42,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 43,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 44,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            23
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 135,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 53
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 136,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 53
+                }
+              ],
+              "company_id": 1,
+              "id": 53
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 93,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T11:15:28.890458",
+            "kind": "order.denied",
+            "correlation": "VAL-DISABLED-PRODUCT-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"exists\":false}",
+            "reason": "Product not eligible for Cashea",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "negative-native-cost",
+      "status": "FAIL",
+      "executed": true,
+      "probe_request": {
+        "action": "ccm-core-cycle-negative-cost",
+        "case_id": "VAL-NEGATIVE-NATIVE-COST",
+        "control_input": "30.00",
+        "invalid_input": "-0.01"
+      },
+      "probe_actor": "admin",
+      "before": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-NEGATIVE-NATIVE-COST",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 45,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 46,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 47,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            24
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 137,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 54
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 138,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 54
+                }
+              ],
+              "company_id": 1,
+              "id": 54
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "native_result": {
+        "valid_control": {
+          "input_cost": "30.00",
+          "qty": "1",
+          "company_id": 1,
+          "warehouse_id": 18,
+          "product_id": 1,
+          "native_move_id": 25,
+          "planned_status": 2,
+          "reloaded_status": 3,
+          "reloaded_lines": [
+            {
+              "unit_cost": "30.0000000000",
+              "qty": "1.0000000000",
+              "id": 125,
+              "native_move_id": 25
+            }
+          ],
+          "stage": "native-stock-realized-and-reloaded",
+          "diagnostic_rollback_only": true,
+          "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+          "error": "Native receipt accepted and realized; diagnostic rollback only",
+          "native_stack": [
+            "com.cencomun.core.NativeNegativeCostProbe.execute(NativeNegativeCostProbe.java:52)",
+            "com.cencomun.core.CoreOrderController.costProbe(CoreOrderController.java:99)",
+            "com.cencomun.core.CoreOrderController.negativeCost(CoreOrderController.java:92)",
+            "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+            "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)",
+            "com.axelor.meta.schema.actions.Action.execute(Action.java:89)",
+            "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+            "com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)",
+            "com.axelor.meta.schema.actions.Action.execute(Action.java:85)",
+            "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+            "com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)",
+            "com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)",
+            "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:41)",
+            "com.axelor.web.service.ActionService.execute(ActionService.java:106)",
+            "com.axelor.rpc.RequestFilter.invoke(RequestFilter.java:42)",
+            "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:50)",
+            "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+            "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)"
+          ]
+        },
+        "case": "VAL-NEGATIVE-NATIVE-COST",
+        "invalid_attempt": {
+          "input_cost": "-0.01",
+          "qty": "1",
+          "company_id": 1,
+          "warehouse_id": 18,
+          "product_id": 1,
+          "native_move_id": 26,
+          "planned_status": 2,
+          "reloaded_status": 3,
+          "reloaded_lines": [
+            {
+              "unit_cost": "-0.0100000000",
+              "qty": "1.0000000000",
+              "id": 127,
+              "native_move_id": 26
+            }
+          ],
+          "stage": "native-stock-realized-and-reloaded",
+          "diagnostic_rollback_only": true,
+          "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+          "error": "Native receipt accepted and realized; diagnostic rollback only",
+          "native_stack": [
+            "com.cencomun.core.NativeNegativeCostProbe.execute(NativeNegativeCostProbe.java:52)",
+            "com.cencomun.core.CoreOrderController.costProbe(CoreOrderController.java:99)",
+            "com.cencomun.core.CoreOrderController.negativeCost(CoreOrderController.java:93)",
+            "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+            "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)",
+            "com.axelor.meta.schema.actions.Action.execute(Action.java:89)",
+            "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+            "com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)",
+            "com.axelor.meta.schema.actions.Action.execute(Action.java:85)",
+            "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+            "com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)",
+            "com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)",
+            "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:41)",
+            "com.axelor.web.service.ActionService.execute(ActionService.java:106)",
+            "com.axelor.rpc.RequestFilter.invoke(RequestFilter.java:42)",
+            "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:50)",
+            "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+            "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)"
+          ]
+        }
+      },
+      "after": {
+        "order": {},
+        "native_export": {
+          "case": "VAL-NEGATIVE-NATIVE-COST",
+          "stock": [
+            {
+              "code": "P001",
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 45,
+              "avg_price": "30.0000000000"
+            },
+            {
+              "code": "P002",
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 46,
+              "avg_price": "10.0000000000"
+            },
+            {
+              "code": "P003",
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 47,
+              "avg_price": "60.0000000000"
+            }
+          ],
+          "stock_move_ids": [
+            24
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "legal_vat_system": 2,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false,
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "partner_id": 3,
+                "invoicing_address_id": 4,
+                "code": "C002"
+              },
+              {
+                "partner_id": 4,
+                "invoicing_address_id": 5,
+                "code": "CBANK"
+              },
+              {
+                "partner_id": 2,
+                "invoicing_address_id": 3,
+                "code": "C001"
+              }
+            ]
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK",
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 137,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 54
+                },
+                {
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING",
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 138,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 54
+                }
+              ],
+              "company_id": 1,
+              "id": 54
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "assertion_error": "ERP accepted negative native cost; cleanup rollback cannot count as validation"
+    }
+  ],
+  "complete": false,
+  "status": "FAIL",
+  "error": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+  "error_type": "AssertionError",
+  "last_attempt": {
+    "name": "disabled-product",
+    "executed": true,
+    "actor": "ccm-operator",
+    "request": {
+      "id": "VAL-DISABLED-PRODUCT",
+      "customer_id": "C001",
+      "datetime": "2026-10-01T10:00:00-04:00",
+      "channel": "STORE",
+      "currency": "USD",
+      "tax_rate": "0",
+      "financed_amount": "75.00",
+      "shipping_expense": "0.00",
+      "guide": null,
+      "lines": [
+        {
+          "product_id": "P003",
+          "qty": "2",
+          "unit_price": "50.00"
+        },
+        {
+          "product_id": "P002",
+          "qty": "1",
+          "unit_price": "25.00"
+        }
+      ],
+      "company_id": "CCM-LAB-001",
+      "request_key": "VAL-DISABLED-PRODUCT-create"
+    },
+    "http_status": 422,
+    "expected_http_status": 422,
+    "response": {
+      "error_type": "com.cencomun.core.CoreFault",
+      "error": "Product not eligible for Cashea",
+      "native_stack": [
+        "com.cencomun.core.CoreOrderService.createOrder(CoreOrderService.java:100)",
+        "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+        "com.cencomun.core.CoreOrderResource.create(CoreOrderResource.java:21)",
+        "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+        "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+        "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+        "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+        "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+        "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+      ]
+    },
+    "before": {
+      "order": {},
+      "native_export": {
+        "case": "VAL-DISABLED-PRODUCT",
+        "stock": [
+          {
+            "code": "P001",
+            "product_id": 1,
+            "current_qty": "5.0000000000",
+            "id": 42,
+            "avg_price": "30.0000000000"
+          },
+          {
+            "code": "P002",
+            "product_id": 2,
+            "current_qty": "5.0000000000",
+            "id": 43,
+            "avg_price": "10.0000000000"
+          },
+          {
+            "code": "P003",
+            "product_id": 3,
+            "current_qty": "5.0000000000",
+            "id": 44,
+            "avg_price": "60.0000000000"
+          }
+        ],
+        "stock_move_ids": [
+          23
+        ],
+        "fixture_configuration": {
+          "company_id": 1,
+          "legal_vat_system": 2,
+          "invoice_runtime_configuration": {
+            "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+            "persisted_isVentilationSkipped": false,
+            "isVentilationSkipped": false,
+            "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+            "native_app_invoice_id": 1
+          },
+          "legal_partner_id": 1,
+          "accounts": [
+            {
+              "code": "CCM-AR",
+              "vat_system": 1,
+              "id": 1
+            },
+            {
+              "code": "CCM-AP",
+              "vat_system": 1,
+              "id": 2
+            },
+            {
+              "code": "CCM-STOCK",
+              "vat_system": 1,
+              "id": 3
+            },
+            {
+              "code": "CCM-REVENUE",
+              "vat_system": 1,
+              "id": 4
+            },
+            {
+              "code": "CCM-COGS",
+              "vat_system": 1,
+              "id": 5
+            },
+            {
+              "code": "CCM-COMMISSION",
+              "vat_system": 1,
+              "id": 6
+            },
+            {
+              "code": "CCM-SHIPPING",
+              "vat_system": 1,
+              "id": 7
+            },
+            {
+              "code": "CCM-TAX",
+              "vat_system": 1,
+              "id": 8
+            },
+            {
+              "code": "CCM-CASH",
+              "vat_system": 1,
+              "id": 9
+            },
+            {
+              "code": "CCM-BANK",
+              "vat_system": 1,
+              "id": 10
+            },
+            {
+              "code": "CCM-OPENING",
+              "vat_system": 1,
+              "id": 11
+            },
+            {
+              "code": "CCM-CASH-VES",
+              "vat_system": 1,
+              "id": 12
+            }
+          ],
+          "customers": [
+            {
+              "partner_id": 3,
+              "invoicing_address_id": 4,
+              "code": "C002"
+            },
+            {
+              "partner_id": 4,
+              "invoicing_address_id": 5,
+              "code": "CBANK"
+            },
+            {
+              "partner_id": 2,
+              "invoicing_address_id": 3,
+              "code": "C001"
+            }
+          ]
+        },
+        "sale_order_ids": [],
+        "invoices": [],
+        "moves": [],
+        "fixture_opening_moves": [
+          {
+            "company_code": "CCM-LAB-001",
+            "status": 3,
+            "lines": [
+              {
+                "account_company_id": 1,
+                "account_code": "CCM-STOCK",
+                "account_id": 3,
+                "debit": "500.000",
+                "id": 135,
+                "credit": "0.000",
+                "remaining": "0",
+                "parent_move_id": 53
+              },
+              {
+                "account_company_id": 1,
+                "account_code": "CCM-OPENING",
+                "account_id": 11,
+                "debit": "0.000",
+                "id": 136,
+                "credit": "500.000",
+                "remaining": "0",
+                "parent_move_id": 53
+              }
+            ],
+            "company_id": 1,
+            "id": 53
+          }
+        ],
+        "deliveries": [],
+        "company_ids": [
+          1
+        ]
+      },
+      "keys": [],
+      "events": [],
+      "audit": [],
+      "read_boundary": "separate-http-after-business-commit-or-rollback"
+    },
+    "after": {
+      "order": {},
+      "native_export": {
+        "case": "VAL-DISABLED-PRODUCT",
+        "stock": [
+          {
+            "code": "P001",
+            "product_id": 1,
+            "current_qty": "5.0000000000",
+            "id": 42,
+            "avg_price": "30.0000000000"
+          },
+          {
+            "code": "P002",
+            "product_id": 2,
+            "current_qty": "5.0000000000",
+            "id": 43,
+            "avg_price": "10.0000000000"
+          },
+          {
+            "code": "P003",
+            "product_id": 3,
+            "current_qty": "5.0000000000",
+            "id": 44,
+            "avg_price": "60.0000000000"
+          }
+        ],
+        "stock_move_ids": [
+          23
+        ],
+        "fixture_configuration": {
+          "company_id": 1,
+          "legal_vat_system": 2,
+          "invoice_runtime_configuration": {
+            "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+            "persisted_isVentilationSkipped": false,
+            "isVentilationSkipped": false,
+            "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+            "native_app_invoice_id": 1
+          },
+          "legal_partner_id": 1,
+          "accounts": [
+            {
+              "code": "CCM-AR",
+              "vat_system": 1,
+              "id": 1
+            },
+            {
+              "code": "CCM-AP",
+              "vat_system": 1,
+              "id": 2
+            },
+            {
+              "code": "CCM-STOCK",
+              "vat_system": 1,
+              "id": 3
+            },
+            {
+              "code": "CCM-REVENUE",
+              "vat_system": 1,
+              "id": 4
+            },
+            {
+              "code": "CCM-COGS",
+              "vat_system": 1,
+              "id": 5
+            },
+            {
+              "code": "CCM-COMMISSION",
+              "vat_system": 1,
+              "id": 6
+            },
+            {
+              "code": "CCM-SHIPPING",
+              "vat_system": 1,
+              "id": 7
+            },
+            {
+              "code": "CCM-TAX",
+              "vat_system": 1,
+              "id": 8
+            },
+            {
+              "code": "CCM-CASH",
+              "vat_system": 1,
+              "id": 9
+            },
+            {
+              "code": "CCM-BANK",
+              "vat_system": 1,
+              "id": 10
+            },
+            {
+              "code": "CCM-OPENING",
+              "vat_system": 1,
+              "id": 11
+            },
+            {
+              "code": "CCM-CASH-VES",
+              "vat_system": 1,
+              "id": 12
+            }
+          ],
+          "customers": [
+            {
+              "partner_id": 3,
+              "invoicing_address_id": 4,
+              "code": "C002"
+            },
+            {
+              "partner_id": 4,
+              "invoicing_address_id": 5,
+              "code": "CBANK"
+            },
+            {
+              "partner_id": 2,
+              "invoicing_address_id": 3,
+              "code": "C001"
+            }
+          ]
+        },
+        "sale_order_ids": [],
+        "invoices": [],
+        "moves": [],
+        "fixture_opening_moves": [
+          {
+            "company_code": "CCM-LAB-001",
+            "status": 3,
+            "lines": [
+              {
+                "account_company_id": 1,
+                "account_code": "CCM-STOCK",
+                "account_id": 3,
+                "debit": "500.000",
+                "id": 135,
+                "credit": "0.000",
+                "remaining": "0",
+                "parent_move_id": 53
+              },
+              {
+                "account_company_id": 1,
+                "account_code": "CCM-OPENING",
+                "account_id": 11,
+                "debit": "0.000",
+                "id": 136,
+                "credit": "500.000",
+                "remaining": "0",
+                "parent_move_id": 53
+              }
+            ],
+            "company_id": 1,
+            "id": 53
+          }
+        ],
+        "deliveries": [],
+        "company_ids": [
+          1
+        ]
+      },
+      "keys": [],
+      "events": [],
+      "audit": [
+        {
+          "id": 93,
+          "actor": "ccm-operator",
+          "actor_id": 2,
+          "created_on": "2026-10-06T11:15:28.890458",
+          "kind": "order.denied",
+          "correlation": "VAL-DISABLED-PRODUCT-create",
+          "beforeState": "{\"exists\":false}",
+          "afterState": "{\"exists\":false}",
+          "reason": "Product not eligible for Cashea",
+          "rejected": true
+        }
+      ],
+      "read_boundary": "separate-http-after-business-commit-or-rollback"
+    },
+    "read_boundary": "separate-http-after-business-commit-or-rollback",
+    "status": "PASS"
+  },
+  "seconds": 3.955
+}

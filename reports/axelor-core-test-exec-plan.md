@@ -666,3 +666,22 @@ BLOCKED por objetivo de actualización aplazado. Conservar coste y cancelación
 como FAIL funcionales cuando ocurran. Publicar solicitudes fallidas completas
 y separar matriz del run primario y réplica. Validaciones locales31Java+61Python
 no sustituyen aceptación runtime. No más de un CI activo ni red ampliada.
+
+
+Empaquetado (2026-10-06, CI5660bc7 activo): reemplazar sólo el agregado de
+repetición por un índice de rutas/tamaños/SHA256 de ambas fases. Retener cada
+archivo completo y el original legado fuera del árbol Git, cargar todos los
+referenciados y aplicar las mismas aserciones. No aceptar etiquetas PASS ni
+reconstruir evidencia ausente. Transportar archivos originales individuales
+una sola vez, con manifiesto por fase antes del siguiente arranque. Regresiones
+de igualdad AST, fallos conservados y recuperación completa/primaria:74PASS
+locales; sin atribuir aceptación ERP. Dejar finalizar CI37453727869 y revisar
+su evidencia ejecutada sin repetir negocio por un cambio sólo de empaquetado.
+
+CI37453727869 terminó:34grupos por fase, primaria26PASS/8FAIL y réplica27PASS/7FAIL.
+Índice22.428bytes y92archivos/60.654.190bytes verificados, cápsula original íntegra
+archivada; ningún rerun por empaquetado. Resolver juntas las causas observadas
+(getter banco inexistente, serialización tasa, orden fuente caja, identificación
+causal del rechazo CRUD200/status-1 y carrera de entidad/versiones) y repetir
+una única validación CI para ejecución/comprobaciones relevantes. No reinterpretar
+el FAIL original como PASS ni cambiar coste/cancelación/fixtures/oráculo.

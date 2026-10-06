@@ -1,0 +1,380 @@
+{
+  "case": "TAX01-W",
+  "fixture_configuration": {
+    "company_id": 1,
+    "legal_vat_system": 2,
+    "invoice_runtime_configuration": {
+      "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+      "persisted_isVentilationSkipped": false,
+      "isVentilationSkipped": false,
+      "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+      "native_app_invoice_id": 1
+    },
+    "legal_partner_id": 1,
+    "accounts": [
+      {
+        "code": "CCM-AR",
+        "vat_system": 1,
+        "id": 1
+      },
+      {
+        "code": "CCM-AP",
+        "vat_system": 1,
+        "id": 2
+      },
+      {
+        "code": "CCM-STOCK",
+        "vat_system": 1,
+        "id": 3
+      },
+      {
+        "code": "CCM-REVENUE",
+        "vat_system": 1,
+        "id": 4
+      },
+      {
+        "code": "CCM-COGS",
+        "vat_system": 1,
+        "id": 5
+      },
+      {
+        "code": "CCM-COMMISSION",
+        "vat_system": 1,
+        "id": 6
+      },
+      {
+        "code": "CCM-SHIPPING",
+        "vat_system": 1,
+        "id": 7
+      },
+      {
+        "code": "CCM-TAX",
+        "vat_system": 1,
+        "id": 8
+      },
+      {
+        "code": "CCM-CASH",
+        "vat_system": 1,
+        "id": 9
+      },
+      {
+        "code": "CCM-BANK",
+        "vat_system": 1,
+        "id": 10
+      },
+      {
+        "code": "CCM-OPENING",
+        "vat_system": 1,
+        "id": 11
+      }
+    ],
+    "customers": [
+      {
+        "partner_id": 3,
+        "invoicing_address_id": 4,
+        "code": "C002"
+      },
+      {
+        "partner_id": 4,
+        "invoicing_address_id": 5,
+        "code": "CBANK"
+      },
+      {
+        "partner_id": 2,
+        "invoicing_address_id": 3,
+        "code": "C001"
+      }
+    ]
+  },
+  "stock": [
+    {
+      "code": "P001",
+      "product_id": 1,
+      "current_qty": "3.0000000000",
+      "id": 9,
+      "avg_price": "30.0000000000"
+    },
+    {
+      "code": "P002",
+      "product_id": 2,
+      "current_qty": "4.0000000000",
+      "id": 10,
+      "avg_price": "10.0000000000"
+    },
+    {
+      "code": "P003",
+      "product_id": 3,
+      "current_qty": "5.0000000000",
+      "id": 11,
+      "avg_price": "60.0000000000"
+    }
+  ],
+  "invoices": [
+    {
+      "id": 2,
+      "native_source_linkage": {
+        "native_invoice_id": 2,
+        "native_company_id": 1,
+        "header_sale_order_id": 2,
+        "header_sale_order_company_id": 1,
+        "header_sale_order_reference": "CCM-TAX01-W",
+        "line_links": [
+          {
+            "sale_order_id": 2,
+            "sale_order_line_id": 3,
+            "parent_invoice_id": 2,
+            "sale_order_reference": "CCM-TAX01-W",
+            "product_code": "P001",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 3
+          },
+          {
+            "sale_order_id": 2,
+            "sale_order_line_id": 4,
+            "parent_invoice_id": 2,
+            "sale_order_reference": "CCM-TAX01-W",
+            "product_code": "P002",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 4
+          }
+        ],
+        "source": "InvoiceLine.saleOrderLine.saleOrder"
+      },
+      "invoicing_address_id": 3,
+      "native_vat_liability": 2,
+      "statusSelect": "3",
+      "exTaxTotal": "125.000",
+      "taxTotal": "12.500",
+      "inTaxTotal": "137.500",
+      "amountPaid": "137.500",
+      "amountRemaining": "0.000",
+      "lines": [
+        {
+          "code": "P001",
+          "id": 3,
+          "in_tax_total": "110.000",
+          "ex_tax_total": "100.000",
+          "product_id": 1,
+          "qty": "2.0000000000"
+        },
+        {
+          "code": "P002",
+          "id": 4,
+          "in_tax_total": "27.500",
+          "ex_tax_total": "25.000",
+          "product_id": 2,
+          "qty": "1.0000000000"
+        }
+      ],
+      "payments": [
+        {
+          "status": 1,
+          "amount": "55.000",
+          "id": 3
+        },
+        {
+          "status": 1,
+          "amount": "82.500",
+          "id": 4
+        }
+      ]
+    }
+  ],
+  "moves": [
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-CASH",
+          "account_id": 9,
+          "debit": "55.000",
+          "id": 21,
+          "credit": "0.000",
+          "remaining": "0",
+          "parent_move_id": 9
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-AR",
+          "account_id": 1,
+          "debit": "0.000",
+          "id": 22,
+          "credit": "55.000",
+          "remaining": "0.000",
+          "parent_move_id": 9
+        }
+      ],
+      "company_id": 1,
+      "id": 9
+    },
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-BANK",
+          "account_id": 10,
+          "debit": "70.250",
+          "id": 23,
+          "credit": "0.000",
+          "remaining": "0",
+          "parent_move_id": 10
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-COMMISSION",
+          "account_id": 6,
+          "debit": "11.550",
+          "id": 24,
+          "credit": "0.000",
+          "remaining": "0",
+          "parent_move_id": 10
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-SHIPPING",
+          "account_id": 7,
+          "debit": "0.700",
+          "id": 25,
+          "credit": "0.000",
+          "remaining": "0",
+          "parent_move_id": 10
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-AR",
+          "account_id": 1,
+          "debit": "0.000",
+          "id": 26,
+          "credit": "82.500",
+          "remaining": "0.000",
+          "parent_move_id": 10
+        }
+      ],
+      "company_id": 1,
+      "id": 10
+    },
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-REVENUE",
+          "account_id": 4,
+          "debit": "0.000",
+          "id": 16,
+          "credit": "100.000",
+          "remaining": "0",
+          "parent_move_id": 7
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-REVENUE",
+          "account_id": 4,
+          "debit": "0.000",
+          "id": 17,
+          "credit": "25.000",
+          "remaining": "0",
+          "parent_move_id": 7
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-TAX",
+          "account_id": 8,
+          "debit": "0.000",
+          "id": 18,
+          "credit": "12.500",
+          "remaining": "0",
+          "parent_move_id": 7
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-AR",
+          "account_id": 1,
+          "debit": "137.500",
+          "id": 15,
+          "credit": "0.000",
+          "remaining": "0.000",
+          "parent_move_id": 7
+        }
+      ],
+      "company_id": 1,
+      "id": 7
+    },
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-COGS",
+          "account_id": 5,
+          "debit": "70.000",
+          "id": 19,
+          "credit": "0.000",
+          "remaining": "0",
+          "parent_move_id": 8
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-STOCK",
+          "account_id": 3,
+          "debit": "0.000",
+          "id": 20,
+          "credit": "70.000",
+          "remaining": "0",
+          "parent_move_id": 8
+        }
+      ],
+      "company_id": 1,
+      "id": 8
+    }
+  ],
+  "fixture_opening_moves": [
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-STOCK",
+          "account_id": 3,
+          "debit": "500.000",
+          "id": 13,
+          "credit": "0.000",
+          "remaining": "0",
+          "parent_move_id": 6
+        },
+        {
+          "account_company_id": 1,
+          "account_code": "CCM-OPENING",
+          "account_id": 11,
+          "debit": "0.000",
+          "id": 14,
+          "credit": "500.000",
+          "remaining": "0",
+          "parent_move_id": 6
+        }
+      ],
+      "company_id": 1,
+      "id": 6
+    }
+  ],
+  "deliveries": [
+    {
+      "status": 3,
+      "type": 2,
+      "id": 4
+    }
+  ],
+  "sale_order_ids": [
+    2
+  ],
+  "company_ids": [
+    1
+  ]
+}
