@@ -754,3 +754,44 @@ productos/clientes/monedas y nueve metadatos Role; no aprueba permisos funcional
 Los asientos verifican compañía, cuentas y pertenencia de cada línea.
 ZIP bloqueado productionresultssa4.blob.core.windows.net en un único intento;
 logs estructurados conservados, sin ampliación ni publicación de red.
+
+## Revisión causal posterior a 80f94067 (CI16 no duplicado)
+
+STATE-UNKNOWN-ATOMIC necesitaba distinguir CRUD prohibido de enum inválido.
+El CRUD válido REVIEWED y UNKNOWN-LAB se prueban como guardas, sin contar esos
+rechazos como validación del enum. Un probe LAB separado usa Mapper.set nativo,
+con control REVIEWED guardado, flush y lectura Hibernate, y UNKNOWN-LAB debe
+fallar en ValueEnum.of con tipo/valor/cause frame específicos. Ambos probes
+siempre revierten y se comparan snapshots económicos posteriores al rollback.
+VAL01-04 exige un recibo nativo válido a coste30, mismo fixture/qty, realizado
+y leído, junto con la tentativa -0.01. Un AxelorException de secuencia,
+dirección u otra configuración no aprueba coste negativo: se requieren mensaje
+específico y frame de validación stock, más el control válido. Si el ERP acepta
+-0.01, el rollback de limpieza es FAIL funcional, nunca rechazo PASS.
+
+1. Ejecutar controles/probes agrupados en la próxima ejecución de fuente,
+   después del CI16 activo; no cancelar ni duplicar el job.
+2. Revalidar también evidencia CI16 con el agregador reforzado, conservando
+   resultado original aparte. Falta de controles causales significa cobertura
+   UNRUN/incompleta; no transferir un PASS del comprobador anterior.
+3. Registrar como FAIL funcional una cancelación ejecutada cuyo servicio
+   rehúsa CANCELLED exigido, con error y los tres intentos. Un límite funcional
+   del baseline no es un bloqueo de transporte/entorno. Mantener oráculo y guards.
+
+## CI16 — hallazgos funcionales y pérdida diagnóstica del intento de entrega
+
+CI37440203758/80f94067 ejecutó tres cancelaciones confirmadas y el coste -0.01.
+Cancelación422 con SaleOrderWorkflowService y mensaje “Vous pouvez seulement
+annuler un devis brouillon ou finalisé.”; coste negativo realizado y revertido
+por limpieza. Ambos son FAIL funcionales, no bloqueos de entorno. Matriz revisada
+9PASS/6FAIL/19UNRUN. UNKNOWN del run sólo probó CoreWriteScope, no ValueEnum.
+Cuatro ciclos abortaron al comprobar delivery-rollback; faltó conservar el
+intento antes del assert, por lo que el run no demuestra su causa nativa.
+
+1. Guardar intento completo antes de aserciones, incluido snapshot después del
+   rollback, y mensajes específicos; regresión falla si vuelve a perderse.
+2. Repetir los cuatro ciclos en un único CI con probes causales agrupados,
+   conservar servicio/efectos nativos y expectativas503/rollback intactas.
+3. Diagnosticar sólo la respuesta real y verificar cualquier corrección con
+   entrega, factura, COGS, liquidación, roles y rechazos. Continuar finanzas
+   independientes mientras corre esa validación, sin otro CI simultáneo.

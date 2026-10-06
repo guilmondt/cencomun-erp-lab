@@ -83,14 +83,37 @@ public class CoreOrderController {
   }
   public void negativeCost(ActionRequest request, ActionResponse response) {
     NativeIndependentController.fixtureAdmin(); String id=id(request);
-    try { Beans.get(NativeNegativeCostProbe.class).execute(id); throw new IllegalStateException("Diagnostic must roll back"); }
+    Map<String,Object> control=costProbe(id,new java.math.BigDecimal("30.00"));
+    Map<String,Object> invalid=costProbe(id,new java.math.BigDecimal("-0.01"));
+    // Python reviewer identifies the native cost-specific validator; no class-only PASS flag.
+    response.setValue("core_result",Map.of("case",id,"valid_control",control,"invalid_attempt",invalid));
+  }
+  private Map<String,Object> costProbe(String id,java.math.BigDecimal cost) {
+    NativeNegativeCostProbe.Progress p=new NativeNegativeCostProbe.Progress();
+    try { Beans.get(NativeNegativeCostProbe.class).execute(id,cost,p);throw new IllegalStateException("Probe must roll back"); }
     catch(Exception error) {
-      Throwable root=error; while(root.getCause()!=null && root.getCause()!=root)root=root.getCause();
-      response.setValue("core_result",Map.of("case",id,
-          "native_rejected",root.getClass().getName().equals("com.axelor.apps.base.AxelorException"),
-          "diagnostic_rollback_only",root instanceof NativeNegativeCostProbe.NativeAcceptedNegativeCost,
-          "error_type",root.getClass().getName(),"error",String.valueOf(root.getMessage()),
-          "native_stack",java.util.Arrays.stream(root.getStackTrace()).filter(f->f.getClassName().startsWith("com.axelor.")||f.getClassName().startsWith("com.cencomun.")).limit(12).map(StackTraceElement::toString).toList()));
+      Throwable root=error;while(root.getCause()!=null && root.getCause()!=root)root=root.getCause();
+      Map<String,Object> proof=new java.util.LinkedHashMap<>(p.evidence);
+      proof.put("stage",p.stage);proof.put("diagnostic_rollback_only",root instanceof NativeNegativeCostProbe.NativeAcceptedCost);
+      proof.put("error_type",root.getClass().getName());proof.put("error",String.valueOf(root.getMessage()));
+      proof.put("native_stack",java.util.Arrays.stream(root.getStackTrace()).filter(f->f.getClassName().startsWith("com.axelor.")||f.getClassName().startsWith("com.cencomun.")).limit(18).map(StackTraceElement::toString).toList());
+      return proof;
+    }
+  }
+  public void enumProbe(ActionRequest request, ActionResponse response) {
+    NativeIndependentController.fixtureAdmin();String id=id(request);
+    response.setValue("core_result",Map.of("case",id,"valid_control",enumProbe(id,"REVIEWED"),"invalid_attempt",enumProbe(id,"UNKNOWN-LAB")));
+  }
+  private Map<String,Object> enumProbe(String id,String state) {
+    NativeEnumProbe.Progress p=new NativeEnumProbe.Progress();
+    try { Beans.get(NativeEnumProbe.class).execute(id,state,p);throw new IllegalStateException("Probe must roll back"); }
+    catch(Exception error) {
+      Throwable root=error;while(root.getCause()!=null && root.getCause()!=root)root=root.getCause();
+      Map<String,Object> proof=new java.util.LinkedHashMap<>(p.evidence);
+      proof.put("stage",p.stage);proof.put("diagnostic_rollback_only",root instanceof NativeEnumProbe.ControlRollback);
+      proof.put("error_type",root.getClass().getName());proof.put("error",String.valueOf(root.getMessage()));
+      proof.put("native_stack",java.util.Arrays.stream(root.getStackTrace()).filter(f->f.getClassName().startsWith("com.axelor.")||f.getClassName().startsWith("com.cencomun.")).limit(18).map(StackTraceElement::toString).toList());
+      return proof;
     }
   }
   public void inspect(ActionRequest request, ActionResponse response) {

@@ -1,6 +1,7 @@
 """Complete grouped native order acceptance; expected fixture values remain assertion-only."""
 import copy
 import json
+import re
 import time
 import urllib.error
 from collections import Counter
@@ -41,15 +42,52 @@ def assert_initial(native, approved=False):
 
 
 def assert_denied_step(step):
-    assert step['http_status'] == step['expected_http_status']
-    assert step['read_boundary'] == 'separate-http-after-business-commit-or-rollback'
+    name = step.get('name', 'denied-request')
+    assert step['http_status'] == step['expected_http_status'], (
+        f"{name}: expected HTTP {step['expected_http_status']}, observed {step['http_status']}; "
+        f"native response={step['response']}")
+    assert step['read_boundary'] == 'separate-http-after-business-commit-or-rollback', name+': independent rollback read missing'
     assert effects(step['before']) == effects(step['after']), 'Rejected request retained economic, key or event effects'
     old = {a['id'] for a in step['before']['audit']}
     new = [a for a in step['after']['audit'] if a['id'] not in old]
     assert len(new) == 1 and new[0]['rejected'] is True, 'Denied request must create exactly one semantic rejection'
-    assert new[0]['actor'] == step['actor'] and new[0]['actor_id'] > 0 and new[0]['created_on'] not in ('null', '', 'None')
-    assert new[0]['reason'] and new[0]['correlation'] == step['request']['request_key'] and json.loads(new[0]['beforeState']) == json.loads(new[0]['afterState'])
+    assert new[0]['actor'] == step['actor'] and new[0]['actor_id'] > 0 and new[0]['created_on'] not in ('null', '', 'None'), name+': denial actor/time invalid'
+    assert new[0]['reason'] and new[0]['correlation'] == step['request']['request_key'] and json.loads(new[0]['beforeState']) == json.loads(new[0]['afterState']), name+': denial reason/correlation or semantic rollback invalid'
     assert step['response'].get('error'), 'Actual denial response required'
+
+
+def assert_native_enum_probe(probe):
+    control, invalid = probe['valid_control'], probe['invalid_attempt']
+    assert control['raw_value'] == 'REVIEWED' and control['persisted_state'] == 'REVIEWED'
+    assert control['persisted_native_id'] == control['model_id'] > 0
+    assert control['stage'] == 'native-enum-persisted-and-reloaded' and control['diagnostic_rollback_only'] is True
+    assert control['native_mapper'] == invalid['native_mapper'] == 'com.axelor.db.mapper.Mapper.set'
+    assert control['enum_type'] == invalid['enum_type'] == 'com.cencomun.core.db.CcmOrderState'
+    assert invalid['raw_value'] == 'UNKNOWN-LAB' and invalid['stage'] == 'native-enum-conversion'
+    assert invalid['diagnostic_rollback_only'] is False and invalid['error_type'] == 'java.lang.IllegalArgumentException'
+    assert 'UNKNOWN-LAB' in invalid['error'] and 'CcmOrderState' in invalid['error']
+    assert any('com.axelor.db.ValueEnum.of' in frame for frame in invalid['native_stack']), 'Native enum validator causal frame required'
+    assert any('com.axelor.db.mapper.' in frame for frame in invalid['native_stack'])
+    assert 'persisted_state' not in invalid and 'persisted_native_id' not in invalid
+
+
+def assert_native_cost_probe(probe):
+    control, invalid = probe['valid_control'], probe['invalid_attempt']
+    assert Decimal(control['input_cost']) == Decimal('30.00') and Decimal(invalid['input_cost']) == Decimal('-0.01')
+    assert control['qty'] == invalid['qty'] == '1'
+    assert control['stage'] == 'native-stock-realized-and-reloaded' and control['diagnostic_rollback_only'] is True
+    assert control['planned_status'] == 2 and control['reloaded_status'] == 3
+    assert len(control['reloaded_lines']) == 1
+    line = control['reloaded_lines'][0]
+    assert line['id'] > 0 and line['native_move_id'] == control['native_move_id'] > 0
+    assert Decimal(line['qty']) == 1 and Decimal(line['unit_cost']) == 30
+    assert all(control[k] == invalid[k] > 0 for k in ('company_id','warehouse_id','product_id'))
+    assert invalid['diagnostic_rollback_only'] is False, 'ERP accepted negative native cost; cleanup rollback cannot count as validation'
+    assert invalid['error_type'] in ('com.axelor.apps.base.AxelorException','jakarta.validation.ConstraintViolationException')
+    assert invalid['stage'] in ('native-stock-line-create','native-stock-move-plan','native-stock-move-realize')
+    assert re.search(r'(negative.*(?:cost|price)|(?:cost|price).*(?:negative|must be.*positive|non.?negative))', invalid['error'], re.I), 'Cost-specific native validation message required; fixture/configuration errors cannot PASS'
+    assert any('com.axelor.apps.stock.' in frame for frame in invalid['native_stack']), 'Native stock validator causal frame required'
+    assert invalid.get('reloaded_status') != 3
 
 
 def assert_group(evidence, fixtures):
@@ -93,7 +131,9 @@ def assert_group(evidence, fixtures):
     elif case == 'STATE-UNKNOWN-ATOMIC':
         for step in steps:
             assert step['request']['state'] == 'UNKNOWN-LAB' and step['expected_http_status'] == 409
-            assert step['unknown_native_state_rejected'] is True and step['native_unknown_attempt']
+            assert_native_enum_probe(step['native_enum_probe'])
+            assert effects(step['native_probe_before']) == effects(step['native_probe_after'])
+            assert step['generic_valid_crud_denied'] and step['generic_unknown_crud_denied']
     elif case == 'STATE-DELIVERY-WITHOUT-ACCEPTANCE':
         for step in steps:
             channel, state = step['name'].split('-')
@@ -105,7 +145,7 @@ def assert_group(evidence, fixtures):
         assert not step['before']['order']['guide']; assert_initial(step['after']['native_export'],True)
     elif case == 'VAL01-04':
         cost = next(s for s in steps if s['name']=='negative-native-cost')
-        assert cost['native_result']['native_rejected'] is True and cost['native_result']['diagnostic_rollback_only'] is False
+        assert_native_cost_probe(cost['native_result'])
         assert effects(cost['before']) == effects(cost['after'])
     return True
 
@@ -113,6 +153,23 @@ def assert_group(evidence, fixtures):
 def review_order_group(row, evidence, fixtures):
     if row['case'] not in GROUP_CHECKS:
         return
+    if evidence and row['case'] == 'STATE-CANCEL-BEFORE-HANDOVER':
+        observed = [s for s in evidence.get('steps', []) if s.get('http_status') == 422
+                    and s.get('response', {}).get('error_type') == 'com.axelor.apps.base.AxelorException'
+                    and s.get('request', {}).get('state') == 'CANCELLED'
+                    and any('SaleOrderWorkflowService' in f for f in s.get('response', {}).get('native_stack', []))]
+        if observed:
+            row.update(status='FAIL', complete=False, reason='Executed native service refuses required cancellation: observed functional contract failure, not environment blocker')
+            return
+    if evidence and evidence.get('status') == 'PASS':
+        steps = evidence.get('steps', [])
+        missing_controls = (row['case'] == 'STATE-UNKNOWN-ATOMIC' and any('native_enum_probe' not in s for s in steps))
+        if row['case'] == 'VAL01-04':
+            cost = next((s for s in steps if s.get('name') == 'negative-native-cost'), {})
+            missing_controls = 'valid_control' not in cost.get('native_result', {})
+        if missing_controls:
+            row.update(status='UNRUN', complete=False, reason='Required native causal validator and valid control have not executed; generic CRUD/error-class evidence is insufficient')
+            return
     if not evidence or evidence.get('status') != 'PASS':
         if evidence:
             row.update(status=evidence['status'], complete=False, reason=evidence.get('error', 'Executed grouped subcase failure'))
@@ -197,7 +254,15 @@ class OrderCases:
         step = {'name':name,'executed':True,'actor':'ccm-'+actor,'request':body,'http_status':status,
                 'expected_http_status':expected,'response':response,'before':before,'after':after,
                 'read_boundary':after['read_boundary']}
-        assert_denied_step(step)
+        self.last_attempt = step
+        # Preserve the actual HTTP/native result before assertions can abort the group.
+        try:
+            assert_denied_step(step)
+        except (AssertionError, KeyError, TypeError, ValueError) as error:
+            step.update(status='FAIL', assertion_error=str(error))
+            if getattr(self, 'active_evidence', None) is not None:
+                self.active_evidence['steps'].append(step)
+            raise
         step['status'] = 'PASS'
         return step
 
@@ -205,14 +270,18 @@ class OrderCases:
         start = time.perf_counter()
         evidence = {'case':case,'reference':REFERENCE,'revision':2 if case.startswith('STATE-') else 1,
                     'steps':[], 'complete':False}
+        self.last_attempt = None
+        self.active_evidence = evidence
         try:
             operation(evidence)
             assert_group(evidence,self.fixtures)
             evidence.update(status='PASS',complete=True)
-        except NativeCancellationBlocked as error:
+        except NativeCancellationFailure as error:
             evidence.update(status=error.evidence['status'],complete=False,error=str(error))
         except Exception as error:
             evidence.update(status=exception_status(error),error=str(error)[:2500],error_type=type(error).__name__)
+            if self.last_attempt is not None:
+                evidence['last_attempt'] = self.last_attempt
         evidence['seconds'] = round(time.perf_counter()-start,3)
         (self.output/(case+'.json')).write_text(json.dumps(evidence,indent=2)+'\n')
         row=self.rows[case]
@@ -316,18 +385,24 @@ class OrderCases:
             self.create('CO00' if channel=='STORE' else 'CO01',id)
             body={'company_id':'CCM-LAB-001','id':id,'state':'UNKNOWN-LAB','request_key':id+'-unknown','reason':'Synthetic unknown state'}
             step=self.denied(name,id,'simulator','transition',body,409)
-            # Native generic CRUD must also reject an unknown enum, without allowing persisted state changes.
-            before=self.snapshot(id)
-            try:
-                native=self.admin.request('/ws/rest/com.cencomun.core.db.CcmOrder',{'data':{
-                    'id':before['order']['native_id'],'state':'UNKNOWN-LAB'}})
-            except urllib.error.HTTPError as error:
-                native={'http_status':error.code,'error':error.read().decode(errors='replace')[:1800]}
-                assert error.code in (400,403,409,422,500)
-            else:
-                assert native.get('status')!=0,native
-            assert effects(before)==effects(self.snapshot(id))
-            step.update(native_unknown_attempt=native,unknown_native_state_rejected=True)
+            # Generic CRUD rejects both valid and invalid states. It proves the guard, never enum causality.
+            before=self.snapshot(id); crud={}
+            for state in ('REVIEWED','UNKNOWN-LAB'):
+                try:
+                    native=self.admin.request('/ws/rest/com.cencomun.core.db.CcmOrder',{'data':{
+                        'id':before['order']['native_id'],'state':state}})
+                except urllib.error.HTTPError as error:
+                    native={'http_status':error.code,'error':error.read().decode(errors='replace')[:1800]}
+                    assert error.code in (400,403,409,422,500)
+                else:
+                    assert native.get('status')!=0,native
+                assert effects(before)==effects(self.snapshot(id));crud[state]=native
+            probe_before=self.snapshot(id)
+            probe=self.admin.action('ccm-core-cycle-enum-probe',id)
+            probe_after=self.snapshot(id)
+            assert_native_enum_probe(probe);assert effects(probe_before)==effects(probe_after)
+            step.update(native_enum_probe=probe,native_probe_before=probe_before,native_probe_after=probe_after,
+                        generic_valid_crud_denied=crud['REVIEWED'],generic_unknown_crud_denied=crud['UNKNOWN-LAB'])
             evidence['steps'].append(step)
 
     def without_acceptance(self,evidence):
@@ -362,7 +437,7 @@ class OrderCases:
                       'response':response,'before':before,'after':after,'read_boundary':after['read_boundary']}
                 if status==422 and response.get('error_type')=='com.axelor.apps.base.AxelorException' and any('SaleOrderWorkflowService' in f for f in response.get('native_stack',[])):
                     assert effects(before)==effects(after);assert_initial(after['native_export'],True)
-                    step.update(status='BLOCKED',expected_state='CANCELLED',reason='Pinned native service rejects cancellation of confirmed SaleOrder; expected result unchanged')
+                    step.update(status='FAIL',expected_state='CANCELLED',functional_failure=True,reason='Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged')
                     failures.append(step)
                 else:
                     assert status==200 and after['order']['state']=='CANCELLED' and after['order']['saleOrder_status']==5,(status,response)
@@ -375,8 +450,8 @@ class OrderCases:
         if failures:
             status=max((s['status'] for s in failures),key=RANK.get)
             # Preserve actual technical blocker and independent executions; never approve expected cancellation.
-            evidence.update(status=status,complete=False,error='Confirmed native cancellation incompatibility; three actual attempts preserved')
-            raise NativeCancellationBlocked(evidence)
+            evidence.update(status=status,complete=False,error='Observed functional failure of required confirmed native cancellation; three actual attempts preserved')
+            raise NativeCancellationFailure(evidence)
 
     def insufficient(self,evidence):
         id='INV-INSUFFICIENT';payload=copy.deepcopy(self.templates['CO00']);payload['lines']=[{'product_id':'P001','qty':'6','unit_price':'50.00'}]
@@ -396,12 +471,12 @@ class OrderCases:
         id='VAL-NEGATIVE-NATIVE-COST';self.fixture(id)
         before=self.snapshot(id)
         native=self.admin.action('ccm-core-cycle-negative-cost',id);after=self.snapshot(id)
-        assert native['native_rejected'] is True,native
+        assert_native_cost_probe(native)
         assert effects(before)==effects(after)
         evidence['steps'].append(self.passed('negative-native-cost',native_result=native,before=before,after=after))
 
 
-class NativeCancellationBlocked(Exception):
+class NativeCancellationFailure(Exception):
     def __init__(self,evidence): self.evidence=evidence;super().__init__(evidence['error'])
 
 

@@ -28,7 +28,14 @@ class NativeOrderModelTest {
     });
   }
   @Test void generatedStateCannotRepresentAnUnknownValue() {
-    assertThrows(IllegalArgumentException.class,()->CcmOrderState.valueOf("UNKNOWN-LAB"));
+    CcmOrder nativeMapped=new CcmOrder();
+    com.axelor.db.mapper.Mapper mapper=com.axelor.db.mapper.Mapper.of(CcmOrder.class);
+    mapper.set(nativeMapped,"state","REVIEWED");assertEquals(CcmOrderState.REVIEWED,nativeMapped.getState());
+    IllegalArgumentException denied=assertThrows(IllegalArgumentException.class,()->mapper.set(nativeMapped,"state","UNKNOWN-LAB"));
+    Throwable root=denied;while(root.getCause()!=null)root=root.getCause();
+    assertTrue(root.getMessage().contains("UNKNOWN-LAB"));assertTrue(root.getMessage().contains("CcmOrderState"));
+    assertTrue(java.util.Arrays.stream(root.getStackTrace()).anyMatch(f->f.getClassName().equals("com.axelor.db.ValueEnum") && f.getMethodName().equals("of")));
+    assertEquals(CcmOrderState.REVIEWED,nativeMapped.getState());
     CcmOrder order=new CcmOrder();assertEquals(CcmOrderState.NEW,order.getState());
   }
   @Test void economicDocumentReferencesAreNativeTypedForeignKeys() throws Exception {

@@ -610,3 +610,10 @@ confirmada está descrita en B31 antes de ampliar el trabajo. Los subcasos se
 revalidan por lecturas posteriores al commit; ninguna etiqueta PASS se hereda.
 Continuarán compras, caja, banco, API/MCP, concurrencia, recuperación y medición
 según esta matriz; un avance parcial no cierra la tarea autorizada.
+
+Revisión causal de los negativos de 80f94067: controles nativos válidos y causas
+específicas obligatorios para enum/coste; CRUD genéricamente prohibido o clase
+AxelorException solos no aprueban. Revisor reforzado aplicado también al CI16,
+sin sustituir evidencia ejecutada ni duplicar su job. Cancelación confirmada
+que contradice el contrato se clasifica FAIL funcional observado (B31),
+con tres tentativas independientes, expectativa intacta y rollback comprobado.

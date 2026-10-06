@@ -1,5 +1,76 @@
 # Core Test Axelor — ejecución en curso
 
+Comparación **incompleta**, referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
+fixtures/oráculo/manifiesto/cobertura revisión2 sin cambios. Rama exclusiva `lab/axelor-baseline`.
+
+Último CI: [37440203758](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37440203758),
+commit `80f94067d0454b23711a56514a27bbc7ea96d65f`, **FAILURE**.
+Matriz revisada: **9 PASS / 6 FAIL / 19 UNRUN**, sin bloqueos de entorno asignados a grupos.
+Los 14 criterios se calculan desde pruebas; actualización separada permanece bloqueada por alcance.
+
+CO00 administrador PASS13.367s; TAX01-W administrador PASS6.671s. Stock3/4/5,
+valor430, COGS70, ingresos125, IVA0/12.50, GL ACCOUNTED y AR0 se vuelven a verificar.
+No sustituyen los ciclos completos con roles y atomicidad: los cuatro ciclos fallaron
+al comprobar delivery-rollback, tras 14/15 comprobaciones exitosas. El helper antiguo
+perdió la respuesta al lanzar AssertionError vacío. No se inventa la causa nativa.
+El siguiente run conserva petición, actor, HTTP, error/stack y snapshots antes/después
+antes de evaluar la aserción, con mensajes específicos.
+
+Hallazgos ejecutados: coste -0.01 aceptado por StockMove nativo (FAIL funcional);
+los tres intentos de cancelar pedido confirmado devuelven422 y
+“Vous pouvez seulement annuler un devis brouillon ou finalisé.” (FAIL funcional,
+expectativa CANCELLED intacta). UNKNOWN-LAB llegó sólo a la guarda CRUD; su PASS
+histórico se sustituye por UNRUN en la revisión estricta. Próximo run probará
+Mapper.set/ValueEnum.of con control válido guardado y rollback, y un coste válido
+realizado/releído antes de identificar específicamente el rechazo de coste negativo.
+
+| Grupo completo | Estado revisado |
+| --- | --- |
+| CO00-NATIVE | FAIL |
+| CO01-NATIVE | FAIL |
+| TAX01-S-NATIVE | FAIL |
+| TAX01-W-NATIVE | FAIL |
+| PROD01-04 | PASS |
+| VAL01-04 | FAIL |
+| STATE01-04 | PASS |
+| INV01-03-INSUFFICIENT | PASS |
+| FX01-03-MONEY01-03 | PASS |
+| PO01-09-NATIVE | UNRUN |
+| PO07-09-REVISION-SELF | UNRUN |
+| CASH00-06-NATIVE | UNRUN |
+| BANK-BOOK-FIXTURE | PASS |
+| BANK01-05-NATIVE | UNRUN |
+| API01-06-SIX-ROUTES | UNRUN |
+| IDEM01-02-CREATE-CONCURRENT | UNRUN |
+| PERM-API-NATIVE | UNRUN |
+| CASH04-06-HTTP-IMMUTABLE | UNRUN |
+| SEARCH01-04-NATIVE | PASS |
+| TAX02-04-IDEM-CONCURRENT | UNRUN |
+| BANK-CONCURRENT-1000 | UNRUN |
+| MCP01-06-STDIO | UNRUN |
+| IDEM03-LOST-RESTART | UNRUN |
+| IDEM04-EVENTS-RECOVERY | UNRUN |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS |
+| AUDIT01-03-NATIVE | UNRUN |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | UNRUN |
+| SUPPORTED-CONFIGURATION | UNRUN |
+| STATE-UNKNOWN-ATOMIC | UNRUN |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS |
+| STATE-WEB-NO-GUIDE | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | UNRUN |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | UNRUN |
+
+Evidencias del commit anterior preservadas en
+[runs/37440203758](evidence/axelor-core/runs/37440203758/): coverage.json usa el
+comprobador congelado del run; coverage-reviewed.json aplica la revisión causal
+sin atribuirle probes nuevos que no ejecutó. ZIP bloqueado sa3, un intento;
+log completo estructurado conservado, sin publicar/ampliar red. Java53 pruebas,
+0fallos/errores/skips, upstreamdiff0; arranque362.17s/reinicio269.94s autenticados.
+
+## Historial CI15 (resultados exclusivos de ese commit)
+
+
 Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
 16 fixtures idénticos más manifiesto, oráculo intacto, cobertura revisión2,
 34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.

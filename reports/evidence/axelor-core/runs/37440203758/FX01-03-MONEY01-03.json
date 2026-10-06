@@ -1,0 +1,505 @@
+{
+  "case": "FX01-03-MONEY01-03",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "status": "PASS",
+  "complete": true,
+  "seconds": 3.343,
+  "operator": "ccm-operator",
+  "manager": "ccm-manager",
+  "partial_conversion_status": "PASS",
+  "full_evidence_file": "FX01-03-MONEY01-03.json",
+  "steps": [
+    {
+      "case": "FX01",
+      "native_conversion": {
+        "date": "2026-10-01",
+        "id": "FX01",
+        "rate": "40.000000",
+        "total": "40.00",
+        "lines": [
+          "40.00"
+        ],
+        "native_conversion_id": 10
+      }
+    },
+    {
+      "case": "FX02",
+      "native_conversion": {
+        "date": "2026-10-02",
+        "id": "FX02",
+        "rate": "41.000000",
+        "total": "41.00",
+        "lines": [
+          "41.00"
+        ],
+        "native_conversion_id": 11
+      }
+    },
+    {
+      "case": "missing-rate",
+      "http_status": 422,
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "operator-denied",
+      "http_status": 403,
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "manager-authorized",
+      "result": {
+        "native_conversion_id": 12,
+        "authorization_id": 1
+      },
+      "persisted": {
+        "payments": [],
+        "invoice_runtime_configuration": {
+          "native_app_invoice_id": 1,
+          "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+          "isVentilationSkipped": false,
+          "persisted_isVentilationSkipped": false,
+          "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false
+        },
+        "authorizations": [
+          {
+            "id": 1,
+            "external_id": "FX-AUTH",
+            "reason": "Synthetic authorized payment-day rate",
+            "approved_by": "ccm-manager",
+            "native_conversion_id": 12,
+            "company_id": 1
+          }
+        ],
+        "invoices": [],
+        "rates": [
+          {
+            "to_date": "2026-10-01",
+            "id": 10,
+            "rate": "40.000000",
+            "source": "USD",
+            "target": "VES",
+            "from_date": "2026-10-01"
+          },
+          {
+            "to_date": "2026-10-02",
+            "id": 11,
+            "rate": "41.000000",
+            "source": "USD",
+            "target": "VES",
+            "from_date": "2026-10-02"
+          },
+          {
+            "to_date": "2026-10-03",
+            "id": 12,
+            "rate": "40.500000",
+            "source": "USD",
+            "target": "VES",
+            "from_date": "2026-10-03"
+          }
+        ],
+        "company_id": 1,
+        "company_code": "CCM-LAB-001"
+      }
+    },
+    {
+      "case": "MONEY-ROUND",
+      "native_conversion": {
+        "date": "2026-10-03",
+        "id": "MONEY-ROUND",
+        "rate": "40.500000",
+        "total": "0.82",
+        "lines": [
+          "0.41",
+          "0.41"
+        ],
+        "native_conversion_id": 12
+      }
+    },
+    {
+      "case": "committed-payment-case",
+      "result": {
+        "date": "2026-10-01",
+        "id": "FX01",
+        "rate": "40.000000",
+        "total": "40.00",
+        "lines": [
+          "40.00"
+        ],
+        "native_conversion_id": 10,
+        "native_invoice_id": 3,
+        "native_payment_ids": [
+          5
+        ]
+      },
+      "persisted": {
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "read_boundary": "separate-http-after-payment-commit",
+        "invoices": [
+          {
+            "id": 3,
+            "reference": "FX-FX01",
+            "company_id": 1,
+            "customer": "C002",
+            "date": "2026-10-01",
+            "currency": "USD",
+            "status": 3,
+            "total": "1.000",
+            "paid": "1.000",
+            "remaining": "0.000",
+            "move": {
+              "company_currency": "USD",
+              "id": 15,
+              "status": 3,
+              "currency": "USD",
+              "lines": [
+                {
+                  "id": 36,
+                  "account": "CCM-REVENUE",
+                  "debit": "0.000",
+                  "credit": "1.000",
+                  "currencyAmount": "-1.000",
+                  "currencyRate": "1.000000",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 35,
+                  "account": "CCM-AR",
+                  "debit": "1.000",
+                  "credit": "0.000",
+                  "currencyAmount": "1.000",
+                  "currencyRate": "1.000000",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-01"
+            }
+          }
+        ],
+        "payments": [
+          {
+            "id": 5,
+            "reference": "FX-FX01-1",
+            "invoice_id": 3,
+            "date": "2026-10-01",
+            "currency": "VES",
+            "amount": "40.000",
+            "status": 1,
+            "observed_payment_day_conversion_id": 10,
+            "observed_payment_day_rate": "40.000000",
+            "move": {
+              "company_currency": "USD",
+              "id": 16,
+              "status": 3,
+              "currency": "VES",
+              "lines": [
+                {
+                  "id": 37,
+                  "account": "CCM-CASH-VES",
+                  "debit": "1.000",
+                  "credit": "0.000",
+                  "currencyAmount": "40.000",
+                  "currencyRate": "0.025000",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 38,
+                  "account": "CCM-AR",
+                  "debit": "0.000",
+                  "credit": "1.000",
+                  "currencyAmount": "-40.000",
+                  "currencyRate": "0.025000",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-01"
+            },
+            "reconcile": {
+              "amount": "1.00",
+              "id": 5,
+              "debit_line_id": 35,
+              "status": 2,
+              "credit_line_id": 38
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "committed-payment-case",
+      "result": {
+        "date": "2026-10-02",
+        "id": "FX02",
+        "rate": "41.000000",
+        "total": "41.00",
+        "lines": [
+          "41.00"
+        ],
+        "native_conversion_id": 11,
+        "native_invoice_id": 4,
+        "native_payment_ids": [
+          6
+        ]
+      },
+      "persisted": {
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "read_boundary": "separate-http-after-payment-commit",
+        "invoices": [
+          {
+            "id": 4,
+            "reference": "FX-FX02",
+            "company_id": 1,
+            "customer": "C002",
+            "date": "2026-10-02",
+            "currency": "USD",
+            "status": 3,
+            "total": "1.000",
+            "paid": "1.000",
+            "remaining": "0.000",
+            "move": {
+              "company_currency": "USD",
+              "id": 17,
+              "status": 3,
+              "currency": "USD",
+              "lines": [
+                {
+                  "id": 40,
+                  "account": "CCM-REVENUE",
+                  "debit": "0.000",
+                  "credit": "1.000",
+                  "currencyAmount": "-1.000",
+                  "currencyRate": "1.000000",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 39,
+                  "account": "CCM-AR",
+                  "debit": "1.000",
+                  "credit": "0.000",
+                  "currencyAmount": "1.000",
+                  "currencyRate": "1.000000",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-02"
+            }
+          }
+        ],
+        "payments": [
+          {
+            "id": 6,
+            "reference": "FX-FX02-1",
+            "invoice_id": 4,
+            "date": "2026-10-02",
+            "currency": "VES",
+            "amount": "41.000",
+            "status": 1,
+            "observed_payment_day_conversion_id": 11,
+            "observed_payment_day_rate": "41.000000",
+            "move": {
+              "company_currency": "USD",
+              "id": 18,
+              "status": 3,
+              "currency": "VES",
+              "lines": [
+                {
+                  "id": 41,
+                  "account": "CCM-CASH-VES",
+                  "debit": "1.000",
+                  "credit": "0.000",
+                  "currencyAmount": "41.000",
+                  "currencyRate": "0.024390",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 42,
+                  "account": "CCM-AR",
+                  "debit": "0.000",
+                  "credit": "1.000",
+                  "currencyAmount": "-41.000",
+                  "currencyRate": "0.024390",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-02"
+            },
+            "reconcile": {
+              "amount": "1.00",
+              "id": 6,
+              "debit_line_id": 39,
+              "status": 2,
+              "credit_line_id": 42
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "committed-payment-case",
+      "result": {
+        "date": "2026-10-03",
+        "id": "MONEY-ROUND",
+        "rate": "40.500000",
+        "total": "0.82",
+        "lines": [
+          "0.41",
+          "0.41"
+        ],
+        "native_conversion_id": 12,
+        "native_invoice_id": 5,
+        "native_payment_ids": [
+          7,
+          8
+        ]
+      },
+      "persisted": {
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "read_boundary": "separate-http-after-payment-commit",
+        "invoices": [
+          {
+            "id": 5,
+            "reference": "FX-MONEY-ROUND",
+            "company_id": 1,
+            "customer": "C002",
+            "date": "2026-10-03",
+            "currency": "USD",
+            "status": 3,
+            "total": "0.020",
+            "paid": "0.020",
+            "remaining": "0.000",
+            "move": {
+              "company_currency": "USD",
+              "id": 19,
+              "status": 3,
+              "currency": "USD",
+              "lines": [
+                {
+                  "id": 44,
+                  "account": "CCM-REVENUE",
+                  "debit": "0.000",
+                  "credit": "0.020",
+                  "currencyAmount": "-0.020",
+                  "currencyRate": "1.000000",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 43,
+                  "account": "CCM-AR",
+                  "debit": "0.020",
+                  "credit": "0.000",
+                  "currencyAmount": "0.020",
+                  "currencyRate": "1.000000",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-03"
+            }
+          }
+        ],
+        "payments": [
+          {
+            "id": 7,
+            "reference": "FX-MONEY-ROUND-1",
+            "invoice_id": 5,
+            "date": "2026-10-03",
+            "currency": "VES",
+            "amount": "0.410",
+            "status": 1,
+            "observed_payment_day_conversion_id": 12,
+            "observed_payment_day_rate": "40.500000",
+            "move": {
+              "company_currency": "USD",
+              "id": 20,
+              "status": 3,
+              "currency": "VES",
+              "lines": [
+                {
+                  "id": 45,
+                  "account": "CCM-CASH-VES",
+                  "debit": "0.010",
+                  "credit": "0.000",
+                  "currencyAmount": "0.410",
+                  "currencyRate": "0.024390",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 46,
+                  "account": "CCM-AR",
+                  "debit": "0.000",
+                  "credit": "0.010",
+                  "currencyAmount": "-0.410",
+                  "currencyRate": "0.024390",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-03"
+            },
+            "reconcile": {
+              "amount": "0.01",
+              "id": 7,
+              "debit_line_id": 43,
+              "status": 2,
+              "credit_line_id": 46
+            }
+          },
+          {
+            "id": 8,
+            "reference": "FX-MONEY-ROUND-2",
+            "invoice_id": 5,
+            "date": "2026-10-03",
+            "currency": "VES",
+            "amount": "0.410",
+            "status": 1,
+            "observed_payment_day_conversion_id": 12,
+            "observed_payment_day_rate": "40.500000",
+            "move": {
+              "company_currency": "USD",
+              "id": 21,
+              "status": 3,
+              "currency": "VES",
+              "lines": [
+                {
+                  "id": 47,
+                  "account": "CCM-CASH-VES",
+                  "debit": "0.010",
+                  "credit": "0.000",
+                  "currencyAmount": "0.410",
+                  "currencyRate": "0.024390",
+                  "amountRemaining": "0"
+                },
+                {
+                  "id": 48,
+                  "account": "CCM-AR",
+                  "debit": "0.000",
+                  "credit": "0.010",
+                  "currencyAmount": "-0.410",
+                  "currencyRate": "0.024390",
+                  "amountRemaining": "0.000"
+                }
+              ],
+              "company_id": 1,
+              "date": "2026-10-03"
+            },
+            "reconcile": {
+              "amount": "0.01",
+              "id": 8,
+              "debit_line_id": 43,
+              "status": 2,
+              "credit_line_id": 48
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "payment_failures": []
+}
