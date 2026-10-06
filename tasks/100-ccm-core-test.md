@@ -613,10 +613,10 @@ las reglas LAB. No modifica Axelor, main, producción ni las fuentes upstream.
 
 - [x] Crear sitios upstream vacíos, aislados de los tres sitios LAB existentes;
   instalar únicamente las aplicaciones oficiales y cargar sus propios fixtures.
-- [ ] Ejecutar las suites oficiales de servidor de Frappe y ERPNext, conservar
+- [x] Ejecutar las suites oficiales de servidor de Frappe y ERPNext, conservar
   comandos, cantidades realmente ejecutadas, omisiones y fallos. Los cuatro
   unitarios históricos se mantienen identificados como subconjunto.
-- [ ] Repetir Cencomun si la preparación afecta su runtime compartido; verificar
+- [x] Repetir Cencomun si la preparación afecta su runtime compartido; verificar
   que los fixtures y el oráculo no cambiaron.
 - [x] Consultar tags oficiales 16.36 de ambos proyectos. Sin patch compatible
   posterior a 16.36.1: criterio 13 BLOCKED y sus seis escenarios UNRUN. Ninguna
@@ -624,7 +624,7 @@ las reglas LAB. No modifica Axelor, main, producción ni las fuentes upstream.
 - [x] Documentar una comprobación del snapshot guardado en una tarea cloud nueva,
   con HEAD esperado fcf690dbc58b2b2dcf8d045c49976e3613e804cf, servicios y consulta
   autenticada de precio/stock. Crear un sitio aquí no acredita esa comprobación.
-- [ ] Actualizar informe/evidencias y publicar exclusivamente lab/frappe-baseline;
+- [x] Actualizar informe/evidencias y publicar exclusivamente lab/frappe-baseline;
   conservar PR #4 como borrador. No repetir Guardar/Publicar del entorno cloud.
 
 Observación inicial de recuperación del 2026-10-06: el ejecutor volvió a ser accesible, los
@@ -671,3 +671,28 @@ Continuación posterior al checkpoint `2b3192663ca3977320855434e75584abd819ec65`
   pins, fixtures compartidos y el oráculo no cambiaron; criterio 13 BLOCKED y
   sus seis escenarios UNRUN. La lectura local de ping no demostró un problema
   de proxy: no se cambió el proxy ni se atribuyen a él los errores HTTP nativos.
+
+Finalización posterior de esa ejecución y regresión (2026-10-06):
+
+- ERPNext CI completo terminó sin duplicarse, pese a perder la sesión de
+  herramienta: **3.255 tests, FAIL**, 3.188 PASS, 1 FAIL, 66 ERROR, SKIP 0;
+  2.507,481 segundos. Las cantidades salen del resumen nativo, no de progreso.
+  El detector ahora rechaza un comando nativo vivo si su cwd no puede leerse;
+  18 tests del harness PASS. La pérdida de sesión no se confunde con el intento
+  ERPNext 2 interrumpido, que permanece BLOCKED/incompleto.
+- Payment Request, repetición modular en proceso nuevo: **22 tests, 17 PASS,
+  5 ERROR** por tasas faltantes. El módulo Payments se resolvió correctamente
+  y sus 22 errores del completo no reaparecieron, sin cambiar validadores o
+  tasas. El completo sigue FAIL; la causa precisa del contexto compartido
+  queda abierta. [Diagnóstico y pasos](../reports/frappe-official-diagnostics.md).
+- Core Test completo desde padre `7f162bfd226c78b611a49855c073d65cf0d1f51a`:
+  todos los comandos exit 0, **34 grupos obligatorios PASS**, sin gaps;
+  matriz **13 PASS, 0 FAIL, 1 BLOCKED, 0 UNRUN**. TAX01-S/TAX01-W, impuesto
+  sintético incluido del 10%, contabilidad nativa y oráculo conservados.
+  Reproducción repitió 18 grupos en el sitio LAB de copia; benchmark terminó
+  con la suite oficial y sus servicios auxiliares detenidos. No es restauración
+  cloud ni regresión después de patch.
+- Criterio 13 sigue BLOCKED y seis escenarios UNRUN; ambas series oficiales
+  16.36 terminan en 16.36.1. No se modificaron pins/oráculo ni se ejecutó otra
+  minor. El PASS externo de restauración fcf690d y su JSON exacto siguen
+  atribuidos al coordinador; no se repitió Guardar/Publicar.

@@ -48,16 +48,23 @@ class SuiteLock:
         self.file.close()
 
 
-def active_runners(bench=BENCH):
+def active_runners(bench=BENCH, proc_root=Path('/proc')):
     result = []
-    for process in Path('/proc').iterdir():
+    for process in proc_root.iterdir():
         if not process.name.isdigit():
             continue
         try:
             command = (process / 'cmdline').read_bytes().split(b'\0')
             if not {b'run-tests', b'run-parallel-tests'}.intersection(command):
                 continue
-            cwd = Path(os.readlink(process / 'cwd')).resolve()
+            try:
+                cwd = Path(os.readlink(process / 'cwd')).resolve()
+            except PermissionError:
+                # A recovered tool session can read cmdline/stat but not the
+                # old process's cwd symlink. Do not mistake that for inactivity.
+                # Reject conservatively instead of launching a duplicate suite.
+                result.append(int(process.name))
+                continue
             if bench.resolve() not in [cwd, *cwd.parents]:
                 continue
             if (process / 'stat').read_text().split(') ', 1)[1].split()[0] != 'Z':

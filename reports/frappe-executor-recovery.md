@@ -115,3 +115,21 @@ deben agregarse a Git ni adjuntarse como evidencia pública sin redacción.
 Este informe documenta la recuperación; no certifica la finalización de las
 suites ni la restauración de MariaDB. PR #4 conserva su condición de borrador;
 en esta recuperación no se cambiaron remotos, producción, main ni Axelor.
+
+## Continuación posterior, separada de la observación inicial
+
+Los checkpoints `68d7074`, `2b31926` y `7f162bf` se publicaron únicamente en
+lab/frappe-baseline. Después terminaron suites y regresión Cencomun; los
+resultados actuales están en [suites oficiales](frappe-official-suites.md) y
+[matriz Core Test](frappe-core-test.md). ERPNext intento 2 permanece incompleto;
+los intentos nuevos no lo convierten en PASS.
+
+Durante ERPNext CI se perdió otra sesión de herramienta:
+`write_stdin failed: Unknown process id 94748`; también se observó
+`PermissionError: [Errno 13] Permission denied: /proc/12115/cwd`.
+Los procesos y lock seguían vivos y el log crecía. Se observó por archivos,
+sin reiniciar el runner; terminó 3.255 pruebas y el driver escribió su JSON
+final FAIL. [Observación y resolución](evidence/frappe-official/ci-tool-session-observation.json).
+Esto no es el fallo de transporte original de 25 segundos ni prueba su causa.
+`progress.py` y los pasos de recuperación del README permiten observar sin
+exponer logs; el detector trata cwd inaccesible de forma conservadora.

@@ -1,13 +1,5 @@
 # Core Test de Frappe/ERPNext — LAB-ONLY-v1
 
-**Seguimiento técnico del 2026-10-06:** la matriz siguiente conserva los
-resultados históricos de `fcf690d`; la regresión Cencomun posterior a la nueva
-preparación todavía no se ejecutó. Se recuperaron los cambios y logs tras una
-desconexión del ejecutor. ERPNext quedó interrumpido sin resultado final; no se
-relanzó la suite. Véanse el [estado y los pasos de recuperación](frappe-executor-recovery.md)
-y la [observación verificable](evidence/frappe-official/executor-recovery-20261006.json).
-La comprobación cloud nueva iniciada por el coordinador se evalúa por separado.
-
 **CERRADO_CON_LIMITACIONES: PASS 13/14, FAIL 0/14, BLOCKED 1/14, UNRUN 0/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.
 
 Cobertura obligatoria: 34 grupos; 34 PASS, 0 FAIL, 0 UNRUN. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13. [coverage.json](evidence/frappe-core/coverage.json) impide conservar PASS con casos ausentes o evidencia anterior a la corrección.
@@ -66,9 +58,9 @@ Caja: USD -2.00, VES +10.00, POS/transferencia 0; pendiente Cashea 125.00 separa
 
 | Operación | Muestras | p50 ms | p95 ms | p99 ms | Errores |
 | --- | --- | --- | --- | --- | --- |
-| search | 1000 | 16.50107 | 19.97382 | 59.80712 | 0 |
-| inventory | 1000 | 15.19665 | 17.39143 | 63.15145 | 0 |
-| create | 1000 | 27.39561 | 31.72523 | 68.79645 | 0 |
+| search | 1000 | 15.62455 | 20.90799 | 79.9335 | 0 |
+| inventory | 1000 | 15.92619 | 24.0025 | 92.42482 | 0 |
+| create | 1000 | 25.70902 | 32.1956 | 85.75072 | 0 |
 
 Tiempos crudos, consultas y tiempo DB por muestra: [benchmark-raw.csv](evidence/frappe-core/benchmark-raw.csv). Recursos y metodología: [benchmark.json](evidence/frappe-core/benchmark.json). El recorder nativo mide dentro del servicio RPC; HTTP/autenticación externa están incluidos solamente en el tiempo extremo a extremo. No se grabaron SQL crudos ni credenciales.
 
@@ -82,16 +74,20 @@ Por venta STORE se usan 5 acciones del servicio; WEB 6. Nativos: un Sales Order,
 
 Subconjunto oficial de plataforma: 4 tests PASS; alcance: utilidades unitarias. Los cinco tests de registro/paquete también se ejecutan en el runner. Los grupos de negocio son integración real sobre MariaDB/Redis, incluidos HTTP, permisos y concurrencia. No se presenta esto como la suite completa upstream ni como regresión posterior a un patch.
 
+Suites oficiales de servidor sobre sitios vacíos con fixtures oficiales: frappe: FAIL, 2319 realmente ejecutadas / 2326 descubiertas; erpnext: FAIL, 3255 realmente ejecutadas / 3255 descubiertas. Comandos, resultados por ID, fallos y omisiones: [frappe-official-suites.md](frappe-official-suites.md). Los registros JUnit incluyen errores de fixtures/subtests y no se usan para inflar la cantidad real. Estas suites de baseline no acreditan las seis pruebas posteriores al patch.
+
 El sitio de reproducción separado restauró el checkpoint y repitió 13 grupos de negocio y 5 de finanzas sin modificar el sitio medido. Credenciales, encryption_key, dumps y logs completos permanecen privados, fuera del repositorio. Solo se publican hashes/metadatos y evidencias ficticias.
 
 ## Limitaciones, diagnóstico y resolución
 
-1. **Criterio 13 BLOCKED; patch y regresiones dependientes UNRUN.** La consulta oficial de Frappe en la serie fijada solo ofrece 16.36.0 y 16.36.1. Ver tags, SHAs, comandos y códigos en [patch.json](evidence/frappe-core/patch.json). No se fuerza otra minor/major. Para resolver: (1) terminar el Core Test de Axelor con este mismo manifiesto; (2) consultar tags oficiales posteriores compatibles de ambos ERP; (3) congelar objetivo y dependencias; (4) respaldar/restaurar en copia aislada; (5) actualizar/migrar allí; (6) ejecutar suites completas de plataforma y Cencomun; (7) comprobar rollback y publicar evidencias. Hasta entonces no hay aprobación 14/14 ni paridad integral.
+1. **Criterio 13 BLOCKED; sus seis escenarios UNRUN.** Los tags oficiales de Frappe y ERPNext solo ofrecen 16.36.0 y 16.36.1 en la serie fijada. Ver comandos/SHAs/códigos en [patch.json](evidence/frappe-core/patch.json). No se inventa un patch ni se fuerza otra minor. Para resolver: (1) consultar nuevos tags oficiales compatibles de ambos proyectos; (2) fijar objetivo/SHAs y compatibilidad; (3) definir backup, copia, migración, regresión y rollback; (4) ejecutar únicamente el cambio autorizado; (5) comprobar suites y restauración. Una propuesta para otra minor requiere plan separado y aprobación previa. El baseline actual no cuenta como esas regresiones; no hay aprobación 14/14.
 
-2. **La suite oficial de integración de utilidades no se completó en el sitio con fixtures LAB.** El bootstrap de ERPNext intentó insertar Standard Buying con otra configuración y produjo DuplicateEntryError. `--skip-before-tests` no evita ese bootstrap lazy. Se ejecutó y contó por separado la categoría unit (4 tests); no se contó el primer comando deprecated que devolvió cero sin ejecutar tests. Para la regresión completa: (1) preparar otro sitio upstream vacío; (2) instalar dependencias de test fijadas; (3) cargar los fixtures oficiales antes de los LAB o usar listas de precio LAB con nombres distintos mediante mapping versionado; (4) ejecutar y contar suites; (5) repetir Cencomun con el mismo oráculo. Esta limitación no sustituye ni aprueba el criterio 13.
+2. **Standard Buying resuelto; resultados oficiales separados.** Se prepararon sitios vacíos sin Cencomun, con fixtures oficiales y un Bench copiado para aislar tests de comandos. No se cambió la lista LAB ni el oráculo. Las suites oficiales conservan sus FAIL/BLOCKED/UNRUN reales, cantidades e IDs en [frappe-official-suites.md](frappe-official-suites.md); los cuatro unitarios históricos no las sustituyen. `pip check` detecta incompatibilidades preexistentes de requests/oauthlib que se documentan sin cambiar pins. Diagnóstico y repetición paso a paso: [README oficial](../scripts/official-tests/README.md). Esta evidencia no sustituye ni aprueba el criterio 13.
 
 3. **Alcance técnico del laboratorio.** Cashea y consumidor de eventos son simuladores locales; entrega al menos una vez con deduplicación, no integración real. Serial verifica búsqueda del registro nativo; no seguimiento físico por serial. No se prueba localización fiscal venezolana, remisión del impuesto, devoluciones, combos a cero, integración MRW, producción ni SLA. Las decisiones comerciales aplazadas siguen en el ExecPlan.
 
 4. **Intervenciones realizadas y preservadas.** Se añadieron Currency VES, grupos hoja, cuentas por defecto, listas nativas y cliente mariadb-dump 11.8.6 con checksum. Se corrigieron el mapeo bruto/neto de Payment Entry, precio/listas obligatorias, scope nativo sin permisos de empresa, auditoría de cierre sin diferencia y traducción de UniqueValidationError a 409. El proxy baseline apuntaba a otro sitio: el adaptador usa 127.0.0.1:8000 con Host ccm-core.test. No se modificó ese proxy. Los intentos fallidos se conservan en `evidence/frappe-core/attempts` y runs; los pasos exactos están en el README.
+
+5. **Restauración cloud: PASS externo aportado por el coordinador.** Evidencia exacta y alcance en [frappe-cloud-restoration.md](frappe-cloud-restoration.md). No se reejecutó aquí ni modifica suites oficiales o criterio 13. El criterio 14 acredita setup/replay de sitio LAB y mantiene un alcance distinto. El snapshot verificado es fcf690dbc58b2b2dcf8d045c49976e3613e804cf; no se repitió Guardar/Publicar. Precio P001 USD50.00 y stock5 coinciden por adaptador y API nativa en el almacén HTTP. Los dos fallos HTTP iniciales se conservan con causa desconocida; no se inventa una explicación.
 
 Versiones efectivas: Frappe/ERPNext 16.36.1, MariaDB 11.8.6, Redis 8.0.2, Python 3.14.0, Node 24.19.0, Bench 5.29.0, Cencomun 0.0.1. Fuente, SHAs, hashes, estados y resultados completos: [summary.json](evidence/frappe-core/summary.json).

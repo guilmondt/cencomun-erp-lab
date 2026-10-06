@@ -68,6 +68,8 @@ def main():
                             'command': selected['command'], 'exit_code': selected['exit_code'],
                             'site': selected['site'], 'seconds': selected['elapsed_seconds'],
                             'ci_parallel': selected.get('ci_parallel', False),
+                            'observed_result_events': selected.get('observed_result_events'),
+                            'result_format': selected.get('result_format', 'JUnit + native Ran N'),
                             'interrupted': selected.get('interrupted', False),
                             'completed_native_category_counts': selected.get('completed_native_category_counts'),
                             'fixture_preparation_status': preparation['status'],
@@ -78,7 +80,7 @@ def main():
                             'discovered_test_count': discovery['discovered_test_count']})
     check = subprocess.run([str(ROOT / 'bench/env/bin/python'), '-m', 'pip', 'check'],
                            capture_output=True, text=True)
-    metadata = {'scope': 'official default server suites on pinned MariaDB; baseline, not post-patch regression',
+    metadata = {'scope': 'official server runners on pinned MariaDB; serial/JUnit and native CI text are distinct attempts; baseline, not post-patch regression',
                 'recorded_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
                 'results': results, 'pip_check': {'exit_code': check.returncode,
                                                  'output': redact(check.stdout + check.stderr)},
@@ -91,6 +93,7 @@ def main():
                                  'procedure': 'docs/FRAPPE_CLOUD_RESTORE_CHECK.md'},
                 'attempts': [{'app': a['app'], 'attempt': a['attempt'], 'status': a['status'],
                               'module': a.get('module'), 'category': a.get('category', 'all'),
+                              'ci_parallel': a.get('ci_parallel', False),
                               'actual_tests_run': a['actual_tests_run'], 'evidence': a['evidence'],
                               'evidence_valid': a.get('evidence_valid', True)} for a in attempts]}
     (OUT / 'summary.json').write_text(json.dumps(metadata, indent=2) + '\n')
@@ -98,7 +101,7 @@ def main():
             'Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, pins o validadores. '
             'Este informe distingue descubrimiento, ejecución real y eventos JUnit. '
             'Los cuatro unitarios históricos de utilidades no son estas suites.', '',
-            '| Aplicación | Sitio del último intento registrado | Descubiertas | Ejecutadas (Ran N) | Estado | Exit | Segundos | Evidencia |',
+            '| Aplicación | Sitio del último intento registrado | Descubiertas | Ejecutadas (contador nativo) | Estado | Exit | Segundos | Evidencia |',
             '| --- | --- | --- | --- | --- | --- | --- | --- |']
     for result in results:
         rows.append(f"| {result['app']} | {result.get('site','—')} | {result['discovered_test_count']} | "
@@ -110,12 +113,29 @@ def main():
              '| --- | --- | --- | --- | --- | --- | --- |']
     for result in results:
         counts = result.get('counts', {})
+        junit = '— (texto CI)' if result.get('ci_parallel') else result.get('junit_records', '—')
         rows.append('| ' + result['app'] + ' | ' + ' | '.join(str(counts.get(k, '—'))
-                    for k in ['PASS', 'FAIL', 'ERROR', 'SKIP']) + f" | {result.get('junit_records','—')} | {result.get('unobserved_test_count','—')} |")
+                    for k in ['PASS', 'FAIL', 'ERROR', 'SKIP']) + f" | {junit} | {result.get('unobserved_test_count','—')} |")
     rows += ['', '**Los eventos JUnit no son el contador real de pruebas.** setUpClass/tearDownClass y subtests '
-             'producen registros adicionales; SKIP no aprueba. Los JSON guardan cada ID, excepción y traza '
-             'redactada; en intentos interrumpidos los resultados no observados son desconocidos. Un comando interrumpido '
-             'no se convierte en suite aprobada.', '', '## Comandos ejecutados', '']
+             'producen registros adicionales; SKIP no aprueba. Los intentos seriales guardan cada ID, excepción y traza '
+             'redactada. El runner CI no emite JUnit: se usa su resumen `Tests: N`, con totales FAIL/ERROR, '
+             'eventos verbose por método y cabeceras de fallos (ID/tipo de excepción, sin variables privadas). '
+             'Un evento FAILED_EVENT no inventa un subtipo. En intentos interrumpidos los resultados no '
+             'observados son desconocidos; no se convierten en suite aprobada.', '',
+             '## Intentos y repeticiones conservados', '',
+             '| App | Intento | Alcance | Contador nativo | Estado | Evidencia |',
+             '| --- | --- | --- | --- | --- | --- |']
+    for a in attempts:
+        scope = a.get('module') or ('CI, todos los módulos (un shard)' if a.get('ci_parallel') else a.get('category', 'all'))
+        number = a['actual_tests_run'] if a['actual_tests_run'] is not None else 'desconocido'
+        valid = '' if a.get('evidence_valid', True) else ' / evidencia no válida'
+        rows.append(f"| {a['app']} | {a['attempt']} | {scope} | {number} | {a['status']}{valid} | "
+                    f"[{Path(a['evidence']).name}]({a['evidence'].removeprefix('reports/')}) |")
+    rows += ['', 'Cada intento conserva su alcance. El módulo timeline ejecutó siete legacy PASS tras '
+             'recrear copias limpias en los mismos SHAs; no convierte el comando Frappe completo en PASS. '
+             'La selección directa de su categoría fue rechazada por la CLI (cero tests). '
+             'La repetición auth completó una unitaria y quedó BLOCKED durante preparación: no acredita '
+             'la integración de autenticación.', '', '## Comandos ejecutados', '']
     for result in results:
         if 'command' in result:
             rows += [f"- `{result['command']}`"]
@@ -150,11 +170,17 @@ def main():
     rows += ['', 'Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). '
              'El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: '
              'ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con '
-             'reserva exclusiva de nombres. Quince tests del harness verifican cero-test, categorías, '
+             'reserva exclusiva de nombres. Dieciocho tests del harness verifican cero-test, categorías, '
              'subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación '
              'de archivos generados; no son tests oficiales. '
              'El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; '
              '[informe de recuperación](frappe-executor-recovery.md).', '',
+             'Diagnóstico de causas comprobadas, hipótesis pendientes y pasos de repetición: '
+             '[frappe-official-diagnostics.md](frappe-official-diagnostics.md). '
+             'Payments solo está en el Bench oficial copiado, con SHA version-16 y siete SDKs fijados; '
+             '[preparación](evidence/frappe-official/payments-preparation.json). '
+             'ERPNext CI usa bootstrap previo y lightmode, como su workflow oficial; el runner restablece '
+             'Administrator antes de cada módulo por su propio código. No se cambian roles ni validadores.', '',
              'No se ejecutan UI/Cypress, PostgreSQL, SQLite ni migraciones a otra versión. '
              'No se modifican validaciones para aprobar. Para cada excepción nativa: localizar ID/traza, '
              'identificar causa comprobada, corregir únicamente preparación autorizada, repetir módulo '

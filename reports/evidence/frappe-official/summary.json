@@ -1,6 +1,6 @@
 {
-  "scope": "official default server suites on pinned MariaDB; baseline, not post-patch regression",
-  "recorded_utc": "2026-10-06T03:49:22.821046+00:00",
+  "scope": "official server runners on pinned MariaDB; serial/JUnit and native CI text are distinct attempts; baseline, not post-patch regression",
+  "recorded_utc": "2026-10-06T04:38:57.765930+00:00",
   "results": [
     {
       "app": "frappe",
@@ -21,6 +21,8 @@
       "site": "ccm-upstream-frappe-fresh.test",
       "seconds": 814.858,
       "ci_parallel": false,
+      "observed_result_events": null,
+      "result_format": "JUnit + native Ran N",
       "interrupted": false,
       "completed_native_category_counts": null,
       "fixture_preparation_status": "PASS",
@@ -32,30 +34,32 @@
       "status": "FAIL",
       "actual_tests_run": 3255,
       "discovered_test_count": 3255,
-      "junit_records": 3256,
+      "junit_records": 0,
       "counts": {
-        "PASS": 2675,
-        "FAIL": 9,
-        "ERROR": 572,
-        "SKIP": 0
+        "PASS": 3188,
+        "SKIP": 0,
+        "FAIL": 1,
+        "ERROR": 66
       },
       "unobserved_test_count": 0,
       "evidence": "reports/evidence/frappe-official/erpnext-latest.json",
-      "command": "bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-3.xml",
+      "command": "bench --site ccm-upstream-erpnext-fresh.test run-parallel-tests --app erpnext --total-builds 1 --build-number 1 --lightmode",
       "exit_code": 1,
-      "site": "ccm-upstream-erpnext.test",
-      "seconds": 1981.974,
-      "ci_parallel": false,
+      "site": "ccm-upstream-erpnext-fresh.test",
+      "seconds": 2507.481,
+      "ci_parallel": true,
+      "observed_result_events": 3255,
+      "result_format": "official CI verbose text; not JUnit",
       "interrupted": false,
       "completed_native_category_counts": null,
       "fixture_preparation_status": "PASS",
       "fixture_preparation_site": "ccm-upstream-erpnext-fresh.test",
-      "fixture_metadata_matches_attempt_site": false
+      "fixture_metadata_matches_attempt_site": true
     }
   ],
   "pip_check": {
     "exit_code": 1,
-    "output": "frappe 16.36.1 has requirement oauthlib~=3.3.1, but you have oauthlib 4.0.0.\nfrappe 16.36.1 has requirement requests~=2.33.0, but you have requests 2.34.2.\nWARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n"
+    "output": "frappe 16.36.1 has requirement oauthlib~=3.3.1, but you have oauthlib 4.0.0.\nfrappe 16.36.1 has requirement requests~=2.33.0, but you have requests 2.34.2.\n"
   },
   "pins_changed": false,
   "oracle_changed": false,
@@ -72,9 +76,21 @@
     {
       "app": "erpnext",
       "attempt": 1,
+      "status": "FAIL",
+      "module": null,
+      "category": "all",
+      "ci_parallel": true,
+      "actual_tests_run": 3255,
+      "evidence": "reports/evidence/frappe-official/erpnext-ci-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "erpnext",
+      "attempt": 1,
       "status": "BLOCKED",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": null,
       "evidence": "reports/evidence/frappe-official/erpnext-full-attempt-1.json",
       "evidence_valid": false
@@ -85,6 +101,7 @@
       "status": "BLOCKED",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": null,
       "evidence": "reports/evidence/frappe-official/erpnext-full-attempt-2.json",
       "evidence_valid": true
@@ -95,8 +112,20 @@
       "status": "FAIL",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 3255,
       "evidence": "reports/evidence/frappe-official/erpnext-full-attempt-3.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "erpnext",
+      "attempt": 1,
+      "status": "FAIL",
+      "module": "erpnext.accounts.doctype.payment_request.test_payment_request",
+      "category": "all",
+      "ci_parallel": false,
+      "actual_tests_run": 22,
+      "evidence": "reports/evidence/frappe-official/erpnext-test_payment_request-attempt-1.json",
       "evidence_valid": true
     },
     {
@@ -105,6 +134,7 @@
       "status": "BLOCKED",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 32,
       "evidence": "reports/evidence/frappe-official/frappe-full-attempt-1.json",
       "evidence_valid": true
@@ -115,6 +145,7 @@
       "status": "FAIL",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 2275,
       "evidence": "reports/evidence/frappe-official/frappe-full-attempt-2.json",
       "evidence_valid": true
@@ -125,6 +156,7 @@
       "status": "BLOCKED",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 32,
       "evidence": "reports/evidence/frappe-official/frappe-full-attempt-3.json",
       "evidence_valid": true
@@ -135,6 +167,7 @@
       "status": "FAIL",
       "module": null,
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 2319,
       "evidence": "reports/evidence/frappe-official/frappe-full-attempt-4.json",
       "evidence_valid": true
@@ -145,6 +178,7 @@
       "status": "FAIL",
       "module": null,
       "category": "integration",
+      "ci_parallel": false,
       "actual_tests_run": 333,
       "evidence": "reports/evidence/frappe-official/frappe-full-integration-attempt-1.json",
       "evidence_valid": true
@@ -155,6 +189,7 @@
       "status": "BLOCKED",
       "module": null,
       "category": "old-frappe-test-class-category",
+      "ci_parallel": false,
       "actual_tests_run": 0,
       "evidence": "reports/evidence/frappe-official/frappe-full-old-frappe-test-class-category-attempt-1.json",
       "evidence_valid": true
@@ -165,6 +200,7 @@
       "status": "BLOCKED",
       "module": "frappe.tests.test_auth",
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 1,
       "evidence": "reports/evidence/frappe-official/frappe-test_auth-attempt-1.json",
       "evidence_valid": true
@@ -175,6 +211,7 @@
       "status": "BLOCKED",
       "module": "frappe.core.doctype.rq_job.test_rq_job",
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 0,
       "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-1.json",
       "evidence_valid": true
@@ -185,6 +222,7 @@
       "status": "BLOCKED",
       "module": "frappe.core.doctype.rq_job.test_rq_job",
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 0,
       "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-2.json",
       "evidence_valid": true
@@ -195,6 +233,7 @@
       "status": "PASS",
       "module": "frappe.core.doctype.rq_job.test_rq_job",
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 13,
       "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-3.json",
       "evidence_valid": true
@@ -205,6 +244,7 @@
       "status": "PASS",
       "module": "frappe.tests.test_timeline",
       "category": "all",
+      "ci_parallel": false,
       "actual_tests_run": 7,
       "evidence": "reports/evidence/frappe-official/frappe-test_timeline-attempt-1.json",
       "evidence_valid": true

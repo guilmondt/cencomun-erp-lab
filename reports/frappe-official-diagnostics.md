@@ -15,6 +15,49 @@ No modifica pins, validadores, permisos, negocio, Axelor o producción.
 | HTTP 403, AuthError y Domain forbidden | Frappe completo 4 | Observados; causa final no establecida. Ping en el sitio oficial respondió 200 con requests heredando el proxy y también directo; eso no demuestra que el proxy causó los fallos de autenticación. |
 | Otros fallos nativos | IDs, excepciones y trazas saneadas en JSON de cada intento | Incluyen assertions, fixtures Milestone Tracker, email, contexto request y restauración SQL. Siguen FAIL/ERROR; no se inventa una causa general ni se atribuyen sin prueba a requests/oauthlib. |
 
+Resultado final de la repetición ERPNext CI: **3.255 tests, FAIL**, 3.188
+eventos PASS, 1 FAIL y 66 ERROR, sin SKIP; duración 2.507,481 segundos. No
+persistieron los PermissionError ni el SQL de Payment Gateway ausente.
+Se conservaron 67 cabeceras de fallo con ID y tipo, sin variables privadas:
+
+| Excepción | Cantidad | Observación comprobada |
+| --- | --- | --- |
+| ValidationError | 26 | 19 mensajes de tasas USD/INR, INR/USD o QAR/INR obligatorias; cinco Received Amount; un desbalance de débito/crédito de 100 y una fila sin débito/crédito. |
+| DoesNotExistError | 22 | `Module Payments not found` al importar Payment Gateway en el setUp de solicitudes de pago, pese a app instalada y tabla presente. |
+| ZeroDivisionError | 14 | Divisiones por cero en las trazas; no se rellenan tasas ni valores para eludirlas. |
+| ReportingCurrencyExchangeNotFoundError | 3 | Tasa USD→INR no encontrada para 2026-10-06. |
+| NonNegativeError | 1 | Basic Rate negativo en Stock Entry Detail, fila 3; se conserva el rechazo nativo. |
+| AssertionError | 1 | `TestBOM.test_update_bom_cost_in_all_boms`: 0.0 frente a 10.0 esperado. |
+
+Una lectura posterior en otro proceso confirmó que Payments está instalado,
+su módulo se resuelve a `payments` y Payment Gateway declara `Payments`:
+[diagnóstico](evidence/frappe-official/payments-module-diagnostic.json).
+La repetición íntegra de `erpnext.accounts.doctype.payment_request.test_payment_request`
+ejecutó **22 tests: 17 PASS, 5 ERROR por tasas obligatorias**. Ninguno volvió a
+fallar por módulo ausente. Esto demuestra que el error de resolución no persiste
+en ese proceso nuevo; no identifica por sí solo quién alteró el contexto del
+runner completo ni aprueba sus 22 resultados originales. Se conserva el FAIL
+completo y el FAIL modular; no se introducen tasas inventadas o bypasses.
+
+Para continuar con estos fallos:
+
+1. Reproducir el módulo afectado en el sitio oficial, con iguales pins/fixtures
+   y sin otra suite activa; usar el comando exacto de su JSON.
+2. Para Payments, cotejar apps instaladas, `sites/apps.txt`, modules.txt y el
+   resolvedor nativo antes/después de los módulos precedentes. Si se identifica
+   preparación/caché incorrecta, corregir solo ese aspecto y repetir; no cambiar
+   get_module_app ni ignorar la excepción.
+3. Para tasas, revisar los fixtures oficiales y el proveedor/configuración
+   esperado por esos tests; conservar fecha, moneda, mensaje y respuesta
+   saneada. No reutilizar las tasas sintéticas del Core Test en la suite
+   oficial ni declarar aprobados los casos sin una entrada oficial válida.
+4. Para BOM y valores negativos, comparar el fixture y documentos nativos
+   usados por el test, aislando contaminación entre módulos. Mantener la
+   aserción 10.0 y el validador no negativo.
+5. Si la solución requiere cambiar dependencias/framework, preparar un plan
+   aparte y obtener la aprobación exigida antes de cambiar pins. Los resultados
+   actuales continúan FAIL hasta ejecutarse la cobertura correspondiente.
+
 Para resolver o repetir un fallo:
 
 1. Abrir el JSON del intento y localizar el ID, comando, sitio, exit y excepción.

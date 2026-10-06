@@ -2,14 +2,23 @@
 
 import unittest
 import tempfile
+import json
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
-from run import parse_results, parse_parallel_results, reserve_attempt, SuiteLock, redact
+from unittest.mock import patch
+from run import parse_results, parse_parallel_results, reserve_attempt, SuiteLock, redact, active_runners
 from isolate_bench import copy_compiled_assets, archive_test_sources
 from recover import interrupted_record
 
 
 class ResultCountingTests(unittest.TestCase):
+    def test_recovered_runner_with_inaccessible_cwd_is_not_treated_as_inactive(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); process = root / '311'; process.mkdir()
+            (process / 'cmdline').write_bytes(b'python\0run-parallel-tests\0--app\0erpnext\0')
+            with patch('run.os.readlink', side_effect=PermissionError('restricted proc cwd')):
+                self.assertEqual(active_runners(root / 'bench', root), [311])
+
     def test_native_ci_counter_is_not_inflated_by_verbose_subtest_events(self):
         log = ('erpnext.tests.TestOfficial\n  ✔ test_one\n  ✖ test_two\n'
                '  ✖ test_two\n  = test_three\nTests: 3, Failing: 2, Errors: 0\n')
@@ -113,6 +122,35 @@ class ResultCountingTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'already exists'):
                 interrupted_record('erpnext', 'erpnext-full-attempt-2', root, root, root)
             self.assertEqual(result.read_text(), '{"status":"BLOCKED"}')
+
+    def test_interrupted_native_ci_keeps_its_state_and_only_observed_outcomes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); base = 'erpnext-ci-attempt-1'
+            (root / (base + '.log')).write_text('erpnext.tests.T\n  ✔ test_one\n')
+            (root / (base + '-running.json')).write_text(json.dumps({
+                'ci_parallel': True, 'site': 'isolated.test', 'command': 'native-ci-command'}))
+            result = interrupted_record('erpnext', base, root, root, root)
+            self.assertEqual(result['status'], 'BLOCKED')
+            self.assertIsNone(result['actual_tests_run'])
+            self.assertTrue(result['ci_parallel'])
+            self.assertEqual(result['site'], 'isolated.test')
+            self.assertEqual(result['command'], 'native-ci-command')
+            self.assertEqual(result['observed_result_events'], 1)
+            self.assertIsNone(result['counts']['ERROR'])
+
+    def test_interrupted_truncated_xml_preserves_complete_documents(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); base = 'erpnext-full-attempt-2'
+            (root / (base + '.log')).write_text('Ran 1 test in 0.01s\nOK\n')
+            (root / (base + '.xml')).write_text('<?xml version="1.0"?><testsuites>'
+                '<testsuite><testcase classname="T" name="test_one"/></testsuite></testsuites>'
+                '<?xml version="1.0"?><testsuites><testsuite>')
+            result = interrupted_record('erpnext', base, root, root, root)
+            self.assertIsNone(result['actual_tests_run'])
+            self.assertTrue(result['truncated_xml_document_preserved'])
+            self.assertEqual(result['completed_native_category_counts'], [1])
+            self.assertEqual(result['junit_records'], 1)
+            self.assertEqual(result['cases'][0]['status'], 'PASS')
 
     def test_generated_temporary_site_passwords_are_redacted_after_config_deletion(self):
         text = ('bench new-site sample --admin-password=generated-demo-secret '

@@ -173,7 +173,22 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    resúmenes de categorías terminadas por separado. Resultados no observados
    durante la interrupción son desconocidos; no se convierten en PASS/UNRUN
    mediante conteo de puntos, E o F.
-5. Ejecutar los once tests del harness y regenerar el informe saneado:
+   Para un intento CI interrumpido, pasar su basename real (por ejemplo
+   `erpnext-ci-attempt-1`) solo si ya no hay runner y falta su JSON final.
+   Recupera su comando/sitio y eventos verbose observados sin fabricar un
+   conteo completo. En XML truncado conserva documentos completos anteriores
+   y el hash del archivo crudo; no elimina ni sobrescribe el fragmento privado.
+   Si `write_stdin` devuelve Unknown process id pero el driver/runner y su lock
+   siguen vivos, no ejecutar recover ni otra suite: el registro de la sesión
+   de herramienta puede haberse perdido. Observar log y JSON final por archivos.
+   Para observar sin imprimir logs, variables ni credenciales:
+   `python scripts/official-tests/progress.py erpnext-ci-attempt-1`.
+   Sustituir el basename por el intento real. Mientras falta su JSON final,
+   distingue eventos observados de contador nativo final y no aprueba la suite.
+   Si `/proc/<pid>/cwd` devuelve PermissionError, el detector rechaza por
+   precaución un comando nativo vivo; nunca interpreta esa denegación como
+   proceso detenido. No solicitar otro sitio para sustituir el proceso activo.
+5. Ejecutar los dieciocho tests del harness y regenerar el informe saneado:
 
    ```bash
    python scripts/official-tests/test_results.py

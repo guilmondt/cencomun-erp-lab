@@ -32,8 +32,8 @@
               "page": 1,
               "page_size": 20,
               "_meta": {
-                "correlation_id": "04c7f4bd-6b2e-4c6e-8f3e-abab4ad3e597",
-                "server_ms": 3.1937
+                "correlation_id": "934b5c26-2a28-4b7e-bbc4-4e23e29c1b75",
+                "server_ms": 3.4502
               }
             }
           },
@@ -50,8 +50,8 @@
               "value": "150.00",
               "unit_cost": "30.00",
               "_meta": {
-                "correlation_id": "7df8ba83-664b-48e8-9498-0a23c0ae92a2",
-                "server_ms": 15.0102
+                "correlation_id": "f8cb914e-2c13-4350-acfe-682bc90e61ce",
+                "server_ms": 15.686
               }
             }
           },
@@ -64,8 +64,8 @@
                 "USD": "0.00"
               },
               "_meta": {
-                "correlation_id": "1e92ac32-4086-477b-890f-763933de4902",
-                "server_ms": 4.8842
+                "correlation_id": "d1d3fe8c-0b1d-411f-bc46-c43b58cfa01e",
+                "server_ms": 5.2418
               }
             }
           },
@@ -124,8 +124,8 @@
               "cashea_pending": "125.00",
               "cashea_received": "0.00",
               "_meta": {
-                "correlation_id": "4e13f766-7586-4966-9213-a4baf0b0dd3d",
-                "server_ms": 2.0251
+                "correlation_id": "3ea0404d-1568-4f97-985c-280e04b147bb",
+                "server_ms": 2.2852
               }
             }
           }
@@ -137,8 +137,8 @@
           "native_order": "PUR-ORD-2026-00011",
           "replay": false,
           "_meta": {
-            "correlation_id": "f2ff3bce-2695-4ca5-b3d9-4ffd102b6019",
-            "server_ms": 134.5424
+            "correlation_id": "96fb3b9d-a63b-410d-85af-7370ea7a791c",
+            "server_ms": 159.4534
           }
         },
         "order": {
@@ -175,8 +175,8 @@
           ],
           "replay": false,
           "_meta": {
-            "correlation_id": "0784ce1e-a4ff-49d5-a085-e1012a8d9eff",
-            "server_ms": 16.7716
+            "correlation_id": "db5c010c-f86c-4ebd-94de-368867504e54",
+            "server_ms": 23.1774
           }
         },
         "replay": {
@@ -213,13 +213,13 @@
           ],
           "replay": true,
           "_meta": {
-            "correlation_id": "160c15b4-8b15-4f55-88af-eb70932f48a9",
-            "server_ms": 1.1157
+            "correlation_id": "5d14b8dd-dbd5-4fb2-b778-7fffe6bf6b7a",
+            "server_ms": 2.6632
           }
         },
         "conflict": 409
       },
-      "seconds": 0.4314
+      "seconds": 0.5674
     },
     {
       "case": "IDEM01-02-CREATE-CONCURRENT",
@@ -232,47 +232,6 @@
       "coverage_revision": 2,
       "actual": {
         "responses": [
-          [
-            201,
-            {
-              "id": "IDEM-CREATE",
-              "company_id": "CCM-LAB-001",
-              "status": "NEW",
-              "channel": "STORE",
-              "currency": "USD",
-              "gross": "125.00",
-              "revenue": "125.00",
-              "tax": "0.00",
-              "commission": "8.00",
-              "cost": "70.00",
-              "net": "117.00",
-              "indicator": "47.00",
-              "accounting_profit": "47.00",
-              "financed_amount": "75.00",
-              "shipping_expense": "0.00",
-              "lines": [
-                {
-                  "product_id": "P001",
-                  "qty": "2",
-                  "unit_price": "50.00",
-                  "line_total": "100.00",
-                  "unit_cost": "30.00"
-                },
-                {
-                  "product_id": "P002",
-                  "qty": "1",
-                  "unit_price": "25.00",
-                  "line_total": "25.00",
-                  "unit_cost": "10.00"
-                }
-              ],
-              "replay": false,
-              "_meta": {
-                "correlation_id": "f188cdf1-96e3-4c6a-b2fd-2a7e6070d011",
-                "server_ms": 14.3031
-              }
-            }
-          ],
           [
             200,
             {
@@ -309,8 +268,49 @@
               ],
               "replay": true,
               "_meta": {
-                "correlation_id": "5d56aa61-0148-48a6-9edc-d1baf29c41a9",
-                "server_ms": 103.31
+                "correlation_id": "1e677fd7-9703-4b6e-a698-66f6c6eeddaa",
+                "server_ms": 102.6452
+              }
+            }
+          ],
+          [
+            201,
+            {
+              "id": "IDEM-CREATE",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ],
+              "replay": false,
+              "_meta": {
+                "correlation_id": "e92e337a-293f-4315-9770-9b72464f0d73",
+                "server_ms": 19.3255
               }
             }
           ]
@@ -318,7 +318,7 @@
         "replay_without_permissions": 403,
         "same_external_id_different_key": 409
       },
-      "seconds": 0.2079
+      "seconds": 0.1954
     },
     {
       "case": "PERM-API-NATIVE",
@@ -399,7 +399,7 @@
         ],
         "native_read_write_denials": true
       },
-      "seconds": 0.4762
+      "seconds": 0.5548
     },
     {
       "case": "CASH04-06-HTTP-IMMUTABLE",
@@ -411,25 +411,25 @@
       "status": "PASS",
       "coverage_revision": 2,
       "actual": {
-        "native_closing": "f47evfkf2h",
+        "native_closing": "8ooobm72tb",
         "before": {
           "state": "CONFIRMED",
           "snapshot": "{\"channels\": [{\"channel\": \"USD\", \"currency\": \"USD\", \"expected\": \"100.00\", \"observed\": \"98.00\", \"difference\": \"-2.00\", \"vouchers\": [\"ACC-JV-2026-00001\", \"ACC-JV-2026-00002\", \"ACC-JV-2026-00003\", \"ACC-JV-2026-00004\"]}, {\"channel\": \"VES\", \"currency\": \"VES\", \"expected\": \"4000.00\", \"observed\": \"4010.00\", \"difference\": \"10.00\", \"vouchers\": [\"ACC-JV-2026-00005\", \"ACC-JV-2026-00006\"]}, {\"channel\": \"POS\", \"currency\": \"USD\", \"expected\": \"50.00\", \"observed\": \"50.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00007\"]}, {\"channel\": \"TRANSFER\", \"currency\": \"USD\", \"expected\": \"30.00\", \"observed\": \"30.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00008\"]}], \"cashea_pending\": \"125.00\", \"cashea_received\": \"0.00\"}",
           "note": "Synthetic difference acknowledged",
           "confirmed_by": "manager@example.invalid",
-          "confirmed_at": "2026-10-06 09:59:52.816278"
+          "confirmed_at": "2026-10-06 04:21:20.884366"
         },
         "after": {
           "state": "CONFIRMED",
           "snapshot": "{\"channels\": [{\"channel\": \"USD\", \"currency\": \"USD\", \"expected\": \"100.00\", \"observed\": \"98.00\", \"difference\": \"-2.00\", \"vouchers\": [\"ACC-JV-2026-00001\", \"ACC-JV-2026-00002\", \"ACC-JV-2026-00003\", \"ACC-JV-2026-00004\"]}, {\"channel\": \"VES\", \"currency\": \"VES\", \"expected\": \"4000.00\", \"observed\": \"4010.00\", \"difference\": \"10.00\", \"vouchers\": [\"ACC-JV-2026-00005\", \"ACC-JV-2026-00006\"]}, {\"channel\": \"POS\", \"currency\": \"USD\", \"expected\": \"50.00\", \"observed\": \"50.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00007\"]}, {\"channel\": \"TRANSFER\", \"currency\": \"USD\", \"expected\": \"30.00\", \"observed\": \"30.00\", \"difference\": \"0.00\", \"vouchers\": [\"ACC-JV-2026-00008\"]}], \"cashea_pending\": \"125.00\", \"cashea_received\": \"0.00\"}",
           "note": "Synthetic difference acknowledged",
           "confirmed_by": "manager@example.invalid",
-          "confirmed_at": "2026-10-06 09:59:52.816278"
+          "confirmed_at": "2026-10-06 04:21:20.884366"
         },
         "manager_edit": 403,
         "operator_edit": 403
       },
-      "seconds": 0.0363
+      "seconds": 0.045
     },
     {
       "case": "SEARCH01-04-NATIVE",
@@ -486,7 +486,7 @@
         "serial": "SER-P001-001",
         "serial_inventory_tracking_tested": false
       },
-      "seconds": 0.0855
+      "seconds": 0.1093
     },
     {
       "case": "TAX02-04-IDEM-CONCURRENT",
@@ -582,7 +582,7 @@
             {
               "code": "409",
               "message": "Invalid state transition",
-              "correlation_id": "26019363-ba61-46a8-8267-ece335c1ea84"
+              "correlation_id": "343adb90-b9ae-4038-8e55-5a031ab1eda3"
             }
           ],
           "settlement": [
@@ -745,7 +745,7 @@
             {
               "code": "409",
               "message": "Invalid state transition",
-              "correlation_id": "9b4a8da6-b129-4b9d-ab84-3fcb727305ff"
+              "correlation_id": "8acf4a66-8074-415a-a9e6-7bbee5fbf367"
             }
           ],
           "settlement": [
@@ -826,7 +826,7 @@
           ]
         }
       ],
-      "seconds": 1.6946
+      "seconds": 1.7982
     },
     {
       "case": "BANK-CONCURRENT-1000",
@@ -851,7 +851,7 @@
         ],
         "expected_native_unique": 1000
       },
-      "seconds": 12.9742
+      "seconds": 13.3635
     },
     {
       "case": "MCP01-06-STDIO",
@@ -907,8 +907,8 @@
               "page": 1,
               "page_size": 20,
               "_meta": {
-                "correlation_id": "7723df50-bc2e-4d67-a583-8d07c3db3fc6",
-                "server_ms": 1.5101
+                "correlation_id": "e00ce01f-e829-4639-86ec-51be49d8a314",
+                "server_ms": 1.2514
               }
             }
           },
@@ -925,8 +925,8 @@
               "value": "150.00",
               "unit_cost": "30.00",
               "_meta": {
-                "correlation_id": "decf7f78-3cae-4070-87a2-7a7dcccdf35a",
-                "server_ms": 5.9
+                "correlation_id": "d796c540-2943-48fb-bd2e-4bc664bf8f82",
+                "server_ms": 3.7331
               }
             }
           },
@@ -939,8 +939,8 @@
                 "USD": "0.00"
               },
               "_meta": {
-                "correlation_id": "0ee9243c-2436-4375-a002-8a4d1d8c9916",
-                "server_ms": 3.9294
+                "correlation_id": "0f08232c-6826-42ae-b219-bdfc08d0b79d",
+                "server_ms": 1.5655
               }
             }
           },
@@ -999,8 +999,8 @@
               "cashea_pending": "125.00",
               "cashea_received": "0.00",
               "_meta": {
-                "correlation_id": "c6bb70ea-dae8-41f2-b38c-bd3f318d27af",
-                "server_ms": 2.5207
+                "correlation_id": "c3334abf-0553-4528-8621-f114c46c6792",
+                "server_ms": 1.164
               }
             }
           },
@@ -1014,8 +1014,8 @@
               "native_order": "PUR-ORD-2026-00012",
               "replay": false,
               "_meta": {
-                "correlation_id": "eb30bada-5516-4711-83da-8bc2558b6e99",
-                "server_ms": 50.9649
+                "correlation_id": "cd30c0b6-95cd-42d7-ba51-97dcf4ee07d0",
+                "server_ms": 57.1191
               }
             }
           },
@@ -1056,8 +1056,8 @@
               ],
               "replay": false,
               "_meta": {
-                "correlation_id": "328d1cca-591f-4159-bdad-00fb1b107f50",
-                "server_ms": 20.6243
+                "correlation_id": "1fcf0681-2553-4609-8316-86f893adf25b",
+                "server_ms": 17.745
               }
             }
           }
@@ -1455,7 +1455,7 @@
           "replay"
         ]
       },
-      "seconds": 0.5614
+      "seconds": 0.5175
     },
     {
       "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
@@ -1487,7 +1487,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "750b5846-d997-4726-9e97-68c2980109cf"
+              "correlation_id": "8b6c9440-d0fe-4a64-927d-d1129936f60d"
             }
           },
           {
@@ -1506,7 +1506,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "e5cd13f7-c8cc-4e9c-8eba-c226c2c6a669"
+              "correlation_id": "8ff96f7f-2c76-4205-ae2f-b5fa7efba63f"
             }
           },
           {
@@ -1525,7 +1525,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "fbde5673-7be9-47ea-8a45-7c6437b4ccec"
+              "correlation_id": "5b803af5-4227-4fdd-93ec-93bcf8e47cf3"
             }
           },
           {
@@ -1544,7 +1544,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "28d7fadd-0b07-4526-bf41-da140e4b794d"
+              "correlation_id": "c6cddf83-cd33-4fe6-a65c-c7ec517e1ef1"
             }
           },
           {
@@ -1563,7 +1563,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "98c2338c-7c41-4cdc-94dd-d75b0fedf289"
+              "correlation_id": "bd442325-6d2e-41b2-b9f7-9c4349770ef4"
             }
           },
           {
@@ -1582,7 +1582,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "b0233061-42cc-47c4-9176-da53b948e13f"
+              "correlation_id": "de667d8e-7e6e-4cc7-9a6f-420a7d8a001a"
             }
           },
           {
@@ -1603,7 +1603,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "18ab81ab-4d5a-49ac-b4b9-d9655f487055"
+              "correlation_id": "68905917-3190-48f3-ba96-6f600b4b765f"
             }
           },
           {
@@ -1624,7 +1624,7 @@
             "native_error": {
               "code": "403",
               "message": "Role denied",
-              "correlation_id": "a8c683e3-7a16-4d70-b992-df39adc56663"
+              "correlation_id": "caac0155-3f80-481e-8787-ee38bd8e764e"
             }
           }
         ],
@@ -1697,7 +1697,7 @@
               "native_stock_entries": 3,
               "native_gl_entries": 0,
               "success_events": [
-                "abcc9af80f5d399ddc5b87774de729eb4379e4b9375c832e37d0590db5bc475c"
+                "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57"
               ]
             },
             "MCP-DENY-DELIVER-W": {
@@ -1760,7 +1760,7 @@
               "native_stock_entries": 3,
               "native_gl_entries": 0,
               "success_events": [
-                "db7225b44ce0131c0df125e2ff251c2520d34a2d0ca0b5b46328e27bbdca8af4"
+                "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290"
               ]
             },
             "MCP-DENY-SETTLE-S": {
@@ -1823,7 +1823,7 @@
               "native_stock_entries": 5,
               "native_gl_entries": 4,
               "success_events": [
-                "3eb8d84ea4889b52a77be31b7320dedac3385778e5e383cb06165042950e0429"
+                "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28"
               ]
             },
             "MCP-DENY-SETTLE-W": {
@@ -1886,7 +1886,7 @@
               "native_stock_entries": 5,
               "native_gl_entries": 4,
               "success_events": [
-                "5c912b81eb9a1af8ed849a78f5407b16ea20503eab83076c4344f23aef4b0325"
+                "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21"
               ]
             }
           },
@@ -1909,7 +1909,7 @@
         },
         "expected_domain_effects": 0
       },
-      "seconds": 0.1863
+      "seconds": 0.1472
     }
   ]
 }
