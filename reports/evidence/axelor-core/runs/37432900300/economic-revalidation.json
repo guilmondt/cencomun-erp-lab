@@ -1,0 +1,103 @@
+{
+  "scope": "Independent review of actual post-commit native exports; not complete role/state/atomicity groups",
+  "lab_commit": "842a4dadcd74470dc6041d67d59bdfaf28803410",
+  "ci_run": "37432900300",
+  "checker_sha256": "3099df955dd3498240aa8e82cd4b929ecb36668e36f0320c64f2175d8a5ec97c",
+  "oracle_sha256": "d6dd932042d622b7ec9d2e1f5438d0fd8636d405d0fbb1c3856809017e38ec64",
+  "cases": [
+    {
+      "case": "CO00",
+      "status": "PASS",
+      "export_sha256": "72e9717d455f6e2eaaa03b7e4d3ae9afc81d1ba2f1e35e3b7a76a20d3329209a",
+      "native_source_linkage": {
+        "native_invoice_id": 1,
+        "native_company_id": 1,
+        "header_sale_order_id": 1,
+        "header_sale_order_company_id": 1,
+        "header_sale_order_reference": "CCM-CO00",
+        "line_links": [
+          {
+            "sale_order_id": 1,
+            "sale_order_line_id": 1,
+            "parent_invoice_id": 1,
+            "sale_order_reference": "CCM-CO00",
+            "product_code": "P001",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 1
+          },
+          {
+            "sale_order_id": 1,
+            "sale_order_line_id": 2,
+            "parent_invoice_id": 1,
+            "sale_order_reference": "CCM-CO00",
+            "product_code": "P002",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 2
+          }
+        ],
+        "source": "InvoiceLine.saleOrderLine.saleOrder"
+      },
+      "asserted_native_economics": {
+        "stock_value": "430.00000000000000000000",
+        "account_balances": {
+          "CCM-CASH": "50.000",
+          "CCM-AR": "0.000",
+          "CCM-BANK": "67.000",
+          "CCM-COMMISSION": "8.000",
+          "CCM-REVENUE": "-125.000",
+          "CCM-COGS": "70.000",
+          "CCM-STOCK": "-70.000"
+        },
+        "accounting_profit": "47.000"
+      }
+    },
+    {
+      "case": "TAX01-W",
+      "status": "PASS",
+      "export_sha256": "54e414c998adf286061da6d5678d8f4ff981f4158af08d37ca925f1eae3e26a5",
+      "native_source_linkage": {
+        "native_invoice_id": 2,
+        "native_company_id": 1,
+        "header_sale_order_id": 2,
+        "header_sale_order_company_id": 1,
+        "header_sale_order_reference": "CCM-TAX01-W",
+        "line_links": [
+          {
+            "sale_order_id": 2,
+            "sale_order_line_id": 3,
+            "parent_invoice_id": 2,
+            "sale_order_reference": "CCM-TAX01-W",
+            "product_code": "P001",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 3
+          },
+          {
+            "sale_order_id": 2,
+            "sale_order_line_id": 4,
+            "parent_invoice_id": 2,
+            "sale_order_reference": "CCM-TAX01-W",
+            "product_code": "P002",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 4
+          }
+        ],
+        "source": "InvoiceLine.saleOrderLine.saleOrder"
+      },
+      "asserted_native_economics": {
+        "stock_value": "430.00000000000000000000",
+        "account_balances": {
+          "CCM-CASH": "55.000",
+          "CCM-AR": "0.000",
+          "CCM-BANK": "70.250",
+          "CCM-COMMISSION": "11.550",
+          "CCM-SHIPPING": "0.700",
+          "CCM-REVENUE": "-125.000",
+          "CCM-TAX": "-12.500",
+          "CCM-COGS": "70.000",
+          "CCM-STOCK": "-70.000"
+        },
+        "accounting_profit": "42.750"
+      }
+    }
+  ]
+}

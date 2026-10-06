@@ -84,6 +84,7 @@ echo 'Phase: full AOS compilation, frontend, WAR, embedded runner and upstream t
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
   :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
   --tests com.cencomun.core.NativePermissionFilterTest --tests com.cencomun.core.NativeInvoiceRuntimeTest \
+  --tests com.cencomun.core.NativeOrderModelTest \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
   --write-locks > "$state_dir/private/full-build.log" 2>&1
@@ -103,7 +104,7 @@ assert int(suite.attrib['tests']) == 8, suite.attrib
 assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
 (results/'native-fixture-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
 print('Native address callback regression: 8 cases passed, no failures/errors/skips; no database coverage claim')
-for name,count in [('NativePermissionFilterTest',5),('NativeInvoiceRuntimeTest',2)]:
+for name,count in [('NativePermissionFilterTest',5),('NativeInvoiceRuntimeTest',2),('NativeOrderModelTest',4)]:
     path=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/test-results/test')/f'TEST-com.cencomun.core.{name}.xml'
     suite=ET.parse(path).getroot()
     assert int(suite.attrib['tests']) == count, suite.attrib
@@ -126,6 +127,7 @@ echo 'Phase: replay Gradle targets with generated strict dependency locks'
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
   :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
   --tests com.cencomun.core.NativePermissionFilterTest --tests com.cencomun.core.NativeInvoiceRuntimeTest \
+  --tests com.cencomun.core.NativeOrderModelTest \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
   --offline > "$state_dir/private/frozen-build.log" 2>&1

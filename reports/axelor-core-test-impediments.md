@@ -723,3 +723,34 @@ Matriz4PASS/30UNRUN; criterios1PASS/12UNRUN/1BLOCKED. CI global FAILURE por
 cobertura pendiente, no por fallo de estos gates. ZIP bloqueado sa7, un intento;
 no se amplía/publica red. El siguiente CI añade export de compañía de GL,
 propiedad de líneas contables y fixture independiente; aún no aceptados.
+
+## B31 — cancelación de SaleOrder confirmado antes de entrega
+
+Inspección del AOS fijado 0c70d561b19fc454eba9fdd41689258846626d75:
+SaleOrderWorkflowServiceImpl.cancelSaleOrder admite únicamente
+STATUS_DRAFT_QUOTATION y STATUS_FINALIZED_QUOTATION. APPROVED en el contrato
+congelado exige un pedido nativo confirmado; el override SupplyChain delega
+al mismo guard. Esto afecta los tres subcasos de
+STATE-CANCEL-BEFORE-HANDOVER (STORE APPROVED, WEB APPROVED/PREPARING).
+La inspección de fuente no demuestra un fallo ejecutado ni una corrección.
+
+1. Ejecutar el servicio oficial sobre cada pedido confirmado y conservar su
+   error, estado y snapshots posteriores al rollback. Mantener CANCELLED como
+   resultado esperado; no degradar statusSelect, clonar pedidos ni omitir guards.
+2. Buscar una operación pública soportada que cancele el pedido confirmado
+   conservando documentos, auditoría y atomicidad; si no existe, registrar la
+   incompatibilidad del baseline y su impacto sin cambiar upstream ni pins.
+3. Verificar cualquier solución con los tres subcasos, replay, actor real,
+   stock5/5/5 y ausencia de entrega/factura/pagos/eventos de éxito nuevos.
+   Continuar los estados, roles, rechazos y grupos independientes.
+
+## CI15 — export nativo del fixture y scope contable
+
+CI37435418318 de bd1f898b25af0ec90fcbe6ab7b2b27de0b87f913 completado:
+5PASS/29UNRUN, criterios1PASS/12UNRUN/1BLOCKED. Los gates administrador CO00
+10.872s y TAX01-W5.431s vuelven a PASS, separados de los grupos completos.
+FIXTURE-HASH-NATIVE-EXPORT PASS exige bytes del JAR y registros nativos,
+productos/clientes/monedas y nueve metadatos Role; no aprueba permisos funcionales.
+Los asientos verifican compañía, cuentas y pertenencia de cada línea.
+ZIP bloqueado productionresultssa4.blob.core.windows.net en un único intento;
+logs estructurados conservados, sin ampliación ni publicación de red.

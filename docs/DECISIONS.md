@@ -197,3 +197,27 @@ Runner, finalizador y recuperación de logs rechazan PASS sin export completo
 o que contradiga los fixtures. Sin cambiar oráculo ni resultados esperados.
 Los gates añaden scope nativo de Move/Account y propiedad MoveLine.move;
 es una comprobación adicional, sin modificar efectos económicos.
+
+## ADR-010 — Estado Cencomun con efectos y seguridad nativos
+
+2026-10-06. Se reutiliza el único módulo para CcmOrder/líneas, claves,
+auditoría y outbox. FK de compañía, producto, actor, SaleOrder, StockMove e
+Invoice son reales. Se incorpora únicamente el proyecto supplychain del AOS
+fijado, sin artefactos/versiones nuevos ni cambiar locks/pins originales. Los
+servicios nativos confirman en APPROVED, entregan/facturan/contabilizan COGS en
+FULFILLED/SHIPPED y cobran/liquidan en SETTLED. La transacción incluye estado,
+clave, auditoría de éxito y evento; el recurso registra rechazos después del
+rollback. Fallos sintéticos tras entrega/liquidación prueban rollback real.
+Los repositorios Cencomun bloquean CRUD genérico y la auditoría es inmutable.
+Roles reales separados conservan grants previos; permisos READ usan scope de
+compañía y placeholders oficiales. Los usuarios sintéticos existen sólo en
+la DB efímera del CI, sin credenciales persistentes locales/producción.
+
+B31 conserva como incompatibilidad a probar la cancelación nativa de pedidos
+confirmados. No se degrada statusSelect ni se suplanta el servicio nativo.
+El costo negativo se intenta con un StockMove real; si el ERP lo acepta se
+revierte únicamente para limpiar el diagnóstico y el subcaso queda FAIL.
+Cada grupo tiene una lista cerrada de subcasos, con snapshots posteriores a
+commit/rollback y regresiones del agregador. El éxito de administrador no
+sustituye roles/estados/atomicidad. Los resultados grandes del log se fragmentan
+con índices únicos, cantidad exacta y SHA256, sin aceptar evidencia truncada.

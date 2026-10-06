@@ -28,9 +28,11 @@ def finalize(repo, host, output):
         diffs[name] = subprocess.run(["git", "-C", str(root), "diff", "HEAD", "--exit-code"], capture_output=True).returncode
     suites = {}
     paths = [("CencomunModuleTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.baseline.module.CencomunModuleTest.xml"),
+             ("CoreOrderPolicyTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.CoreOrderPolicyTest.xml"),
              ("MoneyPolicyTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.MoneyPolicyTest.xml"),
              ("NativeAddressTemplateTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeAddressTemplateTest.xml"),
              ("NativePermissionFilterTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativePermissionFilterTest.xml"),
+             ("NativeOrderModelTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeOrderModelTest.xml"),
              ("NativeInvoiceRuntimeTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeInvoiceRuntimeTest.xml"),
              ("TestTaxNumberHelper", host / "modules/axelor-open-suite/axelor-base/build/test-results/test/TEST-com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper.xml")]
     for name, path in paths:
@@ -56,6 +58,11 @@ def finalize(repo, host, output):
     fixture_path = output / "FIXTURE-HASH-NATIVE-EXPORT.json"
     review_native_fixture(fixture, json.loads(fixture_path.read_text()) if fixture_path.exists() else {},
                           repo / "fixtures/ccm-core-v1")
+    from order_cases import GROUP_CHECKS, review_order_group
+    for row in coverage["groups"]:
+        if row["case"] in GROUP_CHECKS:
+            path = output / (row["case"]+".json")
+            review_order_group(row, json.loads(path.read_text()) if path.exists() else {}, repo / "fixtures/ccm-core-v1")
     coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
     coverage["criteria"] = criteria_for(coverage["groups"], proof)
     coverage["build_evidence"] = "build-evidence.json"

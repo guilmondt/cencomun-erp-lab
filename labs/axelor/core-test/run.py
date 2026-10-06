@@ -5,6 +5,7 @@ No database connection, expected business values are assertion-only. A missing
 implementation is UNRUN, never a passing substitute for a required group.
 """
 import argparse
+import base64
 import hashlib
 import http.cookiejar
 import json
@@ -62,6 +63,7 @@ class NativeClient:
         start = time.perf_counter()
         try:
             with self.opener.open(urllib.request.Request(self.base + path, raw, headers), timeout=600) as r:
+                self.last_status = r.status
                 return json.loads(r.read())
         finally:
             self.samples.append({"operation": path.split("?")[0], "http_ms": round((time.perf_counter() - start) * 1000, 3)})
@@ -106,7 +108,7 @@ def verified_build_status(evidence):
         return "FAIL"
     if evidence["baseline_pin_blob_sha256"] != evidence["expected_baseline_pin_blob_sha256"]:
         return "FAIL"
-    for name, count in {"CencomunModuleTest": 2, "MoneyPolicyTest": 7, "TestTaxNumberHelper": 16}.items():
+    for name, count in {"CencomunModuleTest": 2, "MoneyPolicyTest": 7, "CoreOrderPolicyTest": 9, "TestTaxNumberHelper": 16}.items():
         suite = evidence["suites"].get(name)
         if suite is None:
             return "UNRUN"
@@ -822,6 +824,18 @@ def publish_native_section(case, section, records):
                 print(f"::notice title=Native {case} {section} record::" + value.replace("%", "%25"), flush=True)
 
 
+def publish_complete_evidence(evidence):
+    """Hash-checked complete result fragments; truncated Actions notices cannot imply PASS."""
+    raw = json.dumps(evidence, ensure_ascii=True, separators=(",", ":")).encode()
+    encoded = base64.b64encode(raw).decode()
+    parts = [encoded[i:i+2800] for i in range(0, len(encoded), 2800)]
+    for index, part in enumerate(parts):
+        notice = {"complete_evidence_case": evidence["case"], "reference": REFERENCE,
+                  "content_sha256": hashlib.sha256(raw).hexdigest(), "fragment_index": index,
+                  "fragment_count": len(parts), "base64_fragment": part}
+        print("::notice title=Core executed group evidence::" + json.dumps(notice), flush=True)
+
+
 def run(base, fixtures, output):
     output.mkdir(parents=True, exist_ok=True)
     required = verify_bundle(fixtures)
@@ -897,6 +911,8 @@ def run(base, fixtures, output):
     book = run_bank_book_cases(client, fixtures, output, by_case["BANK-BOOK-FIXTURE"])
     fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"])
     fixture = run_fixture_cases(client, fixtures, output, by_case["FIXTURE-HASH-NATIVE-EXPORT"])
+    from order_cases import run_order_cases
+    orders = run_order_cases(client, base, fixtures, output, by_case)
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
@@ -905,7 +921,7 @@ def run(base, fixtures, output):
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     metrics = {"metric_kind": "runtime", "reference": REFERENCE,
                                                    "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,

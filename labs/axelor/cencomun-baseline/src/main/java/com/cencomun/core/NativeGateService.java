@@ -150,9 +150,19 @@ public class NativeGateService {
 
   @Transactional(rollbackOn = Exception.class)
   public void sell(Progress p, JsonNode input) {
+    Model so = approve(p, input);
+    Map<String, Model> documents = deliver(p, input, so);
+    p.stage("native-cogs-and-settlement");
+    p.evidence.put("finance", NativeFinance.post(managed((Model) get(so, "company")),
+        managed((Model) get(so, "clientPartner")), documents.get("delivery"), documents.get("invoice"), input));
+    p.stage("native-flow-complete");
+  }
+
+  /** These helpers join the caller's economic transaction; none prepares/commits fixtures. */
+  public Model approve(Progress p, JsonNode input) {
     String caseId = input.get("id").asText();
     Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
-    Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", "C001");
+    Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", input.path("customer_id").asText());
     Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
     p.stage("native-sale-order");
     Model so = (Model) call(service("com.axelor.apps.sale.service.saleorder.SaleOrderCreateService"), "createSaleOrder",
@@ -182,6 +192,22 @@ public class NativeGateService {
     p.stage("native-sale-order-confirmation");
     call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderConfirmService"), "confirmSaleOrder", so);
     so = managed(so);
+    p.evidence.put("sale_order_id", so.getId());
+    return so;
+  }
+
+  public Map<String, Model> deliver(Progress p, JsonNode input, Model so) {
+    String caseId = input.get("id").asText();
+    Model company = (Model) get(so, "company");
+    Model customer = (Model) get(so, "clientPartner");
+    Model warehouse = (Model) get(so, "stockLocation");
+    for (Object saleLine : (List<?>) get(so, "saleOrderLineList")) {
+      Model product = (Model) get(saleLine, "product");
+      Model stockLine = one(STOCK + "StockLocationLine", "self.stockLocation = ?1 AND self.product = ?2", warehouse, product);
+      if (stockLine == null) throw new CoreFault(422, "Native stock line missing");
+      call(service("com.axelor.apps.stock.service.StockLocationLineService"), "checkIfEnoughStock",
+          warehouse, product, get(saleLine, "unit"), get(saleLine, "qty"));
+    }
     p.stage("native-sale-delivery");
     Object moveIds = call(service("com.axelor.apps.supplychain.service.saleorder.SaleOrderStockService"), "createStocksMovesFromSaleOrder", so);
     if (!(moveIds instanceof List<?> ids) || ids.size() != 1) throw new IllegalStateException("Expected exactly one native delivery");
@@ -213,9 +239,7 @@ public class NativeGateService {
     company = managed(company); customer = managed(customer);
     p.evidence.put("sale_order_id", so.getId()); p.evidence.put("delivery_id", delivery.getId());
     p.evidence.put("invoice_id", invoice.getId());
-    p.stage("native-cogs-and-settlement");
-    p.evidence.put("finance", NativeFinance.post(company, customer, delivery, invoice, input));
-    p.stage("native-flow-complete");
+    return Map.of("delivery", delivery, "invoice", invoice);
   }
 
   /** Fresh repository reads after success/rollback; transient IDs never count as evidence. */

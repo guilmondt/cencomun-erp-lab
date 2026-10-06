@@ -29,6 +29,11 @@ public final class NativeAccess {
     catch (ReflectiveOperationException e) { throw new IllegalStateException(e); }
   }
   public static Model save(Model model) {
+    if (EntityHelper.getEntityClass(model).getName().startsWith("com.cencomun.core.db.Ccm")) {
+      try (CoreWriteScope scope = CoreWriteScope.enter()) {
+        return JpaRepository.of(EntityHelper.getEntityClass(model)).save(model);
+      }
+    }
     return JpaRepository.of(EntityHelper.getEntityClass(model)).save(model);
   }
   /** Same AOP contract as the pinned stock JpaModelHelper, after native batch clears. */

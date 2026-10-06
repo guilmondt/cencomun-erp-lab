@@ -618,7 +618,7 @@ class EvidenceTests(unittest.TestCase):
                  "aos_commit": "0c70d561b19fc454eba9fdd41689258846626d75", "upstream_diff_exit_codes": {"host": 0, "aos": 1},
                  "baseline_pin_blob_sha256": "2" * 64, "expected_baseline_pin_blob_sha256": "2" * 64,
                  "suites": {name: {"tests": count, "failures": 0, "errors": 0, "skipped": 0}
-                            for name, count in {"CencomunModuleTest": 2, "MoneyPolicyTest": 7, "TestTaxNumberHelper": 16}.items()},
+                            for name, count in {"CencomunModuleTest": 2, "MoneyPolicyTest": 7, "CoreOrderPolicyTest": 9, "TestTaxNumberHelper": 16}.items()},
                  "war_sha256": "3" * 64}
         self.assertEqual("FAIL", verified_build_status(proof))
         proof["upstream_diff_exit_codes"]["aos"] = 0

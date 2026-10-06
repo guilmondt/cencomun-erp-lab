@@ -596,3 +596,17 @@ lector y403 ajeno PASS; PROD/BANK/FX completos PASS del mismo commit.
 Matriz4PASS/30UNRUN, criterios1PASS/12UNRUN/1BLOCKED. No se completan los grupos
 económicos por esos gates. Se envía una única ampliación independiente del
 export de fixtures/scope GL después de terminar ese CI; repetir gates primero.
+
+## Continuación agrupada: ciclo de pedidos, roles y atomicidad
+
+Después de CI15 se ejecutará un bloque único: cuatro recorridos económicos por
+operador/simulador reales, ocho validaciones, insuficiencia de stock, estados
+excepcionales y negativos revisión2 (2 desconocidos,5 entregas sin aceptación,
+WEB sin guía,3 cancelaciones previas). Los modelos Cencomun usarán FK reales a
+SaleOrder/StockMove/Invoice; las transiciones económicas, clave, auditoría de
+éxito y outbox comparten transacción. Los rechazos auditan tras rollback, sin
+conservar efectos económicos. La posible incompatibilidad de cancelación nativa
+confirmada está descrita en B31 antes de ampliar el trabajo. Los subcasos se
+revalidan por lecturas posteriores al commit; ninguna etiqueta PASS se hereda.
+Continuarán compras, caja, banco, API/MCP, concurrencia, recuperación y medición
+según esta matriz; un avance parcial no cierra la tarea autorizada.

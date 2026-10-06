@@ -5,6 +5,7 @@ This is a secondary evidence source when a ZIP is unavailable. Missing notices
 remain UNRUN; never infer native success from a build or an absent exception.
 """
 import argparse
+import base64
 import hashlib
 import json
 from collections import Counter
@@ -29,6 +30,23 @@ def extract(log, output, run_id, commit, fixtures):
         if value[end:].strip():
             continue  # Truncated or mixed output never establishes a result.
         objects.append(item)
+    complete_fragments = {}
+    for item in objects:
+        if item.get("complete_evidence_case") and item.get("reference") == REFERENCE:
+            complete_fragments.setdefault(item["complete_evidence_case"], []).append(item)
+    complete_groups = {}
+    for case, parts in complete_fragments.items():
+        try:
+            count = parts[0]["fragment_count"]
+            assert count > 0 and len(parts) == count and {p["fragment_index"] for p in parts} == set(range(count))
+            assert all(p["fragment_count"] == count and p["content_sha256"] == parts[0]["content_sha256"] for p in parts)
+            raw = base64.b64decode("".join(p["base64_fragment"] for p in sorted(parts, key=lambda p: p["fragment_index"])), validate=True)
+            assert hashlib.sha256(raw).hexdigest() == parts[0]["content_sha256"]
+            item = json.loads(raw)
+            assert item["case"] == case and item["reference"] == REFERENCE
+            complete_groups[case] = item
+        except (AssertionError, KeyError, TypeError, ValueError):
+            continue  # No inferred result from missing, duplicate or altered fragments.
     rows = rows_for(verify_bundle(fixtures))
     by_case = {r["case"]: r for r in rows}
     gates, exports, independent = {}, {}, {}
@@ -158,6 +176,17 @@ def extract(log, output, run_id, commit, fixtures):
             item["reported_complete"] = item["complete"]
             item.update(status=by_case[case]["status"], complete=by_case[case]["complete"], review_reason=by_case[case]["reason"])
         (output / f"{case}.json").write_text(json.dumps(item, indent=2) + "\n")
+    from order_cases import GROUP_CHECKS, review_order_group
+    for case, item in complete_groups.items():
+        if case not in GROUP_CHECKS:
+            continue
+        row = by_case[case]
+        row.update(status=item["status"], observed_revision=item["revision"], complete=item["complete"],
+                   evidence=case+".json", reason=item.get("error", "Complete executed native proof"))
+        review_order_group(row, item, fixtures)
+        if row["status"] != item["status"] or row["complete"] != item["complete"]:
+            item.update(reported_status=item["status"], status=row["status"], complete=row["complete"], review_reason=row["reason"])
+        (output / (case+".json")).write_text(json.dumps(item, indent=2)+"\n")
     if proof:
         (output / "build-evidence.json").write_text(json.dumps(proof, indent=2) + "\n")
     results = {"source": "complete structured Actions log notices; ZIP availability tracked separately",

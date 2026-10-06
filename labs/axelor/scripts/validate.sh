@@ -38,6 +38,12 @@ if policy_path.exists():
     policy_count = int(policy.attrib['tests'])
     assert policy_count == 7, policy.attrib
     assert all(int(policy.attrib[k]) == 0 for k in ['failures','errors','skipped']), policy.attrib
+order_count = 0
+order_path = module / 'build/test-results/test/TEST-com.cencomun.core.CoreOrderPolicyTest.xml'
+if order_path.exists():
+    order = ET.parse(order_path).getroot()
+    order_count = int(order.attrib['tests'])
+    assert order_count == 9 and all(int(order.attrib[k]) == 0 for k in ['failures','errors','skipped']), order.attrib
 artifact = module / 'build/libs/cencomun-baseline-0.1.0.jar'
 with zipfile.ZipFile(artifact) as jar:
     entries = set(jar.namelist())
@@ -48,7 +54,7 @@ with zipfile.ZipFile(artifact) as jar:
         assert 'ccm-core-v1/manifest.json' in entries
         import hashlib
         assert hashlib.sha256(jar.read('ccm-core-v1/manifest.json')).hexdigest() == '28496929050e7cfeea214dbf0ee5cbd589a08ab2adb60e1849877778baaf9aed'
-print(f'Validated: 2 baseline tests + {policy_count} Core policy unit tests passed; 0 failed/errors/skipped; custom JAR and metadata verified.')
+print(f'Validated: 2 baseline tests + {policy_count} money + {order_count} order policy unit tests passed; 0 failed/errors/skipped; custom JAR and metadata verified.')
 PY
 
 ./scripts/verify-repo.sh

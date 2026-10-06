@@ -214,21 +214,36 @@ public final class NativeFinance {
   }
 
   public static Map<String, Object> post(Model company, Model customer, Model delivery, Model invoice, JsonNode input) {
+    Model cogs = postCost(company, customer, delivery, input);
+    Map<String, Object> result = new LinkedHashMap<>(postSettlement(managed(company), managed(customer), managed(delivery), managed(invoice), input));
+    result.put("cogs_move_id", cogs.getId());
+    return result;
+  }
+  private static Map<String, BigDecimal> observedCosts(Model delivery) {
     // Cost is observed from native realized StockMoveLine WAP, not fixture cost or oracle.
-    Map<String, BigDecimal> costs = new LinkedHashMap<>(); BigDecimal totalCost = BigDecimal.ZERO;
+    Map<String, BigDecimal> costs = new LinkedHashMap<>();
     for (Object item : (List<?>) get(delivery, "stockMoveLineList")) {
       Model product = (Model) get(item, "product");
       BigDecimal wap = (BigDecimal) get(item, "wapPrice");
       costs.put((String) get(product, "code"), wap);
-      totalCost = totalCost.add(((BigDecimal) get(item, "realQty")).multiply(wap));
     }
-    Map<String, BigDecimal> calculation = MoneyPolicy.calculate(input, costs);
+    return costs;
+  }
+  public static Model postCost(Model company, Model customer, Model delivery, JsonNode input) {
+    BigDecimal totalCost = BigDecimal.ZERO;
+    for (Object item : (List<?>) get(delivery, "stockMoveLineList"))
+      totalCost = totalCost.add(((BigDecimal) get(item, "realQty")).multiply((BigDecimal) get(item, "wapPrice")));
     Model cogs = move(company, customer, "GENERAL", null, "CCM-" + input.get("id").asText() + "-COGS");
     List<Model> costLines = new ArrayList<>();
     costLines.add(line(cogs, customer, acct(company, "COGS"), MoneyPolicy.money(totalCost), true, 1));
     costLines.add(line(cogs, customer, acct(company, "STOCK"), MoneyPolicy.money(totalCost), false, 2));
     appendLines(cogs, costLines); cogs = save(cogs);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", cogs);
+    return managed(cogs);
+  }
+  public static Map<String, Object> postSettlement(Model company, Model customer, Model delivery, Model invoice, JsonNode input) {
+    Map<String, BigDecimal> costs = observedCosts(delivery);
+    Map<String, BigDecimal> calculation = MoneyPolicy.calculate(input, costs);
     invoice = managed(invoice);
     Object createPayment = service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentCreateService");
     Model currency = (Model) get(company, "currency");
@@ -257,8 +272,8 @@ public final class NativeFinance {
     if (invoiceDebit == null) throw new IllegalStateException("Native invoice receivable debit missing");
     // Reconciliation updates native InvoicePayments/terms through the framework service.
     Model reconciliation = (Model) call(service("com.axelor.apps.account.service.reconcile.ReconcileService"), "reconcile", invoiceDebit, credit, false, true);
-    return Map.of("cogs_move_id", cogs.getId(), "settlement_move_id", settle.getId(), "reconcile_id", reconciliation.getId(), "upfront_payment_id", upfront.getId(),
-        "native_wap_costs", costs, "calculation", calculation);
+    return Map.of("settlement_move_id", settle.getId(), "reconcile_id", reconciliation.getId(),
+        "upfront_payment_id", upfront.getId(), "native_wap_costs", costs, "calculation", calculation);
   }
   private static Model move(Model company, Model partner, String journal, Model mode, String origin) {
     Model j = one(ACCOUNT + "Journal", "self.company = ?1 AND self.code = ?2", company, "CCM-" + journal);

@@ -4,8 +4,8 @@ Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613
 16 fixtures idénticos más manifiesto, oráculo intacto, cobertura revisión2,
 34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.
 
-Último CI finalizado: [37432900300](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37432900300),
-commit `842a4dadcd74470dc6041d67d59bdfaf28803410`, **FAILURE**.
+Último CI finalizado: [37435418318](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37435418318),
+commit `bd1f898b25af0ec90fcbe6ab7b2b27de0b87f913`, **FAILURE**.
 Los gates administrador y casos independientes ejecutados pasan. El resultado
 global conserva cobertura pendiente: no se declara terminada la comparación.
 Cada resultado pertenece a ese commit; no se arrastran PASS históricos.
@@ -14,8 +14,8 @@ Cada resultado pertenece a ese commit; no se arrastran PASS históricos.
 
 | Gate administrador | Estado | Tiempo | Resultado |
 | --- | --- | --- | --- |
-| CO00 | PASS | 15.960s | Lectura nativa después del commit y oráculo |
-| TAX01-W | PASS | 8.563s | Lectura nativa después del commit y oráculo |
+| CO00 | PASS | 10.872s | Lectura nativa después del commit y oráculo |
+| TAX01-W | PASS | 5.431s | Lectura nativa después del commit y oráculo |
 
 INVOICE_ALL completo asignó la cabecera nativa. getInvoices encontró una
 factura por venta y ambas FK InvoiceLine.saleOrderLine.saleOrder;
@@ -50,10 +50,11 @@ isVentilationSkipped=false. InvoiceService.validate/ventilate íntegro.
 
 | Grupo | Estado | Tiempo |
 | --- | --- | --- |
-| PROD01-04 | PASS | 2.457s |
-| SEARCH01-04-NATIVE | PASS | 0.464s |
-| BANK-BOOK-FIXTURE | PASS | 0.770s |
-| FX01-03-MONEY01-03 | PASS | 4.430s |
+| PROD01-04 | PASS | 1.973s |
+| SEARCH01-04-NATIVE | PASS | 0.380s |
+| BANK-BOOK-FIXTURE | PASS | 0.603s |
+| FX01-03-MONEY01-03 | PASS | 3.097s |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS | 0.105s |
 
 PROD usa operador real, CRUD y lecturas posteriores. BANK-BOOK: cuatro
 anticipos nativos, GL contabilizado, saldo255 y replay idéntico.
@@ -67,7 +68,7 @@ se conserva aparte; el agregador rechaza cálculos/tasas sin pagos nativos.
 
 ## Matriz de 34 grupos — CI finalizado
 
-**PASS4** / **FAIL0** / **BLOCKED0** / **UNRUN30**.
+**PASS5** / **FAIL0** / **BLOCKED0** / **UNRUN29**.
 Los UNRUN incluyen los dos gates parciales; el resto sigue sin aceptación completa.
 
 | Grupo requerido | Revisión mínima | Estado | Completo |
@@ -96,7 +97,7 @@ Los UNRUN incluyen los dos gates parciales; el resto sigue sin aceptación compl
 | MCP01-06-STDIO | 2 | UNRUN | No |
 | IDEM03-LOST-RESTART | 1 | UNRUN | No |
 | IDEM04-EVENTS-RECOVERY | 2 | UNRUN | No |
-| FIXTURE-HASH-NATIVE-EXPORT | 1 | UNRUN | No |
+| FIXTURE-HASH-NATIVE-EXPORT | 1 | PASS | Sí |
 | AUDIT01-03-NATIVE | 2 | UNRUN | No |
 | IDEM-TAX-NATIVE-EFFECT-COUNTS | 1 | UNRUN | No |
 | SUPPORTED-CONFIGURATION | 1 | UNRUN | No |
@@ -135,43 +136,34 @@ integral tampoco se aprueban por smoke.
 ## Validaciones y métricas
 
 - 40 tests Java reales: 2baseline+7política+8dirección+5filtros+2flags+
-  16upstream, cero fallos/errores/skips. Python ejecutó 25 regresiones.
+  16upstream, cero fallos/errores/skips. Python ejecutó 30 regresiones.
 - Preflight HTTP AddressBaseRepository completo PASS: save/render/compute,
   plantilla con cinco hijos/metadatos y campos requeridos, lectura/replay.
-- Readiness inicial422.6s; reinicio misma DB315.35s;
-  job19min35s. Login/REST autenticados, AOP8.2.3/AOS9.1.8,
+- Readiness inicial326.02s; reinicio misma DB257.89s;
+  job15min44s. Login/REST autenticados, AOP8.2.3/AOS9.1.8,
   módulo0.1.0, 33módulos.
-- CPU4/afinidad4; disco libre87087755264bytes.
-  HTTP por actor: `{"administrator": 30, "product_operator": 30, "search_reader": 16, "fx_operator": 11, "fx_manager": 4}`.
+- CPU4/afinidad4; disco libre87087382528bytes.
+  HTTP por actor: `{"administrator": 32, "product_operator": 30, "search_reader": 16, "fx_operator": 11, "fx_manager": 4}`.
 - p50/p95/p99, 1000muestras y query/DB timing: UNRUN.
 - Ambos upstreams fijados diff0; pins SHA256 `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
-  WAR SHA256 `f1a22744900b620722f8d184396fa45b85086fac62e2dcc35edd23068b946b06`.
+  WAR SHA256 `96210618a6ec7646dc76bf8ab9e24c7967635a589e383038784e1eb06d2b6be2`.
 
 ## Evidencia y continuidad
 
-[coverage.json](evidence/axelor-core/runs/37432900300/coverage.json),
-[CO00](evidence/axelor-core/runs/37432900300/CO00-native-export.json),
-[TAX01-W](evidence/axelor-core/runs/37432900300/TAX01-W-native-export.json),
-[SEARCH/lector](evidence/axelor-core/runs/37432900300/SEARCH01-04-NATIVE.json),
-[cuatro pagos FX](evidence/axelor-core/runs/37432900300/FX01-03-MONEY01-03.json),
-[atestación build](evidence/axelor-core/runs/37432900300/build-evidence.json),
-[métricas](evidence/axelor-core/runs/37432900300/runtime-metrics.json),
-[procedencia/hashes](evidence/axelor-core/runs/37432900300/evidence-source.json).
+[coverage.json](evidence/axelor-core/runs/37435418318/coverage.json),
+[CO00](evidence/axelor-core/runs/37435418318/CO00-native-export.json),
+[TAX01-W](evidence/axelor-core/runs/37435418318/TAX01-W-native-export.json),
+[SEARCH/lector](evidence/axelor-core/runs/37435418318/SEARCH01-04-NATIVE.json),
+[cuatro pagos FX](evidence/axelor-core/runs/37435418318/FX01-03-MONEY01-03.json),
+[atestación build](evidence/axelor-core/runs/37435418318/build-evidence.json),
+[métricas](evidence/axelor-core/runs/37435418318/runtime-metrics.json),
+[procedencia/hashes](evidence/axelor-core/runs/37435418318/evidence-source.json).
 Fuente secundaria: JSON completos del log, validados con código del mismo SHA.
-ZIP11398462758: un intento Forbidden en productionresultssa7.blob.core.windows.net;
-sin ampliar ni publicar red. Log recuperable: `/workspace/ccm-axelor-runtime/ci-evidence/37432900300.log`.
+ZIP11399482551: un intento Forbidden en productionresultssa4.blob.core.windows.net;
+sin ampliar ni publicar red. Log recuperable: `/workspace/ccm-axelor-runtime/ci-evidence/37435418318.log`.
 
 CI es fuente de aceptación. Docker/PostgreSQL local no equivalen a ERP fiable;
 el diagnóstico JPA anterior quedó en RequestScoped/saveUNRUN. El preflight
 HTTP real ya pasó. Sin permisos del sistema ni credenciales persistentes nuevas.
 Sin PR/merge/despliegue ni cambios main/Frappe/pins/upstream. Arranque guardado
 sólo en borrador; publicación de red pendiente no se ejecuta.
-
-Siguiente fuente preparada, aceptación ERP **pendiente**: export nativo de16
-hashes/productos/clientes/monedas/nueve metadatos Role, sin usuarios ni grants;
-scope de Move/Account y propiedad MoveLine.move. Publicación de registros
-completos numerados evita pérdidas de GL en avisos grandes. 30 regresiones,
-baseline2+7 y compileJava/JAR full-native offline estricto PASS19s localmente.
-[Validación local](evidence/axelor-core/invoice-fixture-local-20261006/validation.json).
-ADR009/ExecPlan explican alcance; contar roles no aprueba permisos funcionales.
-Repetir gates primero y luego independientes en un único CI, sin arrastrar PASS.

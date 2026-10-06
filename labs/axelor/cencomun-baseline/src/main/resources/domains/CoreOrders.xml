@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://axelor.com/xml/ns/domain-models https://axelor.com/xml/ns/domain-models/domain-models_8.2.xsd">
+ <module name="cencomun-baseline" package="com.cencomun.core.db"/>
+ <entity name="CcmOrder">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <string name="functionalId" required="true"/>
+  <enum name="channel" ref="CcmOrderChannel" required="true"/>
+  <enum name="state" ref="CcmOrderState" required="true" default="NEW"/>
+  <string name="payload" large="true" required="true"/>
+  <string name="guide"/>
+  <many-to-one name="creator" ref="com.axelor.auth.db.User" required="true"/>
+  <many-to-one name="saleOrder" ref="com.axelor.apps.sale.db.SaleOrder"/>
+  <many-to-one name="delivery" ref="com.axelor.apps.stock.db.StockMove"/>
+  <many-to-one name="invoice" ref="com.axelor.apps.account.db.Invoice"/>
+  <one-to-many name="lineList" ref="CcmOrderLine" mappedBy="coreOrder"/>
+  <unique-constraint columns="company,functionalId"/>
+  <track on="UPDATE"><field name="state"/><field name="guide"/></track>
+ </entity>
+ <entity name="CcmOrderLine">
+  <many-to-one name="coreOrder" ref="CcmOrder" required="true"/>
+  <many-to-one name="product" ref="com.axelor.apps.base.db.Product" required="true"/>
+  <decimal name="qty" precision="20" scale="0" required="true" min="1"/>
+  <decimal name="unitPrice" precision="20" scale="2" required="true" min="0.01"/>
+ </entity>
+ <entity name="CcmRequestKey">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <string name="domain" required="true"/>
+  <string name="requestKey" required="true"/>
+  <string name="payloadHash" required="true"/>
+  <string name="objectRef" required="true"/>
+  <string name="result" large="true" required="true"/>
+  <unique-constraint columns="company,domain,requestKey"/>
+ </entity>
+ <entity name="CcmAudit">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <many-to-one name="actor" ref="com.axelor.auth.db.User"/>
+  <string name="actorCode" required="true"/>
+  <string name="objectRef" required="true"/>
+  <string name="kind" required="true"/>
+  <string name="correlation" required="true"/>
+  <string name="beforeState" large="true" required="true"/>
+  <string name="afterState" large="true" required="true"/>
+  <string name="reason" large="true" required="true"/>
+  <boolean name="rejected"/>
+ </entity>
+ <entity name="CcmOutboxEvent">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <many-to-one name="coreOrder" ref="CcmOrder" required="true"/>
+  <string name="eventKey" required="true" unique="true"/>
+  <string name="kind" required="true"/>
+  <string name="payload" large="true" required="true"/>
+  <boolean name="delivered"/>
+  <integer name="attempts" min="0"/>
+ </entity>
+ <enum name="CcmOrderChannel"><item name="STORE"/><item name="WEB"/></enum>
+ <enum name="CcmOrderState">
+  <item name="NEW"/><item name="REVIEWED"/><item name="APPROVED"/><item name="PREPARING"/>
+  <item name="FULFILLED"/><item name="SHIPPED"/><item name="SETTLED"/><item name="REJECTED"/><item name="CANCELLED"/>
+ </enum>
+</domain-models>
