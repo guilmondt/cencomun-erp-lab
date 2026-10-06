@@ -15,10 +15,32 @@ def classify(block, events):
         return 'DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION', 'Explicit offline rejection is the terminal exception; no provider response is inferred.'
     if 'Connection refused' in terminal and '127.0.0.1' in block:
         return 'DEMONSTRATED_LOCAL_HTTP_REFUSAL_CAUSE_UNKNOWN', 'Terminal connection refusal and loopback URL in the native trace are demonstrated; endpoint availability cause remains UNKNOWN, not an inevitable blocker.'
+    if terminal.startswith('frappe.exceptions.ValidationError: Exchange Rate is mandatory.'):
+        enabled = any(e.get('kind') == 'native_state' and e.get('stage') == 'before_test'
+                      and e.get('fx_settings', {}).get('disabled') == 0 for e in events)
+        for index, event in enumerate(events):
+            if not (event.get('kind') == 'fx_return' and event.get('result') == 0
+                    and event.get('entries') == []):
+                continue
+            pair = str(event.get('from_currency')) + ' to ' + str(event.get('to_currency'))
+            if pair not in terminal:
+                continue
+            prior = []
+            for earlier in reversed(events[:index]):
+                if earlier.get('pid') != event.get('pid'):
+                    continue
+                if earlier.get('kind') == 'fx_return':
+                    break
+                prior.append(earlier)
+            rejected = any(e.get('kind') == 'native_fx_error_log'
+                           and 'Official offline reproduction' in e.get('terminal_exception', '')
+                           for e in prior)
+            if enabled and rejected:
+                return 'DEMONSTRATED_OFFLINE_MISSING_NATIVE_RATE', ('Native validator requires the same currency pair whose native resolver returned zero with no eligible rows, after a same-PID offline error log and enabled settings. No provider response or rate is fabricated; no alternate fixture policy is inferred.')
     return 'UNKNOWN', 'Failure reproduced in this full pass; available evidence does not establish its cause.'
 
 
-def publish(path):
+def publish(path, revision=None):
     result = json.loads(path.read_text())
     raw = re.sub(r'\x1b\[[0-9;]*m', '', (PRIVATE / (path.stem + '.log')).read_text())
     stream = PRIVATE / (path.stem + '-observations.jsonl')
@@ -55,7 +77,14 @@ def publish(path):
                 'exit_code': result['exit_code'], 'observed_events': len(result['cases']),
                 'phase': 'Native command terminated without its final summary; inspect private trace before attributing bootstrap/import cause.',
                 'native_trace_frames': re.findall(r'^  File .+$', raw, re.M)[-20:]}}
-    destination = OUT / (result['app'] + '-final-failure-diagnostics.json')
+    if revision is not None:
+        if not isinstance(revision, int) or revision < 2:
+            raise ValueError('Diagnostic revisions must be integers >= 2.')
+        data['diagnostic_revision'] = revision
+        data['supersedes'] = result['app'] + '-final-failure-diagnostics.json'
+        data['native_execution_repeated'] = False
+    destination = OUT / (result['app'] + '-final-failure-diagnostics' +
+                         ('-v' + str(revision) if revision is not None else '') + '.json')
     with destination.open('x') as output:
         output.write(redact(json.dumps(data, indent=2)) + '\n')
     print(json.dumps({k: data[k] for k in ('app', 'status', 'classification_counts', 'native_summary_complete')}))

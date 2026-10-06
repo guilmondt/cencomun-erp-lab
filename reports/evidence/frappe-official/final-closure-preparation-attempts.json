@@ -1,0 +1,40 @@
+{
+  "scope": "Read-only closing helper, not an official suite or Core regression",
+  "attempts": [
+    {
+      "attempt": 1,
+      "command": "python scripts/official-tests/closure.py",
+      "status": "FAIL",
+      "error_type": "FileNotFoundError",
+      "cause": "Native site logger resolved its path from the Bench directory instead of sites/",
+      "native_tests_executed": 0
+    },
+    {
+      "attempt": 2,
+      "command": "closure.main() in diagnostic wrapper",
+      "status": "FAIL",
+      "error_type": "FileNotFoundError",
+      "missing_path": "official-bench/ccm-upstream-frappe.test/logs/database.log",
+      "native_frame_functions": [
+        "connect",
+        "get_db",
+        "get_logger",
+        "create_handler",
+        "RotatingFileHandler",
+        "_open"
+      ],
+      "native_tests_executed": 0
+    },
+    {
+      "attempt": 3,
+      "command": "python scripts/official-tests/closure.py after native sites/ workdir correction",
+      "status": "PASS",
+      "evidence": "final-closure.json",
+      "native_tests_executed": 0
+    }
+  ],
+  "fix": "Use context manager sites_workdir to select the existing native sites directory and restore the caller cwd",
+  "native_logger_regression": "test_readonly_closure_supports_native_site_log_paths",
+  "official_suites_repeated": false,
+  "original_runtime_modified": false
+}

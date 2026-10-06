@@ -4,13 +4,15 @@ Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, 
 
 | Aplicación | Sitio del último intento registrado | Descubiertas | Ejecutadas (contador nativo) | Estado | Exit | Segundos | Evidencia |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| frappe | ccm-upstream-frappe-fresh.test | 2326 | 2319 | FAIL | 1 | 814.858 | [frappe-latest.json](evidence/frappe-official/frappe-latest.json) |
-| erpnext | ccm-upstream-erpnext-fresh.test | 3255 | 3255 | FAIL | 1 | 2507.481 | [erpnext-latest.json](evidence/frappe-official/erpnext-latest.json) |
+| frappe | ccm-upstream-frappe-final.test | 2326 | 2326 | FAIL | 1 | 966.617 | [frappe-latest.json](evidence/frappe-official/frappe-latest.json) |
+| erpnext | ccm-upstream-erpnext-final.test | 3255 | 3255 | FAIL | 1 | 5062.373 | [erpnext-latest.json](evidence/frappe-official/erpnext-latest.json) |
+
+El cierre exclusivo de la última pasada completa desde 9cbfbbd, su clasificación de causas y la conservación del runtime original están en [frappe-official-final-ci.md](frappe-official-final-ci.md). No se suman PASS modulares anteriores a los completos nuevos.
 
 | Aplicación | Eventos PASS | FAIL | ERROR | SKIP | Total JUnit | Métodos descubiertos sin resultado |
 | --- | --- | --- | --- | --- | --- | --- |
-| frappe | 2198 | 24 | 46 | 51 | 2319 | 7 |
-| erpnext | 3188 | 1 | 66 | 0 | — (texto CI) | 0 |
+| frappe | 2220 | 9 | 47 | 50 | — (texto CI) | 0 |
+| erpnext | 3251 | 0 | 4 | 0 | — (texto CI) | 0 |
 
 **Los eventos JUnit no son el contador real de pruebas.** setUpClass/tearDownClass y subtests producen registros adicionales; SKIP no aprueba. Los intentos seriales guardan cada ID, excepción y traza redactada. El runner CI no emite JUnit: se usa su resumen `Tests: N`, con totales FAIL/ERROR, eventos verbose por método y cabeceras de fallos (ID/tipo de excepción, sin variables privadas). Un evento FAILED_EVENT no inventa un subtipo. En intentos interrumpidos los resultados no observados son desconocidos; no se convierten en suite aprobada.
 
@@ -19,6 +21,7 @@ Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, 
 | App | Intento | Alcance | Contador nativo | Estado | Evidencia |
 | --- | --- | --- | --- | --- | --- |
 | erpnext | 1 | CI, todos los módulos (un shard) | 3255 | FAIL | [erpnext-ci-attempt-1.json](evidence/frappe-official/erpnext-ci-attempt-1.json) |
+| erpnext | 2 | CI, todos los módulos (un shard) | 3255 | FAIL | [erpnext-ci-attempt-2.json](evidence/frappe-official/erpnext-ci-attempt-2.json) |
 | erpnext | 1 | all | desconocido | BLOCKED / evidencia no válida | [erpnext-full-attempt-1.json](evidence/frappe-official/erpnext-full-attempt-1.json) |
 | erpnext | 2 | all | desconocido | BLOCKED | [erpnext-full-attempt-2.json](evidence/frappe-official/erpnext-full-attempt-2.json) |
 | erpnext | 3 | all | 3255 | FAIL | [erpnext-full-attempt-3.json](evidence/frappe-official/erpnext-full-attempt-3.json) |
@@ -37,6 +40,7 @@ Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, 
 | erpnext | 1 | erpnext.stock.doctype.stock_entry.test_stock_entry / métodos: test_work_order_manufacture_with_material_consumption | 1 | FAIL | [erpnext-test_stock_entry-selected-attempt-1.json](evidence/frappe-official/erpnext-test_stock_entry-selected-attempt-1.json) |
 | erpnext | 2 | erpnext.stock.doctype.stock_entry.test_stock_entry / métodos: test_work_order_manufacture_with_material_consumption | 1 | PASS | [erpnext-test_stock_entry-selected-attempt-2.json](evidence/frappe-official/erpnext-test_stock_entry-selected-attempt-2.json) |
 | erpnext | 1 | erpnext.manufacturing.doctype.work_order.test_work_order / métodos: test_operations_time_planning_calculation | 1 | PASS | [erpnext-test_work_order-selected-attempt-1.json](evidence/frappe-official/erpnext-test_work_order-selected-attempt-1.json) |
+| frappe | 1 | CI, todos los módulos (un shard) | 2326 | FAIL | [frappe-ci-attempt-1.json](evidence/frappe-official/frappe-ci-attempt-1.json) |
 | frappe | 1 | all | 32 | BLOCKED | [frappe-full-attempt-1.json](evidence/frappe-official/frappe-full-attempt-1.json) |
 | frappe | 2 | all | 2275 | FAIL | [frappe-full-attempt-2.json](evidence/frappe-official/frappe-full-attempt-2.json) |
 | frappe | 3 | all | 32 | BLOCKED | [frappe-full-attempt-3.json](evidence/frappe-official/frappe-full-attempt-3.json) |
@@ -55,8 +59,8 @@ Cada intento conserva su alcance. El módulo timeline ejecutó siete legacy PASS
 
 ## Comandos ejecutados
 
-- `bench --site ccm-upstream-frappe-fresh.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-4.xml`
-- `bench --site ccm-upstream-erpnext-fresh.test run-parallel-tests --app erpnext --total-builds 1 --build-number 1 --lightmode`
+- `/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-final.test run-parallel-tests --app frappe --total-builds 1 --build-number 1`
+- `/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-final.test run-parallel-tests --app erpnext --total-builds 1 --build-number 1 --lightmode`
 
 Preparación, repetición por categoría/módulo y diagnóstico paso a paso: [README](../scripts/official-tests/README.md). Discovery ejecuta cero pruebas. El bootstrap ERPNext de CI también ejecuta cero: carga fixtures oficiales; su éxito no es resultado de suite. Frappe usa su hook oficial antes del comando completo. Los servidores HTTP pertenecen a los sitios explícitos, sin cambiar el proxy baseline.
 
@@ -72,29 +76,21 @@ Resuelta usando sitios creados vacíos sin Cencomun y bootstrap oficial ERPNext.
 
 | Excepción | Eventos fallidos |
 | --- | --- |
-| AssertionError | 24 |
-| AttributeError | 5 |
-| AuthError | 20 |
-| AuthenticationError | 2 |
-| DoesNotExistError | 7 |
-| DuplicateEntryError | 2 |
-| FileNotFoundError | 1 |
-| HTTPError | 1 |
+| AssertionError | 7 |
+| AttributeError | 1 |
+| Error | 1 |
+| Exception | 10 |
 | IndexError | 1 |
-| JSONDecodeError | 3 |
-| LinkValidationError | 1 |
-| TypeError | 1 |
-| ValidationError | 2 |
+| PermissionError | 1 |
+| frappe.exceptions.AuthenticationError | 2 |
+| frappe.exceptions.CommandFailedError | 1 |
+| frappe.exceptions.ValidationError | 2 |
+| requests.exceptions.ConnectionError | 30 |
 ### erpnext: excepciones observadas
 
 | Excepción | Eventos fallidos |
 | --- | --- |
-| AssertionError | 1 |
-| ZeroDivisionError | 14 |
-| erpnext.exceptions.ReportingCurrencyExchangeNotFoundError | 3 |
-| frappe.exceptions.DoesNotExistError | 22 |
-| frappe.exceptions.NonNegativeError | 1 |
-| frappe.exceptions.ValidationError | 26 |
+| frappe.exceptions.ValidationError | 4 |
 
 Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con reserva exclusiva de nombres. Los tests del harness verifican cero-test, categorías, subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación de archivos generados; no son tests oficiales. El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; [informe de recuperación](frappe-executor-recovery.md).
 

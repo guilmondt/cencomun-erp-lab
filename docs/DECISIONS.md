@@ -362,3 +362,38 @@
   Exact commands, attempts, diagnosis and next steps are published in
   reports/frappe-official-preparation-investigation.md. The acknowledged external
   cloud-restoration receipt is preserved byte-for-byte and is not repeated.
+
+## ADR-014 — One final full CI pass with independent result provenance
+
+- Date: 2026-10-06
+- Status: Accepted by explicit user instruction from 9cbfbbd
+- Decision: Execute one full native CI shard for Frappe followed by one for
+  ERPNext, on new isolated official-only sites. Preserve all previous sites,
+  attempts and generated sources. Refresh only the copied test sources to the
+  same clean SHAs between applications. Keep native workflows, bootstrap,
+  validators, assertions, pins, HOME and the shared oracle unchanged.
+- Preparation: Apply the proven Payments helper/import repair and load the six
+  exact official Currency Exchange records via native Document API before any
+  ERPNext test import/bootstrap. Keep offline rejection enabled for preparation,
+  discovery, workers and runners; do not fabricate provider responses or rates.
+- Evidence: This full pass supplies its own native counters, result events by
+  ID, skips, missing results and failure classifications. Earlier modular PASS
+  never fills a missing result. Distinct IDs and repeated native executions are
+  reported separately; discovery and fixture bootstrap execute zero tests.
+- Reader repairs: Validate native class headers against the same discovery
+  manifest and recognize outcomes appended to progress without a newline.
+  Reparse the preserved log rather than rerunning tests. Keep initial derived
+  records private, and cover both reader defects with regression controls.
+- Limits: A demonstrated offline rejection is distinct from a provider response.
+  A local TCP refusal demonstrates an unavailable endpoint at that instant,
+  not its cause or an inevitable platform blocker. Attribute readonly HOME only
+  with causal evidence in that attempt. Unknown causes remain UNKNOWN/FAIL.
+  C13 remains BLOCKED and its six PATCH scenarios UNRUN; no minor change,
+  cloud restoration repeat or additional full repetition is authorized here.
+- Closure: Compare the original Cencomun runtime hashes and perform an
+  authenticated price/stock read. Repeat its regression only if preparation
+  changed that runtime. Preserve the scope of the earlier 34 mandatory groups;
+  do not call the read-only check a new Core Test or cloud restoration.
+- Evidence: tasks/102-frappe-official-final-ci.md and
+  reports/frappe-official-final-ci.md; publish only sanitized evidence on
+  lab/frappe-baseline with PR #4 remaining a draft.

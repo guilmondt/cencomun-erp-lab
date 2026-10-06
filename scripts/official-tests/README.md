@@ -43,6 +43,45 @@ FAIL/incompletos se conservan, sin sumar PASS modulares. Criterio 13 BLOCKED.
    investigar y repetir Core; si no, conservar el alcance de los 34 grupos
    previos, sin llamarlos una nueva regresión. HOME/red/patch no se sortean.
 
+Para registrar el cierre en **este mismo ejecutor**, después de comprobar cero
+runners activos:
+
+```bash
+"$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/integrity.py after
+"$CCM_FRAPPE_ROOT/bench/env/bin/python" scripts/core-test/readiness.py
+"$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/closure.py
+```
+
+`closure.py` consulta los diez sitios oficiales por APIs nativas y acredita que
+sus directorios/DB siguen disponibles; compara los 48 archivos históricos con
+el manifest privado previo y los 32 logs privados que conservan un SHA en su
+resultado nativo. No publica esos logs. Compara los 17 archivos compartidos con fcf690d y pins/
+recibo cloud con sus hashes conservados. Consulta como lector autenticado P001,
+precio USD 50.00 y stock 5 por adaptador y API nativa. No cambia datos ni ejecuta
+los 34 grupos otra vez. Publica solo `final-closure.json`, con creación exclusiva.
+Necesita los manifests/credenciales privados retenidos y un Bench activo; no es
+un procedimiento para acreditar otra restauración cloud.
+
+Publicar cada inventario/diagnóstico una vez cuando exista su resultado final:
+`final_inventory.py erpnext` y la función `final_diagnostics.publish` con el JSON
+del intento correspondiente. Esos archivos usan creación exclusiva para
+conservar derivaciones anteriores; no borrar un resultado para repetirlo. Usar
+`publish_observations.py` y `publish.py` solo al concluir ambos completos, y
+verificar después que los 48 hashes históricos permanezcan idénticos. Si un
+runner termina sin resumen, no sustituir su contador por discovery/eventos.
+
+El cierre usa el cwd nativo `sites/`: Frappe resuelve las rutas de logger de
+sitio desde ahí. Ante `FileNotFoundError` en `<site>/logs/database.log`, conservar
+el intento, comprobar cwd/path y comparar con `inspect_site.py`; no crear un
+árbol alternativo. `sites_workdir` restaura el cwd al terminar y un control con
+el handler nativo cubre la regresión. No afecta ni obliga a repetir las suites.
+
+Una interpretación diagnóstica nueva conserva la anterior: por ejemplo,
+`final_diagnostics.publish(OUT / 'erpnext-ci-attempt-2.json', revision=2)` crea
+un JSON v2 exclusivo y señala que no repitió la ejecución. La clasificación
+de tasa faltante exige evidencia nativa ligada a ese par/PID; un rechazo de
+red en otro momento no basta para atribuir un fallo contable.
+
 `set-config -- admin_password VALUE` mantiene como argumento una credencial
 local que empiece por guion. No imprimirla ni regenerarla para sortear el parser;
 conservar el log del fallo de preparación y continuarlo con el separador nativo.

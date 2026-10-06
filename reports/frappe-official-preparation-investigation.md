@@ -1,5 +1,10 @@
 # Investigación acotada de preparación oficial
 
+**Registro histórico del encargo cerrado en 9cbfbbd.** La nueva pasada completa
+autorizada después de esas correcciones se registra por separado en
+[frappe-official-final-ci.md](frappe-official-final-ci.md). Sus resultados no se
+obtienen sumando los PASS modulares de este documento.
+
 Continuación autorizada desde `8158b6803e4951a3fe66372578667f6cd8cab5a5`,
 2026-10-05 America/Los_Angeles. Solo `lab/frappe-baseline`.
 

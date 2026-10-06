@@ -127,7 +127,7 @@ def main():
                     f"{result.get('exit_code') if result.get('exit_code') is not None else '—'} | "
                     f"{result.get('seconds') if result.get('seconds') is not None else '—'} | "
                     f"[{result['app']}-latest.json](evidence/frappe-official/{result['app']}-latest.json) |")
-    rows += ['', '| Aplicación | Eventos PASS | FAIL | ERROR | SKIP | Total JUnit | Métodos descubiertos sin resultado |',
+    rows += ['', 'El cierre exclusivo de la última pasada completa desde 9cbfbbd, su clasificación de causas y la conservación del runtime original están en [frappe-official-final-ci.md](frappe-official-final-ci.md). No se suman PASS modulares anteriores a los completos nuevos.', '', '| Aplicación | Eventos PASS | FAIL | ERROR | SKIP | Total JUnit | Métodos descubiertos sin resultado |',
              '| --- | --- | --- | --- | --- | --- | --- |']
     for result in results:
         counts = result.get('counts', {})

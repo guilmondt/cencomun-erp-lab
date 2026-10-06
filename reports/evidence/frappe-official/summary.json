@@ -1,32 +1,32 @@
 {
   "scope": "official server runners on pinned MariaDB; serial/JUnit and native CI text are distinct attempts; baseline, not post-patch regression",
-  "recorded_utc": "2026-10-06T05:44:13.633322+00:00",
+  "recorded_utc": "2026-10-06T07:53:42.320406+00:00",
   "results": [
     {
       "app": "frappe",
       "status": "FAIL",
-      "actual_tests_run": 2319,
+      "actual_tests_run": 2326,
       "discovered_test_count": 2326,
-      "junit_records": 2319,
+      "junit_records": 0,
       "counts": {
-        "PASS": 2198,
-        "FAIL": 24,
-        "ERROR": 46,
-        "SKIP": 51
+        "PASS": 2220,
+        "SKIP": 50,
+        "FAIL": 9,
+        "ERROR": 47
       },
-      "unobserved_test_count": 7,
+      "unobserved_test_count": 0,
       "evidence": "reports/evidence/frappe-official/frappe-latest.json",
-      "command": "bench --site ccm-upstream-frappe-fresh.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-4.xml",
+      "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-final.test run-parallel-tests --app frappe --total-builds 1 --build-number 1",
       "exit_code": 1,
-      "site": "ccm-upstream-frappe-fresh.test",
-      "seconds": 814.858,
-      "ci_parallel": false,
-      "observed_result_events": null,
-      "result_format": "JUnit + native Ran N",
+      "site": "ccm-upstream-frappe-final.test",
+      "seconds": 966.617,
+      "ci_parallel": true,
+      "observed_result_events": 2326,
+      "result_format": "official CI verbose text; not JUnit",
       "interrupted": false,
       "completed_native_category_counts": null,
       "fixture_preparation_status": "PASS",
-      "fixture_preparation_site": "ccm-upstream-frappe-fresh.test",
+      "fixture_preparation_site": "ccm-upstream-frappe-final.test",
       "fixture_metadata_matches_attempt_site": true
     },
     {
@@ -36,24 +36,24 @@
       "discovered_test_count": 3255,
       "junit_records": 0,
       "counts": {
-        "PASS": 3188,
+        "PASS": 3251,
         "SKIP": 0,
-        "FAIL": 1,
-        "ERROR": 66
+        "FAIL": 0,
+        "ERROR": 4
       },
       "unobserved_test_count": 0,
       "evidence": "reports/evidence/frappe-official/erpnext-latest.json",
-      "command": "bench --site ccm-upstream-erpnext-fresh.test run-parallel-tests --app erpnext --total-builds 1 --build-number 1 --lightmode",
+      "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-final.test run-parallel-tests --app erpnext --total-builds 1 --build-number 1 --lightmode",
       "exit_code": 1,
-      "site": "ccm-upstream-erpnext-fresh.test",
-      "seconds": 2507.481,
+      "site": "ccm-upstream-erpnext-final.test",
+      "seconds": 5062.373,
       "ci_parallel": true,
       "observed_result_events": 3255,
       "result_format": "official CI verbose text; not JUnit",
       "interrupted": false,
       "completed_native_category_counts": null,
       "fixture_preparation_status": "PASS",
-      "fixture_preparation_site": "ccm-upstream-erpnext-fresh.test",
+      "fixture_preparation_site": "ccm-upstream-erpnext-final.test",
       "fixture_metadata_matches_attempt_site": true
     }
   ],
@@ -82,6 +82,17 @@
       "ci_parallel": true,
       "actual_tests_run": 3255,
       "evidence": "reports/evidence/frappe-official/erpnext-ci-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "erpnext",
+      "attempt": 2,
+      "status": "FAIL",
+      "module": null,
+      "category": "all",
+      "ci_parallel": true,
+      "actual_tests_run": 3255,
+      "evidence": "reports/evidence/frappe-official/erpnext-ci-attempt-2.json",
       "evidence_valid": true
     },
     {
@@ -280,6 +291,17 @@
       "ci_parallel": false,
       "actual_tests_run": 1,
       "evidence": "reports/evidence/frappe-official/erpnext-test_work_order-selected-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "FAIL",
+      "module": null,
+      "category": "all",
+      "ci_parallel": true,
+      "actual_tests_run": 2326,
+      "evidence": "reports/evidence/frappe-official/frappe-ci-attempt-1.json",
       "evidence_valid": true
     },
     {

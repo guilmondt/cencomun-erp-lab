@@ -1,5 +1,9 @@
 # ExecPlan — fallos de preparación oficiales desde 8158b68
 
+Plan histórico cerrado en 9cbfbbd. La autorización posterior de una nueva pasada
+completa se desarrolla en [task 102](102-frappe-official-final-ci.md); no cambia
+los resultados ni el alcance de las reproducciones acotadas de este plan.
+
 Encargo autorizado por el usuario, 2026-10-05 America/Los_Angeles. Solo
 `lab/frappe-baseline`. Conservar los completos Frappe/ERPNext FAIL, criterio 13
 BLOCKED y seis PATCH UNRUN. No repetir restauración cloud, Guardar/Publicar,
