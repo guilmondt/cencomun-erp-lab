@@ -26,7 +26,7 @@ Contrato, fixtures, oráculo y evidencias históricas se conservan sin cambios;
   antes de entrega, el piloto mantendrá el documento nativo finalizado hasta
   entregar; confirmación + entrega constituyen una operación transaccional.
   No se presentará un pedido nativo confirmado como cancelado ni se alterará
-  un estado nativo a mano. Esta restricción requiere prueba de integración.
+  un estado nativo a mano. Esta restricción pasó UI y comprobación nativa en v5 (ver matriz).
 - Revisión de alcance: múltiples líneas; cobro real independiente de entrega, mediante
   PaymentVoucher nativo no aplicado y conciliación posterior a factura. La propuesta
   inicial de un solo producto/cobro al entregar fue retirada antes de aceptación.
@@ -38,9 +38,17 @@ Contrato, fixtures, oráculo y evidencias históricas se conservan sin cambios;
   probada antes del uso. Retención inicial propuesta 7 copias diarias.
 - No crear cuentas persistentes ni instalar un servidor externo sin aprobación.
 
-## Verificación inicial
+## Verificación inicial (registro histórico)
 
 - Preflight y 22 tests existentes: PASS, build 15 s, verify-repo PASS.
 - No `.agents/skills` existente en repositorio ni `/workspace/.agents`.
 - No runtime WAR compilado en el entorno guardado. Compilación full-stack y
   acceso navegable aún pendientes. Docker disponible no demuestra hosting.
+
+## Avance comprobado
+
+Las extensiones y las cuatro áreas operativas están implementadas. La matriz
+[de resultados](axelor-pilot-v1-status.md) identifica cohortes y artefactos,
+incluidos errores de guion y diagnósticos descartados. El acceso Chromium
+local está probado; el acceso externo continúa bloqueado por falta de destino
+y autorización de instalación. PR borrador #5, sin merge.

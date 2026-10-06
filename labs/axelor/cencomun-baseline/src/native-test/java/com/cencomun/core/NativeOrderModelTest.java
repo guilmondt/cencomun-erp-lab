@@ -27,6 +27,24 @@ class NativeOrderModelTest {
       }
     });
   }
+  @Test void stockEvidenceIgnoresDatabaseRowOrderButRetainsEconomicChanges() {
+    var product = new com.axelor.apps.base.db.Product();
+    product.setId(7L); product.setCode("LAB-P7");
+    var first = new com.axelor.apps.stock.db.StockLocationLine();
+    first.setId(18L); first.setProduct(product);
+    first.setCurrentQty(new java.math.BigDecimal("3.0000000000"));
+    first.setAvgPrice(new java.math.BigDecimal("30.0000000000"));
+    var second = new com.axelor.apps.stock.db.StockLocationLine();
+    second.setId(19L); second.setProduct(product);
+    second.setCurrentQty(new java.math.BigDecimal("4.0000000000"));
+    second.setAvgPrice(new java.math.BigDecimal("10.0000000000"));
+    var before = NativeGateService.stockEvidence(java.util.List.of(first, second));
+    assertEquals(before, NativeGateService.stockEvidence(java.util.List.of(second, first)));
+    assertEquals("3.0000000000", before.getFirst().get("current_qty"));
+    second.setAvgPrice(new java.math.BigDecimal("10.0100000000"));
+    assertNotEquals(before, NativeGateService.stockEvidence(java.util.List.of(second, first)));
+    assertEquals(19L, NativeGateService.stockEvidence(java.util.List.of(second, first)).get(1).get("id"));
+  }
   @Test void generatedStateCannotRepresentAnUnknownValue() {
     CcmOrder nativeMapped=new CcmOrder();
     com.axelor.db.mapper.Mapper mapper=com.axelor.db.mapper.Mapper.of(CcmOrder.class);

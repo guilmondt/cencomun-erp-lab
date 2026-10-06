@@ -251,20 +251,25 @@ public class NativeGateService {
     return Map.of("delivery", delivery, "invoice", invoice);
   }
 
+  /** Stable evidence order only; retain every native ID, quantity and cost verbatim. */
+  static List<Map<String, Object>> stockEvidence(List<Model> rows) {
+    List<Map<String, Object>> quantities = new ArrayList<>();
+    for (Model line : rows.stream().sorted(java.util.Comparator.comparing(Model::getId)).toList()) {
+      Model product = (Model) get(line, "product");
+      quantities.add(Map.of("id", line.getId(), "product_id", product.getId(), "code", get(product, "code"),
+          "current_qty", get(line, "currentQty").toString(), "avg_price", get(line, "avgPrice").toString()));
+    }
+    return quantities;
+  }
+
   /** Fresh repository reads after success/rollback; transient IDs never count as evidence. */
   public Map<String, Object> inspect(String caseId) {
     Map<String, Object> result = new LinkedHashMap<>();
     Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
     result.put("case", caseId);
-    List<Map<String, Object>> quantities = new ArrayList<>();
     Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
     if (warehouse != null) {
-      for (Model line : list(STOCK + "StockLocationLine", "self.stockLocation = ?1", warehouse)) {
-        Model product = (Model) get(line, "product");
-        quantities.add(Map.of("id", line.getId(), "product_id", product.getId(), "code", get(product, "code"),
-            "current_qty", get(line, "currentQty").toString(), "avg_price", get(line, "avgPrice").toString()));
-      }
-      result.put("stock", quantities);
+      result.put("stock", stockEvidence(list(STOCK + "StockLocationLine", "self.stockLocation = ?1", warehouse)));
       result.put("stock_move_ids", list(STOCK + "StockMove", "self.fromStockLocation = ?1 OR self.toStockLocation = ?1", warehouse)
           .stream().map(Model::getId).toList());
     } else { result.put("stock", List.of()); result.put("stock_move_ids", List.of()); }

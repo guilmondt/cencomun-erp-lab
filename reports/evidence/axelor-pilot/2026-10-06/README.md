@@ -1,7 +1,13 @@
 # Evidencia del piloto Axelor
 
-Implementación `77da453`: 63 tests Java y 93 Python PASS. La aceptación limpia
-por UI sigue pendiente en DB v3 al publicar este primer lote.
+Cada cohorte conserva su versión y sus resultados; consultar la matriz vigente
+en [estado del piloto](../../../axelor-pilot-v1-status.md). `acceptance-v5`
+contiene las operaciones UI, lectura nativa posterior, snapshots de controles
+negativos y restauración. `ci-37524117138` clasifica por separado el CI de
+`2e33cca`: 32 PASS / 2 FAIL conocidos; no es la regresión del artefacto final.
+
+El primer lote, `77da453`, tenía 63 tests Java y 93 Python PASS pero aún no
+aceptación limpia por UI. Ese estado inicial se conserva aquí como contexto.
 
 `diagnostic-v2` conserva hallazgos y pruebas de depuración: no es una aceptación
 completa. La factura web experimental usó temporalmente tolerancia 0,01; ese
