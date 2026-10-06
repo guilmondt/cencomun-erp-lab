@@ -1,0 +1,514 @@
+{
+  "native_result": "erpnext-test_stock_entry-selected-attempt-2.json",
+  "scope": "selected official methods; not full module or suite",
+  "private_stream_sha256": "4c4a57a40e227a832e0fbfe36f6e60518774b09582857656366753857e7c03d3",
+  "counts_by_event": {
+    "observer_started": 4,
+    "external_transport_rejected": 1,
+    "module_map_return": 1,
+    "native_state": 2,
+    "stock_entry_validation": 8,
+    "test_stopped": 1
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 21053,
+      "epoch": 1791265079.238915,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21053,
+      "epoch": 1791265079.446506,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 21053,
+      "epoch": 1791265080.7756844,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21075,
+      "epoch": 1791265081.3745034,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21075,
+      "epoch": 1791265081.5426595,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 21075,
+      "epoch": 1791265081.9338748,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "db_name": "ccm_upstream_erpnext_fixture_order"
+    },
+    {
+      "kind": "native_state",
+      "pid": 21075,
+      "epoch": 1791265091.2766335,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ],
+      "bom_item_2": [
+        {
+          "parent": "BOM-_Test Item Home Desktop Manufactured-001",
+          "rate": 1.589825119,
+          "base_rate": 100.0,
+          "qty": 2.0
+        }
+      ],
+      "bins_item_2": [
+        {
+          "warehouse": "_Test Warehouse - _TC",
+          "actual_qty": 10.0,
+          "stock_value": 1000.0,
+          "valuation_rate": 100.0
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265091.9238997,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item",
+          "qty": 10,
+          "basic_rate": 5000.0,
+          "amount": 50000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Stores - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265091.9505095,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item",
+          "qty": 10,
+          "basic_rate": 5000.0,
+          "amount": 50000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Stores - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265092.0563908,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 10,
+          "basic_rate": 1000.0,
+          "amount": 10000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Stores - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265092.073948,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 10,
+          "basic_rate": 1000.0,
+          "amount": 10000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Stores - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265092.1413927,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item",
+          "qty": 1.0,
+          "basic_rate": 5000.0,
+          "amount": 5000.0,
+          "s_warehouse": "Stores - _TC",
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 2.0,
+          "basic_rate": 1000.0,
+          "amount": 2000.0,
+          "s_warehouse": "Stores - _TC",
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265092.1667216,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item",
+          "qty": 1.0,
+          "basic_rate": 5000.0,
+          "amount": 5000.0,
+          "s_warehouse": "Stores - _TC",
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 2.0,
+          "basic_rate": 1000.0,
+          "amount": 2000.0,
+          "s_warehouse": "Stores - _TC",
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265092.3774383,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 2.0,
+          "basic_rate": 1000.0,
+          "amount": 2000.0,
+          "s_warehouse": "_Test Warehouse - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "_Test Item",
+          "qty": 1.0,
+          "basic_rate": 100.0,
+          "amount": 100.0,
+          "s_warehouse": "_Test Warehouse - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 3,
+          "item_code": "_Test FG Item",
+          "qty": 1.0,
+          "basic_rate": 2000.0,
+          "amount": 2000.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 4,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 1.0,
+          "basic_rate": 100.0,
+          "amount": 100.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": "Scrap"
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21075,
+      "epoch": 1791265092.4240198,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "items": [
+        {
+          "idx": 3,
+          "item_code": "_Test FG Item",
+          "qty": 1.0,
+          "basic_rate": 200.0,
+          "amount": 200.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 4,
+          "item_code": "_Test Item Home Desktop 100",
+          "qty": 1.0,
+          "basic_rate": 100.0,
+          "amount": 100.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": "Scrap"
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21075,
+      "epoch": 1791265092.577759,
+      "test": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ],
+      "bom_item_2": [
+        {
+          "parent": "BOM-_Test Item Home Desktop Manufactured-001",
+          "rate": 1.589825119,
+          "base_rate": 100.0,
+          "qty": 2.0
+        }
+      ],
+      "bins_item_2": [
+        {
+          "warehouse": "_Test Warehouse - _TC",
+          "actual_qty": 10.0,
+          "stock_value": 1000.0,
+          "valuation_rate": 100.0
+        }
+      ]
+    }
+  ]
+}

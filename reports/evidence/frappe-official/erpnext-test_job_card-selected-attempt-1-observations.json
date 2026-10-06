@@ -1,0 +1,1710 @@
+{
+  "native_result": "erpnext-test_job_card-selected-attempt-1.json",
+  "scope": "selected official methods; not full module or suite",
+  "private_stream_sha256": "666009c94f87e2021460c55230c039ae0b3c7c615a9f740553f31d8c673b174d",
+  "counts_by_event": {
+    "observer_started": 4,
+    "external_transport_rejected": 1,
+    "module_map_return": 1,
+    "native_state": 10,
+    "fx_return": 5,
+    "bom_routing_state": 5,
+    "stock_entry_validation": 27,
+    "test_stopped": 5
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 21215,
+      "epoch": 1791265243.157931,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21215,
+      "epoch": 1791265243.3465333,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 21215,
+      "epoch": 1791265244.6265426,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21221,
+      "epoch": 1791265245.301631,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21221,
+      "epoch": 1791265245.4978006,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 21221,
+      "epoch": 1791265245.928589,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "db_name": "ccm_upstream_erpnext_fixture_order"
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265256.939959,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21221,
+      "epoch": 1791265257.7161667,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "bom_routing_state",
+      "pid": 21221,
+      "epoch": 1791265257.735947,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "name": "BOM-Test Job Card Process Qty Item-001",
+      "routing": "Testing Route",
+      "currency": "USD",
+      "company": "_Test Company",
+      "conversion_rate": 62.9,
+      "quantity": 1
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265258.0365167,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265258.070188,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265258.2039168,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265258.2293007,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265258.910711,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10.0,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10.0,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 3,
+          "item_code": "Test Job Card Process Qty Item",
+          "qty": 7.0,
+          "basic_rate": 285.7142857142857,
+          "amount": 2000.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265259.1375115,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265259.1406877,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21221,
+      "epoch": 1791265259.370781,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "bom_routing_state",
+      "pid": 21221,
+      "epoch": 1791265259.3895442,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "name": "BOM-Test Job Card Process Qty Item-001",
+      "routing": "Testing Route",
+      "currency": "USD",
+      "company": "_Test Company",
+      "conversion_rate": 62.9,
+      "quantity": 1
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265259.4956331,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265259.516136,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265259.5705686,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265259.588571,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265260.0212376,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10.0,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10.0,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 3,
+          "item_code": "Test Job Card Process Qty Item",
+          "qty": 8.0,
+          "basic_rate": 250.0,
+          "amount": 2000.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265260.1844516,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265260.1878715,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21221,
+      "epoch": 1791265260.3948495,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "bom_routing_state",
+      "pid": 21221,
+      "epoch": 1791265260.411355,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "name": "BOM-Test Job Card Process Qty Item-001",
+      "routing": "Testing Route",
+      "currency": "USD",
+      "company": "_Test Company",
+      "conversion_rate": 62.9,
+      "quantity": 1
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265260.5062482,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265260.526098,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265260.5861635,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265260.6089668,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265260.9262474,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 4.0,
+          "basic_rate": 100.0,
+          "amount": 400.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 4.0,
+          "basic_rate": 100.0,
+          "amount": 400.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 3,
+          "item_code": "Test Job Card Process Qty Item",
+          "qty": 4.0,
+          "basic_rate": 200.0,
+          "amount": 804.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265261.187556,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265261.1899984,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21221,
+      "epoch": 1791265261.4128118,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "bom_routing_state",
+      "pid": 21221,
+      "epoch": 1791265261.4285178,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "name": "BOM-Test FG for Overproduction-001",
+      "routing": "Testing Route",
+      "currency": "USD",
+      "company": "_Test Company",
+      "conversion_rate": 62.9,
+      "quantity": 1
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265261.522807,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test RM for Overproduction",
+          "qty": 100,
+          "basic_rate": 100.0,
+          "amount": 10000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse for Overproduction - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265261.5424376,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test RM for Overproduction",
+          "qty": 100,
+          "basic_rate": 100.0,
+          "amount": 10000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse for Overproduction - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265261.9062212,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test RM for Overproduction",
+          "qty": 6.0,
+          "basic_rate": 100.0,
+          "amount": 600.0,
+          "s_warehouse": "Test Warehouse for Overproduction - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test FG for Overproduction",
+          "qty": 6.0,
+          "basic_rate": 100.0,
+          "amount": 2040.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265262.21564,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test RM for Overproduction",
+          "qty": 1.0,
+          "basic_rate": 100.0,
+          "amount": 100.0,
+          "s_warehouse": "Test Warehouse for Overproduction - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test FG for Overproduction",
+          "qty": 1.0,
+          "basic_rate": 100.0,
+          "amount": 820.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265262.550942,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test RM for Overproduction",
+          "qty": 2.0,
+          "basic_rate": 100.0,
+          "amount": 200.0,
+          "s_warehouse": "Test Warehouse for Overproduction - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test FG for Overproduction",
+          "qty": 2.0,
+          "basic_rate": 100.0,
+          "amount": 1640.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265264.2016733,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test RM for Overproduction",
+          "qty": 3.0,
+          "basic_rate": 100.0,
+          "amount": 300.0,
+          "s_warehouse": "Test Warehouse for Overproduction - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test FG for Overproduction",
+          "qty": 3.0,
+          "basic_rate": 100.0,
+          "amount": 1740.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265264.356177,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265264.3587086,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21221,
+      "epoch": 1791265264.5505416,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "bom_routing_state",
+      "pid": 21221,
+      "epoch": 1791265264.5633569,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "name": "BOM-Test Job Card Process Qty Item-001",
+      "routing": "Testing Route",
+      "currency": "USD",
+      "company": "_Test Company",
+      "conversion_rate": 62.9,
+      "quantity": 1
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265264.648744,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265264.6663084,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265264.7206256,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265264.7402,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 10,
+          "basic_rate": 100.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265265.1447287,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 5.0,
+          "basic_rate": 100.0,
+          "amount": 500.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 5.0,
+          "basic_rate": 100.0,
+          "amount": 500.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 3,
+          "item_code": "Test Job Card Process Qty Item",
+          "qty": 2.0,
+          "basic_rate": 500.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 21221,
+      "epoch": 1791265265.3133852,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "Test Job Card Process Qty ItemRM 1",
+          "qty": 5.0,
+          "basic_rate": 100.0,
+          "amount": 500.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 2,
+          "item_code": "Test Job Card Process Qty ItemRM 2",
+          "qty": 5.0,
+          "basic_rate": 100.0,
+          "amount": 500.0,
+          "s_warehouse": "Test Warehouse 123 for Job Card - _TC",
+          "t_warehouse": null,
+          "secondary_item_type": ""
+        },
+        {
+          "idx": 3,
+          "item_code": "Test Job Card Process Qty Item",
+          "qty": 5.0,
+          "basic_rate": 200.0,
+          "amount": 1000.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse 1 - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21221,
+      "epoch": 1791265265.471848,
+      "test": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    }
+  ]
+}

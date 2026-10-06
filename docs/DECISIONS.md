@@ -331,3 +331,34 @@
   authenticated P001 price50.00/stock5 matched with native API records. Retain
   cloud verification UNRUN until evidence includes that new task's identity;
   same-machine site replay has separate scope.
+
+## ADR-013 — Proven official preparation repairs and scoped follow-up
+
+- Date: 2026-10-06 (UTC)
+- Status: Accepted by explicit technical continuation from 8158b68
+- Scope: Official copied Bench/sites and test harness only; no production rules,
+  shared oracle, pins, original Cencomun runtime or upstream source changes.
+- Decision: Rename the helper payments.py to prepare_payments.py because its
+  import shadowed the pinned Payments package and produced an empty native
+  module list. Verify package origins and native resolver entries; rebuild only
+  the site's app_modules cache when a mismatch is demonstrated. Preserve the
+  mistaken initial preflight as invalid preparation, not PASS.
+- Fixture order: Insert the six exact pinned Currency Exchange JSON records
+  through the native Document API before importing test modules/bootstrap.
+  make_test_records imports ERPNextTestSuite and bootstraps masters too early
+  on an empty site. Keep validators, fixture bytes/dates and allow_stale intact;
+  retain failed sites/attempts rather than editing their persisted zero-cost BOMs.
+- Transport: Reject external HTTP/DNS/socket operations before transport during
+  reproductions. This is an explicit offline restriction, not a fabricated rate
+  or provider response. Preserve historical ProxyError tunnel-403 evidence;
+  disabled=0 and missing official rates are recorded. Historical logs without
+  test IDs cannot be assigned unequivocally to individual cases. No new provider
+  calls, network expansion, HOME workaround or minor upgrade is authorized.
+- Evidence: Clean native CI auth 17 PASS, Payment Request 22 PASS, five-module
+  sequence 126 PASS, BOM/negative-rate methods PASS and all 14 original division
+  case IDs PASS in scoped executions. Keep both original full suites FAIL and
+  criterion 13 BLOCKED with six UNRUN. Only new observed reproductions count in
+  follow-up; remaining unexecuted events do not become PASS or inevitable blocks.
+  Exact commands, attempts, diagnosis and next steps are published in
+  reports/frappe-official-preparation-investigation.md. The acknowledged external
+  cloud-restoration receipt is preserved byte-for-byte and is not repeated.

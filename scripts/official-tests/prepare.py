@@ -88,6 +88,8 @@ def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx
     # CLI -- execute starts a new process: no stale module map retained by
     # installation in memory. Do not globally flush shared Redis/other sites.
     run('module-map', ['--site', site, 'execute', 'frappe.setup_module_map'])
+    from module_preflight import check
+    check(site, app + suffix + '-module-preflight-preparation')
     print('Prepared official-only site:', site, flush=True)
 
 

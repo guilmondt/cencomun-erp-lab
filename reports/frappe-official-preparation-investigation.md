@@ -8,7 +8,7 @@ Continuación autorizada desde `8158b6803e4951a3fe66372578667f6cd8cab5a5`,
 No se reejecutaron completos. El intento ERPNext interrumpido sigue incompleto.
 **Criterio 13 BLOCKED; seis PATCH UNRUN.** No se inventa patch ni se cambian pins.
 
-## Resultados acotados disponibles en este checkpoint
+## Resultados acotados finales
 
 | Línea | Resultado ejecutado | Evidencia / alcance |
 | --- | --- | --- |
@@ -16,9 +16,24 @@ No se reejecutaron completos. El intento ERPNext interrumpido sigue incompleto.
 | Payment Request antes de corrección | 22 ERROR de módulo ausente; después 17 PASS/5 ERROR de FX | [intento 2](evidence/frappe-official/erpnext-test_payment_request-attempt-2.json), [intento 3](evidence/frappe-official/erpnext-test_payment_request-attempt-3.json); transporte externo prohibido |
 | Payment Request con fixtures oficiales | 22 tests, 22 PASS | [intento 5](evidence/frappe-official/erpnext-test_payment_request-attempt-5.json), sin consultas externas |
 | Payment Entry → Payment Ledger Entry → Payment Order → Payment Reconciliation → Payment Request | 126 tests, 126 PASS | [secuencia CI](evidence/frappe-official/erpnext-sequence-test_payment_request-attempt-1.json); mismos módulos precedentes, proceso nuevo y runner CI nativo |
-| BOM 0 frente a 10 | 1 test, FAIL | [BOM 1](evidence/frappe-official/erpnext-test_bom-selected-attempt-1.json); sigue investigándose orden de fixtures antes del bootstrap |
-| Valor negativo | 1 test, ERROR en fixture-audit | [stock 1](evidence/frappe-official/erpnext-test_stock_entry-selected-attempt-1.json); conservado, validador intacto |
-| Divisiones en fabricación | Pendientes en este checkpoint | No se aprueban por los PASS contables |
+| BOM 0 frente a 10 | Repetición 3: 1 test, PASS | [BOM 3](evidence/frappe-official/erpnext-test_bom-selected-attempt-3.json); intentos 1 y 2 FAIL conservados |
+| Valor negativo | Repetición 2: 1 test, PASS | [stock 2](evidence/frappe-official/erpnext-test_stock_entry-selected-attempt-2.json); intento 1 ERROR conservado, validador intacto |
+| Accounts Controller, tres divisiones por cero | 3 métodos, 3 PASS | [controller 1](evidence/frappe-official/erpnext-test_accounts_controller-selected-attempt-1.json) |
+| Job Card, cinco divisiones por cero | 5 métodos, 5 PASS | [job card 1](evidence/frappe-official/erpnext-test_job_card-selected-attempt-1.json) |
+| Routing y Work Order | Un método de cada módulo, ambos PASS | [routing 1](evidence/frappe-official/erpnext-test_routing-selected-attempt-1.json), [work order 1](evidence/frappe-official/erpnext-test_work_order-selected-attempt-1.json) |
+
+Se verificaron de nuevo **los 14 IDs que daban ZeroDivisionError**: cuatro en
+Payment Entry dentro de la secuencia contable, tres Accounts Controller, cinco
+Job Card, uno Routing y uno Work Order. Todos tienen PASS en ejecuciones nuevas:
+[matriz por ID, traza original y reproducción](evidence/frappe-official/zero-division-case-tracking.json).
+No se suman módulos/métodos repetidos como si fueran una suite completa.
+
+El [seguimiento de fallos originales](evidence/frappe-official/original-failure-followup.json)
+solo acepta reproducciones observadas nuevas; un PASS antiguo de otro completo
+no cuenta. De 67 eventos ERPNext originales, 44 tienen PASS nuevo y 23 no se
+reprodujeron en esta continuación. De 70 eventos Frappe, ocho tienen PASS nuevo
+y 62 no se reprodujeron. Son eventos, no conteos de una suite nueva. Los no
+reproducidos no reciben PASS ni se convierten en bloqueos inevitables.
 
 ## Tasas: causa demostrada y límites de correlación
 
@@ -87,6 +102,14 @@ resuelve el paquete oficial. El helper puede reconstruir **solo**
 permisos. La secuencia CI conserva `payments` en cada snapshot antes/después de
 los módulos y sus 126 resultados pasan. No se cambia el resolvedor upstream.
 
+La comprobación final también detectó ese mapa incompleto en el sitio original
+`ccm-upstream-erpnext-fresh.test`: faltaban únicamente Payments y Payment
+Gateways. Se reconstruyó su clave nativa y el resolvedor verificó ambas entradas
+([antes/después](evidence/frappe-official/payments-final-fresh.json)). En los tres
+sitios diagnostic/fixture-audit/fixture-order el mapa ya era correcto y no se
+aplicó reparación. Esta comprobación de preparación no reejecuta ni aprueba el
+completo anterior, ni recalcula sus fixtures históricos.
+
 ## Autenticación: separar preparación de HTTP
 
 El sitio `ccm-upstream-frappe-diagnostic.test` nació vacío; se ejecutó
@@ -109,6 +132,43 @@ de bind nativo `0.0.0.0`: cero tests, BLOCKED, conservado. El guard ahora permit
 solo resolver ese literal local; mantiene prohibidos DNS/conexiones externos.
 Werkzeug intenta identificar su interfaz mediante un UDP externo, que el guard
 rechaza y Werkzeug maneja con su fallback nativo loopback. No se envía tráfico.
+
+## BOM, valor negativo y divisiones por cero: orden demostrado
+
+El sitio diagnostic creado con bootstrap antes de FX conserva BOM USD con
+`conversion_rate=0` y `base_rate=0` aunque su valoración de Item 2 sea 100.
+El test aislado sigue rechazando 0 frente a 10. Cargar FX después no recalcula
+automáticamente una BOM ya persistida. Se preservó el FAIL, sin retocar la BOM.
+
+El primer sitio fixture-audit también falló pese a solicitar FX antes del
+bootstrap. La cadena fijada lo explica: `make_test_records` → import del test
+Currency Exchange → import `ERPNextTestSuite` → `BootStrapTestData()` en el
+módulo utils. Este efecto ejecuta los maestros antes de generar las tasas.
+
+La preparación corregida crea `ccm-upstream-erpnext-fixture-order.test` vacío,
+instala las mismas apps/SHAs, inserta los seis JSON oficiales con la API nativa
+de documentos y luego ejecuta el bootstrap oficial. La
+[captura previa](evidence/frappe-official/erpnext-fixture-order-fx-before-bootstrap.json)
+demuestra **cero BOM antes y después de cargar FX**, seis tasas oficiales y
+ningún proveedor consultado. El bootstrap posterior calcula sus campos nativos.
+No se editan fixtures, estados, costos, tasas, fechas, validadores o expectativas.
+
+Antes del test BOM 3, Item 2 tiene valoración 100 y base_rate 100; la aserción
+nativa del incremento de 10 pasa. En stock 1, el observador conservó Basic Rate
+**−100** de `_Test FG Item`, fila 3, rechazado por NonNegativeError. Con los
+fixtures preparados en el orden correcto, el mismo método stock 2 pasa todas
+sus aserciones, incluido costo FG = materias primas − secundario, sin desactivar
+el validador. Sus
+[observaciones](evidence/frappe-official/erpnext-test_stock_entry-selected-attempt-2-observations.json)
+conservan filas y valores permitidos; no se publican documentos privados.
+
+Las trazas originales de las 14 divisiones se conservan en la matriz. Siete
+afectaban denominadores de cambio en pagos/Accounts Controller; otras siete
+pasaban por `BOM.get_routing` y su división por `self.conversion_rate`.
+Las reproducciones pasan con preparación corregida y tasas oficiales.
+**Cero no demuestra por sí solo por qué get_exchange_rate devolvió cero durante
+cada caso original.** La matriz deja ese motivo original no capturado; la causa
+del túnel 403 solo se afirma donde existe su Error Log, en payment_request.
 
 ## Preparación, reproducción y conservación
 
@@ -135,13 +195,41 @@ inicial del hook FX antes de instalar ERPNext (DocType ausente). Ese hook se
 movió después de instalación y antes de bootstrap; el sitio marcado vacío se
 conserva y se continúa, sin borrarlo. Ninguno fue una suite aprobada.
 
-La investigación restante de BOM/valor negativo debe añadirse antes del cierre.
-La hipótesis de cargar FX con el generador antes del bootstrap produjo otro
-BOM FAIL: el generador importa el módulo test Currency Exchange y este importa
-`ERPNextTestSuite`, que ejecuta `BootStrapTestData()` antes de insertar tasas.
-El nuevo slot fixture-order carga directamente los mismos JSON mediante
-`frappe.get_doc(record).insert()`, sin omitir validadores. Se comprobará que la
-carga no creó aún BOM antes de ejecutar el bootstrap y la regresión afectada.
+## Lo pendiente y siguientes pasos concretos
+
+1. Estas líneas acotadas terminaron al pasar; no se repiten completos. Los
+   originales completos siguen FAIL y los métodos no reejecutados conservan su
+   falta de resultado nuevo. Para un siguiente encargo, seleccionar un ID de
+   `original-failure-followup.json`, conservar su traza y formular una hipótesis
+   concreta antes de repetirlo en proceso/sitio oficial aislado. No atribuir
+   todo a requests/oauthlib ni a un bloqueo inevitable.
+2. Para HTTP 403/Domain forbidden originales que no se reproduzcan, conservar
+   sitio/configuración/URL efectiva y observar respuesta HTTP sin secretos en
+   un proceso limpio; no modificar proxy ni declarar causa sin esa evidencia.
+3. HOME sigue de solo lectura: los tests de backup necesitan un ejecutor con
+   HOME realmente escribible y los mismos pins. Permiso adicional no corrige
+   un montaje de solo lectura. No cambiar HOME ni sus aserciones en este ejecutor.
+4. Un FX sin registro oficial válido y que necesite un proveedor permanece sin
+   evidencia de éxito real del proveedor. Este encargo prohíbe nuevas consultas
+   y expansión de red; conservar esa limitación y el caso específico. No
+   inventar cotizaciones ni afirmar que cualquier caso no reproducido está
+   necesariamente bloqueado por red.
+5. Criterio 13 requiere patch compatible real. Sin él, conservar BLOCKED y seis
+   UNRUN. Una minor distinta exige plan separado de pins/SHAs, compatibilidad,
+   backup, migración, regresión y rollback y aprobación previa; no se ensaya ahora.
+
+Todas las correcciones quedaron en scripts de preparación, copia oficial y
+sitios oficiales. No cambiaron venv/apps/configuración ni código de Cencomun;
+sus fuentes upstream originales siguen limpias, pins y fixtures compartidos
+idénticos, incluida la evidencia cloud externa exacta. La consulta autenticada
+de precio/stock Cencomun pasó en este ejecutor; no es una restauración cloud.
+No se repite su Core Test completo porque su runtime no cambió. La matriz Core
+conserva 13 PASS y criterio 13 BLOCKED, distinta de estos completos oficiales FAIL.
+
+Veinticinco controles del harness pasan, incluyendo red sin transporte externo,
+colisión de paquete, conservación de intentos y rechazo de promover un subset a
+completo. No son pruebas oficiales. Checkpoint inicial `5219094`, push solo lab;
+el cierre añade las reproducciones finales y mantiene el PR #4 borrador.
 HOME de solo lectura, patch inexistente y restricciones de red no se sortean.
 Otros fallos del completo siguen documentados y no se atribuyen a una causa
 general. El PR #4 permanece borrador; no se repite Guardar/Publicar ni la

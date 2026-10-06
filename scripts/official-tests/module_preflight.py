@@ -10,6 +10,9 @@ def expected_map(apps, modules):
 
 
 def check(site, label):
+    destination = OUT / (label + '.json')
+    if destination.exists():
+        raise FileExistsError('Preserve existing module evidence before any cache operation.')
     import frappe
     from frappe.modules.utils import get_module_app
     os.chdir(BENCH / 'sites')
@@ -37,7 +40,6 @@ def check(site, label):
             'repair_scope': 'native db_name|app_modules only; no shared cache, permission or source change',
             'native_resolver_verified': True}
     frappe.db.rollback(); frappe.destroy()
-    destination = OUT / (label + '.json')
     with destination.open('x') as stream:
         stream.write(json.dumps(data, indent=2) + '\n')
     print('Native module preflight:', site, 'PASS', 'repair:', bool(mismatch))

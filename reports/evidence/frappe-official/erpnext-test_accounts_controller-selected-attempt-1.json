@@ -1,0 +1,62 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-fixture-order.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.controllers.tests.test_accounts_controller",
+  "category": "all",
+  "attempt": 1,
+  "status": "PASS",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_61_payment_entry_against_journal_for_payable_accounts",
+    "test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+    "test_difference_posting_date_in_pi_and_si"
+  ],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-order.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_accounts_controller-selected-attempt-1.xml --module erpnext.controllers.tests.test_accounts_controller --test test_61_payment_entry_against_journal_for_payable_accounts --test test_71_advance_payment_against_purchase_invoice_in_foreign_currency --test test_difference_posting_date_in_pi_and_si",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-order.test serve --port 8005 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T05:39:34.644520+00:00",
+  "elapsed_seconds": 21.655,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "53d9f9f30b124e77887e9f3cc26cc8176d241c97737842555f0667eae28284b2",
+  "actual_tests_run": 3,
+  "runner_counts_by_category": [
+    3
+  ],
+  "discovered_categories": [
+    {
+      "tests": 3,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 3,
+  "counts": {
+    "PASS": 3,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "seconds": 2.202,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "seconds": 4.653,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "seconds": 3.335,
+      "status": "PASS"
+    }
+  ],
+  "xml_documents": 1
+}

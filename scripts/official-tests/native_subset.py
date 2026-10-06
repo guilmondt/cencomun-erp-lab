@@ -4,6 +4,9 @@ import sys
 from pathlib import Path
 
 app, site, *modules = sys.argv[1:]
+from run import ALLOWED_SITES
+if app not in ('frappe', 'erpnext') or site not in ALLOWED_SITES:
+    raise ValueError('Only explicitly allowed official apps/sites are accepted.')
 os.chdir('/workspace/.local/frappe-integral/official-bench/sites')
 import frappe
 from frappe.parallel_test_runner import ParallelTestRunner

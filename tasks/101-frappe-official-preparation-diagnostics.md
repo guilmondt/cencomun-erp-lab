@@ -22,7 +22,7 @@ suites completas, modificar pins, oráculo, upstream, main, Axelor o producción
 5. Autenticación: CI nativa en sitio limpio, observar respuesta HTTP y separar
    request=None residual. Cambiar solo preparación local demostrada; no omitir
    aserciones ni poner resultados esperados en el transporte.
-6. Aislar BOM 0/10, cantidad Routing cero y Basic Rate negativo con sus fixtures
+6. Aislar BOM 0/10, conversion_rate cero en Routing y Basic Rate negativo con sus fixtures
    oficiales y validador intacto. Diferenciar errores FX de divisiones de
    fabricación. Detener la línea al pasar o demostrar el límite; lo desconocido
    sigue desconocido.
@@ -37,3 +37,14 @@ suites completas, modificar pins, oráculo, upstream, main, Axelor o producción
 Finalización: cada línea tiene resultado ejecutado o límite demostrado, o un
 pendiente desconocido identificado con siguiente reproducción concreta. No
 convertir desconocido en bloqueo inevitable ni aprobar cobertura no ejecutada.
+
+## Cierre de las líneas autorizadas
+
+Auth CI limpia 17/17 PASS; Payment Request 22/22 PASS; secuencia de cinco módulos
+contables 126/126 PASS. BOM +10 y Stock Entry negativo pasan sus métodos nativos
+tras corregir orden de fixtures; los 14 IDs con ZeroDivisionError pasan en sus
+reproducciones acotadas. No se editó el oráculo/fixtures, asserts/validadores ni
+pins. Los completos siguen FAIL; 62 eventos Frappe y 23 ERPNext carecen de
+reproducción nueva en este encargo y no reciben PASS. Criterio 13 BLOCKED y seis
+UNRUN. Detalle, evidencias y pasos pendientes en
+`reports/frappe-official-preparation-investigation.md`.

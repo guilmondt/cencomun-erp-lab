@@ -1,0 +1,1214 @@
+{
+  "native_result": "erpnext-test_accounts_controller-selected-attempt-1.json",
+  "scope": "selected official methods; not full module or suite",
+  "private_stream_sha256": "fc9216762175375ae29a8d4148f48d4c6f42c5b111eabb73bf142b2122004be0",
+  "counts_by_event": {
+    "observer_started": 4,
+    "external_transport_rejected": 1,
+    "module_map_return": 1,
+    "native_state": 6,
+    "fx_return": 48,
+    "test_stopped": 3
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 21175,
+      "epoch": 1791265153.0315213,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21175,
+      "epoch": 1791265153.2222946,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 21175,
+      "epoch": 1791265154.5422294,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21189,
+      "epoch": 1791265155.1980116,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 21189,
+      "epoch": 1791265155.3583786,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 21189,
+      "epoch": 1791265155.7660599,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "db_name": "ccm_upstream_erpnext_fixture_order"
+    },
+    {
+      "kind": "native_state",
+      "pid": 21189,
+      "epoch": 1791265164.0962806,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.656324,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.6689143,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.7127967,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.8280137,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.8321588,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.9502647,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265164.9616973,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265165.0176127,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265165.0244408,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265165.1231778,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265165.1282136,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265166.1284113,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265166.1323974,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265166.1385329,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21189,
+      "epoch": 1791265166.237202,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_61_payment_entry_against_journal_for_payable_accounts",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21189,
+      "epoch": 1791265166.2410645,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265167.1772203,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265167.5558214,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265167.5671012,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.3279955,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.3333764,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.598948,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.6058285,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.68929,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.6977446,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.8305376,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265168.8357966,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265169.90497,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265169.9091458,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265169.944609,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265169.9492815,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 21189,
+      "epoch": 1791265170.8905053,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_71_advance_payment_against_purchase_invoice_in_foreign_currency",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 21189,
+      "epoch": 1791265170.8930502,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265172.0833216,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265172.0834281,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265172.4191887,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265172.4313467,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.2580202,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.2627437,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.41182,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-04",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.4186847,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-04",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.4822247,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.486579,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.5214036,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [
+        {
+          "exchange_rate": 62.9
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.5851986,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.58999,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.947418,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-04",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.9540668,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-04",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.9944482,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265173.99927,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265174.0925333,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 21189,
+      "epoch": 1791265174.0972526,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 21189,
+      "epoch": 1791265174.2259722,
+      "test": "erpnext.controllers.tests.test_accounts_controller.TestAccountsController.test_difference_posting_date_in_pi_and_si",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-order.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    }
+  ]
+}
