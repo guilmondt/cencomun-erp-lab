@@ -47,7 +47,8 @@
  </entity>
  <entity name="CcmOutboxEvent">
   <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
-  <many-to-one name="coreOrder" ref="CcmOrder" required="true"/>
+  <many-to-one name="coreOrder" ref="CcmOrder"/>
+  <string name="objectRef" required="true"/>
   <string name="eventKey" required="true" unique="true"/>
   <string name="kind" required="true"/>
   <string name="payload" large="true" required="true"/>

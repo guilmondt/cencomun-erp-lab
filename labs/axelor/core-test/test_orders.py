@@ -4,14 +4,43 @@ import hashlib
 import json
 import tempfile
 import unittest
+import ast
 from pathlib import Path
-from order_cases import GROUP_CHECKS, effects, assert_denied_step, review_order_group, assert_native_enum_probe, assert_native_cost_probe, OrderCases
+from order_cases import GROUP_CHECKS, effects, assert_denied_step, review_order_group, assert_native_enum_probe, assert_native_cost_probe, OrderCases, capture_probe
 from run import REFERENCE, verify_bundle
 from extract_log_evidence import extract
 
 FIXTURES=Path(__file__).resolve().parents[3]/'fixtures/ccm-core-v1'
 
 class OrderEvidenceRegression(unittest.TestCase):
+    def test_real_runner_schedules_day_one_invoices_before_later_fx_postings(self):
+        tree=ast.parse((Path(__file__).with_name('run.py')).read_text())
+        driver=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='run')
+        calls={n.func.id:n.lineno for n in ast.walk(driver) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name)
+               and n.func.id in ('run_order_cases','run_finance_cases','run_fx_cases')}
+        self.assertLess(calls['run_order_cases'],calls['run_fx_cases'])
+        self.assertLess(calls['run_finance_cases'],calls['run_fx_cases'])
+    def test_failed_native_probes_keep_controls_responses_and_rollback_reads(self):
+        for name,validator,key in [('negative-native-cost',assert_native_cost_probe,'native_result'),('unknown-enum',assert_native_enum_probe,'native_enum_probe')]:
+            with self.subTest(probe=name):
+                evidence={'steps':[]};step={'name':name}
+                proof={'valid_control':{'stage':'fixture-configuration-failed'},'invalid_attempt':{'error':'actual native error','native_stack':['native.actual.validator']}}
+                snapshots=[{'native_export':{'stock':[5,5,5]},'audit':[],'read_boundary':'separate-http-after-business-commit-or-rollback'}]*2
+                request={'control_input':'valid','invalid_input':'invalid','case_id':'LAB'}
+                with self.assertRaises((AssertionError,KeyError)):
+                    capture_probe(evidence,step,request,lambda:snapshots.pop(0),lambda:proof,validator,key)
+                self.assertIs(evidence['steps'][0],step);self.assertEqual(step['status'],'FAIL')
+                self.assertEqual(step[key],proof);self.assertEqual(step['probe_request'],request)
+                self.assertIn('before',step);self.assertIn('after',step);self.assertIn('assertion_error',step)
+    def test_failed_probe_rpc_retains_exception_and_fresh_post_rollback_read(self):
+        evidence={'steps':[]};step={'name':'probe-http-error'};reads=[]
+        def read():
+            reads.append(1);return {'read_boundary':'separate-http-after-business-commit-or-rollback','native_export':{'stock':[5,5,5]}}
+        def invoke():raise RuntimeError('actual native action error')
+        with self.assertRaisesRegex(RuntimeError,'actual native action error'):
+            capture_probe(evidence,step,{'action':'native-probe'},read,invoke,lambda _:None,'native_result')
+        self.assertEqual(len(reads),2);self.assertEqual(step['probe_exception']['error'],'actual native action error')
+        self.assertIn('after',step);self.assertIs(evidence['steps'][0],step)
     def test_failed_http_expectation_retains_complete_attempt_before_assertion(self):
         runner=object.__new__(OrderCases)
         runner.active_evidence={'steps':[]}

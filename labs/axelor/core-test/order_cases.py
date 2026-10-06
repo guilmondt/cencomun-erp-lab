@@ -34,6 +34,32 @@ def effects(snapshot):
     return {k: v for k, v in snapshot.items() if k != 'audit'}
 
 
+def capture_probe(evidence, step, request, read, invoke, validate, result_key,
+                  before_key='before', after_key='after'):
+    """Attach the attempted probe and durable reads before checking its result."""
+    if not any(existing is step for existing in evidence['steps']):
+        evidence['steps'].append(step)
+    step.update(status='UNRUN', executed=True, probe_request=request, probe_actor='admin')
+    step[before_key] = read()
+    try:
+        step[result_key] = invoke()
+    except Exception as error:
+        step['probe_exception'] = {'type': type(error).__name__, 'error': str(error)}
+        step['status'] = exception_status(error)
+        raise
+    finally:
+        step[after_key] = read()
+        step['read_boundary'] = step[after_key]['read_boundary']
+    try:
+        validate(step[result_key])
+        assert effects(step[before_key]) == effects(step[after_key]), step['name']+': probe left domain effects after rollback'
+    except Exception as error:
+        step.update(status='FAIL', assertion_error=str(error))
+        raise
+    step['status'] = 'PASS'
+    return step
+
+
 def assert_initial(native, approved=False):
     assert {r['code']: Decimal(r['current_qty']) for r in native['stock']} == {'P001': Decimal(5), 'P002': Decimal(5), 'P003': Decimal(5)}
     assert sum(Decimal(r['current_qty']) * Decimal(r['avg_price']) for r in native['stock']) == Decimal(500)
@@ -385,25 +411,27 @@ class OrderCases:
             self.create('CO00' if channel=='STORE' else 'CO01',id)
             body={'company_id':'CCM-LAB-001','id':id,'state':'UNKNOWN-LAB','request_key':id+'-unknown','reason':'Synthetic unknown state'}
             step=self.denied(name,id,'simulator','transition',body,409)
+            evidence['steps'].append(step)
+            step['status']='UNRUN'  # This compound subcase includes native enum proof, still pending.
             # Generic CRUD rejects both valid and invalid states. It proves the guard, never enum causality.
-            before=self.snapshot(id); crud={}
+            before=self.snapshot(id); crud={};step['generic_crud_attempts']=crud
             for state in ('REVIEWED','UNKNOWN-LAB'):
                 try:
                     native=self.admin.request('/ws/rest/com.cencomun.core.db.CcmOrder',{'data':{
                         'id':before['order']['native_id'],'state':state}})
                 except urllib.error.HTTPError as error:
                     native={'http_status':error.code,'error':error.read().decode(errors='replace')[:1800]}
-                    assert error.code in (400,403,409,422,500)
+                    crud[state]={'request':{'data':{'id':before['order']['native_id'],'state':state}},'response':native,'before':before,'after':self.snapshot(id)}
+                    assert error.code in (400,403,409,422,500), f'{name}: generic CRUD unexpected HTTP {error.code}: {native}'
                 else:
-                    assert native.get('status')!=0,native
-                assert effects(before)==effects(self.snapshot(id));crud[state]=native
-            probe_before=self.snapshot(id)
-            probe=self.admin.action('ccm-core-cycle-enum-probe',id)
-            probe_after=self.snapshot(id)
-            assert_native_enum_probe(probe);assert effects(probe_before)==effects(probe_after)
-            step.update(native_enum_probe=probe,native_probe_before=probe_before,native_probe_after=probe_after,
-                        generic_valid_crud_denied=crud['REVIEWED'],generic_unknown_crud_denied=crud['UNKNOWN-LAB'])
-            evidence['steps'].append(step)
+                    crud[state]={'request':{'data':{'id':before['order']['native_id'],'state':state}},'response':native,'before':before,'after':self.snapshot(id)}
+                    assert native.get('status')!=0, f'{name}: generic CRUD write unexpectedly accepted: {native}'
+                assert effects(before)==effects(crud[state]['after']), name+': generic CRUD retained domain effects'
+            step.update(generic_valid_crud_denied=crud['REVIEWED'],generic_unknown_crud_denied=crud['UNKNOWN-LAB'])
+            capture_probe(evidence,step,{'action':'ccm-core-cycle-enum-probe','case_id':id,
+                          'control_input':'REVIEWED','invalid_input':'UNKNOWN-LAB'},
+                          lambda:self.snapshot(id),lambda:self.admin.action('ccm-core-cycle-enum-probe',id),
+                          assert_native_enum_probe,'native_enum_probe','native_probe_before','native_probe_after')
 
     def without_acceptance(self,evidence):
         for channel,states in [('STORE',['NEW','REVIEWED']),('WEB',['NEW','REVIEWED','APPROVED'])]:
@@ -469,11 +497,10 @@ class OrderCases:
             id='VAL-'+name.upper();self.fixture(id);body=self.payload('CO00',id);body['lines'][0][field]=value
             evidence['steps'].append(self.denied(name,id,'operator','create',body,422))
         id='VAL-NEGATIVE-NATIVE-COST';self.fixture(id)
-        before=self.snapshot(id)
-        native=self.admin.action('ccm-core-cycle-negative-cost',id);after=self.snapshot(id)
-        assert_native_cost_probe(native)
-        assert effects(before)==effects(after)
-        evidence['steps'].append(self.passed('negative-native-cost',native_result=native,before=before,after=after))
+        capture_probe(evidence,{'name':'negative-native-cost'},
+                      {'action':'ccm-core-cycle-negative-cost','case_id':id,'control_input':'30.00','invalid_input':'-0.01'},
+                      lambda:self.snapshot(id),lambda:self.admin.action('ccm-core-cycle-negative-cost',id),
+                      assert_native_cost_probe,'native_result')
 
 
 class NativeCancellationFailure(Exception):

@@ -795,3 +795,42 @@ intento antes del assert, por lo que el run no demuestra su causa nativa.
 3. Diagnosticar sólo la respuesta real y verificar cualquier corrección con
    entrega, factura, COGS, liquidación, roles y rechazos. Continuar finanzas
    independientes mientras corre esa validación, sin otro CI simultáneo.
+
+## Preparación financiera nativa y conservación de probes fallidos
+
+La ampliación propia declara bank-payment del mismo checkout fijado; el intento
+offline local no tenía jaxb-xjc3.0.1 en caché. Se resolvió mediante repositorios
+existentes con TLS/pins, sin añadir/publicar dominios. Compilación nativa, locks
+externos y replay offline estricto pasan; no prueban finanzas en el ERP.
+Se separan preparación PURCHASE/CASH/BANK y confirmación de secuencias antes del
+negocio; un fallo de configuración de una familia conserva su error y permite
+continuar las otras. No se separa la transacción económica.
+
+1. Confirmar el fixture específico mediante petición separada, ejecutar compras,
+   caja y banco con actores reales y leer sólo después de commit/rollback en CI.
+2. Adjuntar siempre el probe/control válido/intento inválido y snapshots antes
+   de cualquier aserción. Regresiones locales fuerzan ambos probes a fallar y
+   demuestran que se retienen respuesta y lecturas; no son validación ERP.
+3. Verificar aprobación nativa/FX por fecha, ocho movimientos caja ACCOUNTED y
+   factura125 pendiente excluida; statement/reconciliation nativos, signo-10,
+   clasificaciones por recibos reales, replay/hash y 1000 filas concurrentes.
+   Mantener todos UNRUN hasta prueba completa y revisar agregación independiente.
+
+## B32 — orden temporal del fixture contaminó la guarda cronológica nativa
+
+CI37442873626/37f9d28 conservó el intento delivery-rollback de los cuatro ciclos:
+actor ccm-operator, esperado503/real422, VentilateState.checkInvoiceDate267 y
+“La date de facture ou d'avoir ne peut être antérieure à la date de la dernière
+facture ventilée : 2026-10-02”. Los snapshots posteriores verifican rollback de
+stock/documentos/GL/keys/eventos. FX había contabilizado2Oct antes del ciclo1Oct.
+Esto es una interferencia del harness/fixture, no prueba de un fallo de atomicidad
+nativa ni razón para desactivar la guarda. UNKNOWN causal completo PASS del run;
+VAL/cancelación siguen FAIL funcionales. Matriz10PASS/6FAIL/18UNRUN.
+
+1. Preparar y confirmar las tasas/config FX antes de fixtures VES, sin crear
+   facturas; ordenar todos los ciclos y pending de caja1Oct antes de pagos FX2/3Oct.
+2. Conservar fechas/expectativas; no configurar ignoreInvoiceDate ni editar
+   secuencias/status nativos para superar el guard. Regresión protege el orden.
+3. Repetir cuatro ciclos completos, verificando503 real y snapshots de rollback,
+   entrega/factura/COGS/liquidación nativos, denegaciones, replay y oráculo.
+   Agrupar esa validación con seis grupos financieros; aún no verificada en ERP.

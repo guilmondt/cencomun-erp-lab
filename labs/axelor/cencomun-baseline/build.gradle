@@ -26,6 +26,7 @@ if (System.getenv('CCM_AXELOR_FULL_STACK') == '1') {
   dependencies {
     api project(':modules:axelor-account')
     api project(':modules:axelor-supplychain')
+    api project(':modules:axelor-bank-payment')
   }
   // Supported InvoiceGenerator extension is compiled only against the fixed AOS host.
   sourceSets.main.java.srcDir 'src/native/java'

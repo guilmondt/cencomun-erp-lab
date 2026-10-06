@@ -1,5 +1,83 @@
 # Core Test Axelor — ejecución en curso
 
+Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
+34 grupos/14 criterios/revisión2, fixtures, oráculo, manifiesto y pins sin cambios.
+
+Último CI [37442873626](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37442873626),
+`37f9d28d74e3fee776f13efcecc2e31d27b496a3`, FAILURE: **10 PASS / 6 FAIL / 18 UNRUN**.
+Gates administrador: CO00 PASS13.242s y TAX01-W PASS6.242s, mismos efectos nativos
+stock3/4/5, valor430, COGS70, GL ACCOUNTED, impuesto0/12.50 y AR0. Siguen separados
+de los grupos completos de roles, estados y atomicidad.
+
+UNKNOWN-LAB ya tiene prueba causal: control REVIEWED persistido/releído y revertido,
+Mapper.set/ValueEnum.of rechazó el valor inválido, snapshots posteriores iguales,
+ambos canales ejecutados. El coste negativo sigue FAIL (aceptado por ERP); su probe
+completo se conservará antes de asserts en el próximo commit, junto con el control
+válido. Las tres cancelaciones confirmadas siguen FAIL funcionales con expectativa
+CANCELLED y error nativo intactos.
+
+Causa observada de los cuatro ciclos: delivery-rollback esperaba503, obtuvo422 en
+VentilateState.checkInvoiceDate: “La date de facture ou d'avoir ne peut être antérieure
+à la date de la dernière facture ventilée : 2026-10-02”. Actor ccm-operator,
+petición/error/stack y ambos snapshots preservados; revisión independiente comprueba
+rollback económico sin cambios. Se habían ejecutado pagos FX del día2 antes de estos
+pedidos del día1. La corrección mantiene la validación cronológica: preparar tasas
+primero y ejecutar los ciclos/caja del día1 antes de contabilizar FX de días2/3.
+Fechas, efectos y expectativas intactos; corrección pendiente de repetir ERP.
+
+Próximo bloque incluye seis grupos financieros, servicios/FK nativos, roles,
+revisión/self, caja y libro contabilizados, conciliación bancaria, signo negativo,
+replay y1000 filas concurrentes. **UNRUN** hasta aceptación CI. Localmente25 Java y
+47 regresiones Python pasan; compilación/locks externos/replay offline estrictos
+sin diferencias upstream, baseline locks sin cambios. No sustituye CI.
+
+| Grupo completo | Estado del CI37f9d28 |
+| --- | --- |
+| CO00-NATIVE | FAIL |
+| CO01-NATIVE | FAIL |
+| TAX01-S-NATIVE | FAIL |
+| TAX01-W-NATIVE | FAIL |
+| PROD01-04 | PASS |
+| VAL01-04 | FAIL |
+| STATE01-04 | PASS |
+| INV01-03-INSUFFICIENT | PASS |
+| FX01-03-MONEY01-03 | PASS |
+| PO01-09-NATIVE | UNRUN |
+| PO07-09-REVISION-SELF | UNRUN |
+| CASH00-06-NATIVE | UNRUN |
+| BANK-BOOK-FIXTURE | PASS |
+| BANK01-05-NATIVE | UNRUN |
+| API01-06-SIX-ROUTES | UNRUN |
+| IDEM01-02-CREATE-CONCURRENT | UNRUN |
+| PERM-API-NATIVE | UNRUN |
+| CASH04-06-HTTP-IMMUTABLE | UNRUN |
+| SEARCH01-04-NATIVE | PASS |
+| TAX02-04-IDEM-CONCURRENT | UNRUN |
+| BANK-CONCURRENT-1000 | UNRUN |
+| MCP01-06-STDIO | UNRUN |
+| IDEM03-LOST-RESTART | UNRUN |
+| IDEM04-EVENTS-RECOVERY | UNRUN |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS |
+| AUDIT01-03-NATIVE | UNRUN |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | UNRUN |
+| SUPPORTED-CONFIGURATION | UNRUN |
+| STATE-UNKNOWN-ATOMIC | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS |
+| STATE-WEB-NO-GUIDE | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | UNRUN |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | UNRUN |
+
+Evidencia completa saneada: [runs/37442873626](evidence/axelor-core/runs/37442873626/).
+Log estructurado secundario con SHA y comprobador congelado del mismo commit;
+ZIP sa9 bloqueado, un intento, sin ampliación/publicación de red. Java53 pruebas
+CI0fallos/errores/skips; criterio2 deriva de suites, WAR, pins y upstreamdiff0.
+Arranque359.16s/reinicio269.91s autenticados. Se continúa el ExecPlan, no se cierra
+la comparación en la matriz parcial. Ensayo de actualización fuera de este alcance.
+
+## Historial de ejecuciones anteriores (sin transferir resultados)
+
+
 Comparación **incompleta**, referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
 fixtures/oráculo/manifiesto/cobertura revisión2 sin cambios. Rama exclusiva `lab/axelor-baseline`.
 

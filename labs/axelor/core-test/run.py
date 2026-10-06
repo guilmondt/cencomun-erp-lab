@@ -601,7 +601,7 @@ def run_fx_payment_cases(operator, admin, inputs, body, evidence):
     return results
 
 
-def run_fx_cases(admin, base, fixtures, output, row):
+def run_fx_cases(admin, base, fixtures, output, row, preparation=None):
     start = time.perf_counter()
     evidence = {"case": "FX01-03-MONEY01-03", "reference": REFERENCE, "revision": 1, "steps": []}
     operator, manager = NativeClient(base), NativeClient(base)
@@ -619,7 +619,9 @@ def run_fx_cases(admin, base, fixtures, output, row):
             return {"http_status": error.code}
         raise AssertionError("Required FX rejection was accepted")
     try:
-        evidence["preparation"] = admin.action("ccm-core-fx-prepare", "FX")
+        if preparation is not None and 'error' in preparation:
+            raise RuntimeError('Committed FX fixture preparation failed: '+preparation['error'])
+        evidence["preparation"] = preparation if preparation is not None else admin.action("ccm-core-fx-prepare", "FX")
         before = admin.action("ccm-core-fx-inspect", "FX")
         assert len(before["rates"]) == 2 and before["authorizations"] == [], before
         assert {r["from_date"]: Decimal(r["rate"]) for r in before["rates"]} == {d: Decimal(v) for d,v in profile["rates"].items()}
@@ -909,10 +911,19 @@ def run(base, fixtures, output):
     products = run_product_cases(client, base, fixtures, output, by_case["PROD01-04"])
     search = run_search_cases(client, base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
     book = run_bank_book_cases(client, fixtures, output, by_case["BANK-BOOK-FIXTURE"])
-    fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"])
+    # Rates/configuration commit before VES purchase/cash fixtures. Native invoice
+    # chronology remains intact: all day-1 invoices execute before day-2/3 FX invoices.
+    try:
+        fx_preparation = client.action("ccm-core-fx-prepare", "FX")
+    except Exception as error:
+        fx_preparation = {'error':str(error),'error_type':type(error).__name__}
+    (output/'fx-fixture-preparation.json').write_text(json.dumps(fx_preparation,indent=2)+'\n')
     fixture = run_fixture_cases(client, fixtures, output, by_case["FIXTURE-HASH-NATIVE-EXPORT"])
     from order_cases import run_order_cases
     orders = run_order_cases(client, base, fixtures, output, by_case)
+    from finance_cases import run_finance_cases
+    finance = run_finance_cases(client, base, fixtures, output, by_case)
+    fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"], fx_preparation)
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
@@ -921,7 +932,7 @@ def run(base, fixtures, output):
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     metrics = {"metric_kind": "runtime", "reference": REFERENCE,
                                                    "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders+finance],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,

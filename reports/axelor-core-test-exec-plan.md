@@ -617,3 +617,22 @@ AxelorException solos no aprueban. Revisor reforzado aplicado también al CI16,
 sin sustituir evidencia ejecutada ni duplicar su job. Cancelación confirmada
 que contradice el contrato se clasifica FAIL funcional observado (B31),
 con tres tentativas independientes, expectativa intacta y rollback comprobado.
+
+### Continuación financiera agrupada posterior a CI16
+
+Seis grupos se ejecutarán en el mismo run: PO01–09, revisión/self, CASH00–06,
+CASH04–06 HTTP inmutable, BANK01–05 y BANK-CONCURRENT1000. PurchaseOrder nativo
+create/request/validate/cancel/draft; fecha solicitud01Oct y tasa40; PO07 usa
+TaxLine porcentual de15/base180 y freight10 con descuento fijo5 (totales nativos).
+CcmPurchase guarda control de rol/decisión y FK, no sustituye el ERP. Una revisión
+invoca cancel/draft oficiales: invalida estado y firma vigente; el historial
+validatedBy/date del documento nativo permanece como historial de su decisión
+anterior, y sólo su nuevo REQUESTED→VALIDATED puede aprobar la revisión.
+Caja deriva sólo de ocho Move/MoveLine ACCOUNTED del journal dedicado; VES usa
+CurrencyService/MoveLineCreateService y el pending125 nativo no es recibido.
+Banco usa BankStatementLineCreationService y BankReconciliationLine/Validate;
+composición de CSV compartido, signos y criterio de emparejamiento propios,
+efectos/FK/status/remaining nativos. IBAN público de ejemplo, cuenta/cliente
+sintéticos del LAB; no son credenciales ni datos de producción.
+Toda aceptación continúa pendiente de CI, con conjuntos cerrados de subcasos,
+controles de roles, snapshot independiente y agregador que rechaza pruebas vacías.

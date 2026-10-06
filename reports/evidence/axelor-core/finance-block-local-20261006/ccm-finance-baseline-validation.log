@@ -1,0 +1,60 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+
+> Task :buildSrc:compileJava
+Note: /workspace/ccm-axelor-runtime/open-suite-webapp/buildSrc/src/main/java/com/axelor/gradle/tasks/AbstractCheckXmlAttributes.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:processResources NO-SOURCE
+> Task :buildSrc:classes
+> Task :buildSrc:jar
+> Task :modules:cencomun-baseline:generateCode
+
+> Task :modules:cencomun-baseline:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :modules:cencomun-baseline:processResources
+> Task :modules:cencomun-baseline:classes
+> Task :modules:cencomun-baseline:jar
+> Task :modules:cencomun-baseline:generateTestCode
+> Task :modules:cencomun-baseline:compileTestJava
+> Task :modules:cencomun-baseline:processTestResources NO-SOURCE
+> Task :modules:cencomun-baseline:testClasses
+
+> Task :modules:cencomun-baseline:test
+Running: Test generatedMetadataIdentifiesTheCustomModule()(com.cencomun.baseline.module.CencomunModuleTest)
+Running: Test registersWithThePlatformInjectorWithoutADatabase()(com.cencomun.baseline.module.CencomunModuleTest)
+Running: Test fivePhysicalAttemptsBeforeAcceptanceRejectWithoutRelaxingTheGraph()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test invalidQuantityAndPriceMustRejectBeforeNativeDocumentCreation()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test genericCrudDoesNotInheritWorkflowWriteCapability()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test unknownStatesCannotBecomeAnEnumOrEconomicAction()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test exceptionPathsDoNotAllowCancellationAfterHandover()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test storeAndWebPathsRequireEveryStage()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test fixedPayloadsRemainValidWithoutChangingTheirValues()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test missingWebGuideIsInvalidAfterPreparing()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test authenticatedSimulatorAndOperatorHaveDifferentResponsibilities()(com.cencomun.core.CoreOrderPolicyTest)
+Running: Test purchaseLimitsKeepAllSixExactBoundaries()(com.cencomun.core.MoneyPolicyTest)
+Running: Test pricesRejectInvalidPrecisionWithoutRoundingToAccept()(com.cencomun.core.MoneyPolicyTest)
+Running: Test exchangeConversionRoundsEachLine()(com.cencomun.core.MoneyPolicyTest)
+Running: Test allFourMoneyCasesMatchTheFixedOracleWithoutFeedingItIntoCalculations()(com.cencomun.core.MoneyPolicyTest)
+Running: Test negativeCostsAreRejected()(com.cencomun.core.MoneyPolicyTest)
+Running: Test quantitiesRejectZeroNegativeAndFractions()(com.cencomun.core.MoneyPolicyTest)
+Running: Test fixedFixturesAndRevisionTwoRemainByteIdentical()(com.cencomun.core.MoneyPolicyTest)
+
+[Incubating] Problems report is available at: file:///workspace/ccm-axelor-runtime/open-suite-webapp/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 13s
+9 actionable tasks: 9 executed
+Validated: 2 baseline tests + 7 money + 9 order policy unit tests passed; 0 failed/errors/skipped; custom JAR and metadata verified.
+== repository verification ==
+Repository guardrails passed.

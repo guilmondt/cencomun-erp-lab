@@ -36,7 +36,7 @@ public class CoreOrderController {
       if (role == null) role = record("com.axelor.auth.db.Role","name",entry.getValue());
       HashSet<Model> grants = new HashSet<>(get(role,"permissions") == null ? Set.of() : (java.util.Set<Model>)get(role,"permissions"));
       if (!key.equals("other")) {
-        for (String name:List.of("CcmOrder","CcmOrderLine","CcmAudit","CcmRequestKey","CcmOutboxEvent")) {
+        for (String name:List.of("CcmOrder","CcmOrderLine","CcmAudit","CcmRequestKey","CcmOutboxEvent","CcmPurchase","CcmCashClose","CcmBankImport","CcmBankRow")) {
           // All roles read company-scoped evidence; no generic REST business writes.
           String condition = name.equals("CcmOrderLine") ? "self.coreOrder.company.id = ?" : "self.company.id = ?";
           String permissionName = "ccm.lab.order.read."+name;

@@ -1,0 +1,57 @@
+{
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "lab_commit": "37f9d28d74e3fee776f13efcecc2e31d27b496a3",
+  "run_id": "37442873626",
+  "attempts": [
+    {
+      "case": "CO00-NATIVE",
+      "attempt": "delivery-rollback",
+      "actor": "ccm-operator",
+      "actual_http": 422,
+      "expected_http": 503,
+      "error_type": "com.axelor.apps.base.AxelorException",
+      "error": "La date de facture ou d'avoir ne peut \u00eatre ant\u00e9rieure \u00e0 la date de la derni\u00e8re facture ventil\u00e9e : 2026-10-02",
+      "native_cause_frame": "com.axelor.apps.account.service.invoice.workflow.ventilate.VentilateState.checkInvoiceDate(VentilateState.java:267)",
+      "business_effects_unchanged_after_rollback": true,
+      "source_evidence": "CO00-NATIVE.json"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "attempt": "delivery-rollback",
+      "actor": "ccm-operator",
+      "actual_http": 422,
+      "expected_http": 503,
+      "error_type": "com.axelor.apps.base.AxelorException",
+      "error": "La date de facture ou d'avoir ne peut \u00eatre ant\u00e9rieure \u00e0 la date de la derni\u00e8re facture ventil\u00e9e : 2026-10-02",
+      "native_cause_frame": "com.axelor.apps.account.service.invoice.workflow.ventilate.VentilateState.checkInvoiceDate(VentilateState.java:267)",
+      "business_effects_unchanged_after_rollback": true,
+      "source_evidence": "CO01-NATIVE.json"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "attempt": "delivery-rollback",
+      "actor": "ccm-operator",
+      "actual_http": 422,
+      "expected_http": 503,
+      "error_type": "com.axelor.apps.base.AxelorException",
+      "error": "La date de facture ou d'avoir ne peut \u00eatre ant\u00e9rieure \u00e0 la date de la derni\u00e8re facture ventil\u00e9e : 2026-10-02",
+      "native_cause_frame": "com.axelor.apps.account.service.invoice.workflow.ventilate.VentilateState.checkInvoiceDate(VentilateState.java:267)",
+      "business_effects_unchanged_after_rollback": true,
+      "source_evidence": "TAX01-S-NATIVE.json"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "attempt": "delivery-rollback",
+      "actor": "ccm-operator",
+      "actual_http": 422,
+      "expected_http": 503,
+      "error_type": "com.axelor.apps.base.AxelorException",
+      "error": "La date de facture ou d'avoir ne peut \u00eatre ant\u00e9rieure \u00e0 la date de la derni\u00e8re facture ventil\u00e9e : 2026-10-02",
+      "native_cause_frame": "com.axelor.apps.account.service.invoice.workflow.ventilate.VentilateState.checkInvoiceDate(VentilateState.java:267)",
+      "business_effects_unchanged_after_rollback": true,
+      "source_evidence": "TAX01-W-NATIVE.json"
+    }
+  ],
+  "native_enum_causal_controls_and_rollback": "PASS in this run only",
+  "proposed_correction": "Execute all fixed day-1 native invoices before later-date FX postings; prepare rates/config separately and earlier; do not bypass checkInvoiceDate or alter dates/results. Correction ERP validation PENDING."
+}

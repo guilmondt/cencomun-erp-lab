@@ -1,0 +1,131 @@
+{
+  "metric_kind": "runtime",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "gates": [
+    {
+      "case": "CO00",
+      "seconds": 13.242,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-W",
+      "seconds": 6.242,
+      "status": "PASS"
+    }
+  ],
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 1.913,
+      "status": "PASS"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.372,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "seconds": 0.804,
+      "status": "PASS"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "seconds": 3.967,
+      "status": "PASS"
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "seconds": 0.104,
+      "status": "PASS"
+    },
+    {
+      "case": "CO00-NATIVE",
+      "seconds": 5.81,
+      "status": "FAIL"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "seconds": 5.344,
+      "status": "FAIL"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "seconds": 5.347,
+      "status": "FAIL"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "seconds": 5.309,
+      "status": "FAIL"
+    },
+    {
+      "case": "VAL01-04",
+      "seconds": 3.518,
+      "status": "FAIL"
+    },
+    {
+      "case": "STATE01-04",
+      "seconds": 1.838,
+      "status": "PASS"
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "seconds": 3.646,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "seconds": 1.336,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "seconds": 5.127,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "seconds": 3.741,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "seconds": 11.161,
+      "status": "FAIL"
+    }
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.41",
+  "cpu_count": 4,
+  "cpu_affinity": 4,
+  "disk_free_bytes": 87068463104,
+  "http_call_counts": {
+    "administrator": 324,
+    "product_operator": 30,
+    "search_reader": 16,
+    "fx_operator": 11,
+    "fx_manager": 4
+  },
+  "native_action_counts": {
+    "ccm-core-native-prepare": 2,
+    "ccm-core-native-inspect": 4,
+    "ccm-core-native-gate": 2,
+    "ccm-core-products-prepare": 1,
+    "ccm-core-products-inspect": 1,
+    "ccm-core-bank-book-prepare": 1,
+    "ccm-core-bank-book-post": 2,
+    "ccm-core-bank-book-inspect": 2,
+    "ccm-core-fx-prepare": 1,
+    "ccm-core-fx-inspect": 11,
+    "ccm-core-fixtures-prepare": 1,
+    "ccm-core-fixtures-inspect": 1,
+    "ccm-core-cycle-actors": 1,
+    "ccm-core-cycle-prepare": 28,
+    "ccm-core-cycle-seed": 28,
+    "ccm-core-cycle-inspect": 228,
+    "ccm-core-cycle-negative-cost": 1,
+    "ccm-core-cycle-enum-probe": 2
+  },
+  "benchmark": "UNRUN",
+  "note": "Gate timings are not the required 1000-sample benchmark"
+}

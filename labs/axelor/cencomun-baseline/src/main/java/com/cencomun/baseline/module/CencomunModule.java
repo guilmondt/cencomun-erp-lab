@@ -6,7 +6,7 @@ import com.axelor.app.AxelorModule;
 public class CencomunModule extends AxelorModule {
   @Override @SuppressWarnings({"rawtypes", "unchecked"})
   protected void configure() {
-    for(String name : new String[]{"CcmOrder","CcmOrderLine","CcmRequestKey","CcmOutboxEvent","CcmAudit"}) {
+    for(String name : new String[]{"CcmOrder","CcmOrderLine","CcmRequestKey","CcmOutboxEvent","CcmAudit","CcmPurchase","CcmCashClose","CcmBankImport","CcmBankRow"}) {
       try {
         Class repository=Class.forName("com.cencomun.core.db.repo."+name+"Repository");
         Class extension=Class.forName("com.cencomun.core."+name+"WorkflowRepository");

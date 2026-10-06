@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://axelor.com/xml/ns/domain-models https://axelor.com/xml/ns/domain-models/domain-models_8.2.xsd">
+ <module name="cencomun-baseline" package="com.cencomun.core.db"/>
+ <entity name="CcmPurchase">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <string name="functionalId" required="true"/>
+  <many-to-one name="creator" ref="com.axelor.auth.db.User" required="true"/>
+  <many-to-one name="purchaseOrder" ref="com.axelor.apps.purchase.db.PurchaseOrder" required="true"/>
+  <enum name="state" ref="CcmPurchaseState" default="DRAFT" required="true"/>
+  <integer name="decisionRevision" default="1" required="true" min="1"/>
+  <decimal name="usdBase" precision="20" scale="2" required="true"/>
+  <decimal name="requestRate" precision="20" scale="6"/>
+  <string name="payload" large="true" required="true"/>
+  <many-to-one name="approvedBy" ref="com.axelor.auth.db.User"/>
+  <datetime name="approvedAt"/>
+  <unique-constraint columns="company,functionalId"/>
+ </entity>
+ <entity name="CcmCashClose">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <string name="functionalId" required="true"/>
+  <enum name="state" ref="CcmCashState" default="PREPARED" required="true"/>
+  <string name="expectedAmounts" large="true" required="true"/>
+  <string name="observedAmounts" large="true" required="true"/>
+  <string name="differences" large="true" required="true"/>
+  <string name="sourceSnapshot" large="true" required="true"/>
+  <string name="note" large="true"/>
+  <many-to-one name="preparedBy" ref="com.axelor.auth.db.User" required="true"/>
+  <many-to-one name="confirmedBy" ref="com.axelor.auth.db.User"/>
+  <datetime name="confirmedAt"/>
+  <unique-constraint columns="company,functionalId"/>
+ </entity>
+ <entity name="CcmBankImport">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <string name="accountCode" required="true"/>
+  <string name="fileHash" required="true"/>
+  <many-to-one name="bankStatement" ref="com.axelor.apps.bankpayment.db.BankStatement" required="true"/>
+  <string name="result" large="true" required="true"/>
+  <unique-constraint columns="company,accountCode,fileHash"/>
+ </entity>
+ <entity name="CcmBankRow">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <string name="accountCode" required="true"/>
+  <string name="transactionHash" required="true"/>
+  <string name="classification" required="true"/>
+  <string name="candidates" large="true" required="true"/>
+  <many-to-one name="statementLine" ref="com.axelor.apps.bankpayment.db.BankStatementLine" required="true"/>
+  <many-to-one name="bookLine" ref="com.axelor.apps.account.db.MoveLine"/>
+  <many-to-one name="reconciliation" ref="com.axelor.apps.bankpayment.db.BankReconciliation"/>
+  <unique-constraint columns="company,accountCode,transactionHash"/>
+ </entity>
+ <enum name="CcmPurchaseState"><item name="DRAFT"/><item name="PENDING"/><item name="APPROVED"/></enum>
+ <enum name="CcmCashState"><item name="PREPARED"/><item name="CONFIRMED"/></enum>
+</domain-models>

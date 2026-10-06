@@ -1,0 +1,1110 @@
+{
+  "case": "STATE01-04",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [
+    {
+      "name": "STATE-STORE-REJECTED",
+      "status": "PASS",
+      "executed": true,
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "STATE-STORE-REJECTED",
+        "state": "REJECTED",
+        "request_key": "STATE-STORE-REJECTED-REJECTED",
+        "reason": "Synthetic LAB transition to REJECTED"
+      },
+      "response": {
+        "id": "STATE-STORE-REJECTED",
+        "native_id": 5,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "REJECTED",
+        "channel": "STORE",
+        "guide": null,
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": false,
+        "native_progress": {}
+      },
+      "snapshot": {
+        "order": {
+          "id": "STATE-STORE-REJECTED",
+          "native_id": 5,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "state": "REJECTED",
+          "channel": "STORE",
+          "guide": null,
+          "creator": "ccm-operator",
+          "saleOrder_id": null,
+          "delivery_id": null,
+          "invoice_id": null
+        },
+        "native_export": {
+          "case": "STATE-STORE-REJECTED",
+          "stock": [
+            {
+              "code": "P001",
+              "avg_price": "30.0000000000",
+              "id": 48,
+              "current_qty": "5.0000000000",
+              "product_id": 1
+            },
+            {
+              "code": "P002",
+              "avg_price": "10.0000000000",
+              "id": 49,
+              "current_qty": "5.0000000000",
+              "product_id": 2
+            },
+            {
+              "code": "P003",
+              "avg_price": "60.0000000000",
+              "id": 50,
+              "current_qty": "5.0000000000",
+              "product_id": 3
+            }
+          ],
+          "stock_move_ids": [
+            23
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "customers": [
+              {
+                "code": "C002",
+                "invoicing_address_id": 4,
+                "partner_id": 3
+              },
+              {
+                "code": "CBANK",
+                "invoicing_address_id": 5,
+                "partner_id": 4
+              },
+              {
+                "code": "C001",
+                "invoicing_address_id": 3,
+                "partner_id": 2
+              }
+            ],
+            "accounts": [
+              {
+                "id": 1,
+                "vat_system": 1,
+                "code": "CCM-AR"
+              },
+              {
+                "id": 2,
+                "vat_system": 1,
+                "code": "CCM-AP"
+              },
+              {
+                "id": 3,
+                "vat_system": 1,
+                "code": "CCM-STOCK"
+              },
+              {
+                "id": 4,
+                "vat_system": 1,
+                "code": "CCM-REVENUE"
+              },
+              {
+                "id": 5,
+                "vat_system": 1,
+                "code": "CCM-COGS"
+              },
+              {
+                "id": 6,
+                "vat_system": 1,
+                "code": "CCM-COMMISSION"
+              },
+              {
+                "id": 7,
+                "vat_system": 1,
+                "code": "CCM-SHIPPING"
+              },
+              {
+                "id": 8,
+                "vat_system": 1,
+                "code": "CCM-TAX"
+              },
+              {
+                "id": 9,
+                "vat_system": 1,
+                "code": "CCM-CASH"
+              },
+              {
+                "id": 10,
+                "vat_system": 1,
+                "code": "CCM-BANK"
+              },
+              {
+                "id": 11,
+                "vat_system": 1,
+                "code": "CCM-OPENING"
+              },
+              {
+                "id": 12,
+                "vat_system": 1,
+                "code": "CCM-CASH-VES"
+              }
+            ],
+            "legal_partner_id": 1,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "isVentilationSkipped": false,
+              "persisted_isVentilationSkipped": false
+            },
+            "legal_vat_system": 2
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "id": 34,
+              "company_id": 1,
+              "lines": [
+                {
+                  "parent_move_id": 34,
+                  "remaining": "0",
+                  "credit": "0.000",
+                  "id": 73,
+                  "debit": "500.000",
+                  "account_id": 3,
+                  "account_code": "CCM-STOCK",
+                  "account_company_id": 1
+                },
+                {
+                  "parent_move_id": 34,
+                  "remaining": "0",
+                  "credit": "500.000",
+                  "id": 74,
+                  "debit": "0.000",
+                  "account_id": 11,
+                  "account_code": "CCM-OPENING",
+                  "account_company_id": 1
+                }
+              ],
+              "status": 3
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [
+          {
+            "id": 15,
+            "domain": "order.create",
+            "hash": "ebede6427466b9f1c8e2c88b496d3883de1386b17d7baf870b5cb175210b12ac",
+            "key": "STATE-STORE-REJECTED-create"
+          },
+          {
+            "id": 17,
+            "domain": "order.transition",
+            "hash": "2aa3a65863113fc58f2415f206cec0624751abbaeb15e096064274f148b1c83d",
+            "key": "STATE-STORE-REJECTED-REJECTED"
+          },
+          {
+            "id": 16,
+            "domain": "order.transition",
+            "hash": "751a2406df15212b8c8125b1120826bdb1ca6552a1f9a69af72813775555f74f",
+            "key": "STATE-STORE-REJECTED-REVIEWED"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 62,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T09:38:38.722843",
+            "kind": "order.created",
+            "correlation": "STATE-STORE-REJECTED-create",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"STATE-STORE-REJECTED\",\"native_id\":5,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB create",
+            "rejected": false
+          },
+          {
+            "id": 63,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:38.757373",
+            "kind": "order.transition",
+            "correlation": "STATE-STORE-REJECTED-REVIEWED",
+            "beforeState": "{\"id\":\"STATE-STORE-REJECTED\",\"native_id\":5,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-STORE-REJECTED\",\"native_id\":5,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REVIEWED",
+            "rejected": false
+          },
+          {
+            "id": 64,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:38.786797",
+            "kind": "order.transition",
+            "correlation": "STATE-STORE-REJECTED-REJECTED",
+            "beforeState": "{\"id\":\"STATE-STORE-REJECTED\",\"native_id\":5,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-STORE-REJECTED\",\"native_id\":5,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REJECTED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REJECTED",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "replay": {
+        "id": "STATE-STORE-REJECTED",
+        "native_id": 5,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "REJECTED",
+        "channel": "STORE",
+        "guide": null,
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": true,
+        "native_progress": {}
+      }
+    },
+    {
+      "name": "STATE-STORE-CANCELLED",
+      "status": "PASS",
+      "executed": true,
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "STATE-STORE-CANCELLED",
+        "state": "CANCELLED",
+        "request_key": "STATE-STORE-CANCELLED-CANCELLED",
+        "reason": "Synthetic LAB transition to CANCELLED"
+      },
+      "response": {
+        "id": "STATE-STORE-CANCELLED",
+        "native_id": 6,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "CANCELLED",
+        "channel": "STORE",
+        "guide": null,
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": false,
+        "native_progress": {}
+      },
+      "snapshot": {
+        "order": {
+          "id": "STATE-STORE-CANCELLED",
+          "native_id": 6,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "state": "CANCELLED",
+          "channel": "STORE",
+          "guide": null,
+          "creator": "ccm-operator",
+          "saleOrder_id": null,
+          "delivery_id": null,
+          "invoice_id": null
+        },
+        "native_export": {
+          "case": "STATE-STORE-CANCELLED",
+          "stock": [
+            {
+              "code": "P001",
+              "avg_price": "30.0000000000",
+              "id": 51,
+              "current_qty": "5.0000000000",
+              "product_id": 1
+            },
+            {
+              "code": "P002",
+              "avg_price": "10.0000000000",
+              "id": 52,
+              "current_qty": "5.0000000000",
+              "product_id": 2
+            },
+            {
+              "code": "P003",
+              "avg_price": "60.0000000000",
+              "id": 53,
+              "current_qty": "5.0000000000",
+              "product_id": 3
+            }
+          ],
+          "stock_move_ids": [
+            24
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "customers": [
+              {
+                "code": "C002",
+                "invoicing_address_id": 4,
+                "partner_id": 3
+              },
+              {
+                "code": "CBANK",
+                "invoicing_address_id": 5,
+                "partner_id": 4
+              },
+              {
+                "code": "C001",
+                "invoicing_address_id": 3,
+                "partner_id": 2
+              }
+            ],
+            "accounts": [
+              {
+                "id": 1,
+                "vat_system": 1,
+                "code": "CCM-AR"
+              },
+              {
+                "id": 2,
+                "vat_system": 1,
+                "code": "CCM-AP"
+              },
+              {
+                "id": 3,
+                "vat_system": 1,
+                "code": "CCM-STOCK"
+              },
+              {
+                "id": 4,
+                "vat_system": 1,
+                "code": "CCM-REVENUE"
+              },
+              {
+                "id": 5,
+                "vat_system": 1,
+                "code": "CCM-COGS"
+              },
+              {
+                "id": 6,
+                "vat_system": 1,
+                "code": "CCM-COMMISSION"
+              },
+              {
+                "id": 7,
+                "vat_system": 1,
+                "code": "CCM-SHIPPING"
+              },
+              {
+                "id": 8,
+                "vat_system": 1,
+                "code": "CCM-TAX"
+              },
+              {
+                "id": 9,
+                "vat_system": 1,
+                "code": "CCM-CASH"
+              },
+              {
+                "id": 10,
+                "vat_system": 1,
+                "code": "CCM-BANK"
+              },
+              {
+                "id": 11,
+                "vat_system": 1,
+                "code": "CCM-OPENING"
+              },
+              {
+                "id": 12,
+                "vat_system": 1,
+                "code": "CCM-CASH-VES"
+              }
+            ],
+            "legal_partner_id": 1,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "isVentilationSkipped": false,
+              "persisted_isVentilationSkipped": false
+            },
+            "legal_vat_system": 2
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "id": 35,
+              "company_id": 1,
+              "lines": [
+                {
+                  "parent_move_id": 35,
+                  "remaining": "0",
+                  "credit": "0.000",
+                  "id": 75,
+                  "debit": "500.000",
+                  "account_id": 3,
+                  "account_code": "CCM-STOCK",
+                  "account_company_id": 1
+                },
+                {
+                  "parent_move_id": 35,
+                  "remaining": "0",
+                  "credit": "500.000",
+                  "id": 76,
+                  "debit": "0.000",
+                  "account_id": 11,
+                  "account_code": "CCM-OPENING",
+                  "account_company_id": 1
+                }
+              ],
+              "status": 3
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [
+          {
+            "id": 18,
+            "domain": "order.create",
+            "hash": "96ada840f99d575c0a7a594cc8f21193bc7ef72017097e310f4747ebf01bddba",
+            "key": "STATE-STORE-CANCELLED-create"
+          },
+          {
+            "id": 20,
+            "domain": "order.transition",
+            "hash": "08405ba0e0654cff8c5b3e70f0bff3dab46fc9424b2f66cc065e7cd95da20560",
+            "key": "STATE-STORE-CANCELLED-CANCELLED"
+          },
+          {
+            "id": 19,
+            "domain": "order.transition",
+            "hash": "02ddc07414ab863433f062ccbb15cf4050ae94dc78e36aba276dca8117ccc301",
+            "key": "STATE-STORE-CANCELLED-REVIEWED"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 65,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T09:38:39.176879",
+            "kind": "order.created",
+            "correlation": "STATE-STORE-CANCELLED-create",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"STATE-STORE-CANCELLED\",\"native_id\":6,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB create",
+            "rejected": false
+          },
+          {
+            "id": 66,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:39.209551",
+            "kind": "order.transition",
+            "correlation": "STATE-STORE-CANCELLED-REVIEWED",
+            "beforeState": "{\"id\":\"STATE-STORE-CANCELLED\",\"native_id\":6,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-STORE-CANCELLED\",\"native_id\":6,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REVIEWED",
+            "rejected": false
+          },
+          {
+            "id": 67,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:39.241221",
+            "kind": "order.transition",
+            "correlation": "STATE-STORE-CANCELLED-CANCELLED",
+            "beforeState": "{\"id\":\"STATE-STORE-CANCELLED\",\"native_id\":6,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-STORE-CANCELLED\",\"native_id\":6,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"CANCELLED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to CANCELLED",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "replay": {
+        "id": "STATE-STORE-CANCELLED",
+        "native_id": 6,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "CANCELLED",
+        "channel": "STORE",
+        "guide": null,
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": true,
+        "native_progress": {}
+      }
+    },
+    {
+      "name": "STATE-WEB-REJECTED",
+      "status": "PASS",
+      "executed": true,
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "STATE-WEB-REJECTED",
+        "state": "REJECTED",
+        "request_key": "STATE-WEB-REJECTED-REJECTED",
+        "reason": "Synthetic LAB transition to REJECTED"
+      },
+      "response": {
+        "id": "STATE-WEB-REJECTED",
+        "native_id": 7,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "REJECTED",
+        "channel": "WEB",
+        "guide": "GUIDE-LAB-001",
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": false,
+        "native_progress": {}
+      },
+      "snapshot": {
+        "order": {
+          "id": "STATE-WEB-REJECTED",
+          "native_id": 7,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "state": "REJECTED",
+          "channel": "WEB",
+          "guide": "GUIDE-LAB-001",
+          "creator": "ccm-operator",
+          "saleOrder_id": null,
+          "delivery_id": null,
+          "invoice_id": null
+        },
+        "native_export": {
+          "case": "STATE-WEB-REJECTED",
+          "stock": [
+            {
+              "code": "P001",
+              "avg_price": "30.0000000000",
+              "id": 54,
+              "current_qty": "5.0000000000",
+              "product_id": 1
+            },
+            {
+              "code": "P002",
+              "avg_price": "10.0000000000",
+              "id": 55,
+              "current_qty": "5.0000000000",
+              "product_id": 2
+            },
+            {
+              "code": "P003",
+              "avg_price": "60.0000000000",
+              "id": 56,
+              "current_qty": "5.0000000000",
+              "product_id": 3
+            }
+          ],
+          "stock_move_ids": [
+            25
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "customers": [
+              {
+                "code": "C002",
+                "invoicing_address_id": 4,
+                "partner_id": 3
+              },
+              {
+                "code": "CBANK",
+                "invoicing_address_id": 5,
+                "partner_id": 4
+              },
+              {
+                "code": "C001",
+                "invoicing_address_id": 3,
+                "partner_id": 2
+              }
+            ],
+            "accounts": [
+              {
+                "id": 1,
+                "vat_system": 1,
+                "code": "CCM-AR"
+              },
+              {
+                "id": 2,
+                "vat_system": 1,
+                "code": "CCM-AP"
+              },
+              {
+                "id": 3,
+                "vat_system": 1,
+                "code": "CCM-STOCK"
+              },
+              {
+                "id": 4,
+                "vat_system": 1,
+                "code": "CCM-REVENUE"
+              },
+              {
+                "id": 5,
+                "vat_system": 1,
+                "code": "CCM-COGS"
+              },
+              {
+                "id": 6,
+                "vat_system": 1,
+                "code": "CCM-COMMISSION"
+              },
+              {
+                "id": 7,
+                "vat_system": 1,
+                "code": "CCM-SHIPPING"
+              },
+              {
+                "id": 8,
+                "vat_system": 1,
+                "code": "CCM-TAX"
+              },
+              {
+                "id": 9,
+                "vat_system": 1,
+                "code": "CCM-CASH"
+              },
+              {
+                "id": 10,
+                "vat_system": 1,
+                "code": "CCM-BANK"
+              },
+              {
+                "id": 11,
+                "vat_system": 1,
+                "code": "CCM-OPENING"
+              },
+              {
+                "id": 12,
+                "vat_system": 1,
+                "code": "CCM-CASH-VES"
+              }
+            ],
+            "legal_partner_id": 1,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "isVentilationSkipped": false,
+              "persisted_isVentilationSkipped": false
+            },
+            "legal_vat_system": 2
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "id": 36,
+              "company_id": 1,
+              "lines": [
+                {
+                  "parent_move_id": 36,
+                  "remaining": "0",
+                  "credit": "0.000",
+                  "id": 77,
+                  "debit": "500.000",
+                  "account_id": 3,
+                  "account_code": "CCM-STOCK",
+                  "account_company_id": 1
+                },
+                {
+                  "parent_move_id": 36,
+                  "remaining": "0",
+                  "credit": "500.000",
+                  "id": 78,
+                  "debit": "0.000",
+                  "account_id": 11,
+                  "account_code": "CCM-OPENING",
+                  "account_company_id": 1
+                }
+              ],
+              "status": 3
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [
+          {
+            "id": 21,
+            "domain": "order.create",
+            "hash": "8bfe98298dc9df0de19aa8ebd78d82d9769825cef49a3eccf00682bd997072cd",
+            "key": "STATE-WEB-REJECTED-create"
+          },
+          {
+            "id": 23,
+            "domain": "order.transition",
+            "hash": "8ee35227821cd6c7b28026694235c7116fa24525c7c633eadf287d57e70196e2",
+            "key": "STATE-WEB-REJECTED-REJECTED"
+          },
+          {
+            "id": 22,
+            "domain": "order.transition",
+            "hash": "8cf3d85d0706249d9d0c0daf9f315b1c1fd0fd8f367078ee1dafba4ea4aeb3d8",
+            "key": "STATE-WEB-REJECTED-REVIEWED"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 68,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T09:38:39.620754",
+            "kind": "order.created",
+            "correlation": "STATE-WEB-REJECTED-create",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"STATE-WEB-REJECTED\",\"native_id\":7,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB create",
+            "rejected": false
+          },
+          {
+            "id": 69,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:39.654363",
+            "kind": "order.transition",
+            "correlation": "STATE-WEB-REJECTED-REVIEWED",
+            "beforeState": "{\"id\":\"STATE-WEB-REJECTED\",\"native_id\":7,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-WEB-REJECTED\",\"native_id\":7,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REVIEWED",
+            "rejected": false
+          },
+          {
+            "id": 70,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:39.686529",
+            "kind": "order.transition",
+            "correlation": "STATE-WEB-REJECTED-REJECTED",
+            "beforeState": "{\"id\":\"STATE-WEB-REJECTED\",\"native_id\":7,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-WEB-REJECTED\",\"native_id\":7,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REJECTED\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REJECTED",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "replay": {
+        "id": "STATE-WEB-REJECTED",
+        "native_id": 7,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "REJECTED",
+        "channel": "WEB",
+        "guide": "GUIDE-LAB-001",
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": true,
+        "native_progress": {}
+      }
+    },
+    {
+      "name": "STATE-WEB-CANCELLED",
+      "status": "PASS",
+      "executed": true,
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "STATE-WEB-CANCELLED",
+        "state": "CANCELLED",
+        "request_key": "STATE-WEB-CANCELLED-CANCELLED",
+        "reason": "Synthetic LAB transition to CANCELLED"
+      },
+      "response": {
+        "id": "STATE-WEB-CANCELLED",
+        "native_id": 8,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "CANCELLED",
+        "channel": "WEB",
+        "guide": "GUIDE-LAB-001",
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": false,
+        "native_progress": {}
+      },
+      "snapshot": {
+        "order": {
+          "id": "STATE-WEB-CANCELLED",
+          "native_id": 8,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "state": "CANCELLED",
+          "channel": "WEB",
+          "guide": "GUIDE-LAB-001",
+          "creator": "ccm-operator",
+          "saleOrder_id": null,
+          "delivery_id": null,
+          "invoice_id": null
+        },
+        "native_export": {
+          "case": "STATE-WEB-CANCELLED",
+          "stock": [
+            {
+              "code": "P001",
+              "avg_price": "30.0000000000",
+              "id": 57,
+              "current_qty": "5.0000000000",
+              "product_id": 1
+            },
+            {
+              "code": "P002",
+              "avg_price": "10.0000000000",
+              "id": 58,
+              "current_qty": "5.0000000000",
+              "product_id": 2
+            },
+            {
+              "code": "P003",
+              "avg_price": "60.0000000000",
+              "id": 59,
+              "current_qty": "5.0000000000",
+              "product_id": 3
+            }
+          ],
+          "stock_move_ids": [
+            26
+          ],
+          "fixture_configuration": {
+            "company_id": 1,
+            "customers": [
+              {
+                "code": "C002",
+                "invoicing_address_id": 4,
+                "partner_id": 3
+              },
+              {
+                "code": "CBANK",
+                "invoicing_address_id": 5,
+                "partner_id": 4
+              },
+              {
+                "code": "C001",
+                "invoicing_address_id": 3,
+                "partner_id": 2
+              }
+            ],
+            "accounts": [
+              {
+                "id": 1,
+                "vat_system": 1,
+                "code": "CCM-AR"
+              },
+              {
+                "id": 2,
+                "vat_system": 1,
+                "code": "CCM-AP"
+              },
+              {
+                "id": 3,
+                "vat_system": 1,
+                "code": "CCM-STOCK"
+              },
+              {
+                "id": 4,
+                "vat_system": 1,
+                "code": "CCM-REVENUE"
+              },
+              {
+                "id": 5,
+                "vat_system": 1,
+                "code": "CCM-COGS"
+              },
+              {
+                "id": 6,
+                "vat_system": 1,
+                "code": "CCM-COMMISSION"
+              },
+              {
+                "id": 7,
+                "vat_system": 1,
+                "code": "CCM-SHIPPING"
+              },
+              {
+                "id": 8,
+                "vat_system": 1,
+                "code": "CCM-TAX"
+              },
+              {
+                "id": 9,
+                "vat_system": 1,
+                "code": "CCM-CASH"
+              },
+              {
+                "id": 10,
+                "vat_system": 1,
+                "code": "CCM-BANK"
+              },
+              {
+                "id": 11,
+                "vat_system": 1,
+                "code": "CCM-OPENING"
+              },
+              {
+                "id": 12,
+                "vat_system": 1,
+                "code": "CCM-CASH-VES"
+              }
+            ],
+            "legal_partner_id": 1,
+            "invoice_runtime_configuration": {
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "isVentilationSkipped": false,
+              "persisted_isVentilationSkipped": false
+            },
+            "legal_vat_system": 2
+          },
+          "sale_order_ids": [],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_code": "CCM-LAB-001",
+              "id": 37,
+              "company_id": 1,
+              "lines": [
+                {
+                  "parent_move_id": 37,
+                  "remaining": "0",
+                  "credit": "0.000",
+                  "id": 79,
+                  "debit": "500.000",
+                  "account_id": 3,
+                  "account_code": "CCM-STOCK",
+                  "account_company_id": 1
+                },
+                {
+                  "parent_move_id": 37,
+                  "remaining": "0",
+                  "credit": "500.000",
+                  "id": 80,
+                  "debit": "0.000",
+                  "account_id": 11,
+                  "account_code": "CCM-OPENING",
+                  "account_company_id": 1
+                }
+              ],
+              "status": 3
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [
+          {
+            "id": 24,
+            "domain": "order.create",
+            "hash": "4b80fa15662a1345e9d90cde5413ebe206ef13de24bee455b5223cde73621f00",
+            "key": "STATE-WEB-CANCELLED-create"
+          },
+          {
+            "id": 26,
+            "domain": "order.transition",
+            "hash": "832bc306b1a9ab346bd62aff9bc038838ced9b8f91dcd8b9392fd51921cdaa26",
+            "key": "STATE-WEB-CANCELLED-CANCELLED"
+          },
+          {
+            "id": 25,
+            "domain": "order.transition",
+            "hash": "1f3c94148a4af6ae2cfdde7863cfffd92a8f3b296a881dd7913a0f029f256f7e",
+            "key": "STATE-WEB-CANCELLED-REVIEWED"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 71,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T09:38:40.077689",
+            "kind": "order.created",
+            "correlation": "STATE-WEB-CANCELLED-create",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"STATE-WEB-CANCELLED\",\"native_id\":8,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB create",
+            "rejected": false
+          },
+          {
+            "id": 72,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:40.119300",
+            "kind": "order.transition",
+            "correlation": "STATE-WEB-CANCELLED-REVIEWED",
+            "beforeState": "{\"id\":\"STATE-WEB-CANCELLED\",\"native_id\":8,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-WEB-CANCELLED\",\"native_id\":8,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REVIEWED",
+            "rejected": false
+          },
+          {
+            "id": 73,
+            "actor": "ccm-simulator",
+            "actor_id": 9,
+            "created_on": "2026-10-06T09:38:40.147517",
+            "kind": "order.transition",
+            "correlation": "STATE-WEB-CANCELLED-CANCELLED",
+            "beforeState": "{\"id\":\"STATE-WEB-CANCELLED\",\"native_id\":8,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"STATE-WEB-CANCELLED\",\"native_id\":8,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"CANCELLED\",\"channel\":\"WEB\",\"guide\":\"GUIDE-LAB-001\",\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to CANCELLED",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "replay": {
+        "id": "STATE-WEB-CANCELLED",
+        "native_id": 8,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "state": "CANCELLED",
+        "channel": "WEB",
+        "guide": "GUIDE-LAB-001",
+        "creator": "ccm-operator",
+        "saleOrder_id": null,
+        "delivery_id": null,
+        "invoice_id": null,
+        "replayed": true,
+        "native_progress": {}
+      }
+    }
+  ],
+  "complete": true,
+  "status": "PASS",
+  "seconds": 1.838
+}

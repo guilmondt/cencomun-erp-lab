@@ -307,13 +307,13 @@ public final class NativeFinance {
     }
     set(journal, "validAccountSet", accounts); save(journal);
   }
-  private static void account(Model company, String code, String type, boolean reconcile) {
+  static void account(Model company, String code, String type, boolean reconcile) {
     Model kind = one(ACCOUNT + "AccountType", "self.technicalTypeSelect = ?1", type);
     if (kind == null) kind = record(ACCOUNT + "AccountType", "name", "CCM LAB " + type, "technicalTypeSelect", type);
     record(ACCOUNT + "Account", "company", company, "name", "CCM LAB " + code, "code", "CCM-" + code,
         "accountType", kind, "commonPosition", 0, "statusSelect", 1, "reconcileOk", reconcile, "useForPartnerBalance", reconcile);
   }
-  private static Model journal(Model company, String code, int kind) {
+  static Model journal(Model company, String code, int kind) {
     Model type = one(ACCOUNT + "JournalType", "self.code = ?1", "CCM-" + code);
     if (type == null) type = record(ACCOUNT + "JournalType", "name", "CCM LAB " + code, "code", "CCM-" + code, "technicalTypeSelect", kind);
     Model sequence = record(BASE + "Sequence", "company", company, "name", "CCM journal " + code, "codeSelect", "move",

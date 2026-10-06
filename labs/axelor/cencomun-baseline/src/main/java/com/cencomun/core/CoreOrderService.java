@@ -152,7 +152,7 @@ public class CoreOrderService {
     audit(managed(company), order, "order.transition", before, view(order), reason, key(input), false);
     if (Set.of("APPROVED", "FULFILLED", "SHIPPED", "SETTLED").contains(target))
       record(DB+"CcmOutboxEvent", "company", managed(company), "coreOrder", order,
-          "eventKey", "order:"+order.getId()+":"+target, "kind", "cashea."+target.toLowerCase(), "payload", encode(view(order)));
+          "objectRef", String.valueOf(get(order,"functionalId")), "eventKey", "order:"+order.getId()+":"+target, "kind", "cashea."+target.toLowerCase(), "payload", encode(view(order)));
     return result;
   }
 

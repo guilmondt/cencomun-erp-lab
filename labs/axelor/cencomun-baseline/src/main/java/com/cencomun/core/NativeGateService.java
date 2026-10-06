@@ -313,7 +313,7 @@ public class NativeGateService {
     result.put("sequences", sequences);
     return result;
   }
-  private Map<String, Object> exportMove(Model move) {
+  public Map<String, Object> exportMove(Model move) {
     List<Map<String, Object>> lines = new ArrayList<>();
     for (Object line : (List<?>) get(move, "moveLineList")) {
       Model account = (Model) get(line, "account");
