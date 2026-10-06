@@ -18,7 +18,14 @@ java {
 
 axelor {
   title = 'Cencomun Baseline'
-  description = 'Isolated Cencomun extension module; no business features.'
+  description = 'Isolated Cencomun extension and synthetic Core Test laboratory.'
+}
+
+// Exact shared inputs. The oracle is used by assertions, never to create ERP entries.
+processResources {
+  from(new File(projectDir.canonicalFile, '../../../fixtures/ccm-core-v1')) {
+    into 'ccm-core-v1'
+  }
 }
 
 test {

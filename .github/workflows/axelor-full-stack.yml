@@ -8,6 +8,7 @@ on:
       - 'labs/axelor/**'
       - 'versions.lock'
       - 'scripts/**'
+      - 'fixtures/ccm-core-v1/**'
   workflow_dispatch:
 
 permissions:
@@ -32,7 +33,7 @@ jobs:
         run: |
           ./scripts/preflight.sh
           ./scripts/verify-repo.sh
-      - name: Full-stack baseline on disposable external runner
+      - name: Baseline and native Core gates on disposable external runner
         run: CCM_CI_RESULTS="$RUNNER_TEMP/ccm-axelor-results" bash labs/axelor/ci/run-host.sh
       - name: Upload sanitized evidence
         if: always()

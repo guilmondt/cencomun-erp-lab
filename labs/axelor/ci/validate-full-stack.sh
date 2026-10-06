@@ -8,6 +8,7 @@ results_dir="$state_dir/results"
 mkdir -p "$state_dir/private" "$state_dir/locks" "$runtime_dir"
 umask 077
 app_pid=''
+core_status=0
 stop_app() {
   if test -n "$app_pid"; then
     kill -TERM "$app_pid" 2>/dev/null || true
@@ -116,7 +117,7 @@ PY
 
 java_bin="$runtime_dir/jdk/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
 start_app() {
-  "$java_bin" -Xmx3g -jar "$host_dir/build/tomcat/classpath.jar" \
+  CCM_CORE_LAB=1 "$java_bin" -Xmx3g -jar "$host_dir/build/tomcat/classpath.jar" \
     --port 8080 --options-from "$host_dir/build/tomcat/axelor-tomcat.properties" \
     > "$state_dir/private/app-$1.log" 2>&1 &
   app_pid=$!
@@ -126,6 +127,11 @@ echo 'Phase: real PostgreSQL initialization and authenticated API smoke'
 start_app first
 python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
   http://127.0.0.1:8080/axelor-erp "$results_dir/smoke-first.json" 900
+echo 'Phase: CO00 then TAX01-W, native Core gates and strict coverage publication'
+python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/run.py \
+  --base http://127.0.0.1:8080/axelor-erp \
+  --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 \
+  --output "$results_dir/core-test" || core_status=$?
 stop_app
 echo 'Phase: server restart against the same disposable database'
 start_app restart
@@ -144,3 +150,4 @@ cp labs/axelor/cencomun-baseline/build/test-results/test/TEST-*.xml "$results_di
 cp "$host_dir/modules/axelor-open-suite/axelor-base/build/test-results/test/TEST-"*.xml "$results_dir/"
 sha256sum "$host_dir/build/libs/"*.war > "$results_dir/war-sha256.txt"
 echo 'Full-stack validation completed; source and pins unchanged.'
+exit "$core_status"

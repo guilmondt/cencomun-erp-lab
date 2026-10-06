@@ -1,0 +1,38 @@
+{
+  "payments": [
+    {
+      "id": "FX01",
+      "date": "2026-10-01",
+      "lines": [
+        "1.00"
+      ],
+      "expected_total": "40.00"
+    },
+    {
+      "id": "FX02",
+      "date": "2026-10-02",
+      "lines": [
+        "1.00"
+      ],
+      "expected_total": "41.00"
+    },
+    {
+      "id": "MONEY-ROUND",
+      "date": "2026-10-03",
+      "lines": [
+        "0.01",
+        "0.01"
+      ],
+      "expected_lines": [
+        "0.41",
+        "0.41"
+      ],
+      "expected_total": "0.82"
+    }
+  ],
+  "manual_rate": {
+    "date": "2026-10-03",
+    "rate": "40.500000",
+    "reason": "Synthetic authorized payment-day rate"
+  }
+}
