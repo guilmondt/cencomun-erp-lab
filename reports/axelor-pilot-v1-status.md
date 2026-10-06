@@ -9,7 +9,7 @@ Java 21 y PostgreSQL 16.15; pins y locks conservados.
 |---|---|
 | Rama nueva desde referencia, preflight y guardrails | PASS |
 | Compilación full-stack / WAR con locks sin actualización | PASS |
-| Unitarios/modelos Java | PASS, 61 casos en revisión más reciente |
+| Unitarios/modelos Java | PASS, 63 casos en revisión más reciente |
 | Procesamiento de evidencia Core | PASS, 93 casos |
 | Acceso loopback real con Chromium y login | PASS |
 | URL accesible para el usuario / alojamiento persistente | BLOCKED: falta destino autorizado; no preview expuesto |
@@ -21,8 +21,13 @@ Java 21 y PostgreSQL 16.15; pins y locks conservados.
 | Operador intenta cancelar | PASS de denegación explícita de perfil |
 | Control de costo positivo y rechazo negativo nativo con extensión | PASS en runtime; no sustituye FAIL histórico |
 | Rollback de entrega fallida | PASS: sin factura/salida/costo; presupuesto finalizado y stock intactos |
-| Entrega y conciliación de anticipo | FAIL observado por colección nativa de pagos nula; corrección y regresión añadidas, reintento pendiente |
-| Liquidación Cashea, envío, devolución al cancelar, cierre inmutable, replays, aislamiento | UNRUN completos |
+| Entrega y conciliación de anticipo | PASS desde UI tras corregir colección nativa nula; lectura posterior de factura pagada |
+| Cashea tienda y cancelación con devolución | PASS UI y documentos nativos en DB diagnóstica v2 |
+| Web con impuesto por línea | PASS UI con `allowedTaxGap=0.00` y extensión exacta; repetición limpia pendiente |
+| Caja | FAIL detectado en lectura posterior: colisión de entrada temporal con campo persistido; corregido, repetición limpia pendiente |
+| Aislamiento de registros externos reales | PASS en DB v2 después de reiniciar y reaplicar metadatos/perfiles; repetir en aceptación |
+| Replays y cierre inmutable | UNRUN sobre cierre correcto |
+| Aceptación limpia automatizada por navegador | En ejecución/preparación sobre DB v3 independiente |
 | Regresión Core full-stack completa de 34 grupos en esta rama | UNRUN |
 
 Las pruebas UI se ejecutan con Playwright + Chromium sobre el WAR y PostgreSQL,

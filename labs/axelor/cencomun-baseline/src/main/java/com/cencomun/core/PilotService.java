@@ -151,7 +151,10 @@ public class PilotService {
       payload.put("guide",guide);
       call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderConfirmService"),"confirmSaleOrder",get(sale,"saleOrder"));
       sale=managed(sale);
-      Map<String,Model> docs=Beans.get(NativeGateService.class).deliver(new NativeGateService.Progress(),payload,(Model)get(sale,"saleOrder"));
+      Map<String,Model> docs;
+      try(PilotInvoiceTaxGuard.Scope taxScope=PilotInvoiceTaxGuard.enter(company,payload)) {
+        docs=Beans.get(NativeGateService.class).deliver(new NativeGateService.Progress(),payload,(Model)get(sale,"saleOrder"));
+      }
       company=managed(company);sale=managed(sale);
       Model cost=NativeFinance.postCost(company,managed((Model)get(sale,"customer")),docs.get("delivery"),payload);
       sale=managed(sale);set(sale,"delivery",managed(docs.get("delivery")));set(sale,"invoice",managed(docs.get("invoice")));
@@ -204,6 +207,6 @@ public class PilotService {
     Map<String,Object> source=cashSource(company,session);BigDecimal expected=(BigDecimal)source.get("expected");
     set(session,"difference",PilotPolicy.difference(expected,counted,reason));set(session,"expected",expected);set(session,"counted",counted);
     set(session,"reason",reason);set(session,"sourceSnapshot",CoreOrderService.encode(source));set(session,"state","CONFIRMED");
-    set(session,"confirmedBy",AuthUtils.getUser());set(session,"confirmedAt",ZonedDateTime.now());return save(session);
+    set(session,"confirmedBy",AuthUtils.getUser());set(session,"confirmedAt",java.time.LocalDateTime.now());return save(session);
   }
 }

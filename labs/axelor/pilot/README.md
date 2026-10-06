@@ -91,3 +91,24 @@ Revisar `reports/axelor-pilot-v1-status.md`. PASS de compilación o tests de mod
 no sustituye E2E. En revisión coordinada se deben ejecutar los cinco pasos con
 ambos perfiles, repetir clic/recarga/reingreso, probar denegaciones servidor y
 comparar inventario, facturas, pagos, comisiones, envío y cierre después del commit.
+
+## Regresión por navegador
+
+`ui-regression.py` usa Chromium/Playwright contra el WAR real y requiere una
+base **nueva y desechable**, preparada con `ccm-pilot-prepare` y `ccm-pilot-seed`.
+Configure `CCM_PILOT_DISPOSABLE=1`, `CCM_PILOT_ACTORS_FILE` (JSON privado con
+claves operator/supervisor), `CCM_PILOT_RESULTS` y, si procede, `CCM_PILOT_URL`.
+No lo ejecute sobre una sesión con trabajo previo. No imprime contraseñas.
+Los formularios nativos reabiertos requieren el lápiz **Editar** para introducir
+guía, motivo o efectivo contado; los datos económicos guardados siguen bloqueados.
+
+Al actualizar vistas sobre una DB existente, la restauración nativa de metadatos
+puede invalidar asociaciones/cache de perfiles. Reaplique la preparación del
+piloto y reinicie/reingrese antes de probar permisos. No restaure metadatos durante
+una sesión operativa. Las cuentas del piloto tienen una lista exacta de acciones
+permitidas; las acciones administrativas y cadenas arbitrarias quedan rechazadas.
+
+El impuesto se redondea por línea y se suma mediante la política confirmada.
+La extensión de comprobación de factura exige igualdad exacta y asiento equilibrado;
+`allowedTaxGap` permanece en cero. El diagnóstico con tolerancia de un centavo
+fue descartado y no constituye política ni aceptación.

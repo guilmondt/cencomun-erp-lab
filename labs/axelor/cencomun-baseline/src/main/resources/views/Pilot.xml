@@ -16,7 +16,7 @@
  <menuitem name="ccm-pilot-pending" parent="ccm-pilot" title="Entrega y liquidación" action="ccm-pilot-pending-open"/>
  <action-view name="ccm-pilot-pending-open" title="Entrega y liquidación" model="com.cencomun.core.db.CcmPilotSale">
   <view type="grid" name="ccm-pilot-sale-grid"/><view type="form" name="ccm-pilot-sale-form"/>
-  <domain>self.company.id = :companyId AND self.state = 'DELIVERED'</domain>
+  <domain>self.company.id = :companyId AND self.state IN ('RESERVED', 'DELIVERED')</domain>
   <context name="companyId" expr="eval: __user__.activeCompany.id"/>
  </action-view>
  <menuitem name="ccm-pilot-cash" parent="ccm-pilot" title="Cierre de caja" action="ccm-pilot-cash-open"/>
@@ -33,7 +33,7 @@
  <grid name="ccm-pilot-stock-grid" title="Existencias" model="com.axelor.apps.stock.db.StockLocationLine" canNew="false" canEdit="false" canDelete="false">
   <field name="product"/><field name="stockLocation"/><field name="currentQty"/><field name="avgPrice"/>
  </grid>
- <grid name="ccm-pilot-product-grid" title="Catálogo ficticio · precios con impuesto" model="com.cencomun.core.db.CcmProductProfile">
+ <grid name="ccm-pilot-product-grid" title="Catálogo ficticio · precios con impuesto" model="com.cencomun.core.db.CcmProductProfile" canNew="false" canEdit="false" canDelete="false">
   <field name="product"/><field name="casheaPrice" title="Precio con impuesto"/><field name="casheaEnabled"/><field name="warrantyQuantity"/><field name="warrantyUnit"/>
  </grid>
  <form name="ccm-pilot-product-form" title="Producto ficticio" model="com.cencomun.core.db.CcmProductProfile" canSave="false" canDelete="false" canNew="false">
@@ -55,13 +55,14 @@
    <field name="financed" title="Monto financiado (USD)"/><field name="shipping" title="Envío absorbido (USD)"/>
   </panel>
   <panel title="Operaciones">
+   <field name="$supervisor" type="boolean" hidden="true"/>
    <button name="reserve" title="Registrar pedido" onClick="ccm-pilot-create" hideIf="id"/>
    <field name="$guide" type="string" title="Guía de envío" showIf="id &amp;&amp; channel == 'WEB'"/>
    <field name="$reason" type="string" title="Motivo de cancelación" showIf="id"/>
    <button name="collect" title="Registrar cobro inicial real" onClick="ccm-pilot-collect" showIf="id &amp;&amp; !initialVoucher &amp;&amp; state != 'CANCELLED' &amp;&amp; initial > 0"/>
    <button name="handover" title="Entregar productos" onClick="ccm-pilot-deliver" showIf="id &amp;&amp; state == 'RESERVED'"/>
    <button name="cancel" title="Cancelar y devolver inicial cobrada" onClick="ccm-pilot-cancel" showIf="$supervisor &amp;&amp; id &amp;&amp; state == 'RESERVED'"/>
-   <button name="settle" title="Registrar liquidación Cashea" onClick="ccm-pilot-settle" showIf="$supervisor &amp;&amp; id &amp;&amp; state == 'DELIVERED'"/>
+   <button name="settle" title="Registrar liquidación Cashea" onClick="ccm-pilot-settle" showIf="$supervisor &amp;&amp; id &amp;&amp; kind == 'CASHEA' &amp;&amp; state == 'DELIVERED'" readonlyIf="initial &gt; 0 &amp;&amp; !initialVoucher"/>
   </panel>
   <panel title="Resultado y documentos nativos" readonly="true" showIf="id">
    <field name="state"/><field name="gross"/><field name="initial" title="Cobro inicial"/>
@@ -75,12 +76,13 @@
  </grid>
  <form name="ccm-pilot-cash-form" title="Caja · sesión 01/10/2026" model="com.cencomun.core.db.CcmPilotSession" canSave="false" canDelete="false" onNew="ccm-pilot-flags" onLoad="ccm-pilot-flags">
   <panel title="Sesión">
+   <field name="$supervisor" type="boolean" hidden="true"/>
    <button name="open" title="Abrir sesión de caja" onClick="ccm-pilot-open" hideIf="id || !$supervisor"/>
    <field name="businessDate" readonly="true"/><field name="state" readonly="true"/>
    <button name="preview" title="Consultar efectivo esperado" onClick="ccm-pilot-preview" showIf="$supervisor &amp;&amp; state == 'OPEN'"/>
-   <field name="$expected" type="decimal" title="Esperado según cobros nativos" readonly="true"/>
-   <field name="$counted" type="decimal" title="Efectivo contado USD" showIf="state == 'OPEN'"/>
-   <field name="$reason" type="string" title="Explicación de diferencia" showIf="state == 'OPEN'"/>
+   <field name="$cashExpectedPreview" type="decimal" title="Esperado según cobros nativos" readonly="true"/>
+   <field name="$cashCountedInput" type="decimal" title="Efectivo contado USD" showIf="state == 'OPEN'"/>
+   <field name="$cashDifferenceReason" type="string" title="Explicación de diferencia" showIf="state == 'OPEN'"/>
    <button name="confirm" title="Confirmar cierre inmutable" onClick="ccm-pilot-close" showIf="$supervisor &amp;&amp; state == 'OPEN'"/>
   </panel>
   <panel title="Cierre confirmado" readonly="true" showIf="state == 'CONFIRMED'">

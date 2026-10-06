@@ -36,4 +36,31 @@ class NativePilotTest {
     assertEquals(com.axelor.apps.account.db.Move.class,sale.getMethod("getSettlement").getReturnType());
     assertEquals(com.cencomun.core.db.CcmPilotSession.class,sale.getMethod("getSession").getReturnType());
   }
+
+  @Test void nativeActionsAndAdministrativeChainsCannotBypassPilotScreens() {
+    PilotActionGuard.check("ccm-pilot-deliver");
+    for(String action:java.util.List.of("com.axelor.meta.web.MetaController:restoreAll","action-sale-order-method-confirm-cancel","ccm-pilot-deliver,com.axelor.meta.web.MetaController:restoreAll","ccm-pilot-prepare"))
+      assertThrows(CoreFault.class,()->PilotActionGuard.check(action));
+  }
+  private com.axelor.apps.account.db.Move invoiceMove(String tax,String receivable) {
+    var move=new com.axelor.apps.account.db.Move();
+    var company=new com.axelor.apps.base.db.Company();company.setId(1L);move.setCompany(company);
+    for(String code:java.util.List.of("REVENUE","TAX","AR")) {
+      var account=new com.axelor.apps.account.db.Account();account.setCode("CCM-"+code);
+      var line=new com.axelor.apps.account.db.MoveLine();line.setAccount(account);
+      if(code.equals("REVENUE"))line.setCredit(new BigDecimal("81.81"));
+      else if(code.equals("TAX"))line.setCredit(new BigDecimal(tax));
+      else line.setDebit(new BigDecimal(receivable));
+      move.addMoveLineListItem(line);
+    }
+    return move;
+  }
+  @Test void taxInclusiveLineRoundingIsExactAndBalancedWithoutTolerance() {
+    var expected=java.util.Map.of("gross",new BigDecimal("90.00"),"revenue",new BigDecimal("81.81"),"tax",new BigDecimal("8.19"));
+    PilotInvoiceTaxGuard.check(invoiceMove("8.19","90.00"),1L,expected);
+    // Even balanced one- and two-cent tax discrepancies are rejected.
+    for(String[] values:new String[][]{{"8.18","89.99"},{"8.21","90.02"},{"8.19","90.01"}})
+      assertThrows(CoreFault.class,()->PilotInvoiceTaxGuard.check(invoiceMove(values[0],values[1]),1L,expected));
+    assertThrows(CoreFault.class,()->PilotInvoiceTaxGuard.check(invoiceMove("8.19","90.00"),2L,expected));
+  }
 }

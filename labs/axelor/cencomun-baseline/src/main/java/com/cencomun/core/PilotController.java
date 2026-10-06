@@ -26,7 +26,7 @@ public class PilotController {
   private void action(ActionRequest request,ActionResponse response,String action) throws Exception {
     Object id=request.getContext().get("id");if(!(id instanceof Number))throw new CoreFault(422,"Open a saved sale");
     result(Beans.get(PilotService.class).act(((Number)id).longValue(),action,
-        (String)request.getContext().get("$guide"),(String)request.getContext().get("$reason")),response);
+        (String)request.getContext().get("guide"),(String)request.getContext().get("reason")),response);
   }
   public void collect(ActionRequest q,ActionResponse r)throws Exception{action(q,r,"collect");}
   public void deliver(ActionRequest q,ActionResponse r)throws Exception{action(q,r,"deliver");}
@@ -34,12 +34,12 @@ public class PilotController {
   public void settle(ActionRequest q,ActionResponse r)throws Exception{action(q,r,"settle");}
   public void open(ActionRequest q,ActionResponse r){result(Beans.get(PilotService.class).open(),r);}
   public void preview(ActionRequest q,ActionResponse r) {
-    r.setValue("$expected",Beans.get(PilotService.class).previewCash().get("expected"));
+    r.setValue("$cashExpectedPreview",Beans.get(PilotService.class).previewCash().get("expected"));
   }
   public void close(ActionRequest q,ActionResponse r) {
-    Object value=q.getContext().get("$counted");
+    Object value=q.getContext().get("cashCountedInput");
     if(value==null)throw new CoreFault(422,"Enter physically counted cash");
-    result(Beans.get(PilotService.class).close(new BigDecimal(value.toString()),(String)q.getContext().get("$reason")),r);
+    result(Beans.get(PilotService.class).close(new BigDecimal(value.toString()),(String)q.getContext().get("cashDifferenceReason")),r);
   }
   private void result(Model record,ActionResponse response) {
     response.setValue("id",record.getId());response.setReload(true);

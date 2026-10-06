@@ -27,11 +27,19 @@ public class CencomunModule extends AxelorModule {
           java.util.Map.entry("com.axelor.apps.bankpayment.service.bankreconciliation.BankReconciliationLineService",java.util.Set.of("reconcileBRLAndMoveLine")),
           java.util.Map.entry("com.axelor.apps.bankpayment.service.bankreconciliation.BankReconciliationValidateService",java.util.Set.of("validate")));
       if ("1".equals(System.getenv("CCM_PILOT_LAB"))) {
+        bindInterceptor(com.google.inject.matcher.Matchers.subclassesOf(com.axelor.meta.ActionExecutor.class),
+            new com.google.inject.matcher.AbstractMatcher<java.lang.reflect.Method>() {
+              @Override public boolean matches(java.lang.reflect.Method m) {return m.getName().equals("execute");}
+            },new com.cencomun.core.PilotActionGuard());
         bindInterceptor(com.google.inject.matcher.Matchers.subclassesOf(com.axelor.db.JpaRepository.class),
             new com.google.inject.matcher.AbstractMatcher<java.lang.reflect.Method>() {
               @Override public boolean matches(java.lang.reflect.Method m) {return java.util.Set.of("save","remove").contains(m.getName());}
             }, new com.cencomun.core.PilotCostGuard());
         try {
+          bindInterceptor(com.google.inject.matcher.Matchers.subclassesOf(Class.forName("com.axelor.apps.account.service.move.MoveValidateService")),
+              new com.google.inject.matcher.AbstractMatcher<java.lang.reflect.Method>() {
+                @Override public boolean matches(java.lang.reflect.Method m) {return m.getName().equals("checkTaxAmount");}
+              },new com.cencomun.core.PilotInvoiceTaxGuard());
           bindInterceptor(com.google.inject.matcher.Matchers.subclassesOf(Class.forName("com.axelor.apps.stock.service.StockMoveService")),
               new com.google.inject.matcher.AbstractMatcher<java.lang.reflect.Method>() {
                 @Override public boolean matches(java.lang.reflect.Method m) {return java.util.Set.of("plan","planWithNoSplit","realize").contains(m.getName());}

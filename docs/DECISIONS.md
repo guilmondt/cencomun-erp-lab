@@ -256,3 +256,22 @@ de reserva nativa de un pedido confirmado. Restricciones/aceptación: ver
 
 El runtime de pruebas escucha sólo loopback y no proporciona alojamiento de usuario.
 Destino persistente y creación de accesos permanentes quedan pendientes de aprobación.
+
+### Piloto v1 — impuesto por línea, sin tolerancias adicionales
+
+La prueba web 40 + 50 USD reprodujo un rechazo nativo: las bases por línea
+36,36 y 45,45 suman 81,81, y los impuestos por diferencia 3,64 y 4,55 suman
+8,19. El asiento generado estaba equilibrado a 90,00; la comprobación nativa
+agrupada calculó 8,18. Se ensayó `allowedTaxGap=0.01` únicamente para diagnosticar;
+no se acepta como criterio comercial ni evidencia de aprobación. Se restableció
+`0.00` y se conserva evidencia separada del experimento.
+
+La extensión `PilotInvoiceTaxGuard`, habilitada sólo en el piloto y dentro de
+la llamada autenticada de facturación, compara por igualdad exacta AR, ingreso
+e impuesto del asiento con `MoneyPolicy` (redondeo por línea y suma). Exige
+balance exacto y las cuentas previstas. Sólo sustituye esa comprobación agrupada;
+los restantes controles nativos de contabilización permanecen activos. Fuera
+de ese contexto llama al comportamiento nativo. No altera importes, estados,
+asientos, upstream ni el oráculo histórico. Las pruebas rechazan diferencias
+equilibradas de uno y dos centavos y un asiento descuadrado. Validación runtime
+pendiente al escribir esta nota; el informe de estado registra el resultado final.
