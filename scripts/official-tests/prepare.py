@@ -12,12 +12,12 @@ BENCH = ROOT / 'official-bench'
 CLI = str(ROOT / 'bench-tools/bin/bench')
 
 
-def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False):
-    if sum((fresh, diagnostic, fixture_audit, fixture_order)) > 1:
+def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False):
+    if sum((fresh, diagnostic, fixture_audit, fixture_order, final)) > 1:
         raise ValueError('Choose one isolated site slot.')
     if (fixture_audit or fixture_order or official_fx_fixtures) and app != 'erpnext':
         raise ValueError('Official FX fixtures apply only to ERPNext.')
-    suffix = '-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else '')))
+    suffix = '-final' if final else ('-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else ''))))
     site = 'ccm-upstream-' + app + suffix + '.test'
     private_dir = ROOT / 'official-tests'
     private_dir.mkdir(mode=0o700, exist_ok=True)
@@ -61,7 +61,9 @@ def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx
         run('config-' + key, ['--site', site, 'set-config', key, value, '--parse'])
     # Official command tests spawn new sites and read this value from conf.
     # Root login/password live only in the isolated Bench's private config.
-    run('config-admin', ['--site', site, 'set-config', 'admin_password', credentials['admin_password']])
+    # Click positional values can start with '-'; keep secrets out of the
+    # option parser without changing or regenerating existing credentials.
+    run('config-admin', ['--site', site, 'set-config', '--', 'admin_password', credentials['admin_password']])
     # The suite gets its own official `bench --site ... serve` process; the
     # baseline/Core web server and its default site never change.
     port = 8002 if app == 'frappe' else 8005
@@ -93,11 +95,11 @@ def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx
     print('Prepared official-only site:', site, flush=True)
 
 
-def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False):
+def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False):
     with SuiteLock():
         if active_runners():
             raise RuntimeError('An official runner is active; do not change its sites or fixtures.')
-        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order)
+        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order, final)
 
 
 if __name__ == '__main__':
@@ -108,5 +110,6 @@ if __name__ == '__main__':
     parser.add_argument('--fixture-audit', action='store_true', help='Separate empty ERPNext site for preparation-order hypothesis.')
     parser.add_argument('--official-fx-fixtures', action='store_true', help='Load exact pinned Currency Exchange fixtures before native ERP bootstrap.')
     parser.add_argument('--fixture-order', action='store_true', help='New empty site for direct official FX records before any test module import.')
+    parser.add_argument('--final', action='store_true', help='New official-only site for the authorized final full CI pass; preserve previous sites.')
     args = parser.parse_args()
-    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order)
+    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order, args.final)

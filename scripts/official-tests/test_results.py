@@ -14,6 +14,17 @@ from publish import full_suite_candidate, native_result_file
 
 
 class ResultCountingTests(unittest.TestCase):
+    def test_native_set_config_accepts_a_dash_prefixed_positional_value(self):
+        import click
+        from click.testing import CliRunner
+        @click.command()
+        @click.argument('key')
+        @click.argument('value')
+        def command(key, value):
+            click.echo(key + ':' + value)
+        result = CliRunner().invoke(command, ['--', 'admin_password', '-synthetic-parser-value'])
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(result.output.strip(), 'admin_password:-synthetic-parser-value')
     def test_observation_artifacts_never_enter_native_result_parser(self):
         self.assertTrue(native_result_file(Path('erpnext-sequence-test_one-attempt-1.json')))
         self.assertFalse(native_result_file(Path('erpnext-sequence-test_one-attempt-1-observations.json')))

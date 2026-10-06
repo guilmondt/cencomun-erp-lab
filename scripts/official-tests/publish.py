@@ -55,7 +55,8 @@ def main():
     for app in ['frappe', 'erpnext']:
         eligible = [a for a in attempts if full_suite_candidate(a, app)]
         selected = max(eligible, key=lambda a: (a.get('ci_parallel', False), a['attempt'])) if eligible else None
-        discovery = json.loads((OUT / (app + '-discovery.json')).read_text())
+        final_slot = selected and selected.get('site') == 'ccm-upstream-' + app + '-final.test'
+        discovery = json.loads((OUT / (app + '-discovery' + ('-final' if final_slot else '') + '.json')).read_text())
         preparation = json.loads((OUT / (app + '-preparation.json')).read_text())
         if selected:
             method_ids = {c['id'].split(' (', 1)[0] for c in selected['cases']

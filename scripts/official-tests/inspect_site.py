@@ -13,10 +13,12 @@ BENCH = ROOT / 'official-bench'
 REPO = Path(__file__).resolve().parents[2]
 
 
-def main(app, fresh=False):
+def main(app, fresh=False, final=False):
+    if fresh and final:
+        raise ValueError('Choose one official site slot.')
     import frappe
 
-    suffix = '-fresh' if fresh else ''
+    suffix = '-final' if final else ('-fresh' if fresh else '')
     site = 'ccm-upstream-' + app + suffix + '.test'
     os.chdir(BENCH / 'sites')
     frappe.init(site, sites_path=str(BENCH / 'sites'))
@@ -55,7 +57,14 @@ def main(app, fresh=False):
         data['status'] = 'PASS'
         out = REPO / 'reports/evidence/frappe-official'
         out.mkdir(parents=True, exist_ok=True)
-        (out / (app + '-preparation' + (suffix or '-primary') + '.json')).write_text(json.dumps(data, indent=2, default=str) + '\n')
+        destination = out / (app + '-preparation' + (suffix or '-primary') + '.json')
+        if final:
+            attempt = 1
+            while destination.exists():
+                attempt += 1
+                destination = out / (app + '-preparation-final-inspection-' + str(attempt) + '.json')
+        with destination.open('x' if final else 'w') as stream:
+            stream.write(json.dumps(data, indent=2, default=str) + '\n')
         (out / (app + '-preparation.json')).write_text(json.dumps(data, indent=2, default=str) + '\n')
         print('PASS official-only fixture isolation:', app)
     finally:
@@ -66,5 +75,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('app', choices=['frappe', 'erpnext'])
     parser.add_argument('--fresh', action='store_true')
+    parser.add_argument('--final', action='store_true')
     args = parser.parse_args()
-    main(args.app, args.fresh)
+    main(args.app, args.fresh, args.final)

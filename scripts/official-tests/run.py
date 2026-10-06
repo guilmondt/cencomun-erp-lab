@@ -27,7 +27,8 @@ OUT = REPO / 'reports/evidence/frappe-official'
 ALLOWED_SITES = ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test',
                  'ccm-upstream-frappe-fresh.test', 'ccm-upstream-erpnext-fresh.test',
                  'ccm-upstream-frappe-diagnostic.test', 'ccm-upstream-erpnext-diagnostic.test',
-                 'ccm-upstream-erpnext-fixture-audit.test', 'ccm-upstream-erpnext-fixture-order.test']
+                 'ccm-upstream-erpnext-fixture-audit.test', 'ccm-upstream-erpnext-fixture-order.test',
+                 'ccm-upstream-frappe-final.test', 'ccm-upstream-erpnext-final.test']
 
 
 class SuiteLock:
