@@ -6,6 +6,11 @@ recuperación. La comprobación de `fcf690d` en una tarea cloud nueva, iniciada 
 el coordinador, terminó según su confirmación posterior. Es independiente;
 su resultado y evidencia siguen pendientes de recepción, sin volver a ejecutarla.
 
+Actualización posterior: se recibió y conservó su JSON exacto con resultado
+**PASS externo**, atribución y límites en
+[frappe-cloud-restoration.md](frappe-cloud-restoration.md). Ese resultado no
+modifica la interrupción de ERPNext ni el criterio 13.
+
 ## Error exacto y alcance
 
 La lectura de una sesión de ejecución devolvió:

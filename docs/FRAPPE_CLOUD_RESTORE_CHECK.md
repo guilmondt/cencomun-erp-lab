@@ -1,7 +1,8 @@
 # Verificar el entorno Frappe guardado en una tarea cloud nueva
 
-**Estado: ejecución separada terminada según el coordinador; resultado y evidencia
-pendientes de incorporación.** No se vuelve a ejecutar desde esta tarea. Este
+**Estado: PASS externo, aportado por el coordinador desde una tarea cloud nueva.**
+[JSON exacto, atribución y límites](../reports/frappe-cloud-restoration.md).
+No se vuelve a ejecutar desde esta tarea. Este
 procedimiento se conserva para futuras verificaciones reproducibles. Los
 ensayos de sitios aislados y el replay de 18 grupos en esta máquina no acreditan
 restauración cloud. El usuario

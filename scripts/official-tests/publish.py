@@ -20,6 +20,9 @@ def sanitize(value):
 
 
 def main():
+    cloud_path = REPO / 'reports/evidence/frappe-cloud/restoration-fcf690d-external.json'
+    cloud = json.loads(cloud_path.read_text()) if cloud_path.exists() else {}
+    cloud_status = cloud.get('resultado', 'BLOCKED')
     attempts = []
     for path in sorted(OUT.glob('*-attempt-*.json')):
         data = json.loads(path.read_text())
@@ -75,8 +78,10 @@ def main():
                 'results': results, 'pip_check': {'exit_code': check.returncode,
                                                  'output': redact(check.stdout + check.stderr)},
                 'pins_changed': False, 'oracle_changed': False,
-                'cloud_restore': {'status': 'BLOCKED', 'execution_reported_complete': True,
-                                 'reason': 'Coordinator reports separate task completed; verification evidence not yet received.',
+                'cloud_restore': {'status': cloud_status, 'execution_reported_complete': True,
+                                 'provenance': 'External coordinator evidence; not executed by this agent on this instance',
+                                 'evidence': str(cloud_path.relative_to(REPO)),
+                                 'attribution': 'reports/evidence/frappe-cloud/restoration-fcf690d-attribution.json',
                                  'expected_commit': 'fcf690dbc58b2b2dcf8d045c49976e3613e804cf',
                                  'procedure': 'docs/FRAPPE_CLOUD_RESTORE_CHECK.md'},
                 'attempts': [{'app': a['app'], 'attempt': a['attempt'], 'status': a['status'],
@@ -88,12 +93,14 @@ def main():
             'Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, pins o validadores. '
             'Este informe distingue descubrimiento, ejecución real y eventos JUnit. '
             'Los cuatro unitarios históricos de utilidades no son estas suites.', '',
-            '| Aplicación | Sitio del intento completo final | Descubiertas | Ejecutadas (Ran N) | Estado | Exit | Segundos | Evidencia |',
+            '| Aplicación | Sitio del último intento registrado | Descubiertas | Ejecutadas (Ran N) | Estado | Exit | Segundos | Evidencia |',
             '| --- | --- | --- | --- | --- | --- | --- | --- |']
     for result in results:
         rows.append(f"| {result['app']} | {result.get('site','—')} | {result['discovered_test_count']} | "
-                    f"{result['actual_tests_run']} | {result['status']} | {result.get('exit_code','—')} | "
-                    f"{result.get('seconds','—')} | [{result['app']}-latest.json](evidence/frappe-official/{result['app']}-latest.json) |")
+                    f"{result['actual_tests_run'] if result['actual_tests_run'] is not None else 'desconocidas'} | {result['status']} | "
+                    f"{result.get('exit_code') if result.get('exit_code') is not None else '—'} | "
+                    f"{result.get('seconds') if result.get('seconds') is not None else '—'} | "
+                    f"[{result['app']}-latest.json](evidence/frappe-official/{result['app']}-latest.json) |")
     rows += ['', '| Aplicación | Eventos PASS | FAIL | ERROR | SKIP | Total JUnit | Métodos descubiertos sin resultado |',
              '| --- | --- | --- | --- | --- | --- | --- |']
     for result in results:
@@ -152,8 +159,9 @@ def main():
              '[frappe-core-test.md](frappe-core-test.md). Las suites oficiales de baseline no cuentan '
              'como regresión después de patch. Los tags oficiales de ambos proyectos siguen ofreciendo '
              'solo v16.36.0/v16.36.1: criterio 13 BLOCKED, seis escenarios UNRUN. No se cambia minor.', '',
-             'El coordinador informa que la comprobación del entorno guardado en una tarea cloud nueva terminó. '
-             'Su evidencia y resultado todavía no se recibieron aquí: no se acredita PASS ni se vuelve a ejecutar. '
+             f'La comprobación del entorno guardado tiene resultado **{cloud_status} externo**, aportado por el coordinador '
+             'desde una tarea cloud distinta; no fue reejecutada por este agente. '
+             '[Evidencia exacta, atribución y límites](frappe-cloud-restoration.md). '
              '[Procedimiento reproducible](../docs/FRAPPE_CLOUD_RESTORE_CHECK.md): snapshot esperado '
              '`fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, servicios retenidos y consulta autenticada '
              'P001, USD 50.00, stock 5 en almacén HTTP, cotejados con APIs nativas. '

@@ -611,17 +611,17 @@ escenarios UNRUN; la matriz final es la publicada en el informe.
 Esta fase conserva íntegros el oráculo y el manifiesto compartidos, los pins y
 las reglas LAB. No modifica Axelor, main, producción ni las fuentes upstream.
 
-- [ ] Crear sitios upstream vacíos, aislados de los tres sitios LAB existentes;
+- [x] Crear sitios upstream vacíos, aislados de los tres sitios LAB existentes;
   instalar únicamente las aplicaciones oficiales y cargar sus propios fixtures.
 - [ ] Ejecutar las suites oficiales de servidor de Frappe y ERPNext, conservar
   comandos, cantidades realmente ejecutadas, omisiones y fallos. Los cuatro
   unitarios históricos se mantienen identificados como subconjunto.
 - [ ] Repetir Cencomun si la preparación afecta su runtime compartido; verificar
   que los fixtures y el oráculo no cambiaron.
-- [ ] Consultar tags oficiales 16.36 de ambos proyectos. Sin patch compatible
+- [x] Consultar tags oficiales 16.36 de ambos proyectos. Sin patch compatible
   posterior a 16.36.1: criterio 13 BLOCKED y sus seis escenarios UNRUN. Ninguna
   migración a otra minor está autorizada en esta fase.
-- [ ] Documentar una comprobación del snapshot guardado en una tarea cloud nueva,
+- [x] Documentar una comprobación del snapshot guardado en una tarea cloud nueva,
   con HEAD esperado fcf690dbc58b2b2dcf8d045c49976e3613e804cf, servicios y consulta
   autenticada de precio/stock. Crear un sitio aquí no acredita esa comprobación.
 - [ ] Actualizar informe/evidencias y publicar exclusivamente lab/frappe-baseline;
@@ -635,3 +635,12 @@ se completó. No se relanzaron suites ni servicios. La regresión Cencomun y la
 publicación final siguen pendientes. La comprobación de restauración en una
 tarea cloud nueva fue iniciada por separado por el coordinador y no acredita
 ejecución de estas suites. Detalles: [recuperación](../reports/frappe-executor-recovery.md).
+
+Checkpoint `68d707486e5821cb15a247678c84c2ca8d50fc03` publicado únicamente en
+lab/frappe-baseline, PR #4 borrador: diez tests del harness PASS, exclusión de
+runners concurrentes y ERPNext intento 2 BLOCKED/incompleto. Posteriormente
+se recibió el PASS externo de restauración cloud de `fcf690d`, con JSON exacto,
+atribución y límites en [restauración externa](../reports/frappe-cloud-restoration.md).
+No se reejecutó ni modifica las suites oficiales o el criterio 13. La
+preparación de rutas HOME para backups oficiales tiene un bloqueo de filesystem
+de solo lectura, conservado con instrucciones; no se cambia HOME ni upstream.

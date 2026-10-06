@@ -1,6 +1,6 @@
 {
   "scope": "official default server suites on pinned MariaDB; baseline, not post-patch regression",
-  "recorded_utc": "2026-10-06T02:43:33.782255+00:00",
+  "recorded_utc": "2026-10-06T02:52:11.701022+00:00",
   "results": [
     {
       "app": "frappe",
@@ -56,9 +56,11 @@
   "pins_changed": false,
   "oracle_changed": false,
   "cloud_restore": {
-    "status": "BLOCKED",
+    "status": "PASS",
     "execution_reported_complete": true,
-    "reason": "Coordinator reports separate task completed; verification evidence not yet received.",
+    "provenance": "External coordinator evidence; not executed by this agent on this instance",
+    "evidence": "reports/evidence/frappe-cloud/restoration-fcf690d-external.json",
+    "attribution": "reports/evidence/frappe-cloud/restoration-fcf690d-attribution.json",
     "expected_commit": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
     "procedure": "docs/FRAPPE_CLOUD_RESTORE_CHECK.md"
   },

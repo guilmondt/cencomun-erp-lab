@@ -140,8 +140,9 @@ errores de fixtures/subtests, resultados ausentes e intentos previos. Cuatro uni
 históricos no representan esas suites. No se prueban Cashea/MRW reales, fiscalidad
 venezolana, seguimiento físico serial, producción ni SLA. La reproducción
 comprobada usa otro sitio en la misma máquina. La comprobación de una tarea cloud
-nueva terminó según el coordinador; sus resultados/evidencias siguen pendientes
-de incorporación. No volver a ejecutarla aquí ni atribuirle PASS sin evidencia.
+nueva tiene PASS externo aportado por el coordinador; evidencia exacta, atribución
+y límites en `reports/frappe-cloud-restoration.md`. No volver a ejecutarla aquí
+ni contarla como suites oficiales o regresión tras patch.
 
 Usar la skill cloud-environment-onboarding:setup para cambios de entorno.
 Esta continuación no solicita ni modifica el borrador del entorno guardado;

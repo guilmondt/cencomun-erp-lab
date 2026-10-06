@@ -2,10 +2,10 @@
 
 Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, pins o validadores. Este informe distingue descubrimiento, ejecución real y eventos JUnit. Los cuatro unitarios históricos de utilidades no son estas suites.
 
-| Aplicación | Sitio del intento completo final | Descubiertas | Ejecutadas (Ran N) | Estado | Exit | Segundos | Evidencia |
+| Aplicación | Sitio del último intento registrado | Descubiertas | Ejecutadas (Ran N) | Estado | Exit | Segundos | Evidencia |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | frappe | ccm-upstream-frappe.test | 2326 | 2275 | FAIL | 1 | 856.902 | [frappe-latest.json](evidence/frappe-official/frappe-latest.json) |
-| erpnext | ccm-upstream-erpnext.test | 3255 | None | BLOCKED | None | None | [erpnext-latest.json](evidence/frappe-official/erpnext-latest.json) |
+| erpnext | ccm-upstream-erpnext.test | 3255 | desconocidas | BLOCKED | — | — | [erpnext-latest.json](evidence/frappe-official/erpnext-latest.json) |
 
 | Aplicación | Eventos PASS | FAIL | ERROR | SKIP | Total JUnit | Métodos descubiertos sin resultado |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -60,4 +60,4 @@ No se ejecutan UI/Cypress, PostgreSQL, SQLite ni migraciones a otra versión. No
 
 La regresión Cencomun posterior a preparación se publica separadamente en [frappe-core-test.md](frappe-core-test.md). Las suites oficiales de baseline no cuentan como regresión después de patch. Los tags oficiales de ambos proyectos siguen ofreciendo solo v16.36.0/v16.36.1: criterio 13 BLOCKED, seis escenarios UNRUN. No se cambia minor.
 
-El coordinador informa que la comprobación del entorno guardado en una tarea cloud nueva terminó. Su evidencia y resultado todavía no se recibieron aquí: no se acredita PASS ni se vuelve a ejecutar. [Procedimiento reproducible](../docs/FRAPPE_CLOUD_RESTORE_CHECK.md): snapshot esperado `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, servicios retenidos y consulta autenticada P001, USD 50.00, stock 5 en almacén HTTP, cotejados con APIs nativas. Esta tarea no repite Guardar/Publicar; otro sitio en esta máquina no acredita restauración cloud.
+La comprobación del entorno guardado tiene resultado **PASS externo**, aportado por el coordinador desde una tarea cloud distinta; no fue reejecutada por este agente. [Evidencia exacta, atribución y límites](frappe-cloud-restoration.md). [Procedimiento reproducible](../docs/FRAPPE_CLOUD_RESTORE_CHECK.md): snapshot esperado `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, servicios retenidos y consulta autenticada P001, USD 50.00, stock 5 en almacén HTTP, cotejados con APIs nativas. Esta tarea no repite Guardar/Publicar; otro sitio en esta máquina no acredita restauración cloud.

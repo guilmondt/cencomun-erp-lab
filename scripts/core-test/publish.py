@@ -195,6 +195,8 @@ platform = {
 }
 official_path = REPO / 'reports/evidence/frappe-official/summary.json'
 official = json.loads(official_path.read_text()) if official_path.exists() else {'results': [], 'scope': 'UNRUN'}
+cloud_path = REPO / 'reports/evidence/frappe-cloud/restoration-fcf690d-external.json'
+cloud = json.loads(cloud_path.read_text()) if cloud_path.exists() else {}
 commands = (
     json.loads((OUT / "commands.json").read_text())
     if (OUT / "commands.json").exists()
@@ -225,9 +227,11 @@ summary = {
     "platform_baseline_subset": platform,
     "platform_official_server_suites": official,
     "cloud_snapshot_verification": {
-        "status": "BLOCKED",
+        "status": cloud.get('resultado', 'BLOCKED'),
         "execution_reported_complete": True,
-        "reason": "Separate task completed according to coordinator; evidence and outcome not yet received.",
+        "provenance": "External coordinator evidence from a separate cloud task; not executed by this agent here.",
+        "evidence": str(cloud_path.relative_to(REPO)),
+        "attribution": "reports/evidence/frappe-cloud/restoration-fcf690d-attribution.json",
         "expected_saved_commit": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
         "procedure": "docs/FRAPPE_CLOUD_RESTORE_CHECK.md",
         "note": "Criterion 14's LAB site replay is separate evidence; it does not demonstrate restoration in a genuinely new cloud task. The saved environment was not saved/published again.",
@@ -359,7 +363,7 @@ rows += [
     "",
     "4. **Intervenciones realizadas y preservadas.** Se añadieron Currency VES, grupos hoja, cuentas por defecto, listas nativas y cliente mariadb-dump 11.8.6 con checksum. Se corrigieron el mapeo bruto/neto de Payment Entry, precio/listas obligatorias, scope nativo sin permisos de empresa, auditoría de cierre sin diferencia y traducción de UniqueValidationError a 409. El proxy baseline apuntaba a otro sitio: el adaptador usa 127.0.0.1:8000 con Host ccm-core.test. No se modificó ese proxy. Los intentos fallidos se conservan en `evidence/frappe-core/attempts` y runs; los pasos exactos están en el README.",
     "",
-    "5. **Restauración cloud: ejecución separada terminada según el coordinador.** Resultado y evidencia pendientes de incorporación; no se acredita PASS ni se repite esa comprobación aquí. El criterio 14 acredita setup/replay de sitio LAB y mantiene un alcance distinto. El snapshot sigue siendo fcf690dbc58b2b2dcf8d045c49976e3613e804cf; no se repitió Guardar/Publicar. [Procedimiento reproducible](../docs/FRAPPE_CLOUD_RESTORE_CHECK.md): registrar identidad real de tarea, commit/servicios y consultas autenticadas P001, USD50.00 y stock5. Otro sitio local no acredita restauración cloud.",
+    "5. **Restauración cloud: PASS externo aportado por el coordinador.** Evidencia exacta y alcance en [frappe-cloud-restoration.md](frappe-cloud-restoration.md). No se reejecutó aquí ni modifica suites oficiales o criterio 13. El criterio 14 acredita setup/replay de sitio LAB y mantiene un alcance distinto. El snapshot verificado es fcf690dbc58b2b2dcf8d045c49976e3613e804cf; no se repitió Guardar/Publicar. Precio P001 USD50.00 y stock5 coinciden por adaptador y API nativa en el almacén HTTP. Los dos fallos HTTP iniciales se conservan con causa desconocida; no se inventa una explicación.",
     "",
     "Versiones efectivas: Frappe/ERPNext 16.36.1, MariaDB 11.8.6, Redis 8.0.2, Python 3.14.0, Node 24.19.0, Bench 5.29.0, Cencomun 0.0.1. Fuente, SHAs, hashes, estados y resultados completos: [summary.json](evidence/frappe-core/summary.json).",
     "",

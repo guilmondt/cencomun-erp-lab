@@ -161,8 +161,9 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
 
 La recuperación observada, hashes y comandos están en
 `reports/frappe-executor-recovery.md`. No volver a ejecutar la comprobación
-cloud separada que el coordinador ya dio por terminada; su evidencia se
-incorpora cuando sea recibida.
+cloud separada que el coordinador ya dio por terminada. Su JSON exacto,
+atribución y límites se incorporaron en `reports/frappe-cloud-restoration.md`;
+su PASS externo no modifica estas suites ni el criterio 13.
 
 ## Problemas y resolución
 
@@ -205,6 +206,26 @@ incorpora cuando sea recibida.
 4. Para cambios de versiones, preparar un plan separado con SHAs, compatibilidad,
    backup, migración, regresión y rollback; esperar aprobación. Estas suites de
    baseline nunca se cuentan como las regresiones posteriores al patch.
+
+**Backups oficiales fuera de workspace: filesystem HOME de solo lectura:**
+
+1. Conservar el intento y comprobar la traza. Dos tests nativos usan
+   `os.path.expanduser("~")` y escriben en `backups`, `db_path`, `files_path`,
+   `private_path` y `conf_path` dentro de ese directorio.
+2. En este ejecutor, preparar `/home/agent/backups` falló con
+   `OSError: [Errno 30] Read-only file system`, incluso después de conceder
+   acceso de escritura acotado a las cinco rutas. Ver
+   `reports/evidence/frappe-official/home-backup-paths-preparation.json`.
+   No cambiar HOME, expectativas ni fuentes upstream para ocultarlo.
+3. Para resolverlo, ejecutar el módulo afectado en un ejecutor con esas rutas
+   escribibles, mismas versiones fijadas, sitios vacíos y fixtures oficiales.
+   Antes de lanzar pruebas, crear los cinco directorios con modo 0700 y
+   verificar escritura de un archivo ficticio temporal y su eliminación.
+   No copiar credenciales/dumps a Git ni sobrescribir archivos existentes.
+4. Usar `run.py frappe --module frappe.commands.test_commands`, conservar el
+   resultado anterior y distinguir la regresión modular de una suite completa.
+   Los fallos nativos observados siguen siendo FAIL; la preparación bloqueada
+   explica su límite, pero no aprueba los casos.
 
 La verificación del entorno guardado se hace exclusivamente en **otra tarea
 cloud** según `docs/FRAPPE_CLOUD_RESTORE_CHECK.md`; estos sitios/Bench privados
