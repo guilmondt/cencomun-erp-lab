@@ -294,9 +294,13 @@ public class NativeGateService {
     for (Object line : (List<?>) get(move, "moveLineList")) {
       Model account = (Model) get(line, "account");
       lines.add(Map.of("id", ((Model) line).getId(), "account_id", account.getId(), "account_code", get(account, "code"),
-          "debit", get(line, "debit").toString(), "credit", get(line, "credit").toString(), "remaining", get(line, "amountRemaining").toString()));
+          "debit", get(line, "debit").toString(), "credit", get(line, "credit").toString(), "remaining", get(line, "amountRemaining").toString(),
+          "account_company_id", ((Model) get(account, "company")).getId(),
+          "parent_move_id", ((Model) get(line, "move")).getId()));
     }
-    return Map.of("id", move.getId(), "status", get(move, "statusSelect"), "lines", lines);
+    Model company = (Model) get(move, "company");
+    return Map.of("id", move.getId(), "status", get(move, "statusSelect"), "lines", lines,
+        "company_id", company.getId(), "company_code", get(company, "code"));
   }
   private Model location(Model company, String name, int kind, boolean valued) {
     Model found = one(STOCK + "StockLocation", "self.name = ?1", name);

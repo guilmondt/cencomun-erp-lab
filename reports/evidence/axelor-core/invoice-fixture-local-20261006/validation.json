@@ -1,0 +1,145 @@
+{
+  "scope": "Local source compilation/regressions only; native fixture and GL-scope ERP acceptance pending",
+  "base_commit": "842a4dadcd74470dc6041d67d59bdfaf28803410",
+  "python": {
+    "tests": 30,
+    "failures": 0,
+    "errors": 0,
+    "log": "/tmp/ccm-native-fixture-regressions.log"
+  },
+  "baseline": {
+    "tests": 2,
+    "policy_tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 13,
+    "log": "/tmp/ccm-native-fixture-baseline.log"
+  },
+  "full_native_compile": {
+    "status": "PASS",
+    "seconds": 19,
+    "offline": true,
+    "strict_locks": true,
+    "log": "/tmp/ccm-native-fixture-full.log"
+  },
+  "role_changes": "Native Role metadata only, no users/passwords/grants changed",
+  "erp": "UNRUN for this additional source; CI37432900300 tests only commit842a4dadcd74470dc6041d67d59bdfaf28803410",
+  "source_files": [
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/baseline/module/CencomunModule.java",
+      "lines": 12,
+      "sha256": "25b0d1dfc3bfd4ebf4f228cd465c2197df53fdf19dfa63f75544b75396742fc9"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreReadResource.java",
+      "lines": 112,
+      "sha256": "7d187c510dbf239c16614519b38c0c6b5a5f3012422d94c5f2455e713145d71f"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/FixtureBundle.java",
+      "lines": 51,
+      "sha256": "2176bb2f0d5a29b013100669a9733d1d97eb98010c424cba3cf9659125c2ab27"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/MoneyPolicy.java",
+      "lines": 71,
+      "sha256": "8fec86818a0a43253c9bd43f1174cc9295895957e73775134a50a582d28ba5ac"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeAccess.java",
+      "lines": 81,
+      "sha256": "650ebf767730bc5cc9df795f35f68d3c703129fc7092715518f4a542cfd2a875"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeAddressPreflightService.java",
+      "lines": 38,
+      "sha256": "8f01de83a1d010fc0f0b2064942a385ab55a7a6e70782c29be382dd8b6edcd63"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBankBookController.java",
+      "lines": 25,
+      "sha256": "9c4dcd4e4c7c5d03d138fc55df449d53ae8c6af0b80131d0f12b8386ad347df4"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBankBookService.java",
+      "lines": 114,
+      "sha256": "0e5f139badf1f453d36098944519e7db4c54a36f7544875cd542b9f4349c2214"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFinance.java",
+      "lines": 323,
+      "sha256": "5bc9bdcf249b12d5fd58aaffed6b0c16a41902e3d49c4b446cc70d97cb9914fd"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFixtureController.java",
+      "lines": 98,
+      "sha256": "634cdd0083d284d58ae327093a70b4d1d08b44b41ca0bc044ed8ebbe6187344e"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxController.java",
+      "lines": 16,
+      "sha256": "d8c0e99819243ba6f99b05addfe3c7c9920010fb1030aec5643eef4d817a46cc"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxResource.java",
+      "lines": 37,
+      "sha256": "37312bf88149029b0dba0c342904b0838828eccd108996e6b41dc168e37843be"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxService.java",
+      "lines": 255,
+      "sha256": "637efc7dbb7c26347ac81b02219dbfdaaeb8fe2678faae36eb1bd6a3dd163151"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeGateController.java",
+      "lines": 75,
+      "sha256": "3a8145bc87247f66545e4dd11dc2e9b0148c4b1967bddffd4faa6a08fa3fabcb"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeGateService.java",
+      "lines": 322,
+      "sha256": "441142da9dc242d99da81be676da8e3ead4b8b7fcc22971b7018b9fc463a092a"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeIndependentController.java",
+      "lines": 147,
+      "sha256": "150729c99b8c7c90654fe3b97ffb6eeb90c26754b29adebdfd61983b54eb216b"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeInvoiceLinks.java",
+      "lines": 37,
+      "sha256": "7505c2ba5096162e6a0d2be82ca81efe43b4286f23f2dc181a901a0070ccbd88"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/NativeFxInvoiceFactory.java",
+      "lines": 28,
+      "sha256": "5709ffa39dfd17d4a168eb98aa5db41bb4147a47a6103aaffc39a3a2c1fad2cb"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeAddressTemplateTest.java",
+      "lines": 107,
+      "sha256": "58a02ee1d0d9af8a587ef75774ffdf029590f978694ac169361b5a2e86cda2d4"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeInvoiceRuntimeTest.java",
+      "lines": 29,
+      "sha256": "a0bdc5bb862b1dcc8f1691323078b71d494be955ed81b2d994dd2a26e45d6a25"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativePermissionFilterTest.java",
+      "lines": 63,
+      "sha256": "251ba13d0c33ac19c39b3edd4e1258632fb79a037d2816b264885c99fd16da03"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/baseline/module/CencomunModuleTest.java",
+      "lines": 42,
+      "sha256": "d7d16047cc88aa86ccedc76fe592ca20644c9118eb9bd0a0aa42d3cc5ee19501"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/MoneyPolicyTest.java",
+      "lines": 50,
+      "sha256": "1c4bdd495c2db398e69eead0125d2dc70074e34fbdbc08266e6e8e9dee33136b"
+    }
+  ]
+}

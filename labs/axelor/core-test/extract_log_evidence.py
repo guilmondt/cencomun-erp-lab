@@ -9,7 +9,7 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
-from run import REFERENCE, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle
+from run import REFERENCE, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle, review_native_fixture
 
 
 def extract(log, output, run_id, commit, fixtures):
@@ -34,8 +34,12 @@ def extract(log, output, run_id, commit, fixtures):
     gates, exports, independent = {}, {}, {}
     product_steps, search_steps, search_queries, search_failures, book_steps, fx_steps, fx_failures = [], [], [], [], [], [], []
     proof = None
+    fixture_sections = {}
+    chunks = {}
     for item in objects:
         case = item.get("case")
+        if case == "FIXTURE-HASH-NATIVE-EXPORT" and "section" in item and "records" in item:
+            fixture_sections[item["section"]] = item["records"]
         if item.get("scope") == "native address fixture prerequisite, not a Core group":
             assert item.get("lab_commit") == commit and item.get("reference") == REFERENCE
             (output / "address-preflight.json").write_text(json.dumps(item, indent=2) + "\n")
@@ -59,7 +63,11 @@ def extract(log, output, run_id, commit, fixtures):
             assert item["lab_commit"] == commit, "Build proof belongs to another commit"
             proof = item
         if case in ("CO00", "TAX01-W") and "section" in item and "records" in item:
-            exports.setdefault(case, {"case": case})[item["section"]] = item["records"]
+            if "record_index" in item:
+                key = (case, item["section"])
+                chunks.setdefault(key, []).append(item)
+            else:
+                exports.setdefault(case, {"case": case})[item["section"]] = item["records"]
         if case in ("CO00", "TAX01-W") and "sequences" in item:
             (output / f"{case}-committed-sequences.json").write_text(json.dumps(item, indent=2) + "\n")
         # The first runner fallback omitted top-level reference metadata. Its
@@ -75,15 +83,28 @@ def extract(log, output, run_id, commit, fixtures):
             by_case[case + "-NATIVE"].update(status="UNRUN" if item["status"] == "PASS" else item["status"],
                 observed_revision=1, complete=False, partial_gate_status=item["status"],
                 reason=item.get("failed_stage", "Economic administrator gate; complete subcases pending"), evidence=f"{case}-gate.json")
-        if case in ("PROD01-04", "SEARCH01-04-NATIVE", "BANK-BOOK-FIXTURE", "FX01-03-MONEY01-03") and "status" in item and item.get("reference") == REFERENCE:
+        if case in ("PROD01-04", "SEARCH01-04-NATIVE", "BANK-BOOK-FIXTURE", "FX01-03-MONEY01-03", "FIXTURE-HASH-NATIVE-EXPORT") and "status" in item and item.get("reference") == REFERENCE:
             independent[case] = item
             by_case[case].update(status=item["status"], observed_revision=item["revision"], complete=item["complete"],
                 reason=item.get("error", "Executed native independent case"), evidence=f"{case}.json")
+    for (case, section), parts in chunks.items():
+        count = parts[0]["record_count"]
+        if (count > 0 and len(parts) == count and {p["record_index"] for p in parts} == set(range(count))
+            and all(p["record_count"] == count and len(p["records"]) == 1 for p in parts)):
+            exports.setdefault(case, {"case": case})[section] = [p["records"][0] for p in sorted(parts, key=lambda p: p["record_index"])]
     for case, item in gates.items():
         (output / f"{case}-gate.json").write_text(json.dumps(item, indent=2) + "\n")
     for case, item in exports.items():
         (output / f"{case}-native-export.json").write_text(json.dumps(item, indent=2) + "\n")
     for case, item in independent.items():
+        if case == "FIXTURE-HASH-NATIVE-EXPORT":
+            item["native_export"] = fixture_sections
+            review_native_fixture(by_case[case], item, fixtures)
+            if (item["status"], item["complete"]) != (by_case[case]["status"], by_case[case]["complete"]):
+                item.update(reported_status=item["status"], reported_complete=item["complete"],
+                    status=by_case[case]["status"], complete=by_case[case]["complete"], review_reason=by_case[case]["reason"])
+            (output / f"{case}.json").write_text(json.dumps(item, indent=2) + "\n")
+            continue
         item["steps"] = {"PROD01-04": product_steps, "SEARCH01-04-NATIVE": search_steps, "BANK-BOOK-FIXTURE": book_steps, "FX01-03-MONEY01-03": fx_steps}[case]
         if case == "SEARCH01-04-NATIVE":
             item["native_queries"] = search_queries

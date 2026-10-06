@@ -7,7 +7,7 @@ import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
-from run import criteria_for, verified_build_status, review_native_fx
+from run import criteria_for, verified_build_status, review_native_fx, review_native_fixture
 
 BASELINE = "e0190090fd137576ce273e350d7ce6686d66baf9"
 
@@ -52,6 +52,10 @@ def finalize(repo, host, output):
     fx_path = output / "FX01-03-MONEY01-03.json"
     review_native_fx(fx, json.loads(fx_path.read_text()) if fx_path.exists() else {},
         json.loads((repo / "fixtures/ccm-core-v1/fx.json").read_bytes()))
+    fixture = next(r for r in coverage["groups"] if r["case"] == "FIXTURE-HASH-NATIVE-EXPORT")
+    fixture_path = output / "FIXTURE-HASH-NATIVE-EXPORT.json"
+    review_native_fixture(fixture, json.loads(fixture_path.read_text()) if fixture_path.exists() else {},
+                          repo / "fixtures/ccm-core-v1")
     coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
     coverage["criteria"] = criteria_for(coverage["groups"], proof)
     coverage["build_evidence"] = "build-evidence.json"

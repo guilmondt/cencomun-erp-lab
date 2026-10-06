@@ -708,3 +708,18 @@ Matriz actual3PASS/3FAIL/28UNRUN; 14 criterios1PASS/6FAIL/6UNRUN/1BLOCKED.
 ZIP11396837860: un intento Forbidden productionresultssa12.blob.core.windows.net;
 se conservan logs estructurados, sin ampliar/publicar red. Corrección compilada
 localmente y regresiones del inspector ejecutadas; aceptación ERP pendiente.
+
+Verificación de B30: CI37432900300 (842a4dadcd74470dc6041d67d59bdfaf28803410)
+confirma INVOICE_ALL, cabecera y ambas FK de líneas, misma venta/factura/
+compañía. Lecturas nuevas después del commit revalidan oráculo, stock3/4/5,
+valor430, COGS70, ingresos125, IVA0/12.50, anticipos50/55, banco67/70.25,
+comisiones8/11.55, envío0/0.70 y AR0; cuatro GL por gate ACCOUNTED.
+CO00 gate PASS15.960s, TAX01-W gate PASS8.563s; SEARCH completo PASS0.464s
+con lector real y403 compañía ajena en búsqueda y lectura FK. Revalidación
+independiente sobre los registros recuperados, usando comprobador de ese SHA,
+también PASS. Este bloqueo está resuelto para el recorrido administrador;
+no aprueba los grupos CO00/TAX completos ni roles/estados/atomicidad pendientes.
+Matriz4PASS/30UNRUN; criterios1PASS/12UNRUN/1BLOCKED. CI global FAILURE por
+cobertura pendiente, no por fallo de estos gates. ZIP bloqueado sa7, un intento;
+no se amplía/publica red. El siguiente CI añade export de compañía de GL,
+propiedad de líneas contables y fixture independiente; aún no aceptados.

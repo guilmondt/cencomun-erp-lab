@@ -183,3 +183,17 @@ sustituye las FK. El lector usa sus permisos Invoice existentes y la denegación
 ajena sigue siendo 403. No se cambian oráculo, estados, pins ni transacciones
 económicas. La regresión rechaza cabecera null, fuente ausente, factura/venta
 equivocada y compañía ajena. Compilación local no sustituye aceptación ERP.
+
+## ADR-009 — Export verificable de fixtures y metadatos de roles
+
+2026-10-06. El grupo independiente FIXTURE-HASH-NATIVE-EXPORT conserva el
+contrato de la referencia fija:16 hashes del bundle cargado, productos y
+clientes nativos, VES y nueve metadatos Role. Sólo se crean los Role ausentes
+en el runtime LAB por repositorio nativo. No se crean usuarios/credenciales
+ni se cambian grants existentes. Cargar nueve nombres no aprueba permisos
+funcionales; esos grupos/subcasos mantienen su estado pendiente.
+Una petición posterior al commit exporta IDs/FK/valores y hashes reales.
+Runner, finalizador y recuperación de logs rechazan PASS sin export completo
+o que contradiga los fixtures. Sin cambiar oráculo ni resultados esperados.
+Los gates añaden scope nativo de Move/Account y propiedad MoveLine.move;
+es una comprobación adicional, sin modificar efectos económicos.

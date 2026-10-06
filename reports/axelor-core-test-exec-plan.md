@@ -568,3 +568,31 @@ lector conserva scope y prueba denegación403; no agregar permisos. Regresiones
 rechazan cabecera null y vínculos aparentes por referencia. Repetir CO00 antes
 de TAX01-W y después casos independientes en un solo CI. Gates administrador
 PASS seguirán siendo parciales; 34 grupos/14 criterios completos no se infieren.
+
+### Independiente — FIXTURE-HASH-NATIVE-EXPORT
+
+Preparado durante el único CI37432900300, sin cancelarlo ni duplicarlo.
+La referencia fija exige hashes de16 archivos, tres productos/clientes,
+VES nativo y nueve roles cargados. El módulo ya crea Reader/Operator/Manager;
+se preparan sólo los restantes metadatos Role por repositorio nativo, sin
+usuarios/contraseñas/grants nuevos ni cambios a los permisos existentes.
+Su existencia no aprueba subcasos funcionales de roles, compras, caja o MCP.
+El inspector lee bytes del bundle realmente cargado en el JAR y modelos
+persistidos, después de otro commit/petición; exporta IDs/FK/valores reales.
+Runner/finalize/extractor revalidan contra el mismo manifiesto y fixtures;
+regresión rechaza PASS sólo con hashes, registros ausentes, IDs duplicados,
+valores/compañía distintos y lecturas dentro de la transacción de preparación.
+Se añade además lectura company/Account.company/MoveLine.move del GL para
+verificar explícitamente scope y propiedad de los asientos de los gates.
+Los exports grandes se publican por registros completos numerados; el extractor
+sólo reconstruye la sección cuando están todos, sin índices duplicados.
+Una regresión verifica pérdida/duplicación sin inferir evidencia ausente.
+Nada se cuenta como aceptación ERP hasta el siguiente CI completado.
+
+CI37432900300 finalizó: CO00/TAX01-W gates administrador PASS, getInvoices y
+cabecera/FK/compañía comprobados después del commit; oráculo revalidado desde
+export completo con código de842a4dadcd74470dc6041d67d59bdfaf28803410. SEARCH
+lector y403 ajeno PASS; PROD/BANK/FX completos PASS del mismo commit.
+Matriz4PASS/30UNRUN, criterios1PASS/12UNRUN/1BLOCKED. No se completan los grupos
+económicos por esos gates. Se envía una única ampliación independiente del
+export de fixtures/scope GL después de terminar ese CI; repetir gates primero.

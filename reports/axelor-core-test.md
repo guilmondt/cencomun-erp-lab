@@ -1,78 +1,81 @@
 # Core Test Axelor — ejecución en curso
 
 Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
-16 fixtures idénticos, manifiesto/oráculo intactos, cobertura revisión2,
+16 fixtures idénticos más manifiesto, oráculo intacto, cobertura revisión2,
 34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.
 
-Último CI finalizado: [37429209635](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37429209635),
-commit `27bdbd840f733eb3355658d3016b87edb4f3826d`, **FAILURE**.
-PROD, BANK y FX completo PASS ejecutados en ese commit. CO00/TAX01-W y SEARCH
-FAIL: no se demostró el vínculo de la factura en su export. No se arrastran PASS
-históricos al siguiente commit. Causa/impacto/pasos/verificación: impedimento B30.
+Último CI finalizado: [37432900300](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37432900300),
+commit `842a4dadcd74470dc6041d67d59bdfaf28803410`, **FAILURE**.
+Los gates administrador y casos independientes ejecutados pasan. El resultado
+global conserva cobertura pendiente: no se declara terminada la comparación.
+Cada resultado pertenece a ese commit; no se arrastran PASS históricos.
 
-## Gates económicos parciales
+## Gates económicos parciales — separados de los grupos completos
 
-| Gate, administrador real | Estado | Tiempo | Causa observada |
+| Gate administrador | Estado | Tiempo | Resultado |
 | --- | --- | --- | --- |
-| CO00, primero | FAIL | 15.990s | Inspector de cabecera no encuentra factura |
-| TAX01-W, segundo | FAIL | 8.183s | Mismo vínculo no exportado |
+| CO00 | PASS | 15.960s | Lectura nativa después del commit y oráculo |
+| TAX01-W | PASS | 8.563s | Lectura nativa después del commit y oráculo |
 
-La venta confirmó: stock3/4/5, WAP30/10/60, valoración430; COGS70 y liquidaciones
-nativas contabilizadas. CO00: banco67/comisión8/AR75; TAX01-W:
-banco70.25/comisión11.55/envío0.70/AR82.50. El export omite factura/GL/pago directo
-por filtrar Invoice.saleOrder, null con el helper corto. Esos resultados son
-parciales: ingresos, IVA y recorrido económico completo aún sin aceptación.
-Un gate administrador PASS tampoco completará roles, estados, atomicidad,
-rechazos e idempotencia del grupo.
+INVOICE_ALL completo asignó la cabecera nativa. getInvoices encontró una
+factura por venta y ambas FK InvoiceLine.saleOrderLine.saleOrder;
+InvoiceLine.invoice pertenece a esa factura. Cabecera/líneas/compañía coinciden
+con los IDs de venta. No se sustituye el vínculo por una referencia externa.
+El export completo recuperado también se revalidó independientemente con el
+comprobador del mismo commit.
 
-Preflight de dirección PASS1.519s: AddressBaseRepository guardó dirección,
-plantilla, cinco hijos y cinco MetaField; required streetName/city/zip;
-render/compute/save/lectura posterior y replay nativos. No aprueba grupos Core.
-AppInvoice efectivo y persistido id1: PDF automático=false e
-isVentilationSkipped=false. InvoiceService.validate/ventilate permanece íntegro.
-**PDF automático fuera del alcance probado**, sin PrintingTemplate ni demo.
+| Magnitud nativa | CO00 | TAX01-W |
+| --- | --- | --- |
+| Stock final / WAP | 3/4/5; 30/10/60 | 3/4/5; 30/10/60 |
+| Valor stock / COGS | 430 / 70 | 430 / 70 |
+| Ingresos / impuesto | 125 / 0 | 125 / 12.50 |
+| Factura / anticipo | 125 / 50 | 137.50 / 55 |
+| Banco / comisión / envío | 67 / 8 / 0 | 70.25 / 11.55 / 0.70 |
+| Beneficio contable / AR restante | 47 / 0 | 42.75 / 0 |
+
+Cuatro asientos por gate ACCOUNTED, balanceados; dos pagos confirmados por
+factura, conciliación y saldo0. Son gates de administrador: sus grupos CO00 y
+TAX01-W siguen **UNRUN/incompletos** hasta roles, estados, atomicidad, rechazos
+e idempotencia. La atomicidad económica existente no se divide ni se desactiva.
+Se confirma sólo la preparación del fixture antes de consumir Sequence aislado.
+
+SEARCH por lector verifica la misma factura, cabecera y FK reales, misma
+compañía; búsqueda y lectura de vínculo con compañía ajena devuelven403.
+No se amplían grants. Permission.condition usa ? nativo, Query directo ?1.
+AppInvoice efectivo/persistido mantiene PDF automático=false y
+isVentilationSkipped=false. InvoiceService.validate/ventilate íntegro.
+**PDF automático fuera del alcance probado**, sin PrintingTemplate/demo.
 
 ## Casos independientes del mismo CI
 
-- PROD01-04 PASS2.469s: CRUD con operador y lectura posterior al commit.
-- BANK-BOOK-FIXTURE PASS0.794s: cuatro anticipos, GL contabilizado y saldo255;
-  replay idéntico.
-- SEARCH FAIL0.434s: nombre/teléfono/serial, productos/paginación y compañía
-  ajena403 ejecutados. Factura existe, pero no se probó relación de venta.
-- FX01-03-MONEY01-03 PASS4.222s: cuatro InvoicePayment nativos ids5/6/7/8,
-  tres facturas3/4/5 y siete asientos15–21 ACCOUNTED. FX01: Oct1 VES40/USD1;
-  FX02: Oct2 VES41/USD1; MONEY-ROUND: Oct3 dos VES0.41/USD0.01.
-  Fechas, cotizaciones40/41/40.5, tasa efectiva redondeada, conciliación
-  CONFIRMED y factura/AR0 se leyeron después del commit. Rechazos sin efectos
-  y autorización por gerente real ejecutados. Conversión parcial se conserva
-  aparte; el agregador rechaza cálculos/tasas sin los cuatro pagos y sus GL.
+| Grupo | Estado | Tiempo |
+| --- | --- | --- |
+| PROD01-04 | PASS | 2.457s |
+| SEARCH01-04-NATIVE | PASS | 0.464s |
+| BANK-BOOK-FIXTURE | PASS | 0.770s |
+| FX01-03-MONEY01-03 | PASS | 4.430s |
 
-## Corrección de vínculo pendiente de aceptación ERP
+PROD usa operador real, CRUD y lecturas posteriores. BANK-BOOK: cuatro
+anticipos nativos, GL contabilizado, saldo255 y replay idéntico.
+SEARCH: nombre/teléfono/serial, productos/paginación, factura/FK y403 ajeno.
+FX completo exige y demuestra cuatro InvoicePayment, tres facturas USD y
+siete GL contabilizados/conciliados: Oct1 VES40/USD1, Oct2 VES41/USD1, Oct3
+dos VES0.41/USD0.01. Cotizaciones40/41/40.5 y tasa efectiva redondeada se
+comprueban con fechas/importes/IDs y lecturas posteriores al commit; saldos0.
+Rechazos sin efectos y autorización gerente ejecutados. Conversión parcial
+se conserva aparte; el agregador rechaza cálculos/tasas sin pagos nativos.
 
-Se usa el overload completo generateInvoice con la constante oficial
-SaleOrderRepository.INVOICE_ALL y el guard de facturabilidad del wizard.
-AOS asigna/guarda Invoice.saleOrder. Se conserva getInvoices y se exige además
-InvoiceLine.invoice/InvoiceLine.saleOrderLine/SaleOrderLine.saleOrder, misma
-factura/venta/compañía y coincidencia con las líneas económicas exportadas.
-La referencia externa sólo selecciona; no prueba el vínculo. Lectura por
-lector conserva scope/grants nativos y exige denegación ajena403.
-Sin alterar sell transaccional ni validación/contabilización/liquidación.
-25 regresiones Python y 2+7 tests baseline PASS; compilación/JAR full-native
-offline con locks estrictos PASS20s. Son pruebas locales, no aceptación ERP.
-La regresión rechaza cabecera null, FK ausente o compañía/factura equivocada.
-ADR008 y ExecPlan documentan la decisión. Repetir CO00 antes de TAX01-W,
-después independientes, en un único CI; no contar la corrección como verificada.
+## Matriz de 34 grupos — CI finalizado
 
-## Matriz de 34 grupos — último CI finalizado
-
-**PASS3 / FAIL3 / BLOCKED0 / UNRUN28**. Gates parciales separados.
+**PASS4** / **FAIL0** / **BLOCKED0** / **UNRUN30**.
+Los UNRUN incluyen los dos gates parciales; el resto sigue sin aceptación completa.
 
 | Grupo requerido | Revisión mínima | Estado | Completo |
 | --- | --- | --- | --- |
-| CO00-NATIVE | 1 | FAIL | No |
+| CO00-NATIVE | 1 | UNRUN | No |
 | CO01-NATIVE | 1 | UNRUN | No |
 | TAX01-S-NATIVE | 1 | UNRUN | No |
-| TAX01-W-NATIVE | 1 | FAIL | No |
+| TAX01-W-NATIVE | 1 | UNRUN | No |
 | PROD01-04 | 1 | PASS | Sí |
 | VAL01-04 | 1 | UNRUN | No |
 | STATE01-04 | 1 | UNRUN | No |
@@ -87,7 +90,7 @@ después independientes, en un único CI; no contar la corrección como verifica
 | IDEM01-02-CREATE-CONCURRENT | 1 | UNRUN | No |
 | PERM-API-NATIVE | 1 | UNRUN | No |
 | CASH04-06-HTTP-IMMUTABLE | 1 | UNRUN | No |
-| SEARCH01-04-NATIVE | 1 | FAIL | No |
+| SEARCH01-04-NATIVE | 1 | PASS | Sí |
 | TAX02-04-IDEM-CONCURRENT | 1 | UNRUN | No |
 | BANK-CONCURRENT-1000 | 1 | UNRUN | No |
 | MCP01-06-STDIO | 2 | UNRUN | No |
@@ -106,55 +109,69 @@ después independientes, en un único CI; no contar la corrección como verifica
 
 ## 14 criterios — evidencia ejecutada
 
-**PASS1 / FAIL6 / BLOCKED1 / UNRUN6**.
-
 | Criterio | Estado |
 | --- | --- |
-| 1 | FAIL |
+| 1 | UNRUN |
 | 2 | PASS |
-| 3 | FAIL |
-| 4 | FAIL |
-| 5 | FAIL |
+| 3 | UNRUN |
+| 4 | UNRUN |
+| 5 | UNRUN |
 | 6 | UNRUN |
 | 7 | UNRUN |
 | 8 | UNRUN |
 | 9 | UNRUN |
 | 10 | UNRUN |
-| 11 | FAIL |
-| 12 | FAIL |
+| 11 | UNRUN |
+| 12 | UNRUN |
 | 13 | BLOCKED |
 | 14 | UNRUN |
 
-Criterio2 exige suites/WAR/pins/diffs upstream ejecutados del mismo commit,
-sin PASS preasignado. Criterio13 BLOCKED: actualización diferida a copia
-aislada con objetivo aprobado; seis PATCH UNRUN. Faltan28 grupos y subcasos de
-los gates. Benchmark/recovery no se aprueban por smoke.
+Criterio2 proviene de suites/WAR/pins/diffs upstream del mismo commit; nunca
+PASS preasignado. Criterio12 requiere benchmark/restauración adicional: SEARCH
+funcional PASS no lo completa. Criterio13 BLOCKED por actualización diferida
+a copia aislada con objetivo aprobado; seis PATCH UNRUN. Recovery y auditoría
+integral tampoco se aprueban por smoke.
 
-## Métricas y procedencia del CI37429209635
+## Validaciones y métricas
 
-- 24 regresiones Python; 40 tests Java reales: 2baseline+7política+8dirección+
-  5filtros+2flags+16upstream, cero fallos/errores/skips.
-- Readiness inicial419.44s; reinicio misma DB315.38s; job18min54s.
-  Login/REST autenticados; AOP8.2.3/AOS9.1.8/módulo0.1.0, 33módulos.
-- CPU4/afinidad4; Linux6.17.0-1022-azure, disco libre87087919104bytes.
-  HTTP admin30/operador producto30/lector14/operador FX11/gerente FX4.
-- p50/p95/p99, 1000muestras y query/DB timing UNRUN.
-- Upstream host/AOS diff exit0; pins SHA256
-  `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
-  WAR SHA256 `5f8ad51754e5303acf785fd0c38501eaf8d1d5e34e53d15b1fb434de164b57d6`.
+- 40 tests Java reales: 2baseline+7política+8dirección+5filtros+2flags+
+  16upstream, cero fallos/errores/skips. Python ejecutó 25 regresiones.
+- Preflight HTTP AddressBaseRepository completo PASS: save/render/compute,
+  plantilla con cinco hijos/metadatos y campos requeridos, lectura/replay.
+- Readiness inicial422.6s; reinicio misma DB315.35s;
+  job19min35s. Login/REST autenticados, AOP8.2.3/AOS9.1.8,
+  módulo0.1.0, 33módulos.
+- CPU4/afinidad4; disco libre87087755264bytes.
+  HTTP por actor: `{"administrator": 30, "product_operator": 30, "search_reader": 16, "fx_operator": 11, "fx_manager": 4}`.
+- p50/p95/p99, 1000muestras y query/DB timing: UNRUN.
+- Ambos upstreams fijados diff0; pins SHA256 `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
+  WAR SHA256 `f1a22744900b620722f8d184396fa45b85086fac62e2dcc35edd23068b946b06`.
 
-[coverage.json](evidence/axelor-core/runs/37429209635/coverage.json),
-[gates](evidence/axelor-core/runs/37429209635/CO00-native-export.json),
-[cuatro pagos FX](evidence/axelor-core/runs/37429209635/FX01-03-MONEY01-03.json),
-[build](evidence/axelor-core/runs/37429209635/build-evidence.json),
-[métricas](evidence/axelor-core/runs/37429209635/runtime-metrics.json),
-[procedencia/hashes/smokes](evidence/axelor-core/runs/37429209635/evidence-source.json).
-Fuente secundaria: avisos JSON completos del log. ZIP11396837860 Forbidden en
-productionresultssa12.blob.core.windows.net, un intento; red sin cambios ni
-publicación. Log recuperable: `/workspace/ccm-axelor-runtime/ci-evidence/37429209635.log`.
+## Evidencia y continuidad
 
-CI sigue siendo fuente de aceptación. Docker/PostgreSQL local no equivalen a
-ERP fiable; el diagnóstico JPA anterior quedó en RequestScoped/saveUNRUN.
-El preflight HTTP ya pasó en ERP real. No se crean credenciales persistentes.
-Sin PR/merge/despliegue ni cambios main/Frappe/pins/upstream. La comparación
-permanece incompleta y la actualización está fuera de esta ejecución.
+[coverage.json](evidence/axelor-core/runs/37432900300/coverage.json),
+[CO00](evidence/axelor-core/runs/37432900300/CO00-native-export.json),
+[TAX01-W](evidence/axelor-core/runs/37432900300/TAX01-W-native-export.json),
+[SEARCH/lector](evidence/axelor-core/runs/37432900300/SEARCH01-04-NATIVE.json),
+[cuatro pagos FX](evidence/axelor-core/runs/37432900300/FX01-03-MONEY01-03.json),
+[atestación build](evidence/axelor-core/runs/37432900300/build-evidence.json),
+[métricas](evidence/axelor-core/runs/37432900300/runtime-metrics.json),
+[procedencia/hashes](evidence/axelor-core/runs/37432900300/evidence-source.json).
+Fuente secundaria: JSON completos del log, validados con código del mismo SHA.
+ZIP11398462758: un intento Forbidden en productionresultssa7.blob.core.windows.net;
+sin ampliar ni publicar red. Log recuperable: `/workspace/ccm-axelor-runtime/ci-evidence/37432900300.log`.
+
+CI es fuente de aceptación. Docker/PostgreSQL local no equivalen a ERP fiable;
+el diagnóstico JPA anterior quedó en RequestScoped/saveUNRUN. El preflight
+HTTP real ya pasó. Sin permisos del sistema ni credenciales persistentes nuevas.
+Sin PR/merge/despliegue ni cambios main/Frappe/pins/upstream. Arranque guardado
+sólo en borrador; publicación de red pendiente no se ejecuta.
+
+Siguiente fuente preparada, aceptación ERP **pendiente**: export nativo de16
+hashes/productos/clientes/monedas/nueve metadatos Role, sin usuarios ni grants;
+scope de Move/Account y propiedad MoveLine.move. Publicación de registros
+completos numerados evita pérdidas de GL en avisos grandes. 30 regresiones,
+baseline2+7 y compileJava/JAR full-native offline estricto PASS19s localmente.
+[Validación local](evidence/axelor-core/invoice-fixture-local-20261006/validation.json).
+ADR009/ExecPlan explican alcance; contar roles no aprueba permisos funcionales.
+Repetir gates primero y luego independientes en un único CI, sin arrastrar PASS.

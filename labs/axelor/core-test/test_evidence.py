@@ -1,7 +1,8 @@
 """Regression tests for coverage integrity and native accounting evidence rejection."""
 import unittest
+import hashlib
 from pathlib import Path
-from run import assert_native_economics, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
+from run import REFERENCE, assert_native_economics, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
 from finalize import BASELINE, baseline_pin_blob
 
 FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
@@ -497,6 +498,106 @@ class EvidenceTests(unittest.TestCase):
             wrong=copy.deepcopy(link);wrong[field]=value
             with self.subTest(field=field), self.assertRaises(AssertionError):
                 assert_native_invoice_linkage(wrong, 7, 1, 3, "CCM-CO00")
+
+    def test_native_journal_scope_rejects_foreign_company_accounts_and_line_parent(self):
+        import copy
+        from run import assert_native_move_scope
+        move={"id": 7, "company_id": 1, "company_code": "CCM-LAB-001",
+            "lines": [{"account_company_id": 1, "parent_move_id": 7}]}
+        assert_native_move_scope(move, 1)
+        mutations=[lambda m: m.update(company_id=2), lambda m: m.update(company_code="FOREIGN"),
+            lambda m: m["lines"][0].update(account_company_id=2),
+            lambda m: m["lines"][0].update(parent_move_id=8),lambda m: m.update(lines=[])]
+        for index,mutate in enumerate(mutations):
+            wrong=copy.deepcopy(move); mutate(wrong)
+            with self.subTest(mutation=index),self.assertRaises(AssertionError):
+                assert_native_move_scope(wrong,1)
+
+    def test_large_native_ledger_notices_require_all_whole_record_chunks(self):
+        import contextlib,io,json,tempfile
+        from run import publish_native_section
+        from extract_log_evidence import extract
+        records=[{"id": i+1,"diagnostic_padding": "x"*1000} for i in range(5)]
+        stream=io.StringIO()
+        with contextlib.redirect_stdout(stream): publish_native_section("CO00","moves",records)
+        notices=stream.getvalue().splitlines()
+        self.assertEqual(len(notices),5)
+        self.assertTrue(all(len(n)<3800 for n in notices))
+        with tempfile.TemporaryDirectory() as temp:
+            log=Path(temp)/"ci.log";output=Path(temp)/"evidence"
+            log.write_text('\n'.join('##[notice]'+n.split('::',2)[2] for n in notices)+'\n')
+            extract(log,output,"unit-only","unit-commit",FIXTURES)
+            self.assertEqual(json.loads((output/"CO00-native-export.json").read_text())["moves"],records)
+            for subset in [notices[:-1],notices[:-1]+[notices[0]]]:
+                (output/"CO00-native-export.json").unlink(missing_ok=True)
+                log.write_text('\n'.join('##[notice]'+n.split('::',2)[2] for n in subset)+'\n')
+                extract(log,output,"unit-only","unit-commit",FIXTURES)
+                self.assertFalse((output/"CO00-native-export.json").exists())
+
+    def fixture_export_sample(self):
+        import json
+        native = {"read_boundary": "separate-http-after-fixture-commit",
+            "company": {"native_id": 1, "code": "CCM-LAB-001"},
+            "integrity": {"reference": REFERENCE,
+                "manifest_sha256": hashlib.sha256((FIXTURES / "manifest.json").read_bytes()).hexdigest(),
+                "hashes": [{"file": h["path"], "bytes": h["bytes"], "sha256": h["sha256"]}
+                    for h in json.loads((FIXTURES / "manifest.json").read_bytes())["files"]]}}
+        native["products"] = [{**p, "native_id": i, "native_profile_id": i+10, "native_company_id": 1,
+            "cashea_price": p["price"]} for i,p in enumerate(json.loads((FIXTURES / "products.json").read_bytes()),1)]
+        native["customers"] = [{**p, "native_id": i+20, "native_company_ids": [1]}
+            for i,p in enumerate(json.loads((FIXTURES / "customers.json").read_bytes()),1)]
+        native["roles"] = [{"fixture_role": role, "native_id": i+30,
+            "name": "CCM " + ("MCP" if role == "mcp" else role.capitalize())}
+            for i,role in enumerate(set(json.loads((FIXTURES / "permissions.json").read_bytes())) - {"statuses"},1)]
+        native["currencies"] = [{"native_id": 100+i, "code": code, "decimals": 2} for i,code in enumerate(["USD", "VES"])]
+        return native
+
+    def test_fixture_export_rejects_wrong_hashes_values_ids_roles_and_commit_boundary(self):
+        import copy
+        from run import assert_native_fixture
+        native = self.fixture_export_sample()
+        assert_native_fixture(native, FIXTURES)
+        mutations = [lambda n: n.update(read_boundary="inside-prepare-transaction"),
+            lambda n: n["integrity"]["hashes"][0].update(sha256="0"*64),
+            lambda n: n["integrity"]["hashes"].pop(),
+            lambda n: n["products"][0].update(price="51.00"),
+            lambda n: n["products"][0].update(native_company_id=2),
+            lambda n: n["products"][0].update(native_id=0),
+            lambda n: n["customers"][0].update(email="wrong@example.invalid"),
+            lambda n: n["customers"][0].update(native_company_ids=[2]),
+            lambda n: n["roles"].pop(),
+            lambda n: n["roles"][0].update(native_id=n["roles"][1]["native_id"]),
+            lambda n: n["currencies"].pop()]
+        for index, mutate in enumerate(mutations):
+            wrong = copy.deepcopy(native); mutate(wrong)
+            with self.subTest(mutation=index), self.assertRaises(AssertionError):
+                assert_native_fixture(wrong, FIXTURES)
+
+    def test_fixture_aggregator_rejects_hash_only_pass(self):
+        from run import review_native_fixture
+        row = {"status": "PASS", "complete": True}
+        evidence = {"reference": REFERENCE, "complete": True,
+            "native_export": {"integrity": self.fixture_export_sample()["integrity"]}}
+        review_native_fixture(row, evidence, FIXTURES)
+        self.assertEqual(row["status"], "FAIL")
+        self.assertFalse(row["complete"])
+
+    def test_fixture_log_pass_requires_complete_native_export_sections(self):
+        import tempfile,json
+        from extract_log_evidence import extract
+        with tempfile.TemporaryDirectory() as temp:
+            log = Path(temp)/"ci.log"; output = Path(temp)/"evidence"
+            summary={"case": "FIXTURE-HASH-NATIVE-EXPORT", "reference": REFERENCE,
+                "status": "PASS", "complete": True, "revision": 1}
+            log.write_text('##[notice]'+json.dumps(summary)+'\n')
+            extract(log, output, "unit-only", "unit-commit", FIXTURES)
+            coverage=json.loads((output/"coverage.json").read_text())
+            self.assertEqual(next(r for r in coverage["groups"] if r["case"]==summary["case"])["status"],"FAIL")
+            sections=[{"case":summary["case"],"section":s,"records":r} for s,r in self.fixture_export_sample().items()]
+            log.write_text('\n'.join('##[notice]'+json.dumps(n) for n in [*sections,summary])+'\n')
+            extract(log, output, "unit-only", "unit-commit", FIXTURES)
+            coverage=json.loads((output/"coverage.json").read_text())
+            self.assertEqual(next(r for r in coverage["groups"] if r["case"]==summary["case"])["status"],"PASS")
 
     def test_non_native_fixture_bytes_are_rejected(self):
         import tempfile

@@ -176,6 +176,14 @@ def assert_native_invoice_linkage(link, invoice_id, company_id, order_id, order_
         assert line["sale_order_company_id"] == company_id, "Foreign company source order"
 
 
+def assert_native_move_scope(move, company_id):
+    assert move["company_id"] == company_id > 0 and move["company_code"] == "CCM-LAB-001", "Foreign company native journal"
+    assert move["id"] > 0 and move["lines"], "Persisted native journal lines required"
+    for line in move["lines"]:
+        assert line["account_company_id"] == company_id, "Foreign company native account"
+        assert line["parent_move_id"] == move["id"], "Native line belongs to another journal"
+
+
 def assert_native_economics(native, expected):
     quantities = {x["code"]: Decimal(x["current_qty"]) for x in native["stock"]}
     assert [quantities[f"P{i:03}"] for i in (1, 2, 3)] == list(map(Decimal, expected["stock"])), quantities
@@ -205,6 +213,7 @@ def assert_native_economics(native, expected):
     balances = Counter()
     seen = set()
     for move in native["moves"]:
+        assert_native_move_scope(move, native["company_ids"][0])
         assert move["id"] not in seen, "Duplicate move in export"
         seen.add(move["id"])
         assert move["status"] == 3, move
@@ -260,6 +269,82 @@ def assert_native_bank_book(native, fixtures):
         assert amounts == {"CCM-BANK": (amount, Decimal(0)), "CCM-AR": (Decimal(0), amount)}, amounts
     return {"native_voucher_ids": sorted(v["id"] for v in vouchers), "native_move_ids": sorted(moves),
             "native_move_line_ids": sorted(lines), "unallocated_total": str(sum(Decimal(v["remaining_amount"]) for v in vouchers))}
+
+
+def assert_native_fixture(native, fixtures):
+    assert native["read_boundary"] == "separate-http-after-fixture-commit"
+    manifest = json.loads((fixtures / "manifest.json").read_bytes())
+    integrity = native["integrity"]
+    assert integrity["reference"] == REFERENCE
+    assert integrity["manifest_sha256"] == hashlib.sha256((fixtures / "manifest.json").read_bytes()).hexdigest()
+    hashes = integrity["hashes"]
+    assert len(hashes) == 16 and len({h["file"] for h in hashes}) == 16
+    assert sorted(hashes, key=lambda h: h["file"]) == sorted(
+        [{"file": h["path"], "bytes": h["bytes"], "sha256": h["sha256"]} for h in manifest["files"]], key=lambda h: h["file"])
+    company = native["company"]
+    assert company["native_id"] > 0 and company["code"] == "CCM-LAB-001"
+    inputs = json.loads((fixtures / "products.json").read_bytes())
+    products = native["products"]
+    assert len(products) == 3 and len({p["native_id"] for p in products}) == len({p["native_profile_id"] for p in products}) == 3
+    assert {p["id"] for p in products} == {p["id"] for p in inputs}
+    for expected in inputs:
+        actual = next(p for p in products if p["id"] == expected["id"])
+        assert actual["native_id"] > 0 and actual["native_profile_id"] > 0
+        assert actual["native_company_id"] == company["native_id"]
+        for field in ("name", "marketplace_enabled", "cashea_enabled", "supplier_reference", "warranty_quantity", "warranty_unit", "condition"):
+            assert actual[field] == expected[field], (field, actual)
+        assert Decimal(actual["price"]) == Decimal(actual["cashea_price"]) == Decimal(expected["price"])
+    customers = native["customers"]
+    inputs = json.loads((fixtures / "customers.json").read_bytes())
+    assert len(customers) == 3 and len({p["native_id"] for p in customers}) == 3
+    assert {p["id"] for p in customers} == {p["id"] for p in inputs}
+    for expected in inputs:
+        actual = next(p for p in customers if p["id"] == expected["id"])
+        assert actual["native_id"] > 0 and actual["native_company_ids"] == [company["native_id"]]
+        for field in ("name", "email", "phone"): assert actual[field] == expected[field], (field, actual)
+    roles = native["roles"]
+    declared = set(json.loads((fixtures / "permissions.json").read_bytes())) - {"statuses"}
+    assert len(roles) == 9 and {r["fixture_role"] for r in roles} == declared
+    assert len({r["native_id"] for r in roles}) == 9 and all(r["native_id"] > 0 for r in roles)
+    assert len({r["name"] for r in roles}) == 9
+    assert all(r["name"] == "CCM " + ("MCP" if r["fixture_role"] == "mcp" else r["fixture_role"].capitalize()) for r in roles)
+    currencies = native["currencies"]
+    assert len(currencies) == 2 and {c["code"] for c in currencies} == {"USD", "VES"}
+    assert len({c["native_id"] for c in currencies}) == 2 and all(c["native_id"] > 0 and c["decimals"] == 2 for c in currencies)
+
+
+def review_native_fixture(row, evidence, fixtures):
+    if row.get("status") != "PASS": return
+    try:
+        assert evidence.get("reference") == REFERENCE and evidence.get("complete") is True
+        assert_native_fixture(evidence["native_export"], fixtures)
+    except (AssertionError, KeyError, TypeError, StopIteration) as error:
+        row.update(status="FAIL", complete=False, reason="Fixture PASS lacks matching committed native records/hashes: " + str(error))
+
+
+def run_fixture_cases(admin, fixtures, output, row):
+    start = time.perf_counter()
+    evidence = {"case": "FIXTURE-HASH-NATIVE-EXPORT", "reference": REFERENCE, "revision": 1,
+                "actor": "admin", "scope": "Native fixture metadata, not functional role acceptance"}
+    try:
+        evidence["preparation"] = admin.action("ccm-core-fixtures-prepare", "FIXTURE")
+        native = admin.action("ccm-core-fixtures-inspect", "FIXTURE")
+        native["read_boundary"] = "separate-http-after-fixture-commit"
+        evidence["native_export"] = native
+        for section, records in native.items():
+            print("::notice title=Native fixture export::" + json.dumps({"case": evidence["case"], "section": section, "records": records}), flush=True)
+        assert_native_fixture(native, fixtures)
+        evidence.update(status="PASS", complete=True)
+    except AssertionError as error:
+        evidence.update(status="FAIL", complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    except Exception as error:
+        evidence.update(status=exception_status(error), complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    evidence["seconds"] = round(time.perf_counter() - start, 3)
+    (output / (evidence["case"] + ".json")).write_text(json.dumps(evidence, indent=2) + "\n")
+    row.update(status=evidence["status"], complete=evidence["complete"], observed_revision=1,
+               evidence=evidence["case"] + ".json", reason=evidence.get("error", "16 bundled hashes and committed native products/customers/9 role metadata/USD+VES"))
+    print("::notice title=Core independent FIXTURE-HASH-NATIVE-EXPORT::" + json.dumps({k: v for k, v in evidence.items() if k != "native_export"}), flush=True)
+    return evidence
 
 
 def run_bank_book_cases(admin, fixtures, output, row):
@@ -724,6 +809,19 @@ def run_search_cases(admin, base, fixtures, output, row):
     return evidence
 
 
+def publish_native_section(case, section, records):
+    value = json.dumps({"case": case, "section": section, "records": records}, ensure_ascii=True)
+    if len(value) <= 3700:
+        print(f"::notice title=Native {case} {section}::" + value.replace("%", "%25"), flush=True)
+    elif isinstance(records, list):
+        # Whole records only. Missing/oversized chunks cannot establish a complete export.
+        for index, record in enumerate(records):
+            value = json.dumps({"case": case, "section": section, "records": [record],
+                "record_index": index, "record_count": len(records)}, ensure_ascii=True)
+            if len(value) <= 3700:
+                print(f"::notice title=Native {case} {section} record::" + value.replace("%", "%25"), flush=True)
+
+
 def run(base, fixtures, output):
     output.mkdir(parents=True, exist_ok=True)
     required = verify_bundle(fixtures)
@@ -758,10 +856,7 @@ def run(base, fixtures, output):
             native = client.action("ccm-core-native-inspect", case)
             (output / f"{case}-native-export.json").write_text(json.dumps(native, indent=2) + "\n")
             for section in ["stock", "invoices", "moves", "fixture_opening_moves", "deliveries", "sale_order_ids", "company_ids"]:
-                value = json.dumps({"case": case, "section": section, "records": native[section]}, ensure_ascii=True)
-                # Keep complete sections only; the full export is retained in the artifact.
-                if len(value) <= 3700:
-                    print(f"::notice title=Native {case} {section}::" + value.replace("%", "%25"), flush=True)
+                publish_native_section(case, section, native[section])
             observed["committed_native_export"] = f"{case}-native-export.json"
             if observed.get("status") == "PASS":
                 oracle = json.loads((fixtures / "oracle.json").read_bytes())
@@ -801,6 +896,7 @@ def run(base, fixtures, output):
     search = run_search_cases(client, base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
     book = run_bank_book_cases(client, fixtures, output, by_case["BANK-BOOK-FIXTURE"])
     fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"])
+    fixture = run_fixture_cases(client, fixtures, output, by_case["FIXTURE-HASH-NATIVE-EXPORT"])
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
@@ -809,7 +905,7 @@ def run(base, fixtures, output):
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     metrics = {"metric_kind": "runtime", "reference": REFERENCE,
                                                    "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx]],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,
