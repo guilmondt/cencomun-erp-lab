@@ -160,10 +160,17 @@ public class NativeGateService {
 
   /** These helpers join the caller's economic transaction; none prepares/commits fixtures. */
   public Model approve(Progress p, JsonNode input) {
+    return quotation(p, input, one(STOCK + "StockLocation", "self.name = ?1",
+        "WH-LAB-001-" + input.get("id").asText()), true);
+  }
+
+  /** Pilot keeps a finalized quotation cancellable until atomic handover. */
+  public Model quotation(Progress p, JsonNode input, Model warehouse, boolean confirm) {
     String caseId = input.get("id").asText();
     Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
     Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", input.path("customer_id").asText());
-    Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
+    if (warehouse == null || !company.equals(get(warehouse, "company")))
+      throw new CoreFault(422, "Warehouse must belong to the active company");
     p.stage("native-sale-order");
     Model so = (Model) call(service("com.axelor.apps.sale.service.saleorder.SaleOrderCreateService"), "createSaleOrder",
         AuthUtils.getUser(), company, null, get(company, "currency"), DATE,
@@ -189,9 +196,11 @@ public class NativeGateService {
     p.stage("native-sale-order-finalization");
     call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderFinalizeService"), "finalizeQuotation", so);
     so = managed(so);
-    p.stage("native-sale-order-confirmation");
-    call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderConfirmService"), "confirmSaleOrder", so);
-    so = managed(so);
+    if (confirm) {
+      p.stage("native-sale-order-confirmation");
+      call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderConfirmService"), "confirmSaleOrder", so);
+      so = managed(so);
+    }
     p.evidence.put("sale_order_id", so.getId());
     return so;
   }
@@ -242,20 +251,25 @@ public class NativeGateService {
     return Map.of("delivery", delivery, "invoice", invoice);
   }
 
+  /** Stable evidence order only; retain every native ID, quantity and cost verbatim. */
+  static List<Map<String, Object>> stockEvidence(List<Model> rows) {
+    List<Map<String, Object>> quantities = new ArrayList<>();
+    for (Model line : rows.stream().sorted(java.util.Comparator.comparing(Model::getId)).toList()) {
+      Model product = (Model) get(line, "product");
+      quantities.add(Map.of("id", line.getId(), "product_id", product.getId(), "code", get(product, "code"),
+          "current_qty", get(line, "currentQty").toString(), "avg_price", get(line, "avgPrice").toString()));
+    }
+    return quantities;
+  }
+
   /** Fresh repository reads after success/rollback; transient IDs never count as evidence. */
   public Map<String, Object> inspect(String caseId) {
     Map<String, Object> result = new LinkedHashMap<>();
     Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
     result.put("case", caseId);
-    List<Map<String, Object>> quantities = new ArrayList<>();
     Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
     if (warehouse != null) {
-      for (Model line : list(STOCK + "StockLocationLine", "self.stockLocation = ?1", warehouse)) {
-        Model product = (Model) get(line, "product");
-        quantities.add(Map.of("id", line.getId(), "product_id", product.getId(), "code", get(product, "code"),
-            "current_qty", get(line, "currentQty").toString(), "avg_price", get(line, "avgPrice").toString()));
-      }
-      result.put("stock", quantities);
+      result.put("stock", stockEvidence(list(STOCK + "StockLocationLine", "self.stockLocation = ?1", warehouse)));
       result.put("stock_move_ids", list(STOCK + "StockMove", "self.fromStockLocation = ?1 OR self.toStockLocation = ?1", warehouse)
           .stream().map(Model::getId).toList());
     } else { result.put("stock", List.of()); result.put("stock_move_ids", List.of()); }

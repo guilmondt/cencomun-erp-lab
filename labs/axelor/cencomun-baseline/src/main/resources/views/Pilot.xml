@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/object-views https://axelor.com/xml/ns/object-views/object-views_8.2.xsd">
+ <menuitem name="ccm-pilot" title="Cencomun · Piloto" order="-9999"/>
+ <menuitem name="ccm-pilot-catalog" parent="ccm-pilot" title="Productos e inventario" action="ccm-pilot-catalog-open"/>
+ <action-view name="ccm-pilot-catalog-open" title="Productos e inventario" model="com.cencomun.core.db.CcmProductProfile">
+  <view type="grid" name="ccm-pilot-product-grid"/><view type="form" name="ccm-pilot-product-form"/>
+  <domain>self.company.id = :companyId</domain>
+  <context name="companyId" expr="eval: __user__.activeCompany.id"/>
+ </action-view>
+ <menuitem name="ccm-pilot-sales" parent="ccm-pilot" title="Venta y pedido" action="ccm-pilot-sales-open"/>
+ <action-view name="ccm-pilot-sales-open" title="Venta y pedido" model="com.cencomun.core.db.CcmPilotSale">
+  <view type="grid" name="ccm-pilot-sale-grid"/><view type="form" name="ccm-pilot-sale-form"/>
+  <domain>self.company.id = :companyId</domain>
+  <context name="companyId" expr="eval: __user__.activeCompany.id"/>
+ </action-view>
+ <menuitem name="ccm-pilot-pending" parent="ccm-pilot" title="Entrega y liquidación" action="ccm-pilot-pending-open"/>
+ <action-view name="ccm-pilot-pending-open" title="Entrega y liquidación" model="com.cencomun.core.db.CcmPilotSale">
+  <view type="grid" name="ccm-pilot-sale-grid"/><view type="form" name="ccm-pilot-sale-form"/>
+  <domain>self.company.id = :companyId AND self.state IN ('RESERVED', 'DELIVERED')</domain>
+  <context name="companyId" expr="eval: __user__.activeCompany.id"/>
+ </action-view>
+ <menuitem name="ccm-pilot-cash" parent="ccm-pilot" title="Cierre de caja" action="ccm-pilot-cash-open"/>
+ <action-view name="ccm-pilot-cash-open" title="Cierre de caja" model="com.cencomun.core.db.CcmPilotSession">
+  <view type="grid" name="ccm-pilot-cash-grid"/><view type="form" name="ccm-pilot-cash-form"/>
+  <domain>self.company.id = :companyId</domain>
+  <context name="companyId" expr="eval: __user__.activeCompany.id"/>
+ </action-view>
+ <action-view name="ccm-pilot-stock-view" title="Inventario" model="com.axelor.apps.stock.db.StockLocationLine">
+  <view type="grid" name="ccm-pilot-stock-grid"/>
+  <domain>self.product.id = :productId AND self.stockLocation.name = 'WH-LAB-001-PILOT'</domain>
+  <context name="productId" expr="eval: product.id"/>
+ </action-view>
+ <grid name="ccm-pilot-stock-grid" title="Existencias" model="com.axelor.apps.stock.db.StockLocationLine" canNew="false" canEdit="false" canDelete="false">
+  <field name="product"/><field name="stockLocation"/><field name="currentQty"/><field name="avgPrice"/>
+ </grid>
+ <grid name="ccm-pilot-product-grid" title="Catálogo ficticio · precios con impuesto" model="com.cencomun.core.db.CcmProductProfile" canNew="false" canEdit="false" canDelete="false">
+  <field name="product"/><field name="casheaPrice" title="Precio con impuesto"/><field name="casheaEnabled"/><field name="warrantyQuantity"/><field name="warrantyUnit"/>
+ </grid>
+ <form name="ccm-pilot-product-form" title="Producto ficticio" model="com.cencomun.core.db.CcmProductProfile" canSave="false" canDelete="false" canNew="false">
+  <panel title="Catálogo" readonly="true"><field name="product"/><field name="casheaPrice" title="Precio con impuesto"/><field name="casheaEnabled"/><field name="supplierReference"/><field name="condition"/><field name="warrantyQuantity"/><field name="warrantyUnit"/></panel>
+  <panel-dashlet name="stock" title="Existencias nativas" action="ccm-pilot-stock-view"/>
+
+ </form>
+ <grid name="ccm-pilot-sale-grid" title="Ventas del piloto" model="com.cencomun.core.db.CcmPilotSale">
+  <field name="reference"/><field name="customer"/><field name="kind"/><field name="state"/><field name="gross"/><field name="initial"/><field name="financed"/>
+ </grid>
+ <form name="ccm-pilot-sale-form" title="Venta · laboratorio USD" model="com.cencomun.core.db.CcmPilotSale" canSave="false" canDelete="false" onNew="ccm-pilot-defaults" onLoad="ccm-pilot-flags">
+  <panel title="Precios con impuesto sintético 10% · 01/10/2026" readonlyIf="id">
+   <field name="reference" readonly="true"/><field name="customer" domain="self.isCustomer = true" canNew="false" canEdit="false"/>
+   <panel-related name="lines" field="lineList" title="Productos" editable="true" readonlyIf="id">
+    <field name="product" canNew="false" canEdit="false" onChange="ccm-pilot-line"/><field name="qty" title="Unidades enteras"/>
+    <field name="price" readonly="true" title="Precio con impuesto"/><field name="warrantyQuantity" readonly="true"/><field name="warrantyUnit" readonly="true"/>
+   </panel-related>
+   <field name="kind" title="Pago" selection="ccm-pilot-kind"/><field name="channel" title="Canal" selection="ccm-pilot-channel"/>
+   <field name="financed" title="Monto financiado (USD)"/><field name="shipping" title="Envío absorbido (USD)"/>
+  </panel>
+  <panel title="Operaciones">
+   <field name="$supervisor" type="boolean" hidden="true"/>
+   <button name="reserve" title="Registrar pedido" onClick="ccm-pilot-create" hideIf="id"/>
+   <field name="$guide" type="string" title="Guía de envío" showIf="id &amp;&amp; channel == 'WEB'"/>
+   <field name="$reason" type="string" title="Motivo de cancelación" showIf="id"/>
+   <button name="collect" title="Registrar cobro inicial real" onClick="ccm-pilot-collect" showIf="id &amp;&amp; !initialVoucher &amp;&amp; state != 'CANCELLED' &amp;&amp; initial > 0"/>
+   <button name="handover" title="Entregar productos" onClick="ccm-pilot-deliver" showIf="id &amp;&amp; state == 'RESERVED'"/>
+   <button name="cancel" title="Cancelar y devolver inicial cobrada" onClick="ccm-pilot-cancel" showIf="$supervisor &amp;&amp; id &amp;&amp; state == 'RESERVED'"/>
+   <button name="settle" title="Registrar liquidación Cashea" onClick="ccm-pilot-settle" showIf="$supervisor &amp;&amp; id &amp;&amp; kind == 'CASHEA' &amp;&amp; state == 'DELIVERED'" readonlyIf="initial &gt; 0 &amp;&amp; !initialVoucher"/>
+  </panel>
+  <panel title="Resultado y documentos nativos" readonly="true" showIf="id">
+   <field name="state"/><field name="gross"/><field name="initial" title="Cobro inicial"/>
+   <field name="commission" title="Comisión Cashea"/><field name="transfer" title="Transferencia neta"/>
+   <field name="session"/>
+   <field name="saleOrder"/><field name="delivery"/><field name="invoice"/><field name="initialVoucher"/><field name="refundVoucher"/><field name="settlement"/><field name="costMove"/>
+  </panel>
+ </form>
+ <grid name="ccm-pilot-cash-grid" title="Caja USD" model="com.cencomun.core.db.CcmPilotSession">
+  <field name="businessDate"/><field name="state"/><field name="expected"/><field name="counted"/><field name="difference"/>
+ </grid>
+ <form name="ccm-pilot-cash-form" title="Caja · sesión 01/10/2026" model="com.cencomun.core.db.CcmPilotSession" canSave="false" canDelete="false" onNew="ccm-pilot-flags" onLoad="ccm-pilot-flags">
+  <panel title="Sesión">
+   <field name="$supervisor" type="boolean" hidden="true"/>
+   <button name="open" title="Abrir sesión de caja" onClick="ccm-pilot-open" hideIf="id || !$supervisor"/>
+   <field name="businessDate" readonly="true"/><field name="state" readonly="true"/>
+   <button name="preview" title="Consultar efectivo esperado" onClick="ccm-pilot-preview" showIf="$supervisor &amp;&amp; state == 'OPEN'"/>
+   <field name="$cashExpectedPreview" type="decimal" title="Esperado según cobros nativos" readonly="true"/>
+   <field name="$cashCountedInput" type="decimal" title="Efectivo contado USD" showIf="state == 'OPEN'"/>
+   <field name="$cashDifferenceReason" type="string" title="Explicación de diferencia" showIf="state == 'OPEN'"/>
+   <button name="confirm" title="Confirmar cierre inmutable" onClick="ccm-pilot-close" showIf="$supervisor &amp;&amp; state == 'OPEN'"/>
+  </panel>
+  <panel title="Cierre confirmado" readonly="true" showIf="state == 'CONFIRMED'">
+   <field name="expected" title="Esperado según cobros nativos"/><field name="counted" title="Contado"/><field name="difference" title="Diferencia"/><field name="reason"/>
+   <field name="confirmedBy"/><field name="confirmedAt"/><field name="sourceSnapshot" title="Trazabilidad de cobros"/>
+  </panel>
+ </form>
+ <selection name="ccm-pilot-kind"><option value="CASH">Contado</option><option value="CASHEA">Cashea</option></selection>
+ <selection name="ccm-pilot-channel"><option value="STORE">Tienda</option><option value="WEB">Web</option></selection>
+ <action-method name="ccm-pilot-defaults"><call class="com.cencomun.core.PilotController" method="defaults"/></action-method>
+ <action-method name="ccm-pilot-create"><call class="com.cencomun.core.PilotController" method="create"/></action-method>
+ <action-method name="ccm-pilot-deliver"><call class="com.cencomun.core.PilotController" method="deliver"/></action-method>
+ <action-method name="ccm-pilot-cancel"><call class="com.cencomun.core.PilotController" method="cancel"/></action-method>
+ <action-method name="ccm-pilot-settle"><call class="com.cencomun.core.PilotController" method="settle"/></action-method>
+ <action-method name="ccm-pilot-open"><call class="com.cencomun.core.PilotController" method="open"/></action-method>
+ <action-method name="ccm-pilot-close"><call class="com.cencomun.core.PilotController" method="close"/></action-method>
+ <action-method name="ccm-pilot-prepare"><call class="com.cencomun.core.PilotFixture" method="prepare"/></action-method>
+ <action-method name="ccm-pilot-seed"><call class="com.cencomun.core.PilotFixture" method="seed"/></action-method>
+ <action-method name="ccm-pilot-preview"><call class="com.cencomun.core.PilotController" method="preview"/></action-method>
+ <action-method name="ccm-pilot-collect"><call class="com.cencomun.core.PilotController" method="collect"/></action-method>
+ <action-method name="ccm-pilot-flags"><call class="com.cencomun.core.PilotController" method="flags"/></action-method>
+ <action-method name="ccm-pilot-line"><call class="com.cencomun.core.PilotController" method="line"/></action-method>
+</object-views>

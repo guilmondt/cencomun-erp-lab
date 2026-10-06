@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models https://axelor.com/xml/ns/domain-models/domain-models_8.2.xsd">
+ <module name="cencomun-baseline" package="com.cencomun.core.db"/>
+ <entity name="CcmPilotSession">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <date name="businessDate" required="true"/>
+  <string name="state" required="true"/>
+  <decimal name="expected" precision="20" scale="2"/>
+  <decimal name="counted" precision="20" scale="2"/>
+  <decimal name="difference" precision="20" scale="2"/>
+  <string name="reason" large="true"/>
+  <string name="sourceSnapshot" large="true"/>
+  <many-to-one name="confirmedBy" ref="com.axelor.auth.db.User"/>
+  <datetime name="confirmedAt"/>
+  <unique-constraint columns="company,businessDate"/>
+  <track on="UPDATE"><field name="state"/><field name="counted"/><field name="difference"/></track>
+ </entity>
+ <entity name="CcmPilotSale">
+  <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+  <many-to-one name="session" ref="CcmPilotSession" required="true"/>
+  <string name="reference" required="true"/>
+  <string name="payloadHash" required="true"/>
+  <many-to-one name="customer" ref="com.axelor.apps.base.db.Partner" required="true"/>
+  <one-to-many name="lineList" ref="CcmPilotLine" mappedBy="sale"/>
+  <string name="kind" required="true"/>
+  <string name="channel" required="true"/>
+  <string name="state" required="true"/>
+  <decimal name="gross" precision="20" scale="2"/>
+  <decimal name="financed" precision="20" scale="2"/>
+  <decimal name="shipping" precision="20" scale="2"/>
+  <decimal name="initial" precision="20" scale="2"/>
+  <decimal name="commission" precision="20" scale="2"/>
+  <decimal name="transfer" precision="20" scale="2"/>
+  <string name="payload" large="true" required="true"/>
+  <string name="guide"/>
+  <many-to-one name="saleOrder" ref="com.axelor.apps.sale.db.SaleOrder"/>
+  <many-to-one name="delivery" ref="com.axelor.apps.stock.db.StockMove"/>
+  <many-to-one name="invoice" ref="com.axelor.apps.account.db.Invoice"/>
+  <many-to-one name="initialVoucher" ref="com.axelor.apps.account.db.PaymentVoucher"/>
+  <many-to-one name="refundVoucher" ref="com.axelor.apps.account.db.PaymentVoucher"/>
+  <many-to-one name="settlement" ref="com.axelor.apps.account.db.Move"/>
+  <many-to-one name="costMove" ref="com.axelor.apps.account.db.Move"/>
+  <many-to-one name="creator" ref="com.axelor.auth.db.User" required="true"/>
+  <unique-constraint columns="company,reference"/>
+  <track on="UPDATE"><field name="state"/><field name="initialVoucher"/><field name="settlement"/></track>
+ </entity>
+ <entity name="CcmPilotLine">
+  <many-to-one name="sale" ref="CcmPilotSale" required="true"/>
+  <many-to-one name="product" ref="com.axelor.apps.base.db.Product" required="true"/>
+  <decimal name="qty" precision="20" scale="0" required="true"/>
+  <decimal name="price" precision="20" scale="2" required="true"/>
+  <integer name="warrantyQuantity"/>
+  <string name="warrantyUnit"/>
+ </entity>
+</domain-models>

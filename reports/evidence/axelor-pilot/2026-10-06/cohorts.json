@@ -1,0 +1,33 @@
+{
+  "v3_v4": {
+    "application_commit": "9d8b9d71cbc1fb60d644c263abb44757a0a02a2f",
+    "war_sha256": "7bb0d9eb0b2abbf4f50b39db6d0570182772543738cc4068b372e4ec2b12aee5",
+    "financial_ui": "PASS",
+    "negative_read_filter_toasts": "fixed later; not final visual acceptance",
+    "server_checks": "counts only; superseded by v5 snapshots"
+  },
+  "v5": {
+    "application_commit": "8df643dc2203750f8be3f7e8907a90d3cba35682",
+    "war_sha256": "89322f1b5d82122a1de5c8ff70f14cb0cba88b5bab67b8ab4e26fa2cc4eca400",
+    "verification_suite_commit": "4f09807944ae481fc60df9adda98414b80e2879b",
+    "ui": "PASS across documented stages/re-entry",
+    "native": "PASS",
+    "immutable_snapshots": "PASS",
+    "backup_restore": "PASS",
+    "isolation": "PASS",
+    "final_rebuild_regression": "See separately executed v6/Core final; no transfer of results"
+  },
+  "v6": {
+    "application_commit": "753728b3859ec0077c1294ae48b330edc320f6e3",
+    "war_sha256": "35efd7ccbcc6270cf7758f19403500fe7848cdbcc83cb3ee9b972f7f7031cf9e",
+    "verification_suite_commit": "fb3f0d8f8b622e1db8b7fb19aaf8a09ab0e1a546",
+    "ui": "PASS, single fresh complete run",
+    "native_after_negative_controls": "PASS",
+    "immutable_field_snapshots": "PASS",
+    "browser_reentry_reload": "PASS both profiles, all economic snapshots identical",
+    "backup_restore_and_restored_browser": "PASS",
+    "isolation": "PASS",
+    "native_core_regression": "32 PASS / 2 preserved historic FAIL; 14 criteria: 6 PASS / 4 FAIL / 3 UNRUN / 1 BLOCKED",
+    "external_user_access": "BLOCKED pending authorized server"
+  }
+}

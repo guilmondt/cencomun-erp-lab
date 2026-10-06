@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "source": "ccm_pilot_v4",
+  "restored_database": "ccm_pilot_restore_v4",
+  "backup_sha256": "8663136b3b273893932d496360aebbd98c634773473a89dcad9eecfb9d8983a0",
+  "fingerprints": {
+    "core_ccm_pilot_session": "1|7dc109dddcd0fd0a2bfcbf6343a79926",
+    "core_ccm_pilot_sale": "5|cf7c0df25b4b55a3a7134f6d63d3515c",
+    "core_ccm_pilot_line": "8|1b69f2c1f95af2d9c235e99ad76d9f9b",
+    "stock_stock_location_line": "24|c59303a3b7a829e6f065c93bd74ad10a",
+    "stock_stock_move": "4|359a124e77cc4ed7748ea76fa13fb0b6",
+    "stock_stock_move_line": "16|4b99b5d13ef73841c9c328ef9bb24433",
+    "account_payment_voucher": "6|67b1337d7f4d4aebb29e69325dac1310",
+    "account_invoice": "3|fd4511c3745b52d196cd8d0503e6c2b3",
+    "account_move": "15|d4c615a792efae61f36448c9b4d9949c",
+    "account_move_line": "39|362c0e58b2b892d12129719eaebed9d2",
+    "sale_sale_order": "5|97c42703baba6d1997ed3501859e768a"
+  },
+  "method": "pg_dump -Fc / pg_restore --exit-on-error; row fingerprints equal for 11 economic tables",
+  "uploads": "No uploaded business files in fixture; external deployment still needs uploads/config backup"
+}

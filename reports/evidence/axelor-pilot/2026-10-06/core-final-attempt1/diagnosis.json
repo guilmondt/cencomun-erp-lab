@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "case": "TAX01-S-NATIVE",
+  "source_commit": "e521c1b47daf9c811bc801fc9ad2be10a0411b01",
+  "war_sha256": "faf47b7234ab22e7a87f2283bb5a1ec48687e94bc2e2766818436008e1ff96af",
+  "evidence_sha256": "567b998531bceabb5bbed3da0147c082f61f37d10b22d718d4675eb5abb13397",
+  "diagnosis": "Only native_export.stock array order differs. All economic fields/IDs/counts/references equal after ordering rows by their original native ID. Original FAIL preserved; no result rewritten.",
+  "correction": "Deterministic order in extension native evidence reader; comparator and historical contract unchanged. Real model regression test also detects changed cost."
+}

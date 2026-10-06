@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "application_commit": "753728b3859ec0077c1294ae48b330edc320f6e3",
+  "database": "ccm_pilot_v6",
+  "fixture": "pristine seeded fixture, restored before UI; no sessions or sales",
+  "ui_method": "Chromium with native Axelor views, fresh login contexts, five sales through UI; no business API writes",
+  "planned_order": [
+    "ui-regression.py",
+    "verify-server.py",
+    "verify-native.py",
+    "verify-views.py",
+    "verify-restore.py",
+    "verify-isolation.py"
+  ],
+  "url": "http://127.0.0.1:18080/axelor-erp/",
+  "external_access": "BLOCKED: no authorized connected external server or hosted preview",
+  "verification_commit": "fb3f0d8f8b622e1db8b7fb19aaf8a09ab0e1a546",
+  "ui_single_fresh_run": true,
+  "server_negative_controls": "PASS",
+  "native_after_negative_controls": "PASS",
+  "browser_reentry_and_reload": "PASS",
+  "backup_restore": "PASS",
+  "isolation": "PASS",
+  "restored_application_browser_and_native": "PASS",
+  "runtime_database_after_acceptance": "ccm_pilot_restore_v6",
+  "runtime_access": "Loopback only; accepted immutable closed session. Fresh fixture needed for a new operational session.",
+  "snapshot_hash": "dddb6fce457feeadd3948291e494df5f1b0f96ad774a316e245fc34dc5714775",
+  "restored_snapshot_matches_original": true
+}

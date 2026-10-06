@@ -235,3 +235,57 @@ aprobada de producción. Auditoría/key/outbox privados quedan legibles solo por
 manager, con retirada de grants antiguos del propio fixture. No ampliar grants
 para corregir tests. Su aceptación exige identidades reales, acción nativa/CRUD,
 rechazo causal y snapshots posteriores; las regresiones locales no la sustituyen.
+
+## 2026-10-06 — Piloto Axelor v1, separado de la evaluación
+
+Rama `pilot/axelor-v1` desde bc0183e; no se cambia el contrato ni la evidencia
+histórica (32 PASS / 2 FAIL). Piloto con entidades/vistas propias y servicios
+nativos. Varias líneas y reservas propias serializadas por compañía, relacionadas
+con un presupuesto nativo finalizado. Confirmación y entrega atómicas; cancelación
+previa mediante el servicio nativo, sin asignar estados nativos a mano.
+
+La inicial se registra mediante PaymentVoucher nativo cuando el operador declara
+el cobro real, independientemente de entrega. Se aplica a la factura por conciliación
+posterior. Liquidación Cashea separada; caja usa las líneas CASH de recibos y
+reembolsos vinculados a la sesión, incluidos anticipos aún no entregados. No se
+reutiliza el diario sintético CoreCashService. La cancelación con dinero cobrado
+requiere devolución real explícita del supervisor y su voucher, no cancelar un
+recibo sólo cambiando estado. Las reservas son extensión propia, no una afirmación
+de reserva nativa de un pedido confirmado. Restricciones/aceptación: ver
+`labs/axelor/pilot/README.md` y `reports/axelor-pilot-v1-status.md`.
+
+El runtime de pruebas escucha sólo loopback y no proporciona alojamiento de usuario.
+Destino persistente y creación de accesos permanentes quedan pendientes de aprobación.
+
+### Piloto v1 — impuesto por línea, sin tolerancias adicionales
+
+La prueba web 40 + 50 USD reprodujo un rechazo nativo: las bases por línea
+36,36 y 45,45 suman 81,81, y los impuestos por diferencia 3,64 y 4,55 suman
+8,19. El asiento generado estaba equilibrado a 90,00; la comprobación nativa
+agrupada calculó 8,18. Se ensayó `allowedTaxGap=0.01` únicamente para diagnosticar;
+no se acepta como criterio comercial ni evidencia de aprobación. Se restableció
+`0.00` y se conserva evidencia separada del experimento.
+
+La extensión `PilotInvoiceTaxGuard`, habilitada sólo en el piloto y dentro de
+la llamada autenticada de facturación, compara por igualdad exacta AR, ingreso
+e impuesto del asiento con `MoneyPolicy` (redondeo por línea y suma). Exige
+balance exacto y las cuentas previstas. Sólo sustituye esa comprobación agrupada;
+los restantes controles nativos de contabilización permanecen activos. Fuera
+de ese contexto llama al comportamiento nativo. No altera importes, estados,
+asientos, upstream ni el oráculo histórico. Las pruebas rechazan diferencias
+equilibradas de uno y dos centavos y un asiento descuadrado. Validación runtime
+pendiente al escribir esta nota; el informe de estado registra el resultado final.
+
+### Piloto v1 — cierre de aceptación local
+
+La cohorte v6 (`753728b`, WAR `35efd7cc…`) confirmó por UI y lectura nativa el
+impuesto exacto con tolerancia cero, cobros independientes de entrega, liquidación
+separada y cierre integrado. Los controles servidor y recargas/reingresos conservan
+snapshots completos idénticos; el backup se restauró y abrió en Chromium con ambos
+perfiles. Acceso externo sigue pendiente de servidor autorizado.
+
+Una regresión local Core detectó distinto orden de los mismos registros de stock.
+Se conservó el FAIL completo y se ordenó sólo el lector propio de evidencia por ID,
+sin cambiar campos, contrato ni comparador. Una prueba con modelos nativos distingue
+ese orden de un cambio real de costo; la repetición limpia obtuvo 32 PASS y los dos
+FAIL históricos. No se atribuyen los resultados de cohortes anteriores al WAR final.

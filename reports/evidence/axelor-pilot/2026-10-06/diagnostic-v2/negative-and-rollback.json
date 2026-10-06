@@ -1,0 +1,795 @@
+{
+  "negative_cost_extension": {
+    "case": "PILOT",
+    "invalid_attempt": {
+      "input_cost": "-0.01",
+      "qty": "1",
+      "company_id": 1,
+      "warehouse_id": 1,
+      "product_id": 1,
+      "stage": "native-stock-line-create",
+      "diagnostic_rollback_only": false,
+      "error_type": "com.cencomun.core.CoreFault",
+      "error": "Pilot negative cost forbidden: unitPriceUntaxed",
+      "native_stack": [
+        "com.cencomun.core.PilotCostGuard.check(PilotCostGuard.java:42)",
+        "com.cencomun.core.PilotCostGuard.invoke(PilotCostGuard.java:31)",
+        "com.cencomun.core.NativeAccess.save(NativeAccess.java:41)",
+        "com.cencomun.core.NativeNegativeCostProbe.execute(NativeNegativeCostProbe.java:40)",
+        "com.cencomun.core.CoreOrderController.costProbe(CoreOrderController.java:99)",
+        "com.cencomun.core.CoreOrderController.negativeCost(CoreOrderController.java:93)",
+        "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+        "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)",
+        "com.axelor.meta.schema.actions.Action.execute(Action.java:89)",
+        "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+        "com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)",
+        "com.axelor.meta.schema.actions.Action.execute(Action.java:85)",
+        "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+        "com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)",
+        "com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)",
+        "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:41)",
+        "com.axelor.web.service.ActionService.execute(ActionService.java:106)",
+        "com.axelor.rpc.RequestFilter.invoke(RequestFilter.java:42)"
+      ]
+    },
+    "valid_control": {
+      "input_cost": "30.00",
+      "qty": "1",
+      "company_id": 1,
+      "warehouse_id": 1,
+      "product_id": 1,
+      "native_move_id": 3,
+      "planned_status": 2,
+      "reloaded_status": 3,
+      "reloaded_lines": [
+        {
+          "qty": "1.0000000000",
+          "id": 25,
+          "native_move_id": 3,
+          "unit_cost": "30.0000000000"
+        }
+      ],
+      "stage": "native-stock-realized-and-reloaded",
+      "diagnostic_rollback_only": true,
+      "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+      "error": "Native receipt accepted and realized; diagnostic rollback only",
+      "native_stack": [
+        "com.cencomun.core.NativeNegativeCostProbe.execute(NativeNegativeCostProbe.java:52)",
+        "com.cencomun.core.CoreOrderController.costProbe(CoreOrderController.java:99)",
+        "com.cencomun.core.CoreOrderController.negativeCost(CoreOrderController.java:92)",
+        "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+        "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)",
+        "com.axelor.meta.schema.actions.Action.execute(Action.java:89)",
+        "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+        "com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)",
+        "com.axelor.meta.schema.actions.Action.execute(Action.java:85)",
+        "com.axelor.meta.schema.actions.Action.wrap(Action.java:102)",
+        "com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)",
+        "com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)",
+        "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:41)",
+        "com.axelor.web.service.ActionService.execute(ActionService.java:106)",
+        "com.axelor.rpc.RequestFilter.invoke(RequestFilter.java:42)",
+        "com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:50)",
+        "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+        "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)"
+      ]
+    }
+  },
+  "rollback_after_failed_delivery": {
+    "status": "PASS",
+    "sales": [
+      {
+        "importOrigin": null,
+        "session": {
+          "id": 1,
+          "$version": 0
+        },
+        "channel": "STORE",
+        "payloadHash": "8584eb308bac89e5e82f06515aef9c19fbd63b7aa9ad62b476c016f155de3733",
+        "refundVoucher": null,
+        "createdOn": "2026-10-06T20:02:01.841723Z",
+        "settlement": null,
+        "reference": "P-9C7A9811-B816-4694-974B-ED8D673A47EC",
+        "costMove": null,
+        "shipping": "0.00",
+        "payload": "{\"id\":\"P-9C7A9811-B816-4694-974B-ED8D673A47EC\",\"customer_id\":\"C002\",\"channel\":\"STORE\",\"currency\":\"USD\",\"tax_rate\":\"0.10\",\"financed_amount\":\"45.00\",\"shipping_expense\":\"0.00\",\"lines\":[{\"product_id\":\"P001\",\"qty\":\"1\",\"unit_price\":\"50.00\"},{\"product_id\":\"P002\",\"qty\":\"1\",\"unit_price\":\"25.00\"}]}",
+        "commission": "4.80",
+        "company": {
+          "code": "CCM-LAB-001",
+          "name": "Cencomun synthetic LAB",
+          "id": 1,
+          "$version": 1
+        },
+        "id": 2,
+        "state": "RESERVED",
+        "guide": null,
+        "selected": false,
+        "saleOrder": {
+          "fullName": "CCM-saleOrder-000002-Cliente ficticio Beta",
+          "id": 2,
+          "$version": 4
+        },
+        "delivery": null,
+        "processInstanceId": null,
+        "creator": {
+          "code": "pilot-operator",
+          "fullName": "CCM Pilot Operator",
+          "id": 2,
+          "$version": 1
+        },
+        "updatedBy": {
+          "code": "pilot-operator",
+          "fullName": "CCM Pilot Operator",
+          "id": 2,
+          "$version": 1
+        },
+        "gross": "75.00",
+        "initial": "30.00",
+        "initialVoucher": {
+          "ref": "P-9C7A9811-B816-4694-974B-ED8D673A47EC-INITIAL",
+          "id": 2,
+          "$version": 2
+        },
+        "kind": "CASHEA",
+        "lineList": [
+          {
+            "id": 3,
+            "$version": 0
+          },
+          {
+            "id": 4,
+            "$version": 0
+          }
+        ],
+        "updatedOn": "2026-10-06T20:02:06.086726Z",
+        "version": 2,
+        "attrs": null,
+        "financed": "45.00",
+        "importId": null,
+        "transfer": "40.20",
+        "createdBy": {
+          "code": "pilot-operator",
+          "fullName": "CCM Pilot Operator",
+          "id": 2,
+          "$version": 1
+        },
+        "invoice": null,
+        "cid": null,
+        "customer": {
+          "fullName": "C002 - Cliente ficticio Beta",
+          "id": 3,
+          "$version": 4
+        }
+      },
+      {
+        "importOrigin": null,
+        "session": {
+          "id": 1,
+          "$version": 0
+        },
+        "channel": "STORE",
+        "payloadHash": "7478478ca6fd907d74f2c78db5f602f4eb8cdf49345234930318abd2c902a562",
+        "refundVoucher": null,
+        "createdOn": "2026-10-06T19:59:09.488912Z",
+        "settlement": null,
+        "reference": "P-A8F94C29-1BDF-46FA-A32B-1CA3AA34A820",
+        "costMove": null,
+        "shipping": "0.00",
+        "payload": "{\"id\":\"P-A8F94C29-1BDF-46FA-A32B-1CA3AA34A820\",\"customer_id\":\"C001\",\"channel\":\"STORE\",\"currency\":\"USD\",\"tax_rate\":\"0.10\",\"financed_amount\":\"0.00\",\"shipping_expense\":\"0.00\",\"lines\":[{\"product_id\":\"P001\",\"qty\":\"1\",\"unit_price\":\"50.00\"},{\"product_id\":\"P002\",\"qty\":\"1\",\"unit_price\":\"25.00\"}]}",
+        "commission": "0.00",
+        "company": {
+          "code": "CCM-LAB-001",
+          "name": "Cencomun synthetic LAB",
+          "id": 1,
+          "$version": 1
+        },
+        "id": 1,
+        "state": "RESERVED",
+        "guide": null,
+        "selected": false,
+        "saleOrder": {
+          "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+          "id": 1,
+          "$version": 4
+        },
+        "delivery": null,
+        "processInstanceId": null,
+        "creator": {
+          "code": "pilot-operator",
+          "fullName": "CCM Pilot Operator",
+          "id": 2,
+          "$version": 1
+        },
+        "updatedBy": {
+          "code": "pilot-operator",
+          "fullName": "CCM Pilot Operator",
+          "id": 2,
+          "$version": 1
+        },
+        "gross": "75.00",
+        "initial": "75.00",
+        "initialVoucher": {
+          "ref": "P-A8F94C29-1BDF-46FA-A32B-1CA3AA34A820-INITIAL",
+          "id": 1,
+          "$version": 2
+        },
+        "kind": "CASH",
+        "lineList": [
+          {
+            "id": 1,
+            "$version": 0
+          },
+          {
+            "id": 2,
+            "$version": 0
+          }
+        ],
+        "updatedOn": "2026-10-06T19:59:51.242782Z",
+        "version": 2,
+        "attrs": null,
+        "financed": "0.00",
+        "importId": null,
+        "transfer": "0.00",
+        "createdBy": {
+          "code": "pilot-operator",
+          "fullName": "CCM Pilot Operator",
+          "id": 2,
+          "$version": 1
+        },
+        "invoice": null,
+        "cid": null,
+        "customer": {
+          "fullName": "C001 - Cliente ficticio Alfa",
+          "id": 2,
+          "$version": 4
+        }
+      }
+    ],
+    "native_quotation_statuses": [
+      2,
+      2
+    ],
+    "stock": [
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "50.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.668678Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 20,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P010",
+          "fullName": "[P010] Producto ficticio 10",
+          "id": 10,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.324829Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "45.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.650330Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 18,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P009",
+          "fullName": "[P009] Producto ficticio 9",
+          "id": 9,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.285927Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "40.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.634371Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 16,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P008",
+          "fullName": "[P008] Producto ficticio 8",
+          "id": 8,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.252004Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "35.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.608317Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 14,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P007",
+          "fullName": "[P007] Producto ficticio 7",
+          "id": 7,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.217432Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "30.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.590198Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 12,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P006",
+          "fullName": "[P006] Producto ficticio 6",
+          "id": 6,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.174069Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "25.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.576292Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 10,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P005",
+          "fullName": "[P005] Producto ficticio 5",
+          "id": 5,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.145346Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "20.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.563268Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 8,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P004",
+          "fullName": "[P004] Producto ficticio 4",
+          "id": 4,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.114263Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "60.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.549442Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 6,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P003",
+          "fullName": "[P003] Equipo ficticio Gamma",
+          "id": 3,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.072961Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "10.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.533437Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 4,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P002",
+          "fullName": "[P002] Accesorio ficticio Beta",
+          "id": 2,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:27.034480Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      },
+      {
+        "importOrigin": null,
+        "lastInventoryDateT": null,
+        "stockLocation": {
+          "name": "WH-LAB-001-PILOT",
+          "id": 1,
+          "$version": 0
+        },
+        "avgPrice": "30.0000000000",
+        "lastInventoryRealQty": "0.0000000000",
+        "createdOn": "2026-10-06T19:53:26.512981Z",
+        "requestedReservedQty": "0.0000000000",
+        "id": 2,
+        "trackingNumber": null,
+        "selected": false,
+        "processInstanceId": null,
+        "$nbDecimalDigitForUnitPrice": 2,
+        "lastFutureStockMoveDate": null,
+        "product": {
+          "code": "P001",
+          "fullName": "[P001] Equipo ficticio Alfa",
+          "id": 1,
+          "$version": 2
+        },
+        "rack": null,
+        "updatedBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "reservedQty": "0.0000000000",
+        "currentQty": "20.0000000000",
+        "updatedOn": "2026-10-06T19:53:26.990013Z",
+        "version": 3,
+        "futureQty": "20.0000000000",
+        "attrs": null,
+        "unit": {
+          "name": "CCM-LAB-UNIT",
+          "id": 1,
+          "$version": 0
+        },
+        "importId": null,
+        "$nbDecimalDigitForQty": 2,
+        "isAvgPriceChanged": false,
+        "createdBy": {
+          "code": "admin",
+          "fullName": "Admin",
+          "id": 1,
+          "$version": 3
+        },
+        "detailsStockLocation": null,
+        "cid": null
+      }
+    ]
+  }
+}
