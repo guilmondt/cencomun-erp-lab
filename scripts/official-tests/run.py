@@ -155,7 +155,7 @@ def parse_results(xml, log):
             'counts': counts, 'cases': cases, 'xml_documents': len(documents)}
 
 
-def parse_parallel_results(log, app):
+def parse_parallel_results(log, app, known_test_ids=None):
     """Read the official CI runner's own counter and verbose result events.
 
     It does not emit JUnit. Never infer its final count from dots or announced
@@ -164,14 +164,32 @@ def parse_parallel_results(log, app):
     clean = re.sub(r'\x1b\[[0-9;]*m', '', log)
     summary = re.findall(r'^Tests: (\d+), Failing: (\d+), Errors: (\d+)\s*$', clean, re.M)
     current = None
+    known_classes = {identifier.rsplit('.', 1)[0] for identifier in known_test_ids} if known_test_ids is not None else None
     cases = []
     for line in clean.splitlines():
         if re.fullmatch(re.escape(app) + r'\.[\w.]+', line.strip()):
-            current = line.strip()
+            candidate = line.strip()
+            # Expected exceptions can print a bare qualified type between
+            # class/result lines. It is not a new test class.
+            if known_classes is None or candidate in known_classes:
+                current = candidate
         match = re.match(r'^\s+([✔✖=])\s+(test\w+)\b', line)
+        if match is None and known_classes is not None:
+            # Native test/progress output may omit its trailing newline before
+            # TestResult writes the final symbol. Accept only a known ID and
+            # the native outcome suffix at the END of that same line.
+            candidate = re.search(r'([✔✖=])\s+(test\w*)\b(?:\s+\([\d.]+s\))?\s*$', line)
+            if candidate and current and current + '.' + candidate[2] in known_test_ids:
+                match = candidate
         if current and match:
             cases.append({'id': current + '.' + match[2],
                           'status': {'✔': 'PASS', '✖': 'FAILED_EVENT', '=': 'SKIP'}[match[1]]})
+        if known_classes is not None:
+            fixture = re.match(r'^\s+([✖=])\s+(setUpClass|tearDownClass)\s+\((' + re.escape(app) + r'\.[\w.]+)\)', line)
+            if fixture:
+                cases.append({'id': fixture[3] + '.' + fixture[2],
+                              'status': 'SKIP' if fixture[1] == '=' else 'FAILED_EVENT',
+                              'kind': 'CLASS_FIXTURE_EVENT'})
     complete = bool(summary)
     final = tuple(map(int, summary[-1])) if complete else None
     failures = []
@@ -295,7 +313,11 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
                 os.killpg(web.pid, signal.SIGTERM)
                 web.wait(timeout=20)
     rawlog = logpath.read_text()
-    parsed = (parse_parallel_results(rawlog, app) if ci_parallel or sequence else
+    manifest = OUT / (app + '-discovery-final.json')
+    known_ids = ([identifier for category_data in json.loads(manifest.read_text())['categories']
+                  for identifier in category_data['test_ids']]
+                 if ci_parallel and site.endswith('-final.test') and manifest.exists() else None)
+    parsed = (parse_parallel_results(rawlog, app, known_ids) if ci_parallel or sequence else
               parse_results(xmlpath.read_text() if xmlpath.exists() else '', rawlog))
     status = 'FAIL' if parsed['counts']['FAIL'] or parsed['counts']['ERROR'] else (
         'BLOCKED' if result_code or not parsed['actual_tests_run'] else 'PASS')

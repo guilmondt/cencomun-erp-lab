@@ -57,3 +57,42 @@ discovery/eventos observados no lo sustituyen. No excluir un caso que falle por
 HOME/red/capacidad ausente, ni volver a ejecutar completos sin nueva corrección
 demostrada. No modificar HOME, pins, upstream, permisos/aserciones, oráculo,
 producción, main, Axelor ni repetir restauración cloud/Guardar/Publicar.
+
+## Checkpoint posterior a Frappe, ERPNext en ejecución
+
+Frappe CI completo terminó **FAIL**: contador nativo 2.326; eventos 2.220 PASS,
+9 FAIL, 47 ERROR y 50 SKIP. Todos los IDs del discovery tienen resultado en
+esta pasada. Hay 2.286 IDs distintos y 40 ejecuciones repetidas de IDs por la
+carga nativa; los IDs distintos no sustituyen el contador 2.326.
+
+- [Intento completo nuevo](evidence/frappe-official/frappe-ci-attempt-1.json).
+- [Inventario por ID, repeticiones y ausencias](evidence/frappe-official/frappe-final-case-inventory.json).
+- [Observaciones permitidas](evidence/frappe-official/frappe-ci-attempt-1-observations.json).
+- [Clasificación de los 56 eventos fallidos](evidence/frappe-official/frappe-final-failure-diagnostics.json):
+  cinco rechazos offline terminales demostrados; 26 rechazos TCP locales con
+  causa de disponibilidad desconocida; otros 25 con causa desconocida. El
+  rechazo TCP no se declara un bloqueo inevitable ni una respuesta 403 remota.
+  HOME sigue siendo una limitación demostrada histórica; no se atribuyen estos
+  dos nuevos FAIL de backup a HOME sin su propia evidencia causal.
+
+Dos correcciones del lector conservaron los resultados nativos: una excepción
+impresa no puede reemplazar una clase declarada en el discovery; la salida de
+progreso sin salto de línea no puede ocultar el símbolo final de un resultado.
+Se completaron nueve eventos inicialmente no leídos (ocho PASS y un fallo),
+sin ejecutar tests otra vez. Los JSON derivados iniciales se conservan privados;
+log/contador/ejecución no cambiaron. Los controles regresan estos casos.
+
+ERPNext se preparó vacío después de terminar Frappe y recrear fuentes limpias
+en los mismos SHAs. Las seis tasas oficiales se insertaron con validadores por
+Document API; **BOM cero antes/después**, sin consultas a proveedor. Bootstrap
+nativo exit 0 (cero tests), mapa Payments verificado sin reparación. Discovery:
+3.255. Primer y único completo ERPNext CI iniciado; su resultado está pendiente.
+
+[FX previo al bootstrap](evidence/frappe-official/erpnext-final-fx-before-bootstrap.json),
+[mapa](evidence/frappe-official/erpnext-final-module-preflight-preparation.json),
+[aislamiento](evidence/frappe-official/erpnext-preparation-final.json),
+[discovery](evidence/frappe-official/erpnext-discovery-final.json).
+
+35 controles del harness PASS tras las correcciones del lector y clasificación;
+no se suman a los tests oficiales. La comparación de integridad original y la
+lectura autenticada final permanecen pendientes hasta terminar ERPNext.

@@ -6,6 +6,47 @@ validaciones. Los resultados detallados, cantidades y fallos están en
 Las pruebas UI/Cypress, PostgreSQL, SQLite y migraciones entre versiones no
 forman parte de esta ejecución de servidor sobre MariaDB fijada.
 
+## Última pasada completa autorizada desde 9cbfbbd
+
+El usuario autorizó una sola nueva pasada completa por aplicación tras las
+correcciones demostradas. Plan: `tasks/102-frappe-official-final-ci.md`;
+resultados exclusivos: `reports/frappe-official-final-ci.md`. Los anteriores
+FAIL/incompletos se conservan, sin sumar PASS modulares. Criterio 13 BLOCKED.
+
+1. Comprobar lock/runners, registrar integridad original con `integrity.py before`
+   y conservar/copiar fuentes oficiales limpias con
+   `isolate_bench.py --refresh-test-sources`, con el worker oficial detenido.
+   No tocar el Bench original. Los sitios `*-final.test` son nuevos sitios
+   oficiales locales; no acreditan restauración cloud.
+2. Usar `set -e`, el env/PATH indicado abajo y el guard offline en preparación,
+   discovery y servidores/worker. Preparar Frappe con `prepare.py frappe --final`;
+   verificar `inspect_site.py frappe --final` y
+   `discover.py frappe --final`. Este discovery registra IDs pero ejecuta cero.
+3. Arrancar SMTP y worker exclusivos. Ejecutar **una vez** Frappe completo:
+   `run.py frappe --site ccm-upstream-frappe-final.test --ci-parallel --offline --observe`.
+   Esperar al resultado antes de la siguiente aplicación. El workflow Frappe
+   fijado también utiliza run-parallel-tests, sin lightmode, con sus hooks.
+4. Detener el worker, conservar cualquier archivo generado y recrear fuentes
+   copiadas limpias en los mismos SHAs. Preparar ERPNext:
+   `prepare.py erpnext --final --official-fx-fixtures`. Las seis tasas exactas se
+   insertan por Document API antes de importar tests/bootstrap; comprobar BOM
+   cero antes/después y mapa nativo. Inspección/discovery `erpnext --final`.
+5. Reiniciar exclusivamente el worker oficial y ejecutar **una vez** ERPNext:
+   `run.py erpnext --site ccm-upstream-erpnext-final.test --ci-parallel --offline --observe`.
+   El lightmode posterior al bootstrap es nativo de su CI. Un shard incluye
+   todos los módulos en ambos casos; no añadir filtros de casos fallidos.
+6. Publicar conteos nativos/IDs/skips/ausencias y diagnóstico permitido, no los
+   logs/variables crudos. Si falta resumen, el total queda desconocido. Conservar
+   cada interrupción de preparación/bootstrap y todos los intentos históricos.
+7. Detener servicios exclusivos, ejecutar `integrity.py after` y la lectura
+   autenticada `scripts/core-test/readiness.py`. Si el runtime original cambia,
+   investigar y repetir Core; si no, conservar el alcance de los 34 grupos
+   previos, sin llamarlos una nueva regresión. HOME/red/patch no se sortean.
+
+`set-config -- admin_password VALUE` mantiene como argumento una credencial
+local que empiece por guion. No imprimirla ni regenerarla para sortear el parser;
+conservar el log del fallo de preparación y continuarlo con el separador nativo.
+
 ## Investigación acotada desde 8158
 
 Los completos conservados siguen FAIL y el criterio 13 BLOCKED. Véase

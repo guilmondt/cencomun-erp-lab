@@ -44,8 +44,13 @@ def main():
             log = PRIVATE / (basename + '.log')
             xml = PRIVATE / (basename + '.xml')
             if log.exists() and not data.get('interrupted'):
-                data.update(parse_parallel_results(log.read_text(), data['app']) if data.get('ci_parallel') or data.get('sequence') else
+                manifest = OUT / (data['app'] + '-discovery-final.json')
+                known_ids = ([identifier for category in json.loads(manifest.read_text())['categories'] for identifier in category['test_ids']]
+                             if data.get('ci_parallel') and data.get('site', '').endswith('-final.test') else None)
+                data.update(parse_parallel_results(log.read_text(), data['app'], known_ids) if data.get('ci_parallel') or data.get('sequence') else
                             parse_results(xml.read_text() if xml.exists() else '', log.read_text()))
+                if known_ids is not None:
+                    data['ci_test_id_validation'] = 'Qualified class headers validated against this final discovery manifest; bare exception types ignored.'
                 if data.get('diagnostic_tail'):
                     data['diagnostic_tail'] = redact('\n'.join(log.read_text().splitlines()[-75:]))
             data = sanitize(data)
