@@ -477,3 +477,22 @@ por journal, se corrigen tipos de permisos y paginación AOP. 14 regresiones
 Python, 2+7 tests propios y compilación full-native/offline pasan localmente.
 Repetir gates primero e independientes después; no declarar correcciones
 verificadas en ERP hasta esa ejecución. No se amplía la red ni se cambia upstream.
+
+### Independiente N5 — FX01-03/MONEY01-03
+
+Se prepara mientras corre el único CI de los gates; no se cancela ni duplica ese
+job. Los dos rangos de CurrencyConversionLine duran exactamente un día, de
+profile.json. CurrencyService selecciona la fecha y convierte/redondea cada
+línea; no se introduce tasa anterior, oráculo en el cálculo ni tabla paralela.
+La ausencia de tasa debe devolver 422 desde el fallo nativo. Un operador real
+recibe 403 al autorizar; sólo CCM Manager puede registrar la tasa manual.
+CcmRateAuthorization conserva FK a la conversión y compañía, motivo y usuario
+real, dentro del mismo commit. Se usa el repositorio y tracking de AOP.
+
+Aceptación: dos conversiones fijadas; rechazo sin tasa; rechazo del operador;
+ambos con snapshot fresco de tasas/autorizaciones sin diferencias; autorización
+por login manager y lectura nueva; 0.41+0.41=0.82 desde el servicio nativo.
+La API de prueba exige CCM_CORE_LAB y compañía LAB. No añade herramientas MCP
+ni aprueba los seis endpoints, auditoría integral o idempotencia. El grupo
+conserva UNRUN hasta el siguiente CI; los tests locales sólo validan compilación
+y rechazo de evidencias incorrectas. Pins/fixtures originales intactos.

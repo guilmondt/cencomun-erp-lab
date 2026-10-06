@@ -1,13 +1,47 @@
 """Regression tests for coverage integrity and native accounting evidence rejection."""
 import unittest
 from pathlib import Path
-from run import assert_native_economics, assert_native_bank_book, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
+from run import assert_native_economics, assert_native_bank_book, assert_native_fx, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
 from finalize import BASELINE, baseline_pin_blob
 
 FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_fx_aggregate_rounding_and_unauthorized_approver_are_rejected(self):
+        import json
+        import copy
+        specification = json.loads((FIXTURES / "fx.json").read_bytes())
+        observations, rates = [], []
+        for index, row in enumerate(specification["payments"], 1):
+            rate = ["40.000000", "41.000000", "40.500000"][index-1]
+            observations.append({"id": row["id"], "date": row["date"], "rate": rate,
+                "native_conversion_id": index, "lines": row.get("expected_lines", [row["expected_total"]]), "total": row["expected_total"]})
+            rates.append({"id": index, "source": "USD", "target": "VES", "from_date": row["date"], "to_date": row["date"], "rate": rate})
+        persisted = {"rates": rates, "authorizations": [{"id": 7, "company_id": 1, "native_conversion_id": 3,
+            "approved_by": "ccm-manager", "external_id": "FX-AUTH", "reason": specification["manual_rate"]["reason"]}]}
+        assert_native_fx(observations, specification, persisted)
+        aggregate = copy.deepcopy(observations)
+        aggregate[-1].update(lines=["0.405", "0.405"], total="0.81")
+        with self.assertRaises(AssertionError):
+            assert_native_fx(aggregate, specification, persisted)
+        unauthorized = copy.deepcopy(persisted)
+        unauthorized["authorizations"][0]["approved_by"] = "ccm-operator"
+        with self.assertRaises(AssertionError):
+            assert_native_fx(observations, specification, unauthorized)
+
+    def test_fx_pass_notice_without_conversion_and_role_evidence_stays_unrun(self):
+        import json
+        import tempfile
+        from extract_log_evidence import extract
+        from run import REFERENCE
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / "run.log"
+            log.write_text("timestamp ##[notice]" + json.dumps({"case": "FX01-03-MONEY01-03",
+                "reference": REFERENCE, "revision": 1, "status": "PASS", "complete": True}) + "\n")
+            result = extract(log, Path(tmp) / "results", "synthetic", "1" * 40, FIXTURES)
+            self.assertEqual({"UNRUN": 34}, result["counts"])
+
     def test_bank_book_payments_without_posted_native_moves_fail(self):
         import json
         fixtures = json.loads((FIXTURES / "bank-book.json").read_bytes())

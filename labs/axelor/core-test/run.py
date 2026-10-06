@@ -319,6 +319,85 @@ def run_product_cases(admin, base, fixtures, output, row):
     return evidence
 
 
+def assert_native_fx(observed, fixture, persisted):
+    rates = {r["id"]: r for r in persisted["rates"]}
+    assert len(observed) == len(fixture["payments"])
+    for actual, expected in zip(observed, fixture["payments"]):
+        assert actual["id"] == expected["id"] and actual["date"] == expected["date"]
+        assert actual["native_conversion_id"] in rates, "Conversion has no durable native rate"
+        native = rates[actual["native_conversion_id"]]
+        assert native["source"] == "USD" and native["target"] == "VES"
+        assert native["from_date"] == native["to_date"] == actual["date"]
+        assert Decimal(actual["rate"]) == Decimal(native["rate"])
+        assert Decimal(actual["total"]) == Decimal(expected["expected_total"])
+        assert sum(map(Decimal, actual["lines"])) == Decimal(actual["total"])
+        if "expected_lines" in expected:
+            assert actual["lines"] == expected["expected_lines"], "Must round each native line before summing"
+    assert len(persisted["authorizations"]) == 1
+    authorization = persisted["authorizations"][0]
+    assert authorization["id"] > 0 and authorization["approved_by"] == "ccm-manager"
+    assert authorization["external_id"] == "FX-AUTH" and authorization["company_id"] > 0
+    assert authorization["reason"] == fixture["manual_rate"]["reason"]
+    assert rates[authorization["native_conversion_id"]]["from_date"] == fixture["manual_rate"]["date"]
+    assert Decimal(rates[authorization["native_conversion_id"]]["rate"]) == Decimal(fixture["manual_rate"]["rate"])
+
+
+def run_fx_cases(admin, base, fixtures, output, row):
+    start = time.perf_counter()
+    evidence = {"case": "FX01-03-MONEY01-03", "reference": REFERENCE, "revision": 1, "steps": []}
+    operator, manager = NativeClient(base), NativeClient(base)
+    specification = json.loads((fixtures / "fx.json").read_bytes())
+    profile = json.loads((fixtures / "profile.json").read_bytes())
+    def body(item):
+        return {**item, "company_id": profile["company_id"]}
+    def rejected(client, path, payload, status):
+        try:
+            client.request(path, payload)
+        except urllib.error.HTTPError as error:
+            assert error.code == status, (error.code, error.read().decode()[:2000])
+            return {"http_status": error.code}
+        raise AssertionError("Required FX rejection was accepted")
+    try:
+        evidence["preparation"] = admin.action("ccm-core-fx-prepare", "FX")
+        before = admin.action("ccm-core-fx-inspect", "FX")
+        assert len(before["rates"]) == 2 and before["authorizations"] == [], before
+        assert {r["from_date"]: Decimal(r["rate"]) for r in before["rates"]} == {d: Decimal(v) for d,v in profile["rates"].items()}
+        operator.login("ccm-operator", "CoreLab-operator-2026!")
+        evidence["operator"] = "ccm-operator"
+        observations = []
+        for input in specification["payments"][:2]:
+            actual = operator.request("/ws/ccm/lab/currency/payment", body(input))
+            observations.append(actual); evidence["steps"].append({"case": input["id"], "native_conversion": actual})
+        denied = rejected(operator, "/ws/ccm/lab/currency/payment", body({"id": "FX-MISSING", "date": "2026-10-03", "lines": ["1.00"]}), 422)
+        assert admin.action("ccm-core-fx-inspect", "FX") == before, "Missing-rate rejection changed persisted rates"
+        evidence["steps"].append({"case": "missing-rate", **denied, "native_effects_unchanged": True})
+        authorization = body({"id": "FX-AUTH", **specification["manual_rate"]})
+        denied = rejected(operator, "/ws/ccm/lab/currency/authorize", authorization, 403)
+        assert admin.action("ccm-core-fx-inspect", "FX") == before, "Unauthorized operator changed a native rate"
+        evidence["steps"].append({"case": "operator-denied", **denied, "native_effects_unchanged": True})
+        manager.login("ccm-manager", "CoreLab-manager-2026!")
+        evidence["manager"] = "ccm-manager"
+        result = manager.request("/ws/ccm/lab/currency/authorize", authorization)
+        persisted = admin.action("ccm-core-fx-inspect", "FX")
+        assert result["native_conversion_id"] in [r["id"] for r in persisted["rates"]]
+        evidence["steps"].append({"case": "manager-authorized", "result": result, "persisted": persisted})
+        rounded = operator.request("/ws/ccm/lab/currency/payment", body(specification["payments"][2]))
+        observations.append(rounded); evidence["steps"].append({"case": "MONEY-ROUND", "native_conversion": rounded})
+        assert_native_fx(observations, specification, persisted)
+        evidence.update(status="PASS", complete=True, observations=observations, persisted=persisted)
+    except Exception as error:
+        evidence.update(status=exception_status(error), complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    evidence["seconds"] = round(time.perf_counter() - start, 3)
+    evidence["http_samples"] = {"operator": operator.samples, "manager": manager.samples}
+    (output / (evidence["case"] + ".json")).write_text(json.dumps(evidence, indent=2) + "\n")
+    row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"], evidence=evidence["case"] + ".json",
+        reason=evidence.get("error", "Native payment-day conversions, missing rate and real manager authorization with unchanged rejected effects"))
+    for step in evidence["steps"]:
+        print("::notice title=Native FX step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
+    print("::notice title=Core independent FX/MONEY::" + json.dumps({k:v for k,v in evidence.items() if k not in ("steps", "http_samples", "observations", "persisted")}), flush=True)
+    return evidence
+
+
 def run_search_cases(base, fixtures, output, row):
     start = time.perf_counter()
     evidence = {"case": "SEARCH01-04-NATIVE", "reference": REFERENCE, "revision": 1, "steps": []}
@@ -451,6 +530,7 @@ def run(base, fixtures, output):
     products = run_product_cases(client, base, fixtures, output, by_case["PROD01-04"])
     search = run_search_cases(base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
     book = run_bank_book_cases(client, fixtures, output, by_case["BANK-BOOK-FIXTURE"])
+    fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"])
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
@@ -459,12 +539,13 @@ def run(base, fixtures, output):
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     metrics = {"metric_kind": "runtime", "reference": REFERENCE,
                                                    "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book]],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx]],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,
                                                    "http_call_counts": {"administrator": len(client.samples),
-                                                       "product_operator": len(products["http_samples"]), "search_reader": len(search["http_samples"])},
+                                                       "product_operator": len(products["http_samples"]), "search_reader": len(search["http_samples"]),
+                                                       "fx_operator": len(fx["http_samples"]["operator"]), "fx_manager": len(fx["http_samples"]["manager"])},
                                                    "native_action_counts": dict(Counter(s["action"] for s in client.samples if "action" in s)),
                                                    "benchmark": "UNRUN", "note": "Gate timings are not the required 1000-sample benchmark"}
     (output / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")

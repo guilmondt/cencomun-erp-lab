@@ -9,7 +9,7 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
-from run import REFERENCE, assert_native_bank_book, criteria_for, rows_for, verify_bundle
+from run import REFERENCE, assert_native_bank_book, assert_native_fx, criteria_for, rows_for, verify_bundle
 
 
 def extract(log, output, run_id, commit, fixtures):
@@ -32,7 +32,7 @@ def extract(log, output, run_id, commit, fixtures):
     rows = rows_for(verify_bundle(fixtures))
     by_case = {r["case"]: r for r in rows}
     gates, exports, independent = {}, {}, {}
-    product_steps, search_steps, book_steps = [], [], []
+    product_steps, search_steps, book_steps, fx_steps = [], [], [], []
     proof = None
     for item in objects:
         case = item.get("case")
@@ -44,6 +44,8 @@ def extract(log, output, run_id, commit, fixtures):
             search_steps.append(item["step"])
         if case == "BANK-BOOK-FIXTURE" and "step" in item:
             book_steps.append(item["step"])
+        if case == "FX01-03-MONEY01-03" and "step" in item:
+            fx_steps.append(item["step"])
         if "lab_commit" in item and "upstream_diff_exit_codes" in item and "suites" in item:
             assert item["lab_commit"] == commit, "Build proof belongs to another commit"
             proof = item
@@ -64,7 +66,7 @@ def extract(log, output, run_id, commit, fixtures):
             by_case[case + "-NATIVE"].update(status="UNRUN" if item["status"] == "PASS" else item["status"],
                 observed_revision=1, complete=False, partial_gate_status=item["status"],
                 reason=item.get("failed_stage", "Economic administrator gate; complete subcases pending"), evidence=f"{case}-gate.json")
-        if case in ("PROD01-04", "SEARCH01-04-NATIVE", "BANK-BOOK-FIXTURE") and "status" in item and item.get("reference") == REFERENCE:
+        if case in ("PROD01-04", "SEARCH01-04-NATIVE", "BANK-BOOK-FIXTURE", "FX01-03-MONEY01-03") and "status" in item and item.get("reference") == REFERENCE:
             independent[case] = item
             by_case[case].update(status=item["status"], observed_revision=item["revision"], complete=item["complete"],
                 reason=item.get("error", "Executed native independent case"), evidence=f"{case}.json")
@@ -73,9 +75,9 @@ def extract(log, output, run_id, commit, fixtures):
     for case, item in exports.items():
         (output / f"{case}-native-export.json").write_text(json.dumps(item, indent=2) + "\n")
     for case, item in independent.items():
-        item["steps"] = {"PROD01-04": product_steps, "SEARCH01-04-NATIVE": search_steps, "BANK-BOOK-FIXTURE": book_steps}[case]
+        item["steps"] = {"PROD01-04": product_steps, "SEARCH01-04-NATIVE": search_steps, "BANK-BOOK-FIXTURE": book_steps, "FX01-03-MONEY01-03": fx_steps}[case]
         if item["status"] == "PASS":
-            complete_notices = len(item["steps"]) == {"PROD01-04": 7, "SEARCH01-04-NATIVE": 11, "BANK-BOOK-FIXTURE": 5}[case]
+            complete_notices = len(item["steps"]) == {"PROD01-04": 7, "SEARCH01-04-NATIVE": 11, "BANK-BOOK-FIXTURE": 5, "FX01-03-MONEY01-03": 6}[case]
             if not complete_notices:
                 by_case[case].update(status="UNRUN", complete=False,
                     reason="PASS notice present but detailed persistence/query notices are incomplete; inspect full artifact")
@@ -89,6 +91,17 @@ def extract(log, output, run_id, commit, fixtures):
                 except (AssertionError, KeyError, TypeError) as error:
                     by_case[case].update(status="FAIL", complete=False,
                         reason="Bank-book notice contradicts persisted native payment/journal detail: " + str(error))
+            elif case == "FX01-03-MONEY01-03":
+                try:
+                    conversions = [s["native_conversion"] for s in fx_steps if "native_conversion" in s]
+                    persisted = next(s["persisted"] for s in fx_steps if s["case"] == "manager-authorized")
+                    assert_native_fx(conversions, json.loads((fixtures / "fx.json").read_bytes()), persisted)
+                    denials = [s for s in fx_steps if s["case"] in ("missing-rate", "operator-denied")]
+                    assert len(denials) == 2 and [s["http_status"] for s in denials] == [422, 403]
+                    assert all(s["native_effects_unchanged"] is True for s in denials)
+                except (AssertionError, KeyError, TypeError, StopIteration) as error:
+                    by_case[case].update(status="FAIL", complete=False,
+                        reason="FX notice contradicts conversion/rate/authorization/rejection details: " + str(error))
         (output / f"{case}.json").write_text(json.dumps(item, indent=2) + "\n")
     if proof:
         (output / "build-evidence.json").write_text(json.dumps(proof, indent=2) + "\n")

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models https://axelor.com/xml/ns/domain-models/domain-models_8.2.xsd">
+  <module name="cencomun-baseline" package="com.cencomun.core.db"/>
+  <entity name="CcmRateAuthorization">
+    <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+    <many-to-one name="conversion" ref="com.axelor.apps.base.db.CurrencyConversionLine" required="true"/>
+    <many-to-one name="approvedBy" ref="com.axelor.auth.db.User" required="true"/>
+    <string name="externalId" required="true"/>
+    <string name="reason" required="true"/>
+    <unique-constraint columns="company,externalId"/>
+    <track>
+      <field name="company" on="CREATE"/>
+      <field name="conversion" on="CREATE"/>
+      <field name="approvedBy" on="CREATE"/>
+      <field name="reason" on="CREATE"/>
+    </track>
+  </entity>
+</domain-models>

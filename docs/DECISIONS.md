@@ -82,10 +82,31 @@
   from the custom compilation; verify that its full JAR contains none. All
   native ERP classes remain supplied by the fixed upstream modules.
 - Permissions: product tests use an actual synthetic operator, native Role and
-  Permission with `self.company = ?1` evaluated from `__user__.activeCompany`.
+  Permission with `self.company.id = ?1` evaluated from `__user__.activeCompany.id`.
   No global wildcard grant, impersonation or administrator CRUD acceptance.
 - Upgrade impact: AOS API or domain changes require recompile and native FK/CRUD
   regression on a separately approved target; no baseline pins are changed.
 - Evidence/tests: `PROD01-04` runner implements six warranty quantity/unit
   round trips and price retention on disable, with separate committed REST
   rereads. Acceptance remains pending until the new full-stack run executes it.
+
+## ADR-004 — Native daily currency configuration and scoped rate authorization
+
+- Date: 2026-10-06
+- Platform: Axelor
+- Status: Implementation authorized; native acceptance pending
+- Decision: use AOS CurrencyConversionLine with one-day validity and the pinned
+  CurrencyService for payment-day selection and line rounding. Manager
+  authorization lives in a Cencomun AOP entity linked to the native conversion,
+  with company, reason and actual approving User in one transaction. Native
+  overlap validation remains enabled. No external provider or secret is used.
+- Permissions: authenticated native Operator/Manager sessions can calculate;
+  only Manager can authorize in the LAB company. The custom service checks the
+  actual native role and company on each call. No general currency/AppBase CRUD
+  grant is given. The service is unavailable unless CCM_CORE_LAB=1.
+- Consequences: AOS currencies are global application configuration in this
+  isolated database. This test does not establish a production multitenant FX
+  policy, the six neutral routes, audit completeness or rate idempotency.
+- Evidence: FX01-03-MONEY01-03 compares the fixed fixture results and fresh
+  native rate/authorization rows. Missing-rate and operator denials must leave
+  those rows unchanged. Native runtime verification is pending the next CI.
