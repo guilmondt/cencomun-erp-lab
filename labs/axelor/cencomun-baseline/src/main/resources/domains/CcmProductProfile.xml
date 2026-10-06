@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models https://axelor.com/xml/ns/domain-models/domain-models_8.2.xsd">
+  <module name="cencomun-baseline" package="com.cencomun.core.db"/>
+  <entity name="CcmProductProfile">
+    <many-to-one name="company" ref="com.axelor.apps.base.db.Company" required="true"/>
+    <many-to-one name="product" ref="com.axelor.apps.base.db.Product" required="true"/>
+    <boolean name="marketplaceEnabled"/>
+    <boolean name="casheaEnabled"/>
+    <decimal name="casheaPrice" precision="20" scale="2" min="0" required="true"/>
+    <string name="supplierReference" required="true"/>
+    <integer name="warrantyQuantity" min="0" required="true"/>
+    <enum name="warrantyUnit" ref="CcmWarrantyUnit" required="true" default="MONTH"/>
+    <enum name="condition" ref="CcmProductCondition" required="true" default="NEW"/>
+    <unique-constraint columns="company,product"/>
+    <track on="UPDATE">
+      <field name="marketplaceEnabled"/>
+      <field name="casheaEnabled"/>
+      <field name="casheaPrice"/>
+      <field name="supplierReference"/>
+      <field name="warrantyQuantity"/>
+      <field name="warrantyUnit"/>
+      <field name="condition"/>
+    </track>
+  </entity>
+  <enum name="CcmWarrantyUnit">
+    <item name="DAY"/>
+    <item name="MONTH"/>
+    <item name="YEAR"/>
+  </enum>
+  <enum name="CcmProductCondition">
+    <item name="NEW"/>
+    <item name="REFURBISHED"/>
+    <item name="USED"/>
+  </enum>
+</domain-models>

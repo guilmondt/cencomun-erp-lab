@@ -61,7 +61,7 @@ public final class NativeFinance {
     List<Model> lines = new ArrayList<>();
     lines.add(line(opening, customer, acct(company, "STOCK"), MoneyPolicy.money(amount), true, 1));
     lines.add(line(opening, customer, acct(company, "OPENING"), MoneyPolicy.money(amount), false, 2));
-    set(opening, "moveLineList", lines); save(opening);
+    set(opening, "moveLineList", lines); opening = save(opening);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", opening);
   }
 
@@ -95,13 +95,14 @@ public final class NativeFinance {
     List<Model> costLines = new ArrayList<>();
     costLines.add(line(cogs, customer, acct(company, "COGS"), MoneyPolicy.money(totalCost), true, 1));
     costLines.add(line(cogs, customer, acct(company, "STOCK"), MoneyPolicy.money(totalCost), false, 2));
-    set(cogs, "moveLineList", costLines); save(cogs);
+    set(cogs, "moveLineList", costLines); cogs = save(cogs);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", cogs);
+    invoice = managed(invoice);
     Object createPayment = service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentCreateService");
     Model currency = (Model) get(company, "currency");
     Model cashMode = one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-CASH");
     Model upfront = (Model) call(createPayment, "createInvoicePayment", invoice, calculation.get("upfront"), DATE, currency, cashMode, 2);
-    save(upfront);
+    upfront = save(upfront);
     call(service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentValidateService"), "validate", upfront);
     Model bankMode = one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-BANK");
     Model settle = move(company, customer, "BANK", bankMode, "CCM-" + input.get("id").asText() + "-SETTLE");
@@ -110,8 +111,9 @@ public final class NativeFinance {
     settlementLines.add(line(settle, customer, acct(company, "COMMISSION"), calculation.get("commission"), true, 2));
     if (calculation.get("shipping").signum() != 0) settlementLines.add(line(settle, customer, acct(company, "SHIPPING"), calculation.get("shipping"), true, 3));
     Model credit = line(settle, customer, acct(company, "AR"), new BigDecimal(input.get("financed_amount").asText()), false, 4);
-    settlementLines.add(credit); set(settle, "moveLineList", settlementLines); save(settle);
+    settlementLines.add(credit); set(settle, "moveLineList", settlementLines); settle = save(settle);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", settle);
+    invoice = managed(invoice); credit = managed(credit);
     Model invoiceMove = (Model) get(invoice, "move");
     Model invoiceDebit = null;
     for (Object candidate : (List<?>) get(invoiceMove, "moveLineList"))

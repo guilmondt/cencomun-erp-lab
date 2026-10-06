@@ -14,6 +14,7 @@ import shutil
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 from collections import Counter
 from decimal import Decimal
 from pathlib import Path
@@ -21,6 +22,14 @@ from pathlib import Path
 REFERENCE = "fcf690dbc58b2b2dcf8d045c49976e3613e804cf"
 MANIFEST_SHA = "28496929050e7cfeea214dbf0ee5cbd589a08ab2adb60e1849877778baaf9aed"
 RANK = {"PASS": 0, "UNRUN": 1, "BLOCKED": 2, "FAIL": 3}
+
+
+def exception_status(error):
+    # API/configuration incompatibilities are test defects; unavailable transport
+    # is a blocker. A native HTTP error is not automatically an environment issue.
+    if isinstance(error, urllib.error.HTTPError):
+        return "FAIL"
+    return "BLOCKED" if isinstance(error, (urllib.error.URLError, TimeoutError, ConnectionError)) else "FAIL"
 
 
 def verify_bundle(root):
@@ -57,14 +66,14 @@ class NativeClient:
         finally:
             self.samples.append({"operation": path.split("?")[0], "http_ms": round((time.perf_counter() - start) * 1000, 3)})
 
-    def login(self):
+    def login(self, username="admin", password="admin"):
         info = self.request("/ws/public/app/info")
         callback = urllib.parse.urlsplit(info["authentication"]["callbackUrl"])
         context = urllib.parse.urlsplit(self.base).path
         assert callback.path.startswith(context + "/callback")
-        self.request(callback.path[len(context):] + "?client_name=AxelorFormClient", {"username": "admin", "password": "admin"})
+        self.request(callback.path[len(context):] + "?client_name=AxelorFormClient", {"username": username, "password": password})
         info = self.request("/ws/public/app/info")
-        assert info["user"]["login"] == "admin"
+        assert info["user"]["login"] == username
         assert info["application"]["aopVersion"] == "8.2.3"
 
     def action(self, name, case):
@@ -110,7 +119,8 @@ def verified_build_status(evidence):
 
 def criteria_for(rows, build_evidence=None):
     # Reject missing/obsolete evidence even if a caller supplied a PASS label.
-    rows = [{**r, "status": "UNRUN" if r.get("observed_revision", 0) < r["minimum_revision"] else r["status"]} for r in rows]
+    rows = [{**r, "status": "UNRUN" if r.get("observed_revision", 0) < r["minimum_revision"]
+             or (r["status"] == "PASS" and (not r.get("complete") or not r.get("evidence"))) else r["status"]} for r in rows]
     result = []
     for number in range(1, 15):
         attached = [r for r in rows if number in r["criteria"]]
@@ -163,6 +173,126 @@ def assert_native_economics(native, expected):
     return {"stock_value": str(value), "account_balances": {k: str(v) for k, v in balances.items()}, "accounting_profit": str(profit)}
 
 
+def run_product_cases(admin, base, fixtures, output, row):
+    """Native CRUD under the real operator; every warranty write is reread after commit."""
+    start = time.perf_counter()
+    evidence = {"case": "PROD01-04", "reference": REFERENCE, "revision": 1, "steps": []}
+    operator = NativeClient(base)
+    model = "com.cencomun.core.db.CcmProductProfile"
+    fields = ["company", "product", "marketplaceEnabled", "casheaEnabled", "casheaPrice",
+              "supplierReference", "warrantyQuantity", "warrantyUnit", "condition"]
+    def fetch(identity):
+        result = operator.request(f"/ws/rest/{model}/{identity}/fetch", {"fields": fields})
+        assert result.get("status") == 0 and len(result["data"]) == 1, result
+        return result["data"][0]
+    def update(identity, **values):
+        current = fetch(identity)
+        result = operator.request(f"/ws/rest/{model}", {"data": {"id": identity, "version": current["version"], **values}})
+        assert result.get("status") == 0, result
+        # No returned in-memory object is accepted as persistence evidence.
+        return fetch(identity)
+    try:
+        setup = admin.action("ccm-core-products-prepare", "PROD")
+        evidence["setup"] = setup
+        operator.login("ccm-operator", "CoreLab-operator-2026!")
+        evidence["actor"] = "ccm-operator"
+        identities = {p["product_code"]: p for p in setup["profiles"]}
+        assert set(identities) == {"P001", "P002", "P003"}
+        identity = identities["P001"]["id"]
+        for quantity, unit in [(30, "DAY"), (6, "MONTH"), (1, "YEAR"), (0, "DAY"), (0, "MONTH"), (0, "YEAR")]:
+            current = update(identity, warrantyQuantity=quantity, warrantyUnit=unit)
+            assert (current["warrantyQuantity"], current["warrantyUnit"]) == (quantity, unit), current
+            evidence["steps"].append({"case": "warranty", "requested": [quantity, unit], "persisted": current})
+            print("::notice title=Native product warranty::" + json.dumps(evidence["steps"][-1]), flush=True)
+        disabled = update(identity, casheaEnabled=False)
+        assert disabled["casheaEnabled"] is False and Decimal(disabled["casheaPrice"]) == Decimal("50.00")
+        evidence["steps"].append({"case": "disabled-price-retained", "persisted": disabled})
+        print("::notice title=Native product disabled price::" + json.dumps(evidence["steps"][-1]), flush=True)
+        update(identity, casheaEnabled=True, warrantyQuantity=12, warrantyUnit="MONTH")
+        exported = {}
+        for product in json.loads((fixtures / "products.json").read_bytes()):
+            current = fetch(identities[product["id"]]["id"])
+            assert current["company"]["id"] == setup["company_id"]
+            assert current["product"]["id"] == identities[product["id"]]["product_id"]
+            for key, native in [("marketplace_enabled", "marketplaceEnabled"), ("cashea_enabled", "casheaEnabled"),
+                                ("supplier_reference", "supplierReference"), ("warranty_quantity", "warrantyQuantity"),
+                                ("warranty_unit", "warrantyUnit"), ("condition", "condition")]:
+                assert current[native] == product[key], (product["id"], key, current)
+            assert Decimal(current["casheaPrice"]) == Decimal(product["price"])
+            exported[product["id"]] = current
+        evidence.update(status="PASS", complete=True, final_native_profiles=exported)
+    except AssertionError as error:
+        evidence.update(status="FAIL", complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    except Exception as error:
+        evidence.update(status=exception_status(error), complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    evidence["seconds"] = round(time.perf_counter() - start, 3)
+    evidence["http_samples"] = operator.samples
+    (output / "PROD01-04.json").write_text(json.dumps(evidence, indent=2) + "\n")
+    row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"],
+               evidence="PROD01-04.json", reason=evidence.get("error", "Executed native operator CRUD with committed rereads"))
+    print("::notice title=Core independent PROD01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["steps", "http_samples"]})[:3800], flush=True)
+    return evidence
+
+
+def run_search_cases(base, fixtures, output, row):
+    start = time.perf_counter()
+    evidence = {"case": "SEARCH01-04-NATIVE", "reference": REFERENCE, "revision": 1, "steps": []}
+    reader = NativeClient(base)
+    specification = json.loads((fixtures / "scenarios.json").read_bytes())["search"]
+    def native_search(model, criteria, fields):
+        result = reader.request(f"/ws/rest/{model}/search", {"data": {"criteria": criteria}, "fields": fields, "limit": 100})
+        assert result.get("status") == 0, result
+        return result.get("data", [])
+    try:
+        reader.login("ccm-reader", "CoreLab-reader-2026!")
+        evidence["actor"] = "ccm-reader"
+        try:
+            reader.request("/ws/ccm/products/search?company_id=OTHER-LAB&q=P001")
+        except urllib.error.HTTPError as error:
+            assert error.code == 403, error.code
+            evidence["steps"].append({"case": "foreign-company-denied", "http_status": error.code})
+        else:
+            raise AssertionError("Foreign company search was accepted")
+        for text, expected in specification["products"].items():
+            response = reader.request("/ws/ccm/products/search?" + urllib.parse.urlencode({"company_id": "CCM-LAB-001", "q": text}))
+            assert [r["id"] for r in response["items"]] == expected, response
+            evidence["steps"].append({"case": "product-query", "query": text, "persisted": response})
+        seen = []
+        for page in (1, 2):
+            response = reader.request("/ws/ccm/products/search?" + urllib.parse.urlencode({"company_id": "CCM-LAB-001", "q": "ficticio", "page": page, "page_size": 2}))
+            assert response["total"] == 3, response
+            seen.extend(r["id"] for r in response["items"])
+            evidence["steps"].append({"case": "complete-pages", "persisted": response})
+        assert seen == ["P001", "P002", "P003"]
+        for field, text in [("name", specification["customer"]["name"]), ("mobilePhone", specification["customer"]["phone"])]:
+            found = native_search("com.axelor.apps.base.db.Partner", [{"fieldName": field, "operator": "=", "value": text}], ["partnerSeq", "name", "mobilePhone"])
+            assert [r["partnerSeq"] for r in found] == specification["customer"]["expected"], found
+            evidence["steps"].append({"case": "native-customer-query", "field": field, "query": text, "persisted": found})
+        found = native_search("com.axelor.apps.stock.db.TrackingNumber", [{"fieldName": "trackingNumberSeq", "operator": "=", "value": specification["serial"]["reference"]}], ["trackingNumberSeq", "product.code"])
+        assert len(found) == 1 and found[0].get("product.code", found[0].get("product", {}).get("code")) == "P001", found
+        evidence["steps"].append({"case": "native-serial-query", "persisted": found, "serial_inventory_tracking_tested": False})
+        found = native_search("com.axelor.apps.account.db.Invoice", [{"fieldName": "externalReference", "operator": "=", "value": specification["invoice"]["reference"]}], ["externalReference", "saleOrder.externalReference"])
+        if not found:
+            evidence.update(status="BLOCKED", complete=False, error="CO00 native invoice prerequisite has not committed; independent product/customer/serial searches executed")
+        else:
+            assert len(found) == 1 and found[0].get("saleOrder.externalReference", found[0].get("saleOrder", {}).get("externalReference")) == "CCM-CO00", found
+            evidence["steps"].append({"case": "native-invoice-query", "persisted": found})
+            evidence.update(status="PASS", complete=True)
+    except AssertionError as error:
+        evidence.update(status="FAIL", complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    except Exception as error:
+        evidence.update(status=exception_status(error), complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    evidence["seconds"] = round(time.perf_counter() - start, 3)
+    evidence["http_samples"] = reader.samples
+    (output / "SEARCH01-04-NATIVE.json").write_text(json.dumps(evidence, indent=2) + "\n")
+    row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"], evidence="SEARCH01-04-NATIVE.json",
+               reason=evidence.get("error", "Native queries and complete nonduplicated pages under the real reader"))
+    for step in evidence["steps"]:
+        print("::notice title=Native search step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
+    print("::notice title=Core independent SEARCH01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["http_samples", "steps"]})[:3800], flush=True)
+    return evidence
+
+
 def run(base, fixtures, output):
     output.mkdir(parents=True, exist_ok=True)
     required = verify_bundle(fixtures)
@@ -184,7 +314,7 @@ def run(base, fixtures, output):
             assert len(configuration["company_ids"]) == 1
             assert len(configuration["sequences"]) == 12, configuration["sequences"]
             assert all(s["id"] and len(s["versions"]) == 1 and s["versions"][0]["id"] for s in configuration["sequences"])
-            print(f"::notice title=Native {case} committed sequences::" + json.dumps(configuration["sequences"]), flush=True)
+            print(f"::notice title=Native {case} committed sequences::" + json.dumps({"case": case, "sequences": configuration["sequences"]}), flush=True)
             observed = client.action("ccm-core-native-gate", case)
             # Independent new HTTP request reads durable records, after any rollback.
             native = client.action("ccm-core-native-inspect", case)
@@ -219,6 +349,9 @@ def run(base, fixtures, output):
         message = json.dumps(observed, ensure_ascii=True).replace("%", "%25").replace("\n", "%0A").replace("\r", "%0D")
         print(f"::notice title=Core gate {case}::{message[:3800]}", flush=True)
     (output / "gate-impediments.json").write_text(json.dumps(gates, indent=2) + "\n")
+    # Independent catalog fields run after the economic impediments have been persisted.
+    products = run_product_cases(client, base, fixtures, output, by_case["PROD01-04"])
+    search = run_search_cases(base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
@@ -226,6 +359,7 @@ def run(base, fixtures, output):
                "scope": "Actual native gates. Policy unit tests do not mark native groups PASS."}
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     (output / "metrics.json").write_text(json.dumps({"gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search]],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,

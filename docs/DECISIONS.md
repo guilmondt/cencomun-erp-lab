@@ -61,3 +61,31 @@
   run 37228746936 passed full compilation/WAR, 18 unit cases, strict offline
   Gradle replay, PostgreSQL authenticated metadata API and server restart with
   33 modules. First startup 422.42s, restart 315.44s; tracked upstream diffs empty.
+
+## ADR-003 — Native Core entities with an independently retained cloud baseline
+
+- Date: 2026-10-06
+- Platform: Axelor
+- Status: Accepted within the user-authorized Core Test implementation
+- Context: Shared product fields require durable framework entities and real
+  foreign keys to native company/product, while the original cloud AOP-only
+  compilation and its frozen dependency lock remain reproducible.
+- Decision: declare Cencomun models in `com.cencomun.core.db`; the full-stack
+  profile depends on the existing pinned AOS base project. Its build directory
+  is `build/full`, set before AOP plugin application in the supported CI init
+  script. Full dependency locks remain external per-run evidence. Cloud compiles
+  the AOP services/policies, generates and parses the domain, and excludes
+  native-FK generated classes/resources from its artifact.
+- Consequences: full-stack compilation and authenticated native CRUD are
+  mandatory for entity acceptance. Cloud unit tests never prove their native
+  persistence. Exclude any merged `com.axelor` generated dependency classes
+  from the custom compilation; verify that its full JAR contains none. All
+  native ERP classes remain supplied by the fixed upstream modules.
+- Permissions: product tests use an actual synthetic operator, native Role and
+  Permission with `self.company = ?1` evaluated from `__user__.activeCompany`.
+  No global wildcard grant, impersonation or administrator CRUD acceptance.
+- Upgrade impact: AOS API or domain changes require recompile and native FK/CRUD
+  regression on a separately approved target; no baseline pins are changed.
+- Evidence/tests: `PROD01-04` runner implements six warranty quantity/unit
+  round trips and price retention on disable, with separate committed REST
+  rereads. Acceptance remains pending until the new full-stack run executes it.

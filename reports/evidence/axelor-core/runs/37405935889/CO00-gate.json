@@ -1,0 +1,28 @@
+{
+  "case": "CO00",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "BLOCKED",
+  "failed_stage": "native-initial-stock-receipt",
+  "error_type": "com.axelor.apps.base.AxelorException",
+  "error": "Cannot realize a stock move that is not planned.",
+  "native_stack": [
+    "com.axelor.apps.stock.service.StockMoveServiceImpl.realizeStockMove(StockMoveServiceImpl.java:551)",
+    "com.axelor.apps.supplychain.service.StockMoveServiceSupplychainImpl.realizeStockMove(StockMoveServiceSupplychainImpl.java:194)",
+    "com.axelor.apps.production.service.StockMoveServiceProductionImpl.realizeStockMove(StockMoveServiceProductionImpl.java:171)",
+    "com.axelor.apps.stock.service.StockMoveServiceImpl.realize(StockMoveServiceImpl.java:533)",
+    "com.axelor.apps.stock.service.StockMoveServiceImpl.realize(StockMoveServiceImpl.java:527)",
+    "com.cencomun.core.NativeAccess.call(NativeAccess.java:54)",
+    "com.cencomun.core.NativeGateService.seed(NativeGateService.java:127)",
+    "com.cencomun.core.NativeGateController.run(NativeGateController.java:45)",
+    "com.cencomun.core.NativeGateController.execute(NativeGateController.java:24)",
+    "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+    "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)",
+    "com.axelor.meta.schema.actions.Action.execute(Action.java:89)"
+  ],
+  "phase_evidence": {},
+  "committed_native_export": "CO00-native-export.json",
+  "seconds": 5.881,
+  "sequence": 1
+}

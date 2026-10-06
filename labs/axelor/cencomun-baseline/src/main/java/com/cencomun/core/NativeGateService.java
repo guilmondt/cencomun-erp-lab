@@ -76,9 +76,16 @@ public class NativeGateService {
           "costPrice", dec(fixture, "cost"), "stockManaged", true, "costTypeSelect", 3, "productTypeSelect", "storable",
           "saleCurrency", usd, "purchaseCurrency", usd);
     }
+    for (JsonNode fixture : FixtureBundle.json("customers.json")) {
+      Model partner = one(BASE + "Partner", "self.partnerSeq = ?1", fixture.get("id").asText());
+      if (partner == null) {
+        Model email = record("com.axelor.message.db.EmailAddress", "address", fixture.get("email").asText());
+        record(BASE + "Partner", "partnerSeq", fixture.get("id").asText(),
+            "name", fixture.get("name").asText(), "mobilePhone", fixture.get("phone").asText(), "emailAddress", email,
+            "companySet", new HashSet<>(List.of(company)), "isCustomer", true, "partnerTypeSelect", 2);
+      }
+    }
     Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", "C001");
-    if (customer == null) customer = record(BASE + "Partner", "partnerSeq", "C001", "name", "CCM synthetic customer C001",
-        "isCustomer", true, "partnerTypeSelect", 2);
     set(AuthUtils.getUser(), "activeCompany", company);
     set(AuthUtils.getUser(), "companySet", new HashSet<>(List.of(company))); save(AuthUtils.getUser());
     if (one(SALE + "SaleConfig", "self.company = ?1", company) == null) {
@@ -124,7 +131,12 @@ public class NativeGateService {
       set(line, "realQty", BigDecimal.valueOf(fixture.get("stock").asInt()));
       call(move, "addStockMoveLineListItem", line);
     }
-    save(move); call(stock, "plan", move); call(stock, "realize", move);
+    move = save(move); call(stock, "plan", move);
+    move = managed(move);
+    p.evidence.put("planned_initial_stock_move_id", move.getId());
+    p.evidence.put("planned_initial_stock_move_status", get(move, "statusSelect"));
+    if (!Integer.valueOf(2).equals(get(move, "statusSelect"))) throw new IllegalStateException("Native plan did not persist PLANNED");
+    call(stock, "realize", move); move = managed(move);
     p.stage("native-initial-stock-accounting");
     NativeFinance.opening(company, customer, warehouse, caseId);
     p.evidence.put("initial_stock_move_id", move.getId());
@@ -154,12 +166,15 @@ public class NativeGateService {
       set(line, "taxLineSet", new HashSet<>(List.of(NativeFinance.tax(company, dec(input, "tax_rate")))));
       saleLines.add(line);
     }
-    set(so, "saleOrderLineList", saleLines); save(so);
+    set(so, "saleOrderLineList", saleLines); so = save(so);
     call(service("com.axelor.apps.sale.service.saleorder.SaleOrderComputeService"), "computeSaleOrder", so);
+    so = managed(so);
     p.stage("native-sale-order-finalization");
     call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderFinalizeService"), "finalizeQuotation", so);
+    so = managed(so);
     p.stage("native-sale-order-confirmation");
     call(service("com.axelor.apps.sale.service.saleorder.status.SaleOrderConfirmService"), "confirmSaleOrder", so);
+    so = managed(so);
     p.stage("native-sale-delivery");
     Object moveIds = call(service("com.axelor.apps.supplychain.service.saleorder.SaleOrderStockService"), "createStocksMovesFromSaleOrder", so);
     if (!(moveIds instanceof List<?> ids) || ids.size() != 1) throw new IllegalStateException("Expected exactly one native delivery");
@@ -167,11 +182,16 @@ public class NativeGateService {
     if (input.get("guide") != null && !input.get("guide").isNull()) set(delivery, "trackingNumber", input.get("guide").asText());
     Object stock = service("com.axelor.apps.stock.service.StockMoveService");
     // createStocksMovesFromSaleOrder already calls the native planWithNoSplit.
-    call(stock, "copyQtyToRealQty", delivery); call(stock, "realize", delivery);
+    call(stock, "copyQtyToRealQty", delivery); delivery = managed(delivery);
+    call(stock, "realize", delivery); delivery = managed(delivery); so = managed(so);
     p.stage("native-invoice-generation");
     Model invoice = (Model) call(service("com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceService"), "generateInvoice", so);
-    set(invoice, "invoiceDate", DATE); save(invoice);
+    if (caseId.equals("CO00")) try {
+      set(invoice, "externalReference", FixtureBundle.json("scenarios.json").get("search").get("invoice").get("reference").asText());
+    } catch (java.io.IOException error) { throw new IllegalStateException("Fixed search fixture unavailable", error); }
+    set(invoice, "invoiceDate", DATE); invoice = save(invoice);
     call(service("com.axelor.apps.account.service.invoice.InvoiceService"), "validateAndVentilate", invoice);
+    invoice = managed(invoice); delivery = managed(delivery);
     p.evidence.put("sale_order_id", so.getId()); p.evidence.put("delivery_id", delivery.getId());
     p.evidence.put("invoice_id", invoice.getId());
     p.stage("native-cogs-and-settlement");

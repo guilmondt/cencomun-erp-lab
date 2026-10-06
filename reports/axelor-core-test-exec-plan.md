@@ -11,6 +11,16 @@ plan preparado y sus observaciones históricas; los resultados nuevos se
 publican aparte en `reports/axelor-core-test.md` y sus evidencias. Los tests
 del baseline y de política monetaria no se cuentan como grupos nativos PASS.
 
+Progreso de continuación (2026-10-06): checkout/ejecutor recuperado; historial
+del baseline verificado antes del build; preparación de fixture separada por
+petición y commit del consumo nativo de `Sequence`. La repetición de gates
+se ejecuta antes de ampliar su alcance. Se implementan los campos de producto
+con FK nativos y pruebas `PROD01-04` por operador real, más consultas de
+`SEARCH01-04-NATIVE` por lector real. Toda dependencia ausente y subcaso no
+ejecutado conserva estado explícito. La factura de búsqueda depende de CO00.
+No se publica red pendiente, no se modifica ningún pin y no se declara cierre
+de comparación con éxitos parciales.
+
 ## 1. Referencia inmutable y alcance
 
 Fuente común: commit

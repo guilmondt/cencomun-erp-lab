@@ -1,6 +1,10 @@
 // Runtime configuration only. Original settings/build/module sources stay intact.
 gradle.beforeProject { p ->
   if (p.rootProject.name != 'axelor-erp') return
+  if (p.name == 'cencomun-baseline') {
+    // Configure before the AOP plugin captures generated source/output directories.
+    p.layout.buildDirectory.set(p.layout.projectDirectory.dir('build/full'))
+  }
   // Some AOP configuration resolves runtimeClasspath during project evaluation.
   // Locks must be configured before any project build script can resolve it.
   p.dependencyLocking {

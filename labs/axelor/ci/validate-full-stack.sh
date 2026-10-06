@@ -95,6 +95,16 @@ assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), 
 print('Upstream representative suite: 16 tests passed, no failures/errors/skips')
 PY
 echo '::notice title=Axelor full build::Full AOS/frontend WAR and embedded launcher compiled; 16 upstream unit cases passed.'
+python3 - <<'PY'
+from pathlib import Path
+import zipfile
+p=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/libs/cencomun-baseline-0.1.0.jar')
+with zipfile.ZipFile(p) as jar:
+    entries=jar.namelist()
+    assert 'com/cencomun/core/db/CcmProductProfile.class' in entries
+    assert not any(n.startswith('com/axelor/') for n in entries), 'Custom artifact contains upstream classes'
+print('Custom native entity compiled; artifact contains no upstream classes')
+PY
 echo 'Phase: replay Gradle targets with generated strict dependency locks'
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
   :war :generateRunner :modules:axelor-base:test \

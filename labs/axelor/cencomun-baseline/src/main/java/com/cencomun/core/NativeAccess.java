@@ -3,6 +3,8 @@ package com.cencomun.core;
 import com.axelor.db.JpaRepository;
 import com.axelor.db.Model;
 import com.axelor.db.Query;
+import com.axelor.db.JPA;
+import com.axelor.db.EntityHelper;
 import com.axelor.inject.Beans;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,7 +18,8 @@ import java.util.List;
 public final class NativeAccess {
   @SuppressWarnings("unchecked")
   public static Class<Model> type(String name) {
-    if (!name.startsWith("com.axelor.")) throw new IllegalArgumentException("Not an Axelor API");
+    if (!name.startsWith("com.axelor.") && !name.startsWith("com.cencomun.core.db."))
+      throw new IllegalArgumentException("Not a native LAB model or Axelor API");
     try { return (Class<Model>) Class.forName(name); }
     catch (ClassNotFoundException e) { throw new IllegalStateException("Pinned native API unavailable: " + name, e); }
   }
@@ -25,9 +28,14 @@ public final class NativeAccess {
     try { return type(name).getConstructor().newInstance(); }
     catch (ReflectiveOperationException e) { throw new IllegalStateException(e); }
   }
-  @SuppressWarnings("unchecked")
   public static Model save(Model model) {
-    return JpaRepository.of((Class<Model>) (Class<?>) model.getClass()).save(model);
+    return JpaRepository.of(EntityHelper.getEntityClass(model)).save(model);
+  }
+  /** Same AOP contract as the pinned stock JpaModelHelper, after native batch clears. */
+  public static Model managed(Model model) {
+    if (model == null || model.getId() == null) throw new IllegalStateException("Persisted native entity required");
+    return JPA.em().contains(model) ? EntityHelper.getEntity(model)
+        : JPA.find(EntityHelper.getEntityClass(model), model.getId());
   }
   public static Model one(String name, String filter, Object... values) {
     return Query.of(type(name)).filter(filter, values).fetchOne();
@@ -37,6 +45,14 @@ public final class NativeAccess {
   }
   public static Object get(Object obj, String property) { return call(obj, "get" + cap(property)); }
   public static void set(Object obj, String property, Object value) { call(obj, "set" + cap(property), value); }
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public static void setEnum(Object obj, String property, String value) {
+    List<Method> setters = Arrays.stream(obj.getClass().getMethods())
+        .filter(m -> m.getName().equals("set" + cap(property)) && m.getParameterCount() == 1
+            && m.getParameterTypes()[0].isEnum() && !m.isBridge()).toList();
+    if (setters.size() != 1) throw new IllegalStateException("Pinned enum setter missing: " + property);
+    set(obj, property, Enum.valueOf((Class) setters.getFirst().getParameterTypes()[0], value));
+  }
   private static String cap(String s) { return Character.toUpperCase(s.charAt(0)) + s.substring(1); }
   private static Class<?> box(Class<?> t) {
     if (t == int.class) return Integer.class; if (t == boolean.class) return Boolean.class;

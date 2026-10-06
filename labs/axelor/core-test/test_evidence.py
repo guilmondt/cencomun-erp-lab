@@ -1,13 +1,24 @@
 """Regression tests for coverage integrity and native accounting evidence rejection."""
 import unittest
 from pathlib import Path
-from run import assert_native_economics, criteria_for, rows_for, verify_bundle, verified_build_status
+from run import assert_native_economics, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
 from finalize import BASELINE, baseline_pin_blob
 
 FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_log_extraction_does_not_infer_missing_native_or_build_proof(self):
+        import tempfile
+        from extract_log_evidence import extract
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / "run.log"
+            log.write_text('timestamp ##[notice]{"status":"PASS","message":"build successful"}\n'
+                           'timestamp ##[notice]{"case":"CO00","status":"PASS"\n')
+            result = extract(log, Path(tmp) / "results", "synthetic", "1" * 40, FIXTURES)
+            self.assertEqual({"UNRUN": 34}, result["counts"])
+            self.assertEqual("UNRUN", next(r["status"] for r in result["criteria"] if r["criterion"] == 2))
+
     def test_shallow_checkout_requires_explicit_base_fetch(self):
         import subprocess
         import tempfile
@@ -57,6 +68,34 @@ class EvidenceTests(unittest.TestCase):
         statuses = {r["criterion"]: r["status"] for r in criteria_for(rows)}
         self.assertEqual("UNRUN", statuses[2])
         self.assertEqual("UNRUN", statuses[5])
+
+    def test_partial_admin_pass_cannot_pass_a_complete_group_criterion(self):
+        rows = rows_for(verify_bundle(FIXTURES))
+        for row in rows:
+            row.update(status="PASS", observed_revision=row["minimum_revision"], evidence="actual-test.json", complete=True)
+        next(r for r in rows if r["case"] == "CO00-NATIVE")["complete"] = False
+        criteria = {r["criterion"]: r["status"] for r in criteria_for(rows)}
+        self.assertEqual("UNRUN", criteria[5])
+
+    def test_product_save_success_without_durable_warranty_change_fails(self):
+        import contextlib
+        import io
+        import tempfile
+        from unittest.mock import Mock, patch
+        operator = Mock()
+        operator.samples = []
+        # Simulate a save success whose separate persisted read stayed unchanged.
+        operator.request.side_effect = lambda path, data: ({"status": 0, "data": [{"id": 1, "version": 0,
+            "warrantyQuantity": 12, "warrantyUnit": "MONTH"}]} if path.endswith("/fetch") else {"status": 0})
+        admin = Mock()
+        admin.action.return_value = {"company_id": 1, "profiles": [
+            {"id": i, "product_id": i, "product_code": f"P{i:03}"} for i in (1, 2, 3)]}
+        row = next(r for r in rows_for(verify_bundle(FIXTURES)) if r["case"] == "PROD01-04")
+        with tempfile.TemporaryDirectory() as tmp, patch("run.NativeClient", return_value=operator), contextlib.redirect_stdout(io.StringIO()):
+            result = run_product_cases(admin, "unused", FIXTURES, Path(tmp), row)
+        self.assertEqual("FAIL", result["status"])
+        self.assertEqual("FAIL", row["status"])
+        self.assertFalse(row["complete"])
 
     def test_passing_gate_needs_physical_stock_not_only_calculated_money(self):
         expected = {"stock": [3, 4, 5], "stock_value": "430.00"}

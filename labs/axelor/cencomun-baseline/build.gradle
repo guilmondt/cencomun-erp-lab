@@ -21,6 +21,19 @@ axelor {
   description = 'Isolated Cencomun extension and synthetic Core Test laboratory.'
 }
 
+if (System.getenv('CCM_AXELOR_FULL_STACK') == '1') {
+  // Exact existing AOS project; no dependency version or baseline lock is changed.
+  dependencies { api project(':modules:axelor-base') }
+  // AOP can generate merged dependency models alongside our domain. Compile
+  // only our namespace; the pinned upstream modules own all com.axelor classes.
+  tasks.named('compileJava') { exclude 'com/axelor/**' }
+} else {
+  // Cloud keeps the independently compiled AOP module. Native FK entities are
+  // compiled and exercised by the full AOS runner, not replaced by test doubles.
+  tasks.named('compileJava') { exclude 'com/cencomun/core/db/**' }
+  tasks.named('processResources') { exclude 'domains/**' }
+}
+
 // Exact shared inputs. The oracle is used by assertions, never to create ERP entries.
 processResources {
   from(new File(projectDir.canonicalFile, '../../../fixtures/ccm-core-v1')) {

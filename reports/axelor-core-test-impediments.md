@@ -177,3 +177,36 @@ ese intento, no prueban ni refutan la corrección de Sequence.
 4. Verificar aparte en CI el SHA base real y después repetir ambos gates.
 
 No se publica ni añade el host 4 al borrador de red para recuperar este log.
+
+## B07 — referencia de StockMove separada del contexto después de planificar
+
+Run 37405935889, commit `9e9e835ce6d6cad40994d0b860c739e516d2008c`:
+CO00 5.881 s, TAX01-W 0.684 s; ambos fallaron en la entrada inicial con
+`AxelorException: Cannot realize a stock move that is not planned.`
+Las doce secuencias y sus versiones ya estaban confirmadas en otra petición.
+La segunda lectura muestra que `inStockMove` pasó de nextNum 1 a 2: el
+incremento nativo funcionó. El error `NoResultException` no se repitió.
+Compañía 1 quedó persistida; stock, ventas, entregas, facturas y asientos
+permanecieron vacíos tras rollback de la entrada inicial.
+
+La fuente fijada de `planStockMove` devuelve void y sustituye su referencia
+mediante `JpaModelHelper.ensureManaged`, antes y después del procesamiento de
+líneas. Nuestro caller reutilizaba el objeto anterior, que podía estar separado
+del contexto y seguir con DRAFT. `realizeStockMove` exige PLANNED antes de
+recargarlo. No se puede resolver estableciendo el estado manualmente.
+
+1. Conservar el objeto devuelto por cada save del repositorio nativo.
+2. Después de servicios que limpian el contexto, recuperar el modelo con
+   `JPA.find(EntityHelper.getEntityClass(model), id)`, siguiendo exactamente
+   la semántica de `JpaModelHelper.ensureManaged` de upstream.
+3. Comprobar y exportar PLANNED real después de plan; llamar realize con ese
+   modelo administrado. Aplicar la misma disciplina al resto del recorrido.
+4. Repetir ambos gates, exigiendo stock y contabilización reales en nuevas
+   peticiones. Mantener la misma transacción y rollback de los efectos.
+
+El estado BLOCKED del run se conserva; la causa es un defecto del caller
+Cencomun, no una necesidad de modificar upstream. La corrección de esta
+referencia está pendiente de repetir. B04 (visibilidad de secuencias) queda
+verificado para el incremento que antes fallaba, sin afirmar éxito económico.
+B05 quedó verificado: finalize publicó el blob base real, SHA256 de pins
+idénticos, 2+7+16 tests y diffs host/AOS cero. Sólo ese criterio 2 pasó.
