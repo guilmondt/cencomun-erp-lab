@@ -1,0 +1,25 @@
+{
+  "recorded_utc": "2026-10-06T09:34:58.985639+00:00",
+  "scope": "Harness and repository checks only; no official or Core counts",
+  "harness_unittest": {
+    "command": "official-bench/env/bin/python -m unittest discover -s scripts/official-tests -p test_*.py",
+    "tests": 52,
+    "PASS": 52,
+    "FAIL": 0,
+    "ERROR": 0
+  },
+  "verify_repo": "PASS",
+  "git_diff_check": "PASS",
+  "sanitization_scan": {
+    "files_scanned": 50,
+    "retained_values_compared": 76,
+    "public_fixture_configs_excluded_by_pinned_blob_equality": 4,
+    "issues": []
+  },
+  "artifact_types_published": [
+    "Python code",
+    "Markdown documentation",
+    "sanitized JSON evidence"
+  ],
+  "credentials_dumps_raw_logs_published": false
+}

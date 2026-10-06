@@ -2,7 +2,6 @@
 
 import argparse
 import json
-import secrets
 import subprocess
 from pathlib import Path
 from run import SuiteLock, active_runners
@@ -12,21 +11,41 @@ BENCH = ROOT / 'official-bench'
 CLI = str(ROOT / 'bench-tools/bin/bench')
 
 
-def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False, cause=False, cause_fixed=False):
-    if sum((fresh, diagnostic, fixture_audit, fixture_order, final, cause, cause_fixed)) > 1:
+def retained_native_admin(common_config, fallback_private):
+    """Pinned install_db prefers loaded conf over --admin-password.
+
+    Reuse the existing common credential; never update a user/password or
+    common config. This aligns preparation of NEW isolated sites with native CI.
+    """
+    common = json.loads(common_config.read_text()).get('admin_password')
+    if common:
+        return {'admin_password': common}
+    return {'admin_password': json.loads(fallback_private.read_text())['admin_password']}
+
+
+def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False, cause=False, cause_fixed=False, auth_clean=False, auth_sequence=False):
+    if sum((fresh, diagnostic, fixture_audit, fixture_order, final, cause, cause_fixed, auth_clean, auth_sequence)) > 1:
         raise ValueError('Choose one isolated site slot.')
     if (fixture_audit or fixture_order or official_fx_fixtures) and app != 'erpnext':
         raise ValueError('Official FX fixtures apply only to ERPNext.')
     if cause_fixed and app != 'frappe':
         raise ValueError('Corrected mock guard reproduction is Frappe only.')
-    suffix = '-cause-fixed' if cause_fixed else ('-cause' if cause else ('-final' if final else ('-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else ''))))))
+    if (auth_clean or auth_sequence) and app != 'frappe':
+        raise ValueError('Bounded auth sites are Frappe only.')
+    suffix = '-auth-clean' if auth_clean else ('-auth-sequence' if auth_sequence else ('-cause-fixed' if cause_fixed else ('-cause' if cause else ('-final' if final else ('-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else ''))))))))
     site = 'ccm-upstream-' + app + suffix + '.test'
     private_dir = ROOT / 'official-tests'
     private_dir.mkdir(mode=0o700, exist_ok=True)
     marker = private_dir / (app + suffix + '-isolated-created.json')
     private = private_dir / (app + suffix + '-private.json')
+    if (auth_clean or auth_sequence) and (marker.exists() or (BENCH / 'sites' / site).exists()):
+        raise RuntimeError('Preserve existing auth diagnostic site; do not rewrite its config/credentials. Use read-only probe or runner.')
     if not private.exists():
-        private.write_text(json.dumps({'admin_password': secrets.token_urlsafe(32)}))
+        # Reuse the already retained credential for NEW sites; never reset an
+        # existing site/user or regenerate a persistent credential to pass tests.
+        credentials = retained_native_admin(BENCH / 'sites/common_site_config.json',
+                                            private_dir / 'frappe-cause-fixed-private.json')
+        private.write_text(json.dumps(credentials))
         private.chmod(0o600)
     credentials = json.loads(private.read_text())
     bootstrap = json.loads((ROOT / 'secrets.json').read_text())
@@ -97,11 +116,11 @@ def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx
     print('Prepared official-only site:', site, flush=True)
 
 
-def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False, cause=False, cause_fixed=False):
+def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False, cause=False, cause_fixed=False, auth_clean=False, auth_sequence=False):
     with SuiteLock():
         if active_runners():
             raise RuntimeError('An official runner is active; do not change its sites or fixtures.')
-        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order, final, cause, cause_fixed)
+        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order, final, cause, cause_fixed, auth_clean, auth_sequence)
 
 
 if __name__ == '__main__':
@@ -115,5 +134,7 @@ if __name__ == '__main__':
     parser.add_argument('--final', action='store_true', help='New official-only site for the authorized final full CI pass; preserve previous sites.')
     parser.add_argument('--cause', action='store_true', help='New official-only site for bounded cause diagnostics; preserve all previous sites.')
     parser.add_argument('--cause-fixed', action='store_true', help='New Frappe site after proven offline/native-mock correction; preserve failed site.')
+    parser.add_argument('--auth-clean', action='store_true', help='New native-CI Frappe site for clean representative auth/context cases; retained credential reused.')
+    parser.add_argument('--auth-sequence', action='store_true', help='Separate new native-CI Frappe site for preceding-module hypotheses; retained credential reused.')
     args = parser.parse_args()
-    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order, args.final, args.cause, args.cause_fixed)
+    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order, args.final, args.cause, args.cause_fixed, args.auth_clean, args.auth_sequence)

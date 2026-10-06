@@ -1,5 +1,10 @@
 # Última pasada completa de CI oficial
 
+Actualización acotada desde baad8f9: [auth/request](frappe-auth-request-diagnostics.md)
+demuestra y retesta los 16 pendientes (14 PASS/2 ERROR), conserva un fallo
+adicional API key FAIL/UNKNOWN y todos los intentos. No repite completos ni
+cambia esta tabla, C13 BLOCKED o sus seis PATCH UNRUN.
+
 Corrección posterior de causalidad: los 26 mensajes etiquetados abajo como
 rechazos TCP son rechazos del mock oficial Responses. El resultado completo
 permanece FAIL. Véase [diagnóstico acotado](frappe-bounded-cause-diagnostics.md)

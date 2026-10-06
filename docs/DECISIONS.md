@@ -423,3 +423,29 @@
   persistence is distinct from coordinator Save/Publish and new restoration.
 - Evidence: tasks/103-frappe-bounded-cause-diagnostics.md,
   reports/frappe-bounded-cause-diagnostics.md and docs/FRAPPE_ENVIRONMENT_START.md.
+## ADR-016 — native credential precedence and bounded request/auth diagnosis
+
+- Own preparation defect: pinned install_db prefers already loaded common
+  admin_password to the command argument; writing a different per-site conf
+  afterward made HTTP password login disagree with the stored native hash.
+  New sites reuse the existing common credential. No existing password, secret,
+  common config, policy or access is changed or reset.
+- Read-only evidence: passlib verifies SELECT results, never check_password,
+  with boolean matches only. Native request Local transitions, exception frames,
+  configuration-loading time and redirect parameter names/presence are observed.
+  No credential/token/cookie values or fake per-case request are published/added.
+- Bounded outcomes: 14 of the 16 prior failures pass after new-site preparation;
+  two Client retain ERROR. Their truthy native _dict request has cache_control
+  None at website/utils:537 while the native Workflow fixture triggers print.
+  No upstream fixture, assertion, renderer or validator change is made.
+- OAuth's first reproduced login 500 is a native SecurityException from the IP
+  failure tracker, preceding authorize's login redirect and empty token result.
+  Performance's native benchmark runs without frame profiling; threshold intact.
+- Extra API-key positive request FAIL remains UNKNOWN; stored native secret is
+  not decryptable, but initial key/cache mutation order was not captured.
+  Do not regenerate keys, repeat to force PASS or call UNKNOWN inevitable.
+- All old results/attempts and full FAIL remain; original runtime/oracle unchanged,
+  authenticated Core price/stock read passes, no Core rerun. C13 BLOCKED/six UNRUN.
+  Coordinator already published baad8f9; only a new ordinary draft is prepared.
+- Evidence: tasks/104-frappe-auth-request-diagnostics.md and
+  reports/frappe-auth-request-diagnostics.md. PR #4 stays draft on lab only.

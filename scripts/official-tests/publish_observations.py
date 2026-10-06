@@ -43,7 +43,11 @@ def main():
                    'external_transport_rejected', 'stock_entry_validation', 'bom_routing_state', 'observation_error',
                    'journal_state', 'journal_fx_return', 'http_attempt', 'http_exception',
                    'native_get_url', 'native_http_served', 'native_mock_transition', 'native_mock_dispatch',
-                   'native_module_discovery')
+                   'native_module_discovery', 'auth_state', 'request_context_transition',
+                   'auth_config_loaded', 'auth_class_import', 'native_auth_operation',
+                   'native_http_exception', 'native_todo_workflow_call', 'native_cache_html',
+                   'auth_http_response', 'native_password_write_call', 'native_auth_tracker',
+                   'native_oauth_assertion_state', 'native_http_reply')
         errors = {c['id'] for c in result.get('cases', []) if c['status'] == 'ERROR'}
         errors.update(c['id'] for c in result.get('failure_headers', []) if c['status'] == 'ERROR')
         evidence = {'native_result': resultpath.name, 'scope': result['scope'],

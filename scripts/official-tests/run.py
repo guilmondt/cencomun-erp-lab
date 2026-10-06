@@ -30,7 +30,8 @@ ALLOWED_SITES = ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test',
                  'ccm-upstream-erpnext-fixture-audit.test', 'ccm-upstream-erpnext-fixture-order.test',
                  'ccm-upstream-frappe-final.test', 'ccm-upstream-erpnext-final.test',
                  'ccm-upstream-frappe-cause.test', 'ccm-upstream-erpnext-cause.test',
-                 'ccm-upstream-frappe-cause-fixed.test']
+                 'ccm-upstream-frappe-cause-fixed.test',
+                 'ccm-upstream-frappe-auth-clean.test', 'ccm-upstream-frappe-auth-sequence.test']
 
 
 class SuiteLock:
@@ -217,8 +218,18 @@ def parse_parallel_results(log, app, known_test_ids=None):
                           'FAILED_EVENT has no inferred FAIL/ERROR subtype. Missing final summary leaves count unknown.'}
 
 
+def observed_native_ids(path):
+    """Use actual loader events; do not import/discover modules early."""
+    if not path.exists():
+        return None
+    ids = {identifier for line in path.read_text().splitlines()
+           for event in [json.loads(line)] if event['kind'] == 'native_module_discovery'
+           for identifier in event['test_ids']}
+    return ids or None
+
+
 def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel=False,
-              offline=False, observe=False, tests=(), sequence=()):
+              offline=False, observe=False, tests=(), sequence=(), auth_diagnostics=False):
     PRIVATE.mkdir(mode=0o700, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
     if ci_parallel and (module or category):
@@ -258,6 +269,10 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
         command = [str(BENCH / 'env/bin/python'), str(REPO / 'scripts/official-tests/native_subset.py'),
                    app, site, *sequence]
     child_env = {**os.environ, 'CI': 'Yes'}
+    if auth_diagnostics:
+        if not offline:
+            raise ValueError('Auth diagnostics require the offline guard.')
+        child_env['CCM_OFFICIAL_AUTH_DIAG'] = '1'
     if offline or observe:
         child_env.update(CCM_OFFICIAL_OFFLINE='1' if offline else '0',
                          CCM_OFFICIAL_OBSERVE='1' if observe else '0',
@@ -330,14 +345,25 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
     known_ids = ([identifier for category_data in json.loads(manifest.read_text())['categories']
                   for identifier in category_data['test_ids']]
                  if ci_parallel and site.endswith('-final.test') and manifest.exists() else None)
+    if sequence and observe:
+        known_ids = observed_native_ids(PRIVATE / (base + '-observations.jsonl'))
     parsed = (parse_parallel_results(rawlog, app, known_ids) if ci_parallel or sequence else
               parse_results(xmlpath.read_text() if xmlpath.exists() else '', rawlog))
+    if auth_diagnostics:
+        # Login/redirect failures can contain newly issued tokens absent from
+        # retained secret files. Keep raw XML/logs private; publish frames only.
+        for case in parsed['cases']:
+            if 'traceback' in case:
+                case['native_trace_frames'] = re.findall(r'^  File .+$', case.pop('traceback'), re.M)
+                case.pop('message', None)
     status = 'FAIL' if parsed['counts']['FAIL'] or parsed['counts']['ERROR'] else (
         'BLOCKED' if result_code or not parsed['actual_tests_run'] else 'PASS')
     record = {'scope': 'full official server application discovery' if not module else 'official module regression',
               'app': app, 'site': site, 'bench': str(BENCH), 'module': module, 'category': category or 'all', 'attempt': attempt, 'status': status,
               'ci_parallel': ci_parallel, 'sequence': list(sequence), 'selected_tests': list(tests),
               'offline': offline, 'observe': observe,
+              'auth_diagnostics': auth_diagnostics,
+              'native_frame_profiling': observe,
               'command': ' '.join(command), 'web_command': ' '.join(webargs), 'exit_code': result_code,
               'recorded_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'elapsed_seconds': round(time.monotonic() - start, 3),
@@ -351,7 +377,7 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
         record['scope'] = 'selected official modules through native CI runner; not full suite'
     elif tests:
         record['scope'] = 'selected official methods; not full module or suite'
-    if (result_code or not parsed['actual_tests_run']) and not (ci_parallel or sequence):
+    if (result_code or not parsed['actual_tests_run']) and not (ci_parallel or sequence or auth_diagnostics):
         record['diagnostic_tail'] = redact('\n'.join(rawlog.splitlines()[-75:]))
     (OUT / (base + '.json')).write_text(json.dumps(record, indent=2) + '\n')
     statepath.unlink(missing_ok=True)
@@ -379,6 +405,7 @@ if __name__ == '__main__':
     parser.add_argument('--observe', action='store_true', help='Record whitelisted native state and outcomes outside upstream sources.')
     parser.add_argument('--test', action='append', default=[], help='Native method selector; report as selected methods only.')
     parser.add_argument('--sequence', nargs='+', default=[], help='Selected modules in one native CI process, in the supplied order.')
+    parser.add_argument('--auth-diagnostics', action='store_true', help='Read-only context/auth evidence; publish no raw exception bodies.')
     args = parser.parse_args()
     raise SystemExit(main(args.app, args.module, args.category, args.port, args.site, args.ci_parallel,
-                          args.offline, args.observe, args.test, args.sequence))
+                          args.offline, args.observe, args.test, args.sequence, args.auth_diagnostics))

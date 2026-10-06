@@ -1,0 +1,4593 @@
+{
+  "native_result": "frappe-test_frappe_client-selected-attempt-1.json",
+  "scope": "selected official methods; not full module or suite",
+  "private_stream_sha256": "83d2b025eb93815f41dbcbbf9b238be83d9a3e02fa33310e072b1e731794e51d",
+  "counts_by_event": {
+    "observer_started": 4,
+    "external_transport_rejected": 1,
+    "request_context_transition": 30,
+    "auth_config_loaded": 16,
+    "module_map_return": 3,
+    "native_http_served": 2,
+    "auth_class_import": 1,
+    "native_module_discovery": 1,
+    "native_get_url": 65,
+    "native_todo_workflow_call": 1,
+    "native_password_write_call": 9,
+    "native_state": 2,
+    "auth_state": 2,
+    "http_attempt": 1,
+    "native_auth_operation": 14,
+    "native_http_exception": 1,
+    "http_response": 1,
+    "auth_http_response": 1,
+    "test_stopped": 1
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "selection": "All allowed events",
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 1519,
+      "epoch": 1791277635.7711189,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 1519,
+      "epoch": 1791277636.1418805,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 1519,
+      "epoch": 1791277641.318036,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.7514527,
+      "test": null,
+      "operation": "init_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.7515728,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.7516193,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.75166,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.7516937,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1519,
+      "epoch": 1791277641.7525642,
+      "test": null,
+      "function": "get_site_config",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 1519,
+      "epoch": 1791277641.761479,
+      "test": null,
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_auth_clean"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.761558,
+      "test": null,
+      "operation": "init_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 1519,
+      "epoch": 1791277641.861136,
+      "test": null,
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.8705063,
+      "test": null,
+      "operation": "destroy_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wsgi.py",
+          "line": 260,
+          "function": "close"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 367,
+          "function": "execute"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 370,
+          "function": "run_wsgi"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 473,
+          "function": "handle_one_request"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 485,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 398,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 766,
+          "function": "__init__"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 362,
+          "function": "finish_request"
+        }
+      ],
+      "request_is_none": false,
+      "request_type": "werkzeug.wrappers.request.Request",
+      "request_truthy": true,
+      "cache_control_is_none": false,
+      "cache_control_has_no_cache": true
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277641.8707023,
+      "test": null,
+      "operation": "destroy_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wsgi.py",
+          "line": 260,
+          "function": "close"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 367,
+          "function": "execute"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 370,
+          "function": "run_wsgi"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 473,
+          "function": "handle_one_request"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 485,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 398,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 766,
+          "function": "__init__"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 362,
+          "function": "finish_request"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 1528,
+      "epoch": 1791277641.9167705,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 1528,
+      "epoch": 1791277642.305707,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.6075497,
+      "test": null,
+      "operation": "init_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 347,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.607637,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 347,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.6077607,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 347,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.6078095,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 347,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.6078417,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 347,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277643.608699,
+      "test": null,
+      "function": "get_site_config",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 1528,
+      "epoch": 1791277643.6363797,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_auth_clean"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.6365047,
+      "test": null,
+      "operation": "init_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 347,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.785576,
+      "test": null,
+      "operation": "init_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 43,
+          "function": "_initialize_test_environment"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 137,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.785646,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 43,
+          "function": "_initialize_test_environment"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 137,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.7856925,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 43,
+          "function": "_initialize_test_environment"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 137,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277643.7857237,
+      "test": null,
+      "operation": "init_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 43,
+          "function": "_initialize_test_environment"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 137,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "auth_class_import",
+      "pid": 1528,
+      "epoch": 1791277648.3381448,
+      "test": null,
+      "class_name": "TestFrappeClient",
+      "config_present": true,
+      "password_matches_config": true,
+      "password_matches_retained": true
+    },
+    {
+      "kind": "native_module_discovery",
+      "pid": 1528,
+      "epoch": 1791277648.3404737,
+      "test": null,
+      "module": "frappe.tests.test_frappe_client",
+      "test_ids": [
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_delete_doc",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_get_doc",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_get_single",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_filters",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_name",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_with_malicious_query",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_insert_many",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_list_docs",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_list_summary",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_update_child_doc",
+        "frappe.tests.test_frappe_client.TestFrappeClient.test_update_doc"
+      ]
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277652.821531,
+      "test": null,
+      "function": "get_site_config",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277653.429063,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_todo_workflow_call",
+      "pid": 1528,
+      "epoch": 1791277653.767038,
+      "test": null,
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/workflow/doctype/workflow_action/workflow_action.py",
+          "line": 92,
+          "function": "process_workflow_actions"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1645,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1569,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 77,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277654.2414458,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277654.2737932,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277654.277635,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277654.2778678,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277654.2799098,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277654.3653789,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277654.5644803,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277658.427628,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277658.4371328,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277659.8123672,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277659.8348134,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277659.837889,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277659.8381197,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277659.8399868,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277659.8461459,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277659.8481925,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.1898472,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.1967986,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277660.5391488,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.5657227,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277660.5699477,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.5701745,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.5719519,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.5782661,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.580402,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.9220862,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277660.9292524,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277661.2693682,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.2934966,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277661.296457,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.2966866,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.2986155,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.3049443,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.3069413,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.6420121,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277661.6490877,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277661.9774013,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.0017867,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277662.0046835,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.0049005,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.006633,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.013089,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.015152,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.3550065,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.361492,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277662.6756065,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.6993299,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277662.702125,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.7023435,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.7040424,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.7097845,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277662.7116656,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.0376503,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.0445435,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277663.3499138,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.370649,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277663.3736446,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.3738673,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.3756046,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.381523,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.3834639,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.7337468,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277663.740904,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277664.043075,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.0642395,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277664.067109,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.067363,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.0690324,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.0749447,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.077056,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.407452,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.4141223,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_password_write_call",
+      "pid": 1528,
+      "epoch": 1791277664.7329845,
+      "test": null,
+      "administrator": false,
+      "passed_matches_retained": false,
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 455,
+          "function": "send_password_notification"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/user/user.py",
+          "line": 324,
+          "function": "on_update"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1258,
+          "function": "fn"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1637,
+          "function": "runner"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1663,
+          "function": "composer"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1261,
+          "function": "run_method"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 1456,
+          "function": "run_post_save_methods"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py",
+          "line": 514,
+          "function": "insert"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 314,
+          "function": "_try_create"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 231,
+          "function": "_load"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 279,
+          "function": "_sync_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 196,
+          "function": "_generate_records_for"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 148,
+          "function": "_generate_all_records_towards"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/utils/generators.py",
+          "line": 421,
+          "function": "make_test_records"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 207,
+          "function": "_create_global_test_record_dependencies"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/utils.py",
+          "line": 12,
+          "function": "wrapper"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/environment.py",
+          "line": 186,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 107,
+          "function": "_prepare_category"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/testing/runner.py",
+          "line": 87,
+          "function": "iterRun"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 163,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/decorators.py",
+          "line": 34,
+          "function": "new_func"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 907,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1353,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1970,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/bench_helper.py",
+          "line": 48,
+          "function": "invoke"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/click/core.py",
+          "line": 1490,
+          "function": "main"
+        }
+      ]
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.7566085,
+      "test": null,
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277664.7599375,
+      "test": null,
+      "function": "get_conf",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.7601538,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.7619436,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.7722118,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277664.7747345,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277665.1459117,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277665.1571407,
+      "test": null,
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277665.3877974,
+      "test": null,
+      "operation": "init_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/integration_test_case.py",
+          "line": 46,
+          "function": "setUpClass"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 166,
+          "function": "_handleClassSetUp"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 114,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 84,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/xmlrunner/runner.py",
+          "line": 67,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 168,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277665.3878791,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/integration_test_case.py",
+          "line": 46,
+          "function": "setUpClass"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 166,
+          "function": "_handleClassSetUp"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 114,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 84,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/xmlrunner/runner.py",
+          "line": 67,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 168,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277665.387933,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/integration_test_case.py",
+          "line": 46,
+          "function": "setUpClass"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 166,
+          "function": "_handleClassSetUp"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 114,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 84,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/xmlrunner/runner.py",
+          "line": 67,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 168,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1528,
+      "epoch": 1791277665.3880832,
+      "test": null,
+      "operation": "init_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/integration_test_case.py",
+          "line": 46,
+          "function": "setUpClass"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 166,
+          "function": "_handleClassSetUp"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 114,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/suite.py",
+          "line": 84,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/xmlrunner/runner.py",
+          "line": 67,
+          "function": "run"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 168,
+          "function": "main"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/testing.py",
+          "line": 362,
+          "function": "run_tests"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/__init__.py",
+          "line": 28,
+          "function": "_func"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277665.3881912,
+      "test": null,
+      "function": "get_conf",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_state",
+      "pid": 1528,
+      "epoch": 1791277665.3909905,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      }
+    },
+    {
+      "kind": "auth_state",
+      "pid": 1528,
+      "epoch": 1791277665.4099412,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false,
+      "config_admin_password_present": true,
+      "config_matches_retained": true,
+      "administrator_auth_record_present": true,
+      "retained_matches_native_hash": false,
+      "config_matches_native_hash": false,
+      "common_admin_password_present": true,
+      "common_matches_native_hash": true,
+      "config_matches_common": false,
+      "auth_settings": {
+        "disable_user_pass_login": 0,
+        "allow_consecutive_login_attempts": 10,
+        "allow_login_after_fail": 60,
+        "enable_two_factor_auth": 0,
+        "force_user_to_reset_password": 0
+      },
+      "active_todo_workflows": [],
+      "cached_todo_workflow": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 1528,
+      "epoch": 1791277665.4124599,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 1528,
+      "epoch": 1791277665.4183211,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.4242797,
+      "test": null,
+      "operation": "init_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.4245017,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.4245641,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.4246006,
+      "test": null,
+      "operation": "init_c_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.4246335,
+      "test": null,
+      "operation": "init_c_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1519,
+      "epoch": 1791277665.4248521,
+      "test": null,
+      "function": "get_site_config",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 1519,
+      "epoch": 1791277665.42798,
+      "test": null,
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": [
+        "frappe"
+      ],
+      "db_name": "ccm_upstream_frappe_auth_clean"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.4280372,
+      "test": null,
+      "operation": "init_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 217,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wrappers/request.py",
+          "line": 193,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 123,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/middleware/shared_data.py",
+          "line": 250,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/middlewares.py",
+          "line": 31,
+          "function": "__call__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 331,
+          "function": "execute"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.429301,
+      "test": null,
+      "operation": "login_call",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.430257,
+      "test": null,
+      "operation": "login_c_call",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.4302864,
+      "test": null,
+      "operation": "login_c_return",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5298913,
+      "test": null,
+      "operation": "authenticate_call",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5299587,
+      "test": null,
+      "operation": "authenticate_c_call",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5299797,
+      "test": null,
+      "operation": "authenticate_c_return",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5300043,
+      "test": null,
+      "operation": "authenticate_c_call",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5300176,
+      "test": null,
+      "operation": "authenticate_c_return",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5300298,
+      "test": null,
+      "operation": "authenticate_c_call",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5300415,
+      "test": null,
+      "operation": "authenticate_c_return",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.5585163,
+      "test": null,
+      "operation": "fail_call",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "native_reason": "Invalid login credentials"
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1519,
+      "epoch": 1791277665.6843379,
+      "test": null,
+      "function": "get_site_config",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.6881187,
+      "test": null,
+      "operation": "fail_return",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "native_reason": "Invalid login credentials"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.688156,
+      "test": null,
+      "operation": "authenticate_return",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_auth_operation",
+      "pid": 1519,
+      "epoch": 1791277665.6881752,
+      "test": null,
+      "operation": "login_return",
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 1519,
+      "epoch": 1791277665.6881986,
+      "test": null,
+      "site": "ccm-upstream-frappe-auth-clean.test"
+    },
+    {
+      "kind": "native_http_exception",
+      "pid": 1519,
+      "epoch": 1791277665.6882753,
+      "test": null,
+      "exception": "AuthenticationError",
+      "frames": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 139,
+          "function": "application"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/app.py",
+          "line": 242,
+          "function": "init_request"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py",
+          "line": 42,
+          "function": "__init__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py",
+          "line": 79,
+          "function": "set_session"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py",
+          "line": 131,
+          "function": "__init__"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py",
+          "line": 155,
+          "function": "login"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py",
+          "line": 285,
+          "function": "authenticate"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py",
+          "line": 328,
+          "function": "fail"
+        }
+      ],
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "route": "/"
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.7602592,
+      "test": null,
+      "operation": "destroy_call",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wsgi.py",
+          "line": 260,
+          "function": "close"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 367,
+          "function": "execute"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 370,
+          "function": "run_wsgi"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 473,
+          "function": "handle_one_request"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 485,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 398,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 766,
+          "function": "__init__"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 362,
+          "function": "finish_request"
+        }
+      ],
+      "request_is_none": false,
+      "request_type": "werkzeug.wrappers.request.Request",
+      "request_truthy": true,
+      "cache_control_is_none": false,
+      "cache_control_has_no_cache": true
+    },
+    {
+      "kind": "request_context_transition",
+      "pid": 1519,
+      "epoch": 1791277665.7605517,
+      "test": null,
+      "operation": "destroy_return",
+      "caller": [
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/wsgi.py",
+          "line": 260,
+          "function": "close"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 367,
+          "function": "execute"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 370,
+          "function": "run_wsgi"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 473,
+          "function": "handle_one_request"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/http/server.py",
+          "line": 485,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/werkzeug/serving.py",
+          "line": 398,
+          "function": "handle"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 766,
+          "function": "__init__"
+        },
+        {
+          "file": "/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socketserver.py",
+          "line": 362,
+          "function": "finish_request"
+        }
+      ],
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false
+    },
+    {
+      "kind": "http_response",
+      "pid": 1528,
+      "epoch": 1791277665.7607803,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "method": "POST",
+      "hostname": "127.0.0.1",
+      "path": "/",
+      "status": 401,
+      "domain_forbidden": false,
+      "proxy_used": false
+    },
+    {
+      "kind": "auth_http_response",
+      "pid": 1528,
+      "epoch": 1791277665.76132,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "method": "POST",
+      "status": 401,
+      "route": "/",
+      "effective_route": "/",
+      "redirect_history": [],
+      "location": {
+        "route": "",
+        "query_parameter_names": [],
+        "fragment_parameter_names": []
+      },
+      "native_exception_type": "AuthenticationError",
+      "native_reason": "Invalid login credentials",
+      "native_message_present": true
+    },
+    {
+      "kind": "native_state",
+      "pid": 1528,
+      "epoch": 1791277665.767217,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      }
+    },
+    {
+      "kind": "auth_state",
+      "pid": 1528,
+      "epoch": 1791277665.7813144,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-auth-clean.test",
+      "request_is_none": true,
+      "request_type": "builtins.NoneType",
+      "request_truthy": false,
+      "cache_control_is_none": true,
+      "cache_control_has_no_cache": false,
+      "config_admin_password_present": true,
+      "config_matches_retained": true,
+      "administrator_auth_record_present": true,
+      "retained_matches_native_hash": false,
+      "config_matches_native_hash": false,
+      "common_admin_password_present": true,
+      "common_matches_native_hash": true,
+      "config_matches_common": false,
+      "auth_settings": {
+        "disable_user_pass_login": 0,
+        "allow_consecutive_login_attempts": 10,
+        "allow_login_after_fail": 60,
+        "enable_two_factor_auth": 0,
+        "force_user_to_reset_password": 0
+      },
+      "active_todo_workflows": [],
+      "cached_todo_workflow": ""
+    },
+    {
+      "kind": "auth_config_loaded",
+      "pid": 1528,
+      "epoch": 1791277665.7827408,
+      "test": null,
+      "function": "get_site_config",
+      "site": null,
+      "config_admin_present": true,
+      "config_matches_retained": true
+    }
+  ]
+}

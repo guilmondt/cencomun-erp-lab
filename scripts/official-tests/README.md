@@ -463,3 +463,29 @@ corrección sin reescribir intentos; el discovery reutilizado se identifica como
 tal. `integrity.py --label cause` y `closure.py --label cause` conservan el cierre
 anterior. Para inicio reteniendo datos, usar `docs/FRAPPE_ENVIRONMENT_START.md`,
 sin install/migrate/seed/restore ni suites automáticas.
+# Auth/request: seguimiento acotado desde baad8f9
+
+Leer `reports/frappe-auth-request-diagnostics.md` y task104 antes de reproducir.
+Sin suites completas. Cero runners antes de cualquier preparación; conservar
+sitios, claves, streams, reservas y resultados. Slots nuevos --auth-clean y
+--auth-sequence aplican before_tests y configuración CI nativos. Solo en sitios
+nuevos se reutiliza la credencial común retenida, respetando la prioridad de
+install_db; no reset de usuario ni reconfiguración de un slot auth existente.
+No repetir prepare sobre sitios históricos para reparar sus discrepancias.
+
+Usar Python del Bench y PATH con official-tools/bin + core-tools/usr/bin.
+run.py --offline --observe --auth-diagnostics registra configuración/contexto
+del Local nativo, hash-match solo booleano, excepción de login y redirecciones
+por status/ruta/nombres/presencia. Sin tokens/cookies/queries/valores sensibles.
+Los resultados XML de estos intentos publican frames, no traceback crudo.
+Para Performance --offline --auth-diagnostics, sin --observe: conservar guard,
+HTTP saneado y umbral nativo, sin profiling/tracing del benchmark.
+
+auth_probe.py SITE ETIQUETA hace solo SELECT/verificación passlib, sin llamar
+check_password (puede rehash/limpiar trackers), reset, login o generate_keys.
+auth_evidence.py deriva ocho intentos conservados/16 IDs y preserva todos los
+JSON originales. auth_preservation.py comprueba los manifests privados previos,
+prefijos de logs append-only, confs, fuentes y DBs; creación exclusiva de evidencia.
+integrity.py after --label auth y closure.py --label auth realizan cierre sin
+repetir Core/restauración. Los nuevos helpers también requieren guard offline
+por env y PYTHONPATH observer al invocarlos directamente en un nuevo proceso.

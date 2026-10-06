@@ -2,7 +2,8 @@
 
 No business function, fixture, rate, validator or expected result is replaced.
 The socket audit hook forbids external DNS/connections even through a proxy.
-HTTP observation records status/path only, never bodies, query tokens or headers.
+HTTP observation records status/path, with opt-in whitelisted auth metadata and
+redirect parameter names/presence, never bodies, query tokens or header values.
 """
 import ipaddress
 import json
@@ -18,6 +19,9 @@ import threading
 OFFLINE = os.environ.get('CCM_OFFICIAL_OFFLINE') == '1'
 OBSERVE = os.environ.get('CCM_OFFICIAL_OBSERVE') == '1'
 OUTPUT = os.environ.get('CCM_OFFICIAL_OBSERVATION')
+AUTH_DIAG = os.environ.get('CCM_OFFICIAL_AUTH_DIAG') == '1'
+if AUTH_DIAG:
+    import auth_diagnostics
 CURRENT = None
 BUSY = False
 
@@ -155,6 +159,8 @@ def snapshot(stage):
                 data['bom_item_2'] = f.get_all('BOM Item', filters={'item_code': '_Test Item 2', 'docstatus': 1}, fields=['parent', 'rate', 'base_rate', 'qty'])
                 data['bins_item_2'] = f.get_all('Bin', filters={'item_code': '_Test Item 2'}, fields=['warehouse', 'actual_qty', 'stock_value', 'valuation_rate'])
         emit('native_state', **data)
+        if AUTH_DIAG:
+            auth_diagnostics.snapshot(f, emit, stage)
     except Exception as exc:
         emit('observation_error', stage=stage, exception=type(exc).__name__)
     finally:
@@ -167,6 +173,8 @@ def profile_event(frame, event, arg):
         return
     function = frame.f_code.co_name
     filename = frame.f_code.co_filename
+    if AUTH_DIAG:
+        auth_diagnostics.profile(frame, event, arg, emit)
     if CURRENT and event in ('call', 'return'):
         if filename.endswith('journal_entry/journal_entry.py') and function in (
             'set_exchange_rate', 'set_amounts_in_company_currency',
@@ -251,6 +259,9 @@ if OFFLINE or OBSERVE:
         emit('http_response', method=request.method, hostname=target.hostname, path=target.path,
              status=response.status_code, domain_forbidden=response.text.strip() == 'Domain forbidden',
              proxy_used=bool(kwargs.get('proxies')))
+        if AUTH_DIAG:
+            emit('auth_http_response', method=request.method, status=response.status_code,
+                 route=target.path, **auth_diagnostics.response_data(response))
         return response
 
     requests.sessions.Session.send = send
@@ -273,3 +284,12 @@ if OFFLINE or OBSERVE:
         unittest.TestResult.startTest, unittest.TestResult.stopTest = start, stop
         sys.setprofile(profile)
         threading.setprofile(profile)
+        if AUTH_DIAG:
+            def trace(frame, event, arg):
+                try:
+                    return auth_diagnostics.trace(frame, event, arg, emit)
+                except Exception as exc:
+                    emit('observation_error', stage='auth_trace', exception=type(exc).__name__)
+                    return None
+            sys.settrace(trace)
+            threading.settrace(trace)

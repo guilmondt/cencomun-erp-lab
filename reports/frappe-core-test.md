@@ -1,5 +1,9 @@
 # Core Test de Frappe/ERPNext — LAB-ONLY-v1
 
+Cierre posterior desde baad8f9: [auth/request](frappe-auth-request-diagnostics.md).
+49.823 hashes originales idénticos y lectura autenticada P001 USD50.00/stock5.
+Sin cambio de runtime ni nuevo Core; matriz y alcance de 34 grupos conservados.
+
 Comprobación posterior de integridad/lectura sin repetir Core y diagnósticos
 oficiales acotados: [informe desde 618c676](frappe-bounded-cause-diagnostics.md).
 El resultado Core siguiente permanece separado de los oficiales completos FAIL.

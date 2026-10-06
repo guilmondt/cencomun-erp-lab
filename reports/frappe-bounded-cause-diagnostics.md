@@ -1,5 +1,9 @@
 # Diagnósticos acotados desde 618c676
 
+Seguimiento conservado desde baad8f9: [auth/request](frappe-auth-request-diagnostics.md)
+demuestra las primeras causas y retesta los 16 pendientes (14 PASS/2 ERROR).
+No reemplaza esta secuencia ni los completos; API key adicional FAIL/UNKNOWN.
+
 Solo `lab/frappe-baseline`, PR #4 borrador. Offline, mismos pins/oráculo,
 sin modificación de upstream, HOME, red, acceso, producción, main o Axelor.
 [ExecPlan 103](../tasks/103-frappe-bounded-cause-diagnostics.md).

@@ -4,18 +4,22 @@ Repositorio `guilmondt/cencomun-erp-lab`, checkout existente
 `/workspace/cencomun-erp-lab`, rama `lab/frappe-baseline`. La referencia exacta
 propuesta es el último commit probado que registre el borrador ordinario.
 No crear worktrees ni reinstalar automáticamente. Leer AGENTS.md,
-docs/CODEX_CLOUD_SETUP.md, versions.lock y task 103 antes de trabajar.
+docs/CODEX_CLOUD_SETUP.md, versions.lock y task 104 antes de trabajar.
 
 Core conserva 34 grupos PASS; criterios 13 PASS/1 BLOCKED, seis PATCH UNRUN.
 Oficiales completos: Frappe y ERPNext FAIL, separados de Core. Los diagnósticos
 acotados posteriores tampoco son suites completas. Leer
-reports/frappe-bounded-cause-diagnostics.md y reports/frappe-core-test.md.
+reports/frappe-auth-request-diagnostics.md y reports/frappe-core-test.md.
+Los 16 pendientes acotados: 14 PASS/2 ERROR; un API key adicional FAIL/UNKNOWN.
+Esto no cambia los contadores ni el FAIL de los oficiales completos.
 No modificar oráculo/pins/upstream/HOME, main/producción/Axelor, red, secretos,
 variables persistentes, acceso o permisos. PR #4 continúa borrador.
 
 La restauración cloud **fcf690d** ya pasó en otra tarea, con recibo externo en
 reports/evidence/frappe-cloud/restoration-fcf690d-external.json. No repetirla ni
-confundir sitios nuevos en esta máquina con esa prueba. Guardar el borrador no
+confundir sitios nuevos en esta máquina con esa prueba. El coordinador guardó
+y publicó baad8f9 y verificó catálogo/estado; no repetir esa publicación.
+El nuevo SHA probado se propone solamente en el borrador ordinario. Guardar el borrador no
 publica un nuevo snapshot; la restauración del commit nuevo no está acreditada.
 
 ## Inicio conservando los datos
