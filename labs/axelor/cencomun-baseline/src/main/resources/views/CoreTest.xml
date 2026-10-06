@@ -11,7 +11,19 @@
   <action-method name="ccm-core-products-prepare">
     <call class="com.cencomun.core.NativeIndependentController" method="prepareProducts"/>
   </action-method>
+  <action-method name="ccm-core-products-inspect">
+    <call class="com.cencomun.core.NativeIndependentController" method="inspectProducts"/>
+  </action-method>
   <action-method name="ccm-core-native-inspect">
     <call class="com.cencomun.core.NativeGateController" method="inspect"/>
+  </action-method>
+  <action-method name="ccm-core-bank-book-prepare">
+    <call class="com.cencomun.core.NativeBankBookController" method="prepare"/>
+  </action-method>
+  <action-method name="ccm-core-bank-book-post">
+    <call class="com.cencomun.core.NativeBankBookController" method="post"/>
+  </action-method>
+  <action-method name="ccm-core-bank-book-inspect">
+    <call class="com.cencomun.core.NativeBankBookController" method="inspect"/>
   </action-method>
 </object-views>

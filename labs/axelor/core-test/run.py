@@ -182,6 +182,74 @@ def assert_native_economics(native, expected):
     return {"stock_value": str(value), "account_balances": {k: str(v) for k, v in balances.items()}, "accounting_profit": str(profit)}
 
 
+def assert_native_bank_book(native, fixtures):
+    """Require four actual advance payments and their native balanced posted moves."""
+    expected = {r["reference"]: r for r in fixtures}
+    vouchers = native["vouchers"]
+    assert len(vouchers) == len(expected) == 4, vouchers
+    assert {r["reference"] for r in vouchers} == set(expected)
+    assert len({r["id"] for r in vouchers}) == 4
+    moves, lines = set(), set()
+    for voucher in vouchers:
+        want = expected[voucher["reference"]]
+        amount = Decimal(want["amount"])
+        assert voucher["status"] == 2 and voucher["allocation_ids"] == [], voucher
+        assert voucher["company_id"] == native["company_id"] and voucher["company_code"] == "CCM-LAB-001"
+        assert voucher["customer_id"] == want["customer_id"] and voucher["partner_id"]
+        assert voucher["currency"] == want["currency"] and voucher["payment_date"] == want["date"]
+        assert Decimal(voucher["paid_amount"]) == Decimal(voucher["remaining_amount"]) == amount
+        move = voucher["move"]
+        assert move["status"] == 3 and move["voucher_id"] == voucher["id"]
+        assert move["company_id"] == voucher["company_id"] and move["date"] == want["date"]
+        assert move["id"] not in moves
+        moves.add(move["id"])
+        assert len(move["lines"]) == 2
+        amounts = {}
+        for line in move["lines"]:
+            assert line["id"] not in lines
+            lines.add(line["id"])
+            assert line["account"] not in amounts
+            amounts[line["account"]] = (Decimal(line["debit"]), Decimal(line["credit"]))
+            if line["account"] == "CCM-AR":
+                assert Decimal(line["remaining"]) == amount, line
+        assert amounts == {"CCM-BANK": (amount, Decimal(0)), "CCM-AR": (Decimal(0), amount)}, amounts
+    return {"native_voucher_ids": sorted(v["id"] for v in vouchers), "native_move_ids": sorted(moves),
+            "native_move_line_ids": sorted(lines), "unallocated_total": str(sum(Decimal(v["remaining_amount"]) for v in vouchers))}
+
+
+def run_bank_book_cases(admin, fixtures, output, row):
+    start = time.perf_counter()
+    evidence = {"case": "BANK-BOOK-FIXTURE", "reference": REFERENCE, "revision": 1, "actor": "admin", "steps": []}
+    expected = json.loads((fixtures / "bank-book.json").read_bytes())
+    try:
+        evidence["setup"] = admin.action("ccm-core-bank-book-prepare", "BANKBOOK")
+        admin.action("ccm-core-bank-book-post", "BANKBOOK")
+        native = admin.action("ccm-core-bank-book-inspect", "BANKBOOK")
+        evidence["native_assertions"] = assert_native_bank_book(native, expected)
+        for voucher in native["vouchers"]:
+            step = {"case": "native-advance-receipt", "persisted": voucher}
+            evidence["steps"].append(step)
+            print("::notice title=Native bank book receipt::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
+        admin.action("ccm-core-bank-book-post", "BANKBOOK")
+        replay = admin.action("ccm-core-bank-book-inspect", "BANKBOOK")
+        assert_native_bank_book(replay, expected)
+        assert replay == native, "Fixture replay changed persisted native vouchers or moves"
+        step = {"case": "fixture-replay", "persisted_ids": evidence["native_assertions"], "native_export_identical": True}
+        evidence["steps"].append(step)
+        print("::notice title=Native bank book replay::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
+        evidence.update(status="PASS", complete=True)
+    except AssertionError as error:
+        evidence.update(status="FAIL", complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    except Exception as error:
+        evidence.update(status=exception_status(error), complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+    evidence["seconds"] = round(time.perf_counter() - start, 3)
+    (output / "BANK-BOOK-FIXTURE.json").write_text(json.dumps(evidence, indent=2) + "\n")
+    row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"], evidence="BANK-BOOK-FIXTURE.json",
+               reason=evidence.get("error", "Four confirmed native advance payments with posted GL and unallocated balances"))
+    print("::notice title=Core independent BANK-BOOK-FIXTURE::" + json.dumps({k: v for k, v in evidence.items() if k != "steps"})[:3800], flush=True)
+    return evidence
+
+
 def run_product_cases(admin, base, fixtures, output, row):
     """Native CRUD under the real operator; every warranty write is reread after commit."""
     start = time.perf_counter()
@@ -203,6 +271,14 @@ def run_product_cases(admin, base, fixtures, output, row):
     try:
         setup = admin.action("ccm-core-products-prepare", "PROD")
         evidence["setup"] = setup
+        persisted_setup = admin.action("ccm-core-products-inspect", "PROD")
+        evidence["persisted_setup"] = persisted_setup
+        assert len(persisted_setup["profiles"]) == 3 and len(persisted_setup["users"]) == 2
+        assert all(u["active"] and not u["blocked"] and u["native_role_present"] and u["credentials_match"]
+                   and u["company_id"] == setup["company_id"] for u in persisted_setup["users"]), persisted_setup
+        assert sorted(persisted_setup["profiles"], key=lambda p: p["id"]) == sorted(
+            [{**p, "company_id": setup["company_id"]} for p in setup["profiles"]], key=lambda p: p["id"])
+        print("::notice title=Native committed product actors::" + json.dumps({"case": "PROD01-04", "persisted_setup": persisted_setup}), flush=True)
         operator.login("ccm-operator", "CoreLab-operator-2026!")
         evidence["actor"] = "ccm-operator"
         identities = {p["product_code"]: p for p in setup["profiles"]}
@@ -374,18 +450,25 @@ def run(base, fixtures, output):
     # Independent catalog fields run after the economic impediments have been persisted.
     products = run_product_cases(client, base, fixtures, output, by_case["PROD01-04"])
     search = run_search_cases(base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
+    book = run_bank_book_cases(client, fixtures, output, by_case["BANK-BOOK-FIXTURE"])
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
                "patch_scenarios": {"status": "UNRUN", "count": 6},
                "scope": "Actual native gates. Policy unit tests do not mark native groups PASS."}
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
-    (output / "metrics.json").write_text(json.dumps({"gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search]],
+    metrics = {"metric_kind": "runtime", "reference": REFERENCE,
+                                                   "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book]],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,
-                                                   "benchmark": "UNRUN", "note": "Gate timings are not the required 1000-sample benchmark"}, indent=2) + "\n")
+                                                   "http_call_counts": {"administrator": len(client.samples),
+                                                       "product_operator": len(products["http_samples"]), "search_reader": len(search["http_samples"])},
+                                                   "native_action_counts": dict(Counter(s["action"] for s in client.samples if "action" in s)),
+                                                   "benchmark": "UNRUN", "note": "Gate timings are not the required 1000-sample benchmark"}
+    (output / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
+    print("::notice title=Core measured runtime::" + json.dumps({k: v for k, v in metrics.items() if k != "http_samples"}), flush=True)
     print("::notice title=Core coverage::" + json.dumps({"reference": REFERENCE, "groups": results["counts"], "criteria": dict(Counter(r["status"] for r in results["criteria"]))}), flush=True)
     return 0 if all(r["status"] == "PASS" for r in rows) else 2
 

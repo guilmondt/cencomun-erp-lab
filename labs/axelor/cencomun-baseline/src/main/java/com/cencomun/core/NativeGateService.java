@@ -139,6 +139,7 @@ public class NativeGateService {
     p.evidence.put("planned_initial_stock_move_status", get(move, "statusSelect"));
     if (!Integer.valueOf(2).equals(get(move, "statusSelect"))) throw new IllegalStateException("Native plan did not persist PLANNED");
     call(stock, "realize", move); move = managed(move);
+    company = managed(company); customer = managed(customer); warehouse = managed(warehouse);
     p.stage("native-initial-stock-accounting");
     NativeFinance.opening(company, customer, warehouse, caseId);
     p.evidence.put("initial_stock_move_id", move.getId());
@@ -194,6 +195,7 @@ public class NativeGateService {
     set(invoice, "invoiceDate", DATE); invoice = save(invoice);
     call(service("com.axelor.apps.account.service.invoice.InvoiceService"), "validateAndVentilate", invoice);
     invoice = managed(invoice); delivery = managed(delivery);
+    company = managed(company); customer = managed(customer);
     p.evidence.put("sale_order_id", so.getId()); p.evidence.put("delivery_id", delivery.getId());
     p.evidence.put("invoice_id", invoice.getId());
     p.stage("native-cogs-and-settlement");

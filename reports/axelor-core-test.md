@@ -2,67 +2,72 @@
 
 Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
 16 archivos de fixtures byte a byte, manifiesto/oráculo intactos, cobertura revisión 2,
-34 grupos y 14 criterios. Trabajo exclusivo en `lab/axelor-baseline`.
+34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.
 
-Último CI finalizado: [37407761697](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37407761697),
-commit `d1b3930486b7be0480ae394a506e149e700f493c`, **FAILURE**.
-La preparación falló por crear clientes asociados a la compañía antes de su
-configuración contable. La corrección conserva el repositorio nativo y cambia
-sólo ese orden del fixture; compilación local comprobada, nueva repetición CI pendiente.
+Último CI finalizado: [37409531164](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37409531164),
+commit `ebe8d0b9be92b07b13b54cb33ed6c7911a9fbb2d`, **FAILURE**.
+Configuración y secuencias preparadas; la planificación nativa avanzó a PLANNED.
+La contabilización inicial falló por un proxy de Currency separado del contexto.
+CRUD/búsquedas recibieron 401 porque AOS crea User con blocked=true.
+Se corrigieron esas referencias y se activan sólo los dos usuarios sintéticos.
+Repetición ERP pendiente; compilación/tests locales comprobados.
 
-## Resultados económicos parciales
+## Gates económicos parciales
 
-| Gate, administrador real | Resultado del último run | Tiempo | Etapa |
+| Gate, administrador real | Estado | Tiempo | Evidencia |
 | --- | --- | --- | --- |
-| CO00, primero | FAIL | 4.030 s | Preparación de catálogo/configuración |
-| TAX01-W, segundo | FAIL | 0.222 s | Misma preparación |
+| CO00, primero | BLOCKED | 6.859 s | PLANNED=2 en fase transitoria; rollback sin stock ni efectos financieros |
+| TAX01-W, segundo | BLOCKED | 0.604 s | Mismo error de Currency; rollback completo del fixture |
 
-Estos resultados son parciales. Incluso un gate económico PASS como administrador no
-sustituye roles, estados, rechazos, atomicidad e idempotencia del grupo completo.
-Todavía no se demuestran stock final 3/4/5, costo de ventas 70, impuestos y liquidación.
+No se demuestran aún stock final 3/4/5, costo de ventas 70, impuestos y liquidación.
+Un futuro gate PASS como admin seguirá siendo parcial: roles, estados, rechazos,
+atomicidad e idempotencia requieren sus propias pruebas antes de completar el grupo.
 
-## Correcciones y límites observados
+## Correcciones e independientes
 
-1. El ejecutor volvió a responder. Logs recuperados en
-   `/workspace/ccm-axelor-runtime/ci-evidence`; la rama remota conserva los commits.
-2. `fetch-depth: 0`, guard de commit/blob `e0190090...` y comparación estricta
-   de pins real corrigieron finalize. El criterio 2 sí se deriva de pruebas ejecutadas.
-3. Run 37405935889 confirmó las doce secuencias y versiones persistidas entre
-   peticiones; el contador nativo inStockMove pasó de 1 a 2 y no se repitió
-   NoResultException. Se verificó esa frontera; no el resultado económico completo.
-4. Ese run detectó después una referencia StockMove separada del contexto tras plan.
-   Se conservan los resultados de save y se administran de nuevo siguiendo el
-   JpaModelHelper oficial; sin estados manuales ni commits financieros añadidos.
-   El run nuevo falló antes de stock, por lo que esta corrección aún requiere repetición.
-5. Se corrige B08 configurando la contabilidad antes de guardar clientes con companySet.
-   El fallo se documentó antes de ampliar alcance, con fuente nativa y pasos de solución.
-6. PROD01-04 se intentó y falló en preparación (0.211 s). SEARCH se intentó y
-   recibió 401 porque esa preparación no creó su lector (0.044 s). No se
-   transfieren esos resultados a funciones de Axelor que no alcanzaron a probarse.
-7. Campos propios de producto con FK Company/Product, generación AOP y permisos
-   por compañía; CRUD de operador y consultas de lector reales implementados.
-   Aceptación nativa pendiente. El JAR propio no contiene clases com.axelor.*.
-8. Se añadió export y aserción del impuesto por cada línea nativa de factura,
-   además de los totales. Un test rechaza la distribución equivocada aun si la
-   cabecera suma correctamente. Esta nueva aserción espera ejecución en CI.
-9. Upgrade: criterio 13 BLOCKED por instrucción expresa; seis casos PATCH UNRUN.
-   Preset restringido intacto: dominios 19/1 siguen en borrador; 4/14 bloqueados
-   registrados sin añadirlos. Los logs completos sí se recuperaron por la ruta de gh run.
+1. Ejecutor recuperado; historial completo y guard del commit/blob base corrigen
+   finalize conservando la comparación estricta con `e0190090...:versions.lock`.
+2. Fuente Sequence fijada y repetición confirman doce secuencias/versiones visibles
+   entre peticiones e incremento nativo aislado. No volvió NoResultException.
+   Separación sólo del fixture: venta/entrega/factura/costo/liquidación conservan
+   una transacción conjunta. No se sustituyó la numeración del ERP.
+3. Conservar resultados de save y volver a administrar StockMove corrigió su
+   estado antiguo: PLANNED=2 real fue observado en el nuevo run. Ahora se
+   recargan también compañía/cliente/almacén antes de usar sus relaciones lazy.
+4. Configurar contabilidad antes de clientes corrigió B08. El repositorio de
+   Partner mantiene su inicialización y validaciones de situación contable.
+5. PROD01-04 falló en login (0.476 s); SEARCH en login (0.017 s). La preparación
+   devolvió IDs de perfiles/roles, que no equivalen a lectura nueva persistida.
+   El artefacto revela `User is disabled`; User.xml nativo fija blocked=true.
+   Se activan sólo los usuarios LAB y se añade inspección fresca de perfiles,
+   presencia/estado/rol y matcher booleano, sin revelar hashes ni cookies.
+6. Campos de producto propios con FK nativos Company/Product, enums, tracking
+   y permisos por compañía. La prueba exige CRUD de operador real y búsquedas
+   del lector real; la factura consultada depende del CO00 nativo.
+7. Export/aserción por línea de factura añadido: cabecera correcta con impuesto
+   mal repartido falla. Todavía no se alcanzó esa aserción en el ERP.
+8. BANK-BOOK-FIXTURE implementado como independiente: cuatro PaymentVoucher
+   de anticipo con confirmación nativa, journal dedicado y secuencia confirmada
+   antes del consumo. Exige asientos/saldos y replay conservando IDs. Localmente
+   compila; el grupo sigue UNRUN hasta ejecución ERP. No aprueba importación o conciliación.
+9. Criterio 13 BLOCKED por instrucción expresa; seis PATCH UNRUN. No hay upgrade.
+   Red restringida intacta; ampliaciones pendientes sin publicar. El artefacto
+   completo del nuevo run sí se descargó sin añadir dominios.
 
 Causa, impacto, pasos numerados y verificación por impedimento:
 [axelor-core-test-impediments.md](axelor-core-test-impediments.md).
 
-## Matriz de los 34 grupos — último CI finalizado
+## Matriz de 34 grupos — último CI finalizado
 
-PASS 0; FAIL 4; BLOCKED 0; UNRUN 30. Los cuatro grupos intentados no están completos.
-Los fallos de preparación pertenecen al caller Cencomun y no prueban incapacidad del ERP.
+PASS 0; FAIL 2; BLOCKED 2; UNRUN 30. Ningún grupo completo.
+Los defectos de preparación/caller no prueban incapacidad económica del ERP.
 
 | Grupo requerido | Revisión mínima | Estado | Completo |
 | --- | ---: | --- | --- |
-| CO00-NATIVE | 1 | FAIL | No |
+| CO00-NATIVE | 1 | BLOCKED | No |
 | CO01-NATIVE | 1 | UNRUN | No |
 | TAX01-S-NATIVE | 1 | UNRUN | No |
-| TAX01-W-NATIVE | 1 | FAIL | No |
+| TAX01-W-NATIVE | 1 | BLOCKED | No |
 | PROD01-04 | 1 | FAIL | No |
 | VAL01-04 | 1 | UNRUN | No |
 | STATE01-04 | 1 | UNRUN | No |
@@ -94,14 +99,14 @@ Los fallos de preparación pertenecen al caller Cencomun y no prueban incapacida
 | MCP-FORBIDDEN-CRITICAL-ACTIONS | 2 | UNRUN | No |
 | MCP-DENIALS-NATIVE-EFFECTS-AUDIT | 2 | UNRUN | No |
 
-## Criterios — derivados de evidencia ejecutada
+## 14 criterios — evidencia real
 
 | Criterio | Estado |
 | ---: | --- |
 | 1 | FAIL |
 | 2 | PASS |
 | 3 | FAIL |
-| 4 | FAIL |
+| 4 | BLOCKED |
 | 5 | FAIL |
 | 6 | UNRUN |
 | 7 | UNRUN |
@@ -113,36 +118,41 @@ Los fallos de preparación pertenecen al caller Cencomun y no prueban incapacida
 | 13 | BLOCKED |
 | 14 | UNRUN |
 
-Criterio 2 PASS por commits host/AOS exactos, diffs upstream reales cero,
-blob de pins idéntico al baseline, WAR y suites actuales verificados.
-El agregador rechaza revisión obsoleta, prueba incompleta o PASS sin evidencia.
-Los unit tests no completan grupos nativos sin ejecutar.
+Criterio 2 PASS exige host/AOS exactos, diffs upstream reales cero, blob de
+pins idéntico al baseline, WAR y suites del mismo run. El agregador rechaza
+revisión obsoleta, prueba incompleta o PASS sin evidencia. Los unit tests no
+completan grupos nativos sin ejecutar.
 
-## Métricas y pruebas
+## Métricas y validaciones
 
-- Último CI: 2 tests originales + 7 de política + 16 upstream; 0 errores/fallos/skips.
-- Correcciones actuales locales: mismos 2+7 tests y 12 regresiones Python PASS.
-- Entidades nativas: compilación, JAR por perfil full-stack y replay offline PASS.
-- Primer arranque real del último CI: 422.47 s; reinicio de la misma DB: 315.31 s.
-- Código de producto y recurso propio cargado en WAR; persistencia/CRUD no demostrados.
-- Una tabla propia de perfil con FK/enums; sólo DDL en DB desechable, ningún servicio de producción.
-- Benchmark 1000 muestras, query/DB timing y p50/p95/p99: UNRUN. Readiness y tiempos
-  de gates no sustituyen ese benchmark. No se infiere hardware comparable.
-- Muestras HTTP completas quedan en el artefacto real; no se reconstruyen datos ausentes del log.
+- Último CI: 2 originales + 7 de política + 16 upstream; 0 fallos/errores/skips,
+  y 12 regresiones Python de ese commit. Correcciones locales actuales: 14
+  regresiones Python, los mismos 2+7 tests, compilación full-stack y replay offline PASS.
+- Readiness inicial: 416.53 s; reinicio de la misma DB: 318.47 s.
+- Fases por timestamps: setup/validación 104.172 s,
+  build full-stack 133.119 s, offline 73.935 s.
+  No son timings por tarea Gradle ni benchmark de operaciones.
+- Runner observado: 4 CPU visibles/4 de afinidad;
+  plataforma `Linux-6.17.0-1022-azure-x86_64-with-glibc2.41`; disco libre 87100194816 bytes.
+- HTTP Core medido: 12 llamadas del admin, 2 del operador y 2 del lector. Incluye
+  login y preparación; los 401 no se convierten en latencias de una acción completada.
+- p50/p95/p99, 1000 muestras y query/DB timing: UNRUN. No se infieren de readiness.
+- Esquema propio: un perfil de producto con FK/enums, sólo en la DB desechable.
+  El artefacto propio no contiene clases com.axelor.*; pins y lock original intactos.
 
 Pins SHA256: `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
-WAR del CI finalizado: `6d29533645fefa89351dfbc18df74ba08ab7505a21a69a5fad2437a3b1163133`.
+WAR del último run: `78eafd8337d2baa3663ef0490764a2c4b2b28b50c078c6b268d8cee852a3521c`.
 
-## Evidencia recuperable y continuación
+## Evidencia y continuación
 
-[coverage.json](evidence/axelor-core/runs/37407761697/coverage.json),
-[build-evidence.json](evidence/axelor-core/runs/37407761697/build-evidence.json),
-[metrics.json](evidence/axelor-core/runs/37407761697/metrics.json), resultados independientes
- y gates en ese directorio. Sólo se extrajeron avisos estructurados completos.
-Los fallos de preparación heredados contienen explícitamente la referencia fija
- dentro de su error nativo; se conserva esa procedencia. No se infiere éxito
- de un aviso ausente/truncado. Los exports de secuencias del run anterior
- siguen en `evidence/axelor-core/runs/37405935889`.
+[coverage.json](evidence/axelor-core/runs/37409531164/coverage.json),
+[build-evidence.json](evidence/axelor-core/runs/37409531164/build-evidence.json),
+[metrics.json](evidence/axelor-core/runs/37409531164/metrics.json), XML de las tres
+suites, preparación, exports/gates, errores de autenticación, smoke y procedencia
+con hashes en [evidence-source.json](evidence/axelor-core/runs/37409531164/evidence-source.json).
+Son archivos reales del artefacto 11389525853; los derivados están etiquetados.
+ZIP completo recuperable en `/workspace/ccm-axelor-runtime/ci-evidence/37409531164-artifact`.
+Los resultados históricos se conservan aparte y no sustituyen la repetición nueva.
 
 Continúa autorizada la ejecución de gates y casos independientes. No hay PR,
-merge, despliegue, cambios de main/Frappe/upstream/pins ni cierre de comparación.
+merge, despliegue, modificación de main/Frappe/upstream/pins ni cierre de comparación.

@@ -20,7 +20,7 @@ import java.util.Map;
 /** Fixture-only setup; acceptance writes use authenticated native REST and native repositories. */
 public class NativeIndependentController {
   public static final String PROFILE = "com.cencomun.core.db.CcmProductProfile";
-  private static void fixtureAdmin() {
+  static void fixtureAdmin() {
     if (!"1".equals(System.getenv("CCM_CORE_LAB")) || AuthUtils.getUser() == null
         || !"admin".equals(AuthUtils.getUser().getCode()))
       throw new SecurityException("Synthetic fixture setup requires the LAB administrator");
@@ -70,6 +70,9 @@ public class NativeIndependentController {
     if (user == null) user = record("com.axelor.auth.db.User", "code", "ccm-operator", "name", "Synthetic Core Operator",
         "password", AuthService.getInstance().encrypt("CoreLab-operator-2026!"), "email", "operator@example.invalid");
     set(user, "roles", new HashSet<>(List.of(role)));
+    // AOS overrides AOP's new-user default to blocked=true; only these LAB users
+    // are explicitly activated by the authenticated fixture administrator.
+    set(user, "blocked", false);
     set(user, "activeCompany", company); set(user, "companySet", new HashSet<>(List.of(company))); save(user);
     Model readerRole = one("com.axelor.auth.db.Role", "self.name = ?1", "CCM Reader");
     if (readerRole == null) readerRole = record("com.axelor.auth.db.Role", "name", "CCM Reader");
@@ -84,6 +87,7 @@ public class NativeIndependentController {
     if (reader == null) reader = record("com.axelor.auth.db.User", "code", "ccm-reader", "name", "Synthetic Core Reader",
         "password", AuthService.getInstance().encrypt("CoreLab-reader-2026!"), "email", "reader@example.invalid");
     set(reader, "roles", new HashSet<>(List.of(readerRole)));
+    set(reader, "blocked", false);
     set(reader, "activeCompany", company); set(reader, "companySet", new HashSet<>(List.of(company))); save(reader);
     String serial = FixtureBundle.json("scenarios.json").get("search").get("serial").get("reference").asText();
     if (one("com.axelor.apps.stock.db.TrackingNumber", "self.trackingNumberSeq = ?1", serial) == null)
@@ -94,6 +98,28 @@ public class NativeIndependentController {
     result.put("operator_user_id", user.getId()); result.put("operator_role_id", role.getId());
     result.put("native_permission_id", permission.getId());
     return result;
+  }
+  public void inspectProducts(ActionRequest request, ActionResponse response) {
+    fixtureAdmin();
+    Model company = one("com.axelor.apps.base.db.Company", "self.code = ?1", "CCM-LAB-001");
+    List<Map<String, Object>> profiles = new ArrayList<>();
+    for (Model profile : list(PROFILE, "self.company = ?1", company)) {
+      Model product = (Model) get(profile, "product");
+      profiles.add(Map.of("id", profile.getId(), "company_id", company.getId(),
+          "product_id", product.getId(), "product_code", get(product, "code")));
+    }
+    List<Map<String, Object>> users = new ArrayList<>();
+    for (String code : List.of("ccm-operator", "ccm-reader")) {
+      com.axelor.auth.db.User user = (com.axelor.auth.db.User) one("com.axelor.auth.db.User", "self.code = ?1", code);
+      if (user == null) throw new IllegalStateException("Committed fixture user missing: " + code);
+      String password = code.equals("ccm-operator") ? "CoreLab-operator-2026!" : "CoreLab-reader-2026!";
+      String role = code.equals("ccm-operator") ? "CCM Operator" : "CCM Reader";
+      users.add(Map.of("id", user.getId(), "code", code, "active", AuthUtils.isActive(user),
+          "blocked", user.getBlocked(), "role", role, "native_role_present", AuthUtils.hasRole(user, role),
+          "credentials_match", AuthService.getInstance().match(password, user.getPassword()),
+          "company_id", ((Model) get(user, "activeCompany")).getId()));
+    }
+    response.setValue("core_result", Map.of("company_id", company.getId(), "profiles", profiles, "users", users));
   }
   private Model readPermission(String label, String model, String condition) {
     String name = "ccm.lab.reader." + label;

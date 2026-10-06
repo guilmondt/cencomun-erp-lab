@@ -104,6 +104,7 @@ public final class NativeFinance {
     Model upfront = (Model) call(createPayment, "createInvoicePayment", invoice, calculation.get("upfront"), DATE, currency, cashMode, 2);
     upfront = save(upfront);
     call(service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentValidateService"), "validate", upfront);
+    company = managed(company); customer = managed(customer);
     Model bankMode = one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-BANK");
     Model settle = move(company, customer, "BANK", bankMode, "CCM-" + input.get("id").asText() + "-SETTLE");
     List<Model> settlementLines = new ArrayList<>();

@@ -1,13 +1,39 @@
 """Regression tests for coverage integrity and native accounting evidence rejection."""
 import unittest
 from pathlib import Path
-from run import assert_native_economics, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
+from run import assert_native_economics, assert_native_bank_book, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
 from finalize import BASELINE, baseline_pin_blob
 
 FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_bank_book_payments_without_posted_native_moves_fail(self):
+        import json
+        fixtures = json.loads((FIXTURES / "bank-book.json").read_bytes())
+        vouchers = []
+        for index, row in enumerate(fixtures, 1):
+            vouchers.append({"id": index, "reference": row["reference"], "status": 2,
+                "company_id": 1, "company_code": "CCM-LAB-001", "partner_id": 9,
+                "customer_id": row["customer_id"], "currency": row["currency"],
+                "payment_date": row["date"], "paid_amount": row["amount"],
+                "remaining_amount": row["amount"], "allocation_ids": [],
+                "move": {"id": index, "status": 1, "voucher_id": index, "lines": []}})
+        with self.assertRaises(AssertionError):
+            assert_native_bank_book({"company_id": 1, "vouchers": vouchers}, fixtures)
+
+    def test_bank_book_pass_notice_without_native_details_stays_unrun(self):
+        import json
+        import tempfile
+        from extract_log_evidence import extract
+        from run import REFERENCE
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / "run.log"
+            log.write_text("timestamp ##[notice]" + json.dumps({"case": "BANK-BOOK-FIXTURE",
+                "reference": REFERENCE, "revision": 1, "status": "PASS", "complete": True}) + "\n")
+            result = extract(log, Path(tmp) / "results", "synthetic", "1" * 40, FIXTURES)
+            self.assertEqual({"UNRUN": 34}, result["counts"])
+
     def test_legacy_preparation_failure_retains_explicit_reference_evidence(self):
         import json
         import tempfile
@@ -105,14 +131,21 @@ class EvidenceTests(unittest.TestCase):
         operator.request.side_effect = lambda path, data: ({"status": 0, "data": [{"id": 1, "version": 0,
             "warrantyQuantity": 12, "warrantyUnit": "MONTH"}]} if path.endswith("/fetch") else {"status": 0})
         admin = Mock()
-        admin.action.return_value = {"company_id": 1, "profiles": [
+        setup = {"company_id": 1, "profiles": [
             {"id": i, "product_id": i, "product_code": f"P{i:03}"} for i in (1, 2, 3)]}
+        persisted_setup = {"company_id": 1,
+            "profiles": [{**p, "company_id": 1} for p in setup["profiles"]],
+            "users": [{"active": True, "blocked": False, "native_role_present": True,
+                       "credentials_match": True, "company_id": 1} for _ in range(2)]}
+        admin.action.side_effect = lambda name, case: persisted_setup if name.endswith("inspect") else setup
         row = next(r for r in rows_for(verify_bundle(FIXTURES)) if r["case"] == "PROD01-04")
         with tempfile.TemporaryDirectory() as tmp, patch("run.NativeClient", return_value=operator), contextlib.redirect_stdout(io.StringIO()):
             result = run_product_cases(admin, "unused", FIXTURES, Path(tmp), row)
         self.assertEqual("FAIL", result["status"])
         self.assertEqual("FAIL", row["status"])
         self.assertFalse(row["complete"])
+        self.assertEqual("ccm-operator", result["actor"])
+        self.assertIn("warrantyQuantity", result["error"])
 
     def test_passing_gate_needs_physical_stock_not_only_calculated_money(self):
         expected = {"stock": [3, 4, 5], "stock_value": "430.00"}

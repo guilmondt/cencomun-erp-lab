@@ -1,0 +1,31 @@
+{
+  "case": "CO00",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "BLOCKED",
+  "failed_stage": "native-initial-stock-accounting",
+  "error_type": "org.hibernate.LazyInitializationException",
+  "error": "Could not initialize proxy [com.axelor.apps.base.db.Currency#148] - no session",
+  "native_stack": [
+    "com.axelor.apps.base.db.Currency$HibernateProxy.getCodeISO(Unknown Source)",
+    "com.axelor.apps.account.service.move.MoveCreateServiceImpl.createMove(MoveCreateServiceImpl.java:283)",
+    "com.axelor.apps.bankpayment.service.move.MoveCreateBankPaymentServiceImpl.createMove(MoveCreateBankPaymentServiceImpl.java:84)",
+    "com.axelor.apps.account.service.move.MoveCreateServiceImpl.createMove(MoveCreateServiceImpl.java:191)",
+    "com.cencomun.core.NativeAccess.call(NativeAccess.java:70)",
+    "com.cencomun.core.NativeFinance.move(NativeFinance.java:129)",
+    "com.cencomun.core.NativeFinance.opening(NativeFinance.java:60)",
+    "com.cencomun.core.NativeGateService.seed(NativeGateService.java:143)",
+    "com.cencomun.core.NativeGateController.run(NativeGateController.java:45)",
+    "com.cencomun.core.NativeGateController.execute(NativeGateController.java:24)",
+    "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+    "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)"
+  ],
+  "phase_evidence": {
+    "planned_initial_stock_move_id": 1,
+    "planned_initial_stock_move_status": 2
+  },
+  "committed_native_export": "CO00-native-export.json",
+  "seconds": 6.859,
+  "sequence": 1
+}

@@ -1,0 +1,100 @@
+{
+  "gates": [
+    {
+      "case": "CO00",
+      "seconds": 6.859,
+      "status": "BLOCKED"
+    },
+    {
+      "case": "TAX01-W",
+      "seconds": 0.604,
+      "status": "BLOCKED"
+    }
+  ],
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 0.476,
+      "status": "FAIL"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.017,
+      "status": "FAIL"
+    }
+  ],
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 5.374
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 78.594
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 8.095
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 4893.638,
+      "action": "ccm-core-native-prepare",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 62.755,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 1860.012,
+      "action": "ccm-core-native-gate",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 41.293,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 210.207,
+      "action": "ccm-core-native-prepare",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.508,
+      "action": "ccm-core-native-inspect",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 343.067,
+      "action": "ccm-core-native-gate",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.836,
+      "action": "ccm-core-native-inspect",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 431.053,
+      "action": "ccm-core-products-prepare",
+      "case": "PROD"
+    }
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.41",
+  "cpu_count": 4,
+  "cpu_affinity": 4,
+  "disk_free_bytes": 87100194816,
+  "benchmark": "UNRUN",
+  "note": "Gate timings are not the required 1000-sample benchmark"
+}

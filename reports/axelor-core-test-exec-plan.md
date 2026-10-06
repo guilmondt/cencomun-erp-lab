@@ -21,6 +21,15 @@ ejecutado conserva estado explícito. La factura de búsqueda depende de CO00.
 No se publica red pendiente, no se modifica ningún pin y no se declara cierre
 de comparación con éxitos parciales.
 
+Continuación del fixture independiente `BANK-BOOK-FIXTURE`: las cuatro filas
+fijadas se implementan mediante PaymentVoucher de anticipo y su servicio nativo
+de confirmación, sin factura ni asignación. Un journal nativo dedicado permite
+anticipos (`excessPaymentOk`) sin alterar los journals de los gates; su secuencia
+se prepara y confirma antes de consumirla. La prueba exige lectura nueva de
+los vouchers/asientos/saldos, más replay de fixture conservando IDs. Compilación
+y 14 regresiones locales comprobadas; prueba ERP pendiente. Esto no aprueba
+importación, conciliación, concurrencia ni los otros grupos bancarios.
+
 ## 1. Referencia inmutable y alcance
 
 Fuente común: commit

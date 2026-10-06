@@ -235,3 +235,62 @@ también se intentaron; no se anticipa éxito de sus pasos no alcanzados.
 Impacto: todavía no hay gates económicos aprobados. Comparación incompleta.
 Una descarga de logs de ese job fue rechazada en el host 14 de blobs; se
 registró sin añadir ni publicar ese dominio ni otros cambios de red.
+
+## B09 — proxies de moneda separados al contabilizar la entrada inicial
+
+Run 37409531164, commit `ebe8d0b9be92b07b13b54cb33ed6c7911a9fbb2d`:
+CO00 6.859 s y TAX01-W 0.604 s alcanzaron
+`native-initial-stock-accounting`. La planificación nativa devolvió estado
+PLANNED=2 para los StockMove 1/2; la realización avanzó hasta preparar la
+apertura. Falló `MoveCreateServiceImpl.createMove` con
+`LazyInitializationException: Could not initialize proxy [com.axelor.apps.base.db.Currency#148] - no session`.
+Las lecturas nuevas conservaron compañía/configuración pero ningún stock o
+efecto económico: el fixture realizó rollback completo.
+
+La corrección de B07 permite ya pasar la guardia PLANNED. B08 permite crear
+los clientes y preparar catálogo. La misma limpieza nativa de JPA también
+separa compañía/cliente/almacén y sus relaciones lazy. Es un defecto de
+referencias del caller, sin necesidad de modificar upstream.
+
+1. Administrar de nuevo compañía, cliente y almacén después de realizar el
+   stock, antes de crear la apertura, usando el helper conforme a upstream.
+2. Aplicar esa misma disciplina antes de contabilizar venta y liquidación,
+   conservando la transacción conjunta y las validaciones nativas.
+3. Repetir compilación/tests y gates en una DB desechable.
+4. Exigir cantidades, costos, impuestos por línea y pagos/asientos persistidos
+   después de commit. Ningún ID transitorio ni estado PLANNED parcial es PASS.
+
+## B10 — autenticación de los usuarios sintéticos respondió 401
+
+En el mismo run, la preparación de producto devolvió IDs de tres perfiles,
+operador 2, rol 3 y permiso 34. No sustituyen una lectura nueva persistida.
+PROD01-04 falló al autenticar en 0.476 s y SEARCH en 0.017 s: HTTP 401.
+No hay round trips de garantía ni búsquedas demostrados. La causa de 401
+todavía no se identifica con ese mensaje; no se atribuye sin pruebas a la
+contraseña, caché o permisos. El AuthService fijado trata hashes ya cifrados
+de forma idempotente; su código no respalda asumir doble hashing.
+
+1. Leer usuarios y perfiles desde una petición nueva autenticada como admin.
+2. Registrar sólo presencia/IDs, estado activo, roles y resultado booleano
+   del matcher nativo; no exponer contraseñas, hashes o cookies.
+3. Conservar el cuerpo público de error HTTP cuando aporte la causa del 401.
+4. Corregir el defecto observado y repetir login y CRUD/búsquedas con los
+   mismos actores y permisos. No sustituirlos por administrador.
+
+Impacto: ambos grupos siguen FAIL/incompletos, gates aún BLOCKED. Continúa
+el fixture bancario independiente; la comparación permanece incompleta.
+
+Evidencia adicional recuperada sin ampliar la red: el artefacto 11389525853
+de ese run se descargó completo. `app-first.log` declara para ambos usuarios
+`Authentication failed ...: User is disabled.` La fuente oficial fijada
+`axelor-base/src/main/resources/domains/User.xml:49` redefine blocked con
+default=true; mirar solamente el constructor de AOP no reflejaba el dominio
+fusionado AOS. La preparación Cencomun omitía activar sus usuarios sintéticos.
+
+1. El admin del fixture configura blocked=false sólo para ccm-operator y
+   ccm-reader, mediante sus repositorios nativos. No cambia defaults upstream
+   ni se dan roles administrativos a esos actores.
+2. Una nueva petición verifica presencia persistida, AuthUtils.isActive,
+   rol por AuthUtils.hasRole y matcher nativo booleano, sin publicar hashes.
+3. Repetir login HTTP y las mismas escrituras/lecturas bajo cada actor; no
+   considerar esa activación corregida hasta observarlo en el nuevo CI.

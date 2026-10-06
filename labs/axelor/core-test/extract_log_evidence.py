@@ -9,7 +9,7 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
-from run import REFERENCE, criteria_for, rows_for, verify_bundle
+from run import REFERENCE, assert_native_bank_book, criteria_for, rows_for, verify_bundle
 
 
 def extract(log, output, run_id, commit, fixtures):
@@ -32,14 +32,18 @@ def extract(log, output, run_id, commit, fixtures):
     rows = rows_for(verify_bundle(fixtures))
     by_case = {r["case"]: r for r in rows}
     gates, exports, independent = {}, {}, {}
-    product_steps, search_steps = [], []
+    product_steps, search_steps, book_steps = [], [], []
     proof = None
     for item in objects:
         case = item.get("case")
+        if item.get("metric_kind") == "runtime" and item.get("reference") == REFERENCE:
+            (output / "runtime-metrics.json").write_text(json.dumps(item, indent=2) + "\n")
         if case in ("warranty", "disabled-price-retained") and "persisted" in item:
             product_steps.append(item)
         if case == "SEARCH01-04-NATIVE" and "step" in item:
             search_steps.append(item["step"])
+        if case == "BANK-BOOK-FIXTURE" and "step" in item:
+            book_steps.append(item["step"])
         if "lab_commit" in item and "upstream_diff_exit_codes" in item and "suites" in item:
             assert item["lab_commit"] == commit, "Build proof belongs to another commit"
             proof = item
@@ -60,7 +64,7 @@ def extract(log, output, run_id, commit, fixtures):
             by_case[case + "-NATIVE"].update(status="UNRUN" if item["status"] == "PASS" else item["status"],
                 observed_revision=1, complete=False, partial_gate_status=item["status"],
                 reason=item.get("failed_stage", "Economic administrator gate; complete subcases pending"), evidence=f"{case}-gate.json")
-        if case in ("PROD01-04", "SEARCH01-04-NATIVE") and "status" in item and item.get("reference") == REFERENCE:
+        if case in ("PROD01-04", "SEARCH01-04-NATIVE", "BANK-BOOK-FIXTURE") and "status" in item and item.get("reference") == REFERENCE:
             independent[case] = item
             by_case[case].update(status=item["status"], observed_revision=item["revision"], complete=item["complete"],
                 reason=item.get("error", "Executed native independent case"), evidence=f"{case}.json")
@@ -69,12 +73,22 @@ def extract(log, output, run_id, commit, fixtures):
     for case, item in exports.items():
         (output / f"{case}-native-export.json").write_text(json.dumps(item, indent=2) + "\n")
     for case, item in independent.items():
-        item["steps"] = product_steps if case == "PROD01-04" else search_steps
+        item["steps"] = {"PROD01-04": product_steps, "SEARCH01-04-NATIVE": search_steps, "BANK-BOOK-FIXTURE": book_steps}[case]
         if item["status"] == "PASS":
-            complete_notices = len(item["steps"]) == (7 if case == "PROD01-04" else 11)
+            complete_notices = len(item["steps"]) == {"PROD01-04": 7, "SEARCH01-04-NATIVE": 11, "BANK-BOOK-FIXTURE": 5}[case]
             if not complete_notices:
                 by_case[case].update(status="UNRUN", complete=False,
                     reason="PASS notice present but detailed persistence/query notices are incomplete; inspect full artifact")
+            elif case == "BANK-BOOK-FIXTURE":
+                receipts = [s["persisted"] for s in item["steps"] if s.get("case") == "native-advance-receipt"]
+                try:
+                    assert len(receipts) == 4
+                    assert_native_bank_book({"company_id": receipts[0]["company_id"], "vouchers": receipts},
+                        json.loads((fixtures / "bank-book.json").read_bytes()))
+                    assert item["steps"][-1].get("case") == "fixture-replay" and item["steps"][-1].get("native_export_identical") is True
+                except (AssertionError, KeyError, TypeError) as error:
+                    by_case[case].update(status="FAIL", complete=False,
+                        reason="Bank-book notice contradicts persisted native payment/journal detail: " + str(error))
         (output / f"{case}.json").write_text(json.dumps(item, indent=2) + "\n")
     if proof:
         (output / "build-evidence.json").write_text(json.dumps(proof, indent=2) + "\n")

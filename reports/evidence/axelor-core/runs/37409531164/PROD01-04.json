@@ -1,0 +1,44 @@
+{
+  "case": "PROD01-04",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [],
+  "setup": {
+    "profiles": [
+      {
+        "product_code": "P001",
+        "product_id": 1,
+        "id": 1
+      },
+      {
+        "product_code": "P002",
+        "product_id": 2,
+        "id": 2
+      },
+      {
+        "product_code": "P003",
+        "product_id": 3,
+        "id": 3
+      }
+    ],
+    "company_id": 1,
+    "operator_user_id": 2,
+    "operator_role_id": 3,
+    "native_permission_id": 34
+  },
+  "status": "FAIL",
+  "complete": false,
+  "error": "HTTP Error 401: ",
+  "error_type": "HTTPError",
+  "seconds": 0.476,
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 3.367
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 33.662
+    }
+  ]
+}
