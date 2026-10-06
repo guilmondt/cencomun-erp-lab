@@ -6,6 +6,70 @@ validaciones. Los resultados detallados, cantidades y fallos están en
 Las pruebas UI/Cypress, PostgreSQL, SQLite y migraciones entre versiones no
 forman parte de esta ejecución de servidor sobre MariaDB fijada.
 
+## Investigación acotada desde 8158
+
+Los completos conservados siguen FAIL y el criterio 13 BLOCKED. Véase
+`reports/frappe-official-preparation-investigation.md`. No repetir completos
+sin corrección o hipótesis concreta, ni repetir restauración cloud.
+
+1. El helper Payments ahora se llama **prepare_payments.py**: el nombre antiguo
+   ocultaba al paquete oficial al importar Frappe desde otros helpers. Ejecutar
+   `prove_payments_shadow.py` una vez conserva la prueba sin sitio/DB/caché/red;
+   si su evidencia ya existe, conservarla. `module_preflight.py` comprueba el
+   origen del paquete y listas no vacías; solo reconstruye `db_name|app_modules`
+   ante diferencias demostradas. Nunca purgar Redis completo.
+2. Usar un sitio nuevo marcado sin borrar el anterior. Para autenticación:
+   `prepare.py frappe --diagnostic`. Para aislar el orden de fixtures ERPNext:
+   `prepare.py erpnext --fixture-order --official-fx-fixtures`. Estos slots son
+   sitios locales de diagnóstico, no comprobaciones de restauración cloud.
+   No reejecutar su preparación si la evidencia FX con ese nombre existe:
+   conservar el sitio y comprobar el estado antes de continuar.
+3. Prohibir transportes externos durante preparación y reproducción:
+
+   ```bash
+   cd /workspace/cencomun-erp-lab
+   source scripts/frappe-integral/env.sh
+   export PATH="$CCM_FRAPPE_ROOT/official-tools/bin:$CCM_FRAPPE_ROOT/core-tools/usr/bin:$PATH"
+   export CCM_OFFICIAL_OFFLINE=1
+   export PYTHONPATH="$PWD/scripts/official-tests/observer"
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare.py erpnext --fixture-order --official-fx-fixtures
+   ```
+
+   El guard permite loopback y resolver el literal de bind nativo. Rechaza
+   DNS/conexiones externas y HTTP externo antes del adapter; no devuelve una
+   respuesta ni tasa ficticia. No cambia permisos de red, TLS o proxy. Un
+   rechazo offline observado se distingue del ProxyError histórico real.
+4. Las tasas se leen de los seis registros JSON oficiales exactos, sin cambiar
+   fechas/monedas/valores/banderas. Antes del bootstrap se usa
+   `frappe.get_doc(record).insert()` con validación nativa: el generador de
+   test records importa `ERPNextTestSuite` y dispara demasiado pronto los
+   fixtures maestros. Conservar conteos BOM antes/después de cargar FX. No
+   modificar `allow_stale` ni agregar tasas LAB o cotizaciones externas.
+5. Ejecutar el módulo o métodos requeridos, con procesos nuevos y mismo lock:
+
+   ```bash
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/run.py frappe \
+     --site ccm-upstream-frappe-diagnostic.test --sequence frappe.tests.test_auth --offline --observe
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/run.py erpnext \
+     --site ccm-upstream-erpnext-fixture-order.test \
+     --module erpnext.manufacturing.doctype.bom.test_bom \
+     --test test_update_bom_cost_in_all_boms --offline --observe
+   ```
+
+   `--sequence` utiliza el ParallelTestRunner nativo para módulos seleccionados
+   en un proceso; conserva sus hooks, reset de usuario y TestResult. No es una
+   suite completa. `--test` usa el selector nativo y se etiqueta como métodos
+   seleccionados; no acredita el módulo entero. El observador no reemplaza
+   funciones de negocio/validadores/fixtures ni cambia sus resultados.
+6. Publicar solo JSON permitidos con `publish_observations.py`, luego
+   `publish.py`; ambos distinguen streams observacionales de resultados
+   nativos. Cada intento reserva archivos exclusivos. Preparación tampoco
+   sobrescribe logs de etapas anteriores. Ante fallo, conservar el intento y
+   repetir únicamente después de corregir o formular una hipótesis verificable.
+7. Verificar controles del harness con el venv oficial:
+   `python -m unittest discover -s scripts/official-tests -p 'test_*.py'`.
+   No contarlos como tests Frappe/ERPNext o como criterio 13.
+
 ## Preparación y ejecución
 
 1. Conservar `versions.lock` y el manifiesto compartido; comprobar rama
@@ -43,7 +107,7 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    ```bash
    "$CCM_FRAPPE_ROOT/bench/env/bin/python" scripts/official-tests/isolate_bench.py
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare.py frappe
-   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/payments.py
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare_payments.py
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare.py erpnext --fresh
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/inspect_site.py frappe
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/inspect_site.py erpnext --fresh
@@ -68,7 +132,7 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    compatible: se usa únicamente el commit oficial version-16
    `cca07d9f9392e2ea0e521c5975151db9e4b6c321`, Frappe >=16,<17, Python >=3.14.
    Los siete SDKs están fijados con hashes en `official-payments.lock.txt`;
-   `payments.py` rechaza un runner/worker activo y comprueba que ninguna versión
+   `prepare_payments.py` rechaza un runner/worker activo y comprueba que ninguna versión
    previamente instalada cambió. Solo modifica el venv del Bench oficial
    copiado; Payments no se instala en sitios ni venv Cencomun. Los sources
    originales y `versions.lock` siguen intactos. No se usa `bench get-app`

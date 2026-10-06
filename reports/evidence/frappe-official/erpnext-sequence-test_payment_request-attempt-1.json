@@ -1,0 +1,550 @@
+{
+  "scope": "selected official modules through native CI runner; not full suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-diagnostic.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": null,
+  "category": "all",
+  "attempt": 1,
+  "status": "PASS",
+  "ci_parallel": false,
+  "sequence": [
+    "erpnext.accounts.doctype.payment_entry.test_payment_entry",
+    "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry",
+    "erpnext.accounts.doctype.payment_order.test_payment_order",
+    "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation",
+    "erpnext.accounts.doctype.payment_request.test_payment_request"
+  ],
+  "selected_tests": [],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/official-bench/env/bin/python /workspace/cencomun-erp-lab/scripts/official-tests/native_subset.py erpnext ccm-upstream-erpnext-diagnostic.test erpnext.accounts.doctype.payment_entry.test_payment_entry erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry erpnext.accounts.doctype.payment_order.test_payment_order erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation erpnext.accounts.doctype.payment_request.test_payment_request",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test serve --port 8005 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T05:19:28.425083+00:00",
+  "elapsed_seconds": 79.874,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "705ee7c3175cf0cc06647df46cb91935f9979c8e77ec6f9ec58ea5c933146518",
+  "actual_tests_run": 126,
+  "runner_counts_by_category": [],
+  "discovered_categories": [],
+  "junit_records": 0,
+  "xml_documents": 0,
+  "cases": [
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_advance_as_liability_against_order",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_advance_reverse_payment_reconciliation",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_allocation_validation_for_sales_order",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_delete_linked_exchange_gain_loss_journal",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_details_update_on_reference_table",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_duplicate_payment_entry_allocate_amount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_duplicate_payment_entry_partial_allocate_amount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_gl_of_multi_currency_payment_transaction",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_gl_of_multi_currency_payment_with_taxes",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_internal_transfer_rejects_same_account",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_internal_transfer_usd_to_inr",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_ledger_entries_for_advance_as_liability",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_multi_currency_payment_entry_with_taxes",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_opening_flag_for_advance_as_liability",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_outstanding_invoices_api",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_outstanding_multicurrency_sales_order_split",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_outstanding_orders_no_split_when_allocate_disabled",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_outstanding_orders_split_by_payment_terms",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_overallocation_validation_on_payment_terms",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_overallocation_validation_shouldnt_misfire",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_against_negative_sales_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_against_partial_return_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_against_purchase_invoice_to_check_status",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_against_sales_invoice_to_check_status",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_against_sales_order_usd_to_inr",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_account_and_party_balance_with_cost_center",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_onhold_purchase_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_order",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_payment_terms",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_payment_terms_with_discount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_payment_terms_with_discount_amount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_payment_terms_with_discount_on_pi",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_pi",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_purchase_invoice_with_cost_center",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_sales_invoice_with_cost_centre",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_si_usd_to_inr",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_si_usd_to_usd",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_against_si_usd_to_usd_with_deduction_in_base_currency",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_does_not_merge_gl_entries_when_setting_disabled",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_exchange_gain_loss",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_for_blocked_supplier_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_for_blocked_supplier_payments",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_for_blocked_supplier_payments_past_date",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_for_blocked_supplier_payments_today_date",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_for_employee",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_merges_gl_entries_with_same_account_head",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_multicurrency_accounting_si_with_early_payment_discount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_multicurrency_si_with_base_currency_accounting_early_payment_discount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_retrieves_last_exchange_rate",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_with_inclusive_tax",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_payment_entry_write_off_difference",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_project_name_in_exchange_gain_loss_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_receive_payment_from_payable_party_type",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_reference_outstanding_amount_on_advance_pull",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_entry.test_payment_entry.TestPaymentEntry.test_reverse_payment_reconciliation",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_advance_payment_unlink_on_order_cancellation",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_cr_note_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_je_against_inv_and_note",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_multi_je_unlink_on_invoice_cancellation",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_multi_payment_unlink_on_invoice_cancellation",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_partial_payment_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_payment_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry.TestPaymentLedgerEntry.test_reverse_entries_on_cancel_for_immutable_ledger",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_order.test_payment_order.TestPaymentOrder.test_payment_order_creation_against_payment_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_advance_payment_reconciliation_against_journal_for_customer",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_advance_payment_reconciliation_against_journal_for_supplier",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_advance_payment_reconciliation_date",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_advance_payment_reconciliation_date_for_older_date",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_advance_reconciliation_effect_on_same_date",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_advance_reverse_payment_against_payment_for_supplier",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_cost_center_filter_on_vouchers",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_cr_note_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_cr_note_partial_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_cr_note_payment_limit_filter",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_cr_note_split_across_invoices_floating_point_precision",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_difference_amount_via_journal_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_difference_amount_via_negative_debit_or_credit_journal_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_difference_amount_via_payment_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_differing_cost_center_on_invoice_and_payment",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_filter_invoice_limit",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_filter_min_max",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_filter_posting_date",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_filter_posting_date_case2",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_foreign_currency_reverse_journal_entry_against_journal_entry_for_customer",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_foreign_currency_reverse_journal_entry_against_journal_entry_for_supplier",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_foreign_currency_reverse_payment_entry_against_payment_entry_for_customer",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_foreign_currency_reverse_payment_entry_against_payment_entry_for_supplier",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_foreign_currency_reverse_payment_entry_gain_for_supplier",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_invoice_status_after_cr_note_cancellation",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_journal_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_journal_against_journal",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_negative_debit_or_credit_journal_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_no_difference_amount_for_base_currency_accounts",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_partial_advance_payment_with_closed_fiscal_year",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_payment_against_foreign_currency_journal",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_payment_against_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_payment_against_journal",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_pr_output_foreign_currency_and_amount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_reconciliation_from_purchase_order_to_multiple_invoices",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_reconciliation_on_closed_period_payment",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_reconciliation_purchase_invoice_against_return",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_reverse_payment_against_payment_for_supplier",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_rounding_of_unallocated_amount",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation.TestPaymentReconciliation.test_user_permission_on_accounting_dimension_filters_vouchers",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_draft_pr_reuse_merges_payment_references",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entries_against_sales_order",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_grand_total_from_selected_schedules",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "status": "PASS"
+    }
+  ],
+  "counts": {
+    "PASS": 126,
+    "SKIP": 0,
+    "FAIL": 0,
+    "ERROR": 0
+  },
+  "native_summary_complete": true,
+  "observed_result_events": 126,
+  "failure_headers": [],
+  "result_format": "official CI verbose text; not JUnit",
+  "count_note": "Native Tests counter is authoritative; events may include subtests/fixtures. FAILED_EVENT has no inferred FAIL/ERROR subtype. Missing final summary leaves count unknown."
+}

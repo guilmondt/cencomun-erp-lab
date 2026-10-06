@@ -1,0 +1,110 @@
+{
+  "scope": "selected official modules through native CI runner; not full suite",
+  "app": "frappe",
+  "site": "ccm-upstream-frappe-diagnostic.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": null,
+  "category": "all",
+  "attempt": 2,
+  "status": "PASS",
+  "ci_parallel": false,
+  "sequence": [
+    "frappe.tests.test_auth"
+  ],
+  "selected_tests": [],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/official-bench/env/bin/python /workspace/cencomun-erp-lab/scripts/official-tests/native_subset.py frappe ccm-upstream-frappe-diagnostic.test frappe.tests.test_auth",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-diagnostic.test serve --port 8002 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T05:10:34.669572+00:00",
+  "elapsed_seconds": 20.55,
+  "upstream_sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+  "log_sha256": "c22488306a657cbe419d85113c982dbceb41cda420e6f18582f9d3d6acb97ee1",
+  "actual_tests_run": 17,
+  "runner_counts_by_category": [],
+  "discovered_categories": [],
+  "junit_records": 0,
+  "xml_documents": 0,
+  "cases": [
+    {
+      "id": "frappe.tests.test_auth.TestAllowedReferrer.test_is_allowed_referrer",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_mobile",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_only_email",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username_and_mobile",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_correct_cookie_expiry_set",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_disable_user_pass_login",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_forced_password_reset_does_not_leak_reset_key",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_forced_password_reset_waits_for_2fa",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestIPRestrictionForAPIAuth.test_api_auth_allowed_from_allowed_ip",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestIPRestrictionForAPIAuth.test_api_auth_blocked_from_disallowed_ip",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestIPRestrictionForAPIAuth.test_api_auth_unaffected_without_ip_restriction",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestLoginAttemptTracker.test_account_lock",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestLoginAttemptTracker.test_account_unlock",
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestSessionExpiry.test_session_expires",
+      "status": "PASS"
+    }
+  ],
+  "counts": {
+    "PASS": 17,
+    "SKIP": 0,
+    "FAIL": 0,
+    "ERROR": 0
+  },
+  "native_summary_complete": true,
+  "observed_result_events": 17,
+  "failure_headers": [],
+  "result_format": "official CI verbose text; not JUnit",
+  "count_note": "Native Tests counter is authoritative; events may include subtests/fixtures. FAILED_EVENT has no inferred FAIL/ERROR subtype. Missing final summary leaves count unknown."
+}

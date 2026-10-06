@@ -1,0 +1,3083 @@
+{
+  "native_result": "erpnext-test_payment_request-attempt-4.json",
+  "scope": "official module regression",
+  "private_stream_sha256": "63b01f504c222bc9a13982e02a20854180bfc719928254080bff50f64abc844c",
+  "counts_by_event": {
+    "observer_started": 4,
+    "external_transport_rejected": 1,
+    "module_map_return": 1,
+    "native_state": 44,
+    "fx_return": 94,
+    "test_stopped": 22,
+    "external_http_rejected": 12,
+    "native_fx_error_log": 12
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "native_error_log": "9vh9n6eb64"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "native_error_log": "9vt1ijnt72"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "native_error_log": "9vtorvji1h"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "native_error_log": "a1ca0o1ncu"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "native_error_log": "a1obdobq4m"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "native_error_log": "a1o1a1nga6"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "native_error_log": "a2opdkn262"
+    },
+    {
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "native_error_log": "a2okre0t89"
+    }
+  ],
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 19777,
+      "epoch": 1791263729.6935158,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 19777,
+      "epoch": 1791263729.8637547,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 19777,
+      "epoch": 1791263731.0200975,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 19784,
+      "epoch": 1791263731.3470879,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 19784,
+      "epoch": 1791263731.5422068,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 19784,
+      "epoch": 1791263731.9469957,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "db_name": "ccm_upstream_erpnext_diagnostic"
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263740.3035522,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263741.5462542,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263741.5577927,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263741.7068965,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263741.7146063,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263741.984331,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263741.9894335,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263742.1868682,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263742.1913874,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263742.2783737,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263742.2812386,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263742.344876,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263742.5427728,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "name": "9vh9n6eb64",
+      "creation": "2026-10-06 10:45:42.532377",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "66da09c33914bf853943bab0bdc9dd5a272991ce327c04a8a89ac4d7a03ee047",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263742.5430174,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263742.6206815,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263742.623238,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_draft_pr_reuse_merges_payment_references",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263742.9426646,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_draft_pr_reuse_merges_payment_references",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263742.945649,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entries_against_sales_order",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263743.3362951,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entries_against_sales_order",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263743.3385322,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263743.6435091,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263743.6478713,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263743.6983652,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263743.706322,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "name": "9vt1ijnt72",
+      "creation": "2026-10-06 10:45:43.702796",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263743.7065125,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263743.7203333,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263743.7280216,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "name": "9vtorvji1h",
+      "creation": "2026-10-06 10:45:43.724615",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263743.728253,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263743.7385974,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263743.741273,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263743.958892,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263743.963772,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.1035743,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.1086755,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.2576077,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.2620018,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263744.3397214,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263744.3425224,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.6610446,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.737335,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.7428012,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.8080015,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.8452013,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.891583,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263744.8955898,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263744.930896,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263744.9334593,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.1587996,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.163756,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.3724465,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.3771276,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.5902357,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.5956814,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.7725735,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263745.7775502,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263745.845424,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263745.8480947,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.1148732,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.120726,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.3519952,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.3575988,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263746.40759,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263746.4100854,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.6226902,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.6279664,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.8088505,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.8134308,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.8716364,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263746.875261,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263747.8217764,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263747.825991,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263747.876612,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263747.879614,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.1948705,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.2528868,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.2579892,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.3294368,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.333773,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263748.3704083,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263748.3734486,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263748.4408107,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263748.4497738,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "name": "a1ca0o1ncu",
+      "creation": "2026-10-06 10:45:48.445789",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "17ae6311b6594c5a18df776e790fc7c2c10249a43856a668c9c319327dab2f4b",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.4500065,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263748.4683447,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263748.4714174,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.7845273,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.827186,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.8933856,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263748.899064,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.117286,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.1222856,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263749.1826708,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263749.1917734,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "name": "a1jr7anr85",
+      "creation": "2026-10-06 10:45:49.187904",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.1920094,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.328359,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.333363,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263749.3636494,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263749.3667376,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.600604,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.6060877,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263749.663142,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263749.671055,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "name": "a1obdobq4m",
+      "creation": "2026-10-06 10:45:49.667661",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.671306,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263749.6883054,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263749.6989098,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "name": "a1o1a1nga6",
+      "creation": "2026-10-06 10:45:49.693897",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.6991997,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263749.709121,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263749.711708,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.9123492,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263749.9167771,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263749.9975255,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263749.9997723,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_grand_total_from_selected_schedules",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263750.2196944,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_grand_total_from_selected_schedules",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263750.2218726,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263750.3570213,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263750.3653996,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "name": "a1vmhsalnq",
+      "creation": "2026-10-06 10:45:50.361759",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.3656254,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263750.4034352,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263750.411776,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "name": "a20n0r4vg8",
+      "creation": "2026-10-06 10:45:50.408002",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "66da09c33914bf853943bab0bdc9dd5a272991ce327c04a8a89ac4d7a03ee047",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.4119925,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263750.491496,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263750.4995537,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "name": "a200oc5011",
+      "creation": "2026-10-06 10:45:50.496150",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "66da09c33914bf853943bab0bdc9dd5a272991ce327c04a8a89ac4d7a03ee047",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.4997709,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.5719368,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.5768795,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263750.6099162,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263750.6121993,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.8235474,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263750.829008,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.0398757,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.0459387,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263751.1274877,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263751.1305141,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.4025788,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.4443614,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.5006835,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.5061526,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263751.5335462,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263751.5357943,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.8679683,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263751.8724477,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.058773,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.0631752,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.0676455,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263752.1422858,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263752.144786,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.4040413,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.4520345,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.5207515,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.5250657,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.5293639,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263752.5615132,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263752.5636082,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.7513602,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.7560635,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263752.8087885,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263752.8167632,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "name": "a2opdkn262",
+      "creation": "2026-10-06 10:45:52.813335",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.8169444,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 19784,
+      "epoch": 1791263752.829046,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 19784,
+      "epoch": 1791263752.8362606,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "name": "a2okre0t89",
+      "creation": "2026-10-06 10:45:52.833231",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "3c50fef7df7c7d3baa404502010243edc9ed181040d74cac6e6d4b3bc97f4110",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 127, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 19784,
+      "epoch": 1791263752.8364296,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 19784,
+      "epoch": 1791263752.844854,
+      "test": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-diagnostic.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": []
+    }
+  ]
+}

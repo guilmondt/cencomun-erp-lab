@@ -5,8 +5,19 @@ import datetime
 import hashlib
 import json
 import subprocess
+import re
 from pathlib import Path
 from run import PRIVATE, REPO, ROOT, OUT, parse_results, parse_parallel_results, redact
+
+
+def full_suite_candidate(attempt, app):
+    return (attempt['app'] == app and not attempt.get('module')
+            and not attempt.get('sequence') and not attempt.get('selected_tests')
+            and attempt.get('category', 'all') == 'all' and attempt.get('evidence_valid', True))
+
+
+def native_result_file(path):
+    return bool(re.fullmatch(r'(frappe|erpnext)-.+-attempt-\d+', path.stem))
 
 
 def sanitize(value):
@@ -25,13 +36,15 @@ def main():
     cloud_status = cloud.get('resultado', 'BLOCKED')
     attempts = []
     for path in sorted(OUT.glob('*-attempt-*.json')):
+        if not native_result_file(path):
+            continue  # Observation artifacts are evidence, not native result records.
         data = json.loads(path.read_text())
         if data.get('evidence_valid', True):
             basename = path.stem
             log = PRIVATE / (basename + '.log')
             xml = PRIVATE / (basename + '.xml')
             if log.exists() and not data.get('interrupted'):
-                data.update(parse_parallel_results(log.read_text(), data['app']) if data.get('ci_parallel') else
+                data.update(parse_parallel_results(log.read_text(), data['app']) if data.get('ci_parallel') or data.get('sequence') else
                             parse_results(xml.read_text() if xml.exists() else '', log.read_text()))
                 if data.get('diagnostic_tail'):
                     data['diagnostic_tail'] = redact('\n'.join(log.read_text().splitlines()[-75:]))
@@ -40,8 +53,7 @@ def main():
         attempts.append({**data, 'evidence': str(path.relative_to(REPO))})
     results = []
     for app in ['frappe', 'erpnext']:
-        eligible = [a for a in attempts if a['app'] == app and not a.get('module')
-                    and a.get('category', 'all') == 'all' and a.get('evidence_valid', True)]
+        eligible = [a for a in attempts if full_suite_candidate(a, app)]
         selected = max(eligible, key=lambda a: (a.get('ci_parallel', False), a['attempt'])) if eligible else None
         discovery = json.loads((OUT / (app + '-discovery.json')).read_text())
         preparation = json.loads((OUT / (app + '-preparation.json')).read_text())
@@ -126,7 +138,10 @@ def main():
              '| App | Intento | Alcance | Contador nativo | Estado | Evidencia |',
              '| --- | --- | --- | --- | --- | --- |']
     for a in attempts:
-        scope = a.get('module') or ('CI, todos los módulos (un shard)' if a.get('ci_parallel') else a.get('category', 'all'))
+        scope = ('Secuencia CI acotada: ' + ', '.join(a['sequence']) if a.get('sequence') else
+                 a.get('module') or ('CI, todos los módulos (un shard)' if a.get('ci_parallel') else a.get('category', 'all')))
+        if a.get('selected_tests'):
+            scope += ' / métodos: ' + ', '.join(a['selected_tests'])
         number = a['actual_tests_run'] if a['actual_tests_run'] is not None else 'desconocido'
         valid = '' if a.get('evidence_valid', True) else ' / evidencia no válida'
         rows.append(f"| {a['app']} | {a['attempt']} | {scope} | {number} | {a['status']}{valid} | "
@@ -134,8 +149,10 @@ def main():
     rows += ['', 'Cada intento conserva su alcance. El módulo timeline ejecutó siete legacy PASS tras '
              'recrear copias limpias en los mismos SHAs; no convierte el comando Frappe completo en PASS. '
              'La selección directa de su categoría fue rechazada por la CLI (cero tests). '
-             'La repetición auth completó una unitaria y quedó BLOCKED durante preparación: no acredita '
-             'la integración de autenticación.', '', '## Comandos ejecutados', '']
+             'La repetición auth antigua completó una unitaria y quedó BLOCKED durante preparación. '
+             'La reproducción posterior en sitio limpio usa la CI nativa; sus resultados y el '
+             'diagnóstico de fixtures están en [la investigación acotada](frappe-official-preparation-investigation.md). '
+             'Ninguna repetición modular convierte estos completos FAIL en PASS.', '', '## Comandos ejecutados', '']
     for result in results:
         if 'command' in result:
             rows += [f"- `{result['command']}`"]
@@ -170,7 +187,7 @@ def main():
     rows += ['', 'Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). '
              'El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: '
              'ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con '
-             'reserva exclusiva de nombres. Dieciocho tests del harness verifican cero-test, categorías, '
+             'reserva exclusiva de nombres. Los tests del harness verifican cero-test, categorías, '
              'subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación '
              'de archivos generados; no son tests oficiales. '
              'El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; '

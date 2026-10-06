@@ -1,4 +1,4 @@
-"""Install ERPNext's official CI fixture app only in the copied test Bench."""
+"""Prepare Payments CI fixtures without shadowing the official `payments` package."""
 
 import importlib.metadata
 import json

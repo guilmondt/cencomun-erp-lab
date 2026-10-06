@@ -9,9 +9,39 @@ from unittest.mock import patch
 from run import parse_results, parse_parallel_results, reserve_attempt, SuiteLock, redact, active_runners
 from isolate_bench import copy_compiled_assets, archive_test_sources
 from recover import interrupted_record
+from module_preflight import expected_map
+from publish import full_suite_candidate, native_result_file
 
 
 class ResultCountingTests(unittest.TestCase):
+    def test_observation_artifacts_never_enter_native_result_parser(self):
+        self.assertTrue(native_result_file(Path('erpnext-sequence-test_one-attempt-1.json')))
+        self.assertFalse(native_result_file(Path('erpnext-sequence-test_one-attempt-1-observations.json')))
+        self.assertFalse(native_result_file(Path('diagnostic-preparation-failed-attempts.json')))
+    def test_pass_subset_never_replaces_failed_full_suite_in_report(self):
+        full = {'app': 'erpnext', 'status': 'FAIL', 'category': 'all'}
+        self.assertTrue(full_suite_candidate(full, 'erpnext'))
+        self.assertFalse(full_suite_candidate({**full, 'status': 'PASS', 'sequence': ['erpnext.test_one']}, 'erpnext'))
+        self.assertFalse(full_suite_candidate({**full, 'status': 'PASS', 'selected_tests': ['test_one']}, 'erpnext'))
+    def test_helpers_do_not_shadow_the_required_official_payments_package(self):
+        import importlib.util
+        spec = importlib.util.find_spec('payments')
+        self.assertIsNotNone(spec)
+        self.assertIsNotNone(spec.submodule_search_locations, 'payments must be a package, not a helper script')
+        self.assertFalse((Path(__file__).parent / 'payments.py').exists())
+    def test_payments_module_preflight_detects_missing_mapping_without_ignoring_it(self):
+        expected = expected_map(['frappe', 'payments'], {'frappe': ['Core'], 'payments': ['Payments', 'Payment Gateways']})
+        stale = {'core': 'frappe'}
+        self.assertEqual({m: a for m, a in expected.items() if stale.get(m) != a},
+                         {'payments': 'payments', 'payment_gateways': 'payments'})
+    def test_native_subset_is_also_an_active_official_runner(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); process = root / '312'; process.mkdir()
+            (process / 'cmdline').write_bytes(b'python\0/repo/native_subset.py\0erpnext\0')
+            (process / 'stat').write_text('312 (python) S')
+            with patch('run.os.readlink', return_value=str(root / 'bench/sites')):
+                self.assertEqual(active_runners(root / 'bench', root), [312])
+
     def test_recovered_runner_with_inaccessible_cwd_is_not_treated_as_inactive(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder); process = root / '311'; process.mkdir()

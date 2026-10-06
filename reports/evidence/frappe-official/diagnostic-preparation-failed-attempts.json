@@ -1,0 +1,25 @@
+{
+  "scope": "preparation attempts, not official test outcomes",
+  "native_tests_run": 0,
+  "records": [
+    {
+      "operation": "load official FX fixtures on diagnostic site before rename",
+      "status": "FAIL",
+      "exception": "ModuleNotFoundError",
+      "message": "No module named 'payments.hooks'; 'payments' is not a package",
+      "cause": "payments.py helper shadows installed package",
+      "rates_loaded": 0,
+      "followup": "Rename helper, verify import origin, then load exact official fixture records."
+    },
+    {
+      "operation": "initial fixture-audit preparation",
+      "status": "FAIL",
+      "exception": "DoesNotExistError",
+      "message": "DocType Currency Exchange not found",
+      "cause": "Fixture hook placed before ERPNext installation",
+      "site_created_retained": true,
+      "followup": "Move hook after install and before bootstrap; continue same marked empty site, no drop/reset."
+    }
+  ],
+  "recorded_utc": "2026-10-06T05:26:02.352143+00:00"
+}

@@ -25,7 +25,9 @@ BENCH = ROOT / 'official-bench'
 PRIVATE = ROOT / 'official-tests'
 OUT = REPO / 'reports/evidence/frappe-official'
 ALLOWED_SITES = ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test',
-                 'ccm-upstream-frappe-fresh.test', 'ccm-upstream-erpnext-fresh.test']
+                 'ccm-upstream-frappe-fresh.test', 'ccm-upstream-erpnext-fresh.test',
+                 'ccm-upstream-frappe-diagnostic.test', 'ccm-upstream-erpnext-diagnostic.test',
+                 'ccm-upstream-erpnext-fixture-audit.test', 'ccm-upstream-erpnext-fixture-order.test']
 
 
 class SuiteLock:
@@ -55,7 +57,8 @@ def active_runners(bench=BENCH, proc_root=Path('/proc')):
             continue
         try:
             command = (process / 'cmdline').read_bytes().split(b'\0')
-            if not {b'run-tests', b'run-parallel-tests'}.intersection(command):
+            if not ({b'run-tests', b'run-parallel-tests'}.intersection(command) or
+                    any(token.rsplit(b'/', 1)[-1] == b'native_subset.py' for token in command)):
                 continue
             try:
                 cwd = Path(os.readlink(process / 'cwd')).resolve()
@@ -193,14 +196,23 @@ def parse_parallel_results(log, app):
                           'FAILED_EVENT has no inferred FAIL/ERROR subtype. Missing final summary leaves count unknown.'}
 
 
-def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel=False):
+def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel=False,
+              offline=False, observe=False, tests=(), sequence=()):
     PRIVATE.mkdir(mode=0o700, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
     if ci_parallel and (module or category):
         raise ValueError('CI runner covers every module; do not combine selection flags.')
+    if sequence and (module or category or ci_parallel or tests):
+        raise ValueError('A native CI module sequence cannot combine other selectors.')
+    if tests and not module:
+        raise ValueError('Method selection requires an explicit module.')
     label = app + ('-ci' if ci_parallel else ('-' + module.rsplit('.', 1)[-1] if module else '-full'))
     if category:
         label += '-' + category
+    if tests:
+        label += '-selected'
+    if sequence:
+        label = app + '-sequence-' + sequence[-1].rsplit('.', 1)[-1]
     # Reserve against BOTH completed and still-running attempts. Exclusive file
     # creation prevents concurrent runs from truncating each other's evidence.
     attempt, base = reserve_attempt(label)
@@ -218,14 +230,28 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
         args += ['--module', module]
     if category:
         args += ['--test-category', category]
+    for test in tests:
+        args += ['--test', test]
+    command = [str(ROOT / 'bench-tools/bin/bench'), *args]
+    if sequence:
+        command = [str(BENCH / 'env/bin/python'), str(REPO / 'scripts/official-tests/native_subset.py'),
+                   app, site, *sequence]
+    child_env = {**os.environ, 'CI': 'Yes'}
+    if offline or observe:
+        child_env.update(CCM_OFFICIAL_OFFLINE='1' if offline else '0',
+                         CCM_OFFICIAL_OBSERVE='1' if observe else '0',
+                         CCM_OFFICIAL_OBSERVATION=str(PRIVATE / (base + '-observations.jsonl')),
+                         PYTHONPATH=str(REPO / 'scripts/official-tests/observer') +
+                         (os.pathsep + os.environ['PYTHONPATH'] if os.environ.get('PYTHONPATH') else ''))
     start = time.monotonic()
-    print('Starting:', 'bench', *args, flush=True)
+    print('Starting:', ' '.join(command), flush=True)
     port = port or (8002 if app == 'frappe' else 8005)
     statepath = PRIVATE / (base + '-running.json')
     state = {'app': app, 'site': site, 'bench': str(BENCH), 'module': module,
-             'category': category or 'all', 'attempt': attempt, 'command': 'bench ' + ' '.join(args),
+             'category': category or 'all', 'attempt': attempt, 'command': ' '.join(command),
              'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
              'driver_pid': os.getpid(), 'port': port, 'ci_parallel': ci_parallel}
+    state.update(offline=offline, observe=observe, selected_tests=list(tests), sequence=list(sequence))
     statepath.write_text(json.dumps(state, indent=2) + '\n')
     statepath.chmod(0o600)
     webargs = [str(ROOT / 'bench-tools/bin/bench'), '--site', site, 'serve',
@@ -233,8 +259,9 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
     # Official serve sets its site explicitly. CI mode disables the interactive
     # debugger; there is no application monkeypatch or modified validation.
     with (PRIVATE / (base + '-web.log')).open('x') as web_log:
-        web = subprocess.Popen(webargs, cwd=BENCH, env={**os.environ, 'CI': 'Yes'},
+        web = subprocess.Popen(webargs, cwd=BENCH, env=child_env,
                                stdout=web_log, stderr=subprocess.STDOUT, start_new_session=True)
+        startup_error = None
         try:
             opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
             for _ in range(60):
@@ -249,31 +276,45 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
             else:
                 raise RuntimeError('Official site HTTP readiness timeout.')
             with logpath.open('x') as log:
-                runner = subprocess.Popen([str(ROOT / 'bench-tools/bin/bench'), *args],
-                                          cwd=BENCH, env={**os.environ, 'CI': 'Yes'},
+                runner = subprocess.Popen(command,
+                                          cwd=BENCH, env=child_env,
                                           stdout=log, stderr=subprocess.STDOUT)
                 state['runner_pid'] = runner.pid
                 statepath.write_text(json.dumps(state, indent=2) + '\n')
                 result_code = runner.wait()
+        except (OSError, ValueError, RuntimeError) as exc:
+            if 'runner_pid' in state:
+                raise  # A running suite must be recovered/observed, never replaced.
+            startup_error = type(exc).__name__ + ': ' + str(exc)
+            result_code = web.poll() if web.poll() is not None else 1
+            with logpath.open('x') as log:
+                log.write('Harness startup failure before native runner: ' + startup_error + '\n')
         finally:
             if web.poll() is None:
                 os.killpg(web.pid, signal.SIGTERM)
                 web.wait(timeout=20)
     rawlog = logpath.read_text()
-    parsed = (parse_parallel_results(rawlog, app) if ci_parallel else
+    parsed = (parse_parallel_results(rawlog, app) if ci_parallel or sequence else
               parse_results(xmlpath.read_text() if xmlpath.exists() else '', rawlog))
     status = 'FAIL' if parsed['counts']['FAIL'] or parsed['counts']['ERROR'] else (
         'BLOCKED' if result_code or not parsed['actual_tests_run'] else 'PASS')
     record = {'scope': 'full official server application discovery' if not module else 'official module regression',
               'app': app, 'site': site, 'bench': str(BENCH), 'module': module, 'category': category or 'all', 'attempt': attempt, 'status': status,
-              'ci_parallel': ci_parallel,
-              'command': 'bench ' + ' '.join(args), 'web_command': ' '.join(webargs), 'exit_code': result_code,
+              'ci_parallel': ci_parallel, 'sequence': list(sequence), 'selected_tests': list(tests),
+              'offline': offline, 'observe': observe,
+              'command': ' '.join(command), 'web_command': ' '.join(webargs), 'exit_code': result_code,
               'recorded_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'elapsed_seconds': round(time.monotonic() - start, 3),
               'upstream_sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=BENCH / 'apps' / app, text=True).strip(),
               'log_sha256': hashlib.sha256(logpath.read_bytes()).hexdigest(),
               **parsed}
-    if (result_code or not parsed['actual_tests_run']) and not ci_parallel:
+    if startup_error:
+        record['startup_error'] = startup_error
+    if sequence:
+        record['scope'] = 'selected official modules through native CI runner; not full suite'
+    elif tests:
+        record['scope'] = 'selected official methods; not full module or suite'
+    if (result_code or not parsed['actual_tests_run']) and not (ci_parallel or sequence):
         record['diagnostic_tail'] = redact('\n'.join(rawlog.splitlines()[-75:]))
     (OUT / (base + '.json')).write_text(json.dumps(record, indent=2) + '\n')
     statepath.unlink(missing_ok=True)
@@ -297,5 +338,10 @@ if __name__ == '__main__':
     parser.add_argument('--site', choices=ALLOWED_SITES)
     parser.add_argument('--ci-parallel', action='store_true',
                         help='Native official CI runner, one shard covering all modules; ERPNext uses its CI lightmode.')
+    parser.add_argument('--offline', action='store_true', help='Reject non-loopback transports; never fabricate a provider response/rate.')
+    parser.add_argument('--observe', action='store_true', help='Record whitelisted native state and outcomes outside upstream sources.')
+    parser.add_argument('--test', action='append', default=[], help='Native method selector; report as selected methods only.')
+    parser.add_argument('--sequence', nargs='+', default=[], help='Selected modules in one native CI process, in the supplied order.')
     args = parser.parse_args()
-    raise SystemExit(main(args.app, args.module, args.category, args.port, args.site, args.ci_parallel))
+    raise SystemExit(main(args.app, args.module, args.category, args.port, args.site, args.ci_parallel,
+                          args.offline, args.observe, args.test, args.sequence))

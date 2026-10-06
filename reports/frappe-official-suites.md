@@ -22,20 +22,30 @@ Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, 
 | erpnext | 1 | all | desconocido | BLOCKED / evidencia no válida | [erpnext-full-attempt-1.json](evidence/frappe-official/erpnext-full-attempt-1.json) |
 | erpnext | 2 | all | desconocido | BLOCKED | [erpnext-full-attempt-2.json](evidence/frappe-official/erpnext-full-attempt-2.json) |
 | erpnext | 3 | all | 3255 | FAIL | [erpnext-full-attempt-3.json](evidence/frappe-official/erpnext-full-attempt-3.json) |
+| erpnext | 1 | Secuencia CI acotada: erpnext.accounts.doctype.payment_entry.test_payment_entry, erpnext.accounts.doctype.payment_ledger_entry.test_payment_ledger_entry, erpnext.accounts.doctype.payment_order.test_payment_order, erpnext.accounts.doctype.payment_reconciliation.test_payment_reconciliation, erpnext.accounts.doctype.payment_request.test_payment_request | 126 | PASS | [erpnext-sequence-test_payment_request-attempt-1.json](evidence/frappe-official/erpnext-sequence-test_payment_request-attempt-1.json) |
+| erpnext | 1 | erpnext.manufacturing.doctype.bom.test_bom / métodos: test_update_bom_cost_in_all_boms | 1 | FAIL | [erpnext-test_bom-selected-attempt-1.json](evidence/frappe-official/erpnext-test_bom-selected-attempt-1.json) |
+| erpnext | 2 | erpnext.manufacturing.doctype.bom.test_bom / métodos: test_update_bom_cost_in_all_boms | 1 | FAIL | [erpnext-test_bom-selected-attempt-2.json](evidence/frappe-official/erpnext-test_bom-selected-attempt-2.json) |
 | erpnext | 1 | erpnext.accounts.doctype.payment_request.test_payment_request | 22 | FAIL | [erpnext-test_payment_request-attempt-1.json](evidence/frappe-official/erpnext-test_payment_request-attempt-1.json) |
+| erpnext | 2 | erpnext.accounts.doctype.payment_request.test_payment_request | 22 | FAIL | [erpnext-test_payment_request-attempt-2.json](evidence/frappe-official/erpnext-test_payment_request-attempt-2.json) |
+| erpnext | 3 | erpnext.accounts.doctype.payment_request.test_payment_request | 22 | FAIL | [erpnext-test_payment_request-attempt-3.json](evidence/frappe-official/erpnext-test_payment_request-attempt-3.json) |
+| erpnext | 4 | erpnext.accounts.doctype.payment_request.test_payment_request | 22 | FAIL | [erpnext-test_payment_request-attempt-4.json](evidence/frappe-official/erpnext-test_payment_request-attempt-4.json) |
+| erpnext | 5 | erpnext.accounts.doctype.payment_request.test_payment_request | 22 | PASS | [erpnext-test_payment_request-attempt-5.json](evidence/frappe-official/erpnext-test_payment_request-attempt-5.json) |
+| erpnext | 1 | erpnext.stock.doctype.stock_entry.test_stock_entry / métodos: test_work_order_manufacture_with_material_consumption | 1 | FAIL | [erpnext-test_stock_entry-selected-attempt-1.json](evidence/frappe-official/erpnext-test_stock_entry-selected-attempt-1.json) |
 | frappe | 1 | all | 32 | BLOCKED | [frappe-full-attempt-1.json](evidence/frappe-official/frappe-full-attempt-1.json) |
 | frappe | 2 | all | 2275 | FAIL | [frappe-full-attempt-2.json](evidence/frappe-official/frappe-full-attempt-2.json) |
 | frappe | 3 | all | 32 | BLOCKED | [frappe-full-attempt-3.json](evidence/frappe-official/frappe-full-attempt-3.json) |
 | frappe | 4 | all | 2319 | FAIL | [frappe-full-attempt-4.json](evidence/frappe-official/frappe-full-attempt-4.json) |
 | frappe | 1 | integration | 333 | FAIL | [frappe-full-integration-attempt-1.json](evidence/frappe-official/frappe-full-integration-attempt-1.json) |
 | frappe | 1 | old-frappe-test-class-category | 0 | BLOCKED | [frappe-full-old-frappe-test-class-category-attempt-1.json](evidence/frappe-official/frappe-full-old-frappe-test-class-category-attempt-1.json) |
+| frappe | 1 | Secuencia CI acotada: frappe.tests.test_auth | desconocido | BLOCKED | [frappe-sequence-test_auth-attempt-1.json](evidence/frappe-official/frappe-sequence-test_auth-attempt-1.json) |
+| frappe | 2 | Secuencia CI acotada: frappe.tests.test_auth | 17 | PASS | [frappe-sequence-test_auth-attempt-2.json](evidence/frappe-official/frappe-sequence-test_auth-attempt-2.json) |
 | frappe | 1 | frappe.tests.test_auth | 1 | BLOCKED | [frappe-test_auth-attempt-1.json](evidence/frappe-official/frappe-test_auth-attempt-1.json) |
 | frappe | 1 | frappe.core.doctype.rq_job.test_rq_job | 0 | BLOCKED | [frappe-test_rq_job-attempt-1.json](evidence/frappe-official/frappe-test_rq_job-attempt-1.json) |
 | frappe | 2 | frappe.core.doctype.rq_job.test_rq_job | 0 | BLOCKED | [frappe-test_rq_job-attempt-2.json](evidence/frappe-official/frappe-test_rq_job-attempt-2.json) |
 | frappe | 3 | frappe.core.doctype.rq_job.test_rq_job | 13 | PASS | [frappe-test_rq_job-attempt-3.json](evidence/frappe-official/frappe-test_rq_job-attempt-3.json) |
 | frappe | 1 | frappe.tests.test_timeline | 7 | PASS | [frappe-test_timeline-attempt-1.json](evidence/frappe-official/frappe-test_timeline-attempt-1.json) |
 
-Cada intento conserva su alcance. El módulo timeline ejecutó siete legacy PASS tras recrear copias limpias en los mismos SHAs; no convierte el comando Frappe completo en PASS. La selección directa de su categoría fue rechazada por la CLI (cero tests). La repetición auth completó una unitaria y quedó BLOCKED durante preparación: no acredita la integración de autenticación.
+Cada intento conserva su alcance. El módulo timeline ejecutó siete legacy PASS tras recrear copias limpias en los mismos SHAs; no convierte el comando Frappe completo en PASS. La selección directa de su categoría fue rechazada por la CLI (cero tests). La repetición auth antigua completó una unitaria y quedó BLOCKED durante preparación. La reproducción posterior en sitio limpio usa la CI nativa; sus resultados y el diagnóstico de fixtures están en [la investigación acotada](frappe-official-preparation-investigation.md). Ninguna repetición modular convierte estos completos FAIL en PASS.
 
 ## Comandos ejecutados
 
@@ -80,7 +90,7 @@ Resuelta usando sitios creados vacíos sin Cencomun y bootstrap oficial ERPNext.
 | frappe.exceptions.NonNegativeError | 1 |
 | frappe.exceptions.ValidationError | 26 |
 
-Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con reserva exclusiva de nombres. Dieciocho tests del harness verifican cero-test, categorías, subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación de archivos generados; no son tests oficiales. El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; [informe de recuperación](frappe-executor-recovery.md).
+Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con reserva exclusiva de nombres. Los tests del harness verifican cero-test, categorías, subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación de archivos generados; no son tests oficiales. El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; [informe de recuperación](frappe-executor-recovery.md).
 
 Diagnóstico de causas comprobadas, hipótesis pendientes y pasos de repetición: [frappe-official-diagnostics.md](frappe-official-diagnostics.md). Payments solo está en el Bench oficial copiado, con SHA version-16 y siete SDKs fijados; [preparación](evidence/frappe-official/payments-preparation.json). ERPNext CI usa bootstrap previo y lightmode, como su workflow oficial; el runner restablece Administrator antes de cada módulo por su propio código. No se cambian roles ni validadores.
 

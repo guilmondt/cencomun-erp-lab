@@ -12,8 +12,12 @@ BENCH = ROOT / 'official-bench'
 CLI = str(ROOT / 'bench-tools/bin/bench')
 
 
-def prepare(app, fresh=False):
-    suffix = '-fresh' if fresh else ''
+def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False):
+    if sum((fresh, diagnostic, fixture_audit, fixture_order)) > 1:
+        raise ValueError('Choose one isolated site slot.')
+    if (fixture_audit or fixture_order or official_fx_fixtures) and app != 'erpnext':
+        raise ValueError('Official FX fixtures apply only to ERPNext.')
+    suffix = '-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else '')))
     site = 'ccm-upstream-' + app + suffix + '.test'
     private_dir = ROOT / 'official-tests'
     private_dir.mkdir(mode=0o700, exist_ok=True)
@@ -27,7 +31,12 @@ def prepare(app, fresh=False):
     payments = app == 'erpnext' and (private_dir / 'payments-prepared.json').exists()
 
     def run(label, args):
-        with (private_dir / (app + suffix + '-' + label + '.log')).open('w') as log:
+        logpath = private_dir / (app + suffix + '-' + label + '.log')
+        attempt = 1
+        while logpath.exists():
+            attempt += 1
+            logpath = private_dir / (app + suffix + '-' + label + f'-attempt-{attempt}.log')
+        with logpath.open('x') as log:
             result = subprocess.run([CLI, *args], cwd=BENCH, stdout=log, stderr=subprocess.STDOUT)
         print(app, label, 'exit', result.returncode, flush=True)
         if result.returncode:
@@ -36,7 +45,7 @@ def prepare(app, fresh=False):
     if not marker.exists():
         if (BENCH / 'sites' / site).exists():
             raise SystemExit('Unmarked existing official site: inspect; never drop/force it.')
-        run('new-site', ['new-site', site, '--db-name', 'ccm_upstream_' + app + ('_fresh' if fresh else ''),
+        run('new-site', ['new-site', site, '--db-name', 'ccm_upstream_' + app + suffix.replace('-', '_'),
             '--db-host', '127.0.0.1', '--db-port', '3307', '--db-socket', str(ROOT / 'mariadb.sock'),
             '--db-root-username', 'ccm_bootstrap', '--db-root-password', bootstrap['bootstrap_password'],
             '--admin-password', credentials['admin_password']])
@@ -64,6 +73,9 @@ def prepare(app, fresh=False):
         run('config-' + key, ['--site', site, 'set-config', key, str(value),
                              *(['--parse'] if isinstance(value, int) else [])])
     if app == 'erpnext':
+        if official_fx_fixtures:
+            from capture_fx import capture
+            capture(site, app + suffix + '-fx-before-bootstrap', load=True, direct_records=True)
         # Exactly the bootstrap module used by pinned ERPNext CI. Zero tests here
         # are fixture preparation only, never evidence of a passing suite.
         run('bootstrap', ['--site', site, 'run-tests', '--lightmode', '--module',
@@ -73,19 +85,26 @@ def prepare(app, fresh=False):
         # setup-wizard failure between categories. The hook still runs normally
         # inside the suite; nothing is skipped or monkeypatched.
         run('bootstrap', ['--site', site, 'execute', 'frappe.utils.install.before_tests'])
+    # CLI -- execute starts a new process: no stale module map retained by
+    # installation in memory. Do not globally flush shared Redis/other sites.
+    run('module-map', ['--site', site, 'execute', 'frappe.setup_module_map'])
     print('Prepared official-only site:', site, flush=True)
 
 
-def main(app, fresh=False):
+def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False):
     with SuiteLock():
         if active_runners():
             raise RuntimeError('An official runner is active; do not change its sites or fixtures.')
-        prepare(app, fresh)
+        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('app', choices=['frappe', 'erpnext'])
     parser.add_argument('--fresh', action='store_true', help='Use a separate new marked site; preserve the previous site intact.')
+    parser.add_argument('--diagnostic', action='store_true', help='New official-only diagnostic site; preserve both previous sites.')
+    parser.add_argument('--fixture-audit', action='store_true', help='Separate empty ERPNext site for preparation-order hypothesis.')
+    parser.add_argument('--official-fx-fixtures', action='store_true', help='Load exact pinned Currency Exchange fixtures before native ERP bootstrap.')
+    parser.add_argument('--fixture-order', action='store_true', help='New empty site for direct official FX records before any test module import.')
     args = parser.parse_args()
-    main(args.app, args.fresh)
+    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order)

@@ -4,6 +4,11 @@ Este registro conserva causas comprobadas y pasos de repetición. Los resultados
 actualizados, comandos y conteos están en [el informe de suites](frappe-official-suites.md).
 No modifica pins, validadores, permisos, negocio, Axelor o producción.
 
+La continuación desde 8158 y sus resultados acotados, configuración/Error Log,
+colisión del helper Payments, autenticación limpia y orden de fixtures están en
+[la investigación de preparación](frappe-official-preparation-investigation.md).
+Las causas nuevas no convierten los completos históricos FAIL en PASS.
+
 | Problema | Evidencia y alcance | Causa comprobada / límite |
 | --- | --- | --- |
 | Standard Buying | Sitios oficiales primario y fresh; inspecciones JSON | Colisión LAB resuelta con sitios vacíos y bootstrap oficial, lista INR. No se cambia la lista/oráculo LAB. |
