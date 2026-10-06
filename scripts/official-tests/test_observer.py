@@ -33,6 +33,20 @@ with patch('requests.adapters.HTTPAdapter.send') as adapter:
         self.assertNotIn('never-publish', str(events))
         self.assertFalse(any(e['kind'] == 'http_response' for e in events))
 
+    def test_guard_does_not_preload_requests_but_guards_its_first_import(self):
+        events = self.execute("""
+import sys
+assert 'requests' not in sys.modules, 'guard inflated non-HTTP worker imports'
+import requests
+from unittest.mock import patch
+with patch('requests.adapters.HTTPAdapter.send') as adapter:
+    try: requests.get('https://example.invalid/')
+    except requests.exceptions.ConnectionError: pass
+    else: raise AssertionError('first imported HTTP request escaped guard')
+    adapter.assert_not_called()
+""")
+        self.assertEqual(sum(e['kind'] == 'external_http_rejected' for e in events), 1)
+
     def test_external_dns_and_socket_rejected_but_loopback_resolves(self):
         events = self.execute("""
 import socket

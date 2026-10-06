@@ -489,3 +489,35 @@ prefijos de logs append-only, confs, fuentes y DBs; creación exclusiva de evide
 integrity.py after --label auth y closure.py --label auth realizan cierre sin
 repetir Core/restauración. Los nuevos helpers también requieren guard offline
 por env y PYTHONPATH observer al invocarlos directamente en un nuevo proceso.
+
+## Cierre residual desde 678c5ef (sin completos)
+
+Plan tasks/105 y reports/frappe-residual-failure-closure.md. Matriz exacta de56
+fallos originales +2 Client adicionales: residual-final-matrix.json. Estados
+completos FAIL inmutables; UNRUN posterior nunca aprueba un fallo original.
+
+Nuevo slot único `prepare.py frappe --residual`, nativo CI, credencial común
+retenida, sin reset de sitios anteriores. `run.py --module MODULO --test METODO`
+selecciona solo métodos autorizados; comandos y cantidad real en cada resultado.
+Nunca ejecutar test_set_password, test_existing_db_username o API-key para buscar
+PASS: cambian credenciales. API-key solo lectura de lo ya retenido.
+
+CCM_OFFICIAL_RESIDUAL_DIAG=1 junto a --observe permite capturar errno/frame/HOME
+boolean del handler nativo backup y estado de recepción de email, sin mensajes,
+valores secretos ni mail/dumps. En CPU/memoria omitir --observe; guard offline
+siempre activo. El guard ya no importa requests anticipadamente en workers, pero
+protege DNS/sockets desde startup e instala el mismo wrapper antes de terminar
+el primer import requests. Los controles verifican primer import, mocks nativos
+sin passthrough y rechazo externo previo al adapter.
+
+`residual_schema.py` reproduce solo el subcaso original Automation Trigger Queue
+con assertQueryCount(0), sin modificar el método aleatorio oficial ni contarlo
+como una nueva ejecución completa de ese método. Conserva FAIL y dos ALTER.
+HOME no se remapea. TCP sin db_socket rechazó acceso1130 antes del runner; la
+config del sitio diagnóstico fue restaurada, no se alteran grants ni credenciales.
+
+`residual_evidence.py`, `residual_preservation.py` y `closure.py --label residual`
+son derivados/comprobaciones de solo lectura con creación exclusiva, sin tests
+ni restauración. No borrar salidas existentes para repetirlos; nueva revisión
+requiere otro nombre/versión y una hipótesis. Inicio de datos retenidos en
+../../docs/FRAPPE_ENVIRONMENT_START.md; Guardar/Publicar queda con el coordinador.

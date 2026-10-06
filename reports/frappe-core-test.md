@@ -1,5 +1,9 @@
 # Core Test de Frappe/ERPNext — LAB-ONLY-v1
 
+Cierre residual desde 678c5ef: [informe](frappe-residual-failure-closure.md).
+Runtime original/oráculo intactos, P001 USD50.00/stock5 autenticados.
+No se repitió Core; 34 grupos anteriores y matriz siguiente conservados.
+
 Cierre posterior desde baad8f9: [auth/request](frappe-auth-request-diagnostics.md).
 49.823 hashes originales idénticos y lectura autenticada P001 USD50.00/stock5.
 Sin cambio de runtime ni nuevo Core; matriz y alcance de 34 grupos conservados.

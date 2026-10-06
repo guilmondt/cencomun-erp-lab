@@ -4,13 +4,14 @@ Repositorio `guilmondt/cencomun-erp-lab`, checkout existente
 `/workspace/cencomun-erp-lab`, rama `lab/frappe-baseline`. La referencia exacta
 propuesta es el último commit probado que registre el borrador ordinario.
 No crear worktrees ni reinstalar automáticamente. Leer AGENTS.md,
-docs/CODEX_CLOUD_SETUP.md, versions.lock y task 104 antes de trabajar.
+docs/CODEX_CLOUD_SETUP.md, versions.lock y task 105 antes de trabajar.
 
 Core conserva 34 grupos PASS; criterios 13 PASS/1 BLOCKED, seis PATCH UNRUN.
 Oficiales completos: Frappe y ERPNext FAIL, separados de Core. Los diagnósticos
 acotados posteriores tampoco son suites completas. Leer
-reports/frappe-auth-request-diagnostics.md y reports/frappe-core-test.md.
-Los 16 pendientes acotados: 14 PASS/2 ERROR; un API key adicional FAIL/UNKNOWN.
+reports/frappe-residual-failure-closure.md y reports/frappe-core-test.md.
+Los 56 fallos originales: 45 PASS acotados/4 FAIL/7 UNRUN posteriores;
+dos Client adicionales ERROR conservados, API key FAIL/UNKNOWN.
 Esto no cambia los contadores ni el FAIL de los oficiales completos.
 No modificar oráculo/pins/upstream/HOME, main/producción/Axelor, red, secretos,
 variables persistentes, acceso o permisos. PR #4 continúa borrador.
@@ -18,7 +19,8 @@ variables persistentes, acceso o permisos. PR #4 continúa borrador.
 La restauración cloud **fcf690d** ya pasó en otra tarea, con recibo externo en
 reports/evidence/frappe-cloud/restoration-fcf690d-external.json. No repetirla ni
 confundir sitios nuevos en esta máquina con esa prueba. El coordinador guardó
-y publicó baad8f9 y verificó catálogo/estado; no repetir esa publicación.
+y publicó 678c5ef0d90f628bece3fea0adce2ab5ad541ee9 y verificó catálogo/estado;
+no repetir esa publicación ni restauración externa.
 El nuevo SHA probado se propone solamente en el borrador ordinario. Guardar el borrador no
 publica un nuevo snapshot; la restauración del commit nuevo no está acreditada.
 
@@ -81,6 +83,9 @@ fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba. Python3.14.0, Node24.19.0,
 MariaDB11.8.6, Redis8.0.2, Bench5.29.0, Yarn1.22.22, Nginx1.26.3. Dependencias
 upstream/caches/archivos históricos son runtime, no repositorios adicionales.
 No modificar pins para resolver límites. Criterio13 BLOCKED/seis UNRUN.
+HOME readonly, contrato nativo de índice/password/usuario existente y acceso TCP
+DB requieren decisiones fuera del alcance; no sortearlos. No ejecutar casos que
+cambian claves/contraseñas persistentes. API key retenida: solo lectura.
 
 El coordinador revisará repositorio/ref e instrucciones y realizará
 Guardar/Publicar. Internet/dominios, install_script, secretos, variables,

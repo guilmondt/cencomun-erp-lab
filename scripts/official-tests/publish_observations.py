@@ -47,7 +47,8 @@ def main():
                    'auth_config_loaded', 'auth_class_import', 'native_auth_operation',
                    'native_http_exception', 'native_todo_workflow_call', 'native_cache_html',
                    'auth_http_response', 'native_password_write_call', 'native_auth_tracker',
-                   'native_oauth_assertion_state', 'native_http_reply')
+                   'native_oauth_assertion_state', 'native_http_reply',
+                   'residual_native_exception', 'residual_email_state')
         errors = {c['id'] for c in result.get('cases', []) if c['status'] == 'ERROR'}
         errors.update(c['id'] for c in result.get('failure_headers', []) if c['status'] == 'ERROR')
         evidence = {'native_result': resultpath.name, 'scope': result['scope'],

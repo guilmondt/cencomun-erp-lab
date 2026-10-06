@@ -86,7 +86,7 @@ def main(label='final'):
 if __name__ == "__main__":
     try:
         import argparse
-        parser = argparse.ArgumentParser(); parser.add_argument('--label', default='final', choices=['final', 'cause', 'auth'])
+        parser = argparse.ArgumentParser(); parser.add_argument('--label', default='final', choices=['final', 'cause', 'auth', 'residual'])
         main(parser.parse_args().label)
     except Exception as error:
         print("FAIL read-only closure:", type(error).__name__, "— inspect private setup and scripts/official-tests/README.md.")

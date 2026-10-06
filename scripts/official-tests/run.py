@@ -31,7 +31,8 @@ ALLOWED_SITES = ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test',
                  'ccm-upstream-frappe-final.test', 'ccm-upstream-erpnext-final.test',
                  'ccm-upstream-frappe-cause.test', 'ccm-upstream-erpnext-cause.test',
                  'ccm-upstream-frappe-cause-fixed.test',
-                 'ccm-upstream-frappe-auth-clean.test', 'ccm-upstream-frappe-auth-sequence.test']
+                 'ccm-upstream-frappe-auth-clean.test', 'ccm-upstream-frappe-auth-sequence.test',
+                 'ccm-upstream-frappe-residual.test']
 
 
 class SuiteLock:

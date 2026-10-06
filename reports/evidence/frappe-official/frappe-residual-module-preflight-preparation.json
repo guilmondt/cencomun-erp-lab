@@ -1,0 +1,95 @@
+{
+  "site": "ccm-upstream-frappe-residual.test",
+  "installed_apps": [
+    "frappe"
+  ],
+  "import_origins": {
+    "frappe": "/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py"
+  },
+  "apps_txt": [
+    "frappe",
+    "erpnext",
+    "payments"
+  ],
+  "modules_txt": {
+    "frappe": [
+      "Core",
+      "Website",
+      "Workflow",
+      "Email",
+      "Custom",
+      "Geo",
+      "Desk",
+      "Integrations",
+      "Printing",
+      "Contacts",
+      "Automation"
+    ]
+  },
+  "before": {
+    "core": "frappe",
+    "website": "frappe",
+    "workflow": "frappe",
+    "email": "frappe",
+    "custom": "frappe",
+    "geo": "frappe",
+    "desk": "frappe",
+    "integrations": "frappe",
+    "printing": "frappe",
+    "contacts": "frappe",
+    "automation": "frappe",
+    "accounts": "erpnext",
+    "crm": "erpnext",
+    "buying": "erpnext",
+    "projects": "erpnext",
+    "selling": "erpnext",
+    "setup": "erpnext",
+    "manufacturing": "erpnext",
+    "stock": "erpnext",
+    "support": "erpnext",
+    "utilities": "erpnext",
+    "assets": "erpnext",
+    "portal": "erpnext",
+    "maintenance": "erpnext",
+    "regional": "erpnext",
+    "erpnext_integrations": "erpnext",
+    "quality_management": "erpnext",
+    "communication": "erpnext",
+    "telephony": "erpnext",
+    "bulk_transaction": "erpnext",
+    "subcontracting": "erpnext",
+    "edi": "erpnext",
+    "payments": "payments",
+    "payment_gateways": "payments"
+  },
+  "expected": {
+    "core": "frappe",
+    "website": "frappe",
+    "workflow": "frappe",
+    "email": "frappe",
+    "custom": "frappe",
+    "geo": "frappe",
+    "desk": "frappe",
+    "integrations": "frappe",
+    "printing": "frappe",
+    "contacts": "frappe",
+    "automation": "frappe"
+  },
+  "after": {
+    "core": "frappe",
+    "website": "frappe",
+    "workflow": "frappe",
+    "email": "frappe",
+    "custom": "frappe",
+    "geo": "frappe",
+    "desk": "frappe",
+    "integrations": "frappe",
+    "printing": "frappe",
+    "contacts": "frappe",
+    "automation": "frappe"
+  },
+  "mismatch": {},
+  "repair_applied": false,
+  "repair_scope": "native db_name|app_modules only; no shared cache, permission or source change",
+  "native_resolver_verified": true
+}

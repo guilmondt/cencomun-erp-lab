@@ -1,0 +1,40 @@
+{
+  "scope": "Native DB transport/preparation diagnosis only; no credential/auth policy/grant changes",
+  "initial_socket_method_result": "frappe-test_db-selected-attempt-1.json",
+  "initial_socket_status": "FAIL",
+  "corrected_tcp_attempt": "frappe-test_db-selected-attempt-2.json",
+  "corrected_tcp_actual_tests_run": 0,
+  "corrected_tcp_attempt_status": "BLOCKED",
+  "native_runner_started": false,
+  "web_readiness_timeout": true,
+  "native_tcp_probe_error_code": 1130,
+  "native_tcp_probe_error_type": "OperationalError",
+  "account_host_scopes": [
+    "localhost"
+  ],
+  "skip_name_resolve": "ON",
+  "own_socket_precedence_demonstrated": true,
+  "tcp_requires_db_host_access_change_not_authorized": true,
+  "diagnostic_site_original_socket_restored": true,
+  "native_ci_socket_host_semantics_not_overridden_by_mock": true,
+  "preparation_command_failures": [
+    {
+      "phase": "relative env path from Bench cwd",
+      "native_tests": 0,
+      "mutation": false
+    },
+    {
+      "phase": "native set-config --parse null rejected by ast.literal_eval",
+      "native_tests": 0,
+      "mutation": false
+    },
+    {
+      "phase": "native set-config --parse None",
+      "exit_code": 0,
+      "diagnostic_site_only": true
+    }
+  ],
+  "latest_official_method_status": "FAIL",
+  "classification": "DEMONSTRATED_SOCKET_PREPARATION_AND_TCP_ACCESS_LIMIT",
+  "next_step": "A separate approval would be needed for DB TCP host access consistent with native CI. Do not change grants, credentials, sockets or the assertion in this task."
+}

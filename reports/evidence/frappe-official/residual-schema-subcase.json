@@ -1,0 +1,16 @@
+{
+  "scope": "Original failing DocType subcase only; not the randomized official method",
+  "official_method_reexecuted": false,
+  "status": "FAIL",
+  "site": "ccm-upstream-frappe-residual.test",
+  "doctype": "Automation Trigger Queue",
+  "native_assertion": "assertQueryCount(0, query_type=(alter,))",
+  "native_ddl": [
+    "ALTER TABLE `tabAutomation Trigger Queue` DROP INDEX `unique_dedup_key`",
+    "ALTER TABLE `tabAutomation Trigger Queue` ADD UNIQUE INDEX `unique_dedup_key` (`dedup_key`)"
+  ],
+  "native_query_count": 2,
+  "random_order_or_assertion_modified": false,
+  "upstream_sources_or_fixture_modified": false,
+  "classification": "DEMONSTRATED_NATIVE_SCHEMA_INDEX_CONTRACT"
+}

@@ -1,5 +1,9 @@
 # Última pasada completa de CI oficial
 
+Cierre residual desde 678c5ef: [matriz de 56 IDs y dos Client adicionales](frappe-residual-failure-closure.md).
+45 PASS acotados/4 FAIL/7 UNRUN posteriores, dos Client ERROR conservados.
+No cambia el resultado completo siguiente; API key FAIL/UNKNOWN y C13 BLOCKED.
+
 Actualización acotada desde baad8f9: [auth/request](frappe-auth-request-diagnostics.md)
 demuestra y retesta los 16 pendientes (14 PASS/2 ERROR), conserva un fallo
 adicional API key FAIL/UNKNOWN y todos los intentos. No repite completos ni

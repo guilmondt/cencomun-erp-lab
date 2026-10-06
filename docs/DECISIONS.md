@@ -449,3 +449,29 @@
   Coordinator already published baad8f9; only a new ordinary draft is prepared.
 - Evidence: tasks/104-frappe-auth-request-diagnostics.md and
   reports/frappe-auth-request-diagnostics.md. PR #4 stays draft on lab only.
+
+## ADR-017 — residual ID reconciliation and deferred offline HTTP guard
+
+- Reconcile exactly the 56 full-run failures and two additional native Client
+  errors. Later selected PASS never replaces or improves the full FAIL counters.
+  UNRUN means no later method result; a read-only probe/subcase is not a PASS.
+- Own demonstrated defect: eagerly importing requests in sitecustomize adds HTTP
+  imports to non-HTTP RQ jobs. Install the identical wrapper when requests first
+  imports; DNS/socket audit remains active from startup. Native mocks only without
+  passthrough. Memory's retained 58 MiB FAIL becomes 52 MiB PASS, same native limit.
+- Observe swallowed backup exceptions using type/errno/frame/HOME boolean only.
+  New per-command errno30 proves HOME limitation; original generic exit1 does not.
+- Native schema generated-column index drops/recreates despite zero-query assertion.
+  Verify only the original subcase, no random resampling or assertion/source change.
+  Native password restore option parsing and existing-user password contract retain
+  FAIL; never repeat cases that change credentials or repair their retained state.
+- Socket masks host-negative DB checks. Diagnostic TCP readiness fails before any
+  native test; read-only native probe1130, only localhost grant, skip_name_resolve ON.
+  Restore only new site's original socket; no access/grant/credential changes.
+- API secret/key mismatch remains FAIL/UNKNOWN: existing ciphertext cannot decrypt
+  with retained keys, no value-level initial cache/key chronology. No regeneration.
+- Preserve full FAIL/ERROR/SKIP, four ERPNext FX errors, C13 BLOCKED/six PATCH UNRUN.
+  Original runtime/oracle unchanged, authenticated read passes; no Core rerun.
+  Coordinator already published678c5ef; only ordinary ref/start instructions drafted.
+- Evidence: tasks/105-frappe-residual-failure-closure.md,
+  reports/frappe-residual-failure-closure.md. PR #4 remains draft on lab only.

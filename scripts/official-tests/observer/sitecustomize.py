@@ -20,6 +20,9 @@ OFFLINE = os.environ.get('CCM_OFFICIAL_OFFLINE') == '1'
 OBSERVE = os.environ.get('CCM_OFFICIAL_OBSERVE') == '1'
 OUTPUT = os.environ.get('CCM_OFFICIAL_OBSERVATION')
 AUTH_DIAG = os.environ.get('CCM_OFFICIAL_AUTH_DIAG') == '1'
+RESIDUAL_DIAG = os.environ.get('CCM_OFFICIAL_RESIDUAL_DIAG') == '1'
+if RESIDUAL_DIAG:
+    import residual_diagnostics
 if AUTH_DIAG:
     import auth_diagnostics
 CURRENT = None
@@ -175,6 +178,8 @@ def profile_event(frame, event, arg):
     filename = frame.f_code.co_filename
     if AUTH_DIAG:
         auth_diagnostics.profile(frame, event, arg, emit)
+    if RESIDUAL_DIAG:
+        residual_diagnostics.profile(frame, event, arg, emit)
     if CURRENT and event in ('call', 'return'):
         if filename.endswith('journal_entry/journal_entry.py') and function in (
             'set_exchange_rate', 'set_amounts_in_company_currency',
@@ -232,11 +237,7 @@ def profile(frame, event, arg):
         emit('observation_error', stage='profile', exception=type(exc).__name__)
 
 
-if OFFLINE or OBSERVE:
-    sys.addaudithook(audit)
-    emit('observer_started', offline=OFFLINE, upstream_functions_replaced=False)
-    # This is transport observation/restriction, not an exchange-rate mock.
-    import requests
+def install_http_guard(requests):
     original_send = requests.sessions.Session.send
 
     def send(self, request, **kwargs):
@@ -265,6 +266,38 @@ if OFFLINE or OBSERVE:
         return response
 
     requests.sessions.Session.send = send
+
+
+
+if OFFLINE or OBSERVE:
+    sys.addaudithook(audit)
+    emit('observer_started', offline=OFFLINE, upstream_functions_replaced=False)
+    # This is transport observation/restriction, not an exchange-rate mock.
+    # Keep the guard active without preloading an HTTP stack into every RQ
+    # worker. The identical wrapper is installed before requests import returns.
+    from importlib.machinery import PathFinder
+
+    class RequestsGuardLoader:
+        def __init__(self, loader): self.loader = loader
+        def create_module(self, spec):
+            return self.loader.create_module(spec) if hasattr(self.loader, 'create_module') else None
+        def exec_module(self, module):
+            self.loader.exec_module(module)
+            install_http_guard(module)
+        def __getattr__(self, name): return getattr(self.loader, name)
+
+    class RequestsGuardFinder:
+        def find_spec(self, fullname, path=None, target=None):
+            if fullname != 'requests': return None
+            spec = PathFinder.find_spec(fullname, path, target)
+            if spec and spec.loader: spec.loader = RequestsGuardLoader(spec.loader)
+            return spec
+
+    existing = sys.modules.get('requests')
+    if existing is not None and hasattr(existing, 'sessions'):
+        install_http_guard(existing)
+    else:
+        sys.meta_path.insert(0, RequestsGuardFinder())
     if OBSERVE:
         original_start, original_stop = unittest.TestResult.startTest, unittest.TestResult.stopTest
 
@@ -284,10 +317,12 @@ if OFFLINE or OBSERVE:
         unittest.TestResult.startTest, unittest.TestResult.stopTest = start, stop
         sys.setprofile(profile)
         threading.setprofile(profile)
-        if AUTH_DIAG:
+        if AUTH_DIAG or RESIDUAL_DIAG:
             def trace(frame, event, arg):
                 try:
-                    return auth_diagnostics.trace(frame, event, arg, emit)
+                    auth_local = auth_diagnostics.trace(frame, event, arg, emit) if AUTH_DIAG else None
+                    residual_local = residual_diagnostics.trace(frame, event, arg, emit) if RESIDUAL_DIAG else False
+                    return trace if residual_local or auth_local else None
                 except Exception as exc:
                     emit('observation_error', stage='auth_trace', exception=type(exc).__name__)
                     return None
