@@ -42,7 +42,7 @@ public class NativeGateService {
   }
 
   @Transactional(rollbackOn = Exception.class)
-  public void seed(Progress p, String caseId) throws Exception {
+  public void prepare(Progress p, String caseId) throws Exception {
     p.stage("native-catalog-and-configuration");
     Model usd = one(BASE + "Currency", "self.codeISO = ?1", "USD");
     if (usd == null) usd = record(BASE + "Currency", "name", "US Dollar LAB", "code", "USD", "codeISO", "USD", "numberOfDecimals", 2);
@@ -89,9 +89,27 @@ public class NativeGateService {
       record("com.axelor.apps.supplychain.db.SupplyChainConfig", "company", company);
     }
     NativeFinance.configure(company);
+    NativeFinance.tax(company, BigDecimal.ZERO);
+    NativeFinance.tax(company, new BigDecimal("0.10"));
     p.evidence.put("company_id", company.getId());
     p.evidence.put("warehouse_id", warehouse.getId());
     p.evidence.put("customer_id", customer.getId());
+    p.stage("native-fixture-prepared");
+  }
+
+  /** Fixture receipt runs only after the preparation HTTP request has committed.
+   * Native Sequence reservations read configuration in a separate TenantAware transaction.
+   * Flushing the preparing transaction would not make its rows visible to that reader.
+   */
+  @Transactional(rollbackOn = Exception.class)
+  public void seed(Progress p, String caseId) throws Exception {
+    Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
+    Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
+    Model supplierLocation = one(STOCK + "StockLocation", "self.name = ?1", "CCM-LAB-SUPPLIER");
+    Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", "C001");
+    Model unit = one(BASE + "Unit", "self.name = ?1", "CCM-LAB-UNIT");
+    if (company == null || warehouse == null || supplierLocation == null || customer == null || unit == null)
+      throw new IllegalStateException("Fixture preparation must commit before the stock receipt");
     p.stage("native-initial-stock-receipt");
     Object stock = service("com.axelor.apps.stock.service.StockMoveService");
     Model move = (Model) call(stock, "createStockMove", null, null, company,
@@ -148,7 +166,8 @@ public class NativeGateService {
     Model delivery = one(STOCK + "StockMove", "self.id = ?1", ids.getFirst());
     if (input.get("guide") != null && !input.get("guide").isNull()) set(delivery, "trackingNumber", input.get("guide").asText());
     Object stock = service("com.axelor.apps.stock.service.StockMoveService");
-    call(stock, "copyQtyToRealQty", delivery); call(stock, "plan", delivery); call(stock, "realize", delivery);
+    // createStocksMovesFromSaleOrder already calls the native planWithNoSplit.
+    call(stock, "copyQtyToRealQty", delivery); call(stock, "realize", delivery);
     p.stage("native-invoice-generation");
     Model invoice = (Model) call(service("com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceService"), "generateInvoice", so);
     set(invoice, "invoiceDate", DATE); save(invoice);
@@ -202,6 +221,16 @@ public class NativeGateService {
       deliveries.add(Map.of("id", move.getId(), "status", get(move, "statusSelect"), "type", get(move, "typeSelect")));
     result.put("deliveries", deliveries);
     result.put("company_ids", list(BASE + "Company", "self.code = ?1", "CCM-LAB-001").stream().map(Model::getId).toList());
+    List<Map<String, Object>> sequences = new ArrayList<>();
+    Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
+    if (company != null) for (Model seq : list(BASE + "Sequence", "self.company = ?1", company)) {
+      List<Map<String, Object>> versions = new ArrayList<>();
+      for (Model version : list(BASE + "SequenceVersion", "self.sequence = ?1", seq))
+        versions.add(Map.of("id", version.getId(), "next_num", get(version, "nextNum"),
+            "start_date", get(version, "startDate").toString(), "end_date", get(version, "endDate").toString()));
+      sequences.add(Map.of("id", seq.getId(), "code", get(seq, "codeSelect"), "prefix", get(seq, "prefixe"), "versions", versions));
+    }
+    result.put("sequences", sequences);
     return result;
   }
   private Map<String, Object> exportMove(Model move) {

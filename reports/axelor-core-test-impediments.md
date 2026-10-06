@@ -84,3 +84,76 @@ Resolución:
 
 Verificación de la solución: pendiente del siguiente CI. Registrado antes de
 ampliar la implementación de otros bloques.
+
+## B03 — interrupción del ejecutor, recuperado
+
+El turno anterior no recibió resultados de `pwd`, `/bin/pwd` ni del patch
+intentado; las celdas se terminaron sin conocer la causa. No se atribuye a
+Axelor ni a GitHub. El entorno existente volvió a responder el 2026-10-06:
+`pwd` devolvió `/workspace` y el checkout estaba limpio en `c2a1402`.
+Los cambios anteriores están recuperados en esa rama remota. Se descargaron
+los logs del run 37403617182 a
+`/workspace/ccm-axelor-runtime/ci-evidence/37403617182.log` y sus anotaciones al
+JSON contiguo, sin publicar ampliaciones de red.
+
+## B04 — secuencias no visibles para la transacción aislada nativa
+
+Observado en el [run 37403617182](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37403617182),
+commit `c2a1402`, job 112076137415. CO00 (3.108 s) y después TAX01-W
+(0.468 s) fallaron en `native-initial-stock-receipt`:
+
+```
+jakarta.persistence.NoResultException:
+No result found for query [SELECT self FROM Sequence self WHERE self.id = :id]
+```
+
+El inspector en peticiones nuevas no encontró compañía, stock, ventas,
+entregas, facturas ni asientos: no se conservaron efectos del `seed` fallido.
+La revisión del código oficial AOS `0c70d561b19fc454eba9fdd41689258846626d75`
+confirma que `SequenceIncrementExecutorImpl.incrementAndGet` usa un hilo
+`TenantAware` separado. `doIncrement` consulta `Sequence` por ID con lock;
+`SequenceReservationServiceImpl` documenta el incremento y reserva aislados.
+Nuestro `seed` creaba las secuencias y consumía sus números sin haber
+confirmado la misma transacción. Un flush no resuelve la visibilidad entre
+transacciones. Es un defecto de preparación Cencomun; la hipótesis queda
+pendiente de verificación mediante la repetición del gate.
+
+Impacto: los resultados económicos siguen sin demostrar; 2 gates bloqueados
+en ese run y 32 grupos sin ejecutar. No es una corrección upstream ni prueba
+de incapacidad del ERP. Se registra antes de ampliar casos independientes.
+
+Resolución y verificación:
+
+1. Ejecutar catálogo/configuración/secuencias en una petición de preparación
+   del fixture, con repositorios y transacción nativos.
+2. Leer en otra petición las 12 secuencias y sus versiones persistidas antes
+   de crear la entrada inicial; guardar esos IDs como evidencia.
+3. Ejecutar la entrada inicial y asiento de apertura en su transacción propia
+   del fixture. Conservar íntegra la transacción de venta, entrega, factura,
+   costo de ventas y liquidación, con rollback ante cualquier excepción.
+4. Repetir CO00 primero y TAX01-W después en una base desechable; exigir los
+   resultados del oráculo por lectura nueva, no sólo ausencia de excepción.
+5. Verificar aparte roles, estados y atomicidad; el administrador económico
+   nunca marca completos los grupos de aceptación.
+
+También se eliminó una segunda planificación de la entrega: el servicio
+oficial `createStocksMovesFromSaleOrder` ya ejecuta `planWithNoSplit`.
+
+## B05 — referencia de pins ausente en checkout superficial de CI
+
+El mismo run terminó con exit 1 en `finalize.py`: `git show
+e0190090fd137576ce273e350d7ce6686d66baf9:versions.lock` devolvió exit 128.
+El checkout de Actions tenía profundidad 1; el objeto de comparación no
+estaba disponible. Criterio 2 queda UNRUN en ese run; el build y tests
+completados no sustituyen la atestación que falló.
+
+1. Configurar `actions/checkout` con historial completo (`fetch-depth: 0`),
+   sin cambiar su SHA ni conservar credenciales.
+2. Comprobar el commit y blob base y su diff de pins antes del build costoso.
+3. Conservar la comparación SHA256 real con ese blob inmutable en finalize.
+4. Ejecutar regresión con un clon superficial: debe rechazar historia
+   ausente, aceptar tras fetch explícito del SHA y detectar pins alterados.
+5. Confirmar la atestación completa y diffs upstream cero en el nuevo CI.
+
+Los dominios de artefactos 19 y 1 continúan en borrador pendiente; no se ha
+publicado ese borrador ni alterado el acceso de red a raíz de estas correcciones.

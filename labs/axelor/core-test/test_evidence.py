@@ -2,11 +2,28 @@
 import unittest
 from pathlib import Path
 from run import assert_native_economics, criteria_for, rows_for, verify_bundle, verified_build_status
+from finalize import BASELINE, baseline_pin_blob
 
 FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_shallow_checkout_requires_explicit_base_fetch(self):
+        import subprocess
+        import tempfile
+        repo = FIXTURES.parent.parent
+        with tempfile.TemporaryDirectory() as tmp:
+            clone = Path(tmp) / "shallow"
+            subprocess.run(["git", "clone", "--quiet", "--depth=1", "--single-branch",
+                            "--branch", "lab/axelor-baseline", repo.as_uri(), str(clone)], check=True)
+            self.assertEqual(b"true\n", subprocess.check_output(["git", "-C", str(clone), "rev-parse", "--is-shallow-repository"]))
+            with self.assertRaises(subprocess.CalledProcessError):
+                baseline_pin_blob(clone)
+            subprocess.run(["git", "-C", str(clone), "fetch", "--quiet", "--no-tags", "--depth=1", "origin", BASELINE], check=True)
+            self.assertEqual((repo / "versions.lock").read_bytes(), baseline_pin_blob(clone))
+            (clone / "versions.lock").write_text("altered pins\n")
+            self.assertNotEqual((clone / "versions.lock").read_bytes(), baseline_pin_blob(clone))
+
     def test_obsolete_revision_cannot_pass(self):
         rows = rows_for(verify_bundle(FIXTURES))
         for row in rows:

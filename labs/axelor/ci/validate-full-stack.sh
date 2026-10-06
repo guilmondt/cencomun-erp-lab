@@ -40,6 +40,7 @@ PY
   exit "$status"
 }
 trap finish EXIT
+bash labs/axelor/ci/verify-baseline-history.sh
 echo 'Phase: exact cloud baseline setup and two custom module tests'
 python3 -m unittest discover -s labs/axelor/core-test -p 'test_*.py' \
   > "$state_dir/private/evidence-tests.log" 2>&1

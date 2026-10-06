@@ -175,6 +175,16 @@ def run(base, fixtures, output):
     for case in ("CO00", "TAX01-W"):
         start = time.perf_counter()
         try:
+            prepared = client.action("ccm-core-native-prepare", case)
+            (output / f"{case}-preparation.json").write_text(json.dumps(prepared, indent=2) + "\n")
+            # A fresh request proves committed configuration before the native isolated increment.
+            configuration = client.action("ccm-core-native-inspect", case)
+            (output / f"{case}-prepared-export.json").write_text(json.dumps(configuration, indent=2) + "\n")
+            assert prepared.get("status") == "PASS", ("Fixture preparation failed", prepared)
+            assert len(configuration["company_ids"]) == 1
+            assert len(configuration["sequences"]) == 12, configuration["sequences"]
+            assert all(s["id"] and len(s["versions"]) == 1 and s["versions"][0]["id"] for s in configuration["sequences"])
+            print(f"::notice title=Native {case} committed sequences::" + json.dumps(configuration["sequences"]), flush=True)
             observed = client.action("ccm-core-native-gate", case)
             # Independent new HTTP request reads durable records, after any rollback.
             native = client.action("ccm-core-native-inspect", case)

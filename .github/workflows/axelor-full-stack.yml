@@ -27,12 +27,15 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          # finalize.py attests versions.lock against the immutable pre-Core baseline.
+          fetch-depth: 0
       - name: Validate workflow semantics
         run: bash labs/axelor/ci/check-workflow.sh
       - name: Issue 1 preflight before Task 020 validation
         run: |
           ./scripts/preflight.sh
           ./scripts/verify-repo.sh
+          bash labs/axelor/ci/verify-baseline-history.sh
       - name: Baseline and native Core gates on disposable external runner
         run: CCM_CI_RESULTS="$RUNNER_TEMP/ccm-axelor-results" bash labs/axelor/ci/run-host.sh
       - name: Upload sanitized evidence
