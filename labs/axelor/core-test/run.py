@@ -424,6 +424,20 @@ def assert_native_fx(observed, fixture, persisted):
             assert reconcile["credit_line_id"] == receivable["id"]
 
 
+def fx_notice_summary(evidence):
+    """Keep a complete coverage notice within Actions' boundary; retain full JSON separately."""
+    fields = ("case", "reference", "revision", "status", "complete", "seconds", "operator", "manager",
+              "partial_conversion_status", "error", "error_type", "native_http_error", "inspection_error")
+    summary = {key: evidence[key] for key in fields if key in evidence}
+    summary["full_evidence_file"] = evidence["case"] + ".json"
+    error_fields = [key for key in ("error", "native_http_error", "inspection_error") if key in summary]
+    while len(json.dumps(summary)) > 3200:
+        largest = max(error_fields, key=lambda key: len(json.dumps(summary[key])))
+        value = str(summary[largest])
+        summary[largest] = value[:len(value) // 2] + " [complete details in full_evidence_file]"
+    return summary
+
+
 def run_fx_cases(admin, base, fixtures, output, row):
     start = time.perf_counter()
     evidence = {"case": "FX01-03-MONEY01-03", "reference": REFERENCE, "revision": 1, "steps": []}
@@ -503,7 +517,7 @@ def run_fx_cases(admin, base, fixtures, output, row):
         reason=evidence.get("error", "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization"))
     for step in evidence["steps"]:
         print("::notice title=Native FX step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
-    print("::notice title=Core independent FX/MONEY::" + json.dumps({k:v for k,v in evidence.items() if k not in ("steps", "http_samples", "observations", "persisted")}), flush=True)
+    print("::notice title=Core independent FX/MONEY::" + json.dumps(fx_notice_summary(evidence)), flush=True)
     return evidence
 
 

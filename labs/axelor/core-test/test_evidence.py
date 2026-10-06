@@ -8,6 +8,28 @@ FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_large_native_fx_failure_remains_complete_extractable_json(self):
+        import json
+        import tempfile
+        from run import REFERENCE, fx_notice_summary
+        from extract_log_evidence import extract
+        evidence = {"case": "FX01-03-MONEY01-03", "reference": REFERENCE, "revision": 1,
+            "status": "FAIL", "complete": False, "error_type": "RuntimeError",
+            "error": "Catalog must commit first: " + "native stack\n" * 300,
+            "inspection_error": "No committed company: " + "native stack\n" * 300,
+            "native_http_error": '{"error":"Native prerequisite missing", "stack":"' + "native stack\\n" * 300 + '"}'}
+        summary = fx_notice_summary(evidence)
+        self.assertLessEqual(len(json.dumps(summary)), 3200)
+        self.assertIn("Catalog must commit first", summary["error"])
+        self.assertGreater(len(evidence["error"]), 3200)  # Complete artifact data was not mutated.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); log = root / "run.log"
+            log.write_text("##[notice]" + json.dumps(summary) + "\n")
+            result = extract(log, root / "out", "test", "test", FIXTURES)
+            row = next(r for r in result["groups"] if r["case"] == evidence["case"])
+            self.assertEqual(row["status"], "FAIL")
+            self.assertFalse(row["complete"])
+
     def test_native_invoice_fixture_rejects_missing_address_or_default_tax_regime(self):
         import copy
         from run import assert_native_configuration

@@ -62,7 +62,10 @@ public final class NativeFinance {
     Model country = one(BASE + "Country", "self.alpha2Code = ?1", "ZZ");
     if (country == null) {
       Model template = record(BASE + "AddressTemplate", "name", "CCM LAB address", "engineSelect", 1,
-          "templateStr", "Synthetic LAB address");
+          "addressL2Str", "$address.addressL2$", "addressL3Str", "$address.addressL3$",
+          "addressL4Str", "$address.addressL4$", "addressL5Str", "$address.addressL5$",
+          "addressL6Str", "$address.addressL6$",
+          "templateStr", "$address.addressL2$\n$address.addressL4$\n$address.addressL6$");
       country = record(BASE + "Country", "name", "Synthetic LAB Country", "alpha2Code", "ZZ", "addressTemplate", template);
     }
     if (one(BASE + "PartnerAddress", "self.partner = ?1 AND self.isInvoicingAddr = true", partner) == null) {

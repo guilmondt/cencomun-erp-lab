@@ -4,72 +4,66 @@ Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613
 16 fixtures idénticos, manifiesto/oráculo intactos, cobertura revisión 2,
 34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.
 
-Último CI finalizado: [37416107406](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37416107406),
-commit `013f9622d67ed921afd79b1ca66388a3e1e89eca`, **FAILURE**. PROD y BANK-BOOK completos
-PASS. Gates bloqueados por requisitos de facturación/configuración. FX conservado
-como conversión parcial PASS y grupo UNRUN: el antiguo PASS completo era incorrecto.
-La matriz siguiente incorpora la revisión B19; conserva el resultado originalmente
-reportado en el archivo del caso y en la procedencia, sin contar pagos inexistentes.
+Último CI finalizado: [37418693317](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37418693317),
+commit `fc6846307688fbc125caa5b7de49d3243d4b21e9`, **FAILURE**.
+La preparación del catálogo revierte por AddressTemplate incompleto (B25).
+No se alcanzaron pagos ni se demostraron gates económicos en esta repetición.
 
 ## Gates económicos parciales
 
 | Gate, administrador real | Estado | Tiempo | Causa observada |
 | --- | --- | --- | --- |
-| CO00, primero | BLOCKED | 13.360 s | ValidateState: Warning ! : Invoicing address missing |
-| TAX01-W, segundo | BLOCKED | 5.441 s | No account found for Tax: TAX-LAB-10 (company: CCM-LAB-001) |
+| CO00, primero | FAIL | 4.941 s | StringTemplates recibe plantilla de línea null al preparar dirección |
+| TAX01-W, segundo | FAIL | 0.434 s | Misma frontera de preparación |
 
-Factory oficial de SaleOrder verificado en ERP: estado draft=1; se superó la
-finalización anterior sin escribir statusSelect. Entrada inicial REALIZED=3,
-stock persistido 5/5/5, WAP 30/10/60 y asiento de apertura separado de 500 por
-fixture. La venta/entrega/factura se revierten juntas al fallar facturación;
-no hay efectos económicos de venta persistidos. Sequence NoResult no reapareció.
-El contador aislado puede avanzar al fallar la transacción; sus huecos no prueban venta.
+AddressBaseRepository.save renderiza addressL2Str–addressL6Str además del
+formato completo; el fixture sólo llenaba templateStr. La preparación atómica
+se revierte y no confirma catálogo ni nueva entrada inicial. B25 documenta causa,
+impacto y pasos antes de la corrección: completar las cinco plantillas con campos
+nativos de Address, conservando renderer, repositorio y validaciones.
+Compilación local comprobada; repetición ERP pendiente.
 
-B20/B21: se preparan direcciones nativas y Company.partner/AccountingSituation
-con régimen de entrega/devengo, además del régimen de las cuentas. Se conservan
-validaciones fiscales y de dirección. B23: se preparan términos nativos del pago
-inicial, requeridos por el servicio oficial. Estas correcciones están pendientes
-de repetición en ERP. No se demuestran aún stock final 3/4/5, costo 70, IVA y liquidación.
-Un futuro gate administrativo PASS seguirá siendo parcial hasta roles, estados,
-rechazos, atomicidad e idempotencia del grupo completo.
+En CI9 se verificaron Sequence tras preparación confirmada, draft oficial,
+entrada inicial REALIZED y stock 5/5/5. No se demostraron aún stock final 3/4/5,
+costo 70, IVA ni liquidación. Un gate administrativo PASS seguirá siendo
+parcial hasta ejecutar roles, estados, rechazos, atomicidad e idempotencia.
 
-## Casos independientes
+## Casos independientes y paridad FX
 
-- PROD01-04 PASS completo, 2.277 s: operador real, seis garantías, retención de
-  precio al deshabilitar, restauración y lecturas nuevas de tres perfiles/FK.
-- BANK-BOOK-FIXTURE PASS completo, 1.526 s: cuatro PaymentVoucher confirmados,
-  cuatro asientos ACCOUNTED, ocho líneas persistidas, AR firmado negativo,
-  vouchers no aplicados positivos por 255 y replay idéntico sin duplicados.
-- SEARCH FAIL, 0.555 s: aislamiento 403, cuatro búsquedas de productos y dos
-  páginas correctos; C001 existe con nombre/teléfono/compañía exactos, pero REST
-  del lector devuelve status=0 sin data. El nuevo diagnóstico compara admin y
-  filtro real JpaSecurity del lector. No se amplía el permiso. Serial/factura pendientes.
-- FX/MONEY: conversiones parciales PASS, 0.581 s, tasas nativas 40/41/40.5 y
-  0.41+0.41=0.82, rechazo 422 sin tasa, operador 403 sin efectos y autorización
-  por manager real. **Cero evidencia de pagos en ese CI: grupo UNRUN.**
-  Se añaden tres facturas USD y cuatro InvoicePayment VES mediante
-  InvoiceGenerator, InvoiceLineService, InvoiceService y servicios de creación,
-  términos, validación, asiento y conciliación. Importes 40/41/0.41/0.41,
-  fechas/tasas/IDs observados, efectos USD y liquidación se exigirán en lecturas
-  posteriores al commit. El agregado rechaza datos de tasas/cálculos solos,
-  asientos draft, fechas incorrectas, pagos ausentes y deuda pendiente.
+- PROD FAIL (0.449 s), BANK-BOOK FAIL (0.334 s): mismo error nativo al preparar.
+- SEARCH FAIL (0.044 s): login 401; el usuario del fixture no confirmó.
+  Diagnóstico de búsqueda del lector pendiente, sin ampliar permisos.
+- FX: runner reporta FAIL (0.148 s), `Catalog must commit first`. Su aviso grande
+  excede el límite del log; sin ZIP, la matriz secundaria mantiene UNRUN.
+  No se reconstruye evidencia completa desde el fragmento.
+- Resultados históricos separados en [CI9](evidence/axelor-core/runs/37416107406/coverage.json):
+  PROD y BANK-BOOK completos PASS; conversiones 40/41/40.5 y 0.41+0.41=0.82
+  parciales PASS. FX completo UNRUN porque ese CI no creó cuatro pagos.
+- La implementación actual exige tres facturas USD y cuatro InvoicePayment VES
+  mediante InvoiceGenerator y servicios nativos de líneas, validación, términos,
+  asientos y conciliación. Fecha, tasa, importe, efectos USD y saldo cero se
+  verifican desde peticiones nuevas después del commit. **Cuatro pagos aún no
+  demostrados en ERP.** El agregado rechaza tasas/cálculos solos, pagos ausentes,
+  asientos draft, fechas incorrectas y deuda pendiente.
+- B25 limita el resumen FX sin modificar el JSON completo del artefacto. Una
+  regresión reproduce el error grande y exige recuperación de FAIL, sin PASS.
 
-Impedimentos, impacto, pasos y verificación:
-[axelor-core-test-impediments.md](axelor-core-test-impediments.md), B19–B24.
+Impedimentos, pasos numerados y verificación:
+[axelor-core-test-impediments.md](axelor-core-test-impediments.md), B19–B25.
 
-## Matriz de 34 grupos — CI revisado
+## Matriz de 34 grupos — ejecución actual, evidencia secundaria íntegra
 
-**PASS 2 / FAIL 1 / BLOCKED 2 / UNRUN 29**. Parciales del administrador y
-conversiones están separados. El CI antiguo reportó 3/1/2/28; B19 rechaza el
-PASS FX completo. No se agregan resultados locales a la cobertura nativa.
+**PASS 0 / FAIL 5 / BLOCKED 0 / UNRUN 29**.
+Runner: 6 FAIL / 28 UNRUN; diferencia por aviso FX incompleto. No se mezclan
+parciales históricos, tests unitarios o resultados supuestos.
 
 | Grupo requerido | Revisión mínima | Estado | Completo |
 | --- | ---: | --- | --- |
-| CO00-NATIVE | 1 | BLOCKED | No |
+| CO00-NATIVE | 1 | FAIL | No |
 | CO01-NATIVE | 1 | UNRUN | No |
 | TAX01-S-NATIVE | 1 | UNRUN | No |
-| TAX01-W-NATIVE | 1 | BLOCKED | No |
-| PROD01-04 | 1 | PASS | Sí |
+| TAX01-W-NATIVE | 1 | FAIL | No |
+| PROD01-04 | 1 | FAIL | No |
 | VAL01-04 | 1 | UNRUN | No |
 | STATE01-04 | 1 | UNRUN | No |
 | INV01-03-INSUFFICIENT | 1 | UNRUN | No |
@@ -77,7 +71,7 @@ PASS FX completo. No se agregan resultados locales a la cobertura nativa.
 | PO01-09-NATIVE | 1 | UNRUN | No |
 | PO07-09-REVISION-SELF | 1 | UNRUN | No |
 | CASH00-06-NATIVE | 1 | UNRUN | No |
-| BANK-BOOK-FIXTURE | 1 | PASS | Sí |
+| BANK-BOOK-FIXTURE | 1 | FAIL | No |
 | BANK01-05-NATIVE | 1 | UNRUN | No |
 | API01-06-SIX-ROUTES | 1 | UNRUN | No |
 | IDEM01-02-CREATE-CONCURRENT | 1 | UNRUN | No |
@@ -104,62 +98,54 @@ PASS FX completo. No se agregan resultados locales a la cobertura nativa.
 
 | Criterio | Estado |
 | ---: | --- |
-| 1 | BLOCKED |
+| 1 | FAIL |
 | 2 | PASS |
 | 3 | FAIL |
-| 4 | BLOCKED |
-| 5 | BLOCKED |
+| 4 | FAIL |
+| 5 | FAIL |
 | 6 | UNRUN |
 | 7 | UNRUN |
 | 8 | UNRUN |
 | 9 | UNRUN |
 | 10 | UNRUN |
-| 11 | BLOCKED |
+| 11 | FAIL |
 | 12 | FAIL |
 | 13 | BLOCKED |
 | 14 | UNRUN |
 
-Criterio 2 procede de commits fijados, diffs upstream reales cero, blob base de
-pins idéntico, WAR y suites de ese run. Ningún criterio está preasignado.
-Benchmark/recovery no se aprueban por smoke. Criterio 13 BLOCKED por decisión
-expresa del usuario; seis PATCH UNRUN. Sin actualización del baseline.
+Criterio 2 deriva del build del mismo commit: suites, WAR, pins y diffs upstream
+reales cero. Ningún criterio está preasignado. Benchmark/recovery no se aprueban
+por smoke. Criterio 13 BLOCKED por decisión expresa del usuario; seis PATCH UNRUN.
 
 ## Métricas y validaciones
 
-- CI: 2 tests originales + 7 de política + 16 upstream; cero errores/fallos/skips,
-  según atestación del log. 17 regresiones Python en ese commit.
-- Cambios posteriores: 19 regresiones de integridad; pruebas locales 2+7 y
-  compilación full-native con perfil de locks externo y replay offline estricto,
-  en secuencia.
-- Readiness inicial 422.52 s; reinicio de la misma DB 318.38 s.
-  Job 19 min 16 s. Son timings de smoke, no benchmark de operaciones.
-- Runner: 4 CPU visibles/4 de afinidad;
-  Linux-6.17.0-1022-azure-x86_64-with-glibc2.41; disco libre 87100051456 bytes.
-- HTTP: {"administrator": 23, "product_operator": 30, "search_reader": 11, "fx_operator": 8, "fx_manager": 4}. Incluye login/preparación;
-  muestras individuales ausentes del log recuperado. FX corresponde a cálculos antiguos.
+- CI: 19 regresiones Python; 2 tests originales + 7 de política + 16 upstream,
+  cero errores/fallos/skips según atestación del log.
+- Corrección B25 posterior: 20 regresiones PASS; 2+7 locales PASS; compilación
+  full-native con locks externos y replay offline estricto PASS, en secuencia.
+  Estas pruebas no sustituyen ejecución del ERP.
+- Readiness inicial 425.60 s; reinicio misma DB 324.47 s; job 19 min 31 s.
+  Son timings de smoke, no benchmark de operaciones.
+- Runner: 4 CPU / 4 de afinidad,
+  Linux-6.17.0-1022-azure-x86_64-with-glibc2.41, disco libre 87100694528 bytes.
+- HTTP: `{"administrator": 11, "product_operator": 0, "search_reader": 2, "fx_operator": 0, "fx_manager": 0}`. FX no inicia sesión ni crea pagos.
 - p50/p95/p99, 1000 muestras y query/DB timing: UNRUN.
 - JAR propio sin com.axelor.*, pins/lock originales y upstream sin diferencias.
-- La ejecución simultánea de los perfiles Gradle produjo ClassNotFoundException
-  de clases propias; repetir el perfil Cloud secuencialmente pasó 2+7.
-  Los perfiles deben ejecutarse secuencialmente en este checkout compartido.
+  Perfiles Gradle ejecutados secuencialmente en este checkout compartido.
 
 Pins SHA256: `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
-WAR: `0075463fdef42500413014c31dca3cadaa3301847c274710ac2c8f59a8367abb`.
+WAR: `1f5c787f09e6068982650188e464d7ac056a26b3f0825ae3d7a93ffbc779955b`.
 
 ## Evidencia y continuidad
 
-[coverage.json](evidence/axelor-core/runs/37416107406/coverage.json),
-[build-evidence.json](evidence/axelor-core/runs/37416107406/build-evidence.json),
-[runtime-metrics.json](evidence/axelor-core/runs/37416107406/runtime-metrics.json),
-gates/exports/casos/smokes/hashes y revisión del PASS rechazado en
-[evidence-source.json](evidence/axelor-core/runs/37416107406/evidence-source.json).
-Fuente secundaria: JSON completo del log; no se infiere lo ausente.
-ZIP 11391813114 bloqueado con Forbidden en productionresultssa16.blob.core.windows.net,
-un intento, sin ampliar/publicar red. Log completo recuperable:
-`/workspace/ccm-axelor-runtime/ci-evidence/37416107406.log`. Evidencias históricas
-CI6/CI7/CI8 conservadas aparte, sin sustituir pruebas de la ejecución actual.
+[coverage.json](evidence/axelor-core/runs/37418693317/coverage.json),
+[build-evidence.json](evidence/axelor-core/runs/37418693317/build-evidence.json),
+[runtime-metrics.json](evidence/axelor-core/runs/37418693317/runtime-metrics.json),
+[gates, smokes, procedencia y hashes](evidence/axelor-core/runs/37418693317/evidence-source.json).
+Fuente secundaria: JSON completo del log. ZIP 11393176285 bloqueado con Forbidden
+por productionresultssa18.blob.core.windows.net, un intento, sin ampliar/publicar red.
+Log recuperable: `/workspace/ccm-axelor-runtime/ci-evidence/37418693317.log`.
 
 Se continúa la repetición autorizada de gates primero y casos independientes
 después. No hay PR, merge, despliegue, cambio de main/Frappe/upstream/pins ni
-cierre de comparación. Configuración de arranque guardada sólo como borrador;
-no se publica ninguna ampliación de red pendiente.
+cierre de comparación. Arranque guardado sólo como borrador; no se publica red pendiente.

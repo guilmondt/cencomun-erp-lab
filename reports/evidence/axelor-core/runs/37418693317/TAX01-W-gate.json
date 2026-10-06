@@ -1,0 +1,56 @@
+{
+  "case": "TAX01-W",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "FAIL",
+  "failed_stage": "native-catalog-and-configuration",
+  "error_type": "java.lang.NullPointerException",
+  "error": "Cannot invoke \"String.toCharArray()\" because \"input\" is null",
+  "native_stack": [
+    "com.axelor.text.StringTemplates.fromText(StringTemplates.java:392)",
+    "com.axelor.apps.base.service.address.AddressTemplateServiceImpl.computeTemplateStr(AddressTemplateServiceImpl.java:100)",
+    "com.axelor.apps.base.service.address.AddressTemplateServiceImpl.setFormattedAddressField(AddressTemplateServiceImpl.java:80)",
+    "com.axelor.apps.base.service.address.AddressTemplateServiceImpl.setFormattedFullName(AddressTemplateServiceImpl.java:69)",
+    "com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:38)",
+    "com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:29)",
+    "com.cencomun.core.NativeAccess.save(NativeAccess.java:32)",
+    "com.cencomun.core.NativeGateService.record(NativeGateService.java:301)",
+    "com.cencomun.core.NativeFinance.configurePartner(NativeFinance.java:69)",
+    "com.cencomun.core.NativeFinance.configureCompanyPartner(NativeFinance.java:91)",
+    "com.cencomun.core.NativeGateService.prepare(NativeGateService.java:82)",
+    "com.cencomun.core.NativeGateController.run(NativeGateController.java:43)"
+  ],
+  "phase_evidence": {
+    "apps": [
+      {
+        "id": 3,
+        "active": true,
+        "code": "base"
+      },
+      {
+        "id": 8,
+        "active": true,
+        "code": "sale"
+      },
+      {
+        "id": 6,
+        "active": true,
+        "code": "stock"
+      },
+      {
+        "id": 5,
+        "active": true,
+        "code": "account"
+      },
+      {
+        "id": 11,
+        "active": true,
+        "code": "supplychain"
+      }
+    ]
+  },
+  "assertion_error": "Fixture preparation failed",
+  "seconds": 0.434,
+  "sequence": 2
+}

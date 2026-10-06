@@ -1,0 +1,78 @@
+{
+  "source": "Secondary evidence: complete structured Actions log notices only",
+  "run_id": "37418693317",
+  "lab_commit": "fc6846307688fbc125caa5b7de49d3243d4b21e9",
+  "artifact_id": 11393176285,
+  "artifact_status": "One ZIP download attempt returned Forbidden; no network policy change",
+  "blocked_host": "productionresultssa18.blob.core.windows.net",
+  "log_path": "/workspace/ccm-axelor-runtime/ci-evidence/37418693317.log",
+  "log_sha256": "62cc0eb39964a0d4fb47a6829df69c19dfc2ca46e4b5b303826411b60e39b446",
+  "raw_reported_counts": {
+    "FAIL": 6,
+    "UNRUN": 28
+  },
+  "reviewed_counts": {
+    "FAIL": 5,
+    "UNRUN": 29
+  },
+  "limitations": [
+    "FX failure notice exceeds log notice boundary; no complete JSON evidence recovered for this row. It remains UNRUN in reviewed matrix.",
+    "Previous CI9 partial conversions remain historical; no FX calculation or payment executed successfully on CI10."
+  ],
+  "validator_code_sha256": {
+    "labs/axelor/core-test/extract_log_evidence.py": "c8a53e5bae228b194bcaa8be8123f533b665cc60d05a552d35842a4b26fc9cbb",
+    "labs/axelor/core-test/run.py": "d24b96009abe58eb1785845195059752a57ce988e4d09a21167bfcfe920e1f3f"
+  },
+  "files": [
+    {
+      "path": "BANK-BOOK-FIXTURE.json",
+      "bytes": 2826,
+      "sha256": "2731923359594410617881f28e7a857e2f77bd1feaf0e89797e2f148d8accbe9"
+    },
+    {
+      "path": "CO00-gate.json",
+      "bytes": 2017,
+      "sha256": "403f8f60c129ba78552f90490d29367744375922f2f78d200b99aa5be9f72529"
+    },
+    {
+      "path": "PROD01-04.json",
+      "bytes": 2798,
+      "sha256": "2312270041e7e542c491ac1ad34a8ff6c766b2528052e28294a1ac3bbe849cf7"
+    },
+    {
+      "path": "SEARCH01-04-NATIVE.json",
+      "bytes": 247,
+      "sha256": "8c26d1c65b08767b2064b31e81e9464ecf92ae390f84524850fc6c4ae9ed38af"
+    },
+    {
+      "path": "TAX01-W-gate.json",
+      "bytes": 2020,
+      "sha256": "0566bc30fbae9b784006400af288eed97ffbb14c32de61d9afac3c51406eabf8"
+    },
+    {
+      "path": "build-evidence.json",
+      "bytes": 891,
+      "sha256": "a096b6a35bcac31484b20dc2106cfbc81f85f66bb6d1aa7eda33f02ac877f2d4"
+    },
+    {
+      "path": "coverage.json",
+      "bytes": 22105,
+      "sha256": "efa20665a84679abb95e31166b21ca69d378808827e730319bfbfe113732a44e"
+    },
+    {
+      "path": "runtime-metrics.json",
+      "bytes": 1280,
+      "sha256": "d2295edc0412fe0ac0c16a0228763db7ee8353a573148b6c2fdd9d13c8a71114"
+    },
+    {
+      "path": "smoke-first.json",
+      "bytes": 327,
+      "sha256": "98b961ca7abdf3bca91d2e605a4c71005b76d26233a2cf0282fa010c790c5190"
+    },
+    {
+      "path": "smoke-restart.json",
+      "bytes": 328,
+      "sha256": "1b5d1c97642dba0ffe64a103a11c6c363db57ec0b2c97f258fc6a944f463ef2d"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "metric_kind": "runtime",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "gates": [
+    {
+      "case": "CO00",
+      "seconds": 4.941,
+      "status": "FAIL"
+    },
+    {
+      "case": "TAX01-W",
+      "seconds": 0.434,
+      "status": "FAIL"
+    }
+  ],
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 0.449,
+      "status": "FAIL"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.044,
+      "status": "FAIL"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "seconds": 0.334,
+      "status": "FAIL"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "seconds": 0.148,
+      "status": "FAIL"
+    }
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.41",
+  "cpu_count": 4,
+  "cpu_affinity": 4,
+  "disk_free_bytes": 87100694528,
+  "http_call_counts": {
+    "administrator": 11,
+    "product_operator": 0,
+    "search_reader": 2,
+    "fx_operator": 0,
+    "fx_manager": 0
+  },
+  "native_action_counts": {
+    "ccm-core-native-prepare": 2,
+    "ccm-core-native-inspect": 2,
+    "ccm-core-products-prepare": 1,
+    "ccm-core-bank-book-prepare": 1,
+    "ccm-core-fx-prepare": 1,
+    "ccm-core-fx-inspect": 1
+  },
+  "benchmark": "UNRUN",
+  "note": "Gate timings are not the required 1000-sample benchmark"
+}

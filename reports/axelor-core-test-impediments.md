@@ -497,3 +497,33 @@ estática se corrige como preparación de entorno, sin desactivar el control.
    paymentDate; no cambiar fixture/oráculo ni permitir facturas futuras.
 3. Exportar el día preparado y repetir FX con fechas/tasas/asientos leídos
    después del commit. No considerar la corrección verificada hasta esa repetición.
+
+## B25 — preparación revertida por plantilla nativa de dirección incompleta
+
+CI 37418693317, commit fc684630: CO00 (4.941 s) y TAX01-W (0.434 s)
+fallan al preparar catálogo con `java.lang.NullPointerException: Cannot invoke
+"String.toCharArray()" because "input" is null`. AddressBaseRepository.save
+ejecuta AddressTemplateService.setFormattedFullName; el servicio fijado renderiza
+addressL2Str–addressL6Str además de templateStr. El fixture sólo completaba
+templateStr, dejando las cinco plantillas de línea en null. La transacción se
+revierte: faltan catálogo/usuarios para PROD, SEARCH y BANK, y FX rechaza
+`Catalog must commit first`. No se alcanzó ningún pago o gate económico.
+
+1. Completar las cinco plantillas nativas de línea con referencias a los campos
+   de Address y el formato completo, durante la preparación confirmada.
+2. Conservar el repositorio/renderer nativo y todas las validaciones; no escribir
+   formattedFullName para evitar el callback ni separar los efectos de venta.
+3. Repetir CO00 y TAX01-W antes de independientes; comprobar direcciones
+   confirmadas y después los cuatro pagos/asientos/liquidaciones FX.
+
+El ZIP 11393176285 devolvió Forbidden en productionresultssa18.blob.core.windows.net
+en un único intento. Log: /workspace/ccm-axelor-runtime/ci-evidence/37418693317.log.
+CI reporta 6 FAIL / 28 UNRUN; la evidencia secundaria íntegra sólo demuestra
+5 FAIL / 29 UNRUN porque el aviso FX con dos stacks excede el límite de log.
+Los PASS históricos de CI9 se mantienen aparte, nunca como éxitos de CI10.
+
+1. Guardar recibo, hash del log y avisos íntegros recuperados, sin inferir el aviso FX.
+2. Emitir un resumen FX acotado conservando el error y la ruta al JSON completo;
+   añadir regresión para que un error grande no suprima la fila de cobertura.
+3. Verificar extracción con JSON completo y conteos reproducibles en el siguiente CI,
+   sin ampliar/publicar dominios ni reconstruir archivos truncados como originales.
