@@ -17,7 +17,8 @@ public final class PilotActionGuard implements MethodInterceptor {
       "ccm-pilot-open","ccm-pilot-preview","ccm-pilot-close",
       "ccm-pilot-catalog-open","ccm-pilot-sales-open","ccm-pilot-pending-open",
       "ccm-pilot-cash-open","ccm-pilot-stock-view",
-      "com.axelor.meta.web.MetaController:moreAttrs");
+      "com.axelor.meta.web.MetaController:moreAttrs",
+      "com.axelor.meta.web.MetaFilterController:findFilters");
   static void check(String action) {
     if(action==null)throw new CoreFault(403,"Pilot action required");
     // AOP appends its read-only dynamic-attribute loader to onNew actions.

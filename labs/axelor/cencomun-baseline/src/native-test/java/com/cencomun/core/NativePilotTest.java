@@ -39,6 +39,7 @@ class NativePilotTest {
 
   @Test void nativeActionsAndAdministrativeChainsCannotBypassPilotScreens() {
     PilotActionGuard.check("ccm-pilot-deliver");
+    PilotActionGuard.check("com.axelor.meta.web.MetaFilterController:findFilters");
     PilotActionGuard.check("ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs");
     for(String action:java.util.List.of("com.axelor.meta.web.MetaController:restoreAll","action-sale-order-method-confirm-cancel","ccm-pilot-deliver,com.axelor.meta.web.MetaController:restoreAll","ccm-pilot-prepare"))
       assertThrows(CoreFault.class,()->PilotActionGuard.check(action));
