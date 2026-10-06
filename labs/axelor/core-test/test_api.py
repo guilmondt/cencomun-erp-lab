@@ -13,6 +13,32 @@ FIXTURES=Path(__file__).resolve().parents[3]/'fixtures/ccm-core-v1'
 
 
 class ApiEvidenceRegression(unittest.TestCase):
+    def admin_immutable(self):
+        message='Semantic audit cannot be deleted by generic CRUD';cause='jakarta.ws.rs.ForbiddenException'
+        return {'name':'immutable-admin-delete','actor':'admin','path':'/ws/rest/com.cencomun.core.db.CcmAudit/removeAll','method':'POST','http_status':200,
+                'request':{'records':[{'id':1,'version':0}]},'read_boundary':BOUNDARY,'before':{'audit':[{'id':1,'version':0}]},'after':{'audit':[{'id':1,'version':0}]},
+                'response':{'status':-1,'data':{'message':message,'causeClass':cause,'causeString':cause+': '+message,
+                  'causeStack':cause+': '+message+'\n\tat com.cencomun.core.CcmAuditWorkflowRepository.remove(CcmAuditWorkflowRepository.java:14)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n'}}}
+    def test_exact_admin_immutable_diagnostics_require_existing_row_and_intact_snapshots(self):
+        record=self.admin_immutable();self.assertTrue(native_permission_denied(record));assert_native_permission_denial(record)
+        for field,value in [('actor','ccm-reader'),('actor','ccm-mcp'),('actor','ccm-manager'),('actor','technical'),('http_status',404),('http_status',403),('name','other-probe')]:
+            changed=copy.deepcopy(record);changed[field]=value
+            with self.subTest(field=field,value=value):self.assertFalse(native_permission_denied(changed))
+        for field in ('before','after','request'):
+            changed=copy.deepcopy(record);changed.pop(field);self.assertFalse(native_permission_denied(changed))
+        changed=copy.deepcopy(record);changed['after']['audit'][0]['version']=1;self.assertFalse(native_permission_denied(changed))
+        changed=copy.deepcopy(record);changed['request']['records'][0]['id']=2;self.assertFalse(native_permission_denied(changed))
+    def test_admin_diagnostics_never_allow_generic_causes_private_records_or_sensitive_stacks(self):
+        record=self.admin_immutable();header=record['response']['data']['causeString']
+        for field,value in [('causeClass','jakarta.persistence.OptimisticLockException'),('causeString',header+'; customer=C001'),('message','Fixture missing'),
+                            ('records',[{'id':1}]),('entityId',1),('causeStack',header+'\nSQL/customer=C001'),('causeStack',header+'\nCaused by: secret value'),
+                            ('causeStack',header+'\n\tat com.axelor.rpc.Resource.remove(password=value.java:1)')]:
+            changed=copy.deepcopy(record);changed['response']['data'][field]=value
+            with self.subTest(field=field):self.assertFalse(native_permission_denied(changed))
+        changed=copy.deepcopy(record);changed['response']['data']=[{'id':1}];self.assertFalse(native_permission_denied(changed))
+    def test_unscoped_stacks_cannot_approve_a_native_denial_even_with_a_known_message(self):
+        self.assertFalse(native_permission_denied({'http_status':200,'response':{'status':-1,'data':{'message':'Semantic audit is immutable','causeStack':'private data'}}}))
+        self.assertFalse(native_permission_denied({'http_status':403,'response':{'message':'You are not authorized to read this resource.','native_stack':'private data'}}))
     def test_six_routes_and_stdio_tools_do_not_include_financial_writes(self):
         self.assertEqual(len(ROUTES)+2,6);self.assertEqual(len(TOOLS),6)
         for method,path in [('POST','/bank/import'),('POST','/cash/prepare'),('POST','/purchases/approve')]:

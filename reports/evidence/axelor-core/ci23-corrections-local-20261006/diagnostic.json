@@ -1,0 +1,87 @@
+{
+  "scope": "Local regressions and Java21/Python transport diagnostic; not Core ERP acceptance",
+  "parent_commit": "4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9",
+  "python_tests": 93,
+  "python_result": "PASS",
+  "native_java_changed": false,
+  "java_transport": {
+    "http_requests": 300,
+    "http503": 100,
+    "http200": 200,
+    "durable_receipts": 1,
+    "received_deliveries": 200,
+    "durable_effects": 1,
+    "result": "PASS",
+    "network": "owned loopback only"
+  },
+  "observed_admin_response": {
+    "source_ci": "37469716840",
+    "phases": [
+      "core-test",
+      "core-test-repeat"
+    ],
+    "actor": "admin",
+    "http_status": 200,
+    "native_status": -1,
+    "causeClass": "jakarta.ws.rs.ForbiddenException",
+    "causeString": "jakarta.ws.rs.ForbiddenException: Semantic audit cannot be deleted by generic CRUD",
+    "message": "Semantic audit cannot be deleted by generic CRUD",
+    "stack_lines": 91,
+    "before_equals_after": true,
+    "original_case_status": "FAIL; preserved, not reclassified"
+  },
+  "observed_event_failure": {
+    "source_ci": "37469716840",
+    "phase": "core-test",
+    "event_id": "purchase.approved:PO01:1",
+    "error": "IOException: HTTP/1.1 header parser received no bytes",
+    "delivered": 41,
+    "pending": 1,
+    "consumer_receipts": 41,
+    "consumer_effects": 41,
+    "original_error_type": "AssertionError",
+    "original_error": "",
+    "next_verification": "New single CI primary and restored repeat after actual supported consumer transport change"
+  },
+  "new_scope": "Only native admin immutable diagnostic tuple; reject other diagnostics and stacks. Consumer reads503 body, HTTP/1.1, no Nagle delay. Recovery evidence/errors strengthened; ERP/Java/fixtures/oracle unchanged.",
+  "network_policy_changed": false,
+  "source_files": [
+    {
+      "path": "labs/axelor/core-test/api_cases.py",
+      "sha256": "db4bcfba9c1ffdc33e65dfc4e566f9d5013404bbad68278098f41d9f1b8eb89a"
+    },
+    {
+      "path": "labs/axelor/core-test/consumer.py",
+      "sha256": "ed3299d2a67ed2537bd138baad70f8690bf58533e5c62d55afb3d513af5cf67e"
+    },
+    {
+      "path": "labs/axelor/core-test/recovery_cases.py",
+      "sha256": "2c254644d17e3391ff73253e677ed846827fecbcc15da1594b82865c4a038441"
+    },
+    {
+      "path": "labs/axelor/core-test/test_api.py",
+      "sha256": "af5dbf7bc06e0ae7ade9a1c8eb8c903601766eff29a676d4a33828403ac63363"
+    },
+    {
+      "path": "labs/axelor/core-test/test_recovery.py",
+      "sha256": "072783c9b94cb67a07929460c416cd3a9d1d7d9c888833ff91193d6ed11ba7d4"
+    }
+  ],
+  "files": [
+    {
+      "path": "java-http-consumer-transport.log",
+      "bytes": 383,
+      "sha256": "89669836dd8500cf19d9020a20ae443147009ecaec0c50f0b47af4c8bb9bcc67"
+    },
+    {
+      "path": "python-regressions.log",
+      "bytes": 273,
+      "sha256": "bbc2776df9bd204820aa668f16df17a2f45830a2aeafff27829f37e9cc3f8449"
+    },
+    {
+      "path": "response-exception-javap.txt",
+      "bytes": 10678,
+      "sha256": "a858e863e05d8394081a0a49ee73e2fe02e090d560ec64b929e04fcabfcfba8e"
+    }
+  ]
+}

@@ -1,0 +1,1042 @@
+Oct 06, 2026 1:24:59 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8080"]
+Oct 06, 2026 1:24:59 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+Oct 06, 2026 1:24:59 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/10.1.57]
+Oct 06, 2026 1:25:00 PM org.apache.catalina.startup.ContextConfig getDefaultWebXmlFragment
+INFO: No global web.xml found
+2026-10-06 13:25:38.135  INFO 5319 --- [           main] com.axelor.db.JpaModule                  : JCache provider: com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider
+2026-10-06 13:25:51.465  INFO 5319 --- [           main] com.axelor.app.AppModule                 : Configuring app modules...
+2026-10-06 13:26:05.191  INFO 5319 --- [           main] com.axelor.app.AppModule                 : View processors: com.axelor.studio.service.ViewProcessorImpl, com.axelor.apps.base.service.meta.BaseViewProcessor
+2026-10-06 13:26:06.056  INFO 5319 --- [           main] com.axelor.app.AppModule                 : Script policy configurators: com.axelor.studio.scripting.StudioScriptPolicyConfigurator, com.axelor.apps.base.module.BaseCustomPolicy, com.axelor.apps.crm.module.CrmCustomPolicy, com.axelor.apps.account.module.AccountCustomPolicy, com.axelor.apps.intervention.module.InterventionCustomPolicy
+2026-10-06 13:26:06.741  INFO 5319 --- [           main] com.axelor.app.AppModule                 : Cache provider: caffeine
+2026-10-06 13:26:21.361  INFO 5319 --- [           main] c.axelor.web.socket.WebSocketEndpoint    : Registering channel: tags
+2026-10-06 13:26:21.361  INFO 5319 --- [           main] c.axelor.web.socket.WebSocketEndpoint    : Registering channel: mail
+2026-10-06 13:26:22.984  INFO 5319 --- [           main] com.axelor.auth.pac4j.AuthPac4jModule    : JCache provider: com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider
+2026-10-06 13:26:24.662  INFO 5319 --- [           main] c.axelor.auth.pac4j.ClientListService    : Indirect clients: AxelorFormClient, MfaClient
+2026-10-06 13:26:24.663  INFO 5319 --- [           main] c.axelor.auth.pac4j.ClientListService    : Direct clients: AxelorApiKeyClient
+2026-10-06 13:28:39.027  INFO 5319 --- [           main] c.a.d.h.dialect.CustomDialectResolver    : Database dialect: AxelorPostgreSQLDialect, version: 16.15
+2026-10-06 13:29:54.924  INFO 5319 --- [           main] com.axelor.web.AppStartup                : Initializing...
+2026-10-06 13:30:06.712  INFO 5319 --- [           main] c.a.s.b.s.BpmAsyncExecutorServiceImpl    : BPM async ForkJoinPool initialized: parallelism=4
+2026-10-06 13:30:08.151  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-core...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-web...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-utils...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-message...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-studio...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-base...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-stock...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-crm...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-sale...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-account...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-purchase...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-supplychain...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-bank-payment...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package cencomun-baseline...
+2026-10-06 13:30:08.154  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-project...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-human-resource...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-quality...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-helpdesk...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-client-portal...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-cash-management...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-contract...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-intervention...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-production...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-maintenance...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-gdpr...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-fleet...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-supplier-portal...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-supplier-management...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-mobile-settings...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-talent...
+2026-10-06 13:30:08.155  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-marketing...
+2026-10-06 13:30:08.156  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-budget...
+2026-10-06 13:30:08.156  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-erp...
+2026-10-06 13:30:08.198  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-core...
+2026-10-06 13:30:23.521  INFO 5319 --- [           main] com.axelor.data.xml.XMLImporter          : Importing: auth.xml
+2026-10-06 13:30:24.825  INFO 5319 --- [           main] com.axelor.data.xml.XMLImporter          : Importing: jobs.xml
+2026-10-06 13:30:24.860  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-web...
+2026-10-06 13:30:25.539  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-utils...
+2026-10-06 13:30:25.631  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-message...
+2026-10-06 13:30:26.103  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:30:32.757  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:30:32.792  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=mail-conf, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/10387209989278161313/data-init/input}]
+2026-10-06 13:30:32.795  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=mail-conf-template, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/10387209989278161313/data-init/input}]
+2026-10-06 13:30:32.841  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=mail-root-email-conf-mail-account, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/10387209989278161313/data-init/input}]
+2026-10-06 13:30:32.844  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=mail-root-email-conf-email-address, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/10387209989278161313/data-init/input}]
+2026-10-06 13:30:32.846  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=mail-message, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/10387209989278161313/data-init/input}]
+2026-10-06 13:30:32.848  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=mail-message-not-send, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/10387209989278161313/data-init/input}]
+2026-10-06 13:30:32.850  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaSchedule from meta_schedule.csv
+2026-10-06 13:30:32.858  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-studio...
+2026-10-06 13:30:36.223  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:30:36.236  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:30:36.238  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-root, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.239  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-studio, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.241  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-reporting, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.242  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-studio-charts, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.243  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-studio-dashboards, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.244  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-config, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.246  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-custom-models, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.289  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-custom-fields, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.291  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-studio-actions, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.293  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-app-config-mappers, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.295  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-web-service-ws-request, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.297  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-web-service-ws-connector, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.298  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to roles with context: [{name=studio-web-service-ws-authenticator, roles_name_=Admin, roles.name=Admin, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/1615888007604843572/data-init/input}]
+2026-10-06 13:30:36.299  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.Library from library.csv
+2026-10-06 13:30:36.309  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.Transformation from transformation.csv
+2026-10-06 13:30:36.378  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.Parameter from parameter.csv
+2026-10-06 13:30:36.488  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaSchedule from meta_schedule.csv
+2026-10-06 13:30:36.493  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-base...
+2026-10-06 13:30:52.615  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Group from auth_group.csv
+2026-10-06 13:30:52.965  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Role from auth_role.csv
+2026-10-06 13:30:52.972  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:30:53.160  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:30:53.291  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:30:53.483  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:30:53.556  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:30:53.626  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.message.db.TemplateContext from base_templateContext.csv
+2026-10-06 13:30:53.632  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.RegistrationNumberTemplate from base_registrationNumberTemplate.csv
+2026-10-06 13:30:53.718  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.AddressTemplate from base_addressTemplate.csv
+2026-10-06 13:30:53.849  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Country from base_country.csv
+2026-10-06 13:30:53.907  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to economicArea with context: [{phonePrefix=33, alpha2Code=FR, economicArea.code=EEA, economicArea_code_=EEA, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/12585143662171112217/data-init/input, numericCode=250, alpha3Code=FRA, importId=67, registrationNumberTemplate_importId_=1, addressTemplate_importId=1, registrationNumberTemplate.importId=1, name=FRANCE, cog=XXXXX}]
+2026-10-06 13:30:53.910  WARN 5319 --- [           main] com.axelor.data.csv.CSVBinder            : Bind null value to economicArea with context: [{phonePrefix=44, alpha2Code=GB, economicArea.code=EEA, economicArea_code_=EEA, __path__=/workspace/ccm-ci-state/upload-temp/tmp_files/12585143662171112217/data-init/input, numericCode=826, alpha3Code=GBR, importId=148, registrationNumberTemplate_importId_=, addressTemplate_importId=5, registrationNumberTemplate.importId=, name=UNITED-KINGDOM, cog=99132}]
+2026-10-06 13:30:53.914  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Language from base_language.csv
+2026-10-06 13:30:53.921  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Localization from base_localization.csv
+2026-10-06 13:30:54.013  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.message.db.Template from base_template.csv
+2026-10-06 13:30:54.303  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BarcodeTypeConfig from base_barcodeTypeConfig.csv
+2026-10-06 13:30:54.452  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Currency from base_currency.csv
+2026-10-06 13:30:54.792  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.CurrencyConversionLine from base_currencyConversionLine.csv
+2026-10-06 13:30:54.963  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:30:55.450  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:30:55.551  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:30:55.808  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:30:55.938  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.User from auth_user.csv
+2026-10-06 13:30:56.146  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BaseBatch from base_baseBatch.csv
+2026-10-06 13:30:56.195  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaSchedule from meta_schedule.csv
+2026-10-06 13:30:56.326  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.AddressTemplate from base_addressTemplate.csv
+2026-10-06 13:30:56.330  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.AddressTemplateLine from base_addressTemplateLine.csv
+2026-10-06 13:30:56.453  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaTheme from meta_theme.csv
+2026-10-06 13:30:56.461  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-stock...
+2026-10-06 13:30:59.421  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:30:59.444  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:30:59.472  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:30:59.500  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:30:59.557  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:30:59.572  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:30:59.631  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:30:59.646  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:30:59.673  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-crm...
+2026-10-06 13:31:01.251  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:01.258  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.EventCategory from crm_eventCategory.csv
+2026-10-06 13:31:01.305  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:01.327  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:01.350  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:01.418  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:01.422  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:01.429  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:01.432  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:01.436  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-sale...
+2026-10-06 13:31:03.201  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:03.220  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:03.245  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:03.279  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:03.354  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:03.363  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:03.397  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:03.402  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:03.409  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-account...
+2026-10-06 13:31:18.447  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AccountingConfigTemplate from account_accountingConfigTemplate.csv
+2026-10-06 13:31:19.288  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:19.299  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:19.360  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:19.383  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:19.598  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:19.616  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:19.707  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:19.721  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:19.738  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-purchase...
+2026-10-06 13:31:20.745  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:20.752  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:20.770  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:20.790  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:20.823  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:20.827  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:20.836  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:20.839  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:20.844  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-supplychain...
+2026-10-06 13:31:22.379 ERROR 5319 --- [ool-65-thread-4] com.axelor.meta.loader.AbstractLoader    : Duplicate FormView found without 'id': invoice-line-form
+2026-10-06 13:31:23.612  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:23.621  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.CancelReason from base_cancelReason.csv
+2026-10-06 13:31:23.668  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:23.704  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:23.739  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:23.780  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaSchedule from meta_schedule.csv
+2026-10-06 13:31:23.783  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:23.793  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:23.816  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:23.828  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:23.838  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-bank-payment...
+2026-10-06 13:31:25.092  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:25.100  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.bankpayment.db.BankOrderFileFormat from bankpayment_bankOrderFileFormat.csv
+2026-10-06 13:31:25.506  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.bankpayment.db.BankStatementFileFormat from bankpayment_bankStatementFileFormat.csv
+2026-10-06 13:31:25.803  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:25.853  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:25.868  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:25.920  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:25.932  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:25.946  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package cencomun-baseline...
+2026-10-06 13:31:26.018  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-project...
+2026-10-06 13:31:27.425  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:27.438  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:27.485  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.project.db.ProjectStatus from project_status.csv
+2026-10-06 13:31:27.494  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.project.db.ProjectPriority from project_priority.csv
+2026-10-06 13:31:27.548  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:31:27.917  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-human-resource...
+2026-10-06 13:31:32.242  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:32.252  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.hr.db.LeaveReason from hr_leaveReason.csv
+2026-10-06 13:31:32.253  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:32.290  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:32.323  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:32.451  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:32.470  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:32.505  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:32.517  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:32.531  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-quality...
+2026-10-06 13:31:33.745  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:33.756  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:33.786  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:33.790  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:33.797  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:33.800  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:33.805  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-helpdesk...
+2026-10-06 13:31:34.046  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:34.054  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:34.080  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-client-portal...
+2026-10-06 13:31:34.268  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:34.277  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-cash-management...
+2026-10-06 13:31:34.523  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:34.530  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:34.533  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:34.536  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:34.550  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:34.554  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:34.558  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:34.561  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:34.564  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-contract...
+2026-10-06 13:31:35.249  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:35.258  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:35.274  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:35.279  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:35.286  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-intervention...
+2026-10-06 13:31:36.099  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-production...
+2026-10-06 13:31:38.287 ERROR 5319 --- [ol-112-thread-3] com.axelor.meta.loader.AbstractLoader    : Duplicate Action found without 'id': action-prod-process-method-compute-hazard-phrases
+2026-10-06 13:31:39.135  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:39.143  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:39.170  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:39.195  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:39.285  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:39.295  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:39.322  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:39.332  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:39.343  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-maintenance...
+2026-10-06 13:31:39.575  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:39.580  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Role from auth_role.csv
+2026-10-06 13:31:39.649  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:39.656  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:39.664  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:39.674  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:39.686  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:39.691  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:39.698  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-gdpr...
+2026-10-06 13:31:39.912  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-fleet...
+2026-10-06 13:31:40.164  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:40.171  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:40.208  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-supplier-portal...
+2026-10-06 13:31:40.310  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:40.317  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-supplier-management...
+2026-10-06 13:31:40.406  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:40.412  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:40.417  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-mobile-settings...
+2026-10-06 13:31:40.670  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-talent...
+2026-10-06 13:31:41.145  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:41.152  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:41.157  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:41.163  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:41.196  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-marketing...
+2026-10-06 13:31:41.387  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:41.394  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpEN.csv
+2026-10-06 13:31:41.397  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaHelp from meta_helpFR.csv
+2026-10-06 13:31:41.399  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:41.410  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-budget...
+2026-10-06 13:31:42.631  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.auth.db.Permission from auth_permission.csv
+2026-10-06 13:31:42.641  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaMenu from meta_metaMenu.csv
+2026-10-06 13:31:42.657  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.AdvancedExport from budget_advanced_export.csv
+2026-10-06 13:31:42.718  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.AdvancedExportLine from budget_advanced_export_line.csv
+2026-10-06 13:31:42.867  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplate from base_birtTemplate.csv
+2026-10-06 13:31:42.870  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.BirtTemplateParameter from base_birtTemplateParameter.csv
+2026-10-06 13:31:42.875  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplate from base_printingTemplate.csv
+2026-10-06 13:31:42.877  INFO 5319 --- [           main] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PrintingTemplateLine from base_printingTemplateLine.csv
+2026-10-06 13:31:42.881  INFO 5319 --- [           main] com.axelor.meta.loader.ModuleManager     : Installing package axelor-erp...
+2026-10-06 13:31:44.038  INFO 5319 --- [           main] com.axelor.meta.loader.ViewLoader        : Generating computed views...
+2026-10-06 13:31:45.069 ERROR 5319 --- [ol-150-thread-2] c.a.m.loader.ComputedViewXmlProcessor    : View user-preferences-form(id=project-user-preferences-form): extend target not found: //field[@name='change']
+2026-10-06 13:31:45.288 ERROR 5319 --- [ol-150-thread-1] c.a.m.loader.ComputedViewXmlProcessor    : View message-form(id=base-message-form): extend target not found: //field[@name='$statusSelectTag']
+2026-10-06 13:31:45.573 ERROR 5319 --- [           main] com.axelor.meta.loader.ViewLoader        : Found 2 duplicate item(s): [action-prod-process-method-compute-hazard-phrases, invoice-line-form]
+2026-10-06 13:31:45.623  INFO 5319 --- [           main] c.a.app.leader.LeaderElectionWorker      : Leader Election Worker started.
+2026-10-06 13:31:48.583  INFO 5319 --- [           main] c.a.s.bpm.listener.AppEntityListener     : BPM app state changed: active=false
+2026-10-06 13:31:48.645  INFO 5319 --- [           main] c.a.s.b.s.init.ProcessEngineServiceImpl  : Engine removed for tenant: default
+2026-10-06 13:31:48.679  INFO 5319 --- [           main] c.a.s.bpm.listener.AppEntityListener     : BPM app state changed: active=false
+2026-10-06 13:31:48.680  INFO 5319 --- [           main] c.a.s.b.s.init.ProcessEngineServiceImpl  : Engine removed for tenant: default
+2026-10-06 13:31:52.169  INFO 5319 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptRequest.request as request
+2026-10-06 13:31:52.169  INFO 5319 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptFunctions.inject as inject
+2026-10-06 13:31:52.169  INFO 5319 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptFunctions.echo as echo
+2026-10-06 13:31:52.169  INFO 5319 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptFunctions.run as run
+2026-10-06 13:31:52.170  INFO 5319 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript binding: com.axelor.studio.ls.LinkScriptService
+2026-10-06 13:31:52.178  INFO 5319 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript binding: com.axelor.studio.ls.builtin.LinkScriptLogger.get as __log__
+2026-10-06 13:31:52.686  INFO 5319 --- [           main] c.a.s.b.s.init.BpmEngineEventService     : Non-distributed cache, skipping BPM event subscription
+2026-10-06 13:31:53.118  INFO 5319 --- [           main] c.a.a.b.l.BaseServerStartListener        : Loaded Timezones
+2026-10-06 13:31:53.382  INFO 5319 --- [           main] com.axelor.web.AppStartup                : Ready to serve...
+
+Running at http://localhost:8080/axelor-erp
+
+2026-10-06 13:32:03.740  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:03.816  INFO 5319 --- [nio-8080-exec-5] .a.a.b.s.a.SequenceIncrementExecutorImpl : SequenceIncrementExecutor initialized with single-thread executor
+2026-10-06 13:32:03.816  INFO 5319 --- [nio-8080-exec-5] a.a.b.s.a.SequenceReservationServiceImpl : SequenceReservationService initialized with single-thread executor
+2026-10-06 13:32:03.882  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppBase from studio_appBase.csv
+2026-10-06 13:32:04.022  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.FakerApiField from base_fakerApiField.csv
+2026-10-06 13:32:04.204  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.FakerApiFieldParameters from base_fakerApiFieldParameters.csv
+2026-10-06 13:32:04.269  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Icpe from base_icpe.csv
+2026-10-06 13:32:04.279  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.HazardPictogram from base_hazard_pictogram.csv
+2026-10-06 13:32:04.330  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.HazardPhrase from base_hazard_phrase.csv
+2026-10-06 13:32:04.507  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:04.536  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.LeadStatus from crm_leadStatus.csv
+2026-10-06 13:32:04.552  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.OpportunityStatus from crm_opportunityStatus.csv
+2026-10-06 13:32:04.566  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.PartnerStatus from crm_partnerStatus.csv
+2026-10-06 13:32:04.580  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppCrm from studio_appCrm.csv
+2026-10-06 13:32:04.686  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:04.790  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:04.891  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.message.db.Template from base_templates.csv
+2026-10-06 13:32:05.026  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:05.526  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppAccount from studio_appAccount.csv
+2026-10-06 13:32:05.541  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AccountingReportType from account_accountingReportType.csv
+2026-10-06 13:32:05.673  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AnalyticLevel from account_analyticLevel.csv
+2026-10-06 13:32:05.751  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.FixedAssetType from account_fixedAssetType.csv
+2026-10-06 13:32:05.789  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.ImportFECType from account_importFecType.csv
+2026-10-06 13:32:05.808  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AssetDisposalReason from account_assetDisposalReason.csv
+2026-10-06 13:32:05.945  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PartnerLinkType from base_partner_link_type.csv
+2026-10-06 13:32:06.061  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:06.215  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.supplychain.db.MrpLineType from supplychain_mrpLineType.csv
+2026-10-06 13:32:06.365  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:32:06.377  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.supplychain.db.StockMoveInvoicingBlockingReason from supplychain_stock_move_invoicing_blocking_reason.csv
+2026-10-06 13:32:06.383  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppSupplychain from studio_appSupplychain.csv
+2026-10-06 13:32:06.394  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PartnerLinkType from base_partner_link_type.csv
+2026-10-06 13:32:18.529  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:32:18.535  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:32:18.542  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:32:18.548  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:32:18.554  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:18.560  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:32:18.565  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:32:18.572  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:27.248  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:32:27.253  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:32:27.257  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:32:27.261  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:32:27.264  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:27.267  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:32:27.271  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:32:27.274  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:31.513 ERROR 5319 --- [nio-8080-exec-8] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Company denied
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:39)
+	at com.cencomun.core.CoreReadResource.searchMeasured(CoreReadResource.java:52)
+	at com.cencomun.core.CoreReadResource.lambda$search$0(CoreReadResource.java:49)
+	at com.cencomun.core.CoreRequestMetrics.measured(CoreRequestMetrics.java:38)
+	at com.cencomun.core.CoreReadResource.search(CoreReadResource.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:32:31.558 ERROR 5319 --- [nio-8080-exec-9] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Company denied
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:39)
+	at com.cencomun.core.CoreReadResource.invoiceLinks(CoreReadResource.java:80)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:32:42.263  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:32:42.266  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:32:42.270  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:32:42.273  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:32:42.277  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:42.280  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:32:42.283  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:32:42.286  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:43.676  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:32:43.679  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:32:43.683  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:32:43.686  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:32:43.688  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:43.691  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:32:43.694  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:32:43.696  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:47.778 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#1]
+2026-10-06 13:32:55.523  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:32:55.525  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:32:55.528  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:32:55.531  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:32:55.533  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:55.536  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:32:55.538  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:32:55.541  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:56.811  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:32:56.813  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:32:56.816  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:32:56.818  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:32:56.821  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:32:56.823  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:32:56.825  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:32:56.828  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:00.440 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#2]
+2026-10-06 13:33:07.944  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:33:07.947  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:33:07.949  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:33:07.952  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:33:07.954  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:07.957  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:33:07.959  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:33:07.962  WARN 5319 --- [nio-8080-exec-9] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:09.093  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:33:09.095  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:33:09.097  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:33:09.099  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:33:09.101  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:09.104  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:33:09.106  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:33:09.108  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:12.606 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#3]
+2026-10-06 13:33:19.988  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:33:19.990  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:33:19.992  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:33:19.994  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:33:19.996  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:19.998  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:33:20.000  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:33:20.002  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:21.055  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:33:21.057  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:33:21.059  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:33:21.061  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:33:21.064  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:21.065  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:33:21.068  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:33:21.070  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:33:24.447 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#4]
+2026-10-06 13:33:37.423 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:33:37.475 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:33:38.359 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:33:38.400 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:34:14.111  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:34:14.113  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:34:14.115  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:34:14.117  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:34:14.119  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:34:14.121  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:34:14.123  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:34:14.125  WARN 5319 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:34:15.526 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:34:15.724  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:34:15.788  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.bankpayment.db.BankStatementQuery from bankpayment_bankStatementQuery.csv
+2026-10-06 13:34:16.017  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AccountingReportType from account_accountingReportType.csv
+2026-10-06 13:34:16.121  INFO 5319 --- [nio-8080-exec-5] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaTranslation from meta_metaTranslation.csv
+2026-10-06 13:34:42.359 ERROR 5319 --- [io-8080-exec-10] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Core read role required
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:36)
+	at com.cencomun.core.CoreReadResource.searchMeasured(CoreReadResource.java:52)
+	at com.cencomun.core.CoreReadResource.lambda$search$0(CoreReadResource.java:49)
+	at com.cencomun.core.CoreRequestMetrics.measured(CoreRequestMetrics.java:38)
+	at com.cencomun.core.CoreReadResource.search(CoreReadResource.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:34:42.382 ERROR 5319 --- [nio-8080-exec-1] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Company denied
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:39)
+	at com.cencomun.core.CoreReadResource.searchMeasured(CoreReadResource.java:52)
+	at com.cencomun.core.CoreReadResource.lambda$search$0(CoreReadResource.java:49)
+	at com.cencomun.core.CoreRequestMetrics.measured(CoreRequestMetrics.java:38)
+	at com.cencomun.core.CoreReadResource.search(CoreReadResource.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:34:55.307 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:55.552 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:55.786 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:56.010 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:34:56.230 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:34:56.455 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:34:56.677 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:34:56.886 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:34:57.102 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:34:57.318 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:57.536 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:57.750 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:57.967 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:34:58.177 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:34:58.390 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:34:58.632 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:34:58.848 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:34:59.068 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:34:59.275 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:59.497 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:59.709 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:34:59.930 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:35:00.145 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:35:00.356 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:35:00.573 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:35:00.827 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:35:01.078 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:35:02.974 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder]
+2026-10-06 13:35:04.334 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:35:05.735 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:35:07.048 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmPurchase]
+2026-10-06 13:35:08.327 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:35:09.648 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:35:11.079 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOrder]
+2026-10-06 13:35:12.565 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:35:13.862 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:35:15.182 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmCashClose]
+2026-10-06 13:35:16.507 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:35:17.801 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:35:19.122 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankImport]
+2026-10-06 13:35:20.414 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankImport#3]
+2026-10-06 13:35:21.904 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankImport#3]
+2026-10-06 13:35:23.195 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankRow]
+2026-10-06 13:35:24.540 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:35:25.827 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:35:27.139 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatement]
+2026-10-06 13:35:28.586 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:35:29.915 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:35:31.282 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatementLine]
+2026-10-06 13:35:32.543 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:35:33.867 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:35:35.345 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.account.db.Move]
+2026-10-06 13:35:36.679 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:35:37.986 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:35:39.372 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder]
+2026-10-06 13:35:40.641 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:35:42.074 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:35:43.429 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmPurchase]
+2026-10-06 13:35:44.714 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:35:45.996 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:35:47.285 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOrder]
+2026-10-06 13:35:48.734 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:35:50.147 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:35:51.518 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmCashClose]
+2026-10-06 13:35:52.803 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:35:54.080 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:35:55.520 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankImport]
+2026-10-06 13:35:56.865 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankImport#3]
+2026-10-06 13:35:58.160 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankImport#3]
+2026-10-06 13:35:59.521 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankRow]
+2026-10-06 13:36:00.853 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:36:02.336 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:36:03.701 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatement]
+2026-10-06 13:36:05.053 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:36:06.441 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:36:07.681 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatementLine]
+2026-10-06 13:36:09.148 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:36:10.460 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:36:11.802 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.account.db.Move]
+2026-10-06 13:36:13.072 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:36:14.393 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:36:15.839 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder]
+2026-10-06 13:36:17.122 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:36:18.380 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:36:19.684 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmPurchase]
+2026-10-06 13:36:21.008 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:36:22.472 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:36:23.787 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOrder]
+2026-10-06 13:36:25.080 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:36:26.417 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:36:27.687 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmCashClose]
+2026-10-06 13:36:29.125 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:36:30.441 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:36:31.662 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankImport]
+2026-10-06 13:36:32.973 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankImport#3]
+2026-10-06 13:36:34.371 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankImport#3]
+2026-10-06 13:36:35.818 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankRow]
+2026-10-06 13:36:37.116 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:36:38.454 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:36:39.860 ERROR 5319 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatement]
+2026-10-06 13:36:41.154 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:36:42.574 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:36:43.906 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatementLine]
+2026-10-06 13:36:45.274 ERROR 5319 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:36:46.627 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:36:47.961 ERROR 5319 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.account.db.Move]
+2026-10-06 13:36:49.389 ERROR 5319 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:36:50.641 ERROR 5319 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:36:51.661 ERROR 5319 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:36:52.313 ERROR 5319 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:36:52.970 ERROR 5319 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:37:11.813  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:11.815  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:11.817  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:11.819  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:11.821  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:11.823  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:11.825  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:11.827  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:18.099  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:18.101  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:18.103  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:18.105  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:18.107  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:18.109  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:18.110  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:18.112  WARN 5319 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:28.940  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:28.942  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:28.944  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:28.946  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:28.948  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:28.950  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:28.951  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:28.953  WARN 5319 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:36.885  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:36.887  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:36.889  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:36.891  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:36.892  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:36.894  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:36.896  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:36.898  WARN 5319 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:40.260 ERROR 5319 --- [nio-8080-exec-6] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.WebApplicationException: Native missing payment-day rate: Aucune conversion trouvée de la devise 'US Dollar' à la devise 'Bolivar synthetic LAB' à la date du 2026-10-03
+	at com.cencomun.core.NativeFxService.convert(NativeFxService.java:84)
+	at com.cencomun.core.NativeFxService.payment(NativeFxService.java:102)
+	at com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)
+	at com.cencomun.core.NativeFxResource.payment(NativeFxResource.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:37:41.118  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:41.120  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:41.121  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:41.122  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:41.124  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:41.125  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:41.126  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:41.128  WARN 5319 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:42.055  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:42.056  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:42.058  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:42.059  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:42.060  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:42.061  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:42.063  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:42.064  WARN 5319 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:42.932  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:37:42.933  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:37:42.935  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:37:42.936  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:37:42.937  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:42.938  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:37:42.940  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:37:42.941  WARN 5319 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:37:44.660 ERROR 5319 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-manager, Detail=com.cencomun.core.db.CcmAudit#1]
+2026-10-06 13:37:44.739 ERROR 5319 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Error: Semantic audit cannot be deleted by generic CRUD
+2026-10-06 13:43:12.344  INFO 5319 --- [       Thread-1] com.axelor.db.audit.AsyncAuditQueue      : Shutting down AuditQueue...
+2026-10-06 13:43:14.894  INFO 5319 --- [       Thread-1] com.axelor.quartz.JobRunner              : The job scheduler is already stopped.
+2026-10-06 13:43:14.894  INFO 5319 --- [       Thread-1] c.a.app.leader.LeaderElectionWorker      : Stopping Leader Election Worker...
+2026-10-06 13:43:14.895  INFO 5319 --- [       Thread-1] c.a.app.leader.LeaderElectionWorker      : Leader Election Worker stopped.

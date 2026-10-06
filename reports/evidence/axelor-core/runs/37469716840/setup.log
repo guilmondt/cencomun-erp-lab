@@ -1,0 +1,95 @@
+== Cencomun ERP Lab preflight ==
+date_utc=2026-10-06T13:19:19Z
+pwd=/workspace/cencomun-erp-lab
+os=Linux
+arch=x86_64
+
+-- resources --
+cpus=4
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       1.4Gi        10Gi        58Mi       4.0Gi        14Gi
+Swap:          3.0Gi          0B       3.0Gi
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G   60G   85G  42% /workspace/cencomun-erp-lab
+
+-- tools --
+git        git version 2.47.3
+python3    Python 3.13.5
+python     MISSING
+node       MISSING
+npm        MISSING
+pnpm       MISSING
+yarn       MISSING
+java       openjdk 21.0.12.1 2026-08-18
+javac      javac 21.0.12.1
+gradle     MISSING
+docker     MISSING
+podman     MISSING
+
+-- git --
+## lab/axelor-baseline...origin/lab/axelor-baseline
+
+-- pins --
+# Pinned research baselines — 2026-10-04
+
+[frappe]
+framework_family = "16"
+framework_reference = "v16.36.1"
+erpnext_reference = "v16.36.1"
+database = "MariaDB 11.8"
+python_min = "3.14"
+node_min = "24"
+
+[axelor]
+aos_reference = "v9.1.8"
+aop_family = "8.2"
+java = "21"
+database = "PostgreSQL >= 12"
+
+[policy]
+allow_floating_upstream_branches = false
+allow_latest_tags = false
+== repository verification ==
+Repository guardrails passed.
+/workspace/ccm-ci-state/runtime/debs/openjdk-21-jdk-headless_21.0.12.1+1-1~deb13u1_amd64.deb: OK
+/workspace/ccm-ci-state/runtime/debs/openjdk-21-jre-headless_21.0.12.1+1-1~deb13u1_amd64.deb: OK
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)
+OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)
+javac 21.0.12.1
+Cloning into '/workspace/ccm-ci-state/runtime/open-suite-webapp'...
+HEAD is now at 1119727 Release 9.1.8
+Cloning into '/workspace/ccm-ci-state/runtime/open-suite-webapp/modules/axelor-open-suite'...
+From https://github.com/axelor/axelor-open-suite
+ * branch            0c70d561b19fc454eba9fdd41689258846626d75 -> FETCH_HEAD
+Submodule path 'modules/axelor-open-suite': checked out '0c70d561b19fc454eba9fdd41689258846626d75'
+Downloading https://services.gradle.org/distributions/gradle-8.14.3-bin.zip
+.............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%..............100%
+
+Welcome to Gradle 8.14.3!
+
+Here are the highlights of this release:
+ - Java 24 support
+ - GraalVM Native Image toolchain selection
+ - Enhancements to test reporting
+ - Build Authoring improvements
+
+For more details see https://docs.gradle.org/8.14.3/release-notes.html
+
+
+------------------------------------------------------------
+Gradle 8.14.3
+------------------------------------------------------------
+
+Build time:    2025-07-04 13:15:44 UTC
+Revision:      e5ee1df3d88b8ca3a8074787a94f373e3090e1db
+
+Kotlin:        2.0.21
+Groovy:        3.0.24
+Ant:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024
+Launcher JVM:  21.0.12.1 (Debian 21.0.12.1+1-1-deb13u1-Debian)
+Daemon JVM:    /workspace/ccm-ci-state/runtime/jdk/usr/lib/jvm/java-21-openjdk-amd64 (no JDK specified, using current Java home)
+OS:            Linux 6.17.0-1022-azure amd64
+
+== repository verification ==
+Repository guardrails passed.

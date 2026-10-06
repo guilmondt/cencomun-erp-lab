@@ -989,3 +989,52 @@ de ambas fases se conservan completos, sin reinterpretar los tres FAIL.
 Recibo local: reports/evidence/axelor-core/ci22-transport-local-20261006/diagnostic.json.
 No cambia negocio Java, ERP, permisos concedidos, fixtures/oráculo/revisión2,
 pins ni upstream. No se anticipan PASS; conservar los dos FAIL funcionales.
+
+
+## B40 — Diagnóstico admin y transporte de recuperación; nueva aceptación pendiente
+
+CI37469716840@4230b2b terminóFAILURE: primaria30PASS/4FAIL y réplica31PASS/3FAIL;
+criterios2PASS/11FAIL/1BLOCKED y3PASS/10FAIL/1BLOCKED. RepeticiónFAIL por diferencia
+IDEM04. Artefacto completo descargado en1intento;103originales/124.521.710bytes
+cargados con SHA256. Permisos27privados+81CRUDcríticos+3acciones nativas y lectura
+lector PASS por fase; MCP seis rutas+dos replays inversos PASS, payload/resultado
+completo iguales. Dos FAIL funcionales de coste/cancelación permanecen intactos.
+
+Causa admin observada en ambas fases: POST/removeAll llega al repositorio y
+respondeHTTP200/status-1, causeClass=jakarta.ws.rs.ForbiddenException,
+causeString y message contienen exactamente Semantic audit cannot be deleted
+by generic CRUD;91frames Java, sin registros en respuesta y before==after.
+El evaluador4230b2b rechaza causeClass/causeString. AOP8.2.3 ResponseException
+verificado en JAR añade esos campos sólo a admin/técnico. Se conserva ese FAIL
+original; la corrección no reescribe archivos ni veredictos del CI anterior.
+
+La primaria de eventos falla al entregar purchase.approved:PO01:1 conIOException:
+HTTP/1.1 header parser received no bytes. ERP conserva1evento pendiente/attempts2;
+consumidor contiene41receipts/41efectos. La aserción era vacía y el caso no ejecutó
+reinicio/replay. La réplica sí ejecutó los cuatro pasos y42efectos únicos, pero
+no sustituye la primaria. El fallo es real de transporte observado; la causa
+interna del EOF no está demostrada por stderr (el runner anterior no lo guardó).
+El consumidor respondía503 antes de leer el cuerpo y usabaHTTP/1.0 con cierre:
+corregir ese defecto soportado y comprobar su efecto, sin ocultar ni reintentar
+ciegamente una entrega fallida. Repetición sigueFAIL hasta nueva ejecución.
+
+1. Reconocer exclusivamente probe immutable-admin-delete/actoradmin/rutaPOST
+   CcmAudit/removeAll, excepción y mensaje exactos, stack limitado a frames Java
+   sin texto sensible, ID existente y snapshots completos iguales. Rechazar
+   diagnósticos/stacks en el resto; adaptador conserva403 estricto. Ningún grant
+   cambia. Validación local de las dos respuestas originales confirma la causa.
+2. Consumidor de prueba: consumir el cuerpo también ante503, protocoloHTTP/1.1
+   explícito y TCP_NODELAY. ConservaSQLite transaccional, claves/payloads y efecto
+   único. No tocar HttpClient ERP/Cencomun ni los pins/servicios económicos.
+3. Guardarstderr de cada proceso consumidor, estadoHTTP y respuesta nativa antes
+   de aserciones; mensajes específicos y rechazo de excepciones mapeadas a503
+   como supuesto503 causal.93Python PASS; Java21 HttpClient real contra servidor
+   propio:100503+100entregas+100replays,1receipt/200deliveries/1efecto PASS local.
+   Sin DB ERP, credenciales, permisos del sistema o red externa para esa prueba.
+4. Ejecutar una única siguiente CI: administrador y recuperación en ambos
+   runtimes, todas las relaciones/efectos,34grupos/14criterios/benchmark y réplica.
+   Es necesaria porque cambia la ejecución de transporte y una comprobación
+   relevante; no se aprueba sólo desde cálculos, índices o resultados históricos.
+
+Recibo local: reports/evidence/axelor-core/ci23-corrections-local-20261006/diagnostic.json.
+Artefacto y log del CI23 íntegros; pins, fixtures/oráculo y upstream intactos.

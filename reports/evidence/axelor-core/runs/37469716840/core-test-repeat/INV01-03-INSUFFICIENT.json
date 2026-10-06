@@ -1,0 +1,538 @@
+{
+  "case": "INV01-03-INSUFFICIENT",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [
+    {
+      "name": "native-stock-insufficient",
+      "executed": true,
+      "actor": "ccm-operator",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "INV-INSUFFICIENT",
+        "state": "FULFILLED",
+        "request_key": "INV-INSUFFICIENT-physical",
+        "reason": "Synthetic insufficient stock"
+      },
+      "http_status": 422,
+      "expected_http_status": 422,
+      "response": {
+        "error_type": "com.axelor.apps.base.AxelorException",
+        "error": "Les stocks du produit Equipo ficticio Alfa (P001) sont insuffisants pour r\u00e9aliser la livraison",
+        "native_stack": [
+          "com.axelor.apps.stock.service.StockLocationLineServiceImpl.checkIfEnoughStock(StockLocationLineServiceImpl.java:388)",
+          "com.axelor.apps.supplychain.service.StockLocationLineServiceSupplychainImpl.checkIfEnoughStock(StockLocationLineServiceSupplychainImpl.java:73)",
+          "com.cencomun.core.NativeAccess.call(NativeAccess.java:80)",
+          "com.cencomun.core.NativeGateService.deliver(NativeGateService.java:208)",
+          "com.cencomun.core.CoreOrderService.transition(CoreOrderService.java:137)",
+          "com.cencomun.core.CoreOrderResource.invoke(CoreOrderResource.java:28)",
+          "com.cencomun.core.CoreOrderResource.transition(CoreOrderResource.java:23)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)"
+        ]
+      },
+      "before": {
+        "order": {
+          "id": "INV-INSUFFICIENT",
+          "native_id": 9,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "state": "APPROVED",
+          "channel": "STORE",
+          "guide": null,
+          "creator": "ccm-operator",
+          "saleOrder_id": 7,
+          "saleOrder_status": 3,
+          "delivery_id": null,
+          "invoice_id": null
+        },
+        "native_export": {
+          "case": "INV-INSUFFICIENT",
+          "stock": [
+            {
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 60,
+              "avg_price": "30.0000000000",
+              "code": "P001"
+            },
+            {
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 61,
+              "avg_price": "10.0000000000",
+              "code": "P002"
+            },
+            {
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 62,
+              "avg_price": "60.0000000000",
+              "code": "P003"
+            }
+          ],
+          "stock_move_ids": [
+            31
+          ],
+          "fixture_configuration": {
+            "invoice_runtime_configuration": {
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1,
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "code": "C001",
+                "partner_id": 2,
+                "invoicing_address_id": 3
+              },
+              {
+                "code": "C002",
+                "partner_id": 3,
+                "invoicing_address_id": 4
+              },
+              {
+                "code": "CBANK",
+                "partner_id": 4,
+                "invoicing_address_id": 5
+              }
+            ],
+            "company_id": 1,
+            "legal_vat_system": 2
+          },
+          "sale_order_ids": [
+            7
+          ],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_id": 1,
+              "id": 59,
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 147,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 59,
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK"
+                },
+                {
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 148,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 59,
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING"
+                }
+              ]
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [
+          {
+            "hash": "b24a7190c3eeeea37b2000256f5987579268480544df82ea9e5c99faaa24ac91",
+            "domain": "order.transition",
+            "id": 36,
+            "key": "INV-INSUFFICIENT-REVIEWED"
+          },
+          {
+            "hash": "71b3c2ea50bcb13f0342d701eb00e63cbf98948aca64db937730a04383d2c53b",
+            "domain": "order.create",
+            "id": 35,
+            "key": "INV-INSUFFICIENT-create"
+          },
+          {
+            "hash": "7a29a6f4e16959aa109e01f0980ba21d5e84130757ec837842c56310edf36496",
+            "domain": "order.transition",
+            "id": 37,
+            "key": "INV-INSUFFICIENT-APPROVED"
+          }
+        ],
+        "events": [
+          {
+            "kind": "cashea.approved",
+            "event_key": "cashea.approved:INV-INSUFFICIENT:1",
+            "id": 13
+          }
+        ],
+        "audit": [
+          {
+            "id": 106,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T13:56:08.515610",
+            "kind": "order.created",
+            "correlation": "INV-INSUFFICIENT-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB create",
+            "rejected": false
+          },
+          {
+            "id": 107,
+            "actor": "ccm-simulator",
+            "actor_id": 6,
+            "created_on": "2026-10-06T13:56:08.564794",
+            "kind": "order.transition",
+            "correlation": "INV-INSUFFICIENT-REVIEWED",
+            "beforeState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REVIEWED",
+            "rejected": false
+          },
+          {
+            "id": 108,
+            "actor": "ccm-simulator",
+            "actor_id": 6,
+            "created_on": "2026-10-06T13:56:12.682292",
+            "kind": "order.transition",
+            "correlation": "INV-INSUFFICIENT-APPROVED",
+            "beforeState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"APPROVED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":7,\"saleOrder_status\":3,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to APPROVED",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "order": {
+          "id": "INV-INSUFFICIENT",
+          "native_id": 9,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "state": "APPROVED",
+          "channel": "STORE",
+          "guide": null,
+          "creator": "ccm-operator",
+          "saleOrder_id": 7,
+          "saleOrder_status": 3,
+          "delivery_id": null,
+          "invoice_id": null
+        },
+        "native_export": {
+          "case": "INV-INSUFFICIENT",
+          "stock": [
+            {
+              "product_id": 1,
+              "current_qty": "5.0000000000",
+              "id": 60,
+              "avg_price": "30.0000000000",
+              "code": "P001"
+            },
+            {
+              "product_id": 2,
+              "current_qty": "5.0000000000",
+              "id": 61,
+              "avg_price": "10.0000000000",
+              "code": "P002"
+            },
+            {
+              "product_id": 3,
+              "current_qty": "5.0000000000",
+              "id": 62,
+              "avg_price": "60.0000000000",
+              "code": "P003"
+            }
+          ],
+          "stock_move_ids": [
+            31
+          ],
+          "fixture_configuration": {
+            "invoice_runtime_configuration": {
+              "isVentilationSkipped": false,
+              "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "native_app_invoice_id": 1,
+              "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+              "persisted_isVentilationSkipped": false
+            },
+            "legal_partner_id": 1,
+            "accounts": [
+              {
+                "code": "CCM-AR",
+                "vat_system": 1,
+                "id": 1
+              },
+              {
+                "code": "CCM-AP",
+                "vat_system": 1,
+                "id": 2
+              },
+              {
+                "code": "CCM-STOCK",
+                "vat_system": 1,
+                "id": 3
+              },
+              {
+                "code": "CCM-REVENUE",
+                "vat_system": 1,
+                "id": 4
+              },
+              {
+                "code": "CCM-COGS",
+                "vat_system": 1,
+                "id": 5
+              },
+              {
+                "code": "CCM-COMMISSION",
+                "vat_system": 1,
+                "id": 6
+              },
+              {
+                "code": "CCM-SHIPPING",
+                "vat_system": 1,
+                "id": 7
+              },
+              {
+                "code": "CCM-TAX",
+                "vat_system": 1,
+                "id": 8
+              },
+              {
+                "code": "CCM-CASH",
+                "vat_system": 1,
+                "id": 9
+              },
+              {
+                "code": "CCM-BANK",
+                "vat_system": 1,
+                "id": 10
+              },
+              {
+                "code": "CCM-OPENING",
+                "vat_system": 1,
+                "id": 11
+              },
+              {
+                "code": "CCM-CASH-VES",
+                "vat_system": 1,
+                "id": 12
+              }
+            ],
+            "customers": [
+              {
+                "code": "C001",
+                "partner_id": 2,
+                "invoicing_address_id": 3
+              },
+              {
+                "code": "C002",
+                "partner_id": 3,
+                "invoicing_address_id": 4
+              },
+              {
+                "code": "CBANK",
+                "partner_id": 4,
+                "invoicing_address_id": 5
+              }
+            ],
+            "company_id": 1,
+            "legal_vat_system": 2
+          },
+          "sale_order_ids": [
+            7
+          ],
+          "invoices": [],
+          "moves": [],
+          "fixture_opening_moves": [
+            {
+              "company_id": 1,
+              "id": 59,
+              "company_code": "CCM-LAB-001",
+              "status": 3,
+              "lines": [
+                {
+                  "account_id": 3,
+                  "debit": "500.000",
+                  "id": 147,
+                  "credit": "0.000",
+                  "remaining": "0",
+                  "parent_move_id": 59,
+                  "account_company_id": 1,
+                  "account_code": "CCM-STOCK"
+                },
+                {
+                  "account_id": 11,
+                  "debit": "0.000",
+                  "id": 148,
+                  "credit": "500.000",
+                  "remaining": "0",
+                  "parent_move_id": 59,
+                  "account_company_id": 1,
+                  "account_code": "CCM-OPENING"
+                }
+              ]
+            }
+          ],
+          "deliveries": [],
+          "company_ids": [
+            1
+          ]
+        },
+        "keys": [
+          {
+            "hash": "b24a7190c3eeeea37b2000256f5987579268480544df82ea9e5c99faaa24ac91",
+            "domain": "order.transition",
+            "id": 36,
+            "key": "INV-INSUFFICIENT-REVIEWED"
+          },
+          {
+            "hash": "71b3c2ea50bcb13f0342d701eb00e63cbf98948aca64db937730a04383d2c53b",
+            "domain": "order.create",
+            "id": 35,
+            "key": "INV-INSUFFICIENT-create"
+          },
+          {
+            "hash": "7a29a6f4e16959aa109e01f0980ba21d5e84130757ec837842c56310edf36496",
+            "domain": "order.transition",
+            "id": 37,
+            "key": "INV-INSUFFICIENT-APPROVED"
+          }
+        ],
+        "events": [
+          {
+            "kind": "cashea.approved",
+            "event_key": "cashea.approved:INV-INSUFFICIENT:1",
+            "id": 13
+          }
+        ],
+        "audit": [
+          {
+            "id": 106,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T13:56:08.515610",
+            "kind": "order.created",
+            "correlation": "INV-INSUFFICIENT-create",
+            "beforeState": "{\"exists\":false}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB create",
+            "rejected": false
+          },
+          {
+            "id": 107,
+            "actor": "ccm-simulator",
+            "actor_id": 6,
+            "created_on": "2026-10-06T13:56:08.564794",
+            "kind": "order.transition",
+            "correlation": "INV-INSUFFICIENT-REVIEWED",
+            "beforeState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"NEW\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to REVIEWED",
+            "rejected": false
+          },
+          {
+            "id": 108,
+            "actor": "ccm-simulator",
+            "actor_id": 6,
+            "created_on": "2026-10-06T13:56:12.682292",
+            "kind": "order.transition",
+            "correlation": "INV-INSUFFICIENT-APPROVED",
+            "beforeState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"REVIEWED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":null,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"APPROVED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":7,\"saleOrder_status\":3,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Synthetic LAB transition to APPROVED",
+            "rejected": false
+          },
+          {
+            "id": 109,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T13:56:12.885824",
+            "kind": "order.denied",
+            "correlation": "INV-INSUFFICIENT-physical",
+            "beforeState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"APPROVED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":7,\"saleOrder_status\":3,\"delivery_id\":null,\"invoice_id\":null}",
+            "afterState": "{\"id\":\"INV-INSUFFICIENT\",\"native_id\":9,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"state\":\"APPROVED\",\"channel\":\"STORE\",\"guide\":null,\"creator\":\"ccm-operator\",\"saleOrder_id\":7,\"saleOrder_status\":3,\"delivery_id\":null,\"invoice_id\":null}",
+            "reason": "Les stocks du produit Equipo ficticio Alfa (P001) sont insuffisants pour r\u00e9aliser la livraison",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS"
+    }
+  ],
+  "complete": true,
+  "status": "PASS",
+  "seconds": 4.919
+}

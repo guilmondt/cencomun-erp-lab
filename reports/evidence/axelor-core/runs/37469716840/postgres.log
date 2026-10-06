@@ -1,0 +1,727 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2026-10-06 13:18:32.206 UTC [54] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-10-06 13:18:32.206 UTC [54] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-06 13:18:32.209 UTC [57] LOG:  database system was shut down at 2026-10-06 13:18:32 UTC
+2026-10-06 13:18:32.212 UTC [54] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+waiting for server to shut down...2026-10-06 13:18:32.390 UTC [54] LOG:  received fast shutdown request
+.2026-10-06 13:18:32.390 UTC [54] LOG:  aborting any active transactions
+2026-10-06 13:18:32.393 UTC [54] LOG:  background worker "logical replication launcher" (PID 60) exited with exit code 1
+2026-10-06 13:18:32.393 UTC [55] LOG:  shutting down
+2026-10-06 13:18:32.394 UTC [55] LOG:  checkpoint starting: shutdown immediate
+2026-10-06 13:18:32.407 UTC [55] LOG:  checkpoint complete: wrote 922 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.011 s, sync=0.002 s, total=0.014 s; sync files=301, longest=0.001 s, average=0.001 s; distance=4255 kB, estimate=4255 kB; lsn=0/1912110, redo lsn=0/1912110
+2026-10-06 13:18:32.414 UTC [54] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2026-10-06 13:18:32.513 UTC [1] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-10-06 13:18:32.513 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-06 13:18:32.513 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-06 13:18:32.514 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-06 13:18:32.517 UTC [70] LOG:  database system was shut down at 2026-10-06 13:18:32 UTC
+2026-10-06 13:18:32.521 UTC [1] LOG:  database system is ready to accept connections
+2026-10-06 13:23:32.615 UTC [68] LOG:  checkpoint starting: time
+2026-10-06 13:23:36.834 UTC [68] LOG:  checkpoint complete: wrote 45 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.209 s, sync=0.002 s, total=4.219 s; sync files=12, longest=0.002 s, average=0.001 s; distance=261 kB, estimate=261 kB; lsn=0/1953568, redo lsn=0/1953530
+2026-10-06 13:29:08.253 UTC [124] ERROR:  function unaccent(unknown) does not exist at character 8
+2026-10-06 13:29:08.253 UTC [124] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2026-10-06 13:29:08.253 UTC [124] STATEMENT:  SELECT unaccent('text')
+2026-10-06 13:29:44.584 UTC [117] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:29:44.584 UTC [117] STATEMENT:  create index account_accounting_report_analytic_config_line_analytic_account_IDX on account_accounting_report_analytic_config_line (analytic_account)
+2026-10-06 13:29:45.482 UTC [117] ERROR:  relation "uk_6bqbunw5kht0kofyuc4l1aydv" already exists
+2026-10-06 13:29:45.482 UTC [117] STATEMENT:  alter table if exists bankpayment_bank_statement_line_afb120 add constraint UK_6bqbunw5kht0kofyuc4l1aydv unique (import_id)
+2026-10-06 13:29:45.483 UTC [117] ERROR:  relation "uk_6bqbunw5kht0kofyuc4l1aydv" already exists
+2026-10-06 13:29:45.483 UTC [117] STATEMENT:  alter table if exists bankpayment_bank_statement_line_camt53 add constraint UK_6bqbunw5kht0kofyuc4l1aydv unique (import_id)
+2026-10-06 13:33:32.924 UTC [68] LOG:  checkpoint starting: time
+2026-10-06 13:38:02.089 UTC [68] LOG:  checkpoint complete: wrote 10006 buffers (61.1%); 0 WAL file(s) added, 0 removed, 6 recycled; write=269.091 s, sync=0.073 s, total=269.166 s; sync files=9147, longest=0.001 s, average=0.001 s; distance=100117 kB, estimate=100117 kB; lsn=0/8A61DB8, redo lsn=0/7B18B88
+2026-10-06 13:38:32.122 UTC [68] LOG:  checkpoint starting: time
+2026-10-06 13:41:50.380 UTC [68] LOG:  checkpoint complete: wrote 1806 buffers (11.0%); 0 WAL file(s) added, 0 removed, 1 recycled; write=198.247 s, sync=0.010 s, total=198.259 s; sync files=802, longest=0.001 s, average=0.001 s; distance=19556 kB, estimate=92061 kB; lsn=0/EA900E8, redo lsn=0/8E31E60
+2026-10-06 13:43:16.562 UTC [1] LOG:  received fast shutdown request
+2026-10-06 13:43:16.562 UTC [1] LOG:  aborting any active transactions
+2026-10-06 13:43:16.566 UTC [1] LOG:  background worker "logical replication launcher" (PID 73) exited with exit code 1
+2026-10-06 13:43:16.568 UTC [68] LOG:  shutting down
+2026-10-06 13:43:16.568 UTC [68] LOG:  checkpoint starting: shutdown immediate
+2026-10-06 13:43:16.589 UTC [68] LOG:  checkpoint complete: wrote 2739 buffers (16.7%); 0 WAL file(s) added, 0 removed, 7 recycled; write=0.018 s, sync=0.001 s, total=0.021 s; sync files=176, longest=0.001 s, average=0.001 s; distance=100685 kB, estimate=100685 kB; lsn=0/F085418, redo lsn=0/F085418
+2026-10-06 13:43:16.622 UTC [1] LOG:  database system is shut down
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+2026-10-06 13:43:16.886 UTC [1] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-10-06 13:43:16.886 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-06 13:43:16.886 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-06 13:43:16.887 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-06 13:43:16.895 UTC [35] LOG:  database system was shut down at 2026-10-06 13:43:16 UTC
+2026-10-06 13:43:16.903 UTC [1] LOG:  database system is ready to accept connections
+2026-10-06 13:48:02.675 UTC [63] ERROR:  relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 13:48:02.675 UTC [63] STATEMENT:  create table account_account_config_move_on_temp_closure_authorized_role_list (account_account_config bigint not null, move_on_temp_closure_authorized_role_list bigint not null, primary key (account_account_config, move_on_temp_closure_authorized_role_list))
+2026-10-06 13:48:02.705 UTC [63] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:48:02.705 UTC [63] STATEMENT:  create table account_accounting_report_analytic_config_line_analytic_account_set (account_accounting_report_analytic_config_line bigint not null, analytic_account_set bigint not null, primary key (account_accounting_report_analytic_config_line, analytic_account_set))
+2026-10-06 13:48:02.708 UTC [63] ERROR:  relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 13:48:02.708 UTC [63] STATEMENT:  create table account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list (account_analytic_move_line_query bigint not null, reverse_analytic_move_line_query_parameter_list bigint not null)
+2026-10-06 13:48:02.734 UTC [63] ERROR:  relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 13:48:02.734 UTC [63] STATEMENT:  create table contract_contract_template_additional_benefit_contract_line_list (contract_contract_template bigint not null, additional_benefit_contract_line_list bigint not null)
+2026-10-06 13:48:02.751 UTC [63] ERROR:  relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 13:48:02.751 UTC [63] STATEMENT:  create table production_prod_process_line_generated_purchase_order_product_set (production_prod_process_line bigint not null, generated_purchase_order_product_set bigint not null, primary key (production_prod_process_line, generated_purchase_order_product_set))
+2026-10-06 13:48:02.764 UTC [63] ERROR:  relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 13:48:02.764 UTC [63] STATEMENT:  create table stock_tracking_number_configuration_profile_profile_field_formula_set (stock_tracking_number_configuration_profile bigint not null, profile_field_formula_set bigint not null, primary key (stock_tracking_number_configuration_profile, profile_field_formula_set))
+2026-10-06 13:48:02.768 UTC [63] ERROR:  relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 13:48:02.768 UTC [63] STATEMENT:  create table studio_app_mobile_settings_customer_delivery_line_addition_role_set (studio_app_mobile_settings bigint not null, customer_delivery_line_addition_role_set bigint not null, primary key (studio_app_mobile_settings, customer_delivery_line_addition_role_set))
+2026-10-06 13:48:02.768 UTC [63] ERROR:  relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 13:48:02.768 UTC [63] STATEMENT:  create table studio_app_mobile_settings_supplier_arrival_line_addition_role_set (studio_app_mobile_settings bigint not null, supplier_arrival_line_addition_role_set bigint not null, primary key (studio_app_mobile_settings, supplier_arrival_line_addition_role_set))
+2026-10-06 13:48:02.769 UTC [63] ERROR:  relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 13:48:02.769 UTC [63] STATEMENT:  create table studio_app_mobile_settings_verify_customer_delivery_line_role_set (studio_app_mobile_settings bigint not null, verify_customer_delivery_line_role_set bigint not null, primary key (studio_app_mobile_settings, verify_customer_delivery_line_role_set))
+2026-10-06 13:48:02.769 UTC [63] ERROR:  relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 13:48:02.769 UTC [63] STATEMENT:  create table studio_app_mobile_settings_verify_supplier_arrival_line_role_set (studio_app_mobile_settings bigint not null, verify_supplier_arrival_line_role_set bigint not null, primary key (studio_app_mobile_settings, verify_supplier_arrival_line_role_set))
+2026-10-06 13:48:02.844 UTC [63] ERROR:  relation "account_account_config_cash_position_variation_debit_account_id" already exists
+2026-10-06 13:48:02.844 UTC [63] STATEMENT:  create index account_account_config_cash_position_variation_debit_account_IDX on account_account_config (cash_position_variation_debit_account)
+2026-10-06 13:48:02.845 UTC [63] ERROR:  relation "account_account_config_cash_position_variation_credit_account_i" already exists
+2026-10-06 13:48:02.845 UTC [63] STATEMENT:  create index account_account_config_cash_position_variation_credit_account_IDX on account_account_config (cash_position_variation_credit_account)
+2026-10-06 13:48:02.845 UTC [63] ERROR:  relation "account_account_config_purchase_invoices_details_print_template" already exists
+2026-10-06 13:48:02.845 UTC [63] STATEMENT:  create index account_account_config_purchase_invoices_details_print_template_IDX on account_account_config (purchase_invoices_details_print_template)
+2026-10-06 13:48:02.849 UTC [63] ERROR:  relation "account_account_management_purch_fixed_assets_tax_vat_system1ac" already exists
+2026-10-06 13:48:02.849 UTC [63] STATEMENT:  create index account_account_management_purch_fixed_assets_tax_vat_system1account_IDX on account_account_management (purch_fixed_assets_tax_vat_system1account)
+2026-10-06 13:48:02.850 UTC [63] ERROR:  relation "account_account_management_purch_fixed_assets_tax_vat_system2ac" already exists
+2026-10-06 13:48:02.850 UTC [63] STATEMENT:  create index account_account_management_purch_fixed_assets_tax_vat_system2account_IDX on account_account_management (purch_fixed_assets_tax_vat_system2account)
+2026-10-06 13:48:02.857 UTC [63] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:48:02.857 UTC [63] STATEMENT:  create index account_accounting_report_analytic_config_line_analytic_account_IDX on account_accounting_report_analytic_config_line (analytic_account)
+2026-10-06 13:48:02.857 UTC [63] ERROR:  relation "account_accounting_report_analytic_config_line_accounting_repor" already exists
+2026-10-06 13:48:02.857 UTC [63] STATEMENT:  create index account_accounting_report_analytic_config_line_accounting_report_IDX on account_accounting_report_analytic_config_line (accounting_report)
+2026-10-06 13:48:02.859 UTC [63] ERROR:  relation "account_accounting_report_move_line_payment_move_line_distribut" already exists
+2026-10-06 13:48:02.859 UTC [63] STATEMENT:  create index account_accounting_report_move_line_payment_move_line_distribution_IDX on account_accounting_report_move_line (payment_move_line_distribution)
+2026-10-06 13:48:02.861 UTC [63] ERROR:  relation "account_accounting_report_value_accounting_report_config_line_i" already exists
+2026-10-06 13:48:02.861 UTC [63] STATEMENT:  create index account_accounting_report_value_accounting_report_config_line_IDX on account_accounting_report_value (accounting_report_config_line)
+2026-10-06 13:48:02.861 UTC [63] ERROR:  relation "account_accounting_report_value_accounting_report_config_line_c" already exists
+2026-10-06 13:48:02.861 UTC [63] STATEMENT:  create index account_accounting_report_value_accounting_report_config_line_column_IDX on account_accounting_report_value (accounting_report_config_line_column)
+2026-10-06 13:48:02.862 UTC [63] ERROR:  relation "account_accounting_situation_invoice_message_template_on_valida" already exists
+2026-10-06 13:48:02.862 UTC [63] STATEMENT:  create index account_accounting_situation_invoice_message_template_on_validate_IDX on account_accounting_situation (invoice_message_template_on_validate)
+2026-10-06 13:48:02.869 UTC [63] ERROR:  relation "account_analytic_move_line_query_parameter_analytic_move_line_s" already exists
+2026-10-06 13:48:02.869 UTC [63] STATEMENT:  create index account_analytic_move_line_query_parameter_analytic_move_line_search_IDX on account_analytic_move_line_query_parameter (analytic_move_line_search)
+2026-10-06 13:48:02.887 UTC [63] ERROR:  relation "account_fixed_asset_category_appro_extraord_depreciation_expens" already exists
+2026-10-06 13:48:02.887 UTC [63] STATEMENT:  create index account_fixed_asset_category_appro_extraord_depreciation_expense_account_IDX on account_fixed_asset_category (appro_extraord_depreciation_expense_account)
+2026-10-06 13:48:02.888 UTC [63] ERROR:  relation "account_fixed_asset_category_expense_depreciation_derogatory_ac" already exists
+2026-10-06 13:48:02.888 UTC [63] STATEMENT:  create index account_fixed_asset_category_expense_depreciation_derogatory_account_IDX on account_fixed_asset_category (expense_depreciation_derogatory_account)
+2026-10-06 13:48:02.888 UTC [63] ERROR:  relation "account_fixed_asset_category_capital_depreciation_derogatory_ac" already exists
+2026-10-06 13:48:02.888 UTC [63] STATEMENT:  create index account_fixed_asset_category_capital_depreciation_derogatory_account_IDX on account_fixed_asset_category (capital_depreciation_derogatory_account)
+2026-10-06 13:48:02.888 UTC [63] ERROR:  relation "account_fixed_asset_category_income_depreciation_derogatory_acc" already exists
+2026-10-06 13:48:02.888 UTC [63] STATEMENT:  create index account_fixed_asset_category_income_depreciation_derogatory_account_IDX on account_fixed_asset_category (income_depreciation_derogatory_account)
+2026-10-06 13:48:02.889 UTC [63] ERROR:  relation "account_fixed_asset_category_wb_provision_fixed_asset_account_i" already exists
+2026-10-06 13:48:02.889 UTC [63] STATEMENT:  create index account_fixed_asset_category_wb_provision_fixed_asset_account_IDX on account_fixed_asset_category (wb_provision_fixed_asset_account)
+2026-10-06 13:48:02.889 UTC [63] ERROR:  relation "account_fixed_asset_category_app_provision_fixed_asset_account_" already exists
+2026-10-06 13:48:02.889 UTC [63] STATEMENT:  create index account_fixed_asset_category_app_provision_fixed_asset_account_IDX on account_fixed_asset_category (app_provision_fixed_asset_account)
+2026-10-06 13:48:02.890 UTC [63] ERROR:  relation "account_fixed_asset_derogatory_line_derogatory_depreciation_mov" already exists
+2026-10-06 13:48:02.890 UTC [63] STATEMENT:  create index account_fixed_asset_derogatory_line_derogatory_depreciation_move_IDX on account_fixed_asset_derogatory_line (derogatory_depreciation_move)
+2026-10-06 13:48:02.924 UTC [63] ERROR:  relation "account_substitute_pfp_validator_substitute_pfp_validator_user_" already exists
+2026-10-06 13:48:02.924 UTC [63] STATEMENT:  create index account_substitute_pfp_validator_substitute_pfp_validator_user_IDX on account_substitute_pfp_validator (substitute_pfp_validator_user)
+2026-10-06 13:48:02.937 UTC [63] ERROR:  relation "bankpayment_bank_order_file_format_country_bank_order_file_form" already exists
+2026-10-06 13:48:02.937 UTC [63] STATEMENT:  create index bankpayment_bank_order_file_format_country_bank_order_file_format_IDX on bankpayment_bank_order_file_format_country (bank_order_file_format)
+2026-10-06 13:48:02.939 UTC [63] ERROR:  relation "bankpayment_bank_payment_config_internal_bank_to_bank_account_i" already exists
+2026-10-06 13:48:02.939 UTC [63] STATEMENT:  create index bankpayment_bank_payment_config_internal_bank_to_bank_account_IDX on bankpayment_bank_payment_config (internal_bank_to_bank_account)
+2026-10-06 13:48:02.940 UTC [63] ERROR:  relation "bankpayment_bank_payment_config_external_bank_to_bank_account_i" already exists
+2026-10-06 13:48:02.940 UTC [63] STATEMENT:  create index bankpayment_bank_payment_config_external_bank_to_bank_account_IDX on bankpayment_bank_payment_config (external_bank_to_bank_account)
+2026-10-06 13:48:02.940 UTC [63] ERROR:  relation "bankpayment_bank_payment_config_bank_statement_lines_print_temp" already exists
+2026-10-06 13:48:02.940 UTC [63] STATEMENT:  create index bankpayment_bank_payment_config_bank_statement_lines_print_template_IDX on bankpayment_bank_payment_config (bank_statement_lines_print_template)
+2026-10-06 13:48:02.941 UTC [63] ERROR:  relation "bankpayment_bank_payment_config_bank_reconciliation_statement_p" already exists
+2026-10-06 13:48:02.941 UTC [63] STATEMENT:  create index bankpayment_bank_payment_config_bank_reconciliation_statement_print_template_IDX on bankpayment_bank_payment_config (bank_reconciliation_statement_print_template)
+2026-10-06 13:48:02.943 UTC [63] ERROR:  relation "bankpayment_bank_reconciliation_line_analytic_distribution_temp" already exists
+2026-10-06 13:48:02.943 UTC [63] STATEMENT:  create index bankpayment_bank_reconciliation_line_analytic_distribution_template_IDX on bankpayment_bank_reconciliation_line (analytic_distribution_template)
+2026-10-06 13:48:02.946 UTC [63] ERROR:  relation "bankpayment_bank_statement_rule_partner_bank_statement_query_id" already exists
+2026-10-06 13:48:02.946 UTC [63] STATEMENT:  create index bankpayment_bank_statement_rule_partner_bank_statement_query_IDX on bankpayment_bank_statement_rule (partner_bank_statement_query)
+2026-10-06 13:48:02.947 UTC [63] ERROR:  relation "bankpayment_bank_statement_rule_move_line_bank_statement_query_" already exists
+2026-10-06 13:48:02.947 UTC [63] STATEMENT:  create index bankpayment_bank_statement_rule_move_line_bank_statement_query_IDX on bankpayment_bank_statement_rule (move_line_bank_statement_query)
+2026-10-06 13:48:02.947 UTC [63] ERROR:  relation "bankpayment_bank_statement_rule_analytic_distribution_template_" already exists
+2026-10-06 13:48:02.947 UTC [63] STATEMENT:  create index bankpayment_bank_statement_rule_analytic_distribution_template_IDX on bankpayment_bank_statement_rule (analytic_distribution_template)
+2026-10-06 13:48:02.978 UTC [63] ERROR:  relation "base_import_export_translation_history_import_export_translatio" already exists
+2026-10-06 13:48:02.978 UTC [63] STATEMENT:  create index base_import_export_translation_history_import_export_translation_IDX on base_import_export_translation_history (import_export_translation)
+2026-10-06 13:48:03.098 UTC [63] ERROR:  relation "intervention_intervention_config_customer_request_creation_mess" already exists
+2026-10-06 13:48:03.098 UTC [63] STATEMENT:  create index intervention_intervention_config_customer_request_creation_message_template_IDX on intervention_intervention_config (customer_request_creation_message_template)
+2026-10-06 13:48:03.098 UTC [63] ERROR:  relation "intervention_intervention_config_intervention_planification_mes" already exists
+2026-10-06 13:48:03.098 UTC [63] STATEMENT:  create index intervention_intervention_config_intervention_planification_message_template_IDX on intervention_intervention_config (intervention_planification_message_template)
+2026-10-06 13:48:03.099 UTC [63] ERROR:  relation "intervention_intervention_config_intervention_re_planification_" already exists
+2026-10-06 13:48:03.099 UTC [63] STATEMENT:  create index intervention_intervention_config_intervention_re_planification_message_template_IDX on intervention_intervention_config (intervention_re_planification_message_template)
+2026-10-06 13:48:03.099 UTC [63] ERROR:  relation "intervention_intervention_config_intervention_validation_messag" already exists
+2026-10-06 13:48:03.099 UTC [63] STATEMENT:  create index intervention_intervention_config_intervention_validation_message_template_IDX on intervention_intervention_config (intervention_validation_message_template)
+2026-10-06 13:48:03.101 UTC [63] ERROR:  relation "intervention_intervention_question_conditional_intervention_que" already exists
+2026-10-06 13:48:03.101 UTC [63] STATEMENT:  create index intervention_intervention_question_conditional_intervention_question_IDX on intervention_intervention_question (conditional_intervention_question)
+2026-10-06 13:48:03.102 UTC [63] ERROR:  relation "intervention_intervention_type_advanced_startup_monitoring_rang" already exists
+2026-10-06 13:48:03.102 UTC [63] STATEMENT:  create index intervention_intervention_type_advanced_startup_monitoring_range_IDX on intervention_intervention_type (advanced_startup_monitoring_range)
+2026-10-06 13:48:03.130 UTC [63] ERROR:  relation "production_bill_of_material_import_main_bill_of_material_genera" already exists
+2026-10-06 13:48:03.130 UTC [63] STATEMENT:  create index production_bill_of_material_import_main_bill_of_material_generated_IDX on production_bill_of_material_import (main_bill_of_material_generated)
+2026-10-06 13:48:03.131 UTC [63] ERROR:  relation "production_bill_of_material_import_line_bill_of_material_import" already exists
+2026-10-06 13:48:03.131 UTC [63] STATEMENT:  create index production_bill_of_material_import_line_bill_of_material_import_IDX on production_bill_of_material_import_line (bill_of_material_import)
+2026-10-06 13:48:03.131 UTC [63] ERROR:  relation "production_bill_of_material_import_line_parent_bomimport_line_i" already exists
+2026-10-06 13:48:03.131 UTC [63] STATEMENT:  create index production_bill_of_material_import_line_parent_bomimport_line_IDX on production_bill_of_material_import_line (parent_bomimport_line)
+2026-10-06 13:48:03.134 UTC [63] ERROR:  relation "production_configurator_prod_process_produced_product_stock_loc" already exists
+2026-10-06 13:48:03.134 UTC [63] STATEMENT:  create index production_configurator_prod_process_produced_product_stock_location_IDX on production_configurator_prod_process (produced_product_stock_location)
+2026-10-06 13:48:03.134 UTC [63] ERROR:  relation "production_configurator_prod_process_workshop_stock_location_id" already exists
+2026-10-06 13:48:03.134 UTC [63] STATEMENT:  create index production_configurator_prod_process_workshop_stock_location_IDX on production_configurator_prod_process (workshop_stock_location)
+2026-10-06 13:48:03.135 UTC [63] ERROR:  relation "production_configurator_prod_process_line_configurator_prod_pro" already exists
+2026-10-06 13:48:03.135 UTC [63] STATEMENT:  create index production_configurator_prod_process_line_configurator_prod_process_IDX on production_configurator_prod_process_line (configurator_prod_process)
+2026-10-06 13:48:03.136 UTC [63] ERROR:  relation "production_configurator_prod_product_configurator_prod_process_" already exists
+2026-10-06 13:48:03.136 UTC [63] STATEMENT:  create index production_configurator_prod_product_configurator_prod_process_line_IDX on production_configurator_prod_product (configurator_prod_process_line)
+2026-10-06 13:48:03.143 UTC [63] ERROR:  relation "production_prod_process_residual_products_default_stock_locatio" already exists
+2026-10-06 13:48:03.143 UTC [63] STATEMENT:  create index production_prod_process_residual_products_default_stock_location_IDX on production_prod_process (residual_products_default_stock_location)
+2026-10-06 13:48:03.146 UTC [63] ERROR:  relation "production_production_config_part_finish_mo_message_template_id" already exists
+2026-10-06 13:48:03.146 UTC [63] STATEMENT:  create index production_production_config_part_finish_mo_message_template_IDX on production_production_config (part_finish_mo_message_template)
+2026-10-06 13:48:03.147 UTC [63] ERROR:  relation "production_production_config_maintenance_bill_of_material_print" already exists
+2026-10-06 13:48:03.147 UTC [63] STATEMENT:  create index production_production_config_maintenance_bill_of_material_print_template_IDX on production_production_config (maintenance_bill_of_material_print_template)
+2026-10-06 13:48:03.147 UTC [63] ERROR:  relation "production_production_config_maintenance_manuf_order_print_temp" already exists
+2026-10-06 13:48:03.147 UTC [63] STATEMENT:  create index production_production_config_maintenance_manuf_order_print_template_IDX on production_production_config (maintenance_manuf_order_print_template)
+2026-10-06 13:48:03.147 UTC [63] ERROR:  relation "production_production_config_maintenance_prod_process_print_tem" already exists
+2026-10-06 13:48:03.147 UTC [63] STATEMENT:  create index production_production_config_maintenance_prod_process_print_template_IDX on production_production_config (maintenance_prod_process_print_template)
+2026-10-06 13:48:03.151 UTC [63] ERROR:  relation "production_workshop_sequence_config_line_workshop_stock_locatio" already exists
+2026-10-06 13:48:03.151 UTC [63] STATEMENT:  create index production_workshop_sequence_config_line_workshop_stock_location_IDX on production_workshop_sequence_config_line (workshop_stock_location)
+2026-10-06 13:48:03.154 UTC [63] ERROR:  relation "project_project_planning_time_display_planned_time_restricted_i" already exists
+2026-10-06 13:48:03.154 UTC [63] STATEMENT:  create index project_project_planning_time_display_planned_time_restricted_IDX on project_project_planning_time (display_planned_time_restricted)
+2026-10-06 13:48:03.160 UTC [63] ERROR:  relation "project_task_status_progress_by_category_project_task_category_" already exists
+2026-10-06 13:48:03.160 UTC [63] STATEMENT:  create index project_task_status_progress_by_category_project_task_category_IDX on project_task_status_progress_by_category (project_task_category)
+2026-10-06 13:48:03.183 UTC [63] ERROR:  relation "quality_quality_config_qi_action_distribution_print_template_id" already exists
+2026-10-06 13:48:03.183 UTC [63] STATEMENT:  create index quality_quality_config_qi_action_distribution_print_template_IDX on quality_quality_config (qi_action_distribution_print_template)
+2026-10-06 13:48:03.183 UTC [63] ERROR:  relation "quality_quality_config_qi_decision_distribution_print_template_" already exists
+2026-10-06 13:48:03.183 UTC [63] STATEMENT:  create index quality_quality_config_qi_decision_distribution_print_template_IDX on quality_quality_config (qi_decision_distribution_print_template)
+2026-10-06 13:48:03.199 UTC [63] ERROR:  relation "stock_default_stock_location_by_site_receipt_default_stock_loca" already exists
+2026-10-06 13:48:03.199 UTC [63] STATEMENT:  create index stock_default_stock_location_by_site_receipt_default_stock_location_IDX on stock_default_stock_location_by_site (receipt_default_stock_location)
+2026-10-06 13:48:03.199 UTC [63] ERROR:  relation "stock_default_stock_location_by_site_pickup_default_stock_locat" already exists
+2026-10-06 13:48:03.199 UTC [63] STATEMENT:  create index stock_default_stock_location_by_site_pickup_default_stock_location_IDX on stock_default_stock_location_by_site (pickup_default_stock_location)
+2026-10-06 13:48:03.204 UTC [63] ERROR:  relation "stock_partner_stock_settings_real_stock_move_message_template_i" already exists
+2026-10-06 13:48:03.204 UTC [63] STATEMENT:  create index stock_partner_stock_settings_real_stock_move_message_template_IDX on stock_partner_stock_settings (real_stock_move_message_template)
+2026-10-06 13:48:03.204 UTC [63] ERROR:  relation "stock_partner_stock_settings_planned_stock_move_message_templat" already exists
+2026-10-06 13:48:03.204 UTC [63] STATEMENT:  create index stock_partner_stock_settings_planned_stock_move_message_template_IDX on stock_partner_stock_settings (planned_stock_move_message_template)
+2026-10-06 13:48:03.204 UTC [63] ERROR:  relation "stock_partner_stock_settings_default_external_stock_location_id" already exists
+2026-10-06 13:48:03.204 UTC [63] STATEMENT:  create index stock_partner_stock_settings_default_external_stock_location_IDX on stock_partner_stock_settings (default_external_stock_location)
+2026-10-06 13:48:03.207 UTC [63] ERROR:  relation "stock_stock_config_supplier_arrival_cancellation_message_templa" already exists
+2026-10-06 13:48:03.207 UTC [63] STATEMENT:  create index stock_stock_config_supplier_arrival_cancellation_message_template_IDX on stock_stock_config (supplier_arrival_cancellation_message_template)
+2026-10-06 13:48:03.215 UTC [63] ERROR:  relation "stock_tracking_number_configuration_tracking_number_configurati" already exists
+2026-10-06 13:48:03.215 UTC [63] STATEMENT:  create index stock_tracking_number_configuration_tracking_number_configuration_profile_IDX on stock_tracking_number_configuration (tracking_number_configuration_profile)
+2026-10-06 13:48:03.216 UTC [63] ERROR:  relation "stock_tracking_number_configuration_profile_field_formula_meta_" already exists
+2026-10-06 13:48:03.216 UTC [63] STATEMENT:  create index stock_tracking_number_configuration_profile_field_formula_meta_field_IDX on stock_tracking_number_configuration_profile_field_formula (meta_field)
+2026-10-06 13:48:03.221 UTC [63] ERROR:  relation "studio_app_intervention_default_type_for_interventions_from_con" already exists
+2026-10-06 13:48:03.221 UTC [63] STATEMENT:  create index studio_app_intervention_default_type_for_interventions_from_contracts_IDX on studio_app_intervention (default_type_for_interventions_from_contracts)
+2026-10-06 13:48:03.222 UTC [63] ERROR:  relation "studio_app_intervention_default_request_source_batch_contract_i" already exists
+2026-10-06 13:48:03.222 UTC [63] STATEMENT:  create index studio_app_intervention_default_request_source_batch_contract_IDX on studio_app_intervention (default_request_source_batch_contract)
+2026-10-06 13:48:03.222 UTC [63] ERROR:  relation "studio_app_intervention_default_request_subject_batch_contract_" already exists
+2026-10-06 13:48:03.222 UTC [63] STATEMENT:  create index studio_app_intervention_default_request_subject_batch_contract_IDX on studio_app_intervention (default_request_subject_batch_contract)
+2026-10-06 13:48:03.222 UTC [63] ERROR:  relation "studio_app_intervention_default_intervention_category_batch_con" already exists
+2026-10-06 13:48:03.222 UTC [63] STATEMENT:  create index studio_app_intervention_default_intervention_category_batch_contract_IDX on studio_app_intervention (default_intervention_category_batch_contract)
+2026-10-06 13:48:03.227 UTC [63] ERROR:  relation "studio_app_supplychain_cancel_reason_on_changing_purchase_order" already exists
+2026-10-06 13:48:03.227 UTC [63] STATEMENT:  create index studio_app_supplychain_cancel_reason_on_changing_purchase_order_IDX on studio_app_supplychain (cancel_reason_on_changing_purchase_order)
+2026-10-06 13:48:03.243 UTC [63] ERROR:  relation "supplychain_customer_shipping_carriage_paid_shipping_costs_prod" already exists
+2026-10-06 13:48:03.243 UTC [63] STATEMENT:  create index supplychain_customer_shipping_carriage_paid_shipping_costs_product_IDX on supplychain_customer_shipping_carriage_paid (shipping_costs_product)
+2026-10-06 13:48:03.244 UTC [63] ERROR:  relation "supplychain_depreciation_rate_config_stock_rotation_category_id" already exists
+2026-10-06 13:48:03.244 UTC [63] STATEMENT:  create index supplychain_depreciation_rate_config_stock_rotation_category_IDX on supplychain_depreciation_rate_config (stock_rotation_category)
+2026-10-06 13:48:03.249 UTC [63] ERROR:  relation "supplychain_supply_chain_config_declaration_of_exch_goods_print" already exists
+2026-10-06 13:48:03.249 UTC [63] STATEMENT:  create index supplychain_supply_chain_config_declaration_of_exch_goods_print_template_IDX on supplychain_supply_chain_config (declaration_of_exch_goods_print_template)
+2026-10-06 13:48:03.249 UTC [63] ERROR:  relation "supplychain_supply_chain_config_declaration_of_exch_services_pr" already exists
+2026-10-06 13:48:03.249 UTC [63] STATEMENT:  create index supplychain_supply_chain_config_declaration_of_exch_services_print_template_IDX on supplychain_supply_chain_config (declaration_of_exch_services_print_template)
+2026-10-06 13:48:03.634 UTC [63] ERROR:  constraint "fk_1j939njcp99dw8w6mbmlq82jf" for relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 13:48:03.634 UTC [63] STATEMENT:  alter table if exists account_account_config_move_on_temp_closure_authorized_role_list add constraint FK_1j939njcp99dw8w6mbmlq82jf foreign key (move_on_temp_closure_authorized_role_list) references auth_role
+2026-10-06 13:48:03.634 UTC [63] ERROR:  constraint "fk_1p1v152ivqobvgiwe98c3f82b" for relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 13:48:03.634 UTC [63] STATEMENT:  alter table if exists account_account_config_move_on_temp_closure_authorized_role_list add constraint FK_1p1v152ivqobvgiwe98c3f82b foreign key (account_account_config) references account_account_config
+2026-10-06 13:48:03.787 UTC [63] ERROR:  constraint "fk_2hdq6bbyxjerlmoiy6vcsixrh" for relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:48:03.787 UTC [63] STATEMENT:  alter table if exists account_accounting_report_analytic_config_line_analytic_account_set add constraint FK_2hdq6bbyxjerlmoiy6vcsixrh foreign key (analytic_account_set) references account_analytic_account
+2026-10-06 13:48:03.787 UTC [63] ERROR:  constraint "fk_4egpi09loy5p87kul8pf45f7x" for relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:48:03.787 UTC [63] STATEMENT:  alter table if exists account_accounting_report_analytic_config_line_analytic_account_set add constraint FK_4egpi09loy5p87kul8pf45f7x foreign key (account_accounting_report_analytic_config_line) references account_accounting_report_analytic_config_line
+2026-10-06 13:48:04.007 UTC [63] ERROR:  constraint "fk_rr0evhig9p26nv4jfsvktt6q4" for relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 13:48:04.007 UTC [63] STATEMENT:  alter table if exists account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list add constraint FK_rr0evhig9p26nv4jfsvktt6q4 foreign key (reverse_analytic_move_line_query_parameter_list) references account_analytic_move_line_query_parameter
+2026-10-06 13:48:04.008 UTC [63] ERROR:  constraint "fk_ff85nwbyev2cxqxqlxq336pjp" for relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 13:48:04.008 UTC [63] STATEMENT:  alter table if exists account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list add constraint FK_ff85nwbyev2cxqxqlxq336pjp foreign key (account_analytic_move_line_query) references account_analytic_move_line_query
+2026-10-06 13:48:05.981 UTC [63] ERROR:  constraint "fk_5jlcdpnop0nnm7400rkl04f76" for relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 13:48:05.981 UTC [63] STATEMENT:  alter table if exists contract_contract_template_additional_benefit_contract_line_list add constraint FK_5jlcdpnop0nnm7400rkl04f76 foreign key (additional_benefit_contract_line_list) references contract_contract_line
+2026-10-06 13:48:05.981 UTC [63] ERROR:  constraint "fk_10ci54vfx1bdddnl1ufkk7yih" for relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 13:48:05.981 UTC [63] STATEMENT:  alter table if exists contract_contract_template_additional_benefit_contract_line_list add constraint FK_10ci54vfx1bdddnl1ufkk7yih foreign key (contract_contract_template) references contract_contract_template
+2026-10-06 13:48:07.292 UTC [63] ERROR:  constraint "fk_em8em05iwkd4m9ii0vjr9q9tq" for relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 13:48:07.292 UTC [63] STATEMENT:  alter table if exists production_prod_process_line_generated_purchase_order_product_set add constraint FK_em8em05iwkd4m9ii0vjr9q9tq foreign key (generated_purchase_order_product_set) references base_product
+2026-10-06 13:48:07.292 UTC [63] ERROR:  constraint "fk_l1p1wsp3rqlixvlpnhq9nhve5" for relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 13:48:07.292 UTC [63] STATEMENT:  alter table if exists production_prod_process_line_generated_purchase_order_product_set add constraint FK_l1p1wsp3rqlixvlpnhq9nhve5 foreign key (production_prod_process_line) references production_prod_process_line
+2026-10-06 13:48:08.265 UTC [63] ERROR:  constraint "fk_qtf2f4t170o73c7k988oobhk1" for relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 13:48:08.265 UTC [63] STATEMENT:  alter table if exists stock_tracking_number_configuration_profile_profile_field_formula_set add constraint FK_qtf2f4t170o73c7k988oobhk1 foreign key (profile_field_formula_set) references stock_tracking_number_configuration_profile_field_formula
+2026-10-06 13:48:08.266 UTC [63] ERROR:  constraint "fk_ar0ai60ydnl8dq4rtfydnt0uq" for relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 13:48:08.266 UTC [63] STATEMENT:  alter table if exists stock_tracking_number_configuration_profile_profile_field_formula_set add constraint FK_ar0ai60ydnl8dq4rtfydnt0uq foreign key (stock_tracking_number_configuration_profile) references stock_tracking_number_configuration_profile
+2026-10-06 13:48:08.404 UTC [63] ERROR:  constraint "fk_adupcq38srikawecrivgsxqkh" for relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 13:48:08.404 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_customer_delivery_line_addition_role_set add constraint FK_adupcq38srikawecrivgsxqkh foreign key (customer_delivery_line_addition_role_set) references auth_role
+2026-10-06 13:48:08.404 UTC [63] ERROR:  constraint "fk_chyilg1er8khfi26tc07m2iri" for relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 13:48:08.404 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_customer_delivery_line_addition_role_set add constraint FK_chyilg1er8khfi26tc07m2iri foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:48:08.408 UTC [63] ERROR:  constraint "fk_rsqp63etp0dvc0o3ofdvewchd" for relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 13:48:08.408 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_supplier_arrival_line_addition_role_set add constraint FK_rsqp63etp0dvc0o3ofdvewchd foreign key (supplier_arrival_line_addition_role_set) references auth_role
+2026-10-06 13:48:08.408 UTC [63] ERROR:  constraint "fk_2c59pgjkp04rilrv918vo58me" for relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 13:48:08.408 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_supplier_arrival_line_addition_role_set add constraint FK_2c59pgjkp04rilrv918vo58me foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:48:08.408 UTC [63] ERROR:  constraint "fk_el630uhqap7jdye2csa0bge3w" for relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 13:48:08.408 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_customer_delivery_line_role_set add constraint FK_el630uhqap7jdye2csa0bge3w foreign key (verify_customer_delivery_line_role_set) references auth_role
+2026-10-06 13:48:08.408 UTC [63] ERROR:  constraint "fk_h4kyehnfglncvj9nqpigyi201" for relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 13:48:08.408 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_customer_delivery_line_role_set add constraint FK_h4kyehnfglncvj9nqpigyi201 foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:48:08.412 UTC [63] ERROR:  constraint "fk_ku43h1pgh6x4n12adsymknuhf" for relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 13:48:08.412 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_supplier_arrival_line_role_set add constraint FK_ku43h1pgh6x4n12adsymknuhf foreign key (verify_supplier_arrival_line_role_set) references auth_role
+2026-10-06 13:48:08.412 UTC [63] ERROR:  constraint "fk_5tygg9xpid1p02c5yhcsvu78e" for relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 13:48:08.412 UTC [63] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_supplier_arrival_line_role_set add constraint FK_5tygg9xpid1p02c5yhcsvu78e foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:48:16.993 UTC [33] LOG:  checkpoint starting: time
+2026-10-06 13:48:31.627 UTC [33] LOG:  checkpoint complete: wrote 148 buffers (0.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=14.631 s, sync=0.001 s, total=14.635 s; sync files=54, longest=0.001 s, average=0.001 s; distance=996 kB, estimate=996 kB; lsn=0/F18A1E0, redo lsn=0/F17E6E0
+2026-10-06 13:53:16.660 UTC [33] LOG:  checkpoint starting: time
+2026-10-06 13:53:44.156 UTC [105] ERROR:  relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 13:53:44.156 UTC [105] STATEMENT:  create table account_account_config_move_on_temp_closure_authorized_role_list (account_account_config bigint not null, move_on_temp_closure_authorized_role_list bigint not null, primary key (account_account_config, move_on_temp_closure_authorized_role_list))
+2026-10-06 13:53:44.186 UTC [105] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:53:44.186 UTC [105] STATEMENT:  create table account_accounting_report_analytic_config_line_analytic_account_set (account_accounting_report_analytic_config_line bigint not null, analytic_account_set bigint not null, primary key (account_accounting_report_analytic_config_line, analytic_account_set))
+2026-10-06 13:53:44.189 UTC [105] ERROR:  relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 13:53:44.189 UTC [105] STATEMENT:  create table account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list (account_analytic_move_line_query bigint not null, reverse_analytic_move_line_query_parameter_list bigint not null)
+2026-10-06 13:53:44.210 UTC [105] ERROR:  relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 13:53:44.210 UTC [105] STATEMENT:  create table contract_contract_template_additional_benefit_contract_line_list (contract_contract_template bigint not null, additional_benefit_contract_line_list bigint not null)
+2026-10-06 13:53:44.220 UTC [105] ERROR:  relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 13:53:44.220 UTC [105] STATEMENT:  create table production_prod_process_line_generated_purchase_order_product_set (production_prod_process_line bigint not null, generated_purchase_order_product_set bigint not null, primary key (production_prod_process_line, generated_purchase_order_product_set))
+2026-10-06 13:53:44.227 UTC [105] ERROR:  relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 13:53:44.227 UTC [105] STATEMENT:  create table stock_tracking_number_configuration_profile_profile_field_formula_set (stock_tracking_number_configuration_profile bigint not null, profile_field_formula_set bigint not null, primary key (stock_tracking_number_configuration_profile, profile_field_formula_set))
+2026-10-06 13:53:44.229 UTC [105] ERROR:  relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 13:53:44.229 UTC [105] STATEMENT:  create table studio_app_mobile_settings_customer_delivery_line_addition_role_set (studio_app_mobile_settings bigint not null, customer_delivery_line_addition_role_set bigint not null, primary key (studio_app_mobile_settings, customer_delivery_line_addition_role_set))
+2026-10-06 13:53:44.229 UTC [105] ERROR:  relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 13:53:44.229 UTC [105] STATEMENT:  create table studio_app_mobile_settings_supplier_arrival_line_addition_role_set (studio_app_mobile_settings bigint not null, supplier_arrival_line_addition_role_set bigint not null, primary key (studio_app_mobile_settings, supplier_arrival_line_addition_role_set))
+2026-10-06 13:53:44.230 UTC [105] ERROR:  relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 13:53:44.230 UTC [105] STATEMENT:  create table studio_app_mobile_settings_verify_customer_delivery_line_role_set (studio_app_mobile_settings bigint not null, verify_customer_delivery_line_role_set bigint not null, primary key (studio_app_mobile_settings, verify_customer_delivery_line_role_set))
+2026-10-06 13:53:44.230 UTC [105] ERROR:  relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 13:53:44.230 UTC [105] STATEMENT:  create table studio_app_mobile_settings_verify_supplier_arrival_line_role_set (studio_app_mobile_settings bigint not null, verify_supplier_arrival_line_role_set bigint not null, primary key (studio_app_mobile_settings, verify_supplier_arrival_line_role_set))
+2026-10-06 13:53:44.288 UTC [105] ERROR:  relation "account_account_config_cash_position_variation_debit_account_id" already exists
+2026-10-06 13:53:44.288 UTC [105] STATEMENT:  create index account_account_config_cash_position_variation_debit_account_IDX on account_account_config (cash_position_variation_debit_account)
+2026-10-06 13:53:44.288 UTC [105] ERROR:  relation "account_account_config_cash_position_variation_credit_account_i" already exists
+2026-10-06 13:53:44.288 UTC [105] STATEMENT:  create index account_account_config_cash_position_variation_credit_account_IDX on account_account_config (cash_position_variation_credit_account)
+2026-10-06 13:53:44.289 UTC [105] ERROR:  relation "account_account_config_purchase_invoices_details_print_template" already exists
+2026-10-06 13:53:44.289 UTC [105] STATEMENT:  create index account_account_config_purchase_invoices_details_print_template_IDX on account_account_config (purchase_invoices_details_print_template)
+2026-10-06 13:53:44.293 UTC [105] ERROR:  relation "account_account_management_purch_fixed_assets_tax_vat_system1ac" already exists
+2026-10-06 13:53:44.293 UTC [105] STATEMENT:  create index account_account_management_purch_fixed_assets_tax_vat_system1account_IDX on account_account_management (purch_fixed_assets_tax_vat_system1account)
+2026-10-06 13:53:44.294 UTC [105] ERROR:  relation "account_account_management_purch_fixed_assets_tax_vat_system2ac" already exists
+2026-10-06 13:53:44.294 UTC [105] STATEMENT:  create index account_account_management_purch_fixed_assets_tax_vat_system2account_IDX on account_account_management (purch_fixed_assets_tax_vat_system2account)
+2026-10-06 13:53:44.302 UTC [105] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:53:44.302 UTC [105] STATEMENT:  create index account_accounting_report_analytic_config_line_analytic_account_IDX on account_accounting_report_analytic_config_line (analytic_account)
+2026-10-06 13:53:44.302 UTC [105] ERROR:  relation "account_accounting_report_analytic_config_line_accounting_repor" already exists
+2026-10-06 13:53:44.302 UTC [105] STATEMENT:  create index account_accounting_report_analytic_config_line_accounting_report_IDX on account_accounting_report_analytic_config_line (accounting_report)
+2026-10-06 13:53:44.303 UTC [105] ERROR:  relation "account_accounting_report_move_line_payment_move_line_distribut" already exists
+2026-10-06 13:53:44.303 UTC [105] STATEMENT:  create index account_accounting_report_move_line_payment_move_line_distribution_IDX on account_accounting_report_move_line (payment_move_line_distribution)
+2026-10-06 13:53:44.305 UTC [105] ERROR:  relation "account_accounting_report_value_accounting_report_config_line_i" already exists
+2026-10-06 13:53:44.305 UTC [105] STATEMENT:  create index account_accounting_report_value_accounting_report_config_line_IDX on account_accounting_report_value (accounting_report_config_line)
+2026-10-06 13:53:44.306 UTC [105] ERROR:  relation "account_accounting_report_value_accounting_report_config_line_c" already exists
+2026-10-06 13:53:44.306 UTC [105] STATEMENT:  create index account_accounting_report_value_accounting_report_config_line_column_IDX on account_accounting_report_value (accounting_report_config_line_column)
+2026-10-06 13:53:44.307 UTC [105] ERROR:  relation "account_accounting_situation_invoice_message_template_on_valida" already exists
+2026-10-06 13:53:44.307 UTC [105] STATEMENT:  create index account_accounting_situation_invoice_message_template_on_validate_IDX on account_accounting_situation (invoice_message_template_on_validate)
+2026-10-06 13:53:44.315 UTC [105] ERROR:  relation "account_analytic_move_line_query_parameter_analytic_move_line_s" already exists
+2026-10-06 13:53:44.315 UTC [105] STATEMENT:  create index account_analytic_move_line_query_parameter_analytic_move_line_search_IDX on account_analytic_move_line_query_parameter (analytic_move_line_search)
+2026-10-06 13:53:44.335 UTC [105] ERROR:  relation "account_fixed_asset_category_appro_extraord_depreciation_expens" already exists
+2026-10-06 13:53:44.335 UTC [105] STATEMENT:  create index account_fixed_asset_category_appro_extraord_depreciation_expense_account_IDX on account_fixed_asset_category (appro_extraord_depreciation_expense_account)
+2026-10-06 13:53:44.336 UTC [105] ERROR:  relation "account_fixed_asset_category_expense_depreciation_derogatory_ac" already exists
+2026-10-06 13:53:44.336 UTC [105] STATEMENT:  create index account_fixed_asset_category_expense_depreciation_derogatory_account_IDX on account_fixed_asset_category (expense_depreciation_derogatory_account)
+2026-10-06 13:53:44.336 UTC [105] ERROR:  relation "account_fixed_asset_category_capital_depreciation_derogatory_ac" already exists
+2026-10-06 13:53:44.336 UTC [105] STATEMENT:  create index account_fixed_asset_category_capital_depreciation_derogatory_account_IDX on account_fixed_asset_category (capital_depreciation_derogatory_account)
+2026-10-06 13:53:44.337 UTC [105] ERROR:  relation "account_fixed_asset_category_income_depreciation_derogatory_acc" already exists
+2026-10-06 13:53:44.337 UTC [105] STATEMENT:  create index account_fixed_asset_category_income_depreciation_derogatory_account_IDX on account_fixed_asset_category (income_depreciation_derogatory_account)
+2026-10-06 13:53:44.337 UTC [105] ERROR:  relation "account_fixed_asset_category_wb_provision_fixed_asset_account_i" already exists
+2026-10-06 13:53:44.337 UTC [105] STATEMENT:  create index account_fixed_asset_category_wb_provision_fixed_asset_account_IDX on account_fixed_asset_category (wb_provision_fixed_asset_account)
+2026-10-06 13:53:44.338 UTC [105] ERROR:  relation "account_fixed_asset_category_app_provision_fixed_asset_account_" already exists
+2026-10-06 13:53:44.338 UTC [105] STATEMENT:  create index account_fixed_asset_category_app_provision_fixed_asset_account_IDX on account_fixed_asset_category (app_provision_fixed_asset_account)
+2026-10-06 13:53:44.339 UTC [105] ERROR:  relation "account_fixed_asset_derogatory_line_derogatory_depreciation_mov" already exists
+2026-10-06 13:53:44.339 UTC [105] STATEMENT:  create index account_fixed_asset_derogatory_line_derogatory_depreciation_move_IDX on account_fixed_asset_derogatory_line (derogatory_depreciation_move)
+2026-10-06 13:53:44.375 UTC [105] ERROR:  relation "account_substitute_pfp_validator_substitute_pfp_validator_user_" already exists
+2026-10-06 13:53:44.375 UTC [105] STATEMENT:  create index account_substitute_pfp_validator_substitute_pfp_validator_user_IDX on account_substitute_pfp_validator (substitute_pfp_validator_user)
+2026-10-06 13:53:44.386 UTC [105] ERROR:  relation "bankpayment_bank_order_file_format_country_bank_order_file_form" already exists
+2026-10-06 13:53:44.386 UTC [105] STATEMENT:  create index bankpayment_bank_order_file_format_country_bank_order_file_format_IDX on bankpayment_bank_order_file_format_country (bank_order_file_format)
+2026-10-06 13:53:44.390 UTC [105] ERROR:  relation "bankpayment_bank_payment_config_internal_bank_to_bank_account_i" already exists
+2026-10-06 13:53:44.390 UTC [105] STATEMENT:  create index bankpayment_bank_payment_config_internal_bank_to_bank_account_IDX on bankpayment_bank_payment_config (internal_bank_to_bank_account)
+2026-10-06 13:53:44.390 UTC [105] ERROR:  relation "bankpayment_bank_payment_config_external_bank_to_bank_account_i" already exists
+2026-10-06 13:53:44.390 UTC [105] STATEMENT:  create index bankpayment_bank_payment_config_external_bank_to_bank_account_IDX on bankpayment_bank_payment_config (external_bank_to_bank_account)
+2026-10-06 13:53:44.391 UTC [105] ERROR:  relation "bankpayment_bank_payment_config_bank_statement_lines_print_temp" already exists
+2026-10-06 13:53:44.391 UTC [105] STATEMENT:  create index bankpayment_bank_payment_config_bank_statement_lines_print_template_IDX on bankpayment_bank_payment_config (bank_statement_lines_print_template)
+2026-10-06 13:53:44.391 UTC [105] ERROR:  relation "bankpayment_bank_payment_config_bank_reconciliation_statement_p" already exists
+2026-10-06 13:53:44.391 UTC [105] STATEMENT:  create index bankpayment_bank_payment_config_bank_reconciliation_statement_print_template_IDX on bankpayment_bank_payment_config (bank_reconciliation_statement_print_template)
+2026-10-06 13:53:44.393 UTC [105] ERROR:  relation "bankpayment_bank_reconciliation_line_analytic_distribution_temp" already exists
+2026-10-06 13:53:44.393 UTC [105] STATEMENT:  create index bankpayment_bank_reconciliation_line_analytic_distribution_template_IDX on bankpayment_bank_reconciliation_line (analytic_distribution_template)
+2026-10-06 13:53:44.397 UTC [105] ERROR:  relation "bankpayment_bank_statement_rule_partner_bank_statement_query_id" already exists
+2026-10-06 13:53:44.397 UTC [105] STATEMENT:  create index bankpayment_bank_statement_rule_partner_bank_statement_query_IDX on bankpayment_bank_statement_rule (partner_bank_statement_query)
+2026-10-06 13:53:44.397 UTC [105] ERROR:  relation "bankpayment_bank_statement_rule_move_line_bank_statement_query_" already exists
+2026-10-06 13:53:44.397 UTC [105] STATEMENT:  create index bankpayment_bank_statement_rule_move_line_bank_statement_query_IDX on bankpayment_bank_statement_rule (move_line_bank_statement_query)
+2026-10-06 13:53:44.398 UTC [105] ERROR:  relation "bankpayment_bank_statement_rule_analytic_distribution_template_" already exists
+2026-10-06 13:53:44.398 UTC [105] STATEMENT:  create index bankpayment_bank_statement_rule_analytic_distribution_template_IDX on bankpayment_bank_statement_rule (analytic_distribution_template)
+2026-10-06 13:53:44.429 UTC [105] ERROR:  relation "base_import_export_translation_history_import_export_translatio" already exists
+2026-10-06 13:53:44.429 UTC [105] STATEMENT:  create index base_import_export_translation_history_import_export_translation_IDX on base_import_export_translation_history (import_export_translation)
+2026-10-06 13:53:44.544 UTC [105] ERROR:  relation "intervention_intervention_config_customer_request_creation_mess" already exists
+2026-10-06 13:53:44.544 UTC [105] STATEMENT:  create index intervention_intervention_config_customer_request_creation_message_template_IDX on intervention_intervention_config (customer_request_creation_message_template)
+2026-10-06 13:53:44.544 UTC [105] ERROR:  relation "intervention_intervention_config_intervention_planification_mes" already exists
+2026-10-06 13:53:44.544 UTC [105] STATEMENT:  create index intervention_intervention_config_intervention_planification_message_template_IDX on intervention_intervention_config (intervention_planification_message_template)
+2026-10-06 13:53:44.545 UTC [105] ERROR:  relation "intervention_intervention_config_intervention_re_planification_" already exists
+2026-10-06 13:53:44.545 UTC [105] STATEMENT:  create index intervention_intervention_config_intervention_re_planification_message_template_IDX on intervention_intervention_config (intervention_re_planification_message_template)
+2026-10-06 13:53:44.545 UTC [105] ERROR:  relation "intervention_intervention_config_intervention_validation_messag" already exists
+2026-10-06 13:53:44.545 UTC [105] STATEMENT:  create index intervention_intervention_config_intervention_validation_message_template_IDX on intervention_intervention_config (intervention_validation_message_template)
+2026-10-06 13:53:44.547 UTC [105] ERROR:  relation "intervention_intervention_question_conditional_intervention_que" already exists
+2026-10-06 13:53:44.547 UTC [105] STATEMENT:  create index intervention_intervention_question_conditional_intervention_question_IDX on intervention_intervention_question (conditional_intervention_question)
+2026-10-06 13:53:44.548 UTC [105] ERROR:  relation "intervention_intervention_type_advanced_startup_monitoring_rang" already exists
+2026-10-06 13:53:44.548 UTC [105] STATEMENT:  create index intervention_intervention_type_advanced_startup_monitoring_range_IDX on intervention_intervention_type (advanced_startup_monitoring_range)
+2026-10-06 13:53:44.573 UTC [105] ERROR:  relation "production_bill_of_material_import_main_bill_of_material_genera" already exists
+2026-10-06 13:53:44.573 UTC [105] STATEMENT:  create index production_bill_of_material_import_main_bill_of_material_generated_IDX on production_bill_of_material_import (main_bill_of_material_generated)
+2026-10-06 13:53:44.574 UTC [105] ERROR:  relation "production_bill_of_material_import_line_bill_of_material_import" already exists
+2026-10-06 13:53:44.574 UTC [105] STATEMENT:  create index production_bill_of_material_import_line_bill_of_material_import_IDX on production_bill_of_material_import_line (bill_of_material_import)
+2026-10-06 13:53:44.574 UTC [105] ERROR:  relation "production_bill_of_material_import_line_parent_bomimport_line_i" already exists
+2026-10-06 13:53:44.574 UTC [105] STATEMENT:  create index production_bill_of_material_import_line_parent_bomimport_line_IDX on production_bill_of_material_import_line (parent_bomimport_line)
+2026-10-06 13:53:44.577 UTC [105] ERROR:  relation "production_configurator_prod_process_produced_product_stock_loc" already exists
+2026-10-06 13:53:44.577 UTC [105] STATEMENT:  create index production_configurator_prod_process_produced_product_stock_location_IDX on production_configurator_prod_process (produced_product_stock_location)
+2026-10-06 13:53:44.577 UTC [105] ERROR:  relation "production_configurator_prod_process_workshop_stock_location_id" already exists
+2026-10-06 13:53:44.577 UTC [105] STATEMENT:  create index production_configurator_prod_process_workshop_stock_location_IDX on production_configurator_prod_process (workshop_stock_location)
+2026-10-06 13:53:44.578 UTC [105] ERROR:  relation "production_configurator_prod_process_line_configurator_prod_pro" already exists
+2026-10-06 13:53:44.578 UTC [105] STATEMENT:  create index production_configurator_prod_process_line_configurator_prod_process_IDX on production_configurator_prod_process_line (configurator_prod_process)
+2026-10-06 13:53:44.579 UTC [105] ERROR:  relation "production_configurator_prod_product_configurator_prod_process_" already exists
+2026-10-06 13:53:44.579 UTC [105] STATEMENT:  create index production_configurator_prod_product_configurator_prod_process_line_IDX on production_configurator_prod_product (configurator_prod_process_line)
+2026-10-06 13:53:44.585 UTC [105] ERROR:  relation "production_prod_process_residual_products_default_stock_locatio" already exists
+2026-10-06 13:53:44.585 UTC [105] STATEMENT:  create index production_prod_process_residual_products_default_stock_location_IDX on production_prod_process (residual_products_default_stock_location)
+2026-10-06 13:53:44.588 UTC [105] ERROR:  relation "production_production_config_part_finish_mo_message_template_id" already exists
+2026-10-06 13:53:44.588 UTC [105] STATEMENT:  create index production_production_config_part_finish_mo_message_template_IDX on production_production_config (part_finish_mo_message_template)
+2026-10-06 13:53:44.589 UTC [105] ERROR:  relation "production_production_config_maintenance_bill_of_material_print" already exists
+2026-10-06 13:53:44.589 UTC [105] STATEMENT:  create index production_production_config_maintenance_bill_of_material_print_template_IDX on production_production_config (maintenance_bill_of_material_print_template)
+2026-10-06 13:53:44.589 UTC [105] ERROR:  relation "production_production_config_maintenance_manuf_order_print_temp" already exists
+2026-10-06 13:53:44.589 UTC [105] STATEMENT:  create index production_production_config_maintenance_manuf_order_print_template_IDX on production_production_config (maintenance_manuf_order_print_template)
+2026-10-06 13:53:44.589 UTC [105] ERROR:  relation "production_production_config_maintenance_prod_process_print_tem" already exists
+2026-10-06 13:53:44.589 UTC [105] STATEMENT:  create index production_production_config_maintenance_prod_process_print_template_IDX on production_production_config (maintenance_prod_process_print_template)
+2026-10-06 13:53:44.593 UTC [105] ERROR:  relation "production_workshop_sequence_config_line_workshop_stock_locatio" already exists
+2026-10-06 13:53:44.593 UTC [105] STATEMENT:  create index production_workshop_sequence_config_line_workshop_stock_location_IDX on production_workshop_sequence_config_line (workshop_stock_location)
+2026-10-06 13:53:44.596 UTC [105] ERROR:  relation "project_project_planning_time_display_planned_time_restricted_i" already exists
+2026-10-06 13:53:44.596 UTC [105] STATEMENT:  create index project_project_planning_time_display_planned_time_restricted_IDX on project_project_planning_time (display_planned_time_restricted)
+2026-10-06 13:53:44.602 UTC [105] ERROR:  relation "project_task_status_progress_by_category_project_task_category_" already exists
+2026-10-06 13:53:44.602 UTC [105] STATEMENT:  create index project_task_status_progress_by_category_project_task_category_IDX on project_task_status_progress_by_category (project_task_category)
+2026-10-06 13:53:44.622 UTC [105] ERROR:  relation "quality_quality_config_qi_action_distribution_print_template_id" already exists
+2026-10-06 13:53:44.622 UTC [105] STATEMENT:  create index quality_quality_config_qi_action_distribution_print_template_IDX on quality_quality_config (qi_action_distribution_print_template)
+2026-10-06 13:53:44.622 UTC [105] ERROR:  relation "quality_quality_config_qi_decision_distribution_print_template_" already exists
+2026-10-06 13:53:44.622 UTC [105] STATEMENT:  create index quality_quality_config_qi_decision_distribution_print_template_IDX on quality_quality_config (qi_decision_distribution_print_template)
+2026-10-06 13:53:44.637 UTC [105] ERROR:  relation "stock_default_stock_location_by_site_receipt_default_stock_loca" already exists
+2026-10-06 13:53:44.637 UTC [105] STATEMENT:  create index stock_default_stock_location_by_site_receipt_default_stock_location_IDX on stock_default_stock_location_by_site (receipt_default_stock_location)
+2026-10-06 13:53:44.638 UTC [105] ERROR:  relation "stock_default_stock_location_by_site_pickup_default_stock_locat" already exists
+2026-10-06 13:53:44.638 UTC [105] STATEMENT:  create index stock_default_stock_location_by_site_pickup_default_stock_location_IDX on stock_default_stock_location_by_site (pickup_default_stock_location)
+2026-10-06 13:53:44.642 UTC [105] ERROR:  relation "stock_partner_stock_settings_real_stock_move_message_template_i" already exists
+2026-10-06 13:53:44.642 UTC [105] STATEMENT:  create index stock_partner_stock_settings_real_stock_move_message_template_IDX on stock_partner_stock_settings (real_stock_move_message_template)
+2026-10-06 13:53:44.643 UTC [105] ERROR:  relation "stock_partner_stock_settings_planned_stock_move_message_templat" already exists
+2026-10-06 13:53:44.643 UTC [105] STATEMENT:  create index stock_partner_stock_settings_planned_stock_move_message_template_IDX on stock_partner_stock_settings (planned_stock_move_message_template)
+2026-10-06 13:53:44.643 UTC [105] ERROR:  relation "stock_partner_stock_settings_default_external_stock_location_id" already exists
+2026-10-06 13:53:44.643 UTC [105] STATEMENT:  create index stock_partner_stock_settings_default_external_stock_location_IDX on stock_partner_stock_settings (default_external_stock_location)
+2026-10-06 13:53:44.646 UTC [105] ERROR:  relation "stock_stock_config_supplier_arrival_cancellation_message_templa" already exists
+2026-10-06 13:53:44.646 UTC [105] STATEMENT:  create index stock_stock_config_supplier_arrival_cancellation_message_template_IDX on stock_stock_config (supplier_arrival_cancellation_message_template)
+2026-10-06 13:53:44.653 UTC [105] ERROR:  relation "stock_tracking_number_configuration_tracking_number_configurati" already exists
+2026-10-06 13:53:44.653 UTC [105] STATEMENT:  create index stock_tracking_number_configuration_tracking_number_configuration_profile_IDX on stock_tracking_number_configuration (tracking_number_configuration_profile)
+2026-10-06 13:53:44.654 UTC [105] ERROR:  relation "stock_tracking_number_configuration_profile_field_formula_meta_" already exists
+2026-10-06 13:53:44.654 UTC [105] STATEMENT:  create index stock_tracking_number_configuration_profile_field_formula_meta_field_IDX on stock_tracking_number_configuration_profile_field_formula (meta_field)
+2026-10-06 13:53:44.659 UTC [105] ERROR:  relation "studio_app_intervention_default_type_for_interventions_from_con" already exists
+2026-10-06 13:53:44.659 UTC [105] STATEMENT:  create index studio_app_intervention_default_type_for_interventions_from_contracts_IDX on studio_app_intervention (default_type_for_interventions_from_contracts)
+2026-10-06 13:53:44.659 UTC [105] ERROR:  relation "studio_app_intervention_default_request_source_batch_contract_i" already exists
+2026-10-06 13:53:44.659 UTC [105] STATEMENT:  create index studio_app_intervention_default_request_source_batch_contract_IDX on studio_app_intervention (default_request_source_batch_contract)
+2026-10-06 13:53:44.659 UTC [105] ERROR:  relation "studio_app_intervention_default_request_subject_batch_contract_" already exists
+2026-10-06 13:53:44.659 UTC [105] STATEMENT:  create index studio_app_intervention_default_request_subject_batch_contract_IDX on studio_app_intervention (default_request_subject_batch_contract)
+2026-10-06 13:53:44.660 UTC [105] ERROR:  relation "studio_app_intervention_default_intervention_category_batch_con" already exists
+2026-10-06 13:53:44.660 UTC [105] STATEMENT:  create index studio_app_intervention_default_intervention_category_batch_contract_IDX on studio_app_intervention (default_intervention_category_batch_contract)
+2026-10-06 13:53:44.664 UTC [105] ERROR:  relation "studio_app_supplychain_cancel_reason_on_changing_purchase_order" already exists
+2026-10-06 13:53:44.664 UTC [105] STATEMENT:  create index studio_app_supplychain_cancel_reason_on_changing_purchase_order_IDX on studio_app_supplychain (cancel_reason_on_changing_purchase_order)
+2026-10-06 13:53:44.679 UTC [105] ERROR:  relation "supplychain_customer_shipping_carriage_paid_shipping_costs_prod" already exists
+2026-10-06 13:53:44.679 UTC [105] STATEMENT:  create index supplychain_customer_shipping_carriage_paid_shipping_costs_product_IDX on supplychain_customer_shipping_carriage_paid (shipping_costs_product)
+2026-10-06 13:53:44.681 UTC [105] ERROR:  relation "supplychain_depreciation_rate_config_stock_rotation_category_id" already exists
+2026-10-06 13:53:44.681 UTC [105] STATEMENT:  create index supplychain_depreciation_rate_config_stock_rotation_category_IDX on supplychain_depreciation_rate_config (stock_rotation_category)
+2026-10-06 13:53:44.685 UTC [105] ERROR:  relation "supplychain_supply_chain_config_declaration_of_exch_goods_print" already exists
+2026-10-06 13:53:44.685 UTC [105] STATEMENT:  create index supplychain_supply_chain_config_declaration_of_exch_goods_print_template_IDX on supplychain_supply_chain_config (declaration_of_exch_goods_print_template)
+2026-10-06 13:53:44.685 UTC [105] ERROR:  relation "supplychain_supply_chain_config_declaration_of_exch_services_pr" already exists
+2026-10-06 13:53:44.685 UTC [105] STATEMENT:  create index supplychain_supply_chain_config_declaration_of_exch_services_print_template_IDX on supplychain_supply_chain_config (declaration_of_exch_services_print_template)
+2026-10-06 13:53:45.075 UTC [105] ERROR:  constraint "fk_1j939njcp99dw8w6mbmlq82jf" for relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 13:53:45.075 UTC [105] STATEMENT:  alter table if exists account_account_config_move_on_temp_closure_authorized_role_list add constraint FK_1j939njcp99dw8w6mbmlq82jf foreign key (move_on_temp_closure_authorized_role_list) references auth_role
+2026-10-06 13:53:45.075 UTC [105] ERROR:  constraint "fk_1p1v152ivqobvgiwe98c3f82b" for relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 13:53:45.075 UTC [105] STATEMENT:  alter table if exists account_account_config_move_on_temp_closure_authorized_role_list add constraint FK_1p1v152ivqobvgiwe98c3f82b foreign key (account_account_config) references account_account_config
+2026-10-06 13:53:45.260 UTC [105] ERROR:  constraint "fk_2hdq6bbyxjerlmoiy6vcsixrh" for relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:53:45.260 UTC [105] STATEMENT:  alter table if exists account_accounting_report_analytic_config_line_analytic_account_set add constraint FK_2hdq6bbyxjerlmoiy6vcsixrh foreign key (analytic_account_set) references account_analytic_account
+2026-10-06 13:53:45.260 UTC [105] ERROR:  constraint "fk_4egpi09loy5p87kul8pf45f7x" for relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 13:53:45.260 UTC [105] STATEMENT:  alter table if exists account_accounting_report_analytic_config_line_analytic_account_set add constraint FK_4egpi09loy5p87kul8pf45f7x foreign key (account_accounting_report_analytic_config_line) references account_accounting_report_analytic_config_line
+2026-10-06 13:53:45.472 UTC [105] ERROR:  constraint "fk_rr0evhig9p26nv4jfsvktt6q4" for relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 13:53:45.472 UTC [105] STATEMENT:  alter table if exists account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list add constraint FK_rr0evhig9p26nv4jfsvktt6q4 foreign key (reverse_analytic_move_line_query_parameter_list) references account_analytic_move_line_query_parameter
+2026-10-06 13:53:45.472 UTC [105] ERROR:  constraint "fk_ff85nwbyev2cxqxqlxq336pjp" for relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 13:53:45.472 UTC [105] STATEMENT:  alter table if exists account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list add constraint FK_ff85nwbyev2cxqxqlxq336pjp foreign key (account_analytic_move_line_query) references account_analytic_move_line_query
+2026-10-06 13:53:47.475 UTC [105] ERROR:  constraint "fk_5jlcdpnop0nnm7400rkl04f76" for relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 13:53:47.475 UTC [105] STATEMENT:  alter table if exists contract_contract_template_additional_benefit_contract_line_list add constraint FK_5jlcdpnop0nnm7400rkl04f76 foreign key (additional_benefit_contract_line_list) references contract_contract_line
+2026-10-06 13:53:47.476 UTC [105] ERROR:  constraint "fk_10ci54vfx1bdddnl1ufkk7yih" for relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 13:53:47.476 UTC [105] STATEMENT:  alter table if exists contract_contract_template_additional_benefit_contract_line_list add constraint FK_10ci54vfx1bdddnl1ufkk7yih foreign key (contract_contract_template) references contract_contract_template
+2026-10-06 13:53:48.760 UTC [105] ERROR:  constraint "fk_em8em05iwkd4m9ii0vjr9q9tq" for relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 13:53:48.760 UTC [105] STATEMENT:  alter table if exists production_prod_process_line_generated_purchase_order_product_set add constraint FK_em8em05iwkd4m9ii0vjr9q9tq foreign key (generated_purchase_order_product_set) references base_product
+2026-10-06 13:53:48.760 UTC [105] ERROR:  constraint "fk_l1p1wsp3rqlixvlpnhq9nhve5" for relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 13:53:48.760 UTC [105] STATEMENT:  alter table if exists production_prod_process_line_generated_purchase_order_product_set add constraint FK_l1p1wsp3rqlixvlpnhq9nhve5 foreign key (production_prod_process_line) references production_prod_process_line
+2026-10-06 13:53:49.735 UTC [105] ERROR:  constraint "fk_qtf2f4t170o73c7k988oobhk1" for relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 13:53:49.735 UTC [105] STATEMENT:  alter table if exists stock_tracking_number_configuration_profile_profile_field_formula_set add constraint FK_qtf2f4t170o73c7k988oobhk1 foreign key (profile_field_formula_set) references stock_tracking_number_configuration_profile_field_formula
+2026-10-06 13:53:49.735 UTC [105] ERROR:  constraint "fk_ar0ai60ydnl8dq4rtfydnt0uq" for relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 13:53:49.735 UTC [105] STATEMENT:  alter table if exists stock_tracking_number_configuration_profile_profile_field_formula_set add constraint FK_ar0ai60ydnl8dq4rtfydnt0uq foreign key (stock_tracking_number_configuration_profile) references stock_tracking_number_configuration_profile
+2026-10-06 13:53:49.867 UTC [105] ERROR:  constraint "fk_adupcq38srikawecrivgsxqkh" for relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 13:53:49.867 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_customer_delivery_line_addition_role_set add constraint FK_adupcq38srikawecrivgsxqkh foreign key (customer_delivery_line_addition_role_set) references auth_role
+2026-10-06 13:53:49.867 UTC [105] ERROR:  constraint "fk_chyilg1er8khfi26tc07m2iri" for relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 13:53:49.867 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_customer_delivery_line_addition_role_set add constraint FK_chyilg1er8khfi26tc07m2iri foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:53:49.871 UTC [105] ERROR:  constraint "fk_rsqp63etp0dvc0o3ofdvewchd" for relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 13:53:49.871 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_supplier_arrival_line_addition_role_set add constraint FK_rsqp63etp0dvc0o3ofdvewchd foreign key (supplier_arrival_line_addition_role_set) references auth_role
+2026-10-06 13:53:49.871 UTC [105] ERROR:  constraint "fk_2c59pgjkp04rilrv918vo58me" for relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 13:53:49.871 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_supplier_arrival_line_addition_role_set add constraint FK_2c59pgjkp04rilrv918vo58me foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:53:49.871 UTC [105] ERROR:  constraint "fk_el630uhqap7jdye2csa0bge3w" for relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 13:53:49.871 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_customer_delivery_line_role_set add constraint FK_el630uhqap7jdye2csa0bge3w foreign key (verify_customer_delivery_line_role_set) references auth_role
+2026-10-06 13:53:49.871 UTC [105] ERROR:  constraint "fk_h4kyehnfglncvj9nqpigyi201" for relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 13:53:49.871 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_customer_delivery_line_role_set add constraint FK_h4kyehnfglncvj9nqpigyi201 foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:53:49.875 UTC [105] ERROR:  constraint "fk_ku43h1pgh6x4n12adsymknuhf" for relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 13:53:49.875 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_supplier_arrival_line_role_set add constraint FK_ku43h1pgh6x4n12adsymknuhf foreign key (verify_supplier_arrival_line_role_set) references auth_role
+2026-10-06 13:53:49.875 UTC [105] ERROR:  constraint "fk_5tygg9xpid1p02c5yhcsvu78e" for relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 13:53:49.875 UTC [105] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_supplier_arrival_line_role_set add constraint FK_5tygg9xpid1p02c5yhcsvu78e foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 13:57:46.111 UTC [33] LOG:  checkpoint complete: wrote 5497 buffers (33.6%); 0 WAL file(s) added, 0 removed, 4 recycled; write=269.373 s, sync=0.077 s, total=269.452 s; sync files=9388, longest=0.001 s, average=0.001 s; distance=77560 kB, estimate=77560 kB; lsn=0/14BD7D90, redo lsn=0/13D3C8C8
+2026-10-06 13:58:16.143 UTC [33] LOG:  checkpoint starting: time
+2026-10-06 14:02:46.103 UTC [33] LOG:  checkpoint complete: wrote 2719 buffers (16.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=269.934 s, sync=0.025 s, total=269.961 s; sync files=1304, longest=0.003 s, average=0.001 s; distance=15062 kB, estimate=71310 kB; lsn=0/1736EDA0, redo lsn=0/14BF2400
+2026-10-06 14:03:16.134 UTC [33] LOG:  checkpoint starting: time
+2026-10-06 14:04:03.023 UTC [106] ERROR:  could not obtain lock on row in relation "audit_log"
+2026-10-06 14:04:03.023 UTC [106] STATEMENT:  WITH locked_rows AS (
+	     SELECT id, tx_id, related_model, related_id, event_type, created_on
+	     FROM audit_log
+	     WHERE processed = false
+	       AND tx_id = $1
+	     FOR UPDATE NOWAIT
+	)
+	SELECT tx_id, related_model, related_id, event_type, MIN(id) as min_id, MAX(id) as max_id
+	FROM locked_rows
+	GROUP BY tx_id, related_model, related_id, event_type
+	ORDER BY MIN(created_on)
+	LIMIT $2 OFFSET $3
+	
+2026-10-06 14:06:05.775 UTC [1] LOG:  received fast shutdown request
+2026-10-06 14:06:05.775 UTC [1] LOG:  aborting any active transactions
+2026-10-06 14:06:05.778 UTC [1] LOG:  background worker "logical replication launcher" (PID 38) exited with exit code 1
+2026-10-06 14:06:05.801 UTC [33] LOG:  checkpoint complete: wrote 3365 buffers (20.5%); 0 WAL file(s) added, 0 removed, 4 recycled; write=169.658 s, sync=0.007 s, total=169.668 s; sync files=472, longest=0.001 s, average=0.001 s; distance=56379 kB, estimate=69817 kB; lsn=0/1CEFE990, redo lsn=0/18301018
+2026-10-06 14:06:05.802 UTC [33] LOG:  shutting down
+2026-10-06 14:06:05.802 UTC [33] LOG:  checkpoint starting: shutdown immediate
+2026-10-06 14:06:05.814 UTC [33] LOG:  checkpoint complete: wrote 1447 buffers (8.8%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.009 s, sync=0.002 s, total=0.013 s; sync files=92, longest=0.001 s, average=0.001 s; distance=77814 kB, estimate=77814 kB; lsn=0/1CEFEA08, redo lsn=0/1CEFEA08
+2026-10-06 14:06:05.851 UTC [1] LOG:  database system is shut down
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+2026-10-06 14:06:06.155 UTC [1] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-10-06 14:06:06.155 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-06 14:06:06.155 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-06 14:06:06.156 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-06 14:06:06.167 UTC [37] LOG:  database system was shut down at 2026-10-06 14:06:05 UTC
+2026-10-06 14:06:06.182 UTC [1] LOG:  database system is ready to accept connections
+2026-10-06 14:10:52.272 UTC [69] ERROR:  relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 14:10:52.272 UTC [69] STATEMENT:  create table account_account_config_move_on_temp_closure_authorized_role_list (account_account_config bigint not null, move_on_temp_closure_authorized_role_list bigint not null, primary key (account_account_config, move_on_temp_closure_authorized_role_list))
+2026-10-06 14:10:52.302 UTC [69] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 14:10:52.302 UTC [69] STATEMENT:  create table account_accounting_report_analytic_config_line_analytic_account_set (account_accounting_report_analytic_config_line bigint not null, analytic_account_set bigint not null, primary key (account_accounting_report_analytic_config_line, analytic_account_set))
+2026-10-06 14:10:52.306 UTC [69] ERROR:  relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 14:10:52.306 UTC [69] STATEMENT:  create table account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list (account_analytic_move_line_query bigint not null, reverse_analytic_move_line_query_parameter_list bigint not null)
+2026-10-06 14:10:52.327 UTC [69] ERROR:  relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 14:10:52.327 UTC [69] STATEMENT:  create table contract_contract_template_additional_benefit_contract_line_list (contract_contract_template bigint not null, additional_benefit_contract_line_list bigint not null)
+2026-10-06 14:10:52.338 UTC [69] ERROR:  relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 14:10:52.338 UTC [69] STATEMENT:  create table production_prod_process_line_generated_purchase_order_product_set (production_prod_process_line bigint not null, generated_purchase_order_product_set bigint not null, primary key (production_prod_process_line, generated_purchase_order_product_set))
+2026-10-06 14:10:52.345 UTC [69] ERROR:  relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 14:10:52.345 UTC [69] STATEMENT:  create table stock_tracking_number_configuration_profile_profile_field_formula_set (stock_tracking_number_configuration_profile bigint not null, profile_field_formula_set bigint not null, primary key (stock_tracking_number_configuration_profile, profile_field_formula_set))
+2026-10-06 14:10:52.347 UTC [69] ERROR:  relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 14:10:52.347 UTC [69] STATEMENT:  create table studio_app_mobile_settings_customer_delivery_line_addition_role_set (studio_app_mobile_settings bigint not null, customer_delivery_line_addition_role_set bigint not null, primary key (studio_app_mobile_settings, customer_delivery_line_addition_role_set))
+2026-10-06 14:10:52.348 UTC [69] ERROR:  relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 14:10:52.348 UTC [69] STATEMENT:  create table studio_app_mobile_settings_supplier_arrival_line_addition_role_set (studio_app_mobile_settings bigint not null, supplier_arrival_line_addition_role_set bigint not null, primary key (studio_app_mobile_settings, supplier_arrival_line_addition_role_set))
+2026-10-06 14:10:52.348 UTC [69] ERROR:  relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 14:10:52.348 UTC [69] STATEMENT:  create table studio_app_mobile_settings_verify_customer_delivery_line_role_set (studio_app_mobile_settings bigint not null, verify_customer_delivery_line_role_set bigint not null, primary key (studio_app_mobile_settings, verify_customer_delivery_line_role_set))
+2026-10-06 14:10:52.349 UTC [69] ERROR:  relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 14:10:52.349 UTC [69] STATEMENT:  create table studio_app_mobile_settings_verify_supplier_arrival_line_role_set (studio_app_mobile_settings bigint not null, verify_supplier_arrival_line_role_set bigint not null, primary key (studio_app_mobile_settings, verify_supplier_arrival_line_role_set))
+2026-10-06 14:10:52.408 UTC [69] ERROR:  relation "account_account_config_cash_position_variation_debit_account_id" already exists
+2026-10-06 14:10:52.408 UTC [69] STATEMENT:  create index account_account_config_cash_position_variation_debit_account_IDX on account_account_config (cash_position_variation_debit_account)
+2026-10-06 14:10:52.408 UTC [69] ERROR:  relation "account_account_config_cash_position_variation_credit_account_i" already exists
+2026-10-06 14:10:52.408 UTC [69] STATEMENT:  create index account_account_config_cash_position_variation_credit_account_IDX on account_account_config (cash_position_variation_credit_account)
+2026-10-06 14:10:52.409 UTC [69] ERROR:  relation "account_account_config_purchase_invoices_details_print_template" already exists
+2026-10-06 14:10:52.409 UTC [69] STATEMENT:  create index account_account_config_purchase_invoices_details_print_template_IDX on account_account_config (purchase_invoices_details_print_template)
+2026-10-06 14:10:52.413 UTC [69] ERROR:  relation "account_account_management_purch_fixed_assets_tax_vat_system1ac" already exists
+2026-10-06 14:10:52.413 UTC [69] STATEMENT:  create index account_account_management_purch_fixed_assets_tax_vat_system1account_IDX on account_account_management (purch_fixed_assets_tax_vat_system1account)
+2026-10-06 14:10:52.414 UTC [69] ERROR:  relation "account_account_management_purch_fixed_assets_tax_vat_system2ac" already exists
+2026-10-06 14:10:52.414 UTC [69] STATEMENT:  create index account_account_management_purch_fixed_assets_tax_vat_system2account_IDX on account_account_management (purch_fixed_assets_tax_vat_system2account)
+2026-10-06 14:10:52.422 UTC [69] ERROR:  relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 14:10:52.422 UTC [69] STATEMENT:  create index account_accounting_report_analytic_config_line_analytic_account_IDX on account_accounting_report_analytic_config_line (analytic_account)
+2026-10-06 14:10:52.423 UTC [69] ERROR:  relation "account_accounting_report_analytic_config_line_accounting_repor" already exists
+2026-10-06 14:10:52.423 UTC [69] STATEMENT:  create index account_accounting_report_analytic_config_line_accounting_report_IDX on account_accounting_report_analytic_config_line (accounting_report)
+2026-10-06 14:10:52.424 UTC [69] ERROR:  relation "account_accounting_report_move_line_payment_move_line_distribut" already exists
+2026-10-06 14:10:52.424 UTC [69] STATEMENT:  create index account_accounting_report_move_line_payment_move_line_distribution_IDX on account_accounting_report_move_line (payment_move_line_distribution)
+2026-10-06 14:10:52.426 UTC [69] ERROR:  relation "account_accounting_report_value_accounting_report_config_line_i" already exists
+2026-10-06 14:10:52.426 UTC [69] STATEMENT:  create index account_accounting_report_value_accounting_report_config_line_IDX on account_accounting_report_value (accounting_report_config_line)
+2026-10-06 14:10:52.427 UTC [69] ERROR:  relation "account_accounting_report_value_accounting_report_config_line_c" already exists
+2026-10-06 14:10:52.427 UTC [69] STATEMENT:  create index account_accounting_report_value_accounting_report_config_line_column_IDX on account_accounting_report_value (accounting_report_config_line_column)
+2026-10-06 14:10:52.428 UTC [69] ERROR:  relation "account_accounting_situation_invoice_message_template_on_valida" already exists
+2026-10-06 14:10:52.428 UTC [69] STATEMENT:  create index account_accounting_situation_invoice_message_template_on_validate_IDX on account_accounting_situation (invoice_message_template_on_validate)
+2026-10-06 14:10:52.437 UTC [69] ERROR:  relation "account_analytic_move_line_query_parameter_analytic_move_line_s" already exists
+2026-10-06 14:10:52.437 UTC [69] STATEMENT:  create index account_analytic_move_line_query_parameter_analytic_move_line_search_IDX on account_analytic_move_line_query_parameter (analytic_move_line_search)
+2026-10-06 14:10:52.458 UTC [69] ERROR:  relation "account_fixed_asset_category_appro_extraord_depreciation_expens" already exists
+2026-10-06 14:10:52.458 UTC [69] STATEMENT:  create index account_fixed_asset_category_appro_extraord_depreciation_expense_account_IDX on account_fixed_asset_category (appro_extraord_depreciation_expense_account)
+2026-10-06 14:10:52.459 UTC [69] ERROR:  relation "account_fixed_asset_category_expense_depreciation_derogatory_ac" already exists
+2026-10-06 14:10:52.459 UTC [69] STATEMENT:  create index account_fixed_asset_category_expense_depreciation_derogatory_account_IDX on account_fixed_asset_category (expense_depreciation_derogatory_account)
+2026-10-06 14:10:52.459 UTC [69] ERROR:  relation "account_fixed_asset_category_capital_depreciation_derogatory_ac" already exists
+2026-10-06 14:10:52.459 UTC [69] STATEMENT:  create index account_fixed_asset_category_capital_depreciation_derogatory_account_IDX on account_fixed_asset_category (capital_depreciation_derogatory_account)
+2026-10-06 14:10:52.459 UTC [69] ERROR:  relation "account_fixed_asset_category_income_depreciation_derogatory_acc" already exists
+2026-10-06 14:10:52.459 UTC [69] STATEMENT:  create index account_fixed_asset_category_income_depreciation_derogatory_account_IDX on account_fixed_asset_category (income_depreciation_derogatory_account)
+2026-10-06 14:10:52.460 UTC [69] ERROR:  relation "account_fixed_asset_category_wb_provision_fixed_asset_account_i" already exists
+2026-10-06 14:10:52.460 UTC [69] STATEMENT:  create index account_fixed_asset_category_wb_provision_fixed_asset_account_IDX on account_fixed_asset_category (wb_provision_fixed_asset_account)
+2026-10-06 14:10:52.460 UTC [69] ERROR:  relation "account_fixed_asset_category_app_provision_fixed_asset_account_" already exists
+2026-10-06 14:10:52.460 UTC [69] STATEMENT:  create index account_fixed_asset_category_app_provision_fixed_asset_account_IDX on account_fixed_asset_category (app_provision_fixed_asset_account)
+2026-10-06 14:10:52.461 UTC [69] ERROR:  relation "account_fixed_asset_derogatory_line_derogatory_depreciation_mov" already exists
+2026-10-06 14:10:52.461 UTC [69] STATEMENT:  create index account_fixed_asset_derogatory_line_derogatory_depreciation_move_IDX on account_fixed_asset_derogatory_line (derogatory_depreciation_move)
+2026-10-06 14:10:52.499 UTC [69] ERROR:  relation "account_substitute_pfp_validator_substitute_pfp_validator_user_" already exists
+2026-10-06 14:10:52.499 UTC [69] STATEMENT:  create index account_substitute_pfp_validator_substitute_pfp_validator_user_IDX on account_substitute_pfp_validator (substitute_pfp_validator_user)
+2026-10-06 14:10:52.512 UTC [69] ERROR:  relation "bankpayment_bank_order_file_format_country_bank_order_file_form" already exists
+2026-10-06 14:10:52.512 UTC [69] STATEMENT:  create index bankpayment_bank_order_file_format_country_bank_order_file_format_IDX on bankpayment_bank_order_file_format_country (bank_order_file_format)
+2026-10-06 14:10:52.516 UTC [69] ERROR:  relation "bankpayment_bank_payment_config_internal_bank_to_bank_account_i" already exists
+2026-10-06 14:10:52.516 UTC [69] STATEMENT:  create index bankpayment_bank_payment_config_internal_bank_to_bank_account_IDX on bankpayment_bank_payment_config (internal_bank_to_bank_account)
+2026-10-06 14:10:52.516 UTC [69] ERROR:  relation "bankpayment_bank_payment_config_external_bank_to_bank_account_i" already exists
+2026-10-06 14:10:52.516 UTC [69] STATEMENT:  create index bankpayment_bank_payment_config_external_bank_to_bank_account_IDX on bankpayment_bank_payment_config (external_bank_to_bank_account)
+2026-10-06 14:10:52.516 UTC [69] ERROR:  relation "bankpayment_bank_payment_config_bank_statement_lines_print_temp" already exists
+2026-10-06 14:10:52.516 UTC [69] STATEMENT:  create index bankpayment_bank_payment_config_bank_statement_lines_print_template_IDX on bankpayment_bank_payment_config (bank_statement_lines_print_template)
+2026-10-06 14:10:52.517 UTC [69] ERROR:  relation "bankpayment_bank_payment_config_bank_reconciliation_statement_p" already exists
+2026-10-06 14:10:52.517 UTC [69] STATEMENT:  create index bankpayment_bank_payment_config_bank_reconciliation_statement_print_template_IDX on bankpayment_bank_payment_config (bank_reconciliation_statement_print_template)
+2026-10-06 14:10:52.519 UTC [69] ERROR:  relation "bankpayment_bank_reconciliation_line_analytic_distribution_temp" already exists
+2026-10-06 14:10:52.519 UTC [69] STATEMENT:  create index bankpayment_bank_reconciliation_line_analytic_distribution_template_IDX on bankpayment_bank_reconciliation_line (analytic_distribution_template)
+2026-10-06 14:10:52.522 UTC [69] ERROR:  relation "bankpayment_bank_statement_rule_partner_bank_statement_query_id" already exists
+2026-10-06 14:10:52.522 UTC [69] STATEMENT:  create index bankpayment_bank_statement_rule_partner_bank_statement_query_IDX on bankpayment_bank_statement_rule (partner_bank_statement_query)
+2026-10-06 14:10:52.523 UTC [69] ERROR:  relation "bankpayment_bank_statement_rule_move_line_bank_statement_query_" already exists
+2026-10-06 14:10:52.523 UTC [69] STATEMENT:  create index bankpayment_bank_statement_rule_move_line_bank_statement_query_IDX on bankpayment_bank_statement_rule (move_line_bank_statement_query)
+2026-10-06 14:10:52.523 UTC [69] ERROR:  relation "bankpayment_bank_statement_rule_analytic_distribution_template_" already exists
+2026-10-06 14:10:52.523 UTC [69] STATEMENT:  create index bankpayment_bank_statement_rule_analytic_distribution_template_IDX on bankpayment_bank_statement_rule (analytic_distribution_template)
+2026-10-06 14:10:52.555 UTC [69] ERROR:  relation "base_import_export_translation_history_import_export_translatio" already exists
+2026-10-06 14:10:52.555 UTC [69] STATEMENT:  create index base_import_export_translation_history_import_export_translation_IDX on base_import_export_translation_history (import_export_translation)
+2026-10-06 14:10:52.673 UTC [69] ERROR:  relation "intervention_intervention_config_customer_request_creation_mess" already exists
+2026-10-06 14:10:52.673 UTC [69] STATEMENT:  create index intervention_intervention_config_customer_request_creation_message_template_IDX on intervention_intervention_config (customer_request_creation_message_template)
+2026-10-06 14:10:52.673 UTC [69] ERROR:  relation "intervention_intervention_config_intervention_planification_mes" already exists
+2026-10-06 14:10:52.673 UTC [69] STATEMENT:  create index intervention_intervention_config_intervention_planification_message_template_IDX on intervention_intervention_config (intervention_planification_message_template)
+2026-10-06 14:10:52.674 UTC [69] ERROR:  relation "intervention_intervention_config_intervention_re_planification_" already exists
+2026-10-06 14:10:52.674 UTC [69] STATEMENT:  create index intervention_intervention_config_intervention_re_planification_message_template_IDX on intervention_intervention_config (intervention_re_planification_message_template)
+2026-10-06 14:10:52.674 UTC [69] ERROR:  relation "intervention_intervention_config_intervention_validation_messag" already exists
+2026-10-06 14:10:52.674 UTC [69] STATEMENT:  create index intervention_intervention_config_intervention_validation_message_template_IDX on intervention_intervention_config (intervention_validation_message_template)
+2026-10-06 14:10:52.676 UTC [69] ERROR:  relation "intervention_intervention_question_conditional_intervention_que" already exists
+2026-10-06 14:10:52.676 UTC [69] STATEMENT:  create index intervention_intervention_question_conditional_intervention_question_IDX on intervention_intervention_question (conditional_intervention_question)
+2026-10-06 14:10:52.677 UTC [69] ERROR:  relation "intervention_intervention_type_advanced_startup_monitoring_rang" already exists
+2026-10-06 14:10:52.677 UTC [69] STATEMENT:  create index intervention_intervention_type_advanced_startup_monitoring_range_IDX on intervention_intervention_type (advanced_startup_monitoring_range)
+2026-10-06 14:10:52.703 UTC [69] ERROR:  relation "production_bill_of_material_import_main_bill_of_material_genera" already exists
+2026-10-06 14:10:52.703 UTC [69] STATEMENT:  create index production_bill_of_material_import_main_bill_of_material_generated_IDX on production_bill_of_material_import (main_bill_of_material_generated)
+2026-10-06 14:10:52.703 UTC [69] ERROR:  relation "production_bill_of_material_import_line_bill_of_material_import" already exists
+2026-10-06 14:10:52.703 UTC [69] STATEMENT:  create index production_bill_of_material_import_line_bill_of_material_import_IDX on production_bill_of_material_import_line (bill_of_material_import)
+2026-10-06 14:10:52.704 UTC [69] ERROR:  relation "production_bill_of_material_import_line_parent_bomimport_line_i" already exists
+2026-10-06 14:10:52.704 UTC [69] STATEMENT:  create index production_bill_of_material_import_line_parent_bomimport_line_IDX on production_bill_of_material_import_line (parent_bomimport_line)
+2026-10-06 14:10:52.706 UTC [69] ERROR:  relation "production_configurator_prod_process_produced_product_stock_loc" already exists
+2026-10-06 14:10:52.706 UTC [69] STATEMENT:  create index production_configurator_prod_process_produced_product_stock_location_IDX on production_configurator_prod_process (produced_product_stock_location)
+2026-10-06 14:10:52.706 UTC [69] ERROR:  relation "production_configurator_prod_process_workshop_stock_location_id" already exists
+2026-10-06 14:10:52.706 UTC [69] STATEMENT:  create index production_configurator_prod_process_workshop_stock_location_IDX on production_configurator_prod_process (workshop_stock_location)
+2026-10-06 14:10:52.707 UTC [69] ERROR:  relation "production_configurator_prod_process_line_configurator_prod_pro" already exists
+2026-10-06 14:10:52.707 UTC [69] STATEMENT:  create index production_configurator_prod_process_line_configurator_prod_process_IDX on production_configurator_prod_process_line (configurator_prod_process)
+2026-10-06 14:10:52.708 UTC [69] ERROR:  relation "production_configurator_prod_product_configurator_prod_process_" already exists
+2026-10-06 14:10:52.708 UTC [69] STATEMENT:  create index production_configurator_prod_product_configurator_prod_process_line_IDX on production_configurator_prod_product (configurator_prod_process_line)
+2026-10-06 14:10:52.715 UTC [69] ERROR:  relation "production_prod_process_residual_products_default_stock_locatio" already exists
+2026-10-06 14:10:52.715 UTC [69] STATEMENT:  create index production_prod_process_residual_products_default_stock_location_IDX on production_prod_process (residual_products_default_stock_location)
+2026-10-06 14:10:52.718 UTC [69] ERROR:  relation "production_production_config_part_finish_mo_message_template_id" already exists
+2026-10-06 14:10:52.718 UTC [69] STATEMENT:  create index production_production_config_part_finish_mo_message_template_IDX on production_production_config (part_finish_mo_message_template)
+2026-10-06 14:10:52.718 UTC [69] ERROR:  relation "production_production_config_maintenance_bill_of_material_print" already exists
+2026-10-06 14:10:52.718 UTC [69] STATEMENT:  create index production_production_config_maintenance_bill_of_material_print_template_IDX on production_production_config (maintenance_bill_of_material_print_template)
+2026-10-06 14:10:52.719 UTC [69] ERROR:  relation "production_production_config_maintenance_manuf_order_print_temp" already exists
+2026-10-06 14:10:52.719 UTC [69] STATEMENT:  create index production_production_config_maintenance_manuf_order_print_template_IDX on production_production_config (maintenance_manuf_order_print_template)
+2026-10-06 14:10:52.719 UTC [69] ERROR:  relation "production_production_config_maintenance_prod_process_print_tem" already exists
+2026-10-06 14:10:52.719 UTC [69] STATEMENT:  create index production_production_config_maintenance_prod_process_print_template_IDX on production_production_config (maintenance_prod_process_print_template)
+2026-10-06 14:10:52.723 UTC [69] ERROR:  relation "production_workshop_sequence_config_line_workshop_stock_locatio" already exists
+2026-10-06 14:10:52.723 UTC [69] STATEMENT:  create index production_workshop_sequence_config_line_workshop_stock_location_IDX on production_workshop_sequence_config_line (workshop_stock_location)
+2026-10-06 14:10:52.726 UTC [69] ERROR:  relation "project_project_planning_time_display_planned_time_restricted_i" already exists
+2026-10-06 14:10:52.726 UTC [69] STATEMENT:  create index project_project_planning_time_display_planned_time_restricted_IDX on project_project_planning_time (display_planned_time_restricted)
+2026-10-06 14:10:52.732 UTC [69] ERROR:  relation "project_task_status_progress_by_category_project_task_category_" already exists
+2026-10-06 14:10:52.732 UTC [69] STATEMENT:  create index project_task_status_progress_by_category_project_task_category_IDX on project_task_status_progress_by_category (project_task_category)
+2026-10-06 14:10:52.753 UTC [69] ERROR:  relation "quality_quality_config_qi_action_distribution_print_template_id" already exists
+2026-10-06 14:10:52.753 UTC [69] STATEMENT:  create index quality_quality_config_qi_action_distribution_print_template_IDX on quality_quality_config (qi_action_distribution_print_template)
+2026-10-06 14:10:52.753 UTC [69] ERROR:  relation "quality_quality_config_qi_decision_distribution_print_template_" already exists
+2026-10-06 14:10:52.753 UTC [69] STATEMENT:  create index quality_quality_config_qi_decision_distribution_print_template_IDX on quality_quality_config (qi_decision_distribution_print_template)
+2026-10-06 14:10:52.768 UTC [69] ERROR:  relation "stock_default_stock_location_by_site_receipt_default_stock_loca" already exists
+2026-10-06 14:10:52.768 UTC [69] STATEMENT:  create index stock_default_stock_location_by_site_receipt_default_stock_location_IDX on stock_default_stock_location_by_site (receipt_default_stock_location)
+2026-10-06 14:10:52.768 UTC [69] ERROR:  relation "stock_default_stock_location_by_site_pickup_default_stock_locat" already exists
+2026-10-06 14:10:52.768 UTC [69] STATEMENT:  create index stock_default_stock_location_by_site_pickup_default_stock_location_IDX on stock_default_stock_location_by_site (pickup_default_stock_location)
+2026-10-06 14:10:52.773 UTC [69] ERROR:  relation "stock_partner_stock_settings_real_stock_move_message_template_i" already exists
+2026-10-06 14:10:52.773 UTC [69] STATEMENT:  create index stock_partner_stock_settings_real_stock_move_message_template_IDX on stock_partner_stock_settings (real_stock_move_message_template)
+2026-10-06 14:10:52.773 UTC [69] ERROR:  relation "stock_partner_stock_settings_planned_stock_move_message_templat" already exists
+2026-10-06 14:10:52.773 UTC [69] STATEMENT:  create index stock_partner_stock_settings_planned_stock_move_message_template_IDX on stock_partner_stock_settings (planned_stock_move_message_template)
+2026-10-06 14:10:52.773 UTC [69] ERROR:  relation "stock_partner_stock_settings_default_external_stock_location_id" already exists
+2026-10-06 14:10:52.773 UTC [69] STATEMENT:  create index stock_partner_stock_settings_default_external_stock_location_IDX on stock_partner_stock_settings (default_external_stock_location)
+2026-10-06 14:10:52.776 UTC [69] ERROR:  relation "stock_stock_config_supplier_arrival_cancellation_message_templa" already exists
+2026-10-06 14:10:52.776 UTC [69] STATEMENT:  create index stock_stock_config_supplier_arrival_cancellation_message_template_IDX on stock_stock_config (supplier_arrival_cancellation_message_template)
+2026-10-06 14:10:52.785 UTC [69] ERROR:  relation "stock_tracking_number_configuration_tracking_number_configurati" already exists
+2026-10-06 14:10:52.785 UTC [69] STATEMENT:  create index stock_tracking_number_configuration_tracking_number_configuration_profile_IDX on stock_tracking_number_configuration (tracking_number_configuration_profile)
+2026-10-06 14:10:52.786 UTC [69] ERROR:  relation "stock_tracking_number_configuration_profile_field_formula_meta_" already exists
+2026-10-06 14:10:52.786 UTC [69] STATEMENT:  create index stock_tracking_number_configuration_profile_field_formula_meta_field_IDX on stock_tracking_number_configuration_profile_field_formula (meta_field)
+2026-10-06 14:10:52.791 UTC [69] ERROR:  relation "studio_app_intervention_default_type_for_interventions_from_con" already exists
+2026-10-06 14:10:52.791 UTC [69] STATEMENT:  create index studio_app_intervention_default_type_for_interventions_from_contracts_IDX on studio_app_intervention (default_type_for_interventions_from_contracts)
+2026-10-06 14:10:52.792 UTC [69] ERROR:  relation "studio_app_intervention_default_request_source_batch_contract_i" already exists
+2026-10-06 14:10:52.792 UTC [69] STATEMENT:  create index studio_app_intervention_default_request_source_batch_contract_IDX on studio_app_intervention (default_request_source_batch_contract)
+2026-10-06 14:10:52.792 UTC [69] ERROR:  relation "studio_app_intervention_default_request_subject_batch_contract_" already exists
+2026-10-06 14:10:52.792 UTC [69] STATEMENT:  create index studio_app_intervention_default_request_subject_batch_contract_IDX on studio_app_intervention (default_request_subject_batch_contract)
+2026-10-06 14:10:52.792 UTC [69] ERROR:  relation "studio_app_intervention_default_intervention_category_batch_con" already exists
+2026-10-06 14:10:52.792 UTC [69] STATEMENT:  create index studio_app_intervention_default_intervention_category_batch_contract_IDX on studio_app_intervention (default_intervention_category_batch_contract)
+2026-10-06 14:10:52.797 UTC [69] ERROR:  relation "studio_app_supplychain_cancel_reason_on_changing_purchase_order" already exists
+2026-10-06 14:10:52.797 UTC [69] STATEMENT:  create index studio_app_supplychain_cancel_reason_on_changing_purchase_order_IDX on studio_app_supplychain (cancel_reason_on_changing_purchase_order)
+2026-10-06 14:10:52.814 UTC [69] ERROR:  relation "supplychain_customer_shipping_carriage_paid_shipping_costs_prod" already exists
+2026-10-06 14:10:52.814 UTC [69] STATEMENT:  create index supplychain_customer_shipping_carriage_paid_shipping_costs_product_IDX on supplychain_customer_shipping_carriage_paid (shipping_costs_product)
+2026-10-06 14:10:52.815 UTC [69] ERROR:  relation "supplychain_depreciation_rate_config_stock_rotation_category_id" already exists
+2026-10-06 14:10:52.815 UTC [69] STATEMENT:  create index supplychain_depreciation_rate_config_stock_rotation_category_IDX on supplychain_depreciation_rate_config (stock_rotation_category)
+2026-10-06 14:10:52.820 UTC [69] ERROR:  relation "supplychain_supply_chain_config_declaration_of_exch_goods_print" already exists
+2026-10-06 14:10:52.820 UTC [69] STATEMENT:  create index supplychain_supply_chain_config_declaration_of_exch_goods_print_template_IDX on supplychain_supply_chain_config (declaration_of_exch_goods_print_template)
+2026-10-06 14:10:52.820 UTC [69] ERROR:  relation "supplychain_supply_chain_config_declaration_of_exch_services_pr" already exists
+2026-10-06 14:10:52.820 UTC [69] STATEMENT:  create index supplychain_supply_chain_config_declaration_of_exch_services_print_template_IDX on supplychain_supply_chain_config (declaration_of_exch_services_print_template)
+2026-10-06 14:10:53.221 UTC [69] ERROR:  constraint "fk_1j939njcp99dw8w6mbmlq82jf" for relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 14:10:53.221 UTC [69] STATEMENT:  alter table if exists account_account_config_move_on_temp_closure_authorized_role_list add constraint FK_1j939njcp99dw8w6mbmlq82jf foreign key (move_on_temp_closure_authorized_role_list) references auth_role
+2026-10-06 14:10:53.222 UTC [69] ERROR:  constraint "fk_1p1v152ivqobvgiwe98c3f82b" for relation "account_account_config_move_on_temp_closure_authorized_role_lis" already exists
+2026-10-06 14:10:53.222 UTC [69] STATEMENT:  alter table if exists account_account_config_move_on_temp_closure_authorized_role_list add constraint FK_1p1v152ivqobvgiwe98c3f82b foreign key (account_account_config) references account_account_config
+2026-10-06 14:10:53.411 UTC [69] ERROR:  constraint "fk_2hdq6bbyxjerlmoiy6vcsixrh" for relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 14:10:53.411 UTC [69] STATEMENT:  alter table if exists account_accounting_report_analytic_config_line_analytic_account_set add constraint FK_2hdq6bbyxjerlmoiy6vcsixrh foreign key (analytic_account_set) references account_analytic_account
+2026-10-06 14:10:53.411 UTC [69] ERROR:  constraint "fk_4egpi09loy5p87kul8pf45f7x" for relation "account_accounting_report_analytic_config_line_analytic_account" already exists
+2026-10-06 14:10:53.411 UTC [69] STATEMENT:  alter table if exists account_accounting_report_analytic_config_line_analytic_account_set add constraint FK_4egpi09loy5p87kul8pf45f7x foreign key (account_accounting_report_analytic_config_line) references account_accounting_report_analytic_config_line
+2026-10-06 14:10:53.605 UTC [69] ERROR:  constraint "fk_rr0evhig9p26nv4jfsvktt6q4" for relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 14:10:53.605 UTC [69] STATEMENT:  alter table if exists account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list add constraint FK_rr0evhig9p26nv4jfsvktt6q4 foreign key (reverse_analytic_move_line_query_parameter_list) references account_analytic_move_line_query_parameter
+2026-10-06 14:10:53.605 UTC [69] ERROR:  constraint "fk_ff85nwbyev2cxqxqlxq336pjp" for relation "account_analytic_move_line_query_reverse_analytic_move_line_que" already exists
+2026-10-06 14:10:53.605 UTC [69] STATEMENT:  alter table if exists account_analytic_move_line_query_reverse_analytic_move_line_query_parameter_list add constraint FK_ff85nwbyev2cxqxqlxq336pjp foreign key (account_analytic_move_line_query) references account_analytic_move_line_query
+2026-10-06 14:10:55.616 UTC [69] ERROR:  constraint "fk_5jlcdpnop0nnm7400rkl04f76" for relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 14:10:55.616 UTC [69] STATEMENT:  alter table if exists contract_contract_template_additional_benefit_contract_line_list add constraint FK_5jlcdpnop0nnm7400rkl04f76 foreign key (additional_benefit_contract_line_list) references contract_contract_line
+2026-10-06 14:10:55.617 UTC [69] ERROR:  constraint "fk_10ci54vfx1bdddnl1ufkk7yih" for relation "contract_contract_template_additional_benefit_contract_line_lis" already exists
+2026-10-06 14:10:55.617 UTC [69] STATEMENT:  alter table if exists contract_contract_template_additional_benefit_contract_line_list add constraint FK_10ci54vfx1bdddnl1ufkk7yih foreign key (contract_contract_template) references contract_contract_template
+2026-10-06 14:10:56.903 UTC [69] ERROR:  constraint "fk_em8em05iwkd4m9ii0vjr9q9tq" for relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 14:10:56.903 UTC [69] STATEMENT:  alter table if exists production_prod_process_line_generated_purchase_order_product_set add constraint FK_em8em05iwkd4m9ii0vjr9q9tq foreign key (generated_purchase_order_product_set) references base_product
+2026-10-06 14:10:56.903 UTC [69] ERROR:  constraint "fk_l1p1wsp3rqlixvlpnhq9nhve5" for relation "production_prod_process_line_generated_purchase_order_product_s" already exists
+2026-10-06 14:10:56.903 UTC [69] STATEMENT:  alter table if exists production_prod_process_line_generated_purchase_order_product_set add constraint FK_l1p1wsp3rqlixvlpnhq9nhve5 foreign key (production_prod_process_line) references production_prod_process_line
+2026-10-06 14:10:57.896 UTC [69] ERROR:  constraint "fk_qtf2f4t170o73c7k988oobhk1" for relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 14:10:57.896 UTC [69] STATEMENT:  alter table if exists stock_tracking_number_configuration_profile_profile_field_formula_set add constraint FK_qtf2f4t170o73c7k988oobhk1 foreign key (profile_field_formula_set) references stock_tracking_number_configuration_profile_field_formula
+2026-10-06 14:10:57.897 UTC [69] ERROR:  constraint "fk_ar0ai60ydnl8dq4rtfydnt0uq" for relation "stock_tracking_number_configuration_profile_profile_field_formu" already exists
+2026-10-06 14:10:57.897 UTC [69] STATEMENT:  alter table if exists stock_tracking_number_configuration_profile_profile_field_formula_set add constraint FK_ar0ai60ydnl8dq4rtfydnt0uq foreign key (stock_tracking_number_configuration_profile) references stock_tracking_number_configuration_profile
+2026-10-06 14:10:58.028 UTC [69] ERROR:  constraint "fk_adupcq38srikawecrivgsxqkh" for relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 14:10:58.028 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_customer_delivery_line_addition_role_set add constraint FK_adupcq38srikawecrivgsxqkh foreign key (customer_delivery_line_addition_role_set) references auth_role
+2026-10-06 14:10:58.028 UTC [69] ERROR:  constraint "fk_chyilg1er8khfi26tc07m2iri" for relation "studio_app_mobile_settings_customer_delivery_line_addition_role" already exists
+2026-10-06 14:10:58.028 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_customer_delivery_line_addition_role_set add constraint FK_chyilg1er8khfi26tc07m2iri foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 14:10:58.032 UTC [69] ERROR:  constraint "fk_rsqp63etp0dvc0o3ofdvewchd" for relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 14:10:58.032 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_supplier_arrival_line_addition_role_set add constraint FK_rsqp63etp0dvc0o3ofdvewchd foreign key (supplier_arrival_line_addition_role_set) references auth_role
+2026-10-06 14:10:58.032 UTC [69] ERROR:  constraint "fk_2c59pgjkp04rilrv918vo58me" for relation "studio_app_mobile_settings_supplier_arrival_line_addition_role_" already exists
+2026-10-06 14:10:58.032 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_supplier_arrival_line_addition_role_set add constraint FK_2c59pgjkp04rilrv918vo58me foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 14:10:58.032 UTC [69] ERROR:  constraint "fk_el630uhqap7jdye2csa0bge3w" for relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 14:10:58.032 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_customer_delivery_line_role_set add constraint FK_el630uhqap7jdye2csa0bge3w foreign key (verify_customer_delivery_line_role_set) references auth_role
+2026-10-06 14:10:58.032 UTC [69] ERROR:  constraint "fk_h4kyehnfglncvj9nqpigyi201" for relation "studio_app_mobile_settings_verify_customer_delivery_line_role_s" already exists
+2026-10-06 14:10:58.032 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_customer_delivery_line_role_set add constraint FK_h4kyehnfglncvj9nqpigyi201 foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 14:10:58.036 UTC [69] ERROR:  constraint "fk_ku43h1pgh6x4n12adsymknuhf" for relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 14:10:58.036 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_supplier_arrival_line_role_set add constraint FK_ku43h1pgh6x4n12adsymknuhf foreign key (verify_supplier_arrival_line_role_set) references auth_role
+2026-10-06 14:10:58.036 UTC [69] ERROR:  constraint "fk_5tygg9xpid1p02c5yhcsvu78e" for relation "studio_app_mobile_settings_verify_supplier_arrival_line_role_se" already exists
+2026-10-06 14:10:58.036 UTC [69] STATEMENT:  alter table if exists studio_app_mobile_settings_verify_supplier_arrival_line_role_set add constraint FK_5tygg9xpid1p02c5yhcsvu78e foreign key (studio_app_mobile_settings) references studio_app_mobile_settings
+2026-10-06 14:11:06.266 UTC [35] LOG:  checkpoint starting: time
+2026-10-06 14:11:14.589 UTC [35] LOG:  checkpoint complete: wrote 85 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=8.320 s, sync=0.001 s, total=8.323 s; sync files=43, longest=0.001 s, average=0.001 s; distance=834 kB, estimate=834 kB; lsn=0/1CFD2DF8, redo lsn=0/1CFCF3B0

@@ -43,18 +43,18 @@ def assert_recovery_group(evidence,fixtures):
         assert len(last['native_counts']['order_counts']['IDEM-LOST'])==1
     else:
         failed=x['consumer-503'];first=x['first-delivery'];restart=x['consumer-restart'];replay=x['durable-event-replay']
-        n=failed['native_response']['failed'];assert n>0 and failed['native_response']['delivered']==0
-        assert all(r['http_status']==503 for r in failed['native_response']['attempts'])
-        assert failed['consumer']=={'receipts':[],'effects':[]} and all(not r['delivered'] and r['attempts']==1 for r in failed['native_after'])
-        assert first['native_response']['delivered']==n and first['native_response']['failed']==0
-        assert len(first['consumer']['receipts'])==len(first['consumer']['effects'])==n
-        assert all(r['deliveries']==1 for r in first['consumer']['receipts']) and all(r['applications']==1 for r in first['consumer']['effects'])
-        assert restart['pid_before']!=restart['pid_after'] and restart['before']==restart['after']==first['consumer']
-        assert replay['native_response']['delivered']==n and replay['native_response']['failed']==0
-        assert replay['consumer']['effects']==first['consumer']['effects']
-        assert all(r['deliveries']==2 for r in replay['consumer']['receipts'])
-        assert [{k:v for k,v in r.items() if k!='deliveries'} for r in replay['consumer']['receipts']]==[{k:v for k,v in r.items() if k!='deliveries'} for r in first['consumer']['receipts']]
-        assert all(r['delivered'] and r['attempts']==3 for r in replay['native_after'])
+        n=failed['native_response']['failed'];assert n>0 and failed['native_response']['delivered']==0,'Unavailable consumer must leave native events pending'
+        assert all(r['http_status']==503 and not r['error'] for r in failed['native_response']['attempts']),'A transport exception mapped to503 is not the required actual consumer503'
+        assert failed['consumer']=={'receipts':[],'effects':[]} and all(not r['delivered'] and r['attempts']==1 for r in failed['native_after']),'Unavailable consumer changed durable receipts/effects or native pending attempts'
+        assert first['native_response']['delivered']==n and first['native_response']['failed']==0,'First delivery must acknowledge every pending event'
+        assert len(first['consumer']['receipts'])==len(first['consumer']['effects'])==n,'First delivery requires one durable receipt/effect per event'
+        assert all(r['deliveries']==1 for r in first['consumer']['receipts']) and all(r['applications']==1 for r in first['consumer']['effects']),'First delivery duplicated a durable consumer effect'
+        assert restart['pid_before']!=restart['pid_after'] and restart['before']==restart['after']==first['consumer'],'Consumer process restart changed durable state or reused the same PID'
+        assert replay['native_response']['delivered']==n and replay['native_response']['failed']==0,'Replay failed to acknowledge every event'
+        assert replay['consumer']['effects']==first['consumer']['effects'],'Replay changed durable effects'
+        assert all(r['deliveries']==2 for r in replay['consumer']['receipts']),'Replay must count the second delivery of each event'
+        assert [{k:v for k,v in r.items() if k!='deliveries'} for r in replay['consumer']['receipts']]==[{k:v for k,v in r.items() if k!='deliveries'} for r in first['consumer']['receipts']],'Replay changed the original event identity/payload'
+        assert all(r['delivered'] and r['attempts']==3 for r in replay['native_after']),'Native outbox acknowledgement/attempts do not match503, delivery and replay'
         original={r['event_id']:json.loads(r['payload']) for r in failed['native_before']}
         assert set(original)=={r['event_id'] for r in replay['consumer']['receipts']}
         for r in replay['consumer']['receipts']:
@@ -120,37 +120,49 @@ class RecoveryCases(ApiCases):
         finally:self.stop_adapter()
         e['seconds']+=round(time.perf_counter()-start,3);self.store(e);return e
     def events(self):
-        e={'case':'IDEM04-EVENTS-RECOVERY','reference':REFERENCE,'revision':2,'complete':False,'steps':[]};start=time.perf_counter();process=None
+        e={'case':'IDEM04-EVENTS-RECOVERY','reference':REFERENCE,'revision':2,'complete':False,'steps':[],'consumer_processes':[]};start=time.perf_counter();process=None
         def native():return self.admin.action('ccm-core-audit-inspect','AUDIT')['events']
         with tempfile.TemporaryDirectory(prefix='ccm-private-consumer-') as directory:
             database=Path(directory)/'consumer.sqlite';flag=Path(directory)/'unavailable'
             def launch():
                 process=subprocess.Popen([sys.executable,str(Path(__file__).with_name('consumer.py')),'--database',str(database),'--fail-flag',str(flag)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
                 return process,'http://127.0.0.1:'+str(json.loads(process.stdout.readline())['listening_port'])+'/events'
+            def stop():
+                if process is None or process.stderr.closed:return
+                if process.poll() is None:process.terminate();process.wait(timeout=15)
+                e['consumer_processes'].append({'pid':process.pid,'exit_status':process.returncode,'stderr':process.stderr.read()})
+                process.stderr.close();process.stdout.close()
             try:
                 def dispatch(step,request):
                     step.update(request=request,native_before=native(),actor='admin')
-                    try:step['native_response']=self.admin.request('/ws/ccm/lab/events/dispatch',request)
+                    try:
+                        step['native_response']=self.admin.request('/ws/ccm/lab/events/dispatch',request);step['native_http_status']=self.admin.last_status
+                    except urllib.error.HTTPError as error:
+                        step['native_http_status']=error.code;raw=error.read().decode(errors='replace')
+                        try:step['native_error_response']=json.loads(raw)
+                        except ValueError:step['native_error_response']={'body':raw}
+                        raise
                     finally:step.update(native_after=native(),consumer=snapshot(database))
                 process,url=launch();flag.write_text('Synthetic503')
                 def failed(step):
                     dispatch(step,{'consumer_url':url,'replay':False})
-                    assert step['native_response']['failed']>0 and step['native_response']['delivered']==0
+                    assert step['native_response']['failed']>0 and step['native_response']['delivered']==0,'Synthetic503 must leave all native events pending: '+str(step['native_response'])
                 self.step(e,'consumer-503',failed);flag.unlink()
                 def delivered(step):
-                    dispatch(step,{'consumer_url':url,'replay':False});assert step['native_response']['failed']==0
+                    dispatch(step,{'consumer_url':url,'replay':False})
+                    assert step['native_response']['failed']==0,'First delivery failed; full requests, native attempts and durable snapshots retained: '+str(step['native_response'])
                 self.step(e,'first-delivery',delivered)
                 def restart(step):
                     nonlocal process,url
-                    step.update(before=snapshot(database),pid_before=process.pid);process.terminate();process.wait(timeout=15);process,url=launch();step.update(after=snapshot(database),pid_after=process.pid)
-                    assert step['before']==step['after'] and step['pid_before']!=step['pid_after']
+                    step.update(before=snapshot(database),pid_before=process.pid);stop();process,url=launch();step.update(after=snapshot(database),pid_after=process.pid)
+                    assert step['before']==step['after'] and step['pid_before']!=step['pid_after'],'Actual consumer restart must preserve durable state and change PID'
                 self.step(e,'consumer-restart',restart)
                 def replay(step):
                     dispatch(step,{'consumer_url':url,'replay':True})
                 self.step(e,'durable-event-replay',replay);assert_recovery_group(e,self.fixtures);e.update(status='PASS',complete=True)
             except Exception as error:e.update(status=exception_status(error),error=str(error),error_type=type(error).__name__)
             finally:
-                if process:process.terminate();process.wait(timeout=15)
+                stop()
         e['seconds']=round(time.perf_counter()-start,3);self.store(e);return e
 
 

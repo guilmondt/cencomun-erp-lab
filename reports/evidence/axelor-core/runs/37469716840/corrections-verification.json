@@ -1,0 +1,4224 @@
+{
+  "run_id": "37469716840",
+  "lab_commit": "4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "loaded_original_files": {
+    "files_loaded": 103,
+    "bytes_loaded": 124521710,
+    "all_hashes_verified": true
+  },
+  "phases": {
+    "primary": {
+      "groups": [
+        {
+          "case": "CO00-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "partial_gate_status": "PASS",
+          "evidence": "core-test/CO00-NATIVE.json"
+        },
+        {
+          "case": "CO01-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/CO01-NATIVE.json"
+        },
+        {
+          "case": "TAX01-S-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/TAX01-S-NATIVE.json"
+        },
+        {
+          "case": "TAX01-W-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "partial_gate_status": "PASS",
+          "evidence": "core-test/TAX01-W-NATIVE.json"
+        },
+        {
+          "case": "PROD01-04",
+          "source": "business",
+          "criteria": [
+            1,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Executed native operator CRUD with committed rereads",
+          "complete": true,
+          "evidence": "core-test/PROD01-04.json"
+        },
+        {
+          "case": "VAL01-04",
+          "source": "business",
+          "criteria": [
+            4,
+            5
+          ],
+          "minimum_revision": 1,
+          "status": "FAIL",
+          "observed_revision": 1,
+          "reason": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+          "complete": false,
+          "evidence": "core-test/VAL01-04.json"
+        },
+        {
+          "case": "STATE01-04",
+          "source": "business",
+          "criteria": [
+            3,
+            4
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/STATE01-04.json"
+        },
+        {
+          "case": "INV01-03-INSUFFICIENT",
+          "source": "business",
+          "criteria": [
+            4,
+            5
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/INV01-03-INSUFFICIENT.json"
+        },
+        {
+          "case": "FX01-03-MONEY01-03",
+          "source": "business",
+          "criteria": [
+            3,
+            5
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization",
+          "complete": true,
+          "evidence": "core-test/FX01-03-MONEY01-03.json",
+          "partial_conversion_status": "PASS"
+        },
+        {
+          "case": "PO01-09-NATIVE",
+          "source": "finance",
+          "criteria": [
+            1,
+            3,
+            7
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/PO01-09-NATIVE.json"
+        },
+        {
+          "case": "PO07-09-REVISION-SELF",
+          "source": "finance",
+          "criteria": [
+            3,
+            7
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/PO07-09-REVISION-SELF.json"
+        },
+        {
+          "case": "CASH00-06-NATIVE",
+          "source": "finance",
+          "criteria": [
+            1,
+            3,
+            5,
+            6
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/CASH00-06-NATIVE.json"
+        },
+        {
+          "case": "BANK-BOOK-FIXTURE",
+          "source": "finance",
+          "criteria": [
+            1,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Four confirmed native advance payments with posted GL and unallocated balances",
+          "complete": true,
+          "evidence": "core-test/BANK-BOOK-FIXTURE.json"
+        },
+        {
+          "case": "BANK01-05-NATIVE",
+          "source": "finance",
+          "criteria": [
+            1,
+            3,
+            8
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/BANK01-05-NATIVE.json"
+        },
+        {
+          "case": "API01-06-SIX-ROUTES",
+          "source": "http",
+          "criteria": [
+            3,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test/API01-06-SIX-ROUTES.json"
+        },
+        {
+          "case": "IDEM01-02-CREATE-CONCURRENT",
+          "source": "http",
+          "criteria": [
+            3,
+            4,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test/IDEM01-02-CREATE-CONCURRENT.json"
+        },
+        {
+          "case": "PERM-API-NATIVE",
+          "source": "http",
+          "criteria": [
+            3,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test/PERM-API-NATIVE.json"
+        },
+        {
+          "case": "CASH04-06-HTTP-IMMUTABLE",
+          "source": "http",
+          "criteria": [
+            3,
+            6,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/CASH04-06-HTTP-IMMUTABLE.json"
+        },
+        {
+          "case": "SEARCH01-04-NATIVE",
+          "source": "http",
+          "criteria": [
+            3,
+            12
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Native queries and complete nonduplicated pages under the real reader",
+          "complete": true,
+          "evidence": "core-test/SEARCH01-04-NATIVE.json"
+        },
+        {
+          "case": "TAX02-04-IDEM-CONCURRENT",
+          "source": "http",
+          "criteria": [
+            3,
+            4,
+            5,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native concurrency/audit/configuration reads checked",
+          "complete": true,
+          "evidence": "core-test/TAX02-04-IDEM-CONCURRENT.json"
+        },
+        {
+          "case": "BANK-CONCURRENT-1000",
+          "source": "http",
+          "criteria": [
+            8,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/BANK-CONCURRENT-1000.json"
+        },
+        {
+          "case": "MCP01-06-STDIO",
+          "source": "http",
+          "criteria": [
+            3,
+            9,
+            10
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test/MCP01-06-STDIO.json"
+        },
+        {
+          "case": "IDEM03-LOST-RESTART",
+          "source": "recovery",
+          "criteria": [
+            4,
+            9,
+            14
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Real process loss/restart and durable native/consumer reads verified",
+          "complete": true,
+          "evidence": "core-test/IDEM03-LOST-RESTART.json"
+        },
+        {
+          "case": "IDEM04-EVENTS-RECOVERY",
+          "source": "recovery",
+          "criteria": [
+            3,
+            6,
+            7,
+            9,
+            14
+          ],
+          "minimum_revision": 2,
+          "status": "FAIL",
+          "observed_revision": 2,
+          "reason": "",
+          "complete": false,
+          "evidence": "core-test/IDEM04-EVENTS-RECOVERY.json"
+        },
+        {
+          "case": "FIXTURE-HASH-NATIVE-EXPORT",
+          "source": "audit",
+          "criteria": [
+            1,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "16 bundled hashes and committed native products/customers/9 role metadata/USD+VES",
+          "complete": true,
+          "evidence": "core-test/FIXTURE-HASH-NATIVE-EXPORT.json"
+        },
+        {
+          "case": "AUDIT01-03-NATIVE",
+          "source": "audit",
+          "criteria": [
+            3,
+            6,
+            7,
+            8
+          ],
+          "minimum_revision": 2,
+          "status": "FAIL",
+          "observed_revision": 2,
+          "reason": "immutable-admin-delete: explicit native authorization rejection required",
+          "complete": false,
+          "evidence": "core-test/AUDIT01-03-NATIVE.json"
+        },
+        {
+          "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+          "source": "audit",
+          "criteria": [
+            1,
+            4,
+            5,
+            8,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native concurrency/audit/configuration reads checked",
+          "complete": true,
+          "evidence": "core-test/IDEM-TAX-NATIVE-EFFECT-COUNTS.json"
+        },
+        {
+          "case": "SUPPORTED-CONFIGURATION",
+          "source": "audit",
+          "criteria": [
+            1,
+            3,
+            11,
+            14
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native concurrency/audit/configuration reads checked",
+          "complete": true,
+          "evidence": "core-test/SUPPORTED-CONFIGURATION.json"
+        },
+        {
+          "case": "STATE-UNKNOWN-ATOMIC",
+          "source": "business",
+          "criteria": [
+            3,
+            4
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/STATE-UNKNOWN-ATOMIC.json"
+        },
+        {
+          "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+          "source": "business",
+          "criteria": [
+            3,
+            4,
+            5
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/STATE-DELIVERY-WITHOUT-ACCEPTANCE.json"
+        },
+        {
+          "case": "STATE-WEB-NO-GUIDE",
+          "source": "business",
+          "criteria": [
+            3,
+            4,
+            5
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test/STATE-WEB-NO-GUIDE.json"
+        },
+        {
+          "case": "STATE-CANCEL-BEFORE-HANDOVER",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5
+          ],
+          "minimum_revision": 2,
+          "status": "FAIL",
+          "observed_revision": 2,
+          "reason": "Executed native service refuses required cancellation: observed functional contract failure, not environment blocker",
+          "complete": false,
+          "evidence": "core-test/STATE-CANCEL-BEFORE-HANDOVER.json"
+        },
+        {
+          "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+          "source": "http",
+          "criteria": [
+            3,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test/MCP-FORBIDDEN-CRITICAL-ACTIONS.json"
+        },
+        {
+          "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+          "source": "audit",
+          "criteria": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            10
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test/MCP-DENIALS-NATIVE-EFFECTS-AUDIT.json"
+        }
+      ],
+      "counts": {
+        "PASS": 30,
+        "FAIL": 4
+      },
+      "criteria": [
+        {
+          "criterion": 1,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "PROD01-04",
+            "PO01-09-NATIVE",
+            "CASH00-06-NATIVE",
+            "BANK-BOOK-FIXTURE",
+            "BANK01-05-NATIVE",
+            "FIXTURE-HASH-NATIVE-EXPORT",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "SUPPORTED-CONFIGURATION",
+            "STATE-CANCEL-BEFORE-HANDOVER"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 2,
+          "status": "PASS",
+          "groups": [],
+          "reason": "Requires actual build suites, WAR hash, pins and clean pinned upstream diffs from this run"
+        },
+        {
+          "criterion": 3,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "STATE01-04",
+            "FX01-03-MONEY01-03",
+            "PO01-09-NATIVE",
+            "PO07-09-REVISION-SELF",
+            "CASH00-06-NATIVE",
+            "BANK01-05-NATIVE",
+            "API01-06-SIX-ROUTES",
+            "IDEM01-02-CREATE-CONCURRENT",
+            "PERM-API-NATIVE",
+            "CASH04-06-HTTP-IMMUTABLE",
+            "SEARCH01-04-NATIVE",
+            "TAX02-04-IDEM-CONCURRENT",
+            "MCP01-06-STDIO",
+            "IDEM04-EVENTS-RECOVERY",
+            "AUDIT01-03-NATIVE",
+            "SUPPORTED-CONFIGURATION",
+            "STATE-UNKNOWN-ATOMIC",
+            "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+            "STATE-WEB-NO-GUIDE",
+            "STATE-CANCEL-BEFORE-HANDOVER",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 4,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "VAL01-04",
+            "STATE01-04",
+            "INV01-03-INSUFFICIENT",
+            "IDEM01-02-CREATE-CONCURRENT",
+            "TAX02-04-IDEM-CONCURRENT",
+            "IDEM03-LOST-RESTART",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "STATE-UNKNOWN-ATOMIC",
+            "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+            "STATE-WEB-NO-GUIDE",
+            "STATE-CANCEL-BEFORE-HANDOVER",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 5,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "PROD01-04",
+            "VAL01-04",
+            "INV01-03-INSUFFICIENT",
+            "FX01-03-MONEY01-03",
+            "CASH00-06-NATIVE",
+            "TAX02-04-IDEM-CONCURRENT",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+            "STATE-WEB-NO-GUIDE",
+            "STATE-CANCEL-BEFORE-HANDOVER",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 6,
+          "status": "FAIL",
+          "groups": [
+            "CASH00-06-NATIVE",
+            "CASH04-06-HTTP-IMMUTABLE",
+            "IDEM04-EVENTS-RECOVERY",
+            "AUDIT01-03-NATIVE",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 7,
+          "status": "FAIL",
+          "groups": [
+            "PO01-09-NATIVE",
+            "PO07-09-REVISION-SELF",
+            "IDEM04-EVENTS-RECOVERY",
+            "AUDIT01-03-NATIVE",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 8,
+          "status": "FAIL",
+          "groups": [
+            "BANK01-05-NATIVE",
+            "BANK-CONCURRENT-1000",
+            "AUDIT01-03-NATIVE",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 9,
+          "status": "FAIL",
+          "groups": [
+            "API01-06-SIX-ROUTES",
+            "IDEM01-02-CREATE-CONCURRENT",
+            "PERM-API-NATIVE",
+            "CASH04-06-HTTP-IMMUTABLE",
+            "TAX02-04-IDEM-CONCURRENT",
+            "BANK-CONCURRENT-1000",
+            "MCP01-06-STDIO",
+            "IDEM03-LOST-RESTART",
+            "IDEM04-EVENTS-RECOVERY",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 10,
+          "status": "PASS",
+          "groups": [
+            "MCP01-06-STDIO",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 11,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "PROD01-04",
+            "BANK-BOOK-FIXTURE",
+            "FIXTURE-HASH-NATIVE-EXPORT",
+            "SUPPORTED-CONFIGURATION"
+          ],
+          "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+        },
+        {
+          "criterion": 12,
+          "status": "FAIL",
+          "groups": [
+            "SEARCH01-04-NATIVE"
+          ],
+          "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+        },
+        {
+          "criterion": 13,
+          "status": "BLOCKED",
+          "groups": [],
+          "reason": "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
+        },
+        {
+          "criterion": 14,
+          "status": "FAIL",
+          "groups": [
+            "IDEM03-LOST-RESTART",
+            "IDEM04-EVENTS-RECOVERY",
+            "SUPPORTED-CONFIGURATION"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        }
+      ],
+      "criteria_counts": {
+        "FAIL": 11,
+        "PASS": 2,
+        "BLOCKED": 1
+      },
+      "corrections": {
+        "tax_concurrency": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test/TAX02-04-IDEM-CONCURRENT.json",
+            "bytes": 210728,
+            "sha256": "8b0b4002be4070b69320941105859d6e8d816713540ed5937079ad5d9ff9548e",
+            "role": "group:TAX02-04-IDEM-CONCURRENT"
+          },
+          "actual_sessions_and_durable_reads": [
+            {
+              "case": "TAX-CONC-S",
+              "step_status": "PASS",
+              "physical": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  false,
+                  true
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-S",
+                  "native_id": 29,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "FULFILLED",
+                  "channel": "STORE",
+                  "guide": null,
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 17,
+                  "saleOrder_status": 3,
+                  "delivery_id": 51,
+                  "delivery_status": 3,
+                  "invoice_id": 14,
+                  "invoice_status": 3
+                },
+                "keys_after": 4,
+                "events_after": 2
+              },
+              "settlement": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  true,
+                  false
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-S",
+                  "native_id": 29,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "SETTLED",
+                  "channel": "STORE",
+                  "guide": null,
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 17,
+                  "saleOrder_status": 3,
+                  "delivery_id": 51,
+                  "delivery_status": 3,
+                  "invoice_id": 14,
+                  "invoice_status": 3
+                },
+                "keys_after": 5,
+                "events_after": 3
+              }
+            },
+            {
+              "case": "TAX-CONC-W",
+              "step_status": "PASS",
+              "physical": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  true,
+                  false
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-W",
+                  "native_id": 30,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "SHIPPED",
+                  "channel": "WEB",
+                  "guide": "GUIDE-LAB-TAX-001",
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 18,
+                  "saleOrder_status": 3,
+                  "delivery_id": 53,
+                  "delivery_status": 3,
+                  "invoice_id": 15,
+                  "invoice_status": 3
+                },
+                "keys_after": 5,
+                "events_after": 2
+              },
+              "settlement": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  false,
+                  true
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-W",
+                  "native_id": 30,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "SETTLED",
+                  "channel": "WEB",
+                  "guide": "GUIDE-LAB-TAX-001",
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 18,
+                  "saleOrder_status": 3,
+                  "delivery_id": 53,
+                  "delivery_status": 3,
+                  "invoice_id": 15,
+                  "invoice_status": 3
+                },
+                "keys_after": 6,
+                "events_after": 3
+              }
+            }
+          ]
+        },
+        "benchmark": {
+          "observed_status": "PASS",
+          "original": {
+            "path": "core-test/benchmark.json",
+            "bytes": 4072421,
+            "sha256": "e2e54fb0b2471dc196a28981c62e9c154f69a999e6945f4155911f34395e005a",
+            "role": "benchmark"
+          },
+          "samples_including_warmup": 3060,
+          "loaded_counts": {
+            "products": 1000,
+            "customers": 100,
+            "orders": 1000,
+            "bank_rows": 1000
+          },
+          "operations": [
+            {
+              "operation": "search",
+              "samples": 1000,
+              "warmup": 20,
+              "errors": 0,
+              "p50": 23.65852,
+              "p95": 38.68102,
+              "p99": 80.09883
+            },
+            {
+              "operation": "inventory",
+              "samples": 1000,
+              "warmup": 20,
+              "errors": 0,
+              "p50": 27.02869,
+              "p95": 32.38729,
+              "p99": 82.22944
+            },
+            {
+              "operation": "create",
+              "samples": 1000,
+              "warmup": 20,
+              "errors": 0,
+              "p50": 30.79762,
+              "p95": 42.34433,
+              "p99": 87.66176
+            }
+          ],
+          "error": null
+        },
+        "private_permissions": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test/PERM-API-NATIVE.json",
+            "bytes": 28207253,
+            "sha256": "47e5b2d56a62710656328b934f3e22d18e0ccfdf685dc6367072181d258f4c90",
+            "role": "group:PERM-API-NATIVE"
+          },
+          "steps": {
+            "private-crud": {
+              "actual_attempts": 27,
+              "step_status": "PASS",
+              "explicit_native_authorization_causes": 27,
+              "native_http_protocol_counts": {
+                "200/-1": 27
+              },
+              "actual_remove_paths": [
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmAudit/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 257
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmRequestKey/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 106
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOutboxEvent/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmAudit/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 257
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmRequestKey/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 106
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOutboxEvent/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmAudit/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 257
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmRequestKey/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 106
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOutboxEvent/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                }
+              ]
+            },
+            "native-critical-crud": {
+              "actual_attempts": 81,
+              "step_status": "PASS",
+              "explicit_native_authorization_causes": 81,
+              "native_http_protocol_counts": {
+                "200/-1": 81
+              },
+              "actual_remove_paths": [
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.purchase.db.PurchaseOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmPurchase/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 21
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmCashClose/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 2
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankImport/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 3
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankRow/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatement/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatementLine/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.account.db.Move/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 71
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.purchase.db.PurchaseOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmPurchase/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 21
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmCashClose/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 2
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankImport/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 3
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankRow/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatement/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatementLine/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.account.db.Move/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 71
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.purchase.db.PurchaseOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmPurchase/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 21
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmCashClose/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 2
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankImport/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 3
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankRow/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatement/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatementLine/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.account.db.Move/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 71
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                }
+              ]
+            },
+            "native-official-actions": {
+              "actual_attempts": 3,
+              "step_status": "PASS",
+              "explicit_native_authorization_causes": 3,
+              "native_http_protocol_counts": {
+                "200/-1": 3
+              },
+              "actual_remove_paths": []
+            }
+          },
+          "adapter_403_contract_unchanged": true
+        },
+        "audit": {
+          "derived_status": "FAIL",
+          "complete_original": {
+            "path": "core-test/AUDIT01-03-NATIVE.json",
+            "bytes": 5207323,
+            "sha256": "94b624648b67b1ef73c8392506a168782ce48a77a290605a03834d9604bc0e0f",
+            "role": "group:AUDIT01-03-NATIVE"
+          },
+          "steps": [
+            {
+              "name": "semantic-native-records",
+              "status": "PASS",
+              "http_status": null,
+              "error": null
+            },
+            {
+              "name": "authorized-manager-read",
+              "status": "PASS",
+              "http_status": 200,
+              "error": null
+            },
+            {
+              "name": "immutable-manager-edit",
+              "status": "PASS",
+              "http_status": 200,
+              "error": null
+            },
+            {
+              "name": "immutable-admin-delete",
+              "status": "FAIL",
+              "http_status": 200,
+              "error": "immutable-admin-delete: explicit native authorization rejection required"
+            }
+          ]
+        },
+        "cash": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test/CASH00-06-NATIVE.json",
+            "bytes": 2927061,
+            "sha256": "5db76a3485e4ee43b00722d5f2cfe86eb1e7fa0641f7c0a210e17e4ddde9fb99",
+            "role": "group:CASH00-06-NATIVE"
+          },
+          "steps": [
+            {
+              "name": "native-source-fixture",
+              "status": "PASS",
+              "error": null
+            },
+            {
+              "name": "native-source-replay",
+              "status": "PASS",
+              "error": null
+            },
+            {
+              "name": "CS000",
+              "status": "PASS",
+              "error": null
+            },
+            {
+              "name": "CS001",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        "mcp_complete_parity": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test/MCP01-06-STDIO.json",
+            "bytes": 128280,
+            "sha256": "7f8253cbb952d392460f78efdb2fb7afbff74f4ebe4e8d7bacc25085ed2e8272",
+            "role": "group:MCP01-06-STDIO"
+          },
+          "complete_pairs": [
+            {
+              "tool": "searchProducts",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/products/search?q=P001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/products/search?q=P001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "getInventory",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/inventory/P001?warehouse=WH-LAB-001-API-BASE&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/inventory/P001?warehouse=WH-LAB-001-API-BASE&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "getCustomerBalance",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/customers/C002/balance?company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/customers/C002/balance?company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "getCashStatus",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/cash/status?id=CS001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/cash/status?id=CS001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createPurchaseDraft",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO"
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 201,
+              "api_request_rate": "0",
+              "api_request_rate_type": "str",
+              "mcp_request_rate": "0",
+              "mcp_request_rate_type": "str",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createCasheaOrder",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO"
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 201,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createPurchaseDraft",
+              "direction": "API_then_MCP",
+              "api_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO-API-FIRST",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO-API-FIRST"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO-API-FIRST",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO-API-FIRST"
+              },
+              "api_http_status": 201,
+              "mcp_http_status": 200,
+              "api_request_rate": "0",
+              "api_request_rate_type": "str",
+              "mcp_request_rate": "0",
+              "mcp_request_rate_type": "str",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createCasheaOrder",
+              "direction": "API_then_MCP",
+              "api_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO-API-FIRST",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO-API-FIRST"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO-API-FIRST",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO-API-FIRST"
+              },
+              "api_http_status": 201,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            }
+          ],
+          "omitted_business_fields": []
+        }
+      },
+      "functional_findings": {
+        "VAL01-04": {
+          "derived_status": "FAIL",
+          "complete_original": {
+            "path": "core-test/VAL01-04.json",
+            "bytes": 106284,
+            "sha256": "add3706eef18a534a6bb9e4feb7de903164bef476219f82b5bd94cd520958e64",
+            "role": "group:VAL01-04"
+          },
+          "error": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+          "steps": [
+            {
+              "name": "negative-native-cost",
+              "status": "FAIL",
+              "assertion_error": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+              "native_probes": {
+                "invalid_attempt": {
+                  "input_cost": "-0.01",
+                  "qty": "1",
+                  "reloaded_status": 3,
+                  "reloaded_lines": [
+                    {
+                      "id": 127,
+                      "native_move_id": 26,
+                      "unit_cost": "-0.0100000000",
+                      "qty": "1.0000000000"
+                    }
+                  ],
+                  "stage": "native-stock-realized-and-reloaded",
+                  "diagnostic_rollback_only": true,
+                  "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+                  "error": "Native receipt accepted and realized; diagnostic rollback only"
+                },
+                "valid_control": {
+                  "input_cost": "30.00",
+                  "qty": "1",
+                  "reloaded_status": 3,
+                  "reloaded_lines": [
+                    {
+                      "id": 125,
+                      "native_move_id": 25,
+                      "unit_cost": "30.0000000000",
+                      "qty": "1.0000000000"
+                    }
+                  ],
+                  "stage": "native-stock-realized-and-reloaded",
+                  "diagnostic_rollback_only": true,
+                  "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+                  "error": "Native receipt accepted and realized; diagnostic rollback only"
+                }
+              }
+            }
+          ]
+        },
+        "STATE-CANCEL-BEFORE-HANDOVER": {
+          "derived_status": "FAIL",
+          "complete_original": {
+            "path": "core-test/STATE-CANCEL-BEFORE-HANDOVER.json",
+            "bytes": 62775,
+            "sha256": "a7b799b46f43d4f7a1337fd4b0c97199181cded531f6610888ddd5731d383fe1",
+            "role": "group:STATE-CANCEL-BEFORE-HANDOVER"
+          },
+          "error": "Observed functional failure of required confirmed native cancellation; three actual attempts preserved",
+          "steps": [
+            {
+              "name": "STORE-APPROVED",
+              "status": "FAIL",
+              "http_status": 422,
+              "expected_state": "CANCELLED",
+              "reason": "Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged",
+              "native_response": {
+                "error_type": "com.axelor.apps.base.AxelorException",
+                "error": "Vous pouvez seulement annuler un devis brouillon ou finalis\u00e9."
+              }
+            },
+            {
+              "name": "WEB-APPROVED",
+              "status": "FAIL",
+              "http_status": 422,
+              "expected_state": "CANCELLED",
+              "reason": "Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged",
+              "native_response": {
+                "error_type": "com.axelor.apps.base.AxelorException",
+                "error": "Vous pouvez seulement annuler un devis brouillon ou finalis\u00e9."
+              }
+            },
+            {
+              "name": "WEB-PREPARING",
+              "status": "FAIL",
+              "http_status": 422,
+              "expected_state": "CANCELLED",
+              "reason": "Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged",
+              "native_response": {
+                "error_type": "com.axelor.apps.base.AxelorException",
+                "error": "Vous pouvez seulement annuler un devis brouillon ou finalis\u00e9."
+              }
+            }
+          ]
+        }
+      },
+      "build_evidence": {
+        "lab_commit": "4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9",
+        "host_commit": "1119727a3b53c8387b7fab535e184c25154d2eac",
+        "aos_commit": "0c70d561b19fc454eba9fdd41689258846626d75",
+        "upstream_diff_exit_codes": {
+          "host": 0,
+          "aos": 0
+        },
+        "baseline_pin_blob_sha256": "6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816",
+        "expected_baseline_pin_blob_sha256": "6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816",
+        "suites": {
+          "CencomunModuleTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "CoreOrderPolicyTest": {
+            "tests": 9,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "CoreFinancePolicyTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "CoreNativeScopeTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "MoneyPolicyTest": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeAddressTemplateTest": {
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativePermissionFilterTest": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeOrderModelTest": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeBankCsvTest": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeFinanceModelTest": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeInvoiceRuntimeTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "TestTaxNumberHelper": {
+            "tests": 16,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "war_sha256": "10f062c955a445f3763af47bab1b8fa3f74922158bef7cbe4af6aa98928047d0"
+      },
+      "administrator_gates": {
+        "CO00": {
+          "case": "CO00",
+          "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+          "actor": "admin",
+          "verified_files": 16,
+          "status": "PASS",
+          "phase_evidence": {
+            "planned_initial_stock_move_id": 1,
+            "planned_initial_stock_move_status": 2,
+            "initial_stock_move_id": 1,
+            "initial_stock_move_status": 3,
+            "native_created_sale_order_status": 1,
+            "sale_order_id": 1,
+            "delivery_id": 2,
+            "invoice_id": 1,
+            "finance": {
+              "native_wap_costs": {
+                "P001": "30.0000000000",
+                "P002": "10.0000000000"
+              },
+              "reconcile_id": 2,
+              "calculation": {
+                "gross": "125.00",
+                "revenue": "125.00",
+                "tax": "0.00",
+                "commission": "8.00",
+                "shipping": "0.00",
+                "cost": "70.00",
+                "net": "117.00",
+                "indicator": "47.00",
+                "accounting_profit": "47.00",
+                "upfront": "50.00",
+                "transfer": "67.00"
+              },
+              "upfront_payment_id": 1,
+              "settlement_move_id": 5,
+              "cogs_move_id": 3
+            }
+          },
+          "committed_native_export": "CO00-native-export.json",
+          "asserted_native_economics": {
+            "stock_value": "430.00000000000000000000",
+            "account_balances": {
+              "CCM-CASH": "50.000",
+              "CCM-AR": "0.000",
+              "CCM-BANK": "67.000",
+              "CCM-COMMISSION": "8.000",
+              "CCM-REVENUE": "-125.000",
+              "CCM-COGS": "70.000",
+              "CCM-STOCK": "-70.000"
+            },
+            "accounting_profit": "47.000"
+          },
+          "seconds": 16.985,
+          "sequence": 1
+        },
+        "TAX01-W": {
+          "case": "TAX01-W",
+          "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+          "actor": "admin",
+          "verified_files": 16,
+          "status": "PASS",
+          "phase_evidence": {
+            "planned_initial_stock_move_id": 3,
+            "planned_initial_stock_move_status": 2,
+            "initial_stock_move_id": 3,
+            "initial_stock_move_status": 3,
+            "native_created_sale_order_status": 1,
+            "sale_order_id": 2,
+            "delivery_id": 4,
+            "invoice_id": 2,
+            "finance": {
+              "native_wap_costs": {
+                "P001": "30.0000000000",
+                "P002": "10.0000000000"
+              },
+              "reconcile_id": 4,
+              "calculation": {
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "11.55",
+                "shipping": "0.70",
+                "cost": "70.00",
+                "net": "125.25",
+                "indicator": "55.25",
+                "accounting_profit": "42.75",
+                "upfront": "55.00",
+                "transfer": "70.25"
+              },
+              "upfront_payment_id": 3,
+              "settlement_move_id": 10,
+              "cogs_move_id": 8
+            }
+          },
+          "committed_native_export": "TAX01-W-native-export.json",
+          "asserted_native_economics": {
+            "stock_value": "430.00000000000000000000",
+            "account_balances": {
+              "CCM-CASH": "55.000",
+              "CCM-AR": "0.000",
+              "CCM-BANK": "70.250",
+              "CCM-COMMISSION": "11.550",
+              "CCM-SHIPPING": "0.700",
+              "CCM-REVENUE": "-125.000",
+              "CCM-TAX": "-12.500",
+              "CCM-COGS": "70.000",
+              "CCM-STOCK": "-70.000"
+            },
+            "accounting_profit": "42.750"
+          },
+          "seconds": 8.432,
+          "sequence": 2
+        }
+      },
+      "smoke": {
+        "status": "passed",
+        "authenticated": true,
+        "aop": "8.2.3",
+        "aos": "9.1.8",
+        "cencomun": "0.1.0",
+        "module_count": 33,
+        "seconds": 312.35,
+        "checks": [
+          "public application API",
+          "framework login",
+          "authenticated identity",
+          "PostgreSQL-backed module REST read",
+          "Cencomun and AOS versions"
+        ]
+      }
+    },
+    "repeat": {
+      "groups": [
+        {
+          "case": "CO00-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "partial_gate_status": "PASS",
+          "evidence": "core-test-repeat/CO00-NATIVE.json"
+        },
+        {
+          "case": "CO01-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/CO01-NATIVE.json"
+        },
+        {
+          "case": "TAX01-S-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/TAX01-S-NATIVE.json"
+        },
+        {
+          "case": "TAX01-W-NATIVE",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "partial_gate_status": "PASS",
+          "evidence": "core-test-repeat/TAX01-W-NATIVE.json"
+        },
+        {
+          "case": "PROD01-04",
+          "source": "business",
+          "criteria": [
+            1,
+            5,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Executed native operator CRUD with committed rereads",
+          "complete": true,
+          "evidence": "core-test-repeat/PROD01-04.json"
+        },
+        {
+          "case": "VAL01-04",
+          "source": "business",
+          "criteria": [
+            4,
+            5
+          ],
+          "minimum_revision": 1,
+          "status": "FAIL",
+          "observed_revision": 1,
+          "reason": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+          "complete": false,
+          "evidence": "core-test-repeat/VAL01-04.json"
+        },
+        {
+          "case": "STATE01-04",
+          "source": "business",
+          "criteria": [
+            3,
+            4
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/STATE01-04.json"
+        },
+        {
+          "case": "INV01-03-INSUFFICIENT",
+          "source": "business",
+          "criteria": [
+            4,
+            5
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/INV01-03-INSUFFICIENT.json"
+        },
+        {
+          "case": "FX01-03-MONEY01-03",
+          "source": "business",
+          "criteria": [
+            3,
+            5
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization",
+          "complete": true,
+          "evidence": "core-test-repeat/FX01-03-MONEY01-03.json",
+          "partial_conversion_status": "PASS"
+        },
+        {
+          "case": "PO01-09-NATIVE",
+          "source": "finance",
+          "criteria": [
+            1,
+            3,
+            7
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/PO01-09-NATIVE.json"
+        },
+        {
+          "case": "PO07-09-REVISION-SELF",
+          "source": "finance",
+          "criteria": [
+            3,
+            7
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/PO07-09-REVISION-SELF.json"
+        },
+        {
+          "case": "CASH00-06-NATIVE",
+          "source": "finance",
+          "criteria": [
+            1,
+            3,
+            5,
+            6
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/CASH00-06-NATIVE.json"
+        },
+        {
+          "case": "BANK-BOOK-FIXTURE",
+          "source": "finance",
+          "criteria": [
+            1,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Four confirmed native advance payments with posted GL and unallocated balances",
+          "complete": true,
+          "evidence": "core-test-repeat/BANK-BOOK-FIXTURE.json"
+        },
+        {
+          "case": "BANK01-05-NATIVE",
+          "source": "finance",
+          "criteria": [
+            1,
+            3,
+            8
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/BANK01-05-NATIVE.json"
+        },
+        {
+          "case": "API01-06-SIX-ROUTES",
+          "source": "http",
+          "criteria": [
+            3,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test-repeat/API01-06-SIX-ROUTES.json"
+        },
+        {
+          "case": "IDEM01-02-CREATE-CONCURRENT",
+          "source": "http",
+          "criteria": [
+            3,
+            4,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test-repeat/IDEM01-02-CREATE-CONCURRENT.json"
+        },
+        {
+          "case": "PERM-API-NATIVE",
+          "source": "http",
+          "criteria": [
+            3,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test-repeat/PERM-API-NATIVE.json"
+        },
+        {
+          "case": "CASH04-06-HTTP-IMMUTABLE",
+          "source": "http",
+          "criteria": [
+            3,
+            6,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/CASH04-06-HTTP-IMMUTABLE.json"
+        },
+        {
+          "case": "SEARCH01-04-NATIVE",
+          "source": "http",
+          "criteria": [
+            3,
+            12
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "Native queries and complete nonduplicated pages under the real reader",
+          "complete": true,
+          "evidence": "core-test-repeat/SEARCH01-04-NATIVE.json"
+        },
+        {
+          "case": "TAX02-04-IDEM-CONCURRENT",
+          "source": "http",
+          "criteria": [
+            3,
+            4,
+            5,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native concurrency/audit/configuration reads checked",
+          "complete": true,
+          "evidence": "core-test-repeat/TAX02-04-IDEM-CONCURRENT.json"
+        },
+        {
+          "case": "BANK-CONCURRENT-1000",
+          "source": "http",
+          "criteria": [
+            8,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All native finance subcases checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/BANK-CONCURRENT-1000.json"
+        },
+        {
+          "case": "MCP01-06-STDIO",
+          "source": "http",
+          "criteria": [
+            3,
+            9,
+            10
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test-repeat/MCP01-06-STDIO.json"
+        },
+        {
+          "case": "IDEM03-LOST-RESTART",
+          "source": "recovery",
+          "criteria": [
+            4,
+            9,
+            14
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Real process loss/restart and durable native/consumer reads verified",
+          "complete": true,
+          "evidence": "core-test-repeat/IDEM03-LOST-RESTART.json"
+        },
+        {
+          "case": "IDEM04-EVENTS-RECOVERY",
+          "source": "recovery",
+          "criteria": [
+            3,
+            6,
+            7,
+            9,
+            14
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Real process loss/restart and durable native/consumer reads verified",
+          "complete": true,
+          "evidence": "core-test-repeat/IDEM04-EVENTS-RECOVERY.json"
+        },
+        {
+          "case": "FIXTURE-HASH-NATIVE-EXPORT",
+          "source": "audit",
+          "criteria": [
+            1,
+            11
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 1,
+          "reason": "16 bundled hashes and committed native products/customers/9 role metadata/USD+VES",
+          "complete": true,
+          "evidence": "core-test-repeat/FIXTURE-HASH-NATIVE-EXPORT.json"
+        },
+        {
+          "case": "AUDIT01-03-NATIVE",
+          "source": "audit",
+          "criteria": [
+            3,
+            6,
+            7,
+            8
+          ],
+          "minimum_revision": 2,
+          "status": "FAIL",
+          "observed_revision": 2,
+          "reason": "immutable-admin-delete: explicit native authorization rejection required",
+          "complete": false,
+          "evidence": "core-test-repeat/AUDIT01-03-NATIVE.json"
+        },
+        {
+          "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+          "source": "audit",
+          "criteria": [
+            1,
+            4,
+            5,
+            8,
+            9
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native concurrency/audit/configuration reads checked",
+          "complete": true,
+          "evidence": "core-test-repeat/IDEM-TAX-NATIVE-EFFECT-COUNTS.json"
+        },
+        {
+          "case": "SUPPORTED-CONFIGURATION",
+          "source": "audit",
+          "criteria": [
+            1,
+            3,
+            11,
+            14
+          ],
+          "minimum_revision": 1,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native concurrency/audit/configuration reads checked",
+          "complete": true,
+          "evidence": "core-test-repeat/SUPPORTED-CONFIGURATION.json"
+        },
+        {
+          "case": "STATE-UNKNOWN-ATOMIC",
+          "source": "business",
+          "criteria": [
+            3,
+            4
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/STATE-UNKNOWN-ATOMIC.json"
+        },
+        {
+          "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+          "source": "business",
+          "criteria": [
+            3,
+            4,
+            5
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/STATE-DELIVERY-WITHOUT-ACCEPTANCE.json"
+        },
+        {
+          "case": "STATE-WEB-NO-GUIDE",
+          "source": "business",
+          "criteria": [
+            3,
+            4,
+            5
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "All grouped subcases executed and independently checked after commit/rollback",
+          "complete": true,
+          "evidence": "core-test-repeat/STATE-WEB-NO-GUIDE.json"
+        },
+        {
+          "case": "STATE-CANCEL-BEFORE-HANDOVER",
+          "source": "business",
+          "criteria": [
+            1,
+            3,
+            4,
+            5
+          ],
+          "minimum_revision": 2,
+          "status": "FAIL",
+          "observed_revision": 2,
+          "reason": "Executed native service refuses required cancellation: observed functional contract failure, not environment blocker",
+          "complete": false,
+          "evidence": "core-test-repeat/STATE-CANCEL-BEFORE-HANDOVER.json"
+        },
+        {
+          "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+          "source": "http",
+          "criteria": [
+            3,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test-repeat/MCP-FORBIDDEN-CRITICAL-ACTIONS.json"
+        },
+        {
+          "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+          "source": "audit",
+          "criteria": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            10
+          ],
+          "minimum_revision": 2,
+          "status": "PASS",
+          "observed_revision": 2,
+          "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+          "complete": true,
+          "evidence": "core-test-repeat/MCP-DENIALS-NATIVE-EFFECTS-AUDIT.json"
+        }
+      ],
+      "counts": {
+        "PASS": 31,
+        "FAIL": 3
+      },
+      "criteria": [
+        {
+          "criterion": 1,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "PROD01-04",
+            "PO01-09-NATIVE",
+            "CASH00-06-NATIVE",
+            "BANK-BOOK-FIXTURE",
+            "BANK01-05-NATIVE",
+            "FIXTURE-HASH-NATIVE-EXPORT",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "SUPPORTED-CONFIGURATION",
+            "STATE-CANCEL-BEFORE-HANDOVER"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 2,
+          "status": "PASS",
+          "groups": [],
+          "reason": "Requires actual build suites, WAR hash, pins and clean pinned upstream diffs from this run"
+        },
+        {
+          "criterion": 3,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "STATE01-04",
+            "FX01-03-MONEY01-03",
+            "PO01-09-NATIVE",
+            "PO07-09-REVISION-SELF",
+            "CASH00-06-NATIVE",
+            "BANK01-05-NATIVE",
+            "API01-06-SIX-ROUTES",
+            "IDEM01-02-CREATE-CONCURRENT",
+            "PERM-API-NATIVE",
+            "CASH04-06-HTTP-IMMUTABLE",
+            "SEARCH01-04-NATIVE",
+            "TAX02-04-IDEM-CONCURRENT",
+            "MCP01-06-STDIO",
+            "IDEM04-EVENTS-RECOVERY",
+            "AUDIT01-03-NATIVE",
+            "SUPPORTED-CONFIGURATION",
+            "STATE-UNKNOWN-ATOMIC",
+            "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+            "STATE-WEB-NO-GUIDE",
+            "STATE-CANCEL-BEFORE-HANDOVER",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 4,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "VAL01-04",
+            "STATE01-04",
+            "INV01-03-INSUFFICIENT",
+            "IDEM01-02-CREATE-CONCURRENT",
+            "TAX02-04-IDEM-CONCURRENT",
+            "IDEM03-LOST-RESTART",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "STATE-UNKNOWN-ATOMIC",
+            "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+            "STATE-WEB-NO-GUIDE",
+            "STATE-CANCEL-BEFORE-HANDOVER",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 5,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "PROD01-04",
+            "VAL01-04",
+            "INV01-03-INSUFFICIENT",
+            "FX01-03-MONEY01-03",
+            "CASH00-06-NATIVE",
+            "TAX02-04-IDEM-CONCURRENT",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+            "STATE-WEB-NO-GUIDE",
+            "STATE-CANCEL-BEFORE-HANDOVER",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 6,
+          "status": "FAIL",
+          "groups": [
+            "CASH00-06-NATIVE",
+            "CASH04-06-HTTP-IMMUTABLE",
+            "IDEM04-EVENTS-RECOVERY",
+            "AUDIT01-03-NATIVE",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 7,
+          "status": "FAIL",
+          "groups": [
+            "PO01-09-NATIVE",
+            "PO07-09-REVISION-SELF",
+            "IDEM04-EVENTS-RECOVERY",
+            "AUDIT01-03-NATIVE",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 8,
+          "status": "FAIL",
+          "groups": [
+            "BANK01-05-NATIVE",
+            "BANK-CONCURRENT-1000",
+            "AUDIT01-03-NATIVE",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 9,
+          "status": "PASS",
+          "groups": [
+            "API01-06-SIX-ROUTES",
+            "IDEM01-02-CREATE-CONCURRENT",
+            "PERM-API-NATIVE",
+            "CASH04-06-HTTP-IMMUTABLE",
+            "TAX02-04-IDEM-CONCURRENT",
+            "BANK-CONCURRENT-1000",
+            "MCP01-06-STDIO",
+            "IDEM03-LOST-RESTART",
+            "IDEM04-EVENTS-RECOVERY",
+            "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 10,
+          "status": "PASS",
+          "groups": [
+            "MCP01-06-STDIO",
+            "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+            "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+          ],
+          "reason": "All attached groups must meet their minimum revision"
+        },
+        {
+          "criterion": 11,
+          "status": "FAIL",
+          "groups": [
+            "CO00-NATIVE",
+            "CO01-NATIVE",
+            "TAX01-S-NATIVE",
+            "TAX01-W-NATIVE",
+            "PROD01-04",
+            "BANK-BOOK-FIXTURE",
+            "FIXTURE-HASH-NATIVE-EXPORT",
+            "SUPPORTED-CONFIGURATION"
+          ],
+          "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+        },
+        {
+          "criterion": 12,
+          "status": "FAIL",
+          "groups": [
+            "SEARCH01-04-NATIVE"
+          ],
+          "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+        },
+        {
+          "criterion": 13,
+          "status": "BLOCKED",
+          "groups": [],
+          "reason": "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
+        },
+        {
+          "criterion": 14,
+          "status": "FAIL",
+          "groups": [
+            "IDEM03-LOST-RESTART",
+            "IDEM04-EVENTS-RECOVERY",
+            "SUPPORTED-CONFIGURATION"
+          ],
+          "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+        }
+      ],
+      "criteria_counts": {
+        "FAIL": 10,
+        "PASS": 3,
+        "BLOCKED": 1
+      },
+      "corrections": {
+        "tax_concurrency": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test-repeat/TAX02-04-IDEM-CONCURRENT.json",
+            "bytes": 210728,
+            "sha256": "9b53490e706d7474b9aa14ace58558c588e6926db085d4ea06988543b6f0cd68",
+            "role": "group:TAX02-04-IDEM-CONCURRENT"
+          },
+          "actual_sessions_and_durable_reads": [
+            {
+              "case": "TAX-CONC-S",
+              "step_status": "PASS",
+              "physical": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  true,
+                  false
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-S",
+                  "native_id": 29,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "FULFILLED",
+                  "channel": "STORE",
+                  "guide": null,
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 17,
+                  "saleOrder_status": 3,
+                  "delivery_id": 51,
+                  "delivery_status": 3,
+                  "invoice_id": 14,
+                  "invoice_status": 3
+                },
+                "keys_after": 4,
+                "events_after": 2
+              },
+              "settlement": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  false,
+                  true
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-S",
+                  "native_id": 29,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "SETTLED",
+                  "channel": "STORE",
+                  "guide": null,
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 17,
+                  "saleOrder_status": 3,
+                  "delivery_id": 51,
+                  "delivery_status": 3,
+                  "invoice_id": 14,
+                  "invoice_status": 3
+                },
+                "keys_after": 5,
+                "events_after": 3
+              }
+            },
+            {
+              "case": "TAX-CONC-W",
+              "step_status": "PASS",
+              "physical": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  true,
+                  false
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-W",
+                  "native_id": 30,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "SHIPPED",
+                  "channel": "WEB",
+                  "guide": "GUIDE-LAB-TAX-001",
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 18,
+                  "saleOrder_status": 3,
+                  "delivery_id": 53,
+                  "delivery_status": 3,
+                  "invoice_id": 15,
+                  "invoice_status": 3
+                },
+                "keys_after": 5,
+                "events_after": 2
+              },
+              "settlement": {
+                "http_statuses": [
+                  200,
+                  200
+                ],
+                "replayed": [
+                  true,
+                  false
+                ],
+                "durable_order": {
+                  "id": "TAX-CONC-W",
+                  "native_id": 30,
+                  "company_id": "CCM-LAB-001",
+                  "native_company_id": 1,
+                  "state": "SETTLED",
+                  "channel": "WEB",
+                  "guide": "GUIDE-LAB-TAX-001",
+                  "creator": "ccm-operator",
+                  "saleOrder_id": 18,
+                  "saleOrder_status": 3,
+                  "delivery_id": 53,
+                  "delivery_status": 3,
+                  "invoice_id": 15,
+                  "invoice_status": 3
+                },
+                "keys_after": 6,
+                "events_after": 3
+              }
+            }
+          ]
+        },
+        "benchmark": {
+          "observed_status": "PASS",
+          "original": {
+            "path": "core-test-repeat/benchmark.json",
+            "bytes": 4072499,
+            "sha256": "3c15e08b29c13bd1b4ffdad67660924c14381e88ec4a0b39ba346a0d5c1945fa",
+            "role": "benchmark"
+          },
+          "samples_including_warmup": 3060,
+          "loaded_counts": {
+            "products": 1000,
+            "customers": 100,
+            "orders": 1000,
+            "bank_rows": 1000
+          },
+          "operations": [
+            {
+              "operation": "search",
+              "samples": 1000,
+              "warmup": 20,
+              "errors": 0,
+              "p50": 24.4198,
+              "p95": 39.2466,
+              "p99": 82.00365
+            },
+            {
+              "operation": "inventory",
+              "samples": 1000,
+              "warmup": 20,
+              "errors": 0,
+              "p50": 28.55381,
+              "p95": 35.38583,
+              "p99": 88.56327
+            },
+            {
+              "operation": "create",
+              "samples": 1000,
+              "warmup": 20,
+              "errors": 0,
+              "p50": 31.67498,
+              "p95": 40.04455,
+              "p99": 89.52004
+            }
+          ],
+          "error": null
+        },
+        "private_permissions": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test-repeat/PERM-API-NATIVE.json",
+            "bytes": 28207253,
+            "sha256": "8a1586f1f6ca540d3f0c95d4b672c4ebcbd5a675766eef4f5af5aed4a16fc907",
+            "role": "group:PERM-API-NATIVE"
+          },
+          "steps": {
+            "private-crud": {
+              "actual_attempts": 27,
+              "step_status": "PASS",
+              "explicit_native_authorization_causes": 27,
+              "native_http_protocol_counts": {
+                "200/-1": 27
+              },
+              "actual_remove_paths": [
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmAudit/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 257
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmRequestKey/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 106
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOutboxEvent/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmAudit/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 257
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmRequestKey/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 106
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOutboxEvent/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmAudit/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 257
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmRequestKey/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 106
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOutboxEvent/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                }
+              ]
+            },
+            "native-critical-crud": {
+              "actual_attempts": 81,
+              "step_status": "PASS",
+              "explicit_native_authorization_causes": 81,
+              "native_http_protocol_counts": {
+                "200/-1": 81
+              },
+              "actual_remove_paths": [
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.purchase.db.PurchaseOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmPurchase/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 21
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmCashClose/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 2
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankImport/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankRow/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatement/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatementLine/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-reader",
+                  "path": "/ws/rest/com.axelor.apps.account.db.Move/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 71
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.purchase.db.PurchaseOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmPurchase/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 21
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmCashClose/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 2
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankImport/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankRow/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatement/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatementLine/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-mcp",
+                  "path": "/ws/rest/com.axelor.apps.account.db.Move/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 71
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.purchase.db.PurchaseOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmPurchase/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 11
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmOrder/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 21
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmCashClose/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 2
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankImport/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.cencomun.core.db.CcmBankRow/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatement/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.bankpayment.db.BankStatementLine/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                },
+                {
+                  "actor": "ccm-other",
+                  "path": "/ws/rest/com.axelor.apps.account.db.Move/removeAll",
+                  "request": {
+                    "records": [
+                      {
+                        "id": 71
+                      }
+                    ]
+                  },
+                  "causal_rejection": true
+                }
+              ]
+            },
+            "native-official-actions": {
+              "actual_attempts": 3,
+              "step_status": "PASS",
+              "explicit_native_authorization_causes": 3,
+              "native_http_protocol_counts": {
+                "200/-1": 3
+              },
+              "actual_remove_paths": []
+            }
+          },
+          "adapter_403_contract_unchanged": true
+        },
+        "audit": {
+          "derived_status": "FAIL",
+          "complete_original": {
+            "path": "core-test-repeat/AUDIT01-03-NATIVE.json",
+            "bytes": 5207317,
+            "sha256": "6f90b605c1467221176fee9af93330324ebb40e0d027ebf093be954f7d8b13dc",
+            "role": "group:AUDIT01-03-NATIVE"
+          },
+          "steps": [
+            {
+              "name": "semantic-native-records",
+              "status": "PASS",
+              "http_status": null,
+              "error": null
+            },
+            {
+              "name": "authorized-manager-read",
+              "status": "PASS",
+              "http_status": 200,
+              "error": null
+            },
+            {
+              "name": "immutable-manager-edit",
+              "status": "PASS",
+              "http_status": 200,
+              "error": null
+            },
+            {
+              "name": "immutable-admin-delete",
+              "status": "FAIL",
+              "http_status": 200,
+              "error": "immutable-admin-delete: explicit native authorization rejection required"
+            }
+          ]
+        },
+        "cash": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test-repeat/CASH00-06-NATIVE.json",
+            "bytes": 2927061,
+            "sha256": "3f287a04fa2421551a7c3e984cf0716240872c334adda3f9cc002688cc537105",
+            "role": "group:CASH00-06-NATIVE"
+          },
+          "steps": [
+            {
+              "name": "native-source-fixture",
+              "status": "PASS",
+              "error": null
+            },
+            {
+              "name": "native-source-replay",
+              "status": "PASS",
+              "error": null
+            },
+            {
+              "name": "CS000",
+              "status": "PASS",
+              "error": null
+            },
+            {
+              "name": "CS001",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        "mcp_complete_parity": {
+          "derived_status": "PASS",
+          "complete_original": {
+            "path": "core-test-repeat/MCP01-06-STDIO.json",
+            "bytes": 128284,
+            "sha256": "c12746e3ce799e9abab16be48db242b129bcba44c6b5679a26d4b7d6ff6a84c5",
+            "role": "group:MCP01-06-STDIO"
+          },
+          "complete_pairs": [
+            {
+              "tool": "searchProducts",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/products/search?q=P001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/products/search?q=P001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "getInventory",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/inventory/P001?warehouse=WH-LAB-001-API-BASE&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/inventory/P001?warehouse=WH-LAB-001-API-BASE&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "getCustomerBalance",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/customers/C002/balance?company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/customers/C002/balance?company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "getCashStatus",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "GET",
+                "path": "/cash/status?id=CS001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "mcp_adapter_request": {
+                "method": "GET",
+                "path": "/cash/status?id=CS001&company_id=CCM-LAB-001",
+                "body": null,
+                "idempotency_key": null
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createPurchaseDraft",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO"
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 201,
+              "api_request_rate": "0",
+              "api_request_rate_type": "str",
+              "mcp_request_rate": "0",
+              "mcp_request_rate_type": "str",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createCasheaOrder",
+              "direction": "MCP_then_API",
+              "api_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO"
+              },
+              "api_http_status": 200,
+              "mcp_http_status": 201,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createPurchaseDraft",
+              "direction": "API_then_MCP",
+              "api_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO-API-FIRST",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO-API-FIRST"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/purchases/drafts",
+                "body": {
+                  "id": "MCP-PO-API-FIRST",
+                  "amount": "199.99",
+                  "company_id": "CCM-LAB-001"
+                },
+                "idempotency_key": "MCP-PO-API-FIRST"
+              },
+              "api_http_status": 201,
+              "mcp_http_status": 200,
+              "api_request_rate": "0",
+              "api_request_rate_type": "str",
+              "mcp_request_rate": "0",
+              "mcp_request_rate_type": "str",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            },
+            {
+              "tool": "createCasheaOrder",
+              "direction": "API_then_MCP",
+              "api_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO-API-FIRST",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO-API-FIRST"
+              },
+              "mcp_adapter_request": {
+                "method": "POST",
+                "path": "/cashea/orders",
+                "body": {
+                  "id": "MCP-CO-API-FIRST",
+                  "customer_id": "C001",
+                  "datetime": "2026-10-01T10:00:00-04:00",
+                  "channel": "STORE",
+                  "currency": "USD",
+                  "tax_rate": "0",
+                  "financed_amount": "75.00",
+                  "shipping_expense": "0.00",
+                  "guide": null,
+                  "lines": [
+                    {
+                      "product_id": "P001",
+                      "qty": "2",
+                      "unit_price": "50.00"
+                    },
+                    {
+                      "product_id": "P002",
+                      "qty": "1",
+                      "unit_price": "25.00"
+                    }
+                  ],
+                  "company_id": "CCM-LAB-001",
+                  "warehouse": "WH-LAB-001-API-BASE"
+                },
+                "idempotency_key": "MCP-CO-API-FIRST"
+              },
+              "api_http_status": 201,
+              "mcp_http_status": 200,
+              "api_request_rate": null,
+              "api_request_rate_type": "NoneType",
+              "mcp_request_rate": null,
+              "mcp_request_rate_type": "NoneType",
+              "complete_business_result_equal": true,
+              "assertions": "PASS"
+            }
+          ],
+          "omitted_business_fields": []
+        }
+      },
+      "functional_findings": {
+        "VAL01-04": {
+          "derived_status": "FAIL",
+          "complete_original": {
+            "path": "core-test-repeat/VAL01-04.json",
+            "bytes": 106285,
+            "sha256": "13ff8c7b6dc37922b9301d9a08edea467d73bdb175e31f83ef7a6b46989bfd1d",
+            "role": "group:VAL01-04"
+          },
+          "error": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+          "steps": [
+            {
+              "name": "negative-native-cost",
+              "status": "FAIL",
+              "assertion_error": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+              "native_probes": {
+                "invalid_attempt": {
+                  "input_cost": "-0.01",
+                  "qty": "1",
+                  "reloaded_status": 3,
+                  "reloaded_lines": [
+                    {
+                      "qty": "1.0000000000",
+                      "id": 127,
+                      "native_move_id": 26,
+                      "unit_cost": "-0.0100000000"
+                    }
+                  ],
+                  "stage": "native-stock-realized-and-reloaded",
+                  "diagnostic_rollback_only": true,
+                  "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+                  "error": "Native receipt accepted and realized; diagnostic rollback only"
+                },
+                "valid_control": {
+                  "input_cost": "30.00",
+                  "qty": "1",
+                  "reloaded_status": 3,
+                  "reloaded_lines": [
+                    {
+                      "qty": "1.0000000000",
+                      "id": 125,
+                      "native_move_id": 25,
+                      "unit_cost": "30.0000000000"
+                    }
+                  ],
+                  "stage": "native-stock-realized-and-reloaded",
+                  "diagnostic_rollback_only": true,
+                  "error_type": "com.cencomun.core.NativeNegativeCostProbe$NativeAcceptedCost",
+                  "error": "Native receipt accepted and realized; diagnostic rollback only"
+                }
+              }
+            }
+          ]
+        },
+        "STATE-CANCEL-BEFORE-HANDOVER": {
+          "derived_status": "FAIL",
+          "complete_original": {
+            "path": "core-test-repeat/STATE-CANCEL-BEFORE-HANDOVER.json",
+            "bytes": 62775,
+            "sha256": "0cff3c7a1d3d57daf3466ae114283aff50a76ebc31837a2739a81cc818997b62",
+            "role": "group:STATE-CANCEL-BEFORE-HANDOVER"
+          },
+          "error": "Observed functional failure of required confirmed native cancellation; three actual attempts preserved",
+          "steps": [
+            {
+              "name": "STORE-APPROVED",
+              "status": "FAIL",
+              "http_status": 422,
+              "expected_state": "CANCELLED",
+              "reason": "Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged",
+              "native_response": {
+                "error_type": "com.axelor.apps.base.AxelorException",
+                "error": "Vous pouvez seulement annuler un devis brouillon ou finalis\u00e9."
+              }
+            },
+            {
+              "name": "WEB-APPROVED",
+              "status": "FAIL",
+              "http_status": 422,
+              "expected_state": "CANCELLED",
+              "reason": "Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged",
+              "native_response": {
+                "error_type": "com.axelor.apps.base.AxelorException",
+                "error": "Vous pouvez seulement annuler un devis brouillon ou finalis\u00e9."
+              }
+            },
+            {
+              "name": "WEB-PREPARING",
+              "status": "FAIL",
+              "http_status": 422,
+              "expected_state": "CANCELLED",
+              "reason": "Pinned native service rejects required cancellation of confirmed SaleOrder; expected result unchanged",
+              "native_response": {
+                "error_type": "com.axelor.apps.base.AxelorException",
+                "error": "Vous pouvez seulement annuler un devis brouillon ou finalis\u00e9."
+              }
+            }
+          ]
+        }
+      },
+      "build_evidence": {
+        "lab_commit": "4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9",
+        "host_commit": "1119727a3b53c8387b7fab535e184c25154d2eac",
+        "aos_commit": "0c70d561b19fc454eba9fdd41689258846626d75",
+        "upstream_diff_exit_codes": {
+          "host": 0,
+          "aos": 0
+        },
+        "baseline_pin_blob_sha256": "6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816",
+        "expected_baseline_pin_blob_sha256": "6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816",
+        "suites": {
+          "CencomunModuleTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "CoreOrderPolicyTest": {
+            "tests": 9,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "CoreFinancePolicyTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "CoreNativeScopeTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "MoneyPolicyTest": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeAddressTemplateTest": {
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativePermissionFilterTest": {
+            "tests": 5,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeOrderModelTest": {
+            "tests": 4,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeBankCsvTest": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeFinanceModelTest": {
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "NativeInvoiceRuntimeTest": {
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "TestTaxNumberHelper": {
+            "tests": 16,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "war_sha256": "10f062c955a445f3763af47bab1b8fa3f74922158bef7cbe4af6aa98928047d0"
+      },
+      "administrator_gates": {
+        "CO00": {
+          "case": "CO00",
+          "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+          "actor": "admin",
+          "verified_files": 16,
+          "status": "PASS",
+          "phase_evidence": {
+            "planned_initial_stock_move_id": 1,
+            "planned_initial_stock_move_status": 2,
+            "initial_stock_move_id": 1,
+            "initial_stock_move_status": 3,
+            "native_created_sale_order_status": 1,
+            "sale_order_id": 1,
+            "delivery_id": 2,
+            "invoice_id": 1,
+            "finance": {
+              "native_wap_costs": {
+                "P001": "30.0000000000",
+                "P002": "10.0000000000"
+              },
+              "reconcile_id": 2,
+              "calculation": {
+                "gross": "125.00",
+                "revenue": "125.00",
+                "tax": "0.00",
+                "commission": "8.00",
+                "shipping": "0.00",
+                "cost": "70.00",
+                "net": "117.00",
+                "indicator": "47.00",
+                "accounting_profit": "47.00",
+                "upfront": "50.00",
+                "transfer": "67.00"
+              },
+              "upfront_payment_id": 1,
+              "settlement_move_id": 5,
+              "cogs_move_id": 3
+            }
+          },
+          "committed_native_export": "CO00-native-export.json",
+          "asserted_native_economics": {
+            "stock_value": "430.00000000000000000000",
+            "account_balances": {
+              "CCM-CASH": "50.000",
+              "CCM-AR": "0.000",
+              "CCM-BANK": "67.000",
+              "CCM-COMMISSION": "8.000",
+              "CCM-REVENUE": "-125.000",
+              "CCM-COGS": "70.000",
+              "CCM-STOCK": "-70.000"
+            },
+            "accounting_profit": "47.000"
+          },
+          "seconds": 39.425,
+          "sequence": 1
+        },
+        "TAX01-W": {
+          "case": "TAX01-W",
+          "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+          "actor": "admin",
+          "verified_files": 16,
+          "status": "PASS",
+          "phase_evidence": {
+            "planned_initial_stock_move_id": 3,
+            "planned_initial_stock_move_status": 2,
+            "initial_stock_move_id": 3,
+            "initial_stock_move_status": 3,
+            "native_created_sale_order_status": 1,
+            "sale_order_id": 2,
+            "delivery_id": 4,
+            "invoice_id": 2,
+            "finance": {
+              "native_wap_costs": {
+                "P001": "30.0000000000",
+                "P002": "10.0000000000"
+              },
+              "reconcile_id": 4,
+              "calculation": {
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "11.55",
+                "shipping": "0.70",
+                "cost": "70.00",
+                "net": "125.25",
+                "indicator": "55.25",
+                "accounting_profit": "42.75",
+                "upfront": "55.00",
+                "transfer": "70.25"
+              },
+              "upfront_payment_id": 3,
+              "settlement_move_id": 10,
+              "cogs_move_id": 8
+            }
+          },
+          "committed_native_export": "TAX01-W-native-export.json",
+          "asserted_native_economics": {
+            "stock_value": "430.00000000000000000000",
+            "account_balances": {
+              "CCM-CASH": "55.000",
+              "CCM-AR": "0.000",
+              "CCM-BANK": "70.250",
+              "CCM-COMMISSION": "11.550",
+              "CCM-SHIPPING": "0.700",
+              "CCM-REVENUE": "-125.000",
+              "CCM-TAX": "-12.500",
+              "CCM-COGS": "70.000",
+              "CCM-STOCK": "-70.000"
+            },
+            "accounting_profit": "42.750"
+          },
+          "seconds": 8.768,
+          "sequence": 2
+        }
+      },
+      "smoke": {
+        "status": "passed",
+        "authenticated": true,
+        "aop": "8.2.3",
+        "aos": "9.1.8",
+        "cencomun": "0.1.0",
+        "module_count": 33,
+        "seconds": 315.35,
+        "checks": [
+          "public application API",
+          "framework login",
+          "authenticated identity",
+          "PostgreSQL-backed module REST read",
+          "Cencomun and AOS versions"
+        ]
+      }
+    }
+  },
+  "repetition": {
+    "derived_status": "FAIL",
+    "complete": false,
+    "error": "AssertionError: Fresh restored execution has a different full-group result",
+    "files_loaded": 103,
+    "bytes_loaded": 124521710,
+    "all_hashes_verified": true
+  }
+}

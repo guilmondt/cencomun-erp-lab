@@ -1,0 +1,8 @@
+# Official references inspected on 2026-10-04. Never use an unqualified image.
+CCM_BUILD_IMAGE='debian:13.7-slim@sha256:a99cfc517144bc59b1978475ec53b46ecabec7e43635402ee5b77cc54cd1b20a'
+CCM_POSTGRES_IMAGE='postgres:16.15-bookworm@sha256:efedf3595f1d6f415c08568ba171029bf54052e754cc9f030e3f2412b21f3d67'
+CCM_JDK_PACKAGE_VERSION='21.0.12.1+1-1~deb13u1'
+CCM_NODE_VERSION='24.5.0'
+CCM_NODE_SHA256='32edb1f2aeaf8ea0d484af33bf3b5d8330d7d33c9cd8c70f811b8a643822e613'
+CCM_YARN_VERSION='1.22.19'
+CCM_YARN_SHA512_BASE64='/0V5q0WbslqnwP91tirOvldvYISzaqhClxzyUKXYxs07yUILIs5jx/k6CFe8bvKSkds5w+eiOqta39Wk3WxdcQ=='

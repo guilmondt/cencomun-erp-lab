@@ -1,0 +1,765 @@
+{
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "coverage_revision": 2,
+  "groups": [
+    {
+      "case": "CO00-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "partial_gate_status": "PASS",
+      "evidence": "core-test/CO00-NATIVE.json"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/CO01-NATIVE.json"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/TAX01-S-NATIVE.json"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "partial_gate_status": "PASS",
+      "evidence": "core-test/TAX01-W-NATIVE.json"
+    },
+    {
+      "case": "PROD01-04",
+      "source": "business",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Executed native operator CRUD with committed rereads",
+      "complete": true,
+      "evidence": "core-test/PROD01-04.json"
+    },
+    {
+      "case": "VAL01-04",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "ERP accepted negative native cost; cleanup rollback cannot count as validation",
+      "complete": false,
+      "evidence": "core-test/VAL01-04.json"
+    },
+    {
+      "case": "STATE01-04",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/STATE01-04.json"
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/INV01-03-INSUFFICIENT.json"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "source": "business",
+      "criteria": [
+        3,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization",
+      "complete": true,
+      "evidence": "core-test/FX01-03-MONEY01-03.json",
+      "partial_conversion_status": "PASS"
+    },
+    {
+      "case": "PO01-09-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        7
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/PO01-09-NATIVE.json"
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "source": "finance",
+      "criteria": [
+        3,
+        7
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/PO07-09-REVISION-SELF.json"
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/CASH00-06-NATIVE.json"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "source": "finance",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Four confirmed native advance payments with posted GL and unallocated balances",
+      "complete": true,
+      "evidence": "core-test/BANK-BOOK-FIXTURE.json"
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        8
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/BANK01-05-NATIVE.json"
+    },
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "core-test/API01-06-SIX-ROUTES.json"
+    },
+    {
+      "case": "IDEM01-02-CREATE-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "core-test/IDEM01-02-CREATE-CONCURRENT.json"
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "core-test/PERM-API-NATIVE.json"
+    },
+    {
+      "case": "CASH04-06-HTTP-IMMUTABLE",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/CASH04-06-HTTP-IMMUTABLE.json"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        12
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "Native queries and complete nonduplicated pages under the real reader",
+      "complete": true,
+      "evidence": "core-test/SEARCH01-04-NATIVE.json"
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native concurrency/audit/configuration reads checked",
+      "complete": true,
+      "evidence": "core-test/TAX02-04-IDEM-CONCURRENT.json"
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "source": "http",
+      "criteria": [
+        8,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All native finance subcases checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/BANK-CONCURRENT-1000.json"
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "source": "http",
+      "criteria": [
+        3,
+        9,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "core-test/MCP01-06-STDIO.json"
+    },
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "source": "recovery",
+      "criteria": [
+        4,
+        9,
+        14
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Real process loss/restart and durable native/consumer reads verified",
+      "complete": true,
+      "evidence": "core-test/IDEM03-LOST-RESTART.json"
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "source": "recovery",
+      "criteria": [
+        3,
+        6,
+        7,
+        9,
+        14
+      ],
+      "minimum_revision": 2,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "",
+      "complete": false,
+      "evidence": "core-test/IDEM04-EVENTS-RECOVERY.json"
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "source": "audit",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 1,
+      "reason": "16 bundled hashes and committed native products/customers/9 role metadata/USD+VES",
+      "complete": true,
+      "evidence": "core-test/FIXTURE-HASH-NATIVE-EXPORT.json"
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "source": "audit",
+      "criteria": [
+        3,
+        6,
+        7,
+        8
+      ],
+      "minimum_revision": 2,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "immutable-admin-delete: explicit native authorization rejection required",
+      "complete": false,
+      "evidence": "core-test/AUDIT01-03-NATIVE.json"
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "source": "audit",
+      "criteria": [
+        1,
+        4,
+        5,
+        8,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native concurrency/audit/configuration reads checked",
+      "complete": true,
+      "evidence": "core-test/IDEM-TAX-NATIVE-EFFECT-COUNTS.json"
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "source": "audit",
+      "criteria": [
+        1,
+        3,
+        11,
+        14
+      ],
+      "minimum_revision": 1,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native concurrency/audit/configuration reads checked",
+      "complete": true,
+      "evidence": "core-test/SUPPORTED-CONFIGURATION.json"
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/STATE-UNKNOWN-ATOMIC.json"
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/STATE-DELIVERY-WITHOUT-ACCEPTANCE.json"
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "All grouped subcases executed and independently checked after commit/rollback",
+      "complete": true,
+      "evidence": "core-test/STATE-WEB-NO-GUIDE.json"
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "FAIL",
+      "observed_revision": 2,
+      "reason": "Executed native service refuses required cancellation: observed functional contract failure, not environment blocker",
+      "complete": false,
+      "evidence": "core-test/STATE-CANCEL-BEFORE-HANDOVER.json"
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "core-test/MCP-FORBIDDEN-CRITICAL-ACTIONS.json"
+    },
+    {
+      "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+      "source": "audit",
+      "criteria": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "PASS",
+      "observed_revision": 2,
+      "reason": "Executed native identities, six routes/stdio and committed effects reviewed",
+      "complete": true,
+      "evidence": "core-test/MCP-DENIALS-NATIVE-EFFECTS-AUDIT.json"
+    }
+  ],
+  "criteria": [
+    {
+      "criterion": 1,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "PO01-09-NATIVE",
+        "CASH00-06-NATIVE",
+        "BANK-BOOK-FIXTURE",
+        "BANK01-05-NATIVE",
+        "FIXTURE-HASH-NATIVE-EXPORT",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "SUPPORTED-CONFIGURATION",
+        "STATE-CANCEL-BEFORE-HANDOVER"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 2,
+      "status": "PASS",
+      "groups": [],
+      "reason": "Requires actual build suites, WAR hash, pins and clean pinned upstream diffs from this run"
+    },
+    {
+      "criterion": 3,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "STATE01-04",
+        "FX01-03-MONEY01-03",
+        "PO01-09-NATIVE",
+        "PO07-09-REVISION-SELF",
+        "CASH00-06-NATIVE",
+        "BANK01-05-NATIVE",
+        "API01-06-SIX-ROUTES",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "PERM-API-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "SEARCH01-04-NATIVE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "MCP01-06-STDIO",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "SUPPORTED-CONFIGURATION",
+        "STATE-UNKNOWN-ATOMIC",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 4,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "VAL01-04",
+        "STATE01-04",
+        "INV01-03-INSUFFICIENT",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "TAX02-04-IDEM-CONCURRENT",
+        "IDEM03-LOST-RESTART",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "STATE-UNKNOWN-ATOMIC",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 5,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "VAL01-04",
+        "INV01-03-INSUFFICIENT",
+        "FX01-03-MONEY01-03",
+        "CASH00-06-NATIVE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 6,
+      "status": "FAIL",
+      "groups": [
+        "CASH00-06-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 7,
+      "status": "FAIL",
+      "groups": [
+        "PO01-09-NATIVE",
+        "PO07-09-REVISION-SELF",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 8,
+      "status": "FAIL",
+      "groups": [
+        "BANK01-05-NATIVE",
+        "BANK-CONCURRENT-1000",
+        "AUDIT01-03-NATIVE",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 9,
+      "status": "FAIL",
+      "groups": [
+        "API01-06-SIX-ROUTES",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "PERM-API-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "BANK-CONCURRENT-1000",
+        "MCP01-06-STDIO",
+        "IDEM03-LOST-RESTART",
+        "IDEM04-EVENTS-RECOVERY",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 10,
+      "status": "PASS",
+      "groups": [
+        "MCP01-06-STDIO",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 11,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "BANK-BOOK-FIXTURE",
+        "FIXTURE-HASH-NATIVE-EXPORT",
+        "SUPPORTED-CONFIGURATION"
+      ],
+      "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+    },
+    {
+      "criterion": 12,
+      "status": "FAIL",
+      "groups": [
+        "SEARCH01-04-NATIVE"
+      ],
+      "reason": "Executed benchmark or independent restored replay did not satisfy frozen proof"
+    },
+    {
+      "criterion": 13,
+      "status": "BLOCKED",
+      "groups": [],
+      "reason": "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
+    },
+    {
+      "criterion": 14,
+      "status": "FAIL",
+      "groups": [
+        "IDEM03-LOST-RESTART",
+        "IDEM04-EVENTS-RECOVERY",
+        "SUPPORTED-CONFIGURATION"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    }
+  ],
+  "counts": {
+    "PASS": 30,
+    "FAIL": 4
+  },
+  "patch_scenarios": {
+    "status": "UNRUN",
+    "count": 6
+  },
+  "scope": "Actual native gates. Policy unit tests do not mark native groups PASS.",
+  "build_evidence": "build-evidence.json",
+  "source": "Complete original indexed files recovered/downloaded and hash verified; native reviewers applied",
+  "run_id": "37469716840",
+  "lab_commit": "4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9",
+  "log_sha256": "043a217870d57862c4498f3b11d45ea1eff353951721c5efbe5f714a6d8a4e85",
+  "repeat_review": {
+    "status": "FAIL",
+    "complete": false,
+    "files_loaded": 103,
+    "bytes_loaded": 124521710,
+    "all_hashes_verified": true,
+    "error": "AssertionError: Fresh restored execution has a different full-group result"
+  }
+}

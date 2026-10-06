@@ -74,12 +74,35 @@ def native_crud_request(operation,id,version=None):
     if operation=='remove':return '/removeAll',{'records':[record]}
     raise ValueError('Unknown native CRUD operation: '+operation)
 
+def native_admin_immutable_denied(record):
+    """Only the observed AOP admin diagnostic envelope, with intact native audit."""
+    import re
+    if record.get('name')!='immutable-admin-delete' or record.get('actor')!='admin':return False
+    if record.get('path')!='/ws/rest/com.cencomun.core.db.CcmAudit/removeAll' or record.get('method')!='POST':return False
+    response=record.get('response',{});data=response.get('data')
+    if record.get('http_status')!=200 or response.get('status')!=-1:return False
+    if set(response)-{'status','data','title','message'} or not isinstance(data,dict):return False
+    if set(data)-{'message','title','causeClass','causeString','causeStack'}:return False
+    cause='jakarta.ws.rs.ForbiddenException';message='Semantic audit cannot be deleted by generic CRUD';header=cause+': '+message
+    if data.get('causeClass')!=cause or data.get('causeString')!=header or data.get('message')!=message:return False
+    if data.get('title') not in (None,'Access error',"Erreur d'accès",'Error','Erreur'):return False
+    frame=re.compile(r'\s+at [A-Za-z_$][\w.$/-]*\([A-Za-z_$][A-Za-z0-9_$]*\.java:\d+\)|\s+at [A-Za-z_$][\w.$/-]*\((?:Native Method|Unknown Source|<generated>)\)')
+    stack=data.get('causeStack','').splitlines()
+    if not stack or stack[0]!=header or not all(frame.fullmatch(line) for line in stack[1:]):return False
+    if not any('com.cencomun.core.CcmAuditWorkflowRepository.remove(' in line for line in stack[1:]):return False
+    before=record.get('before');after=record.get('after');records=record.get('request',{}).get('records',[])
+    if not isinstance(before,dict) or not before or before!=after or len(records)!=1:return False
+    audit_id=records[0].get('id')
+    if not isinstance(audit_id,int) or audit_id<=0 or not any(row.get('id')==audit_id for row in before.get('audit',[])):return False
+    return record.get('read_boundary')==BOUNDARY
+
 def native_permission_denied(result):
     """AOP 8.2.3 RPC error envelope is HTTP200; status=-1 alone proves nothing."""
+    if native_admin_immutable_denied(result):return True
     response=result.get('response',{});data=response.get('data')
-    if set(response)-{'status','data','title','message','error','error_type','native_stack','code','correlation_id'}:return False
+    if set(response)-{'status','data','title','message','error','error_type','code','correlation_id'}:return False
     if isinstance(data,list) and data:return False
-    if isinstance(data,dict) and set(data)-{'title','message','causeStack'}:return False
+    if isinstance(data,dict) and set(data)-{'title','message'}:return False
     if result.get('http_status')==403:
         messages=[response.get('message')]
         if isinstance(data,dict):messages.append(data.get('message'))
@@ -87,8 +110,7 @@ def native_permission_denied(result):
     if result.get('http_status')!=200 or response.get('status')!=-1 or not isinstance(data,dict):return False
     if data.get('title') in ('Access error',"Erreur d'accès") and data.get('message') in NATIVE_RESOURCE_DENIALS:return True
     if data.get('message') in NATIVE_GUARD_DENIALS:return True
-    stack=data.get('causeStack','').splitlines()
-    return bool(stack and stack[0] in {'jakarta.ws.rs.ForbiddenException: '+message for message in NATIVE_GUARD_DENIALS})
+    return False
 
 def assert_native_permission_denial(record):
     assert native_permission_denied(record),record['name']+': explicit native authorization rejection required'

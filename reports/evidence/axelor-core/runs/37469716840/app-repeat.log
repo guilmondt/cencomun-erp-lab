@@ -1,0 +1,811 @@
+Oct 06, 2026 1:49:03 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8080"]
+Oct 06, 2026 1:49:03 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+Oct 06, 2026 1:49:03 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/10.1.57]
+Oct 06, 2026 1:49:05 PM org.apache.catalina.startup.ContextConfig getDefaultWebXmlFragment
+INFO: No global web.xml found
+2026-10-06 13:49:42.722  INFO 10859 --- [           main] com.axelor.db.JpaModule                  : JCache provider: com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider
+2026-10-06 13:49:55.952  INFO 10859 --- [           main] com.axelor.app.AppModule                 : Configuring app modules...
+2026-10-06 13:50:09.548  INFO 10859 --- [           main] com.axelor.app.AppModule                 : View processors: com.axelor.studio.service.ViewProcessorImpl, com.axelor.apps.base.service.meta.BaseViewProcessor
+2026-10-06 13:50:10.390  INFO 10859 --- [           main] com.axelor.app.AppModule                 : Script policy configurators: com.axelor.studio.scripting.StudioScriptPolicyConfigurator, com.axelor.apps.base.module.BaseCustomPolicy, com.axelor.apps.crm.module.CrmCustomPolicy, com.axelor.apps.account.module.AccountCustomPolicy, com.axelor.apps.intervention.module.InterventionCustomPolicy
+2026-10-06 13:50:11.073  INFO 10859 --- [           main] com.axelor.app.AppModule                 : Cache provider: caffeine
+2026-10-06 13:50:25.358  INFO 10859 --- [           main] c.axelor.web.socket.WebSocketEndpoint    : Registering channel: tags
+2026-10-06 13:50:25.359  INFO 10859 --- [           main] c.axelor.web.socket.WebSocketEndpoint    : Registering channel: mail
+2026-10-06 13:50:26.991  INFO 10859 --- [           main] com.axelor.auth.pac4j.AuthPac4jModule    : JCache provider: com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider
+2026-10-06 13:50:28.630  INFO 10859 --- [           main] c.axelor.auth.pac4j.ClientListService    : Indirect clients: AxelorFormClient, MfaClient
+2026-10-06 13:50:28.630  INFO 10859 --- [           main] c.axelor.auth.pac4j.ClientListService    : Direct clients: AxelorApiKeyClient
+2026-10-06 13:52:41.537  INFO 10859 --- [           main] c.a.d.h.dialect.CustomDialectResolver    : Database dialect: AxelorPostgreSQLDialect, version: 16.15
+2026-10-06 13:53:50.581  INFO 10859 --- [           main] com.axelor.web.AppStartup                : Initializing...
+2026-10-06 13:54:02.142  INFO 10859 --- [           main] c.a.s.b.s.BpmAsyncExecutorServiceImpl    : BPM async ForkJoinPool initialized: parallelism=4
+2026-10-06 13:54:02.306  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-core...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-web...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-utils...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-message...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-studio...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-base...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-stock...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-crm...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-sale...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-account...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-purchase...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-supplychain...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-bank-payment...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package cencomun-baseline...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-project...
+2026-10-06 13:54:02.307  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-human-resource...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-quality...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-helpdesk...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-client-portal...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-cash-management...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-contract...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-intervention...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-production...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-maintenance...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-gdpr...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-fleet...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-supplier-portal...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-supplier-management...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-mobile-settings...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-talent...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-marketing...
+2026-10-06 13:54:02.308  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-budget...
+2026-10-06 13:54:02.309  INFO 10859 --- [           main] com.axelor.meta.loader.ModuleManager     : Loading package axelor-erp...
+2026-10-06 13:54:02.317  INFO 10859 --- [           main] c.a.app.leader.LeaderElectionWorker      : Leader Election Worker started.
+2026-10-06 13:54:06.281  INFO 10859 --- [           main] c.a.s.bpm.listener.AppEntityListener     : BPM app state changed: active=false
+2026-10-06 13:54:06.354  INFO 10859 --- [           main] c.a.s.b.s.init.ProcessEngineServiceImpl  : Engine removed for tenant: default
+2026-10-06 13:54:09.732  INFO 10859 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptRequest.request as request
+2026-10-06 13:54:09.733  INFO 10859 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptFunctions.inject as inject
+2026-10-06 13:54:09.733  INFO 10859 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptFunctions.echo as echo
+2026-10-06 13:54:09.733  INFO 10859 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript function: com.axelor.studio.ls.builtin.LinkScriptFunctions.run as run
+2026-10-06 13:54:09.733  INFO 10859 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript binding: com.axelor.studio.ls.LinkScriptService
+2026-10-06 13:54:09.741  INFO 10859 --- [           main] c.a.s.ls.LinkScriptBindingsServiceImpl   : Registering LinkScript binding: com.axelor.studio.ls.builtin.LinkScriptLogger.get as __log__
+2026-10-06 13:54:10.272  INFO 10859 --- [           main] c.a.s.b.s.init.BpmEngineEventService     : Non-distributed cache, skipping BPM event subscription
+2026-10-06 13:54:10.696  INFO 10859 --- [           main] com.axelor.web.AppStartup                : Ready to serve...
+
+Running at http://localhost:8080/axelor-erp
+
+2026-10-06 13:54:27.143  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:34.421  INFO 10859 --- [nio-8080-exec-9] .a.a.b.s.a.SequenceIncrementExecutorImpl : SequenceIncrementExecutor initialized with single-thread executor
+2026-10-06 13:54:34.422  INFO 10859 --- [nio-8080-exec-9] a.a.b.s.a.SequenceReservationServiceImpl : SequenceReservationService initialized with single-thread executor
+2026-10-06 13:54:34.906  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppBase from studio_appBase.csv
+2026-10-06 13:54:35.289  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.FakerApiField from base_fakerApiField.csv
+2026-10-06 13:54:35.589  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.FakerApiFieldParameters from base_fakerApiFieldParameters.csv
+2026-10-06 13:54:35.684  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Icpe from base_icpe.csv
+2026-10-06 13:54:35.710  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.HazardPictogram from base_hazard_pictogram.csv
+2026-10-06 13:54:36.509  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.HazardPhrase from base_hazard_phrase.csv
+2026-10-06 13:54:36.761  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:36.801  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.LeadStatus from crm_leadStatus.csv
+2026-10-06 13:54:36.821  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.OpportunityStatus from crm_opportunityStatus.csv
+2026-10-06 13:54:36.840  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.crm.db.PartnerStatus from crm_partnerStatus.csv
+2026-10-06 13:54:36.859  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppCrm from studio_appCrm.csv
+2026-10-06 13:54:36.991  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:37.116  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:37.252  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.message.db.Template from base_templates.csv
+2026-10-06 13:54:37.643  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:38.495  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppAccount from studio_appAccount.csv
+2026-10-06 13:54:38.534  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AccountingReportType from account_accountingReportType.csv
+2026-10-06 13:54:38.772  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AnalyticLevel from account_analyticLevel.csv
+2026-10-06 13:54:38.891  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.FixedAssetType from account_fixedAssetType.csv
+2026-10-06 13:54:38.964  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.ImportFECType from account_importFecType.csv
+2026-10-06 13:54:39.174  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AssetDisposalReason from account_assetDisposalReason.csv
+2026-10-06 13:54:39.350  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PartnerLinkType from base_partner_link_type.csv
+2026-10-06 13:54:39.509  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:39.696  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.supplychain.db.MrpLineType from supplychain_mrpLineType.csv
+2026-10-06 13:54:39.864  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:54:39.887  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.supplychain.db.StockMoveInvoicingBlockingReason from supplychain_stock_move_invoicing_blocking_reason.csv
+2026-10-06 13:54:39.901  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.studio.db.AppSupplychain from studio_appSupplychain.csv
+2026-10-06 13:54:39.920  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.PartnerLinkType from base_partner_link_type.csv
+2026-10-06 13:54:52.961  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:54:52.967  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:54:52.973  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:54:52.978  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:54:52.983  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:54:52.988  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:54:52.993  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:54:52.999  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:02.227  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:02.230  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:02.234  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:02.239  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:02.243  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:02.248  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:02.252  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:02.256  WARN 10859 --- [nio-8080-exec-5] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:06.502 ERROR 10859 --- [nio-8080-exec-1] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Company denied
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:39)
+	at com.cencomun.core.CoreReadResource.searchMeasured(CoreReadResource.java:52)
+	at com.cencomun.core.CoreReadResource.lambda$search$0(CoreReadResource.java:49)
+	at com.cencomun.core.CoreRequestMetrics.measured(CoreRequestMetrics.java:38)
+	at com.cencomun.core.CoreReadResource.search(CoreReadResource.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:55:06.554 ERROR 10859 --- [nio-8080-exec-2] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Company denied
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:39)
+	at com.cencomun.core.CoreReadResource.invoiceLinks(CoreReadResource.java:80)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:55:17.112  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:17.116  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:17.119  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:17.122  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:17.125  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:17.128  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:17.131  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:17.134  WARN 10859 --- [nio-8080-exec-4] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:18.657  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:18.661  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:18.664  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:18.667  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:18.670  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:18.673  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:18.676  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:18.679  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:22.555 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#1]
+2026-10-06 13:55:30.228  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:30.232  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:30.234  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:30.237  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:30.240  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:30.243  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:30.246  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:30.249  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:31.608  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:31.612  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:31.616  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:31.620  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:31.623  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:31.625  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:31.628  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:31.631  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:35.270 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#2]
+2026-10-06 13:55:42.613  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:42.615  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:42.618  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:42.620  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:42.624  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:42.627  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:42.630  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:42.633  WARN 10859 --- [nio-8080-exec-2] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:43.931  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:43.933  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:43.936  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:43.939  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:43.941  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:43.943  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:43.946  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:43.948  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:47.615 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#3]
+2026-10-06 13:55:55.165  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:55.168  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:55.171  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:55.174  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:55.179  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:55.182  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:55.184  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:55.187  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:56.359  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:55:56.361  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:55:56.363  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:55:56.366  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:55:56.369  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:55:56.371  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:55:56.374  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:55:56.376  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:56:00.023 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-operator, Detail=com.cencomun.core.db.CcmOrder#4]
+2026-10-06 13:56:13.770 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:56:13.822 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:56:14.738 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:56:14.788 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:56:50.288  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:56:50.291  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:56:50.293  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:56:50.295  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:56:50.297  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:56:50.298  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:56:50.300  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:56:50.302  WARN 10859 --- [nio-8080-exec-1] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:56:51.692 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Error: Use the authenticated Cencomun workflow service
+2026-10-06 13:56:51.916  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.base.db.Sequence from base_sequence.csv
+2026-10-06 13:56:51.970  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.bankpayment.db.BankStatementQuery from bankpayment_bankStatementQuery.csv
+2026-10-06 13:56:52.156  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.apps.account.db.AccountingReportType from account_accountingReportType.csv
+2026-10-06 13:56:52.239  INFO 10859 --- [nio-8080-exec-9] com.axelor.data.csv.CSVImporter          : Importing com.axelor.meta.db.MetaTranslation from meta_metaTranslation.csv
+2026-10-06 13:57:19.050 ERROR 10859 --- [nio-8080-exec-3] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Core read role required
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:36)
+	at com.cencomun.core.CoreReadResource.searchMeasured(CoreReadResource.java:52)
+	at com.cencomun.core.CoreReadResource.lambda$search$0(CoreReadResource.java:49)
+	at com.cencomun.core.CoreRequestMetrics.measured(CoreRequestMetrics.java:38)
+	at com.cencomun.core.CoreReadResource.search(CoreReadResource.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:57:19.072 ERROR 10859 --- [nio-8080-exec-6] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.ForbiddenException: Company denied
+	at com.cencomun.core.CoreReadResource.company(CoreReadResource.java:39)
+	at com.cencomun.core.CoreReadResource.searchMeasured(CoreReadResource.java:52)
+	at com.cencomun.core.CoreReadResource.lambda$search$0(CoreReadResource.java:49)
+	at com.cencomun.core.CoreRequestMetrics.measured(CoreRequestMetrics.java:38)
+	at com.cencomun.core.CoreReadResource.search(CoreReadResource.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 13:57:31.826 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:32.048 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:32.272 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:32.486 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:32.702 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:32.922 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:33.131 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:33.333 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:33.537 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:33.741 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:33.950 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:34.157 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:34.421 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:34.697 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:34.929 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:35.150 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:35.364 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:35.585 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:35.801 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:36.010 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:36.225 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmAudit#257]
+2026-10-06 13:57:36.431 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:36.644 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:36.850 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmRequestKey#106]
+2026-10-06 13:57:37.071 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:37.292 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:37.499 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOutboxEvent#1]
+2026-10-06 13:57:39.464 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder]
+2026-10-06 13:57:40.826 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:57:42.134 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:57:43.510 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmPurchase]
+2026-10-06 13:57:44.795 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:57:46.259 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:57:47.589 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOrder]
+2026-10-06 13:57:48.927 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:57:50.295 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:57:51.589 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmCashClose]
+2026-10-06 13:57:53.012 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:57:54.370 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:57:55.693 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankImport]
+2026-10-06 13:57:57.016 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankImport#1]
+2026-10-06 13:57:58.272 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankImport#1]
+2026-10-06 13:57:59.736 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankRow]
+2026-10-06 13:58:01.073 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:58:02.353 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:58:03.609 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatement]
+2026-10-06 13:58:04.979 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:58:06.394 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:58:07.702 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatementLine]
+2026-10-06 13:58:09.048 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:58:10.363 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:58:11.844 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-reader, Detail=com.axelor.apps.account.db.Move]
+2026-10-06 13:58:13.241 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-reader, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:58:14.562 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-reader, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:58:15.875 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder]
+2026-10-06 13:58:17.182 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:58:18.649 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:58:20.022 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmPurchase]
+2026-10-06 13:58:21.384 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:58:22.763 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:58:24.036 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOrder]
+2026-10-06 13:58:25.542 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:58:26.831 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:58:28.170 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmCashClose]
+2026-10-06 13:58:29.518 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:58:30.906 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:58:32.318 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankImport]
+2026-10-06 13:58:33.717 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankImport#1]
+2026-10-06 13:58:34.982 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankImport#1]
+2026-10-06 13:58:36.350 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankRow]
+2026-10-06 13:58:37.721 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:58:39.042 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:58:40.382 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatement]
+2026-10-06 13:58:41.776 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:58:43.141 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:58:44.608 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatementLine]
+2026-10-06 13:58:45.936 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:58:47.321 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:58:48.603 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.account.db.Move]
+2026-10-06 13:58:49.813 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-mcp, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:58:51.237 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-mcp, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:58:52.510 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder]
+2026-10-06 13:58:53.783 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:58:55.158 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:58:56.479 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmPurchase]
+2026-10-06 13:58:57.928 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:58:59.181 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmPurchase#11]
+2026-10-06 13:59:00.480 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOrder]
+2026-10-06 13:59:01.749 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:59:03.124 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmOrder#21]
+2026-10-06 13:59:04.504 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmCashClose]
+2026-10-06 13:59:05.794 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:59:07.110 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmCashClose#2]
+2026-10-06 13:59:08.432 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankImport]
+2026-10-06 13:59:09.859 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankImport#1]
+2026-10-06 13:59:11.141 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankImport#1]
+2026-10-06 13:59:12.430 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankRow]
+2026-10-06 13:59:13.707 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:59:15.085 ERROR 10859 --- [nio-8080-exec-9] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.cencomun.core.db.CcmBankRow#1]
+2026-10-06 13:59:16.488 ERROR 10859 --- [nio-8080-exec-5] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatement]
+2026-10-06 13:59:17.822 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:59:19.243 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatement#1]
+2026-10-06 13:59:20.527 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatementLine]
+2026-10-06 13:59:21.931 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:59:23.322 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.bankpayment.db.BankStatementLine#1]
+2026-10-06 13:59:24.574 ERROR 10859 --- [nio-8080-exec-8] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à créer cette ressource., User=ccm-other, Detail=com.axelor.apps.account.db.Move]
+2026-10-06 13:59:25.816 ERROR 10859 --- [nio-8080-exec-6] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-other, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:59:27.088 ERROR 10859 --- [nio-8080-exec-1] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à supprimer cette ressource., User=ccm-other, Detail=com.axelor.apps.account.db.Move#71]
+2026-10-06 13:59:28.034 ERROR 10859 --- [nio-8080-exec-7] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-reader, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:59:28.773 ERROR 10859 --- [io-8080-exec-10] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-mcp, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:59:29.428 ERROR 10859 --- [nio-8080-exec-2] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à lire cette ressource., User=ccm-other, Detail=com.axelor.apps.purchase.db.PurchaseOrder#11]
+2026-10-06 13:59:47.785  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:59:47.787  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:59:47.789  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:59:47.791  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:59:47.793  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:59:47.795  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:59:47.796  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:59:47.798  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:59:53.866  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 13:59:53.868  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 13:59:53.870  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 13:59:53.872  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 13:59:53.873  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 13:59:53.875  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 13:59:53.877  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 13:59:53.879  WARN 10859 --- [nio-8080-exec-8] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:04.388  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 14:00:04.390  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 14:00:04.391  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 14:00:04.393  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 14:00:04.395  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:04.397  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 14:00:04.399  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 14:00:04.400  WARN 10859 --- [nio-8080-exec-6] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:12.079  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 14:00:12.081  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 14:00:12.083  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 14:00:12.085  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 14:00:12.087  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:12.089  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 14:00:12.091  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 14:00:12.093  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:15.808 ERROR 10859 --- [nio-8080-exec-1] org.jboss.resteasy.resteasy_jaxrs.i18n   : RESTEASY002010: Failed to execute
+jakarta.ws.rs.WebApplicationException: Native missing payment-day rate: Aucune conversion trouvée de la devise 'US Dollar' à la devise 'Bolivar synthetic LAB' à la date du 2026-10-03
+	at com.cencomun.core.NativeFxService.convert(NativeFxService.java:84)
+	at com.cencomun.core.NativeFxService.payment(NativeFxService.java:102)
+	at com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)
+	at com.cencomun.core.NativeFxResource.payment(NativeFxResource.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:118)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:560)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:452)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$0(ResourceMethodInvoker.java:413)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:415)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:378)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:356)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:70)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:434)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$0(SynchronousDispatcher.java:245)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:159)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:321)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:162)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:234)
+	at org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:222)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:51)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:89)
+	at com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:48)
+	at org.pac4j.jee.filter.SecurityFilter.lambda$internalFilter$0(SecurityFilter.java:84)
+	at org.pac4j.core.engine.DefaultSecurityLogic.perform(DefaultSecurityLogic.java:151)
+	at org.pac4j.jee.filter.SecurityFilter.internalFilter(SecurityFilter.java:82)
+	at org.pac4j.jee.config.AbstractConfigFilter.doFilter(AbstractConfigFilter.java:92)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:109)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:138)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at org.apache.shiro.guice.web.SimpleFilterChain.doFilter(SimpleFilterChain.java:45)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:463)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.lambda$doFilterInternal$0(AbstractShiroFilter.java:378)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:91)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:84)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:389)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:376)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:156)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.persist.PersistFilter.doFilter(PersistFilter.java:94)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:82)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:121)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:133)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2032)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-10-06 14:00:16.522  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 14:00:16.524  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 14:00:16.525  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 14:00:16.527  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 14:00:16.528  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:16.529  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 14:00:16.530  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 14:00:16.532  WARN 10859 --- [nio-8080-exec-3] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:17.428  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 14:00:17.429  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 14:00:17.431  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 14:00:17.432  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 14:00:17.434  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:17.435  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 14:00:17.436  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 14:00:17.437  WARN 10859 --- [nio-8080-exec-7] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:18.320  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAI doesn't exist
+2026-10-06 14:00:18.321  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type ABL doesn't exist
+2026-10-06 14:00:18.322  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMT doesn't exist
+2026-10-06 14:00:18.323  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type PMD doesn't exist
+2026-10-06 14:00:18.325  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:18.326  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type SUR doesn't exist
+2026-10-06 14:00:18.327  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type AAB doesn't exist
+2026-10-06 14:00:18.328  WARN 10859 --- [io-8080-exec-10] c.a.a.a.s.n.InvoiceNoteCreationHelper    : Note type REG doesn't exist
+2026-10-06 14:00:20.108 ERROR 10859 --- [nio-8080-exec-4] com.axelor.rpc.ResponseInterceptor       : Authorization Error: [Message=Vous n’êtes pas autorisé(e) à modifier cette ressource., User=ccm-manager, Detail=com.cencomun.core.db.CcmAudit#1]
+2026-10-06 14:00:20.196 ERROR 10859 --- [nio-8080-exec-3] com.axelor.rpc.ResponseInterceptor       : Error: Semantic audit cannot be deleted by generic CRUD
+2026-10-06 14:04:02.422  INFO 10859 --- [Election-Thread] com.axelor.db.audit.AuditProcessor       : Recovering audit logs...
+2026-10-06 14:04:03.044 ERROR 10859 --- [Election-Thread] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: could not obtain lock on row in relation "audit_log"
+2026-10-06 14:06:01.177  INFO 10859 --- [       Thread-0] com.axelor.db.audit.AsyncAuditQueue      : Shutting down AuditQueue...
+2026-10-06 14:06:03.825  INFO 10859 --- [       Thread-0] com.axelor.quartz.JobRunner              : The job scheduler is already stopped.
+2026-10-06 14:06:03.825  INFO 10859 --- [       Thread-0] c.a.app.leader.LeaderElectionWorker      : Stopping Leader Election Worker...
+2026-10-06 14:06:03.825  INFO 10859 --- [       Thread-0] c.a.app.leader.LeaderElectionWorker      : Leader Election Worker stopped.

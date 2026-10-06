@@ -1,0 +1,103 @@
+{
+  "scope": "native address fixture prerequisite, not a Core group",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "lab_commit": "4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9",
+  "prepared": {
+    "address_id": 1,
+    "repository": "com.axelor.apps.base.db.repo.AddressBaseRepository"
+  },
+  "committed": {
+    "template_id": 5,
+    "city": "Synthetic LAB City",
+    "formatted_full_name": "Synthetic LAB preflight\n1 Synthetic LAB Street\nSynthetic LAB City 00000",
+    "zip": "00000",
+    "country_id": 5,
+    "street": "1 Synthetic LAB Street",
+    "address_id": 1,
+    "read_boundary": "separate-http-after-address-commit",
+    "lines": [
+      {
+        "field_id": 5241,
+        "id": 23,
+        "field": "floor",
+        "template_id": 5,
+        "model": "com.axelor.apps.base.db.Address",
+        "required": false
+      },
+      {
+        "field_id": 5229,
+        "id": 24,
+        "field": "streetName",
+        "template_id": 5,
+        "model": "com.axelor.apps.base.db.Address",
+        "required": true
+      },
+      {
+        "field_id": 5253,
+        "id": 25,
+        "field": "postBox",
+        "template_id": 5,
+        "model": "com.axelor.apps.base.db.Address",
+        "required": false
+      },
+      {
+        "field_id": 5222,
+        "id": 26,
+        "field": "city",
+        "template_id": 5,
+        "model": "com.axelor.apps.base.db.Address",
+        "required": true
+      },
+      {
+        "field_id": 5243,
+        "id": 27,
+        "field": "zip",
+        "template_id": 5,
+        "model": "com.axelor.apps.base.db.Address",
+        "required": true
+      }
+    ],
+    "full_name": "SYNTHETIC LAB PREFLIGHT 1 SYNTHETIC LAB STREET SYNTHETIC LAB CITY 00000"
+  },
+  "status": "PASS",
+  "replay_identical": true,
+  "seconds": 1.49,
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 5.292
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 90.878
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 7.368
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 1337.66,
+      "action": "ccm-core-address-preflight",
+      "case": "ADDRESS"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.752,
+      "action": "ccm-core-address-inspect",
+      "case": "ADDRESS"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.66,
+      "action": "ccm-core-address-preflight",
+      "case": "ADDRESS"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.411,
+      "action": "ccm-core-address-inspect",
+      "case": "ADDRESS"
+    }
+  ]
+}

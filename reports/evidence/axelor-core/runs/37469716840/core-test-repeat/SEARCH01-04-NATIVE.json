@@ -1,0 +1,457 @@
+{
+  "case": "SEARCH01-04-NATIVE",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [
+    {
+      "case": "foreign-company-denied",
+      "http_status": 403,
+      "invoice_links_http_status": 403
+    },
+    {
+      "case": "product-query",
+      "query": "P001",
+      "persisted": {
+        "total": 1,
+        "page_size": 100,
+        "items": [
+          {
+            "id": "P001",
+            "native_id": 1,
+            "profile_id": 1,
+            "name": "Equipo ficticio Alfa",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "cashea_price": "50.00",
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          }
+        ],
+        "page": 1,
+        "_meta": {
+          "db_ms": 5.074465,
+          "boundary": "authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads",
+          "server_ms": 63.552298,
+          "query_count": 18,
+          "source": "Hibernate SessionEventListener JDBC execution callbacks"
+        }
+      }
+    },
+    {
+      "case": "product-query",
+      "query": "Equipo ficticio Alfa",
+      "persisted": {
+        "total": 1,
+        "page_size": 100,
+        "items": [
+          {
+            "id": "P001",
+            "native_id": 1,
+            "profile_id": 1,
+            "name": "Equipo ficticio Alfa",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "cashea_price": "50.00",
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          }
+        ],
+        "page": 1,
+        "_meta": {
+          "db_ms": 3.511876,
+          "boundary": "authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads",
+          "server_ms": 7.766597,
+          "query_count": 15,
+          "source": "Hibernate SessionEventListener JDBC execution callbacks"
+        }
+      }
+    },
+    {
+      "case": "product-query",
+      "query": "SUP-BETA-02",
+      "persisted": {
+        "total": 1,
+        "page_size": 100,
+        "items": [
+          {
+            "id": "P002",
+            "native_id": 2,
+            "profile_id": 2,
+            "name": "Accesorio ficticio Beta",
+            "marketplace_enabled": false,
+            "cashea_enabled": true,
+            "cashea_price": "25.00",
+            "supplier_reference": "SUP-BETA-02",
+            "warranty_quantity": 6,
+            "warranty_unit": "MONTH",
+            "condition": "REFURBISHED"
+          }
+        ],
+        "page": 1,
+        "_meta": {
+          "db_ms": 4.10167,
+          "boundary": "authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads",
+          "server_ms": 8.959353,
+          "query_count": 15,
+          "source": "Hibernate SessionEventListener JDBC execution callbacks"
+        }
+      }
+    },
+    {
+      "case": "product-query",
+      "query": "NOT-EXISTS",
+      "persisted": {
+        "total": 0,
+        "page_size": 100,
+        "items": [],
+        "page": 1,
+        "_meta": {
+          "db_ms": 3.978292,
+          "boundary": "authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads",
+          "server_ms": 7.947193,
+          "query_count": 14,
+          "source": "Hibernate SessionEventListener JDBC execution callbacks"
+        }
+      }
+    },
+    {
+      "case": "complete-pages",
+      "persisted": {
+        "total": 3,
+        "page_size": 2,
+        "items": [
+          {
+            "id": "P001",
+            "native_id": 1,
+            "profile_id": 1,
+            "name": "Equipo ficticio Alfa",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "cashea_price": "50.00",
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          },
+          {
+            "id": "P002",
+            "native_id": 2,
+            "profile_id": 2,
+            "name": "Accesorio ficticio Beta",
+            "marketplace_enabled": false,
+            "cashea_enabled": true,
+            "cashea_price": "25.00",
+            "supplier_reference": "SUP-BETA-02",
+            "warranty_quantity": 6,
+            "warranty_unit": "MONTH",
+            "condition": "REFURBISHED"
+          }
+        ],
+        "page": 1,
+        "_meta": {
+          "db_ms": 4.337533,
+          "boundary": "authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads",
+          "server_ms": 9.312914,
+          "query_count": 16,
+          "source": "Hibernate SessionEventListener JDBC execution callbacks"
+        }
+      }
+    },
+    {
+      "case": "complete-pages",
+      "persisted": {
+        "total": 3,
+        "page_size": 2,
+        "items": [
+          {
+            "id": "P003",
+            "native_id": 3,
+            "profile_id": 3,
+            "name": "Equipo ficticio Gamma",
+            "marketplace_enabled": true,
+            "cashea_enabled": false,
+            "cashea_price": "80.00",
+            "supplier_reference": "SUP-GAMMA-03",
+            "warranty_quantity": 0,
+            "warranty_unit": "MONTH",
+            "condition": "USED"
+          }
+        ],
+        "page": 2,
+        "_meta": {
+          "db_ms": 4.332944,
+          "boundary": "authenticated resource/service/transaction; excludes authentication, serialization and isolated native sequence threads",
+          "server_ms": 11.169802,
+          "query_count": 15,
+          "source": "Hibernate SessionEventListener JDBC execution callbacks"
+        }
+      }
+    },
+    {
+      "case": "native-customer-query",
+      "field": "name",
+      "query": "Cliente ficticio Alfa",
+      "persisted": [
+        {
+          "mobilePhone": "+12025550101",
+          "partnerSeq": "C001",
+          "name": "Cliente ficticio Alfa",
+          "id": 2,
+          "version": 6
+        }
+      ]
+    },
+    {
+      "case": "native-customer-query",
+      "field": "mobilePhone",
+      "query": "+12025550101",
+      "persisted": [
+        {
+          "mobilePhone": "+12025550101",
+          "partnerSeq": "C001",
+          "name": "Cliente ficticio Alfa",
+          "id": 2,
+          "version": 6
+        }
+      ]
+    },
+    {
+      "case": "native-serial-query",
+      "persisted": [
+        {
+          "product.code": "P001",
+          "$availableQty": "0",
+          "productTrackingNumberConfiguration": null,
+          "id": 1,
+          "version": 0,
+          "trackingNumberSeq": "SER-P001-001"
+        }
+      ],
+      "serial_inventory_tracking_tested": false
+    },
+    {
+      "case": "native-invoice-query",
+      "persisted": [
+        {
+          "externalReference": "INV-CCM-001",
+          "$subrogationStatusSelect": 1,
+          "saleOrder.externalReference": "CCM-CO00",
+          "id": 1,
+          "version": 17
+        }
+      ],
+      "native_links": {
+        "reader_company_id": 1,
+        "actor": "ccm-reader",
+        "invoices": [
+          {
+            "native_invoice_id": 1,
+            "native_company_id": 1,
+            "header_sale_order_id": 1,
+            "header_sale_order_company_id": 1,
+            "header_sale_order_reference": "CCM-CO00",
+            "line_links": [
+              {
+                "product_code": "P001",
+                "sale_order_company_id": 1,
+                "invoice_line_id": 1,
+                "sale_order_id": 1,
+                "sale_order_line_id": 1,
+                "parent_invoice_id": 1,
+                "sale_order_reference": "CCM-CO00"
+              },
+              {
+                "product_code": "P002",
+                "sale_order_company_id": 1,
+                "invoice_line_id": 2,
+                "sale_order_id": 1,
+                "sale_order_line_id": 2,
+                "parent_invoice_id": 1,
+                "sale_order_reference": "CCM-CO00"
+              }
+            ],
+            "source": "InvoiceLine.saleOrderLine.saleOrder"
+          }
+        ]
+      }
+    }
+  ],
+  "actor": "ccm-reader",
+  "native_queries": [
+    {
+      "case": "native-rest-inspection",
+      "model": "com.axelor.apps.base.db.Partner",
+      "criteria": [
+        {
+          "fieldName": "name",
+          "operator": "=",
+          "value": "Cliente ficticio Alfa"
+        }
+      ],
+      "response": {
+        "status": 0,
+        "offset": 0,
+        "total": 1,
+        "data": [
+          {
+            "mobilePhone": "+12025550101",
+            "partnerSeq": "C001",
+            "name": "Cliente ficticio Alfa",
+            "id": 2,
+            "version": 6
+          }
+        ]
+      }
+    },
+    {
+      "case": "native-rest-inspection",
+      "model": "com.axelor.apps.base.db.Partner",
+      "criteria": [
+        {
+          "fieldName": "mobilePhone",
+          "operator": "=",
+          "value": "+12025550101"
+        }
+      ],
+      "response": {
+        "status": 0,
+        "offset": 0,
+        "total": 1,
+        "data": [
+          {
+            "mobilePhone": "+12025550101",
+            "partnerSeq": "C001",
+            "name": "Cliente ficticio Alfa",
+            "id": 2,
+            "version": 6
+          }
+        ]
+      }
+    },
+    {
+      "case": "native-rest-inspection",
+      "model": "com.axelor.apps.stock.db.TrackingNumber",
+      "criteria": [
+        {
+          "fieldName": "trackingNumberSeq",
+          "operator": "=",
+          "value": "SER-P001-001"
+        }
+      ],
+      "response": {
+        "status": 0,
+        "offset": 0,
+        "total": 1,
+        "data": [
+          {
+            "product.code": "P001",
+            "$availableQty": "0",
+            "productTrackingNumberConfiguration": null,
+            "id": 1,
+            "version": 0,
+            "trackingNumberSeq": "SER-P001-001"
+          }
+        ]
+      }
+    },
+    {
+      "case": "native-rest-inspection",
+      "model": "com.axelor.apps.account.db.Invoice",
+      "criteria": [
+        {
+          "fieldName": "externalReference",
+          "operator": "=",
+          "value": "INV-CCM-001"
+        }
+      ],
+      "response": {
+        "status": 0,
+        "offset": 0,
+        "total": 1,
+        "data": [
+          {
+            "externalReference": "INV-CCM-001",
+            "$subrogationStatusSelect": 1,
+            "saleOrder.externalReference": "CCM-CO00",
+            "id": 1,
+            "version": 17
+          }
+        ]
+      }
+    }
+  ],
+  "subcase_failures": [],
+  "status": "PASS",
+  "complete": true,
+  "seconds": 0.5,
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 2.505
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 69.491
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 4.727
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 111.334
+    },
+    {
+      "operation": "/ws/ccm/lab/invoice-links",
+      "http_ms": 12.772
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 69.457
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 12.275
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 13.393
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 12.597
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 14.272
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 16.211
+    },
+    {
+      "operation": "/ws/rest/com.axelor.apps.base.db.Partner/search",
+      "http_ms": 61.174
+    },
+    {
+      "operation": "/ws/rest/com.axelor.apps.base.db.Partner/search",
+      "http_ms": 12.773
+    },
+    {
+      "operation": "/ws/rest/com.axelor.apps.stock.db.TrackingNumber/search",
+      "http_ms": 43.404
+    },
+    {
+      "operation": "/ws/rest/com.axelor.apps.account.db.Invoice/search",
+      "http_ms": 12.788
+    },
+    {
+      "operation": "/ws/ccm/lab/invoice-links",
+      "http_ms": 22.545
+    }
+  ]
+}

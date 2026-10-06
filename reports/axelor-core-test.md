@@ -1,5 +1,138 @@
 # Core Test Axelor — resultados ejecutados
 
+CI [37469716840](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37469716840),
+commit `4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9`, conclusión `FAILURE`, 3223s.
+Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, cobertura revisión2.
+**Primaria: 30 PASS / 4 FAIL / 0 BLOCKED / 0 UNRUN. Réplica: 31 PASS / 3 FAIL / 0 BLOCKED / 0 UNRUN.**
+Criterios primaria: 2 PASS / 11 FAIL / 1 BLOCKED / 0 UNRUN; réplica: 3 PASS / 10 FAIL / 1 BLOCKED / 0 UNRUN.
+No se declara terminada ni aprobada la comparación. Criterio13 BLOCKED y seis
+escenarios de patch UNRUN: el usuario aplazó actualización y objetivo.
+
+[Procedencia](evidence/axelor-core/runs/37469716840/evidence-source.json),
+[verificación de correcciones](evidence/axelor-core/runs/37469716840/corrections-verification.json),
+[índice completo](evidence/axelor-core/runs/37469716840/isolated-repeat.json) y
+[métricas](axelor-core-metrics.md). Revisores congelados del SHA ejecutado4230b2b; log completo
+con SHA256, un intento ZIP y red restringida conservada.
+
+Índice 23947bytes; 103 archivos originales,
+124521710bytes cargados y verificados. Archivo
+máximo 28207253bytes. Ningún árbol de casos duplicado dentro del índice ni
+aceptación basada sólo en sus etiquetas. Repetición derivada:
+**FAIL**: AssertionError: Fresh restored execution has a different full-group result.
+
+Cada fase intenta los34grupos. PASS significa grupo completo revalidado; FAIL
+conserva los subcasos ejecutados y sus errores, sin afirmar cobertura completa.
+Los gates de administrador y los grupos completos se mantienen separados.
+
+- Gate CO00: PASS, 16.985s; no sustituye roles/estados/atomicidad.
+
+- Gate TAX01-W: PASS, 8.432s; no sustituye roles/estados/atomicidad.
+
+Las correcciones conservan los mecanismos ERP: mutex JPA de compañía antes de
+cargar el pedido, FK BankStatementLine.reference real, causa exacta de denegación
+RPC sin datos/efectos, orden de MoveLine por ID y request_rate texto estable
+comparando el resultado MCP completo. Los estados de aceptación de cada una
+son los del recibo del CI, con todas las solicitudes/errores/lecturas originales.
+Además, los tres grupos de B39 se ejecutan con POST/removeAll y la versión
+real del control manager para el borrado admin. MCP/API conservan el POST
+completo y comparan transporte/clave, resultados completos y lecturas durables
+para seis herramientas y dos replays inversos. Los recibos del run muestran
+qué intentos realmente completaron;404/409 y errores genéricos no aprueban
+permisos, inmutabilidad ni paridad.
+El adaptador mantiene403 estricto. PDF automático está desactivado sólo en LAB,
+fuera del contrato probado; isVentilationSkipped=false y GL nativo se inspeccionan.
+
+Los dos hallazgos funcionales se conservan sin cambiar expectativas:
+VAL01-04 exige rechazo de coste negativo y el ERP realiza -0.01 con control válido;
+STATE-CANCEL-BEFORE-HANDOVER exige CANCELLED y el ERP rechaza los tres intentos
+confirmados. Se preservan sus errores y snapshots tras rollback. Su repetición
+no convierte esos FAIL en PASS. Ver archivos originales de ambas fases.
+
+| Grupo requerido | Primaria | Réplica |
+| --- | --- | --- |
+| CO00-NATIVE | PASS | PASS |
+| CO01-NATIVE | PASS | PASS |
+| TAX01-S-NATIVE | PASS | PASS |
+| TAX01-W-NATIVE | PASS | PASS |
+| PROD01-04 | PASS | PASS |
+| VAL01-04 | FAIL | FAIL |
+| STATE01-04 | PASS | PASS |
+| INV01-03-INSUFFICIENT | PASS | PASS |
+| FX01-03-MONEY01-03 | PASS | PASS |
+| PO01-09-NATIVE | PASS | PASS |
+| PO07-09-REVISION-SELF | PASS | PASS |
+| CASH00-06-NATIVE | PASS | PASS |
+| BANK-BOOK-FIXTURE | PASS | PASS |
+| BANK01-05-NATIVE | PASS | PASS |
+| API01-06-SIX-ROUTES | PASS | PASS |
+| IDEM01-02-CREATE-CONCURRENT | PASS | PASS |
+| PERM-API-NATIVE | PASS | PASS |
+| CASH04-06-HTTP-IMMUTABLE | PASS | PASS |
+| SEARCH01-04-NATIVE | PASS | PASS |
+| TAX02-04-IDEM-CONCURRENT | PASS | PASS |
+| BANK-CONCURRENT-1000 | PASS | PASS |
+| MCP01-06-STDIO | PASS | PASS |
+| IDEM03-LOST-RESTART | PASS | PASS |
+| IDEM04-EVENTS-RECOVERY | FAIL | PASS |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS | PASS |
+| AUDIT01-03-NATIVE | FAIL | FAIL |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | PASS | PASS |
+| SUPPORTED-CONFIGURATION | PASS | PASS |
+| STATE-UNKNOWN-ATOMIC | PASS | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS | PASS |
+| STATE-WEB-NO-GUIDE | PASS | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | PASS | PASS |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | PASS | PASS |
+
+| Criterio | Primaria | Réplica |
+| --- | --- | --- |
+| 1 | FAIL | FAIL |
+| 2 | PASS | PASS |
+| 3 | FAIL | FAIL |
+| 4 | FAIL | FAIL |
+| 5 | FAIL | FAIL |
+| 6 | FAIL | FAIL |
+| 7 | FAIL | FAIL |
+| 8 | FAIL | FAIL |
+| 9 | FAIL | PASS |
+| 10 | PASS | PASS |
+| 11 | FAIL | FAIL |
+| 12 | FAIL | FAIL |
+| 13 | BLOCKED | BLOCKED |
+| 14 | FAIL | FAIL |
+
+Dependencias de criterios que no pasan; todos los grupos se revalidaron con
+el código de este SHA y cada archivo original completo.
+
+| Criterio | Grupos adjuntos que no pasan | Estado observado |
+| --- | --- | --- |
+| 1 | STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 3 | IDEM04-EVENTS-RECOVERY, AUDIT01-03-NATIVE, STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 4 | VAL01-04, STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 5 | VAL01-04, STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 6 | IDEM04-EVENTS-RECOVERY, AUDIT01-03-NATIVE | FAIL |
+| 7 | IDEM04-EVENTS-RECOVERY, AUDIT01-03-NATIVE | FAIL |
+| 8 | AUDIT01-03-NATIVE | FAIL |
+| 9 | IDEM04-EVENTS-RECOVERY | FAIL |
+| 11 | Executed benchmark or independent restored replay did not satisfy frozen proof | FAIL |
+| 12 | Executed benchmark or independent restored replay did not satisfy frozen proof | FAIL |
+| 13 | User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN | BLOCKED |
+| 14 | IDEM04-EVENTS-RECOVERY | FAIL |
+
+## B40 — Correcciones verificadas localmente, aceptación ERP pendiente
+
+Respuesta real de admin confirma ForbiddenException de inmutabilidad con
+91frames y snapshots intactos. Se corrige sólo su interpretación exacta.
+La primaria de IDEM04 conserva EOF de PO01,41efectos/1pendiente y no ejecutó
+reinicio/replay; réplica PASS no sustituye esa prueba. ConsumidorHTTP corregido,
+93Python y300solicitudes Java21 locales PASS; próxima aceptación en una solaCI.
+Los dos FAIL funcionales y la matriz original del run permanecen intactos.
+
+## Historia anterior
+
+# Core Test Axelor — resultados ejecutados
+
 CI [37462836624](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37462836624),
 commit `068e76822da103c44934bf81a6bb0db4b8e12588`, conclusión `FAILURE`, 2325s.
 Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, cobertura revisión2.

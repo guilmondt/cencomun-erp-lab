@@ -35,6 +35,8 @@ def snapshot(path):
 
 
 class Handler(BaseHTTPRequestHandler):
+    protocol_version='HTTP/1.1'
+    disable_nagle_algorithm=True
     def log_message(self,*args):pass
     def reply(self,status,body):
         raw=json.dumps(body).encode();self.send_response(status);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(raw)));self.end_headers();self.wfile.write(raw)
@@ -42,9 +44,13 @@ class Handler(BaseHTTPRequestHandler):
         if self.path!='/snapshot':return self.reply(404,{'error':'Unknown private consumer operation'})
         self.reply(200,snapshot(self.server.database))
     def do_POST(self):
+        # Drain every body, including the intentional 503, before responding.
+        # Otherwise an unread POST may reset the connection instead of yielding
+        # the intended HTTP response to the real Java HttpClient.
+        raw=self.rfile.read(int(self.headers.get('Content-Length','0')))
         if self.path!='/events':return self.reply(404,{'error':'Unknown private consumer operation'})
         if self.server.fail_flag.exists():return self.reply(503,{'error':'Synthetic consumer unavailable'})
-        try:payload=json.loads(self.rfile.read(int(self.headers.get('Content-Length','0'))));apply(self.server.database,payload)
+        try:payload=json.loads(raw);apply(self.server.database,payload)
         except (ValueError,AssertionError,KeyError) as error:return self.reply(409,{'error':str(error)})
         self.reply(200,{'accepted':True})
 
