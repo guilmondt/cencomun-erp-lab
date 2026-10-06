@@ -438,6 +438,49 @@ def fx_notice_summary(evidence):
     return summary
 
 
+def run_fx_payment_cases(operator, admin, inputs, body, evidence):
+    """Each native invoice/receipt transaction is independent; a failure cannot skip later dates."""
+    results, failures = [], []
+    evidence["payment_attempts"] = []
+    for item in inputs:
+        attempt = {"case": item["id"]}
+        before, result = None, None
+        try:
+            before = admin.action("ccm-core-fx-inspect", "FX")
+            result = operator.request("/ws/ccm/lab/currency/payment", body(item))
+            attempt["result"] = result
+        except Exception as error:
+            attempt.update(error=str(error)[:500], error_type=type(error).__name__)
+            if isinstance(error, urllib.error.HTTPError):
+                attempt.update(http_status=error.code, native_http_error=error.read().decode(errors="replace")[:3500])
+        try:
+            # This separate request follows the commit or rollback of the native payment request.
+            committed = admin.action("ccm-core-fx-inspect", "FX")
+            attempt["persisted"] = committed
+            if result is not None:
+                evidence["steps"].append({"case": "committed-payment-case", "result": result,
+                    "persisted": {"company_id": committed["company_id"], "company_code": committed["company_code"],
+                        "read_boundary": "separate-http-after-payment-commit",
+                        "invoices": [i for i in committed["invoices"] if i["id"] == result["native_invoice_id"]],
+                        "payments": [p for p in committed["payments"] if p["id"] in result["native_payment_ids"]]}})
+                results.append(result)
+            elif before is not None:
+                attempt["native_effects_unchanged"] = before == committed
+        except Exception as error:
+            attempt["inspection_error"] = str(error)[:500]
+        evidence["payment_attempts"].append(attempt)
+        if "error" in attempt or "inspection_error" in attempt:
+            failures.append(attempt)
+    if failures:
+        evidence["payment_failures"] = failures
+        first_native = next((f["native_http_error"] for f in failures if "native_http_error" in f), None)
+        if first_native is not None:
+            evidence["native_http_error"] = first_native
+        raise RuntimeError("Native payment cases failed: " + "; ".join(
+            f["case"] + ": " + f.get("error", f.get("inspection_error", "")) for f in failures))
+    return results
+
+
 def run_fx_cases(admin, base, fixtures, output, row):
     start = time.perf_counter()
     evidence = {"case": "FX01-03-MONEY01-03", "reference": REFERENCE, "revision": 1, "steps": []}
@@ -483,17 +526,7 @@ def run_fx_cases(admin, base, fixtures, output, row):
         observations.append(rounded); evidence["steps"].append({"case": "MONEY-ROUND", "native_conversion": rounded})
         assert_native_fx_conversions(observations, specification, persisted)
         evidence.update(partial_conversion_status="PASS", conversion_observations=observations, persisted=persisted)
-        payments = []
-        for input in specification["payments"]:
-            result = operator.request("/ws/ccm/lab/currency/payment", body(input))
-            # A new admin HTTP request reads database state after the payment request committed.
-            committed = admin.action("ccm-core-fx-inspect", "FX")
-            selected_invoices = [i for i in committed["invoices"] if i["id"] == result["native_invoice_id"]]
-            selected_payments = [p for p in committed["payments"] if p["id"] in result["native_payment_ids"]]
-            evidence["steps"].append({"case": "committed-payment-case", "result": result,
-                "persisted": {"company_id": committed["company_id"], "company_code": committed["company_code"],
-                    "read_boundary": "separate-http-after-payment-commit", "invoices": selected_invoices, "payments": selected_payments}})
-            payments.append(result)
+        payments = run_fx_payment_cases(operator, admin, specification["payments"], body, evidence)
         persisted = admin.action("ccm-core-fx-inspect", "FX")
         persisted["read_boundary"] = "separate-http-after-payment-commit"
         observations = payments
@@ -517,6 +550,13 @@ def run_fx_cases(admin, base, fixtures, output, row):
         reason=evidence.get("error", "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization"))
     for step in evidence["steps"]:
         print("::notice title=Native FX step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
+    for failure in evidence.get("payment_failures", []):
+        summary = fx_notice_summary({"case": evidence["case"], "reference": REFERENCE, "revision": 1,
+            "status": "FAIL", "complete": False, **{k:v for k,v in failure.items() if k in
+                ("error", "error_type", "native_http_error", "inspection_error")}})
+        print("::notice title=Native FX failed payment case::" + json.dumps({"case": evidence["case"],
+            "payment_case": failure["case"], "failure": summary,
+            "native_effects_unchanged": failure.get("native_effects_unchanged")}), flush=True)
     print("::notice title=Core independent FX/MONEY::" + json.dumps(fx_notice_summary(evidence)), flush=True)
     return evidence
 
@@ -551,8 +591,13 @@ def run_search_cases(admin, base, fixtures, output, row):
         if model == "com.axelor.apps.base.db.Partner" and not result.get("data"):
             payload = {"data": {"criteria": criteria}, "fields": fields, "limit": 100}
             observation["administrator_comparison"] = admin.request(f"/ws/rest/{model}/search", payload)
-            observation["reader_filter_diagnostics"] = reader.request("/ws/ccm/lab/search/diagnostics?" + urllib.parse.urlencode({
-                "company_id": "CCM-LAB-001", "name": specification["customer"]["name"]}))
+            try:
+                observation["reader_filter_diagnostics"] = reader.request("/ws/ccm/lab/search/diagnostics?" + urllib.parse.urlencode({
+                    "company_id": "CCM-LAB-001", "name": specification["customer"]["name"]}))
+            except Exception as error:
+                observation["reader_filter_diagnostics_error"] = str(error)[:500]
+                if isinstance(error, urllib.error.HTTPError):
+                    observation["reader_filter_diagnostics_http_error"] = error.read().decode(errors="replace")[:1500]
         evidence.setdefault("native_queries", []).append(observation)
         print("::notice title=Native search inspection::" + json.dumps({"case": evidence["case"], "inspection": observation}), flush=True)
         assert result.get("status") == 0, result
@@ -578,19 +623,41 @@ def run_search_cases(admin, base, fixtures, output, row):
             seen.extend(r["id"] for r in response["items"])
             evidence["steps"].append({"case": "complete-pages", "persisted": response})
         assert seen == ["P001", "P002", "P003"]
+        failures, invoice_blocked = [], False
+        def failed(case, error):
+            failure = {"case": case, "status": exception_status(error), "error": str(error)[:500], "error_type": type(error).__name__}
+            if isinstance(error, urllib.error.HTTPError):
+                failure.update(http_status=error.code, native_http_error=error.read().decode(errors="replace")[:1500])
+            failures.append(failure)
         for field, text in [("name", specification["customer"]["name"]), ("mobilePhone", specification["customer"]["phone"])]:
-            found = native_search("com.axelor.apps.base.db.Partner", [{"fieldName": field, "operator": "=", "value": text}], ["partnerSeq", "name", "mobilePhone"])
-            assert [r["partnerSeq"] for r in found] == specification["customer"]["expected"], found
-            evidence["steps"].append({"case": "native-customer-query", "field": field, "query": text, "persisted": found})
-        found = native_search("com.axelor.apps.stock.db.TrackingNumber", [{"fieldName": "trackingNumberSeq", "operator": "=", "value": specification["serial"]["reference"]}], ["trackingNumberSeq", "product.code"])
-        assert len(found) == 1 and found[0].get("product.code", found[0].get("product", {}).get("code")) == "P001", found
-        evidence["steps"].append({"case": "native-serial-query", "persisted": found, "serial_inventory_tracking_tested": False})
-        found = native_search("com.axelor.apps.account.db.Invoice", [{"fieldName": "externalReference", "operator": "=", "value": specification["invoice"]["reference"]}], ["externalReference", "saleOrder.externalReference"])
-        if not found:
+            try:
+                found = native_search("com.axelor.apps.base.db.Partner", [{"fieldName": field, "operator": "=", "value": text}], ["partnerSeq", "name", "mobilePhone"])
+                assert [r["partnerSeq"] for r in found] == specification["customer"]["expected"], found
+                evidence["steps"].append({"case": "native-customer-query", "field": field, "query": text, "persisted": found})
+            except Exception as error:
+                failed("native-customer-query:" + field, error)
+        try:
+            found = native_search("com.axelor.apps.stock.db.TrackingNumber", [{"fieldName": "trackingNumberSeq", "operator": "=", "value": specification["serial"]["reference"]}], ["trackingNumberSeq", "product.code"])
+            assert len(found) == 1 and found[0].get("product.code", found[0].get("product", {}).get("code")) == "P001", found
+            evidence["steps"].append({"case": "native-serial-query", "persisted": found, "serial_inventory_tracking_tested": False})
+        except Exception as error:
+            failed("native-serial-query", error)
+        try:
+            found = native_search("com.axelor.apps.account.db.Invoice", [{"fieldName": "externalReference", "operator": "=", "value": specification["invoice"]["reference"]}], ["externalReference", "saleOrder.externalReference"])
+            if not found:
+                invoice_blocked = True
+            else:
+                assert len(found) == 1 and found[0].get("saleOrder.externalReference", found[0].get("saleOrder", {}).get("externalReference")) == "CCM-CO00", found
+                evidence["steps"].append({"case": "native-invoice-query", "persisted": found})
+        except Exception as error:
+            failed("native-invoice-query", error)
+        evidence["subcase_failures"] = failures
+        if failures:
+            status = max((f["status"] for f in failures), key=RANK.get)
+            evidence.update(status=status, complete=False, error="Independent native search failures: " + ", ".join(f["case"] for f in failures))
+        elif invoice_blocked:
             evidence.update(status="BLOCKED", complete=False, error="CO00 native invoice prerequisite has not committed; independent product/customer/serial searches executed")
         else:
-            assert len(found) == 1 and found[0].get("saleOrder.externalReference", found[0].get("saleOrder", {}).get("externalReference")) == "CCM-CO00", found
-            evidence["steps"].append({"case": "native-invoice-query", "persisted": found})
             evidence.update(status="PASS", complete=True)
     except AssertionError as error:
         evidence.update(status="FAIL", complete=False, error=str(error)[:2500], error_type=type(error).__name__)
@@ -603,7 +670,9 @@ def run_search_cases(admin, base, fixtures, output, row):
                reason=evidence.get("error", "Native queries and complete nonduplicated pages under the real reader"))
     for step in evidence["steps"]:
         print("::notice title=Native search step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
-    print("::notice title=Core independent SEARCH01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["http_samples", "steps"]}), flush=True)
+    for failure in evidence.get("subcase_failures", []):
+        print("::notice title=Native search failed subcase::" + json.dumps({"case": evidence["case"], "failure": failure}), flush=True)
+    print("::notice title=Core independent SEARCH01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["http_samples", "steps", "native_queries", "subcase_failures"]}), flush=True)
     return evidence
 
 

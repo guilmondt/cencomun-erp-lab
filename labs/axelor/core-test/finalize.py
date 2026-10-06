@@ -29,6 +29,7 @@ def finalize(repo, host, output):
     suites = {}
     paths = [("CencomunModuleTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.baseline.module.CencomunModuleTest.xml"),
              ("MoneyPolicyTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.MoneyPolicyTest.xml"),
+             ("NativeAddressTemplateTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeAddressTemplateTest.xml"),
              ("TestTaxNumberHelper", host / "modules/axelor-open-suite/axelor-base/build/test-results/test/TEST-com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper.xml")]
     for name, path in paths:
         suite = ET.parse(path).getroot()

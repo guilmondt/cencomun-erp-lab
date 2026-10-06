@@ -58,14 +58,19 @@ public final class NativeFinance {
   }
 
   /** Native fixture prerequisites, not a relaxation of invoice/tax validation. */
+  static Model addressTemplate() {
+    Model template = create(BASE + "AddressTemplate");
+    set(template, "name", "CCM LAB address"); set(template, "engineSelect", 1);
+    for (String line : List.of("addressL2", "addressL3", "addressL4", "addressL5", "addressL6"))
+      set(template, line + "Str", "$address." + line + "$");
+    set(template, "templateStr", "$address.addressL2$\n$address.addressL4$\n$address.addressL6$");
+    return template;
+  }
+
   public static void configurePartner(Model company, Model partner) {
     Model country = one(BASE + "Country", "self.alpha2Code = ?1", "ZZ");
     if (country == null) {
-      Model template = record(BASE + "AddressTemplate", "name", "CCM LAB address", "engineSelect", 1,
-          "addressL2Str", "$address.addressL2$", "addressL3Str", "$address.addressL3$",
-          "addressL4Str", "$address.addressL4$", "addressL5Str", "$address.addressL5$",
-          "addressL6Str", "$address.addressL6$",
-          "templateStr", "$address.addressL2$\n$address.addressL4$\n$address.addressL6$");
+      Model template = save(addressTemplate());
       country = record(BASE + "Country", "name", "Synthetic LAB Country", "alpha2Code", "ZZ", "addressTemplate", template);
     }
     if (one(BASE + "PartnerAddress", "self.partner = ?1 AND self.isInvoicingAddr = true", partner) == null) {

@@ -423,6 +423,12 @@ es inválido para el grupo completo, aunque los cálculos sean correctos.
    curso 37416107406 se conserva; su resultado FX antiguo se revisará con este
    contrato estricto. No cambiar fixtures, oráculo ni pins para obtener PASS.
 
+Continuación independiente: cada FX01/FX02/MONEY-ROUND conserva su propia
+transacción nativa de factura/pagos. Si una falla, leer después de su rollback,
+guardar el error y cualquier efecto observado y probar las otras fechas.
+El grupo seguirá FAIL ante cualquier fallo, con conversiones parciales separadas;
+ningún subcaso recibe PASS por una respuesta del servicio sin lectura confirmada.
+
 ## B20–B22 — repetición 37416107406
 
 Commit 013f962, CI FAILURE. BANK-BOOK y PROD completos PASS. FX sólo conversión
@@ -464,6 +470,12 @@ explica el fallo; sigue sin demostrarse si falla filtro de permiso o consulta/se
 2. Comparar la misma consulta REST como admin y el filtro real JpaSecurity del lector,
    ejecutando la consulta con ese filtro. Registrar compañía, parámetros y conteos.
 3. Repetir nombre/teléfono/serial; sólo datos leídos por el lector nativo aprueban búsqueda.
+
+Continuación independiente: un rechazo/fallo en nombre o teléfono no debe
+impedir probar serial y factura. Conservar cada consulta/diagnóstico y su fallo,
+continuar las restantes y mantener SEARCH completo FAIL mientras cualquier
+subcaso falle. Un fallo del diagnóstico tampoco debe ocultar la respuesta REST
+original. El CI ya activo se conserva; no se cuentan pruebas del runner como ERP.
 
 El artefacto 11391813114 vuelve a estar bloqueado por Forbidden en
 productionresultssa16.blob.core.windows.net; un intento, sin ampliar/publicar red.
@@ -527,3 +539,12 @@ Los PASS históricos de CI9 se mantienen aparte, nunca como éxitos de CI10.
    añadir regresión para que un error grande no suprima la fila de cobertura.
 3. Verificar extracción con JSON completo y conteos reproducibles en el siguiente CI,
    sin ampliar/publicar dominios ni reconstruir archivos truncados como originales.
+
+Regresión adicional local: dos tests llaman al AddressTemplateServiceImpl oficial
+con un contenedor Guice mínimo, sin DB; la plantilla preparada renderiza todas las
+líneas y dejar addressL2Str=null reproduce la AxelorException causada por NPE.
+Se ejecutaron con clases nativas compiladas del host fijado, usando un init script
+externo para el classpath. El intento full-native del test encontró primero npm
+ENOENT en /home/agent/.npm; no se amplió red ni se omitieron checks del CI.
+Este resultado valida el callback, no confirma persistencia ni efectos económicos.
+El CI incorpora los dos tests al perfil full-native y a su replay con locks.

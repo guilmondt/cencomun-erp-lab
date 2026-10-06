@@ -32,7 +32,7 @@ def extract(log, output, run_id, commit, fixtures):
     rows = rows_for(verify_bundle(fixtures))
     by_case = {r["case"]: r for r in rows}
     gates, exports, independent = {}, {}, {}
-    product_steps, search_steps, book_steps, fx_steps = [], [], [], []
+    product_steps, search_steps, search_queries, search_failures, book_steps, fx_steps, fx_failures = [], [], [], [], [], [], []
     proof = None
     for item in objects:
         case = item.get("case")
@@ -42,10 +42,16 @@ def extract(log, output, run_id, commit, fixtures):
             product_steps.append(item)
         if case == "SEARCH01-04-NATIVE" and "step" in item:
             search_steps.append(item["step"])
+        if case == "SEARCH01-04-NATIVE" and "inspection" in item:
+            search_queries.append(item["inspection"])
+        if case == "SEARCH01-04-NATIVE" and "failure" in item:
+            search_failures.append(item["failure"])
         if case == "BANK-BOOK-FIXTURE" and "step" in item:
             book_steps.append(item["step"])
         if case == "FX01-03-MONEY01-03" and "step" in item:
             fx_steps.append(item["step"])
+        if case == "FX01-03-MONEY01-03" and "payment_case" in item and "failure" in item:
+            fx_failures.append(item)
         if "lab_commit" in item and "upstream_diff_exit_codes" in item and "suites" in item:
             assert item["lab_commit"] == commit, "Build proof belongs to another commit"
             proof = item
@@ -76,7 +82,11 @@ def extract(log, output, run_id, commit, fixtures):
         (output / f"{case}-native-export.json").write_text(json.dumps(item, indent=2) + "\n")
     for case, item in independent.items():
         item["steps"] = {"PROD01-04": product_steps, "SEARCH01-04-NATIVE": search_steps, "BANK-BOOK-FIXTURE": book_steps, "FX01-03-MONEY01-03": fx_steps}[case]
+        if case == "SEARCH01-04-NATIVE":
+            item["native_queries"] = search_queries
+            item["subcase_failures"] = search_failures
         if case == "FX01-03-MONEY01-03":
+            item["payment_failures"] = fx_failures
             configured = None
             try:
                 conversions = [s["native_conversion"] for s in fx_steps if "native_conversion" in s]
@@ -102,6 +112,7 @@ def extract(log, output, run_id, commit, fixtures):
                         reason="Bank-book notice contradicts persisted native payment/journal detail: " + str(error))
             elif case == "FX01-03-MONEY01-03":
                 try:
+                    assert not fx_failures, "A failed native payment case cannot establish complete FX PASS"
                     payments = [s for s in fx_steps if s["case"] == "committed-payment-case"]
                     assert len(payments) == 3
                     persisted = dict(configured)

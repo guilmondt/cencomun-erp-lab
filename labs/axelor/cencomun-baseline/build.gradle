@@ -26,6 +26,7 @@ if (System.getenv('CCM_AXELOR_FULL_STACK') == '1') {
   dependencies { api project(':modules:axelor-account') }
   // Supported InvoiceGenerator extension is compiled only against the fixed AOS host.
   sourceSets.main.java.srcDir 'src/native/java'
+  sourceSets.test.java.srcDir 'src/native-test/java'
   // AOP can generate merged dependency models alongside our domain. Compile
   // only our namespace; the pinned upstream modules own all com.axelor classes.
   tasks.named('compileJava') { exclude 'com/axelor/**' }

@@ -8,6 +8,75 @@ FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_native_fx_failure_does_not_skip_independent_payment_dates(self):
+        import io
+        import json
+        import urllib.error
+        from unittest.mock import Mock
+        from run import run_fx_payment_cases
+        items = json.loads((FIXTURES / "fx.json").read_bytes())["payments"]
+        operator, admin = Mock(), Mock()
+        state = {"company_id": 1, "company_code": "CCM-LAB-001", "invoices": [], "payments": []}
+        admin.action.side_effect = lambda *args: json.loads(json.dumps(state))
+        def post(path, item):
+            if item["id"] == "FX01":
+                raise urllib.error.HTTPError(path, 500, "Native failure", {}, io.BytesIO(b'Native invoice prerequisite missing'))
+            identity = len(state["invoices"]) + 1
+            state["invoices"].append({"id": identity})
+            payment_ids = [identity * 10 + n for n in range(len(item["lines"]))]
+            state["payments"].extend({"id": p} for p in payment_ids)
+            return {"native_invoice_id": identity, "native_payment_ids": payment_ids}
+        operator.request.side_effect = post
+        evidence = {"steps": []}
+        with self.assertRaisesRegex(RuntimeError, "FX01"):
+            run_fx_payment_cases(operator, admin, items, lambda item: item, evidence)
+        self.assertEqual(operator.request.call_count, 3)
+        self.assertEqual([a["case"] for a in evidence["payment_attempts"]], ["FX01", "FX02", "MONEY-ROUND"])
+        self.assertTrue(evidence["payment_failures"][0]["native_effects_unchanged"])
+        self.assertEqual(evidence["native_http_error"], "Native invoice prerequisite missing")
+        self.assertEqual(len(evidence["steps"]), 2)
+        self.assertEqual(admin.action.call_count, 6)
+
+    def test_failed_customer_and_diagnostic_do_not_skip_independent_serial_query(self):
+        import contextlib
+        import io
+        import json
+        import tempfile
+        import urllib.error
+        import urllib.parse
+        from unittest.mock import Mock, patch
+        from run import run_search_cases
+        reader, admin = Mock(), Mock(); reader.samples = []
+        specification = json.loads((FIXTURES / "scenarios.json").read_bytes())["search"]
+        def reply(path, data=None):
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(path).query)
+            if query.get("company_id") == ["OTHER-LAB"]:
+                raise urllib.error.HTTPError(path, 403, "Denied", {}, io.BytesIO())
+            if path.startswith("/ws/ccm/products/search"):
+                if "page" in query:
+                    codes = ["P001", "P002"] if query["page"] == ["1"] else ["P003"]
+                    return {"total": 3, "items": [{"id": c} for c in codes]}
+                return {"items": [{"id": c} for c in specification["products"][query["q"][0]]]}
+            if path.startswith("/ws/ccm/lab/search/diagnostics"):
+                raise urllib.error.HTTPError(path, 500, "Native diagnostic error", {}, io.BytesIO(b'Native filter failed'))
+            if "TrackingNumber" in path:
+                return {"status": 0, "data": [{"trackingNumberSeq": "SER-P001-001", "product.code": "P001"}]}
+            return {"status": 0, "data": []}
+        reader.request.side_effect = reply
+        admin.request.return_value = {"status": 0, "data": [{"partnerSeq": "C001"}]}
+        row = next(r for r in rows_for(verify_bundle(FIXTURES)) if r["case"] == "SEARCH01-04-NATIVE")
+        with tempfile.TemporaryDirectory() as directory, patch("run.NativeClient", return_value=reader), contextlib.redirect_stdout(io.StringIO()):
+            result = run_search_cases(admin, "unused", FIXTURES, Path(directory), row)
+        self.assertEqual(result["status"], "FAIL")
+        self.assertFalse(result["complete"])
+        self.assertEqual(len(result["subcase_failures"]), 2)
+        self.assertIn("native-serial-query", [s["case"] for s in result["steps"]])
+        self.assertTrue(any("Invoice/search" in c.args[0] for c in reader.request.call_args_list))
+        customer_queries = [q for q in result["native_queries"] if q["model"].endswith("Partner")]
+        self.assertEqual(len(customer_queries), 2)
+        self.assertTrue(all(q["response"]["data"] == [] for q in customer_queries))
+        self.assertTrue(all(q["reader_filter_diagnostics_http_error"] == "Native filter failed" for q in customer_queries))
+
     def test_large_native_fx_failure_remains_complete_extractable_json(self):
         import json
         import tempfile

@@ -124,6 +124,12 @@ por smoke. Criterio 13 BLOCKED por decisión expresa del usuario; seis PATCH UNR
 - Corrección B25 posterior: 20 regresiones PASS; 2+7 locales PASS; compilación
   full-native con locks externos y replay offline estricto PASS, en secuencia.
   Estas pruebas no sustituyen ejecución del ERP.
+- Continuación preparada tras iniciar CI 37420752108: 22 regresiones del runner
+  PASS; dos tests del callback nativo de dirección PASS sin DB; 2+7 originales
+  y compilación full-native offline PASS. SEARCH continúa serial/factura tras
+  fallos de cliente; FX continúa las otras fechas tras un pago fallido. El próximo
+  CI exigirá los dos tests de callback y conservará los diagnósticos íntegros por
+  subcaso en el log. No se transfiere ninguna de estas pruebas a los grupos ERP.
 - Readiness inicial 425.60 s; reinicio misma DB 324.47 s; job 19 min 31 s.
   Son timings de smoke, no benchmark de operaciones.
 - Runner: 4 CPU / 4 de afinidad,
