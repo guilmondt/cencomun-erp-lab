@@ -1,0 +1,49 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :buildSrc:compileJava UP-TO-DATE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:processResources NO-SOURCE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+> Task :modules:cencomun-baseline:generateCode UP-TO-DATE
+
+> Task :modules:cencomun-baseline:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :modules:cencomun-baseline:processResources UP-TO-DATE
+> Task :modules:cencomun-baseline:classes
+> Task :modules:cencomun-baseline:generateTestCode UP-TO-DATE
+
+> Task :modules:cencomun-baseline:compileTestJava
+Note: /workspace/ccm-axelor-runtime/open-suite-webapp/modules/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeFinanceModelTest.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :modules:cencomun-baseline:processTestResources NO-SOURCE
+> Task :modules:cencomun-baseline:testClasses
+
+> Task :modules:cencomun-baseline:test
+Running: Test purchaseRateRetainsTheSameStringTypeBeforeAndAfterReplaySerialization()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test decimalSerializationIsIdenticalAfterPersistenceChangesScale()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test immutableNativeAuditRepositoryReturnsPermissionDenialBeforePersistence()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test pinnedSessionProvidesActualJdbcExecutionCallbacks()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test benchmarkReferenceBelongsToTheNativeStatementLine()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test bankCodeIsTheNativeBicAndBankNameIsTheSupportedField()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test nativeLineComputeAcceptsTheLineAndItsOrderBeforeHeaderTotals()(com.cencomun.core.NativeFinanceModelTest)
+Running: Test economicDocumentReferencesAreNativeTypedForeignKeys()(com.cencomun.core.NativeOrderModelTest)
+Running: Test semanticAuditCannotBeEditedEvenWithinWorkflowScope()(com.cencomun.core.NativeOrderModelTest)
+Running: Test genericRepositorySaveDoesNotGainWorkflowPrivilege()(com.cencomun.core.NativeOrderModelTest)
+Running: Test generatedStateCannotRepresentAnUnknownValue()(com.cencomun.core.NativeOrderModelTest)
+
+[Incubating] Problems report is available at: file:///workspace/ccm-axelor-runtime/open-suite-webapp/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 14s
+8 actionable tasks: 3 executed, 5 up-to-date

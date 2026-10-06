@@ -112,7 +112,7 @@ def assert_finance_group(evidence, fixtures):
         assert Counter(a['actor'] for a in indexed['reapprove-threshold']['denials'])==Counter(['ccm-buyer'])
     elif case=='CASH00-06-NATIVE':
         fixture=json.loads((fixtures/'cash.json').read_bytes());assert_cash_source(indexed['native-source-fixture']['after']['native_cash'],fixture)
-        assert indexed['native-source-fixture']['after']['native_cash']==indexed['native-source-replay']['after']['native_cash']
+        assert indexed['native-source-fixture']['after']['native_cash']==indexed['native-source-replay']['after']['native_cash'],'Committed native cash source replay changed complete line identities or values'
         for item in fixture['cases']:
             step=indexed[item['id']];close=step['after']['cash_close'];assert close['state']=='CONFIRMED' and close['confirmed_by']=='ccm-manager' and close['confirmed_at']
             for field,expected in [('observedAmounts',item['observed']),('differences',item['differences'])]:assert {k:Decimal(v) for k,v in close[field].items()}=={k:Decimal(v) for k,v in expected.items()}

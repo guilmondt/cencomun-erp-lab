@@ -1,0 +1,25 @@
+{
+  "scope": "Local ABI/policy/protocol tests only; CI acceptance pending",
+  "business_source_parent": "89b0373",
+  "fixed_reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "python_tests": 77,
+  "native_java_suites": [
+    {
+      "suite": "NativeFinanceModelTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "NativeOrderModelTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "default_java_tests": 22,
+  "native_compile_jar": "PASS,15s,offline wrapper Java21",
+  "initial_diagnostic": "Map equality after JSON round-trip failed because Java Long native IDs deserialize as Integer. Both wire JSONs retain identical numeric IDs. Regression now compares complete wire JSON and explicitly requires unchanged String request_rate; no field omitted."
+}

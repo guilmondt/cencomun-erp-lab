@@ -157,7 +157,7 @@ public class CorePurchaseService {
     result.put("creator",get(get(purchase,"creator"),"code"));result.put("state",get(purchase,"state").toString());result.put("native_status",get(nativeOrder,"statusSelect"));
     result.put("usd_base",get(purchase,"usdBase").toString());result.put("native_gross",get(nativeOrder,"inTaxTotal").toString());
     result.put("native_tax",get(nativeOrder,"taxTotal").toString());result.put("currency",get(get(nativeOrder,"currency"),"codeISO"));
-    result.put("request_date",get(nativeOrder,"orderDate").toString());result.put("request_rate",get(purchase,"requestRate"));result.put("decision_revision",get(purchase,"decisionRevision"));
+    result.put("request_date",get(nativeOrder,"orderDate").toString());result.put("request_rate",decimal(get(purchase,"requestRate")));result.put("decision_revision",get(purchase,"decisionRevision"));
     result.put("approved_by",get(purchase,"approvedBy")==null?null:get(get(purchase,"approvedBy"),"code"));result.put("approved_at",get(purchase,"approvedAt")==null?null:get(purchase,"approvedAt").toString());
     result.put("native_validated_by",get(nativeOrder,"validatedByUser")==null?null:get(get(nativeOrder,"validatedByUser"),"code"));
     List<Map<String,Object>> lines=new ArrayList<>();for(Model line:(List<Model>)get(nativeOrder,"purchaseOrderLineList"))

@@ -63,7 +63,7 @@ public class NativeBenchmarkController {
         "customers",list(BASE+"Partner","self.partnerSeq LIKE ?1","BENCH-C%").stream().map(c->Map.of("id",c.getId(),"code",get(c,"partnerSeq"),"name",get(c,"name"),"company_ids",((java.util.Set<Model>)get(c,"companySet")).stream().map(Model::getId).toList())).toList(),
         "stock",list(STOCK+"StockLocationLine","self.stockLocation = ?1",warehouse).stream().map(s->Map.of("id",s.getId(),"product",get(get(s,"product"),"code"),"qty",get(s,"currentQty"),"cost",get(s,"avgPrice"))).toList(),
         "orders",list(CoreOrderService.DB+"CcmOrder","self.company = ?1 AND self.functionalId LIKE ?2",company,"BENCH-%").stream().map(o->Beans.get(CoreOrderService.class).view(o)).toList(),
-        "bank_rows",list(CoreOrderService.DB+"CcmBankRow","self.company = ?1",company).stream().filter(r->get(r,"reference").toString().startsWith("BENCH-B")).map(CoreBankService::view).toList(),
+        "bank_rows",list(CoreOrderService.DB+"CcmBankRow","self.company = ?1",company).stream().filter(r->get(get(r,"statementLine"),"reference").toString().startsWith("BENCH-B")).map(CoreBankService::view).toList(),
         "company_id",company.getId(),"warehouse","WH-LAB-001-BENCH","read_boundary","separate-http-after-benchmark-commit"));
   }
 }

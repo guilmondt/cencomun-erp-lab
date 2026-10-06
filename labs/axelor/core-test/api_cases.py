@@ -35,6 +35,36 @@ API_CHECKS={
 
 def functional(value):return {k:v for k,v in value.items() if k not in ('_meta','replay')}
 
+NATIVE_RESOURCE_DENIALS={
+    'You are not authorized to '+verb+' this resource.' for verb in ('create','read','remove','update')
+}|{'Vous n’êtes pas autorisé(e) à '+verb+' cette ressource.' for verb in ('créer','lire','supprimer','modifier')}
+NATIVE_RESOURCE_DENIALS|={'You are not allowed to execute this action.','Vous n’êtes pas autorisé(e) à exécuter cette action.',
+    'You are not authorized to perform this action.'}
+NATIVE_GUARD_DENIALS={'Permission denied: authenticated Core workflow required for native writes',
+    'Semantic audit is immutable','Semantic audit cannot be deleted by generic CRUD'}
+CRITICAL_MODELS={'com.axelor.apps.purchase.db.PurchaseOrder','com.cencomun.core.db.CcmPurchase',
+    'com.cencomun.core.db.CcmOrder','com.cencomun.core.db.CcmCashClose','com.cencomun.core.db.CcmBankImport',
+    'com.cencomun.core.db.CcmBankRow','com.axelor.apps.bankpayment.db.BankStatement',
+    'com.axelor.apps.bankpayment.db.BankStatementLine','com.axelor.apps.account.db.Move'}
+
+def native_permission_denied(result):
+    """AOP 8.2.3 RPC error envelope is HTTP200; status=-1 alone proves nothing."""
+    response=result.get('response',{});data=response.get('data')
+    if set(response)-{'status','data','title','message','error','error_type','native_stack','code','correlation_id'}:return False
+    if isinstance(data,list) and data:return False
+    if isinstance(data,dict) and set(data)-{'title','message','causeStack'}:return False
+    if result.get('http_status')==403:return True
+    if result.get('http_status')!=200 or response.get('status')!=-1 or not isinstance(data,dict):return False
+    if data.get('title') in ('Access error',"Erreur d'accès") and data.get('message') in NATIVE_RESOURCE_DENIALS:return True
+    if data.get('message') in NATIVE_GUARD_DENIALS:return True
+    stack=data.get('causeStack','').splitlines()
+    return bool(stack and stack[0] in {'jakarta.ws.rs.ForbiddenException: '+message for message in NATIVE_GUARD_DENIALS})
+
+def assert_native_permission_denial(record):
+    assert native_permission_denied(record),record['name']+': explicit native authorization rejection required'
+    assert record['read_boundary']==BOUNDARY
+    assert effects(record['before'])==effects(record['after']),record['name']+': native denial changed durable effects'
+
 
 def assert_permission_denial(record, audited=True):
     assert record['http_status']==403, record['name']+': permission rejection requires HTTP403; '+str(record['response'])
@@ -82,16 +112,21 @@ def assert_api_group(evidence, fixtures):
         for r in indexed['read-matrix']['attempts']:
             assert r['http_status']==r['expected_http_status'],r
         for name in ('create-matrix','native-extra-write-denials'):
+            assert len(indexed[name]['attempts'])==12,name+': complete identity/write matrix required'
             for r in indexed[name]['attempts']:assert_permission_denial(r)
         private=indexed['private-crud']['attempts']
         assert len(private)==3*3*3, 'Three private models, three identities, three CRUD operations required'
+        assert {(r['actor'],r['model'],r['operation']) for r in private}=={(role,model,operation) for role in ('ccm-reader','ccm-mcp','ccm-other') for model in ('CcmAudit','CcmRequestKey','CcmOutboxEvent') for operation in ('read','write','remove')},'All private model/identity/operation combinations required'
         for r in private:
-            assert r['http_status']==403, 'Private CRUD must deny with native authorization: '+str(r)
-            assert effects(r['before'])==effects(r['after'])
+            assert_native_permission_denial(r)
         for name in ('native-critical-crud','native-official-actions'):
             assert indexed[name]['attempts']
             for r in indexed[name]['attempts']:
-                assert r['permission_denied'] is True and effects(r['before'])==effects(r['after']),r
+                assert_native_permission_denial(r)
+        critical=indexed['native-critical-crud']['attempts']
+        expected={(role,model,operation) for role in ('ccm-reader','ccm-mcp','ccm-other') for model in CRITICAL_MODELS for operation in ('create','write','remove')}
+        assert len(critical)==len(expected) and {(r['actor'],r['model'],r['operation']) for r in critical}==expected,'Complete native cash/bank/purchase/order CRUD identity matrix required'
+        assert len(indexed['native-official-actions']['attempts'])==3,'All three native action identities required'
         assert indexed['reader-order']['response']['status']==0
         assert indexed['reader-order']['response']['data'][0]['id']==indexed['reader-order']['native_order_id']>0
     elif case=='MCP01-06-STDIO':
@@ -177,12 +212,13 @@ class ApiCases:
         return value
     def native_call(self,role,path,payload=None,client=None):
         c=client or self.actor(role)
-        try:result=c.request(path,payload);return {'http_status':c.last_status,'response':result}
+        metadata={'path':path,'method':'GET' if payload is None else 'POST','actor':'ccm-'+role if role!='admin' else 'admin'}
+        try:result=c.request(path,payload);return {**metadata,'http_status':c.last_status,'response':result}
         except urllib.error.HTTPError as error:
             raw=error.read().decode(errors='replace')
             try:result=json.loads(raw)
             except ValueError:result={'error':raw[:2200]}
-            return {'http_status':error.code,'response':result}
+            return {**metadata,'http_status':error.code,'response':result}
     def api(self,role,path,payload=None,key=None,client=None):
         headers={'Content-Type':'application/json'}
         if role is not None:
@@ -297,20 +333,28 @@ class ApiCases:
                 for model,id in ids.items():
                     for operation,path,payload in [('read','/'+str(id),None),('write','',{'data':{'id':id}}),('remove','/remove',{'records':[{'id':id}]})]:
                         before={'order':self.snapshot('API-CO'),'event_order':self.snapshot('CYCLE-CO00')}
-                        r={'name':role+'-'+model+'-'+operation,'actor':'ccm-'+role,'request':payload,'before':before,'read_boundary':BOUNDARY}
+                        r={'name':role+'-'+model+'-'+operation,'actor':'ccm-'+role,'model':model,'operation':operation,'request':payload,'before':before,'read_boundary':BOUNDARY}
                         step['attempts'].append(r);r.update(self.native_call(role,'/ws/rest/com.cencomun.core.db.'+model+path,payload))
                         r['after']={'order':self.snapshot('API-CO'),'event_order':self.snapshot('CYCLE-CO00')}
-                        assert r['http_status']==403 and r['before']==r['after'],r
+                        assert_native_permission_denial(r)
         self.step(e,'private-crud',private)
         po=self.snapshot('API-PO','finance')['purchase'];native_purchase=po['native_purchase_id']
         def critical(step):
             step['attempts']=[]
+            bank=self.finance.snapshot('BANK-CONCURRENT');row=bank['bank_rows'][0]
+            models=[('com.axelor.apps.purchase.db.PurchaseOrder',native_purchase),('com.cencomun.core.db.CcmPurchase',po['native_id']),
+                ('com.cencomun.core.db.CcmOrder',self.snapshot('API-CO')['order']['native_id']),
+                ('com.cencomun.core.db.CcmCashClose',self.snapshot('CS001','finance')['cash_close']['native_id']),
+                ('com.cencomun.core.db.CcmBankImport',bank['bank_imports'][0]['id']),('com.cencomun.core.db.CcmBankRow',row['id']),
+                ('com.axelor.apps.bankpayment.db.BankStatement',row['native_statement_id']),('com.axelor.apps.bankpayment.db.BankStatementLine',row['native_transaction_id']),
+                ('com.axelor.apps.account.db.Move',bank['native_cash']['sources'][0]['lines'][0]['native_move_id'])]
+            def snapshot():return {'order':self.snapshot('API-CO'),'purchase':self.snapshot('API-PO','finance'),'cash':self.snapshot('CS001','finance')}
             for role in ('reader','mcp','other'):
-                for model,id in [('com.axelor.apps.purchase.db.PurchaseOrder',native_purchase),('com.cencomun.core.db.CcmPurchase',po['native_id']),('com.cencomun.core.db.CcmOrder',self.snapshot('API-CO')['order']['native_id'])]:
-                    r={'name':role+'-'+model,'actor':'ccm-'+role,'request':{'data':{'id':id,'statusSelect':3}},'before':self.snapshot('API-PO','finance'),'read_boundary':BOUNDARY};step['attempts'].append(r)
-                    r.update(self.native_call(role,'/ws/rest/'+model,r['request']));r['after']=self.snapshot('API-PO','finance')
-                    r['permission_denied']=r['http_status']==403
-                    assert r['permission_denied'] and effects(r['before'])==effects(r['after']),r
+                for model,id in models:
+                    for operation,suffix,body in [('create','',{'data':{'id':None}}),('write','',{'data':{'id':id}}),('remove','/remove',{'records':[{'id':id}]})]:
+                        r={'name':role+'-'+model+'-'+operation,'actor':'ccm-'+role,'model':model,'operation':operation,'request':body,'before':snapshot(),'read_boundary':BOUNDARY};step['attempts'].append(r)
+                        r.update(self.native_call(role,'/ws/rest/'+model+suffix,body));r['after']=snapshot()
+                        r['permission_denied']=native_permission_denied(r);assert_native_permission_denial(r)
         self.step(e,'native-critical-crud',critical)
         def official(step):
             step['attempts']=[]
@@ -318,8 +362,8 @@ class ApiCases:
                 body={'action':'action-purchase-order-method-requested','model':'com.axelor.apps.purchase.db.PurchaseOrder','data':{'context':{'id':native_purchase,'_model':'com.axelor.apps.purchase.db.PurchaseOrder'}}}
                 r={'name':role+'-native-request','actor':'ccm-'+role,'request':body,'before':self.snapshot('API-PO','finance'),'read_boundary':BOUNDARY};step['attempts'].append(r)
                 r.update(self.native_call(role,'/ws/action',body));r['after']=self.snapshot('API-PO','finance')
-                r['permission_denied']=r['http_status']==403 or (r['response'].get('status')!=0 and any(word in json.dumps(r['response']).lower() for word in ('permission','denied','forbidden','authorization')))
-                assert r['permission_denied'] and effects(r['before'])==effects(r['after']),r
+                r['permission_denied']=native_permission_denied(r)
+                assert_native_permission_denial(r)
         self.step(e,'native-official-actions',official)
         def order(step):
             id=self.snapshot('API-CO')['order']['native_id'];step.update(native_order_id=id,**self.native_call('reader','/ws/rest/com.cencomun.core.db.CcmOrder/'+str(id)))

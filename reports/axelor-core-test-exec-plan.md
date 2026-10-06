@@ -685,3 +685,33 @@ archivada; ningún rerun por empaquetado. Resolver juntas las causas observadas
 causal del rechazo CRUD200/status-1 y carrera de entidad/versiones) y repetir
 una única validación CI para ejecución/comprobaciones relevantes. No reinterpretar
 el FAIL original como PASS ni cambiar coste/cancelación/fixtures/oráculo.
+
+
+## B37 — Cinco causas de CI20 corregidas juntas; aceptación siguiente pendiente
+
+1. Concurrencia TAX: un200 y un500 StaleObjectStateException en refresh del
+   pedido ya cargado. Adquirir el mutex JPA PESSIMISTIC_WRITE de la compañía
+   antes de consultar CcmOrder; conservar refresh de pedido, permiso antes de
+   replay, dos sesiones, transacción económica íntegra y resultado durable.
+   Es una serialización por compañía, igual que create, no un retry que oculta
+   excepciones. Verificar dos200/false-true, mismos IDs/resultado y efectos únicos.
+2. Benchmark: CcmBankRow no tiene getReference. Usar su BankStatementLine real,
+   comprobar ese getter con modelos nativos y repetir20warmups+1000×3 muestras.
+3. CRUD AOP8.2.3: HTTP200/status-1 con mensaje de autorización explícito. Leer
+   textos exactos del JAR fijado, comprobar ausencia de datos y efectos, rechazar
+   errores genéricos. Mantener403 estricto del adaptador. Completar27combinaciones
+   privadas y81escrituras CRUD de nueve modelos económicos, tres identidades y
+   create/write/remove; incluir caja/banco, compañía ajena y lectura de pedidos.
+   Control positivo de lectura de auditoría como manager precede su edición denegada.
+4. Caja: mismas líneas USD/moves71/72 en diferente orden. Ordenar MoveLine por
+   ID al leer la fuente, sin cambiar importes, documentos o snapshot esperado.
+5. MCP compra: request_rate texto0 frente a número0 en replay. Serializar decimal
+   nativo como texto estable desde view, mantener el campo y comparar JSON completo.
+
+Validación local77Python,22Java de módulo/políticas,11Java nativos de modelos/
+repositorios ycompile/JAR offline. Una comparación inicial del test Java confundió
+Long/Integer de IDs internos tras deserialize; ahora compara JSON completo y
+exige String request_rate. No se cambió contrato ni se omitió ningún campo.
+Los PASS locales no son aceptación ERP. CI20 y sus ocho FAIL quedan intactos;
+coste negativo y cancelaciones confirmadas conservan FAIL funcional esperado.
+Ejecutar una única siguiente validación CI para todo este bloque y la matriz.

@@ -6,12 +6,12 @@ from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from run import REFERENCE, NativeClient, exception_status, publish_complete_evidence, assert_native_economics, assert_native_configuration
 from order_cases import OrderCases, effects
-from api_cases import ApiCases, BOUNDARY
+from api_cases import ApiCases, BOUNDARY,assert_native_permission_denial
 
 RUNTIME_CHECKS={
  'TAX02-04-IDEM-CONCURRENT': {'TAX-CONC-S','TAX-CONC-W'},
  'IDEM-TAX-NATIVE-EFFECT-COUNTS': {'two-native-tax-ledgers','create-lost-bank-counts'},
- 'AUDIT01-03-NATIVE': {'semantic-native-records','immutable-manager-edit','immutable-admin-delete'},
+ 'AUDIT01-03-NATIVE': {'semantic-native-records','authorized-manager-read','immutable-manager-edit','immutable-admin-delete'},
  'SUPPORTED-CONFIGURATION': {'native-models-repositories','native-actors-scope','versioned-native-configuration'},
 }
 
@@ -105,8 +105,10 @@ def assert_runtime_group(evidence,fixtures):
         assert len(rows)==len({r['native_transaction_id'] for r in rows})==len({r['key'] for r in rows})==1000
     elif case=='AUDIT01-03-NATIVE':
         step=indexed['semantic-native-records'];assert step['checked_ids']==assert_audit_semantics(step['native'])
+        read=indexed['authorized-manager-read'];assert read['http_status']==200 and read['response']['status']==0,'Manager audit read control must succeed'
+        row=read['response']['data'][0];assert row['id']==read['native_audit_id']>0 and row['company']['id']==step['native']['company_id'],'Native audit read control must retain its ID and company'
         for name in ('immutable-manager-edit','immutable-admin-delete'):
-            r=indexed[name];assert r['http_status']==403 and r['before']==r['after'],r
+            r=indexed[name];assert_native_permission_denial(r);assert r['before']==r['after'],name+': immutable native audit changed'
     elif case=='SUPPORTED-CONFIGURATION':
         native=indexed['native-models-repositories']['native'];assert native['core_lab_enabled'] is True
         assert len(native['models'])==11 and all(m['orm_entity'] is True and m['class'].startswith('com.cencomun.core.db.') for m in native['models'])
@@ -173,11 +175,12 @@ class RuntimeCases(ApiCases):
         def semantic(step):step['native']=self.audit_snapshot();step['checked_ids']=assert_audit_semantics(step['native'])
         self.step(e,'semantic-native-records',semantic)
         id=self.audit_snapshot()['audit'][0]['id'];path='/ws/rest/com.cencomun.core.db.CcmAudit'
+        self.step(e,'authorized-manager-read',lambda step:step.update(native_audit_id=id,**self.native_call('manager',path+'/'+str(id))))
         for name,role,url,body in [('immutable-manager-edit','manager',path,{'data':{'id':id,'reason':'Attempt overwrite'}}),('immutable-admin-delete','admin',path+'/remove',{'records':[{'id':id}]})]:
             def operation(step,role=role,url=url,body=body):
                 step.update(actor=role,request=body,before=self.audit_snapshot())
                 step.update(self.native_call(role,url,body,self.admin if role=='admin' else None));step['after']=self.audit_snapshot()
-                assert step['http_status']==403 and step['before']==step['after'],step
+                assert_native_permission_denial(step);assert step['before']==step['after'],step['name']+': immutable native audit changed'
             self.step(e,name,operation)
     def configuration(self,e):
         self.step(e,'native-models-repositories',lambda step:step.update(native=self.audit_snapshot()))

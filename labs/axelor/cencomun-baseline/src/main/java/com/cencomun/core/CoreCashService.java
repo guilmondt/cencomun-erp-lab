@@ -67,7 +67,7 @@ public class CoreCashService {
     for(String channel:List.of("USD","VES","POS","TRANSFER")) {
       Model account=one(ACCOUNT+"Account","self.company = ?1 AND self.code = ?2",company,"CCM-"+ACCOUNTS.get(channel));
       BigDecimal sum=BigDecimal.ZERO;List<Map<String,Object>> rows=new ArrayList<>();
-      if(journal!=null)for(Model line:list(ACCOUNT+"MoveLine","self.move.company = ?1 AND self.move.journal = ?2 AND self.account = ?3 AND self.move.statusSelect = ?4",company,journal,account,3)) {
+      if(journal!=null)for(Model line:list(ACCOUNT+"MoveLine","self.move.company = ?1 AND self.move.journal = ?2 AND self.account = ?3 AND self.move.statusSelect = ?4",company,journal,account,3).stream().sorted(java.util.Comparator.comparing(Model::getId)).toList()) {
         BigDecimal debit=(BigDecimal)get(line,"debit"),credit=(BigDecimal)get(line,"credit"),value=((BigDecimal)get(line,"currencyAmount")).abs();
         if(debit.compareTo(credit)<0)value=value.negate();sum=sum.add(value);
         Model move=(Model)get(line,"move");rows.add(Map.of("id",line.getId(),"native_move_id",move.getId(),"account_id",account.getId(),"account",get(account,"code"),

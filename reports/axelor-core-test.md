@@ -107,8 +107,9 @@ Hallazgos que se conservan y correcciones acotadas a validar:
 
 Validación local de empaquetado:74Python y checks shell/repositorio PASS.
 El índice no aprueba negocio por etiquetas ni por hashes solos: carga todos
-los archivos y ejecuta las aserciones anteriores. Las correcciones de ejecución
-anteriores requieren una sola siguiente validación CI, sin duplicar jobs.
+los archivos y ejecuta las aserciones anteriores. Las cinco correcciones de B37 están implementadas;77Python/22Java de módulo/
+11Java nativos ycompile/JAR localesPASS. Requieren una sola siguiente validación
+CI, sin duplicar jobs; ningún PASS de CI20 se transfiere al código nuevo.
 
 ## Historia — CI34192b3
 # Core Test Axelor — ejecución en curso

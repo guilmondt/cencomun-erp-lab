@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from adapter import ROUTES, route, normalize
-from api_cases import API_CHECKS, ApiCases, assert_api_group, review_api_group, functional, BOUNDARY
+from api_cases import API_CHECKS, ApiCases, assert_api_group, review_api_group, functional, BOUNDARY,native_permission_denied,assert_native_permission_denial,assert_permission_denial
 from mcp import TOOLS, dispatch
 from run import REFERENCE, verify_bundle
 
@@ -42,3 +42,22 @@ class ApiEvidenceRegression(unittest.TestCase):
             with self.subTest(case=case),self.assertRaises(AssertionError):assert_api_group(evidence,FIXTURES)
     def test_mcp_parity_rejects_changed_native_fk_even_with_equal_marker(self):
         self.assertNotEqual(functional({'native_invoice_id':3,'equal':True}),functional({'native_invoice_id':4,'equal':True}))
+    def test_native_rpc_denial_requires_the_explicit_pinned_permission_cause(self):
+        for message in ('You are not authorized to read this resource.','Vous n’êtes pas autorisé(e) à modifier cette ressource.'):
+            title='Access error' if message.startswith('You') else "Erreur d'accès"
+            record={'name':'private-denial','http_status':200,'response':{'status':-1,'data':{'title':title,'message':message}},'read_boundary':BOUNDARY,'before':{'private_id':7},'after':{'private_id':7}}
+            self.assertTrue(native_permission_denied(record));assert_native_permission_denial(record)
+            with self.assertRaisesRegex(AssertionError,'HTTP403'):assert_permission_denial(record,audited=False)
+            changed=copy.deepcopy(record);changed['after']['private_id']=8
+            with self.assertRaisesRegex(AssertionError,'durable effects'):assert_native_permission_denial(changed)
+    def test_generic_native_errors_or_private_data_cannot_approve_a_denial(self):
+        for data in ({'title':"Erreur d'accès",'message':'No result found for query'},
+                     {'message':'Pinned API signature mismatch'},
+                     {'title':"Erreur d'accès",'message':'Vous n’êtes pas autorisé(e) à lire cette ressource.','id':7},
+                     [{'id':7,'reason':'Private native audit'}]):
+            self.assertFalse(native_permission_denied({'http_status':200,'response':{'status':-1,'data':data}}))
+    def test_complete_mcp_result_still_compares_request_rate_value_and_type(self):
+        first={'native_purchase_id':8,'request_rate':'0','replay':False}
+        replay={**first,'request_rate':0,'replay':True}
+        self.assertNotEqual(functional(first),functional(replay))
+        self.assertEqual(functional(first),functional({**replay,'request_rate':'0'}))

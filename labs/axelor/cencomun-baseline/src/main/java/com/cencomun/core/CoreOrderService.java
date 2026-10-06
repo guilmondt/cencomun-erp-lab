@@ -112,6 +112,11 @@ public class CoreOrderService {
   public Map<String,Object> transition(JsonNode input) throws Exception {
     Model company = company(input); String target = input.path("state").asText();
     CoreOrderPolicy.actor(roles(), "transition", target);
+    // Serialize the idempotent mutation BEFORE loading CcmOrder. Refreshing a
+    // previously loaded order with a lock can itself reject an obsolete version.
+    // The existing company mutex also covers creates; all economic work and the
+    // durable replay result still commit in this same native transaction.
+    JPA.em().refresh(company, LockModeType.PESSIMISTIC_WRITE);
     Model order = one(DB+"CcmOrder", "self.company = ?1 AND self.functionalId = ?2", company, input.path("id").asText());
     if (order == null) throw new CoreFault(404, "Order not found in current company");
     JPA.em().refresh(order, LockModeType.PESSIMISTIC_WRITE);
