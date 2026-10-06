@@ -605,3 +605,33 @@ comprobaciones semánticas de auditoría y 28 eventos con dos recepciones pero u
 aplicación tras reiniciar el consumidor. La copia restaurada repitió 13 grupos
 de negocio y cinco de finanzas. El criterio 13 permanece BLOCKED y sus seis
 escenarios UNRUN; la matriz final es la publicada en el informe.
+
+### Pendientes técnicos autorizados desde fcf690d
+
+Esta fase conserva íntegros el oráculo y el manifiesto compartidos, los pins y
+las reglas LAB. No modifica Axelor, main, producción ni las fuentes upstream.
+
+- [ ] Crear sitios upstream vacíos, aislados de los tres sitios LAB existentes;
+  instalar únicamente las aplicaciones oficiales y cargar sus propios fixtures.
+- [ ] Ejecutar las suites oficiales de servidor de Frappe y ERPNext, conservar
+  comandos, cantidades realmente ejecutadas, omisiones y fallos. Los cuatro
+  unitarios históricos se mantienen identificados como subconjunto.
+- [ ] Repetir Cencomun si la preparación afecta su runtime compartido; verificar
+  que los fixtures y el oráculo no cambiaron.
+- [ ] Consultar tags oficiales 16.36 de ambos proyectos. Sin patch compatible
+  posterior a 16.36.1: criterio 13 BLOCKED y sus seis escenarios UNRUN. Ninguna
+  migración a otra minor está autorizada en esta fase.
+- [ ] Documentar una comprobación del snapshot guardado en una tarea cloud nueva,
+  con HEAD esperado fcf690dbc58b2b2dcf8d045c49976e3613e804cf, servicios y consulta
+  autenticada de precio/stock. Crear un sitio aquí no acredita esa comprobación.
+- [ ] Actualizar informe/evidencias y publicar exclusivamente lab/frappe-baseline;
+  conservar PR #4 como borrador. No repetir Guardar/Publicar del entorno cloud.
+
+Estado de recuperación del 2026-10-06: el ejecutor volvió a ser accesible, los
+cambios siguen sobre `fcf690d` y se conservaron copias privadas de cambios, logs
+y archivos MariaDB retenidos. ERPNext intento 2 no tiene proceso activo ni
+resultado final: BLOCKED por interrupción, con solo dos unitarias cuyo resumen
+se completó. No se relanzaron suites ni servicios. La regresión Cencomun y la
+publicación final siguen pendientes. La comprobación de restauración en una
+tarea cloud nueva fue iniciada por separado por el coordinador y no acredita
+ejecución de estas suites. Detalles: [recuperación](../reports/frappe-executor-recovery.md).

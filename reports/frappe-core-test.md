@@ -1,5 +1,13 @@
 # Core Test de Frappe/ERPNext — LAB-ONLY-v1
 
+**Seguimiento técnico del 2026-10-06:** la matriz siguiente conserva los
+resultados históricos de `fcf690d`; la regresión Cencomun posterior a la nueva
+preparación todavía no se ejecutó. Se recuperaron los cambios y logs tras una
+desconexión del ejecutor. ERPNext quedó interrumpido sin resultado final; no se
+relanzó la suite. Véanse el [estado y los pasos de recuperación](frappe-executor-recovery.md)
+y la [observación verificable](evidence/frappe-official/executor-recovery-20261006.json).
+La comprobación cloud nueva iniciada por el coordinador se evalúa por separado.
+
 **CERRADO_CON_LIMITACIONES: PASS 13/14, FAIL 0/14, BLOCKED 1/14, UNRUN 0/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.
 
 Cobertura obligatoria: 34 grupos; 34 PASS, 0 FAIL, 0 UNRUN. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13. [coverage.json](evidence/frappe-core/coverage.json) impide conservar PASS con casos ausentes o evidencia anterior a la corrección.

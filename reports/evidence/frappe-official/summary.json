@@ -1,0 +1,147 @@
+{
+  "scope": "official default server suites on pinned MariaDB; baseline, not post-patch regression",
+  "recorded_utc": "2026-10-06T02:43:33.782255+00:00",
+  "results": [
+    {
+      "app": "frappe",
+      "status": "FAIL",
+      "actual_tests_run": 2275,
+      "discovered_test_count": 2326,
+      "junit_records": 2279,
+      "counts": {
+        "PASS": 2006,
+        "FAIL": 10,
+        "ERROR": 212,
+        "SKIP": 51
+      },
+      "unobserved_test_count": 51,
+      "evidence": "reports/evidence/frappe-official/frappe-latest.json",
+      "command": "bench --site ccm-upstream-frappe.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-2.xml",
+      "exit_code": 1,
+      "site": "ccm-upstream-frappe.test",
+      "seconds": 856.902,
+      "interrupted": false,
+      "completed_native_category_counts": null,
+      "fixture_preparation_status": "PASS"
+    },
+    {
+      "app": "erpnext",
+      "status": "BLOCKED",
+      "actual_tests_run": null,
+      "discovered_test_count": 3255,
+      "junit_records": 0,
+      "counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "ERROR": 0,
+        "SKIP": 0
+      },
+      "unobserved_test_count": 3255,
+      "evidence": "reports/evidence/frappe-official/erpnext-latest.json",
+      "command": "bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-2.xml",
+      "exit_code": null,
+      "site": "ccm-upstream-erpnext.test",
+      "seconds": null,
+      "interrupted": true,
+      "completed_native_category_counts": [
+        2
+      ],
+      "fixture_preparation_status": "PASS"
+    }
+  ],
+  "pip_check": {
+    "exit_code": 1,
+    "output": "frappe 16.36.1 has requirement oauthlib~=3.3.1, but you have oauthlib 4.0.0.\nfrappe 16.36.1 has requirement requests~=2.33.0, but you have requests 2.34.2.\nWARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n"
+  },
+  "pins_changed": false,
+  "oracle_changed": false,
+  "cloud_restore": {
+    "status": "BLOCKED",
+    "execution_reported_complete": true,
+    "reason": "Coordinator reports separate task completed; verification evidence not yet received.",
+    "expected_commit": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+    "procedure": "docs/FRAPPE_CLOUD_RESTORE_CHECK.md"
+  },
+  "attempts": [
+    {
+      "app": "erpnext",
+      "attempt": 1,
+      "status": "BLOCKED",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": null,
+      "evidence": "reports/evidence/frappe-official/erpnext-full-attempt-1.json",
+      "evidence_valid": false
+    },
+    {
+      "app": "erpnext",
+      "attempt": 2,
+      "status": "BLOCKED",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": null,
+      "evidence": "reports/evidence/frappe-official/erpnext-full-attempt-2.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "BLOCKED",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": 32,
+      "evidence": "reports/evidence/frappe-official/frappe-full-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 2,
+      "status": "FAIL",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": 2275,
+      "evidence": "reports/evidence/frappe-official/frappe-full-attempt-2.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "FAIL",
+      "module": null,
+      "category": "integration",
+      "actual_tests_run": 333,
+      "evidence": "reports/evidence/frappe-official/frappe-full-integration-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "BLOCKED",
+      "module": "frappe.core.doctype.rq_job.test_rq_job",
+      "category": "all",
+      "actual_tests_run": 0,
+      "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 2,
+      "status": "BLOCKED",
+      "module": "frappe.core.doctype.rq_job.test_rq_job",
+      "category": "all",
+      "actual_tests_run": 0,
+      "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-2.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 3,
+      "status": "PASS",
+      "module": "frappe.core.doctype.rq_job.test_rq_job",
+      "category": "all",
+      "actual_tests_run": 13,
+      "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-3.json",
+      "evidence_valid": true
+    }
+  ]
+}

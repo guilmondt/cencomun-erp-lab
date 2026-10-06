@@ -294,3 +294,30 @@
 - Limits: Patch criterion remains BLOCKED, dependent cases UNRUN; the incomplete
   official integration suite is documented separately from its four passing
   utility unit tests. No changes to main, Axelor, production or upstream source.
+
+## ADR-012 — Isolate official server fixtures and distinguish cloud restoration
+
+- Date: 2026-10-05 (America/Caracas)
+- Status: Accepted by explicit technical continuation instruction from fcf690d
+- Decision: Run official Frappe/ERPNext server discovery on empty upstream-only
+  sites with their official bootstrap fixtures, preserving LAB lists and oracle.
+  Copy a Bench at the pinned SHAs for command tests that alter global config or
+  generate source files; keep the original Cencomun Bench/sources untouched.
+  Start its own worker before RQ tests, using the Bench-specific queue prefix.
+  Add only exact test extras under existing runtime constraints; record existing
+  requests/oauthlib incompatibilities instead of silently changing pins.
+- Evidence policy: Record official Ran N counters separately from discovery and
+  JUnit outcome events. Class fixture failures and subtests can inflate JUnit
+  records, never the executed-test count. Preserve failures/UNRUN methods and
+  previous attempts. An interrupted ERPNext log collision is quarantined;
+  exclusive attempt reservations and concurrency regression tests prevent reuse.
+  Modular repetitions retain their scope and do not rewrite a failed full suite.
+- Patch: Official Frappe and ERPNext 16.36 tags currently end at 16.36.1. Keep
+  criterion 13 BLOCKED and all six dependent scenarios UNRUN. No minor upgrade
+  is proposed or executed; such a change needs a separate reviewed plan.
+- Cloud: The user already verified the saved catalog commit fcf690d. Do not
+  save/publish again. Provide read-only verification instructions for an actual
+  NEW cloud task: expected saved HEAD/pins/files, retained service startup and
+  authenticated P001 price50.00/stock5 matched with native API records. Retain
+  cloud verification UNRUN until evidence includes that new task's identity;
+  same-machine site replay has separate scope.

@@ -17,6 +17,13 @@ Mantener las versiones fijadas y usar extensiones soportadas de la app Cencomun.
 La comparación futura debe ejecutar el mismo manifiesto en Axelor; esta tarea
 no afirma paridad entre ambos ERP.
 
+Continuación técnica autorizada desde fcf690d: ejecutar suites oficiales con
+fixtures upstream en sitios/Bench aislados, conservar sus conteos reales y
+fallos, repetir Cencomun afectado y documentar verificación cloud. El usuario
+confirmó que el catálogo ya conserva ese commit: **no repetir Guardar/Publicar**.
+La comprobación de retención se hará en una tarea cloud nueva siguiendo
+`docs/FRAPPE_CLOUD_RESTORE_CHECK.md`; no reconstruir antes de verificar.
+
 ## Estado verificado y artefactos
 
 Leer `reports/frappe-core-test.md` y `reports/evidence/frappe-core/summary.json`:
@@ -122,18 +129,23 @@ diagnósticos de `scripts/core-test/README.md` y `reports/frappe-core-test.md`.
 Continuar pruebas independientes ante bloqueos; no convertir BLOCKED/UNRUN en
 PASS ni modificar el oráculo para superar una limitación.
 
-Criterio 13: todavía no hay patch oficial posterior compatible de Frappe en la
-serie fijada, y la selección espera Core Tests estables de ambas plataformas.
-Resolver con consulta oficial, objetivo fijado, backup/copia, upgrade/migrate,
-suites completas y rollback comprobado. La integración oficial adicional de
-utilidades chocó con el bootstrap Standard Buying en el sitio LAB; para la
-suite completa usar otro sitio upstream vacío y fixtures oficiales antes de
-LAB, como explica el informe. No se prueban Cashea/MRW reales, fiscalidad
+Criterio 13: los tags oficiales de Frappe y ERPNext siguen sin patch posterior
+compatible dentro de 16.36. Conservar BLOCKED y seis escenarios UNRUN. Otra
+minor requiere plan separado con SHAs, compatibilidad, backup, migración,
+regresión y rollback, y aprobación antes de ejecutarlo. No se cambiaron pins.
+Standard Buying se resuelve con sitios vacíos y fixtures oficiales, sin cambiar
+el oráculo LAB. Leer `reports/frappe-official-suites.md` y
+`scripts/official-tests/README.md`: suites completas, conteos reales, fallos,
+errores de fixtures/subtests, resultados ausentes e intentos previos. Cuatro unitarios
+históricos no representan esas suites. No se prueban Cashea/MRW reales, fiscalidad
 venezolana, seguimiento físico serial, producción ni SLA. La reproducción
-comprobada usa otro sitio en la misma máquina; restaurar una nueva tarea cloud
-desde snapshot todavía no está verificado.
+comprobada usa otro sitio en la misma máquina. La comprobación de una tarea cloud
+nueva terminó según el coordinador; sus resultados/evidencias siguen pendientes
+de incorporación. No volver a ejecutarla aquí ni atribuirle PASS sin evidencia.
 
 Usar la skill cloud-environment-onboarding:setup para cambios de entorno.
-Guardar install_script/start_skill en el borrador no ejecuta instrucciones ni
-publica un snapshot. El usuario revisa/guarda y publica desde configuración del
-entorno; no esperar esa revisión para terminar el trabajo independiente.
+Esta continuación no solicita ni modifica el borrador del entorno guardado;
+la instrucción explícita del usuario es no repetir Guardar/Publicar. El snapshot
+fcf690d y el commit posterior de preparación son identidades distintas: verificar
+primero el HEAD retenido, leer el instrumento nuevo desde un SHA revisado sin
+cambiar ese checkout, y conservar la evidencia de la nueva tarea cloud.

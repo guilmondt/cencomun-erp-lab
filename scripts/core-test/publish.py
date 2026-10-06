@@ -85,12 +85,12 @@ for app in ["frappe", "erpnext"]:
         }
     )
     tags.extend(rows)
-# Record rather than execute a change in pins; both Core Tests must stabilize first.
+# Record rather than execute any change in pins: no later compatible target.
 patch = {
     "status": "BLOCKED",
     "current": "v16.36.1",
     "queries": tag_status,
-    "reason": "No official later compatible Frappe patch found in the pinned 16.36 series; patch selection also awaits stable Core Tests on both platforms. Existing runtime pins stay fixed.",
+    "reason": "Neither official Frappe nor ERPNext tags provide a compatible patch after v16.36.1 in the pinned 16.36 series. Existing runtime pins stay fixed; baseline suites do not satisfy post-patch scenarios.",
     "dependent_cases": [
         {"case": k, "status": "UNRUN", "blocked_by": "criterion-13"}
         for k in [
@@ -193,6 +193,8 @@ platform = {
     "status": "PASS" if match and "OK" in text and "FAILED" not in text else "UNRUN",
     "command": "bench --site ccm-core-recovery.test run-tests --module frappe.tests.test_utils --skip-before-tests --test-category unit",
 }
+official_path = REPO / 'reports/evidence/frappe-official/summary.json'
+official = json.loads(official_path.read_text()) if official_path.exists() else {'results': [], 'scope': 'UNRUN'}
 commands = (
     json.loads((OUT / "commands.json").read_text())
     if (OUT / "commands.json").exists()
@@ -221,6 +223,15 @@ summary = {
     "versions_lock_sha256": pins,
     "benchmark": benchmark,
     "platform_baseline_subset": platform,
+    "platform_official_server_suites": official,
+    "cloud_snapshot_verification": {
+        "status": "BLOCKED",
+        "execution_reported_complete": True,
+        "reason": "Separate task completed according to coordinator; evidence and outcome not yet received.",
+        "expected_saved_commit": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+        "procedure": "docs/FRAPPE_CLOUD_RESTORE_CHECK.md",
+        "note": "Criterion 14's LAB site replay is separate evidence; it does not demonstrate restoration in a genuinely new cloud task. The saved environment was not saved/published again.",
+    },
     "reproducibility": repro,
     "cases": cases,
     "unrun": patch["dependent_cases"],
@@ -332,17 +343,23 @@ rows += [
     "",
     f"Subconjunto oficial de plataforma: {platform['tests']} tests {platform['status']}; alcance: utilidades unitarias. Los cinco tests de registro/paquete también se ejecutan en el runner. Los grupos de negocio son integración real sobre MariaDB/Redis, incluidos HTTP, permisos y concurrencia. No se presenta esto como la suite completa upstream ni como regresión posterior a un patch.",
     "",
+    "Suites oficiales de servidor sobre sitios vacíos con fixtures oficiales: "
+    + "; ".join(f"{r['app']}: {r['status']}, {r['actual_tests_run']} realmente ejecutadas / {r['discovered_test_count']} descubiertas" for r in official.get('results', []))
+    + ". Comandos, resultados por ID, fallos y omisiones: [frappe-official-suites.md](frappe-official-suites.md). Los registros JUnit incluyen errores de fixtures/subtests y no se usan para inflar la cantidad real. Estas suites de baseline no acreditan las seis pruebas posteriores al patch.",
+    "",
     f"El sitio de reproducción separado restauró el checkpoint y repitió {repro.get('replayed_case_counts', {}).get('business', 'UNRUN')} grupos de negocio y {repro.get('replayed_case_counts', {}).get('finance', 'UNRUN')} de finanzas sin modificar el sitio medido. Credenciales, encryption_key, dumps y logs completos permanecen privados, fuera del repositorio. Solo se publican hashes/metadatos y evidencias ficticias.",
     "",
     "## Limitaciones, diagnóstico y resolución",
     "",
-    "1. **Criterio 13 BLOCKED; patch y regresiones dependientes UNRUN.** La consulta oficial de Frappe en la serie fijada solo ofrece 16.36.0 y 16.36.1. Ver tags, SHAs, comandos y códigos en [patch.json](evidence/frappe-core/patch.json). No se fuerza otra minor/major. Para resolver: (1) terminar el Core Test de Axelor con este mismo manifiesto; (2) consultar tags oficiales posteriores compatibles de ambos ERP; (3) congelar objetivo y dependencias; (4) respaldar/restaurar en copia aislada; (5) actualizar/migrar allí; (6) ejecutar suites completas de plataforma y Cencomun; (7) comprobar rollback y publicar evidencias. Hasta entonces no hay aprobación 14/14 ni paridad integral.",
+    "1. **Criterio 13 BLOCKED; sus seis escenarios UNRUN.** Los tags oficiales de Frappe y ERPNext solo ofrecen 16.36.0 y 16.36.1 en la serie fijada. Ver comandos/SHAs/códigos en [patch.json](evidence/frappe-core/patch.json). No se inventa un patch ni se fuerza otra minor. Para resolver: (1) consultar nuevos tags oficiales compatibles de ambos proyectos; (2) fijar objetivo/SHAs y compatibilidad; (3) definir backup, copia, migración, regresión y rollback; (4) ejecutar únicamente el cambio autorizado; (5) comprobar suites y restauración. Una propuesta para otra minor requiere plan separado y aprobación previa. El baseline actual no cuenta como esas regresiones; no hay aprobación 14/14.",
     "",
-    "2. **La suite oficial de integración de utilidades no se completó en el sitio con fixtures LAB.** El bootstrap de ERPNext intentó insertar Standard Buying con otra configuración y produjo DuplicateEntryError. `--skip-before-tests` no evita ese bootstrap lazy. Se ejecutó y contó por separado la categoría unit (4 tests); no se contó el primer comando deprecated que devolvió cero sin ejecutar tests. Para la regresión completa: (1) preparar otro sitio upstream vacío; (2) instalar dependencias de test fijadas; (3) cargar los fixtures oficiales antes de los LAB o usar listas de precio LAB con nombres distintos mediante mapping versionado; (4) ejecutar y contar suites; (5) repetir Cencomun con el mismo oráculo. Esta limitación no sustituye ni aprueba el criterio 13.",
+    "2. **Standard Buying resuelto; resultados oficiales separados.** Se prepararon sitios vacíos sin Cencomun, con fixtures oficiales y un Bench copiado para aislar tests de comandos. No se cambió la lista LAB ni el oráculo. Las suites oficiales conservan sus FAIL/BLOCKED/UNRUN reales, cantidades e IDs en [frappe-official-suites.md](frappe-official-suites.md); los cuatro unitarios históricos no las sustituyen. `pip check` detecta incompatibilidades preexistentes de requests/oauthlib que se documentan sin cambiar pins. Diagnóstico y repetición paso a paso: [README oficial](../scripts/official-tests/README.md). Esta evidencia no sustituye ni aprueba el criterio 13.",
     "",
     "3. **Alcance técnico del laboratorio.** Cashea y consumidor de eventos son simuladores locales; entrega al menos una vez con deduplicación, no integración real. Serial verifica búsqueda del registro nativo; no seguimiento físico por serial. No se prueba localización fiscal venezolana, remisión del impuesto, devoluciones, combos a cero, integración MRW, producción ni SLA. Las decisiones comerciales aplazadas siguen en el ExecPlan.",
     "",
     "4. **Intervenciones realizadas y preservadas.** Se añadieron Currency VES, grupos hoja, cuentas por defecto, listas nativas y cliente mariadb-dump 11.8.6 con checksum. Se corrigieron el mapeo bruto/neto de Payment Entry, precio/listas obligatorias, scope nativo sin permisos de empresa, auditoría de cierre sin diferencia y traducción de UniqueValidationError a 409. El proxy baseline apuntaba a otro sitio: el adaptador usa 127.0.0.1:8000 con Host ccm-core.test. No se modificó ese proxy. Los intentos fallidos se conservan en `evidence/frappe-core/attempts` y runs; los pasos exactos están en el README.",
+    "",
+    "5. **Restauración cloud: ejecución separada terminada según el coordinador.** Resultado y evidencia pendientes de incorporación; no se acredita PASS ni se repite esa comprobación aquí. El criterio 14 acredita setup/replay de sitio LAB y mantiene un alcance distinto. El snapshot sigue siendo fcf690dbc58b2b2dcf8d045c49976e3613e804cf; no se repitió Guardar/Publicar. [Procedimiento reproducible](../docs/FRAPPE_CLOUD_RESTORE_CHECK.md): registrar identidad real de tarea, commit/servicios y consultas autenticadas P001, USD50.00 y stock5. Otro sitio local no acredita restauración cloud.",
     "",
     "Versiones efectivas: Frappe/ERPNext 16.36.1, MariaDB 11.8.6, Redis 8.0.2, Python 3.14.0, Node 24.19.0, Bench 5.29.0, Cencomun 0.0.1. Fuente, SHAs, hashes, estados y resultados completos: [summary.json](evidence/frappe-core/summary.json).",
     "",

@@ -1,0 +1,55 @@
+{
+  "recorded_utc": "2026-10-06T02:36:20.713999+00:00",
+  "scope": "executor-access recovery; not a completed ERPNext suite result",
+  "branch": "lab/frappe-baseline",
+  "commit": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "executor_error_exact": "write_stdin failed: Unified exec process failed: exec-server transport disconnected; failed to resume exec-server session: recovery timed out after 25s",
+  "edit_error_exact": "apply_patch verification failed: Failed to read file to update /workspace/cencomun-erp-lab/scripts/official-tests/isolate_bench.py: exec-server transport closed",
+  "cause": "unknown; no observed permission or auto-review rejection",
+  "executor_access_recovered": true,
+  "erpnext_runner_active_on_recovery": false,
+  "erpnext_full_attempt": 2,
+  "status": "BLOCKED",
+  "reason": "interrupted execution: empty JUnit XML, missing final summary and result JSON",
+  "actual_tests_run": null,
+  "completed_category_results": [
+    {
+      "category": "unit",
+      "actual_tests_run": 2,
+      "native_result": "OK"
+    }
+  ],
+  "incomplete_category": {
+    "category": "unspecified",
+    "discovered_tests": 3253,
+    "actual_tests_run": null,
+    "individual_results": "unknown"
+  },
+  "files": {
+    "/workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-2.log": {
+      "bytes": 2682,
+      "sha256": "f0a0734cf262307e9d9b40cc41b9d476a5fa0f3d468fb1d62f4a8b79fcccae31",
+      "mtime_utc": "2026-10-06T02:22:21.859420+00:00"
+    },
+    "/workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-2.xml": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_utc": "2026-10-06T02:05:15.933995+00:00"
+    },
+    "/workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-2.reserved": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_utc": "2026-10-06T02:05:13.773942+00:00"
+    }
+  },
+  "services_restarted": false,
+  "duplicate_suite_started": false,
+  "private_recovery_directory": "/workspace/.local/frappe-integral/recovery/executor-20261006T023334Z",
+  "database_copy_restore_validated": false,
+  "cloud_restore_task": "independent task started by coordinator; result not yet received",
+  "criterion_13": {
+    "status": "BLOCKED",
+    "dependent_scenarios": "six UNRUN"
+  },
+  "report": "reports/frappe-executor-recovery.md"
+}

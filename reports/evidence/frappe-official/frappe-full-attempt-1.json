@@ -1,0 +1,199 @@
+{
+  "scope": "full official server application discovery",
+  "app": "frappe",
+  "site": "ccm-official-frappe.test",
+  "module": null,
+  "attempt": 1,
+  "status": "BLOCKED",
+  "command": "bench --site ccm-official-frappe.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-1.xml",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T01:51:20.186531+00:00",
+  "elapsed_seconds": 5.783,
+  "upstream_sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+  "log_sha256": "01e1c12e93804cae42cf169be28d396ac1a7a72fa99ffe5674b31e9c2270dd5d",
+  "actual_tests_run": 32,
+  "runner_counts_by_category": [
+    32
+  ],
+  "discovered_categories": [
+    {
+      "tests": 32,
+      "category": "unit",
+      "app": "frappe"
+    }
+  ],
+  "junit_records": 32,
+  "counts": {
+    "PASS": 31,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 1
+  },
+  "cases": [
+    {
+      "id": "frappe.core.doctype.file.test_file.TestFilePermissionQuery.test_ignores_stale_custom_docperm_doctype",
+      "seconds": 0.016,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_as_string_converts_values",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_generate_html_diff_escapes_html",
+      "seconds": 0.017,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_generate_html_diff_produces_table",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_should_generate_html_diff_empty_values",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_should_generate_html_diff_long_text",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_should_generate_html_diff_multiline",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.version.test_version.TestHTMLDiff.test_should_generate_html_diff_short_text",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.gettext.extractors.tests.test_python.TestPython.test_extract_noop",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.integrations.test_utils.TestOAuth2DynamicClientMetadata.test_redirect_uri_scheme",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAllowedReferrer.test_is_allowed_referrer",
+      "seconds": 0.062,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_chrome_pdf_interceptor.TestChromePDFLocalResourceInterceptor.test_path_traversal_sends_fail",
+      "seconds": 0.114,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_chrome_pdf_interceptor.TestChromePDFLocalResourceInterceptor.test_root_url_sends_continue_not_read",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_chrome_pdf_interceptor.TestChromePDFLocalResourceInterceptor.test_unknown_origin_url_sends_continue",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_chrome_pdf_interceptor.TestChromePDFLocalResourceInterceptor.test_existing_public_file_sends_fulfill",
+      "seconds": 0.001,
+      "status": "SKIP",
+      "exception": "skip",
+      "message": "No files found under site_public_root",
+      "traceback": ""
+    },
+    {
+      "id": "frappe.tests.test_hooks.TestDocEventHandlerSignature.test_handler_with_keyword_only_args",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_hooks.TestDocEventHandlerSignature.test_handler_with_method_arg",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_hooks.TestDocEventHandlerSignature.test_handler_with_method_default",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_hooks.TestDocEventHandlerSignature.test_handler_with_var_positional",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_hooks.TestDocEventHandlerSignature.test_handler_without_method_arg",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_installer.TestIsRequiredBy.test_an_app_a_qualified_requirement_names_is_a_dependency",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_installer.TestIsRequiredBy.test_an_app_off_the_bench_is_matched_without_a_remote_lookup",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_installer.TestIsRequiredBy.test_an_app_only_spelled_inside_a_requirement_is_not_a_dependency",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_installer.TestRequiredAppName.test_an_app_off_the_bench_resolves_without_a_remote_lookup",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_installer.TestRequiredAppName.test_every_spelling_of_a_requirement_resolves_to_the_app",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_trace.TestTracedFieldContext.test_traced_field_context",
+      "seconds": 0.002,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_trace.TestTracedFieldContext.test_traced_field_context_custom_validation",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_trace.TestTracedFieldContext.test_traced_field_context_not_in_test_mode",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_utils.TestDataUtils.test_comma_and",
+      "seconds": 0.084,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_utils.TestDataUtils.test_comma_or",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_utils.TestDataUtils.test_orjson_dumps_fallback_on_large_integers",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.tests.test_utils.TestMsgPrint.test_msgprint",
+      "seconds": 0.001,
+      "status": "PASS"
+    }
+  ],
+  "xml_documents": 1,
+  "diagnostic_tail": "                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/env/lib/python3.14/site-packages/click/core.py\", line 1353, in invoke\n    return ctx.invoke(self.callback, **ctx.params)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/env/lib/python3.14/site-packages/click/core.py\", line 907, in invoke\n    return callback(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/bench/env/lib/python3.14/site-packages/click/decorators.py\", line 34, in new_func\n    return f(get_current_context(), *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/commands/__init__.py\", line 28, in _func\n    ret = f(ctx.obj, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/commands/testing.py\", line 362, in run_tests\n    main(\n    ~~~~^\n    \tsite,\n     ^^^^^\n    ...<15 lines>...\n    \tlightmode=lightmode,\n     ^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/commands/testing.py\", line 163, in main\n    for app, category, suite in runner.iterRun():\n                                ~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/testing/runner.py\", line 87, in iterRun\n    self._prepare_category(category, suite, app)\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/testing/runner.py\", line 107, in _prepare_category\n    prepare_method(suite, app, category)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/testing/environment.py\", line 182, in __call__\n    self._run_before_test_hooks(app, category)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/testing/utils.py\", line 12, in wrapper\n    result = func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/testing/environment.py\", line 195, in _run_before_test_hooks\n    frappe.get_attr(hook_function)()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/utils/install.py\", line 147, in before_tests\n    complete_setup_wizard()\n    ~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/utils/install.py\", line 157, in complete_setup_wizard\n    setup_complete(\n    ~~~~~~~~~~~~~~^\n    \t{\n     ^\n    ...<8 lines>...\n    \t}\n     ^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/utils/typing_validations.py\", line 36, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/desk/page/setup_wizard/setup_wizard.py\", line 65, in setup_complete\n    return process_setup_stages(stages, kwargs)\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/desk/page/setup_wizard/setup_wizard.py\", line 147, in process_setup_stages\n    run_setup_success(user_input)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/desk/page/setup_wizard/setup_wizard.py\", line 211, in run_setup_success\n    login_as_first_user(args)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/desk/page/setup_wizard/setup_wizard.py\", line 216, in login_as_first_user\n    frappe.local.login_manager.login_as(args.get(\"email\"))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/auth.py\", line 358, in login_as\n    self.post_login(session_end, audit_user)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/auth.py\", line 173, in post_login\n    validate_ip_address(self.user)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/bench/apps/frappe/frappe/auth.py\", line 471, in validate_ip_address\n    if hasattr(frappe.local, \"request\") and frappe.local.request.path.startswith(\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'path'\n\n'NoneType' object has no attribute 'path'"
+}
