@@ -467,3 +467,13 @@ En esta preparación solo se añade este documento. Main, la rama/app/runtime de
 Frappe, producción, baseline Axelor, versions.lock y fuentes upstream permanecen
 sin cambios. Se detiene el trabajo en el límite solicitado: entregar el plan
 revisable y esperar autorización antes de implementar.
+
+### Repetición 37411893961 y correcciones B11–B14
+
+Artefacto completo conservado: 2 gates BLOCKED, PROD/SEARCH/BANK-BOOK FAIL,
+29 grupos UNRUN. Usuarios reales y frontera de Sequence comprobados; no hay
+éxito económico. Se conserva colección de Move, se autorizan cuentas concretas
+por journal, se corrigen tipos de permisos y paginación AOP. 14 regresiones
+Python, 2+7 tests propios y compilación full-native/offline pasan localmente.
+Repetir gates primero e independientes después; no declarar correcciones
+verificadas en ERP hasta esa ejecución. No se amplía la red ni se cambia upstream.

@@ -1,0 +1,139 @@
+{
+  "metric_kind": "runtime",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "gates": [
+    {
+      "case": "CO00",
+      "seconds": 6.822,
+      "status": "BLOCKED"
+    },
+    {
+      "case": "TAX01-W",
+      "seconds": 0.766,
+      "status": "BLOCKED"
+    }
+  ],
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 1.44,
+      "status": "FAIL"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.237,
+      "status": "FAIL"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "seconds": 0.419,
+      "status": "FAIL"
+    }
+  ],
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 7.27
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 79.223
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 8.69
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 4957.516,
+      "action": "ccm-core-native-prepare",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 55.924,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 1776.461,
+      "action": "ccm-core-native-gate",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.935,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 186.993,
+      "action": "ccm-core-native-prepare",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 31.247,
+      "action": "ccm-core-native-inspect",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 519.478,
+      "action": "ccm-core-native-gate",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.358,
+      "action": "ccm-core-native-inspect",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 416.134,
+      "action": "ccm-core-products-prepare",
+      "case": "PROD"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 223.708,
+      "action": "ccm-core-products-inspect",
+      "case": "PROD"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 165.245,
+      "action": "ccm-core-bank-book-prepare",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 253.205,
+      "action": "ccm-core-bank-book-post",
+      "case": "BANKBOOK"
+    }
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.41",
+  "cpu_count": 4,
+  "cpu_affinity": 4,
+  "disk_free_bytes": 87099195392,
+  "http_call_counts": {
+    "administrator": 15,
+    "product_operator": 4,
+    "search_reader": 5
+  },
+  "native_action_counts": {
+    "ccm-core-native-prepare": 2,
+    "ccm-core-native-inspect": 4,
+    "ccm-core-native-gate": 2,
+    "ccm-core-products-prepare": 1,
+    "ccm-core-products-inspect": 1,
+    "ccm-core-bank-book-prepare": 1,
+    "ccm-core-bank-book-post": 1
+  },
+  "benchmark": "UNRUN",
+  "note": "Gate timings are not the required 1000-sample benchmark"
+}

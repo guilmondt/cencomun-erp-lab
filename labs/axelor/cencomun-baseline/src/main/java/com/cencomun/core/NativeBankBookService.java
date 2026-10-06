@@ -40,6 +40,7 @@ public class NativeBankBookService {
       record(ACCOUNT + "AccountManagement", "company", company, "typeSelect", 3, "paymentMode", mode,
           "cashAccount", one(ACCOUNT + "Account", "self.company = ?1 AND self.code = ?2", company, "CCM-BANK"), "journal", journal);
     }
+    NativeFinance.journalAccounts(company, "BOOK", "BANK", "AR");
     return Map.of("company_id", company.getId(), "journal_id", journal.getId(),
         "sequence_id", ((Model) get(journal, "sequence")).getId(), "native_advance_receipts_enabled", get(journal, "excessPaymentOk"));
   }

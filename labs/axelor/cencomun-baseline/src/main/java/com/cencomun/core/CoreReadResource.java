@@ -55,7 +55,7 @@ public class CoreReadResource {
     int offset;
     try { offset = Math.multiplyExact(page - 1, size); }
     catch (ArithmeticException error) { throw new BadRequestException("Invalid search offset"); }
-    for (Model profile : query.order("product.code").fetch(offset, size)) {
+    for (Model profile : query.order("product.code").fetch(size, offset)) {
       Model product = (Model) get(profile, "product");
       Map<String, Object> row = new LinkedHashMap<>();
       row.put("id", get(product, "code")); row.put("native_id", product.getId()); row.put("profile_id", profile.getId());

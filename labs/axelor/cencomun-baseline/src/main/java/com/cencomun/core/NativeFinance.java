@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
 
 /** Synthetic native chart/period configuration and supported journal posting services. */
 public final class NativeFinance {
@@ -18,7 +19,10 @@ public final class NativeFinance {
   private static final LocalDate DATE = LocalDate.of(2026, 10, 1);
 
   public static void configure(Model company) {
-    if (one(ACCOUNT + "AccountConfig", "self.company = ?1", company) != null) return;
+    if (one(ACCOUNT + "AccountConfig", "self.company = ?1", company) != null) {
+      configureJournalAccounts(company);
+      return;
+    }
     account(company, "AR", "receivable", true); account(company, "AP", "payable", true);
     account(company, "STOCK", "currentAsset", false); account(company, "REVENUE", "income", false);
     account(company, "COGS", "charge", false); account(company, "COMMISSION", "charge", false);
@@ -27,6 +31,7 @@ public final class NativeFinance {
     account(company, "OPENING", "equity", false);
     Model sale = journal(company, "SALE", 2); Model general = journal(company, "GENERAL", 5);
     Model cash = journal(company, "CASH", 4); Model bank = journal(company, "BANK", 4);
+    configureJournalAccounts(company);
     Model config = record(ACCOUNT + "AccountConfig", "company", company,
         "customerAccount", acct(company, "AR"), "supplierAccount", acct(company, "AP"),
         "customerSalesJournal", sale, "customerCreditNoteJournal", sale,
@@ -61,7 +66,7 @@ public final class NativeFinance {
     List<Model> lines = new ArrayList<>();
     lines.add(line(opening, customer, acct(company, "STOCK"), MoneyPolicy.money(amount), true, 1));
     lines.add(line(opening, customer, acct(company, "OPENING"), MoneyPolicy.money(amount), false, 2));
-    set(opening, "moveLineList", lines); opening = save(opening);
+    appendLines(opening, lines); opening = save(opening);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", opening);
   }
 
@@ -95,7 +100,7 @@ public final class NativeFinance {
     List<Model> costLines = new ArrayList<>();
     costLines.add(line(cogs, customer, acct(company, "COGS"), MoneyPolicy.money(totalCost), true, 1));
     costLines.add(line(cogs, customer, acct(company, "STOCK"), MoneyPolicy.money(totalCost), false, 2));
-    set(cogs, "moveLineList", costLines); cogs = save(cogs);
+    appendLines(cogs, costLines); cogs = save(cogs);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", cogs);
     invoice = managed(invoice);
     Object createPayment = service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentCreateService");
@@ -112,7 +117,7 @@ public final class NativeFinance {
     settlementLines.add(line(settle, customer, acct(company, "COMMISSION"), calculation.get("commission"), true, 2));
     if (calculation.get("shipping").signum() != 0) settlementLines.add(line(settle, customer, acct(company, "SHIPPING"), calculation.get("shipping"), true, 3));
     Model credit = line(settle, customer, acct(company, "AR"), new BigDecimal(input.get("financed_amount").asText()), false, 4);
-    settlementLines.add(credit); set(settle, "moveLineList", settlementLines); settle = save(settle);
+    settlementLines.add(credit); appendLines(settle, settlementLines); settle = save(settle);
     call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", settle);
     invoice = managed(invoice); credit = managed(credit);
     Model invoiceMove = (Model) get(invoice, "move");
@@ -135,6 +140,28 @@ public final class NativeFinance {
         amount, debit, DATE, n, get(move, "origin"), "CCM synthetic Core posting");
   }
   private static Model acct(Model company, String category) { return one(ACCOUNT + "Account", "self.company = ?1 AND self.code = ?2", company, "CCM-" + category); }
+  private static void appendLines(Model move, List<Model> lines) {
+    // createMove already persists its collection; retain Hibernate's collection
+    // and use the generated native relationship helper, as the ERP does.
+    for (Model line : lines) call(move, "addMoveLineListItem", line);
+  }
+  private static void configureJournalAccounts(Model company) {
+    journalAccounts(company, "SALE", "AR", "REVENUE", "TAX");
+    journalAccounts(company, "GENERAL", "STOCK", "OPENING", "COGS", "AP");
+    journalAccounts(company, "CASH", "CASH", "AR");
+    journalAccounts(company, "BANK", "BANK", "AR", "COMMISSION", "SHIPPING");
+  }
+  static void journalAccounts(Model company, String code, String... categories) {
+    Model journal = one(ACCOUNT + "Journal", "self.company = ?1 AND self.code = ?2", company, "CCM-" + code);
+    if (journal == null) throw new IllegalStateException("Synthetic journal missing: " + code);
+    HashSet<Model> accounts = new HashSet<>();
+    for (String category : categories) {
+      Model account = acct(company, category);
+      if (account == null) throw new IllegalStateException("Synthetic account missing: " + category);
+      accounts.add(account);
+    }
+    set(journal, "validAccountSet", accounts); save(journal);
+  }
   private static void account(Model company, String code, String type, boolean reconcile) {
     Model kind = one(ACCOUNT + "AccountType", "self.technicalTypeSelect = ?1", type);
     if (kind == null) kind = record(ACCOUNT + "AccountType", "name", "CCM LAB " + type, "technicalTypeSelect", type);

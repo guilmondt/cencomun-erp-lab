@@ -1,0 +1,39 @@
+{
+  "case": "SEARCH01-04-NATIVE",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [
+    {
+      "case": "foreign-company-denied",
+      "http_status": 403
+    }
+  ],
+  "actor": "ccm-reader",
+  "status": "FAIL",
+  "complete": false,
+  "error": "{'page_size': 100, 'total': 1, 'page': 1, 'items': []}",
+  "error_type": "AssertionError",
+  "seconds": 0.237,
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 2.943
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 70.003
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 4.287
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 72.193
+    },
+    {
+      "operation": "/ws/ccm/products/search",
+      "http_ms": 77.638
+    }
+  ]
+}

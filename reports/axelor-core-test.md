@@ -4,20 +4,22 @@ Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613
 16 archivos de fixtures byte a byte, manifiesto/oráculo intactos, cobertura revisión 2,
 34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.
 
-Último CI finalizado: [37409531164](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37409531164),
-commit `ebe8d0b9be92b07b13b54cb33ed6c7911a9fbb2d`, **FAILURE**.
-Configuración y secuencias preparadas; la planificación nativa avanzó a PLANNED.
-La contabilización inicial falló por un proxy de Currency separado del contexto.
-CRUD/búsquedas recibieron 401 porque AOS crea User con blocked=true.
-Se corrigieron esas referencias y se activan sólo los dos usuarios sintéticos.
-Repetición ERP pendiente; compilación/tests locales comprobados.
+Último CI finalizado: [37411893961](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37411893961),
+commit `8e6cafd2c89899d3c9ea8216f6b8d7a6f4105773`, **FAILURE**.
+Preparación confirmada, doce secuencias visibles e incremento nativo sin NoResultException.
+El gate alcanzó el asiento inicial y falló porque el caller reemplazaba una colección
+Hibernate con borrado de huérfanos. Ambos usuarios LAB ya inician sesión realmente.
+Los independientes expusieron permisos con parámetros incompatibles, paginación
+invertida y journal sin cuentas autorizadas. B11–B14 documentan causas/pasos.
+Se corrigen estos cuatro defectos conservando controles y transacciones; la nueva
+repetición ERP está pendiente. Compilación/tests locales comprobados.
 
 ## Gates económicos parciales
 
 | Gate, administrador real | Estado | Tiempo | Evidencia |
 | --- | --- | --- | --- |
-| CO00, primero | BLOCKED | 6.859 s | PLANNED=2 en fase transitoria; rollback sin stock ni efectos financieros |
-| TAX01-W, segundo | BLOCKED | 0.604 s | Mismo error de Currency; rollback completo del fixture |
+| CO00, primero | BLOCKED | 6.822 s | PLANNED=2 en fase transitoria; rollback sin stock ni efectos financieros |
+| TAX01-W, segundo | BLOCKED | 0.766 s | Mismo error de colección contable; rollback completo del fixture |
 
 No se demuestran aún stock final 3/4/5, costo de ventas 70, impuestos y liquidación.
 Un futuro gate PASS como admin seguirá siendo parcial: roles, estados, rechazos,
@@ -36,20 +38,21 @@ atomicidad e idempotencia requieren sus propias pruebas antes de completar el gr
    recargan también compañía/cliente/almacén antes de usar sus relaciones lazy.
 4. Configurar contabilidad antes de clientes corrigió B08. El repositorio de
    Partner mantiene su inicialización y validaciones de situación contable.
-5. PROD01-04 falló en login (0.476 s); SEARCH en login (0.017 s). La preparación
-   devolvió IDs de perfiles/roles, que no equivalen a lectura nueva persistida.
-   El artefacto revela `User is disabled`; User.xml nativo fija blocked=true.
-   Se activan sólo los usuarios LAB y se añade inspección fresca de perfiles,
-   presencia/estado/rol y matcher booleano, sin revelar hashes ni cookies.
+5. B09 (referencias Currency) y B10 (usuarios bloqueados) dejaron de reproducirse.
+   Lectura nueva confirmó perfiles y usuarios activos/no bloqueados, roles y matcher;
+   operador y lector iniciaron sesión. PROD (1.440 s) falló al comparar Long con Company.
+   SEARCH (0.237 s) rechazó otra compañía con 403, pero saltó los resultados por
+   Query.fetch(offset,size). Se corrigen parámetros ID y orden fetch(size,offset).
 6. Campos de producto propios con FK nativos Company/Product, enums, tracking
    y permisos por compañía. La prueba exige CRUD de operador real y búsquedas
    del lector real; la factura consultada depende del CO00 nativo.
 7. Export/aserción por línea de factura añadido: cabecera correcta con impuesto
    mal repartido falla. Todavía no se alcanzó esa aserción en el ERP.
-8. BANK-BOOK-FIXTURE implementado como independiente: cuatro PaymentVoucher
-   de anticipo con confirmación nativa, journal dedicado y secuencia confirmada
-   antes del consumo. Exige asientos/saldos y replay conservando IDs. Localmente
-   compila; el grupo sigue UNRUN hasta ejecución ERP. No aprueba importación o conciliación.
+8. BANK-BOOK-FIXTURE se ejecutó (0.419 s) y falló por cuentas no autorizadas en
+   CCM-BOOK. Se configura sólo BANK/AR, manteniendo validación nativa. Apertura,
+   ventas/costo/cobros/liquidación reciben sus conjuntos concretos. El caller de
+   Move conserva la colección administrada usando addMoveLineListItem. Las cuatro
+   correcciones compiladas necesitan repetición ERP; el grupo sigue FAIL.
 9. Criterio 13 BLOCKED por instrucción expresa; seis PATCH UNRUN. No hay upgrade.
    Red restringida intacta; ampliaciones pendientes sin publicar. El artefacto
    completo del nuevo run sí se descargó sin añadir dominios.
@@ -59,7 +62,7 @@ Causa, impacto, pasos numerados y verificación por impedimento:
 
 ## Matriz de 34 grupos — último CI finalizado
 
-PASS 0; FAIL 2; BLOCKED 2; UNRUN 30. Ningún grupo completo.
+PASS 0; FAIL 3; BLOCKED 2; UNRUN 29. Ningún grupo completo.
 Los defectos de preparación/caller no prueban incapacidad económica del ERP.
 
 | Grupo requerido | Revisión mínima | Estado | Completo |
@@ -76,7 +79,7 @@ Los defectos de preparación/caller no prueban incapacidad económica del ERP.
 | PO01-09-NATIVE | 1 | UNRUN | No |
 | PO07-09-REVISION-SELF | 1 | UNRUN | No |
 | CASH00-06-NATIVE | 1 | UNRUN | No |
-| BANK-BOOK-FIXTURE | 1 | UNRUN | No |
+| BANK-BOOK-FIXTURE | 1 | FAIL | No |
 | BANK01-05-NATIVE | 1 | UNRUN | No |
 | API01-06-SIX-ROUTES | 1 | UNRUN | No |
 | IDEM01-02-CREATE-CONCURRENT | 1 | UNRUN | No |
@@ -126,32 +129,31 @@ completan grupos nativos sin ejecutar.
 ## Métricas y validaciones
 
 - Último CI: 2 originales + 7 de política + 16 upstream; 0 fallos/errores/skips,
-  y 12 regresiones Python de ese commit. Correcciones locales actuales: 14
+  y 14 regresiones Python de ese commit. Correcciones locales actuales: 14
   regresiones Python, los mismos 2+7 tests, compilación full-stack y replay offline PASS.
-- Readiness inicial: 416.53 s; reinicio de la misma DB: 318.47 s.
-- Fases por timestamps: setup/validación 104.172 s,
-  build full-stack 133.119 s, offline 73.935 s.
-  No son timings por tarea Gradle ni benchmark de operaciones.
+- Readiness inicial: 419.50 s; reinicio de la misma DB: 318.48 s.
+- Job completo: 18 min 24 s, incluyendo build, arranque, pruebas y reinicio.
+  No equivale a un benchmark de operaciones ni a tiempos por tarea Gradle.
 - Runner observado: 4 CPU visibles/4 de afinidad;
-  plataforma `Linux-6.17.0-1022-azure-x86_64-with-glibc2.41`; disco libre 87100194816 bytes.
-- HTTP Core medido: 12 llamadas del admin, 2 del operador y 2 del lector. Incluye
-  login y preparación; los 401 no se convierten en latencias de una acción completada.
+  plataforma `Linux-6.17.0-1022-azure-x86_64-with-glibc2.41`; disco libre 87099195392 bytes.
+- HTTP Core medido: 15 llamadas del admin, 4 del operador y 5 del lector. Incluye
+  login y preparación; los fallos no se convierten en latencias de una acción completada.
 - p50/p95/p99, 1000 muestras y query/DB timing: UNRUN. No se infieren de readiness.
 - Esquema propio: un perfil de producto con FK/enums, sólo en la DB desechable.
   El artefacto propio no contiene clases com.axelor.*; pins y lock original intactos.
 
 Pins SHA256: `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
-WAR del último run: `78eafd8337d2baa3663ef0490764a2c4b2b28b50c078c6b268d8cee852a3521c`.
+WAR del último run: `1aa4459c3641ceb4117f4ddbdb627f1f659e293157a60fb4dc2f18a5da579e3e`.
 
 ## Evidencia y continuación
 
-[coverage.json](evidence/axelor-core/runs/37409531164/coverage.json),
-[build-evidence.json](evidence/axelor-core/runs/37409531164/build-evidence.json),
-[metrics.json](evidence/axelor-core/runs/37409531164/metrics.json), XML de las tres
-suites, preparación, exports/gates, errores de autenticación, smoke y procedencia
-con hashes en [evidence-source.json](evidence/axelor-core/runs/37409531164/evidence-source.json).
-Son archivos reales del artefacto 11389525853; los derivados están etiquetados.
-ZIP completo recuperable en `/workspace/ccm-axelor-runtime/ci-evidence/37409531164-artifact`.
+[coverage.json](evidence/axelor-core/runs/37411893961/coverage.json),
+[build-evidence.json](evidence/axelor-core/runs/37411893961/build-evidence.json),
+[metrics.json](evidence/axelor-core/runs/37411893961/metrics.json), XML de las tres
+suites, preparación, exports/gates, independientes, smoke y procedencia
+con hashes en [evidence-source.json](evidence/axelor-core/runs/37411893961/evidence-source.json).
+Son archivos reales del artefacto 11390001620; los derivados están etiquetados.
+ZIP completo recuperable en `/workspace/ccm-axelor-runtime/ci-evidence/37411893961-artifact`.
 Los resultados históricos se conservan aparte y no sustituyen la repetición nueva.
 
 Continúa autorizada la ejecución de gates y casos independientes. No hay PR,

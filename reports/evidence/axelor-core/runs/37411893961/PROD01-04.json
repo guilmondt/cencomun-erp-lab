@@ -1,0 +1,98 @@
+{
+  "case": "PROD01-04",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "steps": [],
+  "setup": {
+    "profiles": [
+      {
+        "id": 1,
+        "product_id": 1,
+        "product_code": "P001"
+      },
+      {
+        "id": 2,
+        "product_id": 2,
+        "product_code": "P002"
+      },
+      {
+        "id": 3,
+        "product_id": 3,
+        "product_code": "P003"
+      }
+    ],
+    "company_id": 1,
+    "operator_user_id": 2,
+    "operator_role_id": 3,
+    "native_permission_id": 34
+  },
+  "persisted_setup": {
+    "company_id": 1,
+    "users": [
+      {
+        "credentials_match": true,
+        "active": true,
+        "role": "CCM Operator",
+        "native_role_present": true,
+        "id": 2,
+        "blocked": false,
+        "code": "ccm-operator",
+        "company_id": 1
+      },
+      {
+        "credentials_match": true,
+        "active": true,
+        "role": "CCM Reader",
+        "native_role_present": true,
+        "id": 3,
+        "blocked": false,
+        "code": "ccm-reader",
+        "company_id": 1
+      }
+    ],
+    "profiles": [
+      {
+        "id": 1,
+        "product_id": 1,
+        "company_id": 1,
+        "product_code": "P001"
+      },
+      {
+        "id": 2,
+        "product_id": 2,
+        "company_id": 1,
+        "product_code": "P002"
+      },
+      {
+        "id": 3,
+        "product_id": 3,
+        "company_id": 1,
+        "product_code": "P003"
+      }
+    ]
+  },
+  "actor": "ccm-operator",
+  "status": "FAIL",
+  "complete": false,
+  "error": "{'status': -1, 'data': {'message': \"Cannot compare left expression of type 'java.lang.Long' with right expression of type 'com.axelor.apps.base.db.Company'\"}}",
+  "error_type": "AssertionError",
+  "seconds": 1.44,
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 4.423
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 78.98
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 340.126
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmProductProfile/1/fetch",
+      "http_ms": 357.643
+    }
+  ]
+}

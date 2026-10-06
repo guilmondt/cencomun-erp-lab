@@ -294,3 +294,61 @@ fusionado AOS. La preparación Cencomun omitía activar sus usuarios sintéticos
    rol por AuthUtils.hasRole y matcher nativo booleano, sin publicar hashes.
 3. Repetir login HTTP y las mismas escrituras/lecturas bajo cada actor; no
    considerar esa activación corregida hasta observarlo en el nuevo CI.
+
+## B11–B14 — defectos observados en la repetición 37411893961
+
+Commit `8e6cafd2c89899d3c9ea8216f6b8d7a6f4105773`, artefacto completo 11390001620
+descargado sin cambios de red. La moneda separada ya no produjo error (B09).
+La lectura nueva confirmó tres perfiles y ambos usuarios activos, con rol y
+matcher nativo verdadero. Sus logins HTTP funcionaron (B10 verificado).
+Los grupos siguen incompletos: 2 BLOCKED, 3 FAIL, 29 UNRUN.
+
+### B11 — colección contable con borrado de huérfanos
+
+CO00 6.822 s y TAX01-W 0.766 s: `HibernateException: A collection with orphan
+deletion was no longer referenced by the owning entity instance:
+com.axelor.apps.account.db.Move.moveLineList`, durante apertura. El servicio
+nativo createMove ya guarda el Move; nuestro caller sustituía su colección
+administrada por un ArrayList distinto. No queda stock ni contabilidad tras rollback.
+
+1. Añadir líneas con addMoveLineListItem, preservando la colección nativa.
+2. Aplicar lo mismo a apertura, costo y liquidación; no cambiar commits ni estados.
+3. Repetir compilación y gates, exigiendo lectura económica después del commit.
+
+### B12 — parámetros de permisos con tipos incompatibles
+
+PROD falló tras login real: `Cannot compare left expression of type java.lang.Long
+with right expression of type com.axelor.apps.base.db.Company`. El parámetro
+de configuración entregaba el objeto Company cuando el filtro espera su ID.
+
+1. Usar condiciones explícitas sobre company.id y parámetro __user__.activeCompany.id.
+2. Mantener equivalentes los filtros de Partner.companySet y TrackingNumber,
+   mediante joins/exists que comparen IDs. No eliminar el aislamiento por compañía.
+3. Actualizar también permisos ya preparados en LAB, y repetir CRUD por operador
+   y rechazos del lector a otra compañía. Nunca reemplazar el actor por admin.
+
+### B13 — orden de argumentos de paginación AOP
+
+SEARCH, lector real, rechazó otra compañía con 403. La consulta de P001 devolvió
+total=1 pero items=[]: se usaba Query.fetch(offset,size). Bytecode fijado de AOP
+8.2.3 demuestra que fetchQuery usa el primer argumento en setMaxResults y el
+segundo en setFirstResult: la llamada correcta es fetch(size,offset).
+
+1. Corregir el orden, conservando filtros, límites y búsqueda nativos.
+2. Repetir las cuatro búsquedas y ambas páginas; exigir 3 productos únicos completos.
+3. Mantener aparte las búsquedas de cliente/serial/factura pendientes; no inferir PASS.
+
+### B14 — journal de anticipos sin cuentas autorizadas
+
+BANK-BOOK-FIXTURE falló al confirmar el primer voucher:
+`Designated account CCM-BANK ... is not allowed on the journal CCM-BOOK`.
+MoveLineControlService exige validAccountSet o validAccountTypeSet; estaban
+vacíos. Es configuración del fixture, no un motivo para saltar ese control.
+
+1. Autorizar sólo BANK y AR en el journal dedicado del fixture de anticipos.
+2. Configurar conjuntos concretos de cuentas para los journals originales
+   según apertura/ventas/costo/cobros/liquidación, conservando el control nativo.
+3. Repetir los cuatro vouchers/asientos y sus saldos/replay desde otra petición.
+
+Estos impedimentos se registran antes de continuar otras ampliaciones. El
+oráculo, datos compartidos y pins permanecen intactos.

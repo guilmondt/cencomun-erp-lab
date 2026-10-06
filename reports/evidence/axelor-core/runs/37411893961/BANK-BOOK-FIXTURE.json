@@ -1,0 +1,18 @@
+{
+  "case": "BANK-BOOK-FIXTURE",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "actor": "admin",
+  "steps": [],
+  "setup": {
+    "sequence_id": 105,
+    "native_advance_receipts_enabled": true,
+    "journal_id": 5,
+    "company_id": 1
+  },
+  "status": "FAIL",
+  "complete": false,
+  "error": "Native action rejected: {\"status\": -1, \"data\": {\"causeStack\": \"com.axelor.apps.base.AxelorException: Designated account CCM-BANK in move line #3-1 is not allowed on the journal CCM-BOOK. Please modify journal settings or designated account to proceed.\\n\\tat com.axelor.apps.account.service.move.MoveLineControlServiceImpl.controlAccountingAccount(MoveLineControlServiceImpl.java:103)\\n\\tat com.axelor.apps.account.service.move.MoveLineControlServiceImpl.validateMoveLine(MoveLineControlServiceImpl.java:146)\\n\\tat com.axelor.apps.account.service.move.MoveValidateServiceImpl.checkConsistencyPreconditions(MoveValidateServiceImpl.java:310)\\n\\tat com.axelor.apps.account.service.move.MoveValidateServiceImpl.checkPreconditions(MoveValidateServiceImpl.java:212)\\n\\tat com.axelor.apps.account.service.move.MoveValidateServiceImpl.accounting(MoveValidateServiceImpl.java:450)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:58)\\n\\tat com.axelor.apps.account.service.move.MoveValidateServiceImpl.accounting(MoveValidateServiceImpl.java:435)\\n\\tat com.axelor.apps.budget.service.move.MoveValidateBudgetServiceImpl.accounting(MoveValidateBudgetServiceImpl.java:116)\\n\\tat com.axelor.apps.account.service.payment.paymentvoucher.PaymentVoucherConfirmService.createMoveAndConfirm(PaymentVoucherConfirmService.java:670)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:58)\\n\\tat com.axelor.apps.account.service.payment.paymentvoucher.PaymentVoucherConfirmService.confirmPaymentVoucher(PaymentVoucherConfirmService.java:204)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:58)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat com.cencomun.core.NativeAccess.call(NativeAccess.java:70)\\n\\tat com.cencomun.core.NativeBankBookService.post(NativeBankBookService.java:70)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)\\n\\tat com.cencomun.core.NativeBankBookController.post(NativeBankBookController.java:19)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat com.axelor.meta.ActionHandler.call(ActionHandler.java:230)\\n\\tat com.axelor.meta.schema.actions.ActionMethod.evalua",
+  "error_type": "RuntimeError",
+  "seconds": 0.419
+}

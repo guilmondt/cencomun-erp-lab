@@ -64,7 +64,9 @@ public class NativeIndependentController {
     if (permission == null) permission = record("com.axelor.auth.db.Permission",
         "name", "ccm.lab.product.profile.operator", "object", PROFILE,
         "canRead", true, "canWrite", true, "canCreate", false, "canRemove", false,
-        "condition", "self.company = ?1", "conditionParams", "__user__.activeCompany");
+        "condition", "self.company.id = ?1", "conditionParams", "__user__.activeCompany.id");
+    set(permission, "condition", "self.company.id = ?1");
+    set(permission, "conditionParams", "__user__.activeCompany.id"); save(permission);
     set(role, "permissions", new HashSet<>(List.of(permission))); save(role);
     Model user = one("com.axelor.auth.db.User", "self.code = ?1", "ccm-operator");
     if (user == null) user = record("com.axelor.auth.db.User", "code", "ccm-operator", "name", "Synthetic Core Operator",
@@ -77,11 +79,12 @@ public class NativeIndependentController {
     Model readerRole = one("com.axelor.auth.db.Role", "self.name = ?1", "CCM Reader");
     if (readerRole == null) readerRole = record("com.axelor.auth.db.Role", "name", "CCM Reader");
     List<Model> reads = new ArrayList<>();
-    reads.add(readPermission("profile", PROFILE, "self.company = ?1"));
-    reads.add(readPermission("partner", "com.axelor.apps.base.db.Partner", "?1 MEMBER OF self.companySet"));
-    reads.add(readPermission("invoice", "com.axelor.apps.account.db.Invoice", "self.company = ?1"));
+    reads.add(readPermission("profile", PROFILE, "self.company.id = ?1"));
+    reads.add(readPermission("partner", "com.axelor.apps.base.db.Partner",
+        "self.id IN (SELECT p.id FROM Partner p JOIN p.companySet c WHERE c.id = ?1)"));
+    reads.add(readPermission("invoice", "com.axelor.apps.account.db.Invoice", "self.company.id = ?1"));
     reads.add(readPermission("serial", "com.axelor.apps.stock.db.TrackingNumber",
-        "EXISTS (SELECT p FROM CcmProductProfile p WHERE p.product = self.product AND p.company = ?1)"));
+        "EXISTS (SELECT p FROM CcmProductProfile p WHERE p.product = self.product AND p.company.id = ?1)"));
     set(readerRole, "permissions", new HashSet<>(reads)); save(readerRole);
     Model reader = one("com.axelor.auth.db.User", "self.code = ?1", "ccm-reader");
     if (reader == null) reader = record("com.axelor.auth.db.User", "code", "ccm-reader", "name", "Synthetic Core Reader",
@@ -124,8 +127,11 @@ public class NativeIndependentController {
   private Model readPermission(String label, String model, String condition) {
     String name = "ccm.lab.reader." + label;
     Model found = one("com.axelor.auth.db.Permission", "self.name = ?1", name);
-    return found != null ? found : record("com.axelor.auth.db.Permission", "name", name, "object", model,
+    if (found == null) found = record("com.axelor.auth.db.Permission", "name", name, "object", model,
         "canRead", true, "canWrite", false, "canCreate", false, "canRemove", false,
-        "condition", condition, "conditionParams", "__user__.activeCompany");
+        "condition", condition, "conditionParams", "__user__.activeCompany.id");
+    set(found, "condition", condition);
+    set(found, "conditionParams", "__user__.activeCompany.id");
+    return save(found);
   }
 }
