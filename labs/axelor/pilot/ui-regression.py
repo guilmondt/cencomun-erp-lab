@@ -22,7 +22,9 @@ with sync_playwright() as p:
         page.get_by_text('Cencomun · Piloto',exact=True).click();return page
     def click(page,label,action,success=True):
         with page.expect_response(lambda r:r.url.endswith('/ws/action') and action in (r.request.post_data or ''),timeout=120000) as seen:
-            page.get_by_role('button',name=label,exact=True).click()
+            button=page.get_by_role('button',name=label,exact=True)
+            if action=='ccm-pilot-create': button.dblclick()
+            else: button.click()
         result=seen.value.json();receipts.append({'action':action,'request':json.loads(seen.value.request.post_data),'response':result})
         print(action,result.get('status'),flush=True)
         (out/'receipts.json').write_text(json.dumps(receipts,indent=2))
