@@ -235,3 +235,24 @@ aprobada de producción. Auditoría/key/outbox privados quedan legibles solo por
 manager, con retirada de grants antiguos del propio fixture. No ampliar grants
 para corregir tests. Su aceptación exige identidades reales, acción nativa/CRUD,
 rechazo causal y snapshots posteriores; las regresiones locales no la sustituyen.
+
+## 2026-10-06 — Piloto Axelor v1, separado de la evaluación
+
+Rama `pilot/axelor-v1` desde bc0183e; no se cambia el contrato ni la evidencia
+histórica (32 PASS / 2 FAIL). Piloto con entidades/vistas propias y servicios
+nativos. Varias líneas y reservas propias serializadas por compañía, relacionadas
+con un presupuesto nativo finalizado. Confirmación y entrega atómicas; cancelación
+previa mediante el servicio nativo, sin asignar estados nativos a mano.
+
+La inicial se registra mediante PaymentVoucher nativo cuando el operador declara
+el cobro real, independientemente de entrega. Se aplica a la factura por conciliación
+posterior. Liquidación Cashea separada; caja usa las líneas CASH de recibos y
+reembolsos vinculados a la sesión, incluidos anticipos aún no entregados. No se
+reutiliza el diario sintético CoreCashService. La cancelación con dinero cobrado
+requiere devolución real explícita del supervisor y su voucher, no cancelar un
+recibo sólo cambiando estado. Las reservas son extensión propia, no una afirmación
+de reserva nativa de un pedido confirmado. Restricciones/aceptación: ver
+`labs/axelor/pilot/README.md` y `reports/axelor-pilot-v1-status.md`.
+
+El runtime de pruebas escucha sólo loopback y no proporciona alojamiento de usuario.
+Destino persistente y creación de accesos permanentes quedan pendientes de aprobación.

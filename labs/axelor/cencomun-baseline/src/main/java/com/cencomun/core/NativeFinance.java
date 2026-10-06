@@ -244,16 +244,35 @@ public final class NativeFinance {
   public static Map<String, Object> postSettlement(Model company, Model customer, Model delivery, Model invoice, JsonNode input) {
     Map<String, BigDecimal> costs = observedCosts(delivery);
     Map<String, BigDecimal> calculation = MoneyPolicy.calculate(input, costs);
+    Model upfront = collectInitial(company, invoice, calculation.get("upfront"));
+    Map<String,Object> result = new LinkedHashMap<>(settleFinanced(company, customer, invoice, input, calculation));
+    result.put("upfront_payment_id", upfront == null ? 0L : upfront.getId());
+    result.put("native_wap_costs", costs); result.put("calculation", calculation);
+    return result;
+  }
+
+  /** Actual native payment; the caller owns atomicity, authorization and durable replay. */
+  public static Model collectInitial(Model company, Model invoice, BigDecimal amount) {
+    if (amount.signum() < 0) throw new CoreFault(422, "Initial payment cannot be negative");
+    if (amount.signum() == 0) return null;
     invoice = managed(invoice);
     Object createPayment = service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentCreateService");
     Model currency = (Model) get(company, "currency");
     Model cashMode = one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-CASH");
-    Model upfront = (Model) call(createPayment, "createInvoicePayment", invoice, calculation.get("upfront"), DATE, currency, cashMode, 2);
+    Model upfront = (Model) call(createPayment, "createInvoicePayment", invoice, amount, DATE, currency, cashMode, 2);
     call(invoice, "addInvoicePaymentListItem", upfront);
     call(service("com.axelor.apps.account.service.payment.invoice.payment.InvoiceTermPaymentService"),
         "createInvoicePaymentTerms", upfront, null);
     upfront = save(upfront);
     call(service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentValidateService"), "validate", upfront);
+    return managed(upfront);
+  }
+
+  /** Later Cashea transfer/fees only: never creates a cash payment. */
+  public static Map<String,Object> settleFinanced(Model company, Model customer, Model invoice,
+      JsonNode input, Map<String,BigDecimal> calculation) {
+    if (calculation.get("transfer").signum() < 0)
+      throw new CoreFault(422, "Negative net transfer unsupported in this pilot");
     company = managed(company); customer = managed(customer);
     Model bankMode = one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-BANK");
     Model settle = move(company, customer, "BANK", bankMode, "CCM-" + input.get("id").asText() + "-SETTLE");
@@ -272,8 +291,7 @@ public final class NativeFinance {
     if (invoiceDebit == null) throw new IllegalStateException("Native invoice receivable debit missing");
     // Reconciliation updates native InvoicePayments/terms through the framework service.
     Model reconciliation = (Model) call(service("com.axelor.apps.account.service.reconcile.ReconcileService"), "reconcile", invoiceDebit, credit, false, true);
-    return Map.of("settlement_move_id", settle.getId(), "reconcile_id", reconciliation.getId(),
-        "upfront_payment_id", upfront.getId(), "native_wap_costs", costs, "calculation", calculation);
+    return Map.of("settlement_move_id", settle.getId(), "reconcile_id", reconciliation.getId());
   }
   private static Model move(Model company, Model partner, String journal, Model mode, String origin) {
     Model j = one(ACCOUNT + "Journal", "self.company = ?1 AND self.code = ?2", company, "CCM-" + journal);

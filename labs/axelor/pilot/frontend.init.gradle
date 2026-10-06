@@ -1,0 +1,11 @@
+// Use the checksum-verified frontend tools without writing upstream source.
+gradle.projectsEvaluated {
+  if (gradle.rootProject.name != 'axelor-erp') return
+  gradle.rootProject.allprojects { p ->
+    def node = p.extensions.findByName('node')
+    if (node != null) {
+      node.yarnCommand.set(System.getenv('CCM_PILOT_STATE') + '/yarn/bin/yarn')
+      p.tasks.matching { it.name == 'yarnSetup' }.configureEach { enabled = false }
+    }
+  }
+}
