@@ -28,7 +28,9 @@ ALLOWED_SITES = ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test',
                  'ccm-upstream-frappe-fresh.test', 'ccm-upstream-erpnext-fresh.test',
                  'ccm-upstream-frappe-diagnostic.test', 'ccm-upstream-erpnext-diagnostic.test',
                  'ccm-upstream-erpnext-fixture-audit.test', 'ccm-upstream-erpnext-fixture-order.test',
-                 'ccm-upstream-frappe-final.test', 'ccm-upstream-erpnext-final.test']
+                 'ccm-upstream-frappe-final.test', 'ccm-upstream-erpnext-final.test',
+                 'ccm-upstream-frappe-cause.test', 'ccm-upstream-erpnext-cause.test',
+                 'ccm-upstream-frappe-cause-fixed.test']
 
 
 class SuiteLock:
@@ -277,10 +279,14 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
                '--port', str(port), '--noreload']
     # Official serve sets its site explicitly. CI mode disables the interactive
     # debugger; there is no application monkeypatch or modified validation.
-    with (PRIVATE / (base + '-web.log')).open('x') as web_log:
-        web = subprocess.Popen(webargs, cwd=BENCH, env=child_env,
+    from web_telemetry import record as web_record, publish as web_publish
+    webpath = PRIVATE / (base + '-web.log')
+    telemetrypath = PRIVATE / (base + '-web-telemetry.jsonl')
+    with webpath.open('x') as web_log:
+        web = subprocess.Popen(webargs, cwd=BENCH, env={**child_env, 'PYTHONUNBUFFERED': '1'},
                                stdout=web_log, stderr=subprocess.STDOUT, start_new_session=True)
         startup_error = None
+        web_record(telemetrypath, web, port, webpath, 'before_readiness')
         try:
             opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
             for _ in range(60):
@@ -299,8 +305,13 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
                                           cwd=BENCH, env=child_env,
                                           stdout=log, stderr=subprocess.STDOUT)
                 state['runner_pid'] = runner.pid
+                state['web_pid'] = web.pid
                 statepath.write_text(json.dumps(state, indent=2) + '\n')
-                result_code = runner.wait()
+                web_record(telemetrypath, web, port, webpath, 'before_native_runner_wait')
+                while runner.poll() is None:
+                    web_record(telemetrypath, web, port, webpath, 'during_native_runner')
+                    time.sleep(1)
+                result_code = runner.returncode
         except (OSError, ValueError, RuntimeError) as exc:
             if 'runner_pid' in state:
                 raise  # A running suite must be recovered/observed, never replaced.
@@ -309,9 +320,11 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
             with logpath.open('x') as log:
                 log.write('Harness startup failure before native runner: ' + startup_error + '\n')
         finally:
+            web_record(telemetrypath, web, port, webpath, 'before_harness_cleanup')
             if web.poll() is None:
                 os.killpg(web.pid, signal.SIGTERM)
                 web.wait(timeout=20)
+            web_record(telemetrypath, web, port, webpath, 'after_harness_cleanup')
     rawlog = logpath.read_text()
     manifest = OUT / (app + '-discovery-final.json')
     known_ids = ([identifier for category_data in json.loads(manifest.read_text())['categories']
@@ -331,6 +344,7 @@ def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel
               'upstream_sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=BENCH / 'apps' / app, text=True).strip(),
               'log_sha256': hashlib.sha256(logpath.read_bytes()).hexdigest(),
               **parsed}
+    record['web_telemetry'] = web_publish(telemetrypath, webpath)
     if startup_error:
         record['startup_error'] = startup_error
     if sequence:

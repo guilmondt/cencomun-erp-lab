@@ -13,7 +13,10 @@ def classify(block, events):
         return 'DEMONSTRATED_READONLY_HOME', 'Native traceback contains Errno 30 and a HOME path; no HOME workaround authorized.'
     if 'Official offline reproduction' in terminal:
         return 'DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION', 'Explicit offline rejection is the terminal exception; no provider response is inferred.'
-    if 'Connection refused' in terminal and '127.0.0.1' in block:
+    if 'Connection refused by Responses' in terminal and 'responses/__init__.py' in block:
+        return 'DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION', 'Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.'
+    if ('Connection refused' in terminal and '127.0.0.1' in block
+            and ('[Errno 111]' in block or 'NewConnectionError' in block)):
         return 'DEMONSTRATED_LOCAL_HTTP_REFUSAL_CAUSE_UNKNOWN', 'Terminal connection refusal and loopback URL in the native trace are demonstrated; endpoint availability cause remains UNKNOWN, not an inevitable blocker.'
     if terminal.startswith('frappe.exceptions.ValidationError: Exchange Rate is mandatory.'):
         enabled = any(e.get('kind') == 'native_state' and e.get('stage') == 'before_test'
@@ -62,7 +65,8 @@ def publish(path, revision=None):
                      'native_trace_frames': re.findall(r'^  File .+$', block, re.M),
                      'private_trace_block_sha256': hashlib.sha256(block.encode()).hexdigest() if block else None,
                      'evidence_flags': {'read_only_errno30': '[Errno 30]' in block and 'Read-only file system' in block,
-                                        'loopback_connection_refused': 'Connection refused' in block and '127.0.0.1' in block,
+                                        'loopback_connection_refused': '[Errno 111]' in block and '127.0.0.1' in block,
+                                        'responses_mock_refused': 'Connection refused by Responses' in block and 'responses/__init__.py' in block,
                                         'external_rejection_events': sum(e['kind'] in ('external_http_rejected', 'external_transport_rejected') for e in linked),
                                         'native_fx_error_logs': sum(e['kind'] == 'native_fx_error_log' for e in linked),
                                         'http_domain_forbidden': any(e['kind'] == 'http_response' and e.get('domain_forbidden') for e in linked)}})

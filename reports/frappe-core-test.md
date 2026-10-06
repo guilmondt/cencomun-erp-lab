@@ -1,5 +1,9 @@
 # Core Test de Frappe/ERPNext — LAB-ONLY-v1
 
+Comprobación posterior de integridad/lectura sin repetir Core y diagnósticos
+oficiales acotados: [informe desde 618c676](frappe-bounded-cause-diagnostics.md).
+El resultado Core siguiente permanece separado de los oficiales completos FAIL.
+
 **CERRADO_CON_LIMITACIONES: PASS 13/14, FAIL 0/14, BLOCKED 1/14, UNRUN 0/14.** Los bloqueados mantienen el denominador; este resultado no aprueba integralmente el ERP. Axelor no se ejecutó ni modificó en esta tarea.
 
 Cobertura obligatoria: 34 grupos; 34 PASS, 0 FAIL, 0 UNRUN. Cada grupo conserva entradas, observaciones nativas, vínculos/IDs e importes en sus JSON. Los seis escenarios de patch quedan UNRUN por el criterio 13. [coverage.json](evidence/frappe-core/coverage.json) impide conservar PASS con casos ausentes o evidencia anterior a la corrección.

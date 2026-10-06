@@ -1,0 +1,139 @@
+{
+  "site": "ccm-upstream-erpnext-cause.test",
+  "recorded_utc": "2026-10-06T08:21:53.186039+00:00",
+  "provider_requests_performed_by_capture": 0,
+  "fixture_source": "apps/erpnext/erpnext/setup/doctype/currency_exchange/test_records.json",
+  "fixture_sha256": "77ad01f9b7d1b336c847a9bc0411cc28a33eaa9c76afa307eb46765c7b613d36",
+  "official_fixture_records": [
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-01",
+      "exchange_rate": 60.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-01",
+      "exchange_rate": 0.773,
+      "from_currency": "USD",
+      "to_currency": "EUR",
+      "for_buying": 0,
+      "for_selling": 1
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-01",
+      "exchange_rate": 0.0167,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-10",
+      "exchange_rate": 65.1,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-30",
+      "exchange_rate": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "for_buying": 1,
+      "for_selling": 1
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-10",
+      "exchange_rate": 65.1,
+      "from_currency": "INR",
+      "to_currency": "NGN",
+      "for_buying": 1,
+      "for_selling": 1
+    }
+  ],
+  "native_fixture_load_requested": true,
+  "load_method": "frappe.get_doc(record).insert()",
+  "bom_count_before_fx_load": 0,
+  "bom_count_after_fx_load": 0,
+  "currency_records_before": [],
+  "currency_records_after": [
+    {
+      "date": "2016-01-30",
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "exchange_rate": 62.9,
+      "for_buying": 1,
+      "for_selling": 1
+    },
+    {
+      "date": "2016-01-10",
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "exchange_rate": 65.1,
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "date": "2016-01-10",
+      "from_currency": "INR",
+      "to_currency": "NGN",
+      "exchange_rate": 65.1,
+      "for_buying": 1,
+      "for_selling": 1
+    },
+    {
+      "date": "2016-01-01",
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "exchange_rate": 60.0,
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "date": "2016-01-01",
+      "from_currency": "USD",
+      "to_currency": "EUR",
+      "exchange_rate": 0.773,
+      "for_buying": 0,
+      "for_selling": 1
+    },
+    {
+      "date": "2016-01-01",
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "exchange_rate": 0.0167,
+      "for_buying": 1,
+      "for_selling": 0
+    }
+  ],
+  "settings": {
+    "disabled": 0,
+    "service_provider": "frankfurter.dev - v2",
+    "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+    "use_http": 0
+  },
+  "request_parameters": [
+    {
+      "key": "date",
+      "value": "{transaction_date}"
+    }
+  ],
+  "result_keys": [
+    "rate"
+  ],
+  "accounts_settings": {
+    "allow_stale": 1,
+    "stale_days": 1,
+    "allow_pegged_currencies_exchange_rates": 0
+  },
+  "site_time_zone": null
+}

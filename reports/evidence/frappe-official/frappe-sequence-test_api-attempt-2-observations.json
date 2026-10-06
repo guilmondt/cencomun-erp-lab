@@ -1,0 +1,4437 @@
+{
+  "native_result": "frappe-sequence-test_api-attempt-2.json",
+  "scope": "selected official modules through native CI runner; not full suite",
+  "private_stream_sha256": "02b0fc812a75a9ee46b62aa0c507cfd2dc8eaa67ca6f3dcc0dfddb768bb29dd3",
+  "counts_by_event": {
+    "observer_started": 3,
+    "external_transport_rejected": 1,
+    "module_map_return": 28,
+    "native_http_served": 27,
+    "native_mock_transition": 32,
+    "native_state": 46,
+    "native_get_url": 100,
+    "http_attempt": 20,
+    "external_http_rejected": 20,
+    "test_stopped": 23
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "selection": "All allowed events",
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 32241,
+      "epoch": 1791275237.6310477,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 32241,
+      "epoch": 1791275237.9145496,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 32241,
+      "epoch": 1791275240.4708998,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32241,
+      "epoch": 1791275240.6108692,
+      "test": null,
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": [
+        "frappe"
+      ],
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32241,
+      "epoch": 1791275240.6995773,
+      "test": null,
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 32247,
+      "epoch": 1791275240.7866628,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275241.5636764,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275245.0549445,
+      "test": null,
+      "operation": "reset",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275245.054995,
+      "test": null,
+      "operation": "reset",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275245.438,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275245.4382389,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "operation": "reset",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275245.4382684,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "operation": "reset",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275245.440215,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275245.9543397,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275245.9545786,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275245.955663,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275245.9929192,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275246.086189,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275248.0052955,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275248.010223,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275248.5666878,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275248.56682,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275249.6204412,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275249.6206021,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275250.4454153,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275250.4457052,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275250.4458485,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275250.4458754,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275250.446185,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.6263285,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.626588,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.6275764,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.631095,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.6322205,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.791957,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275250.7960556,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275250.859249,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275250.8593647,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275251.871673,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275251.871822,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275255.45581,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275255.4560046,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275255.4561539,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275255.4561808,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275255.4565,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.6590643,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.6592736,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.6602798,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.6677456,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.6707785,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.8449714,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275255.8487678,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275255.920916,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275255.921043,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275256.9323683,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275256.932487,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275260.4641364,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275260.4643254,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275260.4644399,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275260.464463,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275260.46481,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.6488824,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.6490948,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.650391,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.6538625,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.6552527,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.8304923,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275260.8345592,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275260.9050138,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275260.905237,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275261.9157376,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275261.915881,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275265.473318,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275265.4735591,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275265.473727,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275265.4737573,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275265.474124,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.654135,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.6543484,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.655576,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.6593635,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.6604278,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.8266945,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275265.8307927,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275265.9137516,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275265.9138935,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275266.9273689,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275266.9275124,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275270.4810073,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275270.4812045,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275270.4813197,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275270.4813416,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275270.4817498,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.7099626,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.710261,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.7117975,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.7169385,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.7183716,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.961585,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275270.9675229,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275271.0707877,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275271.0709102,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275272.0837958,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275272.0842476,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275275.4899826,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275275.4902983,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275275.4906974,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275275.4907718,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275275.4912052,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.6984093,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.698613,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.6997063,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.7038674,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.7052543,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.8765337,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275275.879975,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275275.9621017,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275275.9622347,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275276.9776042,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275276.9778514,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275280.498354,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275280.4985514,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275280.4986646,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275280.4986873,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275280.499093,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.7207017,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.7210743,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.7221797,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.72625,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.7273211,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.9219582,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275280.9257147,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275280.997321,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275280.997745,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275282.0102484,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275282.0103848,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275285.5067036,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275285.5069122,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275285.5071344,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275285.5071683,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275285.507574,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.688715,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.688917,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.6900904,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.6934364,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.6945367,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.8681893,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275285.87299,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275285.9538372,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275285.9539628,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275286.9668407,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275286.966987,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275290.5168223,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275290.5171435,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275290.5172951,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275290.517323,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "operation": "reset",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32247,
+      "epoch": 1791275290.5178738,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "operation": "start",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "registered": []
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.7289686,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002/update-password",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/update-password"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.7292151,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.7302957,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.734245,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.7353141,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.972843,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275290.980341,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275291.078884,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275291.0793736,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32247,
+      "epoch": 1791275292.0974143,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 32247,
+      "epoch": 1791275292.0976307,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "hostname": "httpbin.org",
+      "path": "/post"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275295.5251617,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275295.5392056,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_binary_and_csv_response_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275295.7784152,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_binary_and_csv_response_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": [
+        "frappe"
+      ],
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275295.7809815,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_binary_and_csv_response_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275295.8093925,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_binary_and_csv_response_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275295.8116424,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_binary_and_csv_response_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275295.8192077,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_binary_and_csv_response_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275295.8194425,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275295.8443823,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275295.844782,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275295.8451283,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275295.847132,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275295.8548892,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275295.8552487,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275295.9009016,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275295.9032044,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275295.9360397,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275295.9380548,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275295.9440813,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_download_private_file_with_unique_url_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275295.944291,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275295.9718964,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275295.97404,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275296.070159,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275296.6290672,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "url": "http://127.0.0.1:8002/printview",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/printview"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275296.653567,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275297.0424364,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275297.9320056,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_generate_pdf_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275297.932498,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275297.9775035,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275297.9811797,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.0004072,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.0060205,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.0089984,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.0212917,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.0323036,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.0363193,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.0466893,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.0538437,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.0571961,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.0699596,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.0778744,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.0821507,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.0987337,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.1056976,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.1080203,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.1206322,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.1304007,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.1335673,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.1492581,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.1574638,
+      "test": "frappe.tests.test_api.TestAPIResponse.test_login_redirects_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.1608965,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.1612253,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.2091398,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.2122557,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.2199974,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.22238,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.2259758,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.2415705,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_404s_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.2418845,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_array_response_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.2421634,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_array_response_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.2448995,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_array_response_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.2518344,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_array_response_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.260895,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_array_response_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.2611585,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.4353743,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.4378905,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.4491913,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.458912,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.4610317,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.4634295,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.501469,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.5047953,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.5173886,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.524867,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_auth_cycle_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.5250652,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_get_user_info_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.5253296,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_get_user_info_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.5280836,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_get_user_info_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.5345523,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_get_user_info_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.5404217,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_get_user_info_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275298.5406303,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.541028,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.7000902,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.7022636,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.7128048,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.7154636,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.7190053,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275298.7308345,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275298.7326298,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275298.7371943,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.07001,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_logs_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.070352,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_ping_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275299.0707262,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_ping_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275299.0727413,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_ping_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275299.076152,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_ping_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.0804749,
+      "test": "frappe.tests.test_api.TestMethodAPI.test_ping_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.0864465,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_blocked_writes_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275299.0867608,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_blocked_writes_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275299.174532,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_blocked_writes_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275299.1788476,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_blocked_writes_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.2077827,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_blocked_writes_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.2080297,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_reads_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_get_url",
+      "pid": 32247,
+      "epoch": 1791275299.208297,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_reads_v1",
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275299.2421954,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_reads_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275299.2465608,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_reads_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275299.2582178,
+      "test": "frappe.tests.test_api.TestReadOnlyMode.test_reads_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": false,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275300.5029788,
+      "test": "frappe.tests.test_api.TestWSGIApp.test_request_hooks_v1",
+      "stage": "before_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32247,
+      "epoch": 1791275300.5052688,
+      "test": "frappe.tests.test_api.TestWSGIApp.test_request_hooks_v1",
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32247,
+      "epoch": 1791275300.5075223,
+      "test": "frappe.tests.test_api.TestWSGIApp.test_request_hooks_v1",
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "native_state",
+      "pid": 32247,
+      "epoch": 1791275300.5110278,
+      "test": "frappe.tests.test_api.TestWSGIApp.test_request_hooks_v1",
+      "stage": "after_test",
+      "site": "ccm-upstream-frappe-cause.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "url_config": {
+        "host_name": "http://127.0.0.1:8002",
+        "hostname": null,
+        "http_port": null,
+        "webserver_port": 8000,
+        "developer_mode": null,
+        "restart_supervisor_on_update": false,
+        "restart_systemd_on_update": false
+      },
+      "http_adapter_send": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      }
+    }
+  ]
+}

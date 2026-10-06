@@ -443,3 +443,23 @@ su PASS externo no modifica estas suites ni el criterio 13.
 La verificación del entorno guardado se hace exclusivamente en **otra tarea
 cloud** según `docs/FRAPPE_CLOUD_RESTORE_CHECK.md`; estos sitios/Bench privados
 son preparación local y no restauración cloud.
+## Diagnósticos acotados posteriores al cierre completo
+
+Desde 618c676 no se repiten suites completas. Véase
+`reports/frappe-bounded-cause-diagnostics.md` y task 103 para comandos exactos,
+sitios conservados, Journal Entry 0→1 y los 26 rechazos de Responses que el
+clasificador había confundido con TCP. Los resultados completos siguen FAIL.
+
+El guard respeta un interceptor oficial Responses sin passthrough; no instala
+mocks, construye respuestas ni consulta proveedores. Toda petición externa sin
+ese interceptor o con passthrough queda bloqueada, igual que DNS/sockets.
+La telemetría conserva PID/start ticks, listener propio, sitio nativo servido,
+URL sin userinfo/query/fragmento y exit antes/después de cleanup. No reinicia web
+durante pruebas. Las aserciones de los mocks permanecen nativas.
+
+`--cause` y `--cause-fixed` son slots ya usados, no instrucciones para borrar
+sitios. `bounded_evidence.py` publica análisis derivado exclusivo y versiones de
+corrección sin reescribir intentos; el discovery reutilizado se identifica como
+tal. `integrity.py --label cause` y `closure.py --label cause` conservan el cierre
+anterior. Para inicio reteniendo datos, usar `docs/FRAPPE_ENVIRONMENT_START.md`,
+sin install/migrate/seed/restore ni suites automáticas.

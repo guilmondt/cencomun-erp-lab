@@ -12,12 +12,14 @@ BENCH = ROOT / 'official-bench'
 CLI = str(ROOT / 'bench-tools/bin/bench')
 
 
-def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False):
-    if sum((fresh, diagnostic, fixture_audit, fixture_order, final)) > 1:
+def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False, cause=False, cause_fixed=False):
+    if sum((fresh, diagnostic, fixture_audit, fixture_order, final, cause, cause_fixed)) > 1:
         raise ValueError('Choose one isolated site slot.')
     if (fixture_audit or fixture_order or official_fx_fixtures) and app != 'erpnext':
         raise ValueError('Official FX fixtures apply only to ERPNext.')
-    suffix = '-final' if final else ('-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else ''))))
+    if cause_fixed and app != 'frappe':
+        raise ValueError('Corrected mock guard reproduction is Frappe only.')
+    suffix = '-cause-fixed' if cause_fixed else ('-cause' if cause else ('-final' if final else ('-fixture-order' if fixture_order else ('-fixture-audit' if fixture_audit else ('-diagnostic' if diagnostic else ('-fresh' if fresh else ''))))))
     site = 'ccm-upstream-' + app + suffix + '.test'
     private_dir = ROOT / 'official-tests'
     private_dir.mkdir(mode=0o700, exist_ok=True)
@@ -95,11 +97,11 @@ def prepare(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx
     print('Prepared official-only site:', site, flush=True)
 
 
-def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False):
+def main(app, fresh=False, diagnostic=False, fixture_audit=False, official_fx_fixtures=False, fixture_order=False, final=False, cause=False, cause_fixed=False):
     with SuiteLock():
         if active_runners():
             raise RuntimeError('An official runner is active; do not change its sites or fixtures.')
-        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order, final)
+        prepare(app, fresh, diagnostic, fixture_audit, official_fx_fixtures, fixture_order, final, cause, cause_fixed)
 
 
 if __name__ == '__main__':
@@ -111,5 +113,7 @@ if __name__ == '__main__':
     parser.add_argument('--official-fx-fixtures', action='store_true', help='Load exact pinned Currency Exchange fixtures before native ERP bootstrap.')
     parser.add_argument('--fixture-order', action='store_true', help='New empty site for direct official FX records before any test module import.')
     parser.add_argument('--final', action='store_true', help='New official-only site for the authorized final full CI pass; preserve previous sites.')
+    parser.add_argument('--cause', action='store_true', help='New official-only site for bounded cause diagnostics; preserve all previous sites.')
+    parser.add_argument('--cause-fixed', action='store_true', help='New Frappe site after proven offline/native-mock correction; preserve failed site.')
     args = parser.parse_args()
-    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order, args.final)
+    main(args.app, args.fresh, args.diagnostic, args.fixture_audit, args.official_fx_fixtures, args.fixture_order, args.final, args.cause, args.cause_fixed)

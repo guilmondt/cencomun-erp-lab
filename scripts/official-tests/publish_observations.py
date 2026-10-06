@@ -40,7 +40,10 @@ def main():
         # cookies, response bodies, URLs with query tokens or traceback locals.
         allowed = ('observer_started', 'module_map_return', 'native_state', 'fx_return',
                    'native_fx_error_log', 'http_response', 'external_http_rejected',
-                   'external_transport_rejected', 'stock_entry_validation', 'bom_routing_state', 'observation_error')
+                   'external_transport_rejected', 'stock_entry_validation', 'bom_routing_state', 'observation_error',
+                   'journal_state', 'journal_fx_return', 'http_attempt', 'http_exception',
+                   'native_get_url', 'native_http_served', 'native_mock_transition', 'native_mock_dispatch',
+                   'native_module_discovery')
         errors = {c['id'] for c in result.get('cases', []) if c['status'] == 'ERROR'}
         errors.update(c['id'] for c in result.get('failure_headers', []) if c['status'] == 'ERROR')
         evidence = {'native_result': resultpath.name, 'scope': result['scope'],

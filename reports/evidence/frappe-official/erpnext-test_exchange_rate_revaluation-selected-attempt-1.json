@@ -1,0 +1,645 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-cause.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation",
+  "category": "all",
+  "attempt": 1,
+  "status": "FAIL",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_05_revaluation_journal_reversal"
+  ],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-cause.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_exchange_rate_revaluation-selected-attempt-1.xml --module erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation --test test_05_revaluation_journal_reversal",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-cause.test serve --port 8005 --noreload",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T08:24:13.846962+00:00",
+  "elapsed_seconds": 23.496,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "8a98c154ab1f399a62ee8b0abcc9c02627a4c7651eb10369692e1846b5dac763",
+  "actual_tests_run": 1,
+  "runner_counts_by_category": [
+    1
+  ],
+  "discovered_categories": [
+    {
+      "tests": 1,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 1,
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "ERROR": 1,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "seconds": 4.648,
+      "status": "ERROR",
+      "exception": "ValidationError",
+      "message": "Total Debit must be equal to Total Credit. The difference is 100.0",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 85, in inner\n    return func(*args, **kwds)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/exchange_rate_revaluation/test_exchange_rate_revaluation.py\", line 337, in test_05_revaluation_journal_reversal\n    je = je.submit()\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/journal_entry/journal_entry.py\", line 190, in submit\n    return self._submit()\n           ~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1332, in _submit\n    return self.save()\n           ~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 558, in save\n    return self._save(*args, **kwargs)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 595, in _save\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1417, in run_before_save_methods\n    self.run_method(\"before_submit\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/journal_entry/journal_entry.py\", line 204, in before_submit\n    self.validate_total_debit_and_credit()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/journal_entry/journal_entry.py\", line 951, in validate_total_debit_and_credit\n    frappe.throw(\n    ~~~~~~~~~~~~^\n    \t_(\"Total Debit must be equal to Total Credit. The difference is {0}\").format(\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \t\tself.difference\n      ^^^^^^^^^^^^^^^\n    \t)\n     ^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Total Debit must be equal to Total Credit. The difference is 100.0\n"
+    }
+  ],
+  "xml_documents": 1,
+  "web_telemetry": {
+    "samples": [
+      {
+        "epoch": 1791275030.3643773,
+        "stage": "before_readiness",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "R",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": []
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275033.5922747,
+        "stage": "before_native_runner_wait",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275033.600059,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275034.613334,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275035.6236584,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275036.6376991,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275037.653708,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275038.6673622,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275039.681429,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275040.6951694,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275041.704928,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275042.7172651,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275043.7263443,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275044.7358434,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275045.7451706,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275046.7540224,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275047.7639186,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275048.7732296,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275049.7824888,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275050.791769,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275051.801357,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275052.8102028,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275053.8200872,
+        "stage": "before_harness_cleanup",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "S",
+            "ppid": 31840,
+            "start_ticks": "2120186",
+            "owned_listener_inodes": [
+              "353361"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8005,
+            "inode": "353361"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      },
+      {
+        "epoch": 1791275053.8434126,
+        "stage": "after_harness_cleanup",
+        "web_processes": [
+          {
+            "pid": 31843,
+            "state": "GONE",
+            "start_ticks": null,
+            "ownership_unreadable": true
+          }
+        ],
+        "web_exit_code": -15,
+        "listeners": [],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791275030.3516314
+      }
+    ],
+    "web_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "web_log_bytes": 0,
+    "web_log_output_retained_privately": true,
+    "automatic_restarts_during_test": 0
+  },
+  "diagnostic_tail": "Running 1 unspecified-category tests for erpnext\n\nRunning tests...\n----------------------------------------------------------------------\nE\n======================================================================\nERROR [4.648s]: test_05_revaluation_journal_reversal (erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal)\nTest reversing of revaluation journals\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 85, in inner\n    return func(*args, **kwds)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/exchange_rate_revaluation/test_exchange_rate_revaluation.py\", line 337, in test_05_revaluation_journal_reversal\n    je = je.submit()\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/journal_entry/journal_entry.py\", line 190, in submit\n    return self._submit()\n           ~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1332, in _submit\n    return self.save()\n           ~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 558, in save\n    return self._save(*args, **kwargs)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 595, in _save\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1417, in run_before_save_methods\n    self.run_method(\"before_submit\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/journal_entry/journal_entry.py\", line 204, in before_submit\n    self.validate_total_debit_and_credit()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/journal_entry/journal_entry.py\", line 951, in validate_total_debit_and_credit\n    frappe.throw(\n    ~~~~~~~~~~~~^\n    \t_(\"Total Debit must be equal to Total Credit. The difference is {0}\").format(\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \t\tself.difference\n      ^^^^^^^^^^^^^^^\n    \t)\n     ^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Total Debit must be equal to Total Credit. The difference is 100.0\n\n----------------------------------------------------------------------\nRan 1 test in 4.648s\n\nFAILED (errors=1)\n\nGenerating XML reports..."
+}

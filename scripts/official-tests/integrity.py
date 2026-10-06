@@ -45,10 +45,12 @@ def snapshot():
             'manifest_sha256': hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()}
 
 
-def main(stage):
-    private = PRIVATE / 'cencomun-final-integrity-before.json'
+def main(stage, label='final'):
+    if not __import__('re').fullmatch(r'[a-z0-9-]+', label):
+        raise ValueError('Safe evidence label required.')
+    private = PRIVATE / ('cencomun-' + label + '-integrity-before.json')
     data = snapshot()
-    output = OUT / ('cencomun-final-integrity-' + stage + '.json')
+    output = OUT / ('cencomun-' + label + '-integrity-' + stage + '.json')
     if output.exists():
         raise FileExistsError('Preserve existing integrity evidence.')
     if stage == 'before':
@@ -75,4 +77,6 @@ def main(stage):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(); parser.add_argument('stage', choices=['before', 'after'])
-    main(parser.parse_args().stage)
+    parser.add_argument('--label', default='final')
+    args = parser.parse_args()
+    main(args.stage, args.label)

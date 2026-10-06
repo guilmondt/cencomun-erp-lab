@@ -21,7 +21,7 @@ def sites_workdir(bench=BENCH):
         os.chdir(previous)
 
 
-def main():
+def main(label='final'):
     with SuiteLock():
 
         if active_runners(): raise SystemExit('Official native runner active: do not close yet.')
@@ -79,13 +79,15 @@ def main():
         assert len(bins)==1 and Decimal(stock['on_hand'])==Decimal(str(bins[0]['actual_qty']))==Decimal('5')
         data={'recorded_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Read-only closure, not a Core rerun or cloud restore','historical_attempt_artifacts':{'count':len(old),'hashes_unchanged':True},'official_sites':sites,'shared_oracle':{'files_compared_to_fcf690d':len(f),'all_byte_identical':True},'versions_lock_sha256':digest(repo/'versions.lock'),'cloud_receipt':{'sha256':digest(cloud),'unchanged':True,'reexecuted':False},'authenticated_read':{'site':'ccm-core.test','actor_role':'reader','item':'P001','currency':'USD','price':'50.00','stock':'5','adapter_matches_native':True,'mutations':0},'previous_core_groups':{'run':'20261006T042836Z','mandatory':34,'PASS':34,'rerun_in_this_task':False},'criterion_13':{'status':'BLOCKED','dependent_PATCH_UNRUN':6},'active_native_runners':0}
         data['historical_attempt_artifacts']['private_logs_checked_by_recorded_sha256'] = logs_checked
-        with (OUT/'final-closure.json').open('x') as stream: stream.write(json.dumps(data,indent=2)+'\n')
+        with (OUT/(label+'-closure.json')).open('x') as stream: stream.write(json.dumps(data,indent=2)+'\n')
         print(json.dumps({'closure':'PASS','retained_sites':len(sites),'retained_attempt_files':len(old),'oracle_files':len(f),'authenticated_price':'50.00','authenticated_stock':'5'}))
 
 
 if __name__ == "__main__":
     try:
-        main()
+        import argparse
+        parser = argparse.ArgumentParser(); parser.add_argument('--label', default='final', choices=['final', 'cause'])
+        main(parser.parse_args().label)
     except Exception as error:
         print("FAIL read-only closure:", type(error).__name__, "— inspect private setup and scripts/official-tests/README.md.")
         raise SystemExit(1) from None

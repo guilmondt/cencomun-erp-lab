@@ -52,9 +52,18 @@ class FinalEvidenceTests(unittest.TestCase):
             self.assertEqual(Path.cwd(), previous)
 
     def test_local_refusal_does_not_claim_an_inevitable_environment_block(self):
-        category, cause = classify("requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8002): Connection refused\n", [])
+        category, cause = classify("requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8002): [Errno 111] Connection refused\n", [])
         self.assertEqual(category, 'DEMONSTRATED_LOCAL_HTTP_REFUSAL_CAUSE_UNKNOWN')
         self.assertIn('UNKNOWN', cause)
+    def test_responses_refusal_is_not_tcp_refusal(self):
+        block = ('  File "/env/site-packages/responses/__init__.py", line 1046, in _on_request\n'
+                 "requests.exceptions.ConnectionError: Connection refused by Responses - the call doesn't match any registered mock.\n"
+                 'Request: GET http://127.0.0.1:8002/api/resource/User\n')
+        category, cause = classify(block, [])
+        self.assertEqual(category, 'DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION')
+        self.assertIn('before socket', cause)
+        block = "requests.exceptions.ConnectionError: Connection refused, 127.0.0.1\n"
+        self.assertEqual(classify(block, [])[0], 'UNKNOWN')
     def test_native_outcome_after_progress_without_newline_keeps_its_known_id(self):
         identifier = 'frappe.tests.TestOfficial.test_one'
         result = parse_parallel_results('frappe.tests.TestOfficial\nprogress without newline ✔ test_one\nTests: 1, Failing: 0, Errors: 0\n',

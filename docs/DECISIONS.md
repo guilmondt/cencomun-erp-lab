@@ -397,3 +397,29 @@
 - Evidence: tasks/102-frappe-official-final-ci.md and
   reports/frappe-official-final-ci.md; publish only sanitized evidence on
   lab/frappe-baseline with PR #4 remaining a draft.
+
+## ADR-015 — bounded causes, native mocks and preservation after 618c676
+
+- Scope: one isolated ERPNext revaluation method and nine affected/preceding
+  Frappe modules. No complete repetition or oracle/pin/HOME/access changes.
+- Accounting: observe native Journal Entry creation/rate resolution/submit.
+  No eligible historical FX row in the test's date window; offline resolver
+  returns zero, native journal fallback returns one, debit changes by 100 while
+  loss row stays 8000. Keep ERROR; no invented rate or validator bypass.
+- HTTP: correct own classifier. Responses' "Connection refused" is not OS
+  TCP refusal. Preserve old diagnostic and publish a revision. Respect native
+  in-memory Responses interceptors only without passthrough; reject real
+  external requests, DNS and sockets. Never install a business mock or restart
+  web during a method. Observe PID/start ticks, listener, effective URL and site.
+- Results: old full results remain FAIL. Corrected bounded sequence 155 tests,
+  139 PASS/1 FAIL/15 ERROR; remaining first causes UNKNOWN. Loader reference is
+  the retained pinned discovery, not a new discovery run. Preserve bootstrap,
+  class-fixture errors and initial derived coverage before revisions.
+- Closure: original runtime/oracle/pins unchanged, authenticated price/stock
+  read, Core scope remains its previous 34 groups. C13 BLOCKED/six PATCH UNRUN;
+  external cloud restoration fcf690d remains separate and is not repeated.
+- Environment: prepare only ordinary repository/ref/start instructions after
+  testing/push, preserving network/secrets/variables/privacy/permissions. Draft
+  persistence is distinct from coordinator Save/Publish and new restoration.
+- Evidence: tasks/103-frappe-bounded-cause-diagnostics.md,
+  reports/frappe-bounded-cause-diagnostics.md and docs/FRAPPE_ENVIRONMENT_START.md.

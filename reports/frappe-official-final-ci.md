@@ -1,5 +1,10 @@
 # Última pasada completa de CI oficial
 
+Corrección posterior de causalidad: los 26 mensajes etiquetados abajo como
+rechazos TCP son rechazos del mock oficial Responses. El resultado completo
+permanece FAIL. Véase [diagnóstico acotado](frappe-bounded-cause-diagnostics.md)
+para la revisión preservada, corrección del guard propio y regresión de módulos.
+
 Autorizada desde `9cbfbbd5ccd99aaa0b90cabdc8447aea173fb25c`. No suma PASS de
 reproducciones modulares. Los resultados completos anteriores se conservan.
 Una pasada Frappe seguida de una ERPNext, un shard nativo por aplicación,
