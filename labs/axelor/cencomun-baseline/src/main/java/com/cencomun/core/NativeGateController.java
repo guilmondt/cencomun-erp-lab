@@ -66,4 +66,10 @@ public class NativeGateController {
   public void inspect(ActionRequest request, ActionResponse response) {
     guard(); response.setValue("core_result", Beans.get(NativeGateService.class).inspect(caseId(request)));
   }
+  public void addressPreflight(ActionRequest request, ActionResponse response) {
+    guard(); response.setValue("core_result", Beans.get(NativeAddressPreflightService.class).prepare());
+  }
+  public void inspectAddressPreflight(ActionRequest request, ActionResponse response) {
+    guard(); response.setValue("core_result", Beans.get(NativeAddressPreflightService.class).inspect());
+  }
 }

@@ -8,6 +8,46 @@ FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_focused_address_notice_cannot_approve_core_groups(self):
+        import json
+        import tempfile
+        from extract_log_evidence import extract
+        from run import REFERENCE
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / 'run.log'
+            notice = {'scope': 'native address fixture prerequisite, not a Core group',
+                'reference': REFERENCE, 'lab_commit': '1' * 40, 'status': 'PASS'}
+            log.write_text('timestamp ##[notice]' + json.dumps(notice) + '\n')
+            result = extract(log, Path(tmp) / 'results', 'synthetic', '1' * 40, FIXTURES)
+            self.assertEqual({'UNRUN': 34}, result['counts'])
+            self.assertTrue((Path(tmp) / 'results/address-preflight.json').is_file())
+
+    def test_address_preflight_rejects_null_or_incomplete_required_metadata(self):
+        import importlib.util
+        import copy
+        path = Path(__file__).resolve().parents[1] / 'ci/address-preflight.py'
+        spec = importlib.util.spec_from_file_location('address_preflight', path)
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        prepared = {'address_id': 1, 'repository': 'com.axelor.apps.base.db.repo.AddressBaseRepository'}
+        committed = {'address_id': 1, 'template_id': 2, 'read_boundary': 'separate-http-after-address-commit',
+            'street': '1 Synthetic LAB Street', 'city': 'Synthetic LAB City', 'zip': '00000',
+            'formatted_full_name': 'Synthetic LAB preflight\n1 Synthetic LAB Street\nSynthetic LAB City 00000',
+            'full_name': 'SYNTHETIC LAB PREFLIGHT 1 SYNTHETIC LAB STREET SYNTHETIC LAB CITY 00000',
+            'lines': [{'id': i+1, 'field_id': i+100, 'field': field, 'model': 'com.axelor.apps.base.db.Address',
+                'required': field in ('streetName', 'city', 'zip'), 'template_id': 2}
+                for i, field in enumerate(('floor','streetName','postBox','city','zip'))]}
+        module.assert_address(prepared, committed)
+        for mutation in ('missing_collection', 'empty_collection', 'no_required_fields', 'missing_metadata', 'uncommitted_read'):
+            value = copy.deepcopy(committed)
+            if mutation == 'missing_collection': value['lines'] = None
+            if mutation == 'empty_collection': value['lines'] = []
+            if mutation == 'no_required_fields':
+                for line in value['lines']: line['required'] = False
+            if mutation == 'missing_metadata': value['lines'][1]['field_id'] = 0
+            if mutation == 'uncommitted_read': value['read_boundary'] = 'inside-save-transaction'
+            with self.subTest(mutation=mutation), self.assertRaises((AssertionError, TypeError)):
+                module.assert_address(prepared, value)
+
     def test_native_fx_failure_does_not_skip_independent_payment_dates(self):
         import io
         import json
@@ -429,7 +469,7 @@ class EvidenceTests(unittest.TestCase):
     def test_build_pass_label_without_upstream_evidence_is_unrun(self):
         self.assertEqual("UNRUN", verified_build_status({"status": "PASS"}))
 
-    def test_any_upstream_difference_fails_even_when_all_unit_suites_pass(self):
+    def test_build_proof_rejects_upstream_difference_and_any_failed_suite(self):
         proof = {"lab_commit": "1" * 40, "host_commit": "1119727a3b53c8387b7fab535e184c25154d2eac",
                  "aos_commit": "0c70d561b19fc454eba9fdd41689258846626d75", "upstream_diff_exit_codes": {"host": 0, "aos": 1},
                  "baseline_pin_blob_sha256": "2" * 64, "expected_baseline_pin_blob_sha256": "2" * 64,
@@ -437,6 +477,12 @@ class EvidenceTests(unittest.TestCase):
                             for name, count in {"CencomunModuleTest": 2, "MoneyPolicyTest": 7, "TestTaxNumberHelper": 16}.items()},
                  "war_sha256": "3" * 64}
         self.assertEqual("FAIL", verified_build_status(proof))
+        proof["upstream_diff_exit_codes"]["aos"] = 0
+        self.assertEqual("PASS", verified_build_status(proof))
+        proof["suites"]["NativeAddressTemplateTest"] = {"tests": 8, "failures": 1, "errors": 0, "skipped": 0}
+        self.assertEqual("FAIL", verified_build_status(proof))
+        proof["suites"]["NativeAddressTemplateTest"]["failures"] = 0
+        self.assertEqual("PASS", verified_build_status(proof))
 
 
 if __name__ == "__main__":

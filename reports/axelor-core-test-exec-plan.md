@@ -30,6 +30,13 @@ los vouchers/asientos/saldos, más replay de fixture conservando IDs. Compilaci�
 y 14 regresiones locales comprobadas; prueba ERP pendiente. Esto no aprueba
 importación, conciliación, concurrencia ni los otros grupos bancarios.
 
+Continuación B26 (2026-10-06): conservar CI como aceptación. Preparar la plantilla
+con cinco líneas/metadatos reales y tres requeridos oficiales, comprobar ocho
+callbacks localmente y ejecutar preflight de guardado/lectura/replay en el ERP
+real antes de gates/reinicio. El diagnóstico PostgreSQL/JPA local no alcanzó
+save por falta de RequestScoped; se detuvo sin cambiar scopes, permisos ni red.
+No se convierte una herramienta de diagnóstico en requisito del Core Test.
+
 ## 1. Referencia inmutable y alcance
 
 Fuente común: commit

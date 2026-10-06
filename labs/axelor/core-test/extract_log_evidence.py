@@ -36,6 +36,9 @@ def extract(log, output, run_id, commit, fixtures):
     proof = None
     for item in objects:
         case = item.get("case")
+        if item.get("scope") == "native address fixture prerequisite, not a Core group":
+            assert item.get("lab_commit") == commit and item.get("reference") == REFERENCE
+            (output / "address-preflight.json").write_text(json.dumps(item, indent=2) + "\n")
         if item.get("metric_kind") == "runtime" and item.get("reference") == REFERENCE:
             (output / "runtime-metrics.json").write_text(json.dumps(item, indent=2) + "\n")
         if case in ("warranty", "disabled-price-retained") and "persisted" in item:

@@ -1,0 +1,67 @@
+{
+  "scope": "local diagnosis only; CI remains Core acceptance source",
+  "native_callback_suite": {
+    "name": "com.cencomun.core.NativeAddressTemplateTest",
+    "tests": "8",
+    "skipped": "0",
+    "failures": "0",
+    "errors": "0",
+    "timestamp": "2026-10-06T06:37:10.816Z",
+    "hostname": "a3c146394904",
+    "time": "0.696"
+  },
+  "jpa_diagnostic": {
+    "scope": "local diagnostic, not Core acceptance",
+    "image": "postgres:16.15-bookworm@sha256:efedf3595f1d6f415c08568ba171029bf54052e754cc9f030e3f2412b21f3d67",
+    "created_container": true,
+    "postgres_version": "16.15 (Debian 16.15-1.pgdg12+2)",
+    "test_exit_status": 1,
+    "ephemeral_container_removed": true,
+    "temporary_config_removed": true,
+    "persistent_credentials_created": false,
+    "seconds": 19.393
+  },
+  "jpa_suite": {
+    "name": "com.cencomun.core.NativeAddressPersistenceTest",
+    "tests": "1",
+    "skipped": "0",
+    "failures": "1",
+    "errors": "0",
+    "timestamp": "2026-10-06T06:35:12.726Z",
+    "hostname": "a3c146394904",
+    "time": "0.104"
+  },
+  "address_save_executed": false,
+  "after_commit_read_executed": false,
+  "diagnostic_cause": "com.google.inject.CreationException: Unable to create injector, see the following errors:\n\n1) [Guice/ScopeNotFound]: No scope is bound to RequestScoped.\n\nUsed at:\n1  : InvoiceVisibilityServiceImpl.class(InvoiceVisibilityServiceImpl.java:45)\n     at AccountModule.configure(AccountModule.java:788)\n      \\_ installed by: NativeAddressPersistenceTest$1 -> AppModule -> AccountModule\n2  : AccountConfigService.class(AccountConfigService.java:49)\n     at AccountManagementServiceAccountImpl.<init>(AccountManagementServiceAccountImpl.java:73)\n      \\_ for 3rd parameter\n     at AccountModule.configure(AccountModule.java:513)\n      \\_ installed by: NativeAddressPersistenceTest$1 -> AppModule -> AccountModule\n3  : AccountConfigService.class(AccountConfigService.java:49)\n     at AccountingReportServiceImpl.<init>(AccountingReportServiceImpl.java:119)\n      \\_ for 4th parameter\n     at AccountModule.configure(AccountModule.java:531)\n      \\_ installed by: NativeAddressPersistenceTest$1 -> AppModule -> AccountModule\n4  : AccountConfigService.class(AccountConfigService.java:49)\n     at AccountingReportDas2ServiceImpl.<init>(AccountingReportDas2Servi",
+  "first_failure": "Association Partner.linkedUser mappedBy partner missing on the AOP User class; native AOS outputs placed before the AOP jar in the external test classpath.",
+  "second_failure": "Missing Set<HibernateListenerConfigurator>; switched to the official AOS BaseModule/AuthModule/AppModule test module pattern, preserving native listeners.",
+  "final_failure": "No scope is bound to RequestScoped; AppModule discovers AccountModule and requires an HTTP context. Do not replace the scope or disable audit/validation.",
+  "full_runtime_fallback": "labs/axelor/ci/address-preflight.py, real authenticated ERP native repository save and two post-commit inspections, before Core gates/restart.",
+  "source_sha256": {
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFinance.java": "84f95b2758d793ea52500e47941df2baa133750e0923ccd24159d12ccaafa872",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeAddressTemplateTest.java": "58a02ee1d0d9af8a587ef75774ffdf029590f978694ac169361b5a2e86cda2d4"
+  },
+  "recoverable_files": {
+    "/workspace/ccm-axelor-runtime/address-preflight/TEST-com.cencomun.core.NativeAddressPersistenceTest.xml": {
+      "bytes": 105929,
+      "sha256": "67f90b4a0d3f0d338c67e6b5c235c4a581df12134929f680c0fb1b06035e44fd"
+    },
+    "/workspace/ccm-axelor-runtime/address-preflight/native-address-persistence.log": {
+      "bytes": 2203,
+      "sha256": "f326ecf9f43bcc75e0878ad46d4d6a5434087c5c200db4151449fb636b4f9917"
+    },
+    "/tmp/ccm-native-address-final-callbacks.log": {
+      "bytes": 2476,
+      "sha256": "2e8e5323ef31c655ffbd29989b64db40517a06033741dfa211a46fd7e40a8e3f"
+    },
+    "/workspace/ccm-axelor-runtime/address-preflight/NativeAddressPersistenceTest.java": {
+      "bytes": 3627,
+      "sha256": "31cbb8efe0d69a11e6d66be9e05bf91465ac9b18f78ae9466e912df2553e3ae1"
+    },
+    "/workspace/ccm-axelor-runtime/address-preflight/persistence.xml": {
+      "bytes": 337,
+      "sha256": "eb8f2491b942b4d44b8a8261ec4fbe9eb14e644f4120bd0cb4cbd5ca688da192"
+    }
+  }
+}

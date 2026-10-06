@@ -112,6 +112,9 @@ def verified_build_status(evidence):
             return "UNRUN"
         if suite != {"tests": count, "failures": 0, "errors": 0, "skipped": 0}:
             return "FAIL"
+    for suite in evidence["suites"].values():
+        if suite.get("tests", 0) <= 0 or any(suite.get(key, 0) != 0 for key in ("failures", "errors", "skipped")):
+            return "FAIL"
     if len(evidence["lab_commit"]) != 40 or len(evidence["war_sha256"]) != 64:
         return "UNRUN"
     return "PASS"

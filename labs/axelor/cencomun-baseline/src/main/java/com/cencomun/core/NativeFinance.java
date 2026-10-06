@@ -58,26 +58,62 @@ public final class NativeFinance {
   }
 
   /** Native fixture prerequisites, not a relaxation of invoice/tax validation. */
-  static Model addressTemplate() {
+  static Model addressTemplate(Map<String, Model> fields) {
     Model template = create(BASE + "AddressTemplate");
     set(template, "name", "CCM LAB address"); set(template, "engineSelect", 1);
-    for (String line : List.of("addressL2", "addressL3", "addressL4", "addressL5", "addressL6"))
-      set(template, line + "Str", "$address." + line + "$");
+    set(template, "addressL2Str", "$address.subDepartment$");
+    set(template, "addressL3Str", "$address.floor$");
+    set(template, "addressL4Str", "$address.streetName$");
+    set(template, "addressL5Str", "$address.postBox$");
+    set(template, "addressL6Str", "$address.city.name$ $address.zip$");
     set(template, "templateStr", "$address.addressL2$\n$address.addressL4$\n$address.addressL6$");
+    // Same field metadata and required flags as the official DEFAULT importer.
+    for (String field : List.of("floor", "streetName", "postBox", "city", "zip")) {
+      Model metadata = fields.get(field);
+      if (metadata == null || !field.equals(get(metadata, "name"))
+          || !"Address".equals(get(get(metadata, "metaModel"), "name")))
+        throw new IllegalStateException("Native Address field metadata missing: " + field);
+      Model line = create(BASE + "AddressTemplateLine");
+      set(line, "metaField", metadata);
+      set(line, "isRequired", List.of("streetName", "city", "zip").contains(field));
+      call(template, "addAddressTemplateLineListItem", line);
+    }
     return template;
   }
 
-  public static void configurePartner(Model company, Model partner) {
+  static Map<String, Model> addressFields() {
+    Map<String, Model> fields = new LinkedHashMap<>();
+    for (String field : List.of("floor", "streetName", "postBox", "city", "zip")) {
+      Model metadata = one("com.axelor.meta.db.MetaField",
+          "self.name = ?1 AND self.metaModel.fullName = ?2", field, BASE + "Address");
+      if (metadata == null || metadata.getId() == null)
+        throw new IllegalStateException("Official metadata initialization missing: Address." + field);
+      fields.put(field, metadata);
+    }
+    return fields;
+  }
+
+  static Model addressCountry() {
     Model country = one(BASE + "Country", "self.alpha2Code = ?1", "ZZ");
     if (country == null) {
-      Model template = save(addressTemplate());
+      Model template = save(addressTemplate(addressFields()));
       country = record(BASE + "Country", "name", "Synthetic LAB Country", "alpha2Code", "ZZ", "addressTemplate", template);
     }
+    return country;
+  }
+
+  static Model address(Model country, String recipient) {
+    Model city = one(BASE + "City", "self.country = ?1 AND self.name = ?2", country, "Synthetic LAB City");
+    if (city == null) city = record(BASE + "City", "country", country, "name", "Synthetic LAB City", "zip", "00000");
+    // AddressBaseRepository computes both names and checks the native required fields.
+    return record(BASE + "Address", "country", country, "subDepartment", recipient,
+        "streetName", "1 Synthetic LAB Street", "city", city, "zip", "00000");
+  }
+
+  public static void configurePartner(Model company, Model partner) {
+    Model country = addressCountry();
     if (one(BASE + "PartnerAddress", "self.partner = ?1 AND self.isInvoicingAddr = true", partner) == null) {
-      Model address = record(BASE + "Address", "country", country, "addressL2", get(partner, "name"),
-          "addressL4", "1 Synthetic LAB Street", "addressL6", "Synthetic LAB City",
-          "fullName", "Synthetic LAB address " + get(partner, "partnerSeq"),
-          "formattedFullName", get(partner, "name") + "\n1 Synthetic LAB Street\nSynthetic LAB City");
+      Model address = address(country, (String) get(partner, "name"));
       Model link = record(BASE + "PartnerAddress", "partner", partner, "address", address,
           "isInvoicingAddr", true, "isDeliveryAddr", true, "isDefaultAddr", true);
       call(partner, "addPartnerAddressListItem", link); save(partner);

@@ -548,3 +548,75 @@ externo para el classpath. El intento full-native del test encontró primero npm
 ENOENT en /home/agent/.npm; no se amplió red ni se omitieron checks del CI.
 Este resultado valida el callback, no confirma persistencia ni efectos económicos.
 El CI incorpora los dos tests al perfil full-native y a su replay con locks.
+
+## B26 — colección de campos requeridos de AddressTemplate no preparada
+
+CI 37420752108, f058d213: el renderer supera B25, pero AddressBaseRepository
+ejecuta después checkRequiredAddressFields y falla con `Cannot invoke
+"java.util.List.iterator()" because the return value of
+"com.axelor.apps.base.db.AddressTemplate.getAddressTemplateLineList()" is null`.
+CO00 5.994 s / TAX01-W 0.523 s; preparación revertida. PROD/SEARCH/BANK/FX
+se intentan y fallan por catálogo/usuario sin confirmar; ningún pago ejecutado.
+El aviso FX ahora es JSON íntegro: matriz 0 PASS / 6 FAIL / 0 BLOCKED / 28 UNRUN.
+ZIP 11393546981 Forbidden en el mismo host sa18; un intento, sin ampliar red.
+
+Fuente fija revisada: AddressBaseRepository.save llama a setFormattedFullName,
+AddressService.computeFullName y checkRequiredAddressFields antes de super.save.
+AddressTemplateLine no tiene fieldName: usa FK metaField. El importador oficial
+axelor-base/data-init/input-config.xml resuelve nombre + modelo Address; su
+base_addressTemplateLine.csv DEFAULT tiene floor/postBox opcionales y
+streetName/city/zip requeridos. MetaModelService.process y ModelLoader inicializan
+los metadatos; la acción UI de Country selecciona el default de AppBase, pero
+no sustituye su preparación explícita al crear por repositorio.
+
+1. Resolver MetaField persistidos de Address con el fullName oficial; fallar antes
+   de guardar si falta alguno. Crear cinco hijos con FK real y helper nativo
+   parent/children; conservar las tres obligatoriedades oficiales.
+2. Usar streetName, City y zip nativos para la dirección LAB. Completar las cinco
+   plantillas soportadas; no introducir nombres calculados manualmente ni listas
+   vacías para eludir el control. Renderer, computeFullName, validaciones y save
+   permanecen upstream intactos.
+3. Ejecutar las ocho regresiones de callbacks: formato/nombre y relaciones,
+   plantilla null, colección null, MetaField null, metadatos incompletos y rechazo
+   separado de cada campo obligatorio. Ejecutadas localmente: 8 PASS / 0 fallos,
+   errores o skips, 0.696 s. No prueban persistencia.
+4. Ejecutar address-preflight.py en el ERP real autenticado antes de los gates y
+   del reinicio: guardado por AddressBaseRepository, IDs de hijos/metadatos,
+   lectura en petición posterior al commit, replay y nueva lectura idéntica.
+   Los callbacks se ordenan antes de WAR/launcher en la invocación Gradle; sus
+   dependencias upstream pueden requerir compilación/frontend. El preflight del
+   ERP requiere WAR y arranque. Aceptación CI aún pendiente en esta corrección.
+5. Sólo después repetir CO00 y TAX01-W en ese orden, más casos independientes.
+   Exigir direcciones/configuración confirmadas y cuatro pagos/asientos y
+   conciliaciones FX mediante nuevas lecturas; no trasladar PASS históricos.
+
+La separación se limita a preparar el fixture de dirección. Venta, entrega,
+factura, liquidación y sus rechazos conservan sus transacciones y validaciones.
+Evidencia local: reports/evidence/axelor-core/address-preflight-local-20261006.
+
+## B27 — JPA local sin contexto HTTP completo, diagnóstico detenido
+
+Docker respondió y la imagen PostgreSQL 16.15 fijada por digest arrancó, aceptó
+conexión loopback y devolvió 16.15 (Debian 16.15-1.pgdg12+2). Esto no prueba un
+runner full-stack fiable. El test de guardado nunca llegó a su cuerpo:
+primero se observó el User de AOP sin partner; después faltó el binding nativo de
+HibernateListenerConfigurator. Se corrigieron el classpath externo y el módulo
+de test usando el patrón oficial BaseModule/AuthModule/AppModule, sin fuentes,
+pins ni audit listeners modificados. El último diagnóstico (19.393 s) falla al
+crear injector: `[Guice/ScopeNotFound]: No scope is bound to RequestScoped`,
+InvoiceVisibilityServiceImpl / AccountConfigService, porque AppModule descubre
+los módulos AOS y requiere scope HTTP. JUnit informa un initializationError,
+1 fallo, 0 errores/skips; guardado y lectura posterior al commit UNRUN.
+
+1. No sustituir RequestScoped por singleton ni desactivar validaciones/auditoría.
+2. Usar el preflight enfocado dentro del ERP real en CI; requiere contexto HTTP
+   nativo, sin modificar los permisos de Cloud ni ampliar red.
+3. Verificar address-preflight.json PASS, IDs/MetaField/requeridos y replay desde
+   lecturas posteriores al commit antes de interpretar nuevos gates económicos.
+
+Contenedores propios eliminados con sus volúmenes; configuración privada temporal
+eliminada, credenciales sintéticas efímeras sin persistencia. No se modificaron
+permisos del sistema ni red. El diagnóstico se conserva fuera del checkout en
+/workspace/ccm-axelor-runtime/address-preflight: logs sanitizados, XML, fuente de
+test y persistence.xml; hashes y extracto exacto en diagnostic.json del informe
+local. No se añade un test JPA fallido a las suites de aceptación del repositorio.

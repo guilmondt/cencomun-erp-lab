@@ -120,3 +120,25 @@
   amount/payment amount: 0.01 USD / 0.41 VES, not an invented exact reciprocal.
   Acceptance checks both the native daily quote and rounded booked amounts.
   The aggregator rejects calculations alone; native runtime verification is pending.
+
+## ADR-005 — Preparación nativa de direcciones y preflight enfocado
+
+- Date: 2026-10-06
+- Platform: Axelor
+- Status: Accepted within the authorized fixture correction; ERP CI validation pending
+- Context: The actual AddressBaseRepository save renders all lines, computes
+  fullName and checks required AddressTemplateLine.metaField before persistence.
+  Testing the renderer alone missed a null child collection in CI 37420752108.
+- Decision: resolve persisted native Address metadata initialized by AOP; create
+  the five DEFAULT importer fields with streetName/city/zip required, use native
+  parent helpers and modern address fields. Keep all formatting and validation
+  in the unchanged native repository. Run callback regressions, then a focused
+  authenticated ERP save/post-commit read/replay before economic gates/restart.
+- Consequences: only fixture prerequisites are prepared separately; no business
+  oracle, transaction boundary, permission or baseline pin changes. Local JPA
+  lacking native HTTP scope is diagnostic only; CI remains Core acceptance.
+- Upgrade impact: recheck the official metadata/importer/save contract in a
+  separately approved isolated upgrade; no baseline upgrade is authorized here.
+- Evidence/tests: 8 native callback cases passed locally; local JPA stopped at
+  RequestScoped initialization, save UNRUN. Current CI and evidence are recorded
+  in reports/axelor-core-test.md; no historical Core PASS is carried forward.

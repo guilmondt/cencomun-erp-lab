@@ -1,0 +1,56 @@
+{
+  "case": "CO00",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "FAIL",
+  "failed_stage": "native-catalog-and-configuration",
+  "error_type": "java.lang.NullPointerException",
+  "error": "Cannot invoke \"java.util.List.iterator()\" because the return value of \"com.axelor.apps.base.db.AddressTemplate.getAddressTemplateLineList()\" is null",
+  "native_stack": [
+    "com.axelor.apps.base.service.address.AddressTemplateServiceImpl.checkRequiredAddressFields(AddressTemplateServiceImpl.java:123)",
+    "com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:40)",
+    "com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:29)",
+    "com.cencomun.core.NativeAccess.save(NativeAccess.java:32)",
+    "com.cencomun.core.NativeGateService.record(NativeGateService.java:301)",
+    "com.cencomun.core.NativeFinance.configurePartner(NativeFinance.java:72)",
+    "com.cencomun.core.NativeFinance.configureCompanyPartner(NativeFinance.java:94)",
+    "com.cencomun.core.NativeGateService.prepare(NativeGateService.java:82)",
+    "com.cencomun.core.NativeGateController.run(NativeGateController.java:43)",
+    "com.cencomun.core.NativeGateController.prepare(NativeGateController.java:28)",
+    "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+    "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)"
+  ],
+  "phase_evidence": {
+    "apps": [
+      {
+        "id": 3,
+        "active": true,
+        "code": "base"
+      },
+      {
+        "id": 8,
+        "active": true,
+        "code": "sale"
+      },
+      {
+        "id": 6,
+        "active": true,
+        "code": "stock"
+      },
+      {
+        "id": 5,
+        "active": true,
+        "code": "account"
+      },
+      {
+        "id": 11,
+        "active": true,
+        "code": "supplychain"
+      }
+    ]
+  },
+  "assertion_error": "Fixture preparation failed",
+  "seconds": 5.994,
+  "sequence": 1
+}

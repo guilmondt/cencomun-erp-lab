@@ -8,6 +8,12 @@
   <action-method name="ccm-core-native-prepare">
     <call class="com.cencomun.core.NativeGateController" method="prepare"/>
   </action-method>
+  <action-method name="ccm-core-address-preflight">
+    <call class="com.cencomun.core.NativeGateController" method="addressPreflight"/>
+  </action-method>
+  <action-method name="ccm-core-address-inspect">
+    <call class="com.cencomun.core.NativeGateController" method="inspectAddressPreflight"/>
+  </action-method>
   <action-method name="ccm-core-products-prepare">
     <call class="com.cencomun.core.NativeIndependentController" method="prepareProducts"/>
   </action-method>

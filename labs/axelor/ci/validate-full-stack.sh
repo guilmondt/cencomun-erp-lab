@@ -82,9 +82,9 @@ export CCM_AXELOR_FULL_STACK=1
 init_flags=(--init-script /workspace/cencomun-erp-lab/labs/axelor/ci/full-stack.init.gradle)
 echo 'Phase: full AOS compilation, frontend, WAR, embedded runner and upstream tests'
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
+  :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
-  :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
   --write-locks > "$state_dir/private/full-build.log" 2>&1
 python3 - "$host_dir" "$results_dir" <<'PY'
 import json,sys,xml.etree.ElementTree as ET
@@ -98,10 +98,10 @@ assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), 
 print('Upstream representative suite: 16 tests passed, no failures/errors/skips')
 path=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeAddressTemplateTest.xml')
 suite=ET.parse(path).getroot()
-assert int(suite.attrib['tests']) == 2, suite.attrib
+assert int(suite.attrib['tests']) == 8, suite.attrib
 assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
 (results/'native-fixture-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
-print('Native address callback regression: 2 cases passed, no failures/errors/skips; no database coverage claim')
+print('Native address callback regression: 8 cases passed, no failures/errors/skips; no database coverage claim')
 PY
 echo '::notice title=Axelor full build::Full AOS/frontend WAR and embedded launcher compiled; 16 upstream unit cases passed.'
 python3 - <<'PY'
@@ -116,9 +116,9 @@ print('Custom native entity compiled; artifact contains no upstream classes')
 PY
 echo 'Phase: replay Gradle targets with generated strict dependency locks'
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
+  :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
-  :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
   --offline > "$state_dir/private/frozen-build.log" 2>&1
 echo '::notice title=Axelor frozen dependencies::Gradle targets replayed offline with strict generated dependency locks; no lock refresh.'
 
@@ -153,6 +153,9 @@ echo 'Phase: real PostgreSQL initialization and authenticated API smoke'
 start_app first
 python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
   http://127.0.0.1:8080/axelor-erp "$results_dir/smoke-first.json" 900
+echo 'Phase: focused native address save, required metadata and post-commit replay'
+python3 /workspace/cencomun-erp-lab/labs/axelor/ci/address-preflight.py \
+  http://127.0.0.1:8080/axelor-erp "$results_dir/address-preflight.json"
 echo 'Phase: CO00 then TAX01-W, native Core gates and strict coverage publication'
 python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/run.py \
   --base http://127.0.0.1:8080/axelor-erp \

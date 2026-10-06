@@ -1,0 +1,699 @@
+{
+  "source": "complete structured Actions log notices; ZIP availability tracked separately",
+  "run_id": "37420752108",
+  "lab_commit": "f058d21352d73e583c923565c25f754c3ad37e93",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "coverage_revision": 2,
+  "log_sha256": "9a647cc22804da9e832d8ba7da3bbe4fca9b5a3d76444b528c034732cd5712dc",
+  "groups": [
+    {
+      "case": "CO00-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "native-catalog-and-configuration",
+      "complete": false,
+      "partial_gate_status": "FAIL",
+      "evidence": "CO00-gate.json"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "native-catalog-and-configuration",
+      "complete": false,
+      "partial_gate_status": "FAIL",
+      "evidence": "TAX01-W-gate.json"
+    },
+    {
+      "case": "PROD01-04",
+      "source": "business",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "Native action rejected: {\"status\": -1, \"data\": {\"causeStack\": \"java.lang.NullPointerException: Cannot invoke \\\"java.util.List.iterator()\\\" because the return value of \\\"com.axelor.apps.base.db.AddressTemplate.getAddressTemplateLineList()\\\" is null\\n\\tat com.axelor.apps.base.service.address.AddressTemplateServiceImpl.checkRequiredAddressFields(AddressTemplateServiceImpl.java:123)\\n\\tat com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:40)\\n\\tat com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:29)\\n\\tat com.cencomun.core.NativeAccess.save(NativeAccess.java:32)\\n\\tat com.cencomun.core.NativeGateService.record(NativeGateService.java:301)\\n\\tat com.cencomun.core.NativeFinance.configurePartner(NativeFinance.java:72)\\n\\tat com.cencomun.core.NativeFinance.configureCompanyPartner(NativeFinance.java:94)\\n\\tat com.cencomun.core.NativeGateService.prepare(NativeGateService.java:82)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)\\n\\tat com.cencomun.core.NativeIndependentController.prepareProducts(NativeIndependentController.java:34)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat com.axelor.meta.ActionHandler.call(ActionHandler.java:230)\\n\\tat com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)\\n\\tat com.axelor.meta.schema.actions.Action.execute(Action.java:89)\\n\\tat com.axelor.meta.schema.actions.Action.wrap(Action.java:102)\\n\\tat com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)\\n\\tat com.axelor.meta.schema.actions.Action.execute(Action.java:85)\\n\\tat com.axelor.meta.schema.actions.Action.wrap(Action.java:102)\\n\\tat com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)\\n\\tat com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)\\n\\tat com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:41)\\n\\tat com.axelor.web.service.ActionService.execute(ActionService.java:106)\\n\\tat com.axelor.rpc.RequestFilter.invoke(RequestFilter.java:42)\\n\\tat com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:50)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.ja",
+      "complete": false,
+      "evidence": "PROD01-04.json"
+    },
+    {
+      "case": "VAL01-04",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "STATE01-04",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "source": "business",
+      "criteria": [
+        3,
+        5
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "Native action rejected: {\"status\": -1, \"data\": {\"causeStack\": \"java.lang.IllegalStateException: Catalog must commit first\\n\\tat com.cencomun.core.NativeFxService.prepare(NativeFxService.java:44)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)\\n\\tat com.cencomun.core.NativeFxController.prepare(NativeFxController.java:10)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat com.axelor.meta.ActionHandler.call(ActionHandler.java:230)\\n\\tat com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)\\n\\tat com.axelor.meta.schema.actions.Action.execute(Action.java:89)\\n\\tat com.axelor.meta.schema.actions.Action.wrap(Action.java:102)\\n\\tat com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)\\n\\tat com.axelor.meta.schema.actions.Action.execute(Action.java:85)\\n\\tat com.axelor.meta.schema.actions.Action.wrap(Action.java:102)\\n\\tat com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)\\n\\tat com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)\\n\\tat com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:4 [complete details in full_evidence_file]",
+      "complete": false,
+      "evidence": "FX01-03-MONEY01-03.json"
+    },
+    {
+      "case": "PO01-09-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        7
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "source": "finance",
+      "criteria": [
+        3,
+        7
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "source": "finance",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "Native action rejected: {\"status\": -1, \"data\": {\"causeStack\": \"java.lang.NullPointerException: Cannot invoke \\\"java.util.List.iterator()\\\" because the return value of \\\"com.axelor.apps.base.db.AddressTemplate.getAddressTemplateLineList()\\\" is null\\n\\tat com.axelor.apps.base.service.address.AddressTemplateServiceImpl.checkRequiredAddressFields(AddressTemplateServiceImpl.java:123)\\n\\tat com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:40)\\n\\tat com.axelor.apps.base.db.repo.AddressBaseRepository.save(AddressBaseRepository.java:29)\\n\\tat com.cencomun.core.NativeAccess.save(NativeAccess.java:32)\\n\\tat com.cencomun.core.NativeGateService.record(NativeGateService.java:301)\\n\\tat com.cencomun.core.NativeFinance.configurePartner(NativeFinance.java:72)\\n\\tat com.cencomun.core.NativeFinance.configureCompanyPartner(NativeFinance.java:94)\\n\\tat com.cencomun.core.NativeGateService.prepare(NativeGateService.java:82)\\n\\tat com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)\\n\\tat com.cencomun.core.NativeBankBookController.prepare(NativeBankBookController.java:14)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat com.axelor.meta.ActionHandler.call(ActionHandler.java:230)\\n\\tat com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)\\n\\tat com.axelor.meta.schema.actions.Action.execute(Action.java:89)\\n\\tat com.axelor.meta.schema.actions.Action.wrap(Action.java:102)\\n\\tat com.axelor.meta.schema.actions.ActionGroup.evaluate(ActionGroup.java:221)\\n\\tat com.axelor.meta.schema.actions.Action.execute(Action.java:85)\\n\\tat com.axelor.meta.schema.actions.Action.wrap(Action.java:102)\\n\\tat com.axelor.meta.ActionHandler.execute(ActionHandler.java:490)\\n\\tat com.axelor.meta.ActionExecutor.execute(ActionExecutor.java:44)\\n\\tat com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:41)\\n\\tat com.axelor.web.service.ActionService.execute(ActionService.java:106)\\n\\tat com.axelor.rpc.RequestFilter.invoke(RequestFilter.java:42)\\n\\tat com.axelor.rpc.ResponseInterceptor.invoke(ResponseInterceptor.java:50)\\n\\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\\n\\tat org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:154)\\n\\tat ",
+      "complete": false,
+      "evidence": "BANK-BOOK-FIXTURE.json"
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        8
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "IDEM01-02-CREATE-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "CASH04-06-HTTP-IMMUTABLE",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        12
+      ],
+      "minimum_revision": 1,
+      "status": "FAIL",
+      "observed_revision": 1,
+      "reason": "HTTP Error 401: ",
+      "complete": false,
+      "evidence": "SEARCH01-04-NATIVE.json"
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "source": "http",
+      "criteria": [
+        8,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "source": "http",
+      "criteria": [
+        3,
+        9,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "source": "recovery",
+      "criteria": [
+        4,
+        9,
+        14
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "source": "recovery",
+      "criteria": [
+        3,
+        6,
+        7,
+        9,
+        14
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "source": "audit",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "source": "audit",
+      "criteria": [
+        3,
+        6,
+        7,
+        8
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "source": "audit",
+      "criteria": [
+        1,
+        4,
+        5,
+        8,
+        9
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "source": "audit",
+      "criteria": [
+        1,
+        3,
+        11,
+        14
+      ],
+      "minimum_revision": 1,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    },
+    {
+      "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+      "source": "audit",
+      "criteria": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "minimum_revision": 2,
+      "status": "UNRUN",
+      "observed_revision": 0,
+      "reason": "Required native acceptance implementation has not run"
+    }
+  ],
+  "counts": {
+    "FAIL": 6,
+    "UNRUN": 28
+  },
+  "criteria": [
+    {
+      "criterion": 1,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "PO01-09-NATIVE",
+        "CASH00-06-NATIVE",
+        "BANK-BOOK-FIXTURE",
+        "BANK01-05-NATIVE",
+        "FIXTURE-HASH-NATIVE-EXPORT",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "SUPPORTED-CONFIGURATION",
+        "STATE-CANCEL-BEFORE-HANDOVER"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 2,
+      "status": "PASS",
+      "groups": [],
+      "reason": "Requires actual build suites, WAR hash, pins and clean pinned upstream diffs from this run"
+    },
+    {
+      "criterion": 3,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "STATE01-04",
+        "FX01-03-MONEY01-03",
+        "PO01-09-NATIVE",
+        "PO07-09-REVISION-SELF",
+        "CASH00-06-NATIVE",
+        "BANK01-05-NATIVE",
+        "API01-06-SIX-ROUTES",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "PERM-API-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "SEARCH01-04-NATIVE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "MCP01-06-STDIO",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "SUPPORTED-CONFIGURATION",
+        "STATE-UNKNOWN-ATOMIC",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 4,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "VAL01-04",
+        "STATE01-04",
+        "INV01-03-INSUFFICIENT",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "TAX02-04-IDEM-CONCURRENT",
+        "IDEM03-LOST-RESTART",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "STATE-UNKNOWN-ATOMIC",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 5,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "VAL01-04",
+        "INV01-03-INSUFFICIENT",
+        "FX01-03-MONEY01-03",
+        "CASH00-06-NATIVE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+        "STATE-WEB-NO-GUIDE",
+        "STATE-CANCEL-BEFORE-HANDOVER",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 6,
+      "status": "UNRUN",
+      "groups": [
+        "CASH00-06-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 7,
+      "status": "UNRUN",
+      "groups": [
+        "PO01-09-NATIVE",
+        "PO07-09-REVISION-SELF",
+        "IDEM04-EVENTS-RECOVERY",
+        "AUDIT01-03-NATIVE",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 8,
+      "status": "UNRUN",
+      "groups": [
+        "BANK01-05-NATIVE",
+        "BANK-CONCURRENT-1000",
+        "AUDIT01-03-NATIVE",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 9,
+      "status": "UNRUN",
+      "groups": [
+        "API01-06-SIX-ROUTES",
+        "IDEM01-02-CREATE-CONCURRENT",
+        "PERM-API-NATIVE",
+        "CASH04-06-HTTP-IMMUTABLE",
+        "TAX02-04-IDEM-CONCURRENT",
+        "BANK-CONCURRENT-1000",
+        "MCP01-06-STDIO",
+        "IDEM03-LOST-RESTART",
+        "IDEM04-EVENTS-RECOVERY",
+        "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 10,
+      "status": "UNRUN",
+      "groups": [
+        "MCP01-06-STDIO",
+        "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+        "MCP-DENIALS-NATIVE-EFFECTS-AUDIT"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 11,
+      "status": "FAIL",
+      "groups": [
+        "CO00-NATIVE",
+        "CO01-NATIVE",
+        "TAX01-S-NATIVE",
+        "TAX01-W-NATIVE",
+        "PROD01-04",
+        "BANK-BOOK-FIXTURE",
+        "FIXTURE-HASH-NATIVE-EXPORT",
+        "SUPPORTED-CONFIGURATION"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 12,
+      "status": "FAIL",
+      "groups": [
+        "SEARCH01-04-NATIVE"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    },
+    {
+      "criterion": 13,
+      "status": "BLOCKED",
+      "groups": [],
+      "reason": "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
+    },
+    {
+      "criterion": 14,
+      "status": "UNRUN",
+      "groups": [
+        "IDEM03-LOST-RESTART",
+        "IDEM04-EVENTS-RECOVERY",
+        "SUPPORTED-CONFIGURATION"
+      ],
+      "reason": "All attached groups must meet their minimum revision"
+    }
+  ],
+  "patch_scenarios": {
+    "status": "UNRUN",
+    "count": 6
+  },
+  "limitations": "No missing notice is inferred. Economic gates retain incomplete role/state/atomicity coverage. Full metrics/recovery evidence require their actual result files."
+}
