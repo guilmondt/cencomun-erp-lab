@@ -157,3 +157,23 @@ completados no sustituyen la atestación que falló.
 
 Los dominios de artefactos 19 y 1 continúan en borrador pendiente; no se ha
 publicado ese borrador ni alterado el acceso de red a raíz de estas correcciones.
+
+## B06 — regresión de historial interrumpió el runner antes de los gates
+
+Run 37405633383, commit `129614595f7af509b4fd9e83b1d97520179755ad`:
+checkout con historial completo, preflight y verificación del blob base PASS.
+El container terminó al ejecutar el nuevo test Python de evidencia, antes de
+compilar o iniciar el ERP. La anotación no incluía `evidence-tests.log`; la
+descarga del artefacto 11387685627 devolvió Forbidden en el host 4 de blobs.
+La causa exacta interna de ese test no está disponible en la anotación; no se
+atribuye sin evidencia a ownership, Git o Axelor. Los gates siguen UNRUN en
+ese intento, no prueban ni refutan la corrección de Sequence.
+
+1. Publicar el log de esa etapa al fallar y añadirlo a la selección de errores
+   sanitizados, conservando el exit no cero.
+2. Aislar la prueba de historial en un repositorio temporal sintético de dos
+   commits, sin depender de rama, ownership o montaje del checkout anfitrión.
+3. Volver a ejecutar las siete pruebas localmente y CI con ese cambio real.
+4. Verificar aparte en CI el SHA base real y después repetir ambos gates.
+
+No se publica ni añade el host 4 al borrador de red para recuperar este log.

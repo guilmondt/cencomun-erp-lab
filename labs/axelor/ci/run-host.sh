@@ -32,7 +32,7 @@ if int(sys.argv[3]):
     if (target/'core-test/coverage.json').exists():
         core=json.loads((target/'core-test/coverage.json').read_text())
         print('::warning title=Core native coverage::'+json.dumps({'groups':core['counts'],'coverage_revision':core['coverage_revision']}))
-    candidates=[target/name for name in ['app-restart.log','app-first.log','frozen-build.log','full-build.log','init-scope.log','module-tests.log','setup.log']]
+    candidates=[target/name for name in ['app-restart.log','app-first.log','frozen-build.log','full-build.log','init-scope.log','module-tests.log','setup.log','evidence-tests.log']]
     log=next((p for p in candidates if p.exists() and p.stat().st_size),None)
     # GitHub truncates annotation messages around 4 KiB. Keep the client error
     # first, plus the failing-stage tail, rather than losing the exception.

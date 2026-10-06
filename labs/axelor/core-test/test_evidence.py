@@ -11,18 +11,35 @@ class EvidenceTests(unittest.TestCase):
     def test_shallow_checkout_requires_explicit_base_fetch(self):
         import subprocess
         import tempfile
-        repo = FIXTURES.parent.parent
+        from unittest.mock import patch
         with tempfile.TemporaryDirectory() as tmp:
+            # No mount ownership, caller branch, credentials or external transport dependencies.
+            source = Path(tmp) / "source"
+            source.mkdir()
+            def command(*args):
+                return subprocess.check_output(["git", "-C", str(source), *args], stderr=subprocess.PIPE)
+            command("init", "--quiet", "--initial-branch=history-regression")
+            command("config", "user.name", "Synthetic History Test")
+            command("config", "user.email", "history@example.invalid")
+            pin_bytes = (FIXTURES.parent.parent / "versions.lock").read_bytes()
+            (source / "versions.lock").write_bytes(pin_bytes)
+            command("add", "versions.lock")
+            command("commit", "--quiet", "-m", "fixed synthetic baseline")
+            base = command("rev-parse", "HEAD").decode().strip()
+            (source / "second.txt").write_text("shallow tip\n")
+            command("add", "second.txt")
+            command("commit", "--quiet", "-m", "synthetic tip")
             clone = Path(tmp) / "shallow"
             subprocess.run(["git", "clone", "--quiet", "--depth=1", "--single-branch",
-                            "--branch", "lab/axelor-baseline", repo.as_uri(), str(clone)], check=True)
+                            source.as_uri(), str(clone)], check=True)
             self.assertEqual(b"true\n", subprocess.check_output(["git", "-C", str(clone), "rev-parse", "--is-shallow-repository"]))
-            with self.assertRaises(subprocess.CalledProcessError):
-                baseline_pin_blob(clone)
-            subprocess.run(["git", "-C", str(clone), "fetch", "--quiet", "--no-tags", "--depth=1", "origin", BASELINE], check=True)
-            self.assertEqual((repo / "versions.lock").read_bytes(), baseline_pin_blob(clone))
-            (clone / "versions.lock").write_text("altered pins\n")
-            self.assertNotEqual((clone / "versions.lock").read_bytes(), baseline_pin_blob(clone))
+            with patch("finalize.BASELINE", base):
+                with self.assertRaises(subprocess.CalledProcessError):
+                    baseline_pin_blob(clone)
+                subprocess.run(["git", "-C", str(clone), "fetch", "--quiet", "--no-tags", "--depth=1", "origin", base], check=True)
+                self.assertEqual(pin_bytes, baseline_pin_blob(clone))
+                (clone / "versions.lock").write_text("altered pins\n")
+                self.assertNotEqual((clone / "versions.lock").read_bytes(), baseline_pin_blob(clone))
 
     def test_obsolete_revision_cannot_pass(self):
         rows = rows_for(verify_bundle(FIXTURES))

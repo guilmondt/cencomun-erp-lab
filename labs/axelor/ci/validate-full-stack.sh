@@ -43,7 +43,10 @@ trap finish EXIT
 bash labs/axelor/ci/verify-baseline-history.sh
 echo 'Phase: exact cloud baseline setup and two custom module tests'
 python3 -m unittest discover -s labs/axelor/core-test -p 'test_*.py' \
-  > "$state_dir/private/evidence-tests.log" 2>&1
+  > "$state_dir/private/evidence-tests.log" 2>&1 || {
+    cat "$state_dir/private/evidence-tests.log"
+    exit 1
+  }
 bash labs/axelor/scripts/setup-cloud.sh > "$state_dir/private/setup.log" 2>&1
 bash labs/axelor/scripts/validate.sh > "$state_dir/private/module-tests.log" 2>&1
 echo '::notice title=Axelor module tests::2 original baseline tests and 7 Core policy unit tests passed; compilation, JAR metadata and source checks passed.'
