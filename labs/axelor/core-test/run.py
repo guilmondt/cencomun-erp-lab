@@ -16,7 +16,7 @@ import urllib.parse
 import urllib.request
 import urllib.error
 from collections import Counter
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 
 REFERENCE = "fcf690dbc58b2b2dcf8d045c49976e3613e804cf"
@@ -134,6 +134,17 @@ def criteria_for(rows, build_evidence=None):
             status, reason = "UNRUN", "Benchmark/restored independent replay additional evidence not yet executed"
         result.append({"criterion": number, "status": status, "groups": [r["case"] for r in attached], "reason": reason})
     return result
+
+
+def assert_native_configuration(configuration):
+    assert configuration["company_id"] > 0 and configuration["legal_partner_id"] > 0
+    assert configuration["legal_vat_system"] == 2, "Native legal partner delivery/accrual regime required"
+    customers = {p["code"]: p for p in configuration["customers"]}
+    assert set(customers) == {"C001", "C002", "CBANK"}
+    assert all(p["invoicing_address_id"] > 0 for p in customers.values()), "Native invoicing address missing"
+    accounts = {a["code"]: a for a in configuration["accounts"]}
+    for code in ["CCM-AR", "CCM-REVENUE", "CCM-TAX"]:
+        assert accounts[code]["id"] > 0 and accounts[code]["vat_system"] == 1, "Native accrual account regime required: " + code
 
 
 def assert_native_economics(native, expected):
@@ -324,7 +335,7 @@ def run_product_cases(admin, base, fixtures, output, row):
     return evidence
 
 
-def assert_native_fx(observed, fixture, persisted):
+def assert_native_fx_conversions(observed, fixture, persisted):
     rates = {r["id"]: r for r in persisted["rates"]}
     assert len(observed) == len(fixture["payments"])
     for actual, expected in zip(observed, fixture["payments"]):
@@ -345,6 +356,72 @@ def assert_native_fx(observed, fixture, persisted):
     assert authorization["reason"] == fixture["manual_rate"]["reason"]
     assert rates[authorization["native_conversion_id"]]["from_date"] == fixture["manual_rate"]["date"]
     assert Decimal(rates[authorization["native_conversion_id"]]["rate"]) == Decimal(fixture["manual_rate"]["rate"])
+
+
+def assert_native_fx(observed, fixture, persisted):
+    """A conversion is partial; acceptance also needs four committed native receipts."""
+    assert_native_fx_conversions(observed, fixture, persisted)
+    assert persisted.get("read_boundary") == "separate-http-after-payment-commit", "Missing post-commit native payment reads"
+    assert persisted["company_id"] > 0 and persisted["company_code"] == "CCM-LAB-001"
+    invoices, payments = persisted.get("invoices", []), persisted.get("payments", [])
+    assert len(invoices) == 3 and len(payments) == 4, "FX parity requires three USD invoices and four native payments"
+    assert len({p["id"] for p in payments}) == 4 and all(p["id"] > 0 for p in payments)
+    invoice_ids, move_ids, line_ids, reconcile_ids = set(), set(), set(), set()
+    def posted(move, currency, day):
+        assert move["id"] > 0 and move["id"] not in move_ids
+        move_ids.add(move["id"])
+        assert move["status"] == 3 and move["company_id"] == persisted["company_id"]
+        assert move["currency"] == currency and move["company_currency"] == "USD" and move["date"] == day
+        assert len(move["lines"]) == 2
+        for line in move["lines"]:
+            assert line["id"] > 0 and line["id"] not in line_ids
+            line_ids.add(line["id"])
+        assert sum(Decimal(l["debit"]) for l in move["lines"]) == sum(Decimal(l["credit"]) for l in move["lines"])
+        return {l["account"]: l for l in move["lines"]}
+    for actual, expected in zip(observed, fixture["payments"]):
+        reference = "FX-" + expected["id"]
+        matching = [i for i in invoices if i["reference"] == reference]
+        assert len(matching) == 1
+        invoice = matching[0]
+        assert invoice["id"] > 0 and invoice["id"] not in invoice_ids
+        invoice_ids.add(invoice["id"])
+        usd_total = sum(map(Decimal, expected["lines"]))
+        assert invoice["company_id"] == persisted["company_id"] and invoice["customer"] == "C002"
+        assert invoice["date"] == expected["date"] and invoice["currency"] == "USD" and invoice["status"] == 3
+        assert Decimal(invoice["total"]) == Decimal(invoice["paid"]) == usd_total and Decimal(invoice["remaining"]) == 0
+        invoice_lines = posted(invoice["move"], "USD", expected["date"])
+        assert set(invoice_lines) == {"CCM-AR", "CCM-REVENUE"}
+        assert Decimal(invoice_lines["CCM-AR"]["debit"]) == Decimal(invoice_lines["CCM-REVENUE"]["credit"]) == usd_total
+        assert Decimal(invoice_lines["CCM-AR"]["credit"]) == Decimal(invoice_lines["CCM-REVENUE"]["debit"]) == 0
+        assert Decimal(invoice_lines["CCM-AR"]["amountRemaining"]) == 0
+        native = [p for p in payments if p["invoice_id"] == invoice["id"]]
+        assert len(native) == len(expected["lines"])
+        assert sorted(actual["native_payment_ids"]) == sorted(p["id"] for p in native)
+        assert actual["native_invoice_id"] == invoice["id"]
+        for index, (source, converted) in enumerate(zip(expected["lines"], actual["lines"]), 1):
+            matching = [p for p in native if p["reference"] == reference + "-" + str(index)]
+            assert len(matching) == 1
+            payment = matching[0]
+            assert payment["status"] == 1 and payment["currency"] == "VES" and payment["date"] == expected["date"]
+            assert Decimal(payment["amount"]) == Decimal(converted)
+            assert payment["observed_payment_day_conversion_id"] == actual["native_conversion_id"]
+            assert Decimal(payment["observed_payment_day_rate"]) == Decimal(actual["rate"])
+            lines = posted(payment["move"], "VES", expected["date"])
+            assert set(lines) == {"CCM-CASH-VES", "CCM-AR"}
+            cash, receivable = lines["CCM-CASH-VES"], lines["CCM-AR"]
+            assert Decimal(cash["debit"]) == Decimal(receivable["credit"]) == Decimal(source)
+            assert Decimal(cash["credit"]) == Decimal(receivable["debit"]) == 0
+            assert Decimal(cash["currencyAmount"]) == Decimal(converted)
+            assert Decimal(receivable["currencyAmount"]) == -Decimal(converted)
+            effective = (Decimal(source) / Decimal(converted)).quantize(Decimal(".000001"), rounding=ROUND_HALF_UP)
+            assert Decimal(cash["currencyRate"]) == Decimal(receivable["currencyRate"]) == effective
+            assert Decimal(receivable["amountRemaining"]) == 0
+            reconcile = payment["reconcile"]
+            assert reconcile["id"] > 0 and reconcile["id"] not in reconcile_ids and reconcile["status"] == 2
+            reconcile_ids.add(reconcile["id"])
+            assert Decimal(reconcile["amount"]) == Decimal(source)
+            assert reconcile["debit_line_id"] == invoice_lines["CCM-AR"]["id"]
+            assert reconcile["credit_line_id"] == receivable["id"]
 
 
 def run_fx_cases(admin, base, fixtures, output, row):
@@ -373,7 +450,7 @@ def run_fx_cases(admin, base, fixtures, output, row):
         evidence["operator"] = "ccm-operator"
         observations = []
         for input in specification["payments"][:2]:
-            actual = operator.request("/ws/ccm/lab/currency/payment", body(input))
+            actual = operator.request("/ws/ccm/lab/currency/convert", body(input))
             observations.append(actual); evidence["steps"].append({"case": input["id"], "native_conversion": actual})
         denied = rejected(operator, "/ws/ccm/lab/currency/payment", body({"id": "FX-MISSING", "date": "2026-10-03", "lines": ["1.00"]}), 422)
         assert admin.action("ccm-core-fx-inspect", "FX") == before, "Missing-rate rejection changed persisted rates"
@@ -388,24 +465,68 @@ def run_fx_cases(admin, base, fixtures, output, row):
         persisted = admin.action("ccm-core-fx-inspect", "FX")
         assert result["native_conversion_id"] in [r["id"] for r in persisted["rates"]]
         evidence["steps"].append({"case": "manager-authorized", "result": result, "persisted": persisted})
-        rounded = operator.request("/ws/ccm/lab/currency/payment", body(specification["payments"][2]))
+        rounded = operator.request("/ws/ccm/lab/currency/convert", body(specification["payments"][2]))
         observations.append(rounded); evidence["steps"].append({"case": "MONEY-ROUND", "native_conversion": rounded})
+        assert_native_fx_conversions(observations, specification, persisted)
+        evidence.update(partial_conversion_status="PASS", conversion_observations=observations, persisted=persisted)
+        payments = []
+        for input in specification["payments"]:
+            result = operator.request("/ws/ccm/lab/currency/payment", body(input))
+            # A new admin HTTP request reads database state after the payment request committed.
+            committed = admin.action("ccm-core-fx-inspect", "FX")
+            selected_invoices = [i for i in committed["invoices"] if i["id"] == result["native_invoice_id"]]
+            selected_payments = [p for p in committed["payments"] if p["id"] in result["native_payment_ids"]]
+            evidence["steps"].append({"case": "committed-payment-case", "result": result,
+                "persisted": {"company_id": committed["company_id"], "company_code": committed["company_code"],
+                    "read_boundary": "separate-http-after-payment-commit", "invoices": selected_invoices, "payments": selected_payments}})
+            payments.append(result)
+        persisted = admin.action("ccm-core-fx-inspect", "FX")
+        persisted["read_boundary"] = "separate-http-after-payment-commit"
+        observations = payments
         assert_native_fx(observations, specification, persisted)
         evidence.update(status="PASS", complete=True, observations=observations, persisted=persisted)
     except Exception as error:
         evidence.update(status=exception_status(error), complete=False, error=str(error)[:2500], error_type=type(error).__name__)
+        if isinstance(error, urllib.error.HTTPError):
+            evidence["native_http_error"] = error.read().decode(errors="replace")[:3500]
+        try:
+            # Retain any earlier committed payments even if a later case rolls back.
+            evidence["persisted"] = admin.action("ccm-core-fx-inspect", "FX")
+            evidence["persisted"]["read_boundary"] = "separate-http-after-payment-commit"
+        except Exception as inspection_error:
+            evidence["inspection_error"] = str(inspection_error)[:1500]
     evidence["seconds"] = round(time.perf_counter() - start, 3)
     evidence["http_samples"] = {"operator": operator.samples, "manager": manager.samples}
     (output / (evidence["case"] + ".json")).write_text(json.dumps(evidence, indent=2) + "\n")
     row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"], evidence=evidence["case"] + ".json",
-        reason=evidence.get("error", "Native payment-day conversions, missing rate and real manager authorization with unchanged rejected effects"))
+        partial_conversion_status=evidence.get("partial_conversion_status", "UNRUN"),
+        reason=evidence.get("error", "Four native VES payments, posted USD effects and invoice liquidation read after commit; native rates and actual manager authorization"))
     for step in evidence["steps"]:
         print("::notice title=Native FX step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
     print("::notice title=Core independent FX/MONEY::" + json.dumps({k:v for k,v in evidence.items() if k not in ("steps", "http_samples", "observations", "persisted")}), flush=True)
     return evidence
 
 
-def run_search_cases(base, fixtures, output, row):
+def review_native_fx(row, evidence, fixture):
+    """Revalidate result files; never trust a preassigned complete/PASS claim."""
+    persisted = evidence.get("persisted", {})
+    conversions = evidence.get("conversion_observations", evidence.get("observations", []))
+    try:
+        assert_native_fx_conversions(conversions, fixture, persisted)
+        row["partial_conversion_status"] = "PASS"
+    except (AssertionError, KeyError, TypeError):
+        pass
+    if row.get("status") == "PASS" or row.get("complete"):
+        try:
+            assert_native_fx(evidence.get("observations", []), fixture, persisted)
+        except (AssertionError, KeyError, TypeError) as error:
+            missing_payments = len(persisted.get("payments", [])) != 4 or persisted.get("read_boundary") != "separate-http-after-payment-commit"
+            row.update(status="UNRUN" if missing_payments else "FAIL", complete=False,
+                reason="FX complete claim rejected: four native committed payments and posted settlement required; " + str(error))
+    return row
+
+
+def run_search_cases(admin, base, fixtures, output, row):
     start = time.perf_counter()
     evidence = {"case": "SEARCH01-04-NATIVE", "reference": REFERENCE, "revision": 1, "steps": []}
     reader = NativeClient(base)
@@ -413,6 +534,11 @@ def run_search_cases(base, fixtures, output, row):
     def native_search(model, criteria, fields):
         result = reader.request(f"/ws/rest/{model}/search", {"data": {"criteria": criteria}, "fields": fields, "limit": 100})
         observation = {"case": "native-rest-inspection", "model": model, "criteria": criteria, "response": result}
+        if model == "com.axelor.apps.base.db.Partner" and not result.get("data"):
+            payload = {"data": {"criteria": criteria}, "fields": fields, "limit": 100}
+            observation["administrator_comparison"] = admin.request(f"/ws/rest/{model}/search", payload)
+            observation["reader_filter_diagnostics"] = reader.request("/ws/ccm/lab/search/diagnostics?" + urllib.parse.urlencode({
+                "company_id": "CCM-LAB-001", "name": specification["customer"]["name"]}))
         evidence.setdefault("native_queries", []).append(observation)
         print("::notice title=Native search inspection::" + json.dumps({"case": evidence["case"], "inspection": observation}), flush=True)
         assert result.get("status") == 0, result
@@ -491,6 +617,9 @@ def run(base, fixtures, output):
             assert len(configuration["company_ids"]) == 1
             assert len(configuration["sequences"]) == 12, configuration["sequences"]
             assert all(s["id"] and len(s["versions"]) == 1 and s["versions"][0]["id"] for s in configuration["sequences"])
+            assert_native_configuration(configuration["fixture_configuration"])
+            print(f"::notice title=Native {case} committed fixture configuration::" + json.dumps({"case": case,
+                "section": "fixture_configuration", "records": configuration["fixture_configuration"]}), flush=True)
             print(f"::notice title=Native {case} committed sequences::" + json.dumps({"case": case, "sequences": configuration["sequences"]}), flush=True)
             phase = "native-economic-gate"
             observed = client.action("ccm-core-native-gate", case)
@@ -538,7 +667,7 @@ def run(base, fixtures, output):
     (output / "gate-impediments.json").write_text(json.dumps(gates, indent=2) + "\n")
     # Independent catalog fields run after the economic impediments have been persisted.
     products = run_product_cases(client, base, fixtures, output, by_case["PROD01-04"])
-    search = run_search_cases(base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
+    search = run_search_cases(client, base, fixtures, output, by_case["SEARCH01-04-NATIVE"])
     book = run_bank_book_cases(client, fixtures, output, by_case["BANK-BOOK-FIXTURE"])
     fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"])
     results = {"reference": REFERENCE, "coverage_revision": 2,

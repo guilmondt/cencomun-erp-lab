@@ -57,6 +57,60 @@ public final class NativeFinance {
     }
   }
 
+  /** Native fixture prerequisites, not a relaxation of invoice/tax validation. */
+  public static void configurePartner(Model company, Model partner) {
+    Model country = one(BASE + "Country", "self.alpha2Code = ?1", "ZZ");
+    if (country == null) {
+      Model template = record(BASE + "AddressTemplate", "name", "CCM LAB address", "engineSelect", 1,
+          "templateStr", "Synthetic LAB address");
+      country = record(BASE + "Country", "name", "Synthetic LAB Country", "alpha2Code", "ZZ", "addressTemplate", template);
+    }
+    if (one(BASE + "PartnerAddress", "self.partner = ?1 AND self.isInvoicingAddr = true", partner) == null) {
+      Model address = record(BASE + "Address", "country", country, "addressL2", get(partner, "name"),
+          "addressL4", "1 Synthetic LAB Street", "addressL6", "Synthetic LAB City",
+          "fullName", "Synthetic LAB address " + get(partner, "partnerSeq"),
+          "formattedFullName", get(partner, "name") + "\n1 Synthetic LAB Street\nSynthetic LAB City");
+      Model link = record(BASE + "PartnerAddress", "partner", partner, "address", address,
+          "isInvoicingAddr", true, "isDeliveryAddr", true, "isDefaultAddr", true);
+      call(partner, "addPartnerAddressListItem", link); save(partner);
+    }
+    Model situation = (Model) call(service("com.axelor.apps.account.service.accountingsituation.AccountingSituationService"),
+        "getAccountingSituation", partner, company);
+    if (situation == null) throw new IllegalStateException("Native company/partner accounting situation missing");
+    set(situation, "vatSystemSelect", 2); save(situation); // Native option on deliveries (accrual).
+  }
+
+  public static void configureCompanyPartner(Model company) {
+    Model partner = (Model) get(company, "partner");
+    if (partner == null) {
+      partner = record(BASE + "Partner", "partnerSeq", "CCM-LAB-LEGAL", "name", "Cencomun synthetic LAB legal partner",
+          "partnerTypeSelect", 2, "isInternal", true, "currency", get(company, "currency"),
+          "companySet", new HashSet<>(List.of(company)));
+      set(company, "partner", partner); save(company);
+    }
+    configurePartner(company, partner);
+    for (Model account : list(ACCOUNT + "Account", "self.company = ?1", company)) {
+      set(account, "vatSystemSelect", 1); save(account); // Native accrual account mapping.
+    }
+  }
+
+  public static Map<String, Object> inspectConfiguration(Model company) {
+    Model legal = (Model) get(company, "partner");
+    Model situation = legal == null ? null : (Model) call(
+        service("com.axelor.apps.account.service.accountingsituation.AccountingSituationService"),
+        "getAccountingSituation", legal, company);
+    List<Map<String, Object>> customers = new ArrayList<>(), accounts = new ArrayList<>();
+    for (Model partner : list(BASE + "Partner", "self.partnerSeq in (?1, ?2, ?3)", "C001", "C002", "CBANK")) {
+      Model address = (Model) call(service("com.axelor.apps.base.service.PartnerService"), "getInvoicingAddress", partner);
+      customers.add(Map.of("code", get(partner, "partnerSeq"), "partner_id", partner.getId(),
+          "invoicing_address_id", address == null ? 0L : address.getId()));
+    }
+    for (Model account : list(ACCOUNT + "Account", "self.company = ?1", company))
+      accounts.add(Map.of("code", get(account, "code"), "id", account.getId(), "vat_system", get(account, "vatSystemSelect")));
+    return Map.of("company_id", company.getId(), "legal_partner_id", legal == null ? 0L : legal.getId(),
+        "legal_vat_system", situation == null ? 0 : get(situation, "vatSystemSelect"), "customers", customers, "accounts", accounts);
+  }
+
   public static void opening(Model company, Model customer, Model warehouse, String caseId) {
     BigDecimal amount = BigDecimal.ZERO;
     for (Model row : list("com.axelor.apps.stock.db.StockLocationLine", "self.stockLocation = ?1", warehouse))
@@ -107,6 +161,9 @@ public final class NativeFinance {
     Model currency = (Model) get(company, "currency");
     Model cashMode = one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-CASH");
     Model upfront = (Model) call(createPayment, "createInvoicePayment", invoice, calculation.get("upfront"), DATE, currency, cashMode, 2);
+    call(invoice, "addInvoicePaymentListItem", upfront);
+    call(service("com.axelor.apps.account.service.payment.invoice.payment.InvoiceTermPaymentService"),
+        "createInvoicePaymentTerms", upfront, null);
     upfront = save(upfront);
     call(service("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentValidateService"), "validate", upfront);
     company = managed(company); customer = managed(customer);

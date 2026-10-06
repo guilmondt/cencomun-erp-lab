@@ -1,0 +1,175 @@
+{
+  "case": "SEARCH01-04-NATIVE",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "actor": "ccm-reader",
+  "native_queries": [
+    {
+      "case": "native-rest-inspection",
+      "model": "com.axelor.apps.base.db.Partner",
+      "criteria": [
+        {
+          "fieldName": "name",
+          "operator": "=",
+          "value": "Cliente ficticio Alfa"
+        }
+      ],
+      "response": {
+        "status": 0,
+        "offset": 0
+      }
+    }
+  ],
+  "status": "FAIL",
+  "complete": false,
+  "error": "[]",
+  "error_type": "AssertionError",
+  "seconds": 0.555,
+  "steps": [
+    {
+      "case": "foreign-company-denied",
+      "http_status": 403
+    },
+    {
+      "case": "product-query",
+      "query": "P001",
+      "persisted": {
+        "total": 1,
+        "page_size": 100,
+        "items": [
+          {
+            "id": "P001",
+            "native_id": 1,
+            "profile_id": 1,
+            "name": "Equipo ficticio Alfa",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "cashea_price": "50.00",
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          }
+        ],
+        "page": 1
+      }
+    },
+    {
+      "case": "product-query",
+      "query": "Equipo ficticio Alfa",
+      "persisted": {
+        "total": 1,
+        "page_size": 100,
+        "items": [
+          {
+            "id": "P001",
+            "native_id": 1,
+            "profile_id": 1,
+            "name": "Equipo ficticio Alfa",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "cashea_price": "50.00",
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          }
+        ],
+        "page": 1
+      }
+    },
+    {
+      "case": "product-query",
+      "query": "SUP-BETA-02",
+      "persisted": {
+        "total": 1,
+        "page_size": 100,
+        "items": [
+          {
+            "id": "P002",
+            "native_id": 2,
+            "profile_id": 2,
+            "name": "Accesorio ficticio Beta",
+            "marketplace_enabled": false,
+            "cashea_enabled": true,
+            "cashea_price": "25.00",
+            "supplier_reference": "SUP-BETA-02",
+            "warranty_quantity": 6,
+            "warranty_unit": "MONTH",
+            "condition": "REFURBISHED"
+          }
+        ],
+        "page": 1
+      }
+    },
+    {
+      "case": "product-query",
+      "query": "NOT-EXISTS",
+      "persisted": {
+        "total": 0,
+        "page_size": 100,
+        "items": [],
+        "page": 1
+      }
+    },
+    {
+      "case": "complete-pages",
+      "persisted": {
+        "total": 3,
+        "page_size": 2,
+        "items": [
+          {
+            "id": "P001",
+            "native_id": 1,
+            "profile_id": 1,
+            "name": "Equipo ficticio Alfa",
+            "marketplace_enabled": true,
+            "cashea_enabled": true,
+            "cashea_price": "50.00",
+            "supplier_reference": "SUP-ALFA-01",
+            "warranty_quantity": 12,
+            "warranty_unit": "MONTH",
+            "condition": "NEW"
+          },
+          {
+            "id": "P002",
+            "native_id": 2,
+            "profile_id": 2,
+            "name": "Accesorio ficticio Beta",
+            "marketplace_enabled": false,
+            "cashea_enabled": true,
+            "cashea_price": "25.00",
+            "supplier_reference": "SUP-BETA-02",
+            "warranty_quantity": 6,
+            "warranty_unit": "MONTH",
+            "condition": "REFURBISHED"
+          }
+        ],
+        "page": 1
+      }
+    },
+    {
+      "case": "complete-pages",
+      "persisted": {
+        "total": 3,
+        "page_size": 2,
+        "items": [
+          {
+            "id": "P003",
+            "native_id": 3,
+            "profile_id": 3,
+            "name": "Equipo ficticio Gamma",
+            "marketplace_enabled": true,
+            "cashea_enabled": false,
+            "cashea_price": "80.00",
+            "supplier_reference": "SUP-GAMMA-03",
+            "warranty_quantity": 0,
+            "warranty_unit": "MONTH",
+            "condition": "USED"
+          }
+        ],
+        "page": 2
+      }
+    }
+  ]
+}

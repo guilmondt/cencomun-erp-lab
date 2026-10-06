@@ -1,62 +1,67 @@
 # Core Test Axelor — ejecución en curso
 
 Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
-16 archivos de fixtures byte a byte, manifiesto/oráculo intactos, cobertura revisión 2,
+16 fixtures idénticos, manifiesto/oráculo intactos, cobertura revisión 2,
 34 grupos y 14 criterios. Rama exclusiva `lab/axelor-baseline`.
 
-Último CI finalizado: [37413918081](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37413918081),
-commit `66199825dcc333e9001a05b3b94cc68e6d843d2c`, **FAILURE**. Los gates siguen bloqueados;
-PROD01-04 obtuvo PASS completo por operador real. Historial/pins/diffs/build
-pasaron; el CI permanece rojo porque la cobertura requerida no está completa.
+Último CI finalizado: [37416107406](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37416107406),
+commit `013f9622d67ed921afd79b1ca66388a3e1e89eca`, **FAILURE**. PROD y BANK-BOOK completos
+PASS. Gates bloqueados por requisitos de facturación/configuración. FX conservado
+como conversión parcial PASS y grupo UNRUN: el antiguo PASS completo era incorrecto.
+La matriz siguiente incorpora la revisión B19; conserva el resultado originalmente
+reportado en el archivo del caso y en la procedencia, sin contar pagos inexistentes.
 
 ## Gates económicos parciales
 
-| Gate, administrador real | Estado | Tiempo | Evidencia |
+| Gate, administrador real | Estado | Tiempo | Causa observada |
 | --- | --- | --- | --- |
-| CO00, primero | BLOCKED | 7.101 s | Stock inicial persistido 5/5/5, WAP 30/10/60; venta revertida al fallar finalización |
-| TAX01-W, segundo | BLOCKED | 1.394 s | Misma frontera; sin pedido, entrega, factura, costo ni liquidación de venta persistidos |
+| CO00, primero | BLOCKED | 13.360 s | ValidateState: Warning ! : Invoicing address missing |
+| TAX01-W, segundo | BLOCKED | 5.441 s | No account found for Tax: TAX-LAB-10 (company: CCM-LAB-001) |
 
-Error nativo: `Can only finalize a drafted quotation.` SaleOrder no tiene
-estado default; su factory oficial lo inicializa. Se cambia al factory, sin
-escribir statusSelect. Esta corrección todavía necesita repetición en ERP.
-Se añade export separado del asiento de apertura del fixture, que el inspector
-anterior excluía de los movimientos económicos de la venta.
+Factory oficial de SaleOrder verificado en ERP: estado draft=1; se superó la
+finalización anterior sin escribir statusSelect. Entrada inicial REALIZED=3,
+stock persistido 5/5/5, WAP 30/10/60 y asiento de apertura separado de 500 por
+fixture. La venta/entrega/factura se revierten juntas al fallar facturación;
+no hay efectos económicos de venta persistidos. Sequence NoResult no reapareció.
+El contador aislado puede avanzar al fallar la transacción; sus huecos no prueban venta.
 
-La separación de preparación/confirmación corrigió Sequence: doce secuencias
-visibles, incremento aislado nativo y entrada REALIZED=3 sin NoResultException.
-El contador aislado puede avanzar durante un rollback: no demuestra éxito económico.
-No se demuestran aún stock final 3/4/5, costo 70, impuestos y liquidación.
-Incluso un futuro gate PASS como admin seguirá siendo parcial hasta ejecutar
-roles, estados, rechazos, atomicidad e idempotencia del grupo completo.
+B20/B21: se preparan direcciones nativas y Company.partner/AccountingSituation
+con régimen de entrega/devengo, además del régimen de las cuentas. Se conservan
+validaciones fiscales y de dirección. B23: se preparan términos nativos del pago
+inicial, requeridos por el servicio oficial. Estas correcciones están pendientes
+de repetición en ERP. No se demuestran aún stock final 3/4/5, costo 70, IVA y liquidación.
+Un futuro gate administrativo PASS seguirá siendo parcial hasta roles, estados,
+rechazos, atomicidad e idempotencia del grupo completo.
 
-## Independientes y correcciones verificadas
+## Casos independientes
 
-- PROD01-04 PASS, 2.409 s: seis combinaciones de garantía, precio conservado al
-  deshabilitar, restauración y lectura nativa completa de tres perfiles con FK.
-  Login real, usuario activo/no bloqueado y permisos de compañía comprobados.
-- SEARCH FAIL, 0.460 s: aislamiento 403, cuatro búsquedas y ambas páginas de
-  productos correctas. Primera búsqueda de cliente vacía. Se añade inspección
-  de clientes/companySet y respuesta REST completa; no se elimina el permiso ni
-  se atribuye una causa aún no demostrada. Factura/serial pendientes.
-- BANK-BOOK FAIL, 1.268 s: el control de cuentas ya permite la confirmación, pero
-  la aserción confundía importe no aplicado positivo con saldo firmado negativo
-  de crédito AR. Se conserva el saldo nativo y se exige -importe, además de
-  voucher positivo, asientos ACCOUNTED y replay. Fixture/oráculo intactos.
-- B11 (colección Move) ya no se reproduce; el helper nativo mantiene la colección.
-  B12 (Company frente a Long) y B13 (paginación) verificados por CRUD/productos.
-  B14 (cuentas de journal) no reapareció en apertura ni recibo bancario.
-- FX/MONEY preparado como independiente: CurrencyConversionLine de un día,
-  CurrencyService y autorización por manager real con FK/auditoría Cencomun.
-  Prueba falta de tasa, rechazo 403 sin efectos y redondeo 0.41+0.41=0.82.
-  **UNRUN en ERP** hasta el siguiente CI; no se infiere PASS de compilación.
+- PROD01-04 PASS completo, 2.277 s: operador real, seis garantías, retención de
+  precio al deshabilitar, restauración y lecturas nuevas de tres perfiles/FK.
+- BANK-BOOK-FIXTURE PASS completo, 1.526 s: cuatro PaymentVoucher confirmados,
+  cuatro asientos ACCOUNTED, ocho líneas persistidas, AR firmado negativo,
+  vouchers no aplicados positivos por 255 y replay idéntico sin duplicados.
+- SEARCH FAIL, 0.555 s: aislamiento 403, cuatro búsquedas de productos y dos
+  páginas correctos; C001 existe con nombre/teléfono/compañía exactos, pero REST
+  del lector devuelve status=0 sin data. El nuevo diagnóstico compara admin y
+  filtro real JpaSecurity del lector. No se amplía el permiso. Serial/factura pendientes.
+- FX/MONEY: conversiones parciales PASS, 0.581 s, tasas nativas 40/41/40.5 y
+  0.41+0.41=0.82, rechazo 422 sin tasa, operador 403 sin efectos y autorización
+  por manager real. **Cero evidencia de pagos en ese CI: grupo UNRUN.**
+  Se añaden tres facturas USD y cuatro InvoicePayment VES mediante
+  InvoiceGenerator, InvoiceLineService, InvoiceService y servicios de creación,
+  términos, validación, asiento y conciliación. Importes 40/41/0.41/0.41,
+  fechas/tasas/IDs observados, efectos USD y liquidación se exigirán en lecturas
+  posteriores al commit. El agregado rechaza datos de tasas/cálculos solos,
+  asientos draft, fechas incorrectas, pagos ausentes y deuda pendiente.
 
-Causa observada, impacto, pasos numerados y verificación:
-[axelor-core-test-impediments.md](axelor-core-test-impediments.md), B15–B18.
+Impedimentos, impacto, pasos y verificación:
+[axelor-core-test-impediments.md](axelor-core-test-impediments.md), B19–B24.
 
-## Matriz de 34 grupos — último CI finalizado
+## Matriz de 34 grupos — CI revisado
 
-PASS 1; FAIL 2; BLOCKED 2; UNRUN 29. Sólo PROD completo.
-Los resultados parciales del administrador se mantienen separados.
+**PASS 2 / FAIL 1 / BLOCKED 2 / UNRUN 29**. Parciales del administrador y
+conversiones están separados. El CI antiguo reportó 3/1/2/28; B19 rechaza el
+PASS FX completo. No se agregan resultados locales a la cobertura nativa.
 
 | Grupo requerido | Revisión mínima | Estado | Completo |
 | --- | ---: | --- | --- |
@@ -72,7 +77,7 @@ Los resultados parciales del administrador se mantienen separados.
 | PO01-09-NATIVE | 1 | UNRUN | No |
 | PO07-09-REVISION-SELF | 1 | UNRUN | No |
 | CASH00-06-NATIVE | 1 | UNRUN | No |
-| BANK-BOOK-FIXTURE | 1 | FAIL | No |
+| BANK-BOOK-FIXTURE | 1 | PASS | Sí |
 | BANK01-05-NATIVE | 1 | UNRUN | No |
 | API01-06-SIX-ROUTES | 1 | UNRUN | No |
 | IDEM01-02-CREATE-CONCURRENT | 1 | UNRUN | No |
@@ -95,11 +100,11 @@ Los resultados parciales del administrador se mantienen separados.
 | MCP-FORBIDDEN-CRITICAL-ACTIONS | 2 | UNRUN | No |
 | MCP-DENIALS-NATIVE-EFFECTS-AUDIT | 2 | UNRUN | No |
 
-## 14 criterios — pruebas ejecutadas
+## 14 criterios — evidencia ejecutada
 
 | Criterio | Estado |
 | ---: | --- |
-| 1 | FAIL |
+| 1 | BLOCKED |
 | 2 | PASS |
 | 3 | FAIL |
 | 4 | BLOCKED |
@@ -109,49 +114,52 @@ Los resultados parciales del administrador se mantienen separados.
 | 8 | UNRUN |
 | 9 | UNRUN |
 | 10 | UNRUN |
-| 11 | FAIL |
+| 11 | BLOCKED |
 | 12 | FAIL |
 | 13 | BLOCKED |
 | 14 | UNRUN |
 
-Criterio 2 PASS procede de host/AOS exactos, diffs upstream reales cero, blob
-base de pins idéntico, WAR y suites del mismo run. Los demás criterios derivan
-los grupos ejecutados y su revisión/completitud; los benchmark/recovery adicionales
-no se aprueban por smoke. Criterio 13 BLOCKED por decisión expresa del usuario;
-seis escenarios PATCH UNRUN. No hay upgrade.
+Criterio 2 procede de commits fijados, diffs upstream reales cero, blob base de
+pins idéntico, WAR y suites de ese run. Ningún criterio está preasignado.
+Benchmark/recovery no se aprueban por smoke. Criterio 13 BLOCKED por decisión
+expresa del usuario; seis PATCH UNRUN. Sin actualización del baseline.
 
 ## Métricas y validaciones
 
-- CI actual: 2 originales + 7 de política + 16 upstream, sin errores/fallos/skips,
-  según la atestación real del log; 14 regresiones Python en ese commit.
-  Cambios locales posteriores: 17 regresiones, 2+7 tests y compilación nativa/offline PASS.
-- Readiness inicial 422.47 s; reinicio con la misma DB 315.40 s. Job 19 min.
-  No equivale a benchmark de operaciones ni a timings por tarea Gradle.
-- Runner: 4 CPU visibles/4 de afinidad,
-  `Linux-6.17.0-1022-azure-x86_64-with-glibc2.41`; disco libre 87098335232 bytes.
-- Core HTTP: admin 16, operador 30,
-  lector 11; incluye login/preparación.
-  Muestras individuales del cliente no están en los avisos recuperados de este run.
+- CI: 2 tests originales + 7 de política + 16 upstream; cero errores/fallos/skips,
+  según atestación del log. 17 regresiones Python en ese commit.
+- Cambios posteriores: 19 regresiones de integridad; pruebas locales 2+7 y
+  compilación full-native con perfil de locks externo y replay offline estricto,
+  en secuencia.
+- Readiness inicial 422.52 s; reinicio de la misma DB 318.38 s.
+  Job 19 min 16 s. Son timings de smoke, no benchmark de operaciones.
+- Runner: 4 CPU visibles/4 de afinidad;
+  Linux-6.17.0-1022-azure-x86_64-with-glibc2.41; disco libre 87100051456 bytes.
+- HTTP: {"administrator": 23, "product_operator": 30, "search_reader": 11, "fx_operator": 8, "fx_manager": 4}. Incluye login/preparación;
+  muestras individuales ausentes del log recuperado. FX corresponde a cálculos antiguos.
 - p50/p95/p99, 1000 muestras y query/DB timing: UNRUN.
-- JAR propio sin clases com.axelor.*, pins y lock originales sin diferencias.
+- JAR propio sin com.axelor.*, pins/lock originales y upstream sin diferencias.
+- La ejecución simultánea de los perfiles Gradle produjo ClassNotFoundException
+  de clases propias; repetir el perfil Cloud secuencialmente pasó 2+7.
+  Los perfiles deben ejecutarse secuencialmente en este checkout compartido.
 
 Pins SHA256: `6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816`.
-WAR del run: `c1de664d05fa6909755abc9281bd5ba072af6aae1566c28c1886b6a841191714`.
+WAR: `0075463fdef42500413014c31dca3cadaa3301847c274710ac2c8f59a8367abb`.
 
-## Evidencia, red y continuación
+## Evidencia y continuidad
 
-[coverage.json](evidence/axelor-core/runs/37413918081/coverage.json),
-[build-evidence.json](evidence/axelor-core/runs/37413918081/build-evidence.json),
-[runtime-metrics.json](evidence/axelor-core/runs/37413918081/runtime-metrics.json),
-exports/gates, independientes, smoke y hashes en
-[evidence-source.json](evidence/axelor-core/runs/37413918081/evidence-source.json).
-Fuente **secundaria**: avisos JSON completos del log, cuyo hash se conserva.
-El artefacto 11390399358 existe, pero su ZIP fue bloqueado dos veces con Forbidden
-en productionresultssa17.blob.core.windows.net. No se descargaron sus XML ni
-archivos ausentes. Artefactos completos históricos CI6/CI7 se conservan aparte.
-El log completo es recuperable en
-`/workspace/ccm-axelor-runtime/ci-evidence/37413918081.log`.
+[coverage.json](evidence/axelor-core/runs/37416107406/coverage.json),
+[build-evidence.json](evidence/axelor-core/runs/37416107406/build-evidence.json),
+[runtime-metrics.json](evidence/axelor-core/runs/37416107406/runtime-metrics.json),
+gates/exports/casos/smokes/hashes y revisión del PASS rechazado en
+[evidence-source.json](evidence/axelor-core/runs/37416107406/evidence-source.json).
+Fuente secundaria: JSON completo del log; no se infiere lo ausente.
+ZIP 11391813114 bloqueado con Forbidden en productionresultssa16.blob.core.windows.net,
+un intento, sin ampliar/publicar red. Log completo recuperable:
+`/workspace/ccm-axelor-runtime/ci-evidence/37416107406.log`. Evidencias históricas
+CI6/CI7/CI8 conservadas aparte, sin sustituir pruebas de la ejecución actual.
 
-No se publica red pendiente. Continúa autorizada la repetición de gates y casos
-independientes. No hay PR, merge, despliegue, modificación de main/Frappe/upstream/pins
-ni declaración de cierre de comparación. La guía de arranque queda sólo en borrador.
+Se continúa la repetición autorizada de gates primero y casos independientes
+después. No hay PR, merge, despliegue, cambio de main/Frappe/upstream/pins ni
+cierre de comparación. Configuración de arranque guardada sólo como borrador;
+no se publica ninguna ampliación de red pendiente.

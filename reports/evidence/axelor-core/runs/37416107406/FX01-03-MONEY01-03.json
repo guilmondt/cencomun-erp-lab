@@ -1,0 +1,115 @@
+{
+  "case": "FX01-03-MONEY01-03",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "preparation": {
+    "manager_id": 4,
+    "company_id": 1
+  },
+  "operator": "ccm-operator",
+  "manager": "ccm-manager",
+  "status": "UNRUN",
+  "complete": false,
+  "seconds": 0.581,
+  "steps": [
+    {
+      "case": "FX01",
+      "native_conversion": {
+        "total": "40.00",
+        "rate": "40.000000",
+        "id": "FX01",
+        "date": "2026-10-01",
+        "native_conversion_id": 10,
+        "lines": [
+          "40.00"
+        ]
+      }
+    },
+    {
+      "case": "FX02",
+      "native_conversion": {
+        "total": "41.00",
+        "rate": "41.000000",
+        "id": "FX02",
+        "date": "2026-10-02",
+        "native_conversion_id": 11,
+        "lines": [
+          "41.00"
+        ]
+      }
+    },
+    {
+      "case": "missing-rate",
+      "http_status": 422,
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "operator-denied",
+      "http_status": 403,
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "manager-authorized",
+      "result": {
+        "authorization_id": 1,
+        "native_conversion_id": 12
+      },
+      "persisted": {
+        "authorizations": [
+          {
+            "reason": "Synthetic authorized payment-day rate",
+            "external_id": "FX-AUTH",
+            "id": 1,
+            "company_id": 1,
+            "native_conversion_id": 12,
+            "approved_by": "ccm-manager"
+          }
+        ],
+        "rates": [
+          {
+            "rate": "40.000000",
+            "id": 10,
+            "to_date": "2026-10-01",
+            "from_date": "2026-10-01",
+            "target": "VES",
+            "source": "USD"
+          },
+          {
+            "rate": "41.000000",
+            "id": 11,
+            "to_date": "2026-10-02",
+            "from_date": "2026-10-02",
+            "target": "VES",
+            "source": "USD"
+          },
+          {
+            "rate": "40.500000",
+            "id": 12,
+            "to_date": "2026-10-03",
+            "from_date": "2026-10-03",
+            "target": "VES",
+            "source": "USD"
+          }
+        ]
+      }
+    },
+    {
+      "case": "MONEY-ROUND",
+      "native_conversion": {
+        "total": "0.82",
+        "rate": "40.500000",
+        "id": "MONEY-ROUND",
+        "date": "2026-10-03",
+        "native_conversion_id": 12,
+        "lines": [
+          "0.41",
+          "0.41"
+        ]
+      }
+    }
+  ],
+  "partial_conversion_status": "PASS",
+  "reported_status": "PASS",
+  "reported_complete": true,
+  "review_reason": "PASS notice present but detailed persistence/query notices are incomplete; FX calculations alone cannot prove four committed native payments"
+}

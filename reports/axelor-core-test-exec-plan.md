@@ -460,13 +460,13 @@ del Core Test ni ausencia de otros mecanismos aún no explorados.
 - [x] ExecPlan/referencia/oráculo/manifiesto/revisión2 leídos sin merge ni checkout Frappe.
 - [x] 34 grupos y 14 criterios mapeados; causas/impactos/pasos/verificación documentados.
 - [x] Plan acotado y coherencia de IDs/revisiones/criterios/hashes comprobada.
-- [ ] **Recibir autorización explícita para implementar este plan en Axelor.**
-- [ ] Crear/ejecutar Core Test y publicar sus resultados; pendiente.
+- [x] **Autorización explícita recibida para implementar este plan en Axelor.**
+- [ ] Crear/ejecutar los 34 grupos y publicar resultados completos; en curso.
 
-En esta preparación solo se añade este documento. Main, la rama/app/runtime de
-Frappe, producción, baseline Axelor, versions.lock y fuentes upstream permanecen
-sin cambios. Se detiene el trabajo en el límite solicitado: entregar el plan
-revisable y esperar autorización antes de implementar.
+La preparación original se limitó a este documento. Después, el usuario autorizó
+implementación, ejecución, commit/push exclusivamente a lab/axelor-baseline y CI.
+Main, Frappe, producción, versions.lock y fuentes upstream quedan fuera del alcance.
+No hay autorización para merge, despliegue ni cambio de pins/objetivo de actualización.
 
 ### Repetición 37411893961 y correcciones B11–B14
 
@@ -489,9 +489,14 @@ recibe 403 al autorizar; sólo CCM Manager puede registrar la tasa manual.
 CcmRateAuthorization conserva FK a la conversión y compañía, motivo y usuario
 real, dentro del mismo commit. Se usa el repositorio y tracking de AOP.
 
-Aceptación: dos conversiones fijadas; rechazo sin tasa; rechazo del operador;
-ambos con snapshot fresco de tasas/autorizaciones sin diferencias; autorización
+Aceptación parcial de conversión: dos conversiones fijadas; rechazo sin tasa;
+rechazo del operador; ambos con snapshot fresco sin diferencias; autorización
 por login manager y lectura nueva; 0.41+0.41=0.82 desde el servicio nativo.
+La revisión de paridad B19 confirma que falta el recorrido de pagos: cuatro
+pagos nativos contra tres facturas USD, como en la referencia fija. El grupo
+completo exige los pagos VES 40/41/0.41/0.41, fecha/tasa/ID observado, asiento
+ACCOUNTED en USD, conciliación confirmada y factura liquidada, todos leídos
+en otra petición después del commit. Tasas y cálculos solos nunca aprueban el grupo.
 La API de prueba exige CCM_CORE_LAB y compañía LAB. No añade herramientas MCP
 ni aprueba los seis endpoints, auditoría integral o idempotencia. El grupo
 conserva UNRUN hasta el siguiente CI; los tests locales sólo validan compilación
@@ -513,3 +518,22 @@ no se añade dominio ni se publica red. Se conserva log completo y avisos JSON
 etiquetados como fuente secundaria. Los avisos controlados no se recortan a mitad
 de JSON; exports fallidos se guardan antes de evaluar. El CI anterior ya terminó,
 por lo que el siguiente push no cancela ni duplica tareas.
+
+### Revisión de paridad B19 durante CI 37416107406
+
+Se conserva ese único CI, sin cancelarlo. El extractor y finalize revalidan
+el caso FX desde sus datos nativos y rechazan el PASS antiguo de seis pasos;
+los cálculos válidos se conservan como parciales. Una regresión reproduce
+exactamente ese error de completitud. Se añaden rechazos de pagos ausentes,
+lecturas sin frontera de commit, asiento draft, fecha incorrecta y deuda pendiente.
+
+La extensión InvoiceGenerator oficial prepara el encabezado. InvoiceLineService
+calcula la línea P002 sin mover stock; InvoiceService valida/contabiliza la factura.
+InvoicePaymentCreateService, InvoiceTermPaymentService y InvoicePaymentValidateService
+generan cuatro cobros VES, asientos y conciliaciones. Preparación de journal,
+cuenta CASH-VES y secuencia confirma antes; cada factura y todos sus pagos
+comparten transacción. No se escriben estados o saldos para simular éxito.
+El compilador consume el proyecto axelor-account ya fijado del mismo host;
+la extensión se compila sólo en el perfil full-stack, sin nuevos pins de baseline.
+El reloj LAB avanza al último día de fx.json tras los gates para mantener
+activa la validación nativa contra facturas futuras. No cambian fechas ni tasas.

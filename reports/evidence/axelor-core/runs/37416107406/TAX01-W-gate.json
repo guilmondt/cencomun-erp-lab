@@ -1,0 +1,34 @@
+{
+  "case": "TAX01-W",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "BLOCKED",
+  "failed_stage": "native-invoice-generation",
+  "error_type": "com.axelor.apps.base.AxelorException",
+  "error": "No account found for Tax: TAX-LAB-10 (company: CCM-LAB-001)",
+  "native_stack": [
+    "com.axelor.apps.account.service.AccountManagementServiceAccountImpl.getTaxAccount(AccountManagementServiceAccountImpl.java:395)",
+    "com.axelor.apps.account.service.TaxAccountService.getAccount(TaxAccountService.java:66)",
+    "com.axelor.apps.account.service.invoice.generator.tax.TaxInvoiceLine.getImputedAccount(TaxInvoiceLine.java:204)",
+    "com.axelor.apps.account.service.invoice.generator.tax.TaxInvoiceLine.createInvoiceLineTaxes(TaxInvoiceLine.java:167)",
+    "com.axelor.apps.account.service.invoice.generator.tax.TaxInvoiceLine.creates(TaxInvoiceLine.java:107)",
+    "com.axelor.apps.account.service.invoice.generator.InvoiceGenerator.populate(InvoiceGenerator.java:378)",
+    "com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceServiceImpl.createInvoice(SaleOrderInvoiceServiceImpl.java:610)",
+    "com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceServiceImpl.createInvoice(SaleOrderInvoiceServiceImpl.java:591)",
+    "com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceServiceImpl.createInvoice(SaleOrderInvoiceServiceImpl.java:581)",
+    "com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceServiceImpl.generateInvoice(SaleOrderInvoiceServiceImpl.java:500)",
+    "com.cencomun.core.NativeAccess.call(NativeAccess.java:70)",
+    "com.cencomun.core.NativeGateService.sell(NativeGateService.java:193)"
+  ],
+  "phase_evidence": {
+    "planned_initial_stock_move_id": 3,
+    "planned_initial_stock_move_status": 2,
+    "initial_stock_move_id": 3,
+    "initial_stock_move_status": 3,
+    "native_created_sale_order_status": 1
+  },
+  "committed_native_export": "TAX01-W-native-export.json",
+  "seconds": 5.441,
+  "sequence": 2
+}

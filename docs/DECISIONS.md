@@ -107,6 +107,16 @@
 - Consequences: AOS currencies are global application configuration in this
   isolated database. This test does not establish a production multitenant FX
   policy, the six neutral routes, audit completeness or rate idempotency.
-- Evidence: FX01-03-MONEY01-03 compares the fixed fixture results and fresh
-  native rate/authorization rows. Missing-rate and operator denials must leave
-  those rows unchanged. Native runtime verification is pending the next CI.
+- Evidence: conversions/rates are partial. Complete FX01-03-MONEY01-03 parity
+  requires three native USD invoices and four native VES receipts (40, 41,
+  0.41, 0.41), with posted USD effects and liquidation read after commit.
+  The supported InvoiceGenerator extension uses the existing pinned account
+  project; InvoicePayment creation, term allocation, validation, posting and
+  reconciliation remain native. Dedicated LAB CASH-VES account/journal/sequence
+  commit during preparation. Missing-rate/operator denials must leave all native
+  effects unchanged. No stocks are moved for these invoices, matching the reference.
+- Rounding: the daily USD/VES quote and the posted VES/USD effective rate are
+  exported separately. Native posting derives the latter from rounded company
+  amount/payment amount: 0.01 USD / 0.41 VES, not an invented exact reciprocal.
+  Acceptance checks both the native daily quote and rounded booked amounts.
+  The aggregator rejects calculations alone; native runtime verification is pending.

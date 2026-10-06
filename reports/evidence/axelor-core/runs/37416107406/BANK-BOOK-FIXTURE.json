@@ -1,0 +1,384 @@
+{
+  "case": "BANK-BOOK-FIXTURE",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "actor": "admin",
+  "setup": {
+    "company_id": 1,
+    "journal_id": 5,
+    "native_advance_receipts_enabled": true,
+    "sequence_id": 105
+  },
+  "native_export": {
+    "company_id": 1,
+    "vouchers": [
+      {
+        "id": 1,
+        "reference": "EXACT-001",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-01",
+        "paid_amount": "100.000",
+        "remaining_amount": "100.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-01",
+          "id": 3,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 1,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 5,
+              "account": "CCM-BANK",
+              "debit": "100.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-100.000",
+              "id": 6,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "100.000"
+            }
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "reference": "PROB-BOOK-001",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-02",
+        "paid_amount": "75.000",
+        "remaining_amount": "75.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-02",
+          "id": 4,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 2,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 7,
+              "account": "CCM-BANK",
+              "debit": "75.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-75.000",
+              "id": 8,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "75.000"
+            }
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "reference": "AMB-BOOK-A",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-03",
+        "paid_amount": "40.000",
+        "remaining_amount": "40.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-03",
+          "id": 5,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 3,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 9,
+              "account": "CCM-BANK",
+              "debit": "40.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-40.000",
+              "id": 10,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "40.000"
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "reference": "AMB-BOOK-B",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-03",
+        "paid_amount": "40.000",
+        "remaining_amount": "40.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-03",
+          "id": 6,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 4,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 11,
+              "account": "CCM-BANK",
+              "debit": "40.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-40.000",
+              "id": 12,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "40.000"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "native_assertions": {
+    "native_voucher_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "native_move_ids": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "native_move_line_ids": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "unallocated_total": "255.000"
+  },
+  "status": "PASS",
+  "complete": true,
+  "seconds": 1.526,
+  "steps": [
+    {
+      "case": "native-advance-receipt",
+      "persisted": {
+        "id": 1,
+        "reference": "EXACT-001",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-01",
+        "paid_amount": "100.000",
+        "remaining_amount": "100.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-01",
+          "id": 3,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 1,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 5,
+              "account": "CCM-BANK",
+              "debit": "100.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-100.000",
+              "id": 6,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "100.000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "native-advance-receipt",
+      "persisted": {
+        "id": 2,
+        "reference": "PROB-BOOK-001",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-02",
+        "paid_amount": "75.000",
+        "remaining_amount": "75.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-02",
+          "id": 4,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 2,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 7,
+              "account": "CCM-BANK",
+              "debit": "75.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-75.000",
+              "id": 8,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "75.000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "native-advance-receipt",
+      "persisted": {
+        "id": 3,
+        "reference": "AMB-BOOK-A",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-03",
+        "paid_amount": "40.000",
+        "remaining_amount": "40.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-03",
+          "id": 5,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 3,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 9,
+              "account": "CCM-BANK",
+              "debit": "40.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-40.000",
+              "id": 10,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "40.000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "native-advance-receipt",
+      "persisted": {
+        "id": 4,
+        "reference": "AMB-BOOK-B",
+        "company_id": 1,
+        "company_code": "CCM-LAB-001",
+        "partner_id": 3,
+        "customer_id": "CBANK",
+        "currency": "USD",
+        "payment_date": "2026-10-03",
+        "paid_amount": "40.000",
+        "remaining_amount": "40.000",
+        "status": 2,
+        "allocation_ids": [],
+        "move": {
+          "date": "2026-10-03",
+          "id": 6,
+          "status": 3,
+          "company_id": 1,
+          "voucher_id": 4,
+          "lines": [
+            {
+              "remaining": "0",
+              "id": 11,
+              "account": "CCM-BANK",
+              "debit": "40.000",
+              "credit": "0.000"
+            },
+            {
+              "remaining": "-40.000",
+              "id": 12,
+              "account": "CCM-AR",
+              "debit": "0.000",
+              "credit": "40.000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "fixture-replay",
+      "persisted_ids": {
+        "native_voucher_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "native_move_ids": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "native_move_line_ids": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "unallocated_total": "255.000"
+      },
+      "native_export_identical": true
+    }
+  ]
+}

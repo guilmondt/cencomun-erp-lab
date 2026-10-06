@@ -405,3 +405,95 @@ se recuperan como fuente secundaria etiquetada. No se infiere lo ausente.
 2. Continuar compilación y casos independientes por los canales ya disponibles.
 3. La disponibilidad futura del ZIP permitiría verificar sus archivos/hashes;
    no ampliar red ni declarar ese ZIP descargado mientras siga bloqueado.
+
+## B19 — FX/MONEY calculado sin pagos nativos
+
+Revisión de paridad del commit 013f962: NativeFxService.convert consulta
+CurrencyService y devuelve importes/rate IDs, pero no crea pagos. La referencia
+fija fcf690dbc58b2b2dcf8d045c49976e3613e804cf, business.json y finance.py,
+registra una factura USD por caso y cuatro Payment Entries: FX01 (40 VES),
+FX02 (41 VES) y MONEY-ROUND (dos de 0.41 VES). Un PASS basado sólo en tasas
+es inválido para el grupo completo, aunque los cálculos sean correctos.
+
+1. Conservar conversiones y autorización como evidencia parcial; exigir cuatro
+   pagos nativos, fechas, importes y asientos desde otra petición tras el commit.
+2. Usar factura y InvoicePayment oficiales de AOS, su creación de términos,
+   validación, asiento y conciliación; no construir pagos o saldos simulados.
+3. Añadir regresión del agregador contra cálculos/tasas sin pagos. El CI en
+   curso 37416107406 se conserva; su resultado FX antiguo se revisará con este
+   contrato estricto. No cambiar fixtures, oráculo ni pins para obtener PASS.
+
+## B20–B22 — repetición 37416107406
+
+Commit 013f962, CI FAILURE. BANK-BOOK y PROD completos PASS. FX sólo conversión
+parcial PASS; el PASS completo antiguo se rechaza y queda UNRUN. Gates avanzan
+con el factory oficial (draft=1), sin Sequence NoResult. Venta/entrega/factura
+se revierten juntas al fallar la facturación, mientras la apertura del fixture permanece.
+
+### B20 — dirección de facturación requerida
+
+CO00 falla en ValidateState.process: `Warning ! : Invoicing address missing`.
+Los clientes del fixture no tenían Address/PartnerAddress; no se debe desactivar
+la validación. También afecta a las nuevas facturas FX.
+
+1. Preparar direcciones sintéticas nativas con PartnerAddress de facturación,
+   entrega/default, durante la preparación confirmada, sin alterar fixtures compartidos.
+2. Mantener PartnerService/InvoiceGenerator como consumidores de esas direcciones.
+3. Repetir gates/FX y exigir ID de dirección e invoice/accounted effects frescos.
+
+### B21 — régimen fiscal sin configurar
+
+TAX01-W: `No account found for Tax: TAX-LAB-10 (company: CCM-LAB-001)`.
+Las cuatro cuentas fiscales ya estaban asignadas, pero Account.vatSystemSelect
+era el default 0; TaxInvoiceLine resuelve ese 0, y getTaxAccount sólo admite
+sistemas 1/2. Además faltaba Company.partner y su AccountingSituation fiscal,
+necesarios para InvoiceVatLiabilityService. No es una ausencia del impuesto nativo.
+
+1. Configurar el régimen de las cuentas LAB y el Partner interno de Company
+   con AccountingSituation nativa de devengo/entrega, en preparación confirmada.
+2. Conservar cálculo/resolución/validación fiscal oficiales y tasa exacta del fixture.
+3. Repetir TAX01-W; verificar base 125, IVA 12.50 y asientos, sin escribir estados/saldos.
+
+### B22 — cliente presente pero REST del lector vacío
+
+La inspección fresca confirma C001, nombre/teléfono exactos y company_ids=[1].
+REST de lector devuelve {status:0,offset:0} sin data. Preparación del cliente no
+explica el fallo; sigue sin demostrarse si falla filtro de permiso o consulta/selector.
+
+1. Conservar esa respuesta y scope, sin ampliar permisos.
+2. Comparar la misma consulta REST como admin y el filtro real JpaSecurity del lector,
+   ejecutando la consulta con ese filtro. Registrar compañía, parámetros y conteos.
+3. Repetir nombre/teléfono/serial; sólo datos leídos por el lector nativo aprueban búsqueda.
+
+El artefacto 11391813114 vuelve a estar bloqueado por Forbidden en
+productionresultssa16.blob.core.windows.net; un intento, sin ampliar/publicar red.
+Log completo recuperado en /workspace/ccm-axelor-runtime/ci-evidence/37416107406.log.
+
+### B23 — revisión estática de preparación del pago inicial
+
+El CI todavía no alcanzó el cobro del gate. En el código fijado,
+InvoicePaymentMoveCreateServiceImpl.fillMove suma InvoiceTermPayment.companyPaidAmount;
+el constructor simple de InvoicePayment usado por el gate no crea esos términos.
+Sin preparación de términos, esa suma queda en cero. Esto es una omisión observada
+del adaptador, no una corrección ya demostrada mediante un gate ejecutado.
+
+1. Vincular el pago a la colección nativa de Invoice y ejecutar
+   InvoiceTermPaymentService.createInvoicePaymentTerms antes de validar.
+2. Mantener toda la venta/liquidación en la misma transacción y no asignar montos
+   de términos, saldos ni estados manualmente.
+3. Repetir gates; exigir cuatro asientos contabilizados, pagos validados por el
+   total bruto y saldo cero desde la petición de inspección posterior.
+
+### B24 — reloj determinista y fechas de FX
+
+Revisión del código fijado: VentilateState.setDate rechaza invoiceDate posterior
+al reloj AppAccount. El gate prepara el reloj LAB en 2026-10-01; FX02/MONEY
+usan 2026-10-02/03. El recorrido nuevo aún no se ejecutó en ERP; esta frontera
+estática se corrige como preparación de entorno, sin desactivar el control.
+
+1. Después de los gates, avanzar el reloj AppBase LAB al máximo día de fx.json,
+   2026-10-03, durante la preparación FX confirmada.
+2. Conservar fechas originales de las facturas/pagos y selección de tasa por
+   paymentDate; no cambiar fixture/oráculo ni permitir facturas futuras.
+3. Exportar el día preparado y repetir FX con fechas/tasas/asientos leídos
+   después del commit. No considerar la corrección verificada hasta esa repetición.

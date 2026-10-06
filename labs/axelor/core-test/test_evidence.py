@@ -1,13 +1,87 @@
 """Regression tests for coverage integrity and native accounting evidence rejection."""
 import unittest
 from pathlib import Path
-from run import assert_native_economics, assert_native_bank_book, assert_native_fx, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
+from run import assert_native_economics, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle, verified_build_status, run_product_cases
 from finalize import BASELINE, baseline_pin_blob
 
 FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_native_invoice_fixture_rejects_missing_address_or_default_tax_regime(self):
+        import copy
+        from run import assert_native_configuration
+        configuration = {"company_id": 1, "legal_partner_id": 4, "legal_vat_system": 2,
+            "customers": [{"code": c, "invoicing_address_id": i} for i,c in enumerate(["C001", "C002", "CBANK"], 1)],
+            "accounts": [{"code": c, "id": i, "vat_system": 1} for i,c in enumerate(["CCM-AR", "CCM-REVENUE", "CCM-TAX"], 1)]}
+        assert_native_configuration(configuration)
+        missing = copy.deepcopy(configuration); missing["customers"][0]["invoicing_address_id"] = 0
+        with self.assertRaisesRegex(AssertionError, "Native invoicing address missing"):
+            assert_native_configuration(missing)
+        default = copy.deepcopy(configuration); default["accounts"][1]["vat_system"] = 0
+        with self.assertRaisesRegex(AssertionError, "Native accrual account regime required"):
+            assert_native_configuration(default)
+
+    def test_fx_complete_requires_four_posted_payments_and_committed_liquidation(self):
+        import copy
+        import json
+        from decimal import Decimal, ROUND_HALF_UP
+        from run import review_native_fx
+        fixture = json.loads((FIXTURES / "fx.json").read_bytes())
+        observed, invoices, payments, rates = [], [], [], []
+        def move(identity, currency, day, debit_account, credit_account, usd, foreign):
+            return {"id": identity, "status": 3, "company_id": 1, "date": day,
+                "currency": currency, "company_currency": "USD", "lines": [
+                    {"id": identity*10+1, "account": debit_account, "debit": str(usd), "credit": "0",
+                     "currencyAmount": str(foreign), "currencyRate": str((usd/foreign).quantize(Decimal(".000001"), rounding=ROUND_HALF_UP)), "amountRemaining": "0"},
+                    {"id": identity*10+2, "account": credit_account, "debit": "0", "credit": str(usd),
+                     "currencyAmount": str(-foreign), "currencyRate": str((usd/foreign).quantize(Decimal(".000001"), rounding=ROUND_HALF_UP)), "amountRemaining": "0"}]}
+        for index, expected in enumerate(fixture["payments"], 1):
+            reference = "FX-" + expected["id"]
+            day = expected["date"]
+            usd = sum(map(Decimal, expected["lines"]))
+            foreign = expected.get("expected_lines", [expected["expected_total"]])
+            native_invoice = {"id": index, "reference": reference, "company_id": 1,
+                "customer": "C002", "date": day, "currency": "USD", "status": 3,
+                "total": str(usd), "paid": str(usd), "remaining": "0",
+                "move": move(100+index, "USD", day, "CCM-AR", "CCM-REVENUE", usd, usd)}
+            invoices.append(native_invoice)
+            native_ids = []
+            for part, (source, amount) in enumerate(zip(expected["lines"], foreign), 1):
+                identity = 10+len(payments)
+                posted = move(200+identity, "VES", day, "CCM-CASH-VES", "CCM-AR", Decimal(source), Decimal(amount))
+                payments.append({"id": identity, "reference": reference+"-"+str(part), "invoice_id": index,
+                    "date": day, "currency": "VES", "amount": amount, "status": 1, "move": posted,
+                    "reconcile": {"id": identity+500, "status": 2, "amount": source,
+                        "debit_line_id": native_invoice["move"]["lines"][0]["id"], "credit_line_id": posted["lines"][1]["id"]}})
+                native_ids.append(identity)
+            rate = ["40", "41", "40.5"][index-1]
+            rates.append({"id": index, "source": "USD", "target": "VES", "from_date": day, "to_date": day, "rate": rate})
+            observed.append({"id": expected["id"], "date": day, "rate": rate, "native_conversion_id": index,
+                "lines": foreign, "total": expected["expected_total"], "native_invoice_id": index, "native_payment_ids": native_ids})
+            for payment in payments:
+                if payment["invoice_id"] == index:
+                    payment.update(observed_payment_day_conversion_id=index, observed_payment_day_rate=rate)
+        persisted = {"company_id": 1, "company_code": "CCM-LAB-001", "read_boundary": "separate-http-after-payment-commit",
+            "invoices": invoices, "payments": payments, "rates": rates,
+            "authorizations": [{"id": 7, "company_id": 1, "native_conversion_id": 3, "approved_by": "ccm-manager",
+                "external_id": "FX-AUTH", "reason": fixture["manual_rate"]["reason"]}]}
+        assert_native_fx(observed, fixture, persisted)
+        mutations = []
+        missing = copy.deepcopy(persisted); missing["payments"] = []; mutations.append(missing)
+        before_commit = copy.deepcopy(persisted); before_commit.pop("read_boundary"); mutations.append(before_commit)
+        draft = copy.deepcopy(persisted); draft["payments"][0]["move"]["status"] = 1; mutations.append(draft)
+        wrong_date = copy.deepcopy(persisted); wrong_date["payments"][1]["date"] = "2026-10-01"; mutations.append(wrong_date)
+        unliquidated = copy.deepcopy(persisted); unliquidated["invoices"][0]["remaining"] = "1"; mutations.append(unliquidated)
+        for candidate in mutations:
+            with self.subTest(candidate=candidate):
+                with self.assertRaises(AssertionError):
+                    assert_native_fx(observed, fixture, candidate)
+                row = {"status": "PASS", "complete": True}
+                review_native_fx(row, {"observations": observed, "persisted": candidate}, fixture)
+                self.assertNotEqual("PASS", row["status"])
+                self.assertFalse(row["complete"])
+
     def test_bank_book_keeps_signed_native_credit_and_positive_unallocated_amount(self):
         import json
         import copy
@@ -41,15 +115,42 @@ class EvidenceTests(unittest.TestCase):
             rates.append({"id": index, "source": "USD", "target": "VES", "from_date": row["date"], "to_date": row["date"], "rate": rate})
         persisted = {"rates": rates, "authorizations": [{"id": 7, "company_id": 1, "native_conversion_id": 3,
             "approved_by": "ccm-manager", "external_id": "FX-AUTH", "reason": specification["manual_rate"]["reason"]}]}
-        assert_native_fx(observations, specification, persisted)
+        assert_native_fx_conversions(observations, specification, persisted)
+        with self.assertRaises(AssertionError):
+            assert_native_fx(observations, specification, persisted)
         aggregate = copy.deepcopy(observations)
         aggregate[-1].update(lines=["0.405", "0.405"], total="0.81")
         with self.assertRaises(AssertionError):
-            assert_native_fx(aggregate, specification, persisted)
+            assert_native_fx_conversions(aggregate, specification, persisted)
         unauthorized = copy.deepcopy(persisted)
         unauthorized["authorizations"][0]["approved_by"] = "ccm-operator"
         with self.assertRaises(AssertionError):
-            assert_native_fx(observations, specification, unauthorized)
+            assert_native_fx_conversions(observations, specification, unauthorized)
+
+        # Reproduce the old complete six-step PASS, with valid calculations and
+        # real-shaped rate/role evidence but no payments. It must remain partial.
+        import tempfile
+        from extract_log_evidence import extract
+        from run import REFERENCE
+        group = "FX01-03-MONEY01-03"
+        steps = [{"case": o["id"], "native_conversion": o} for o in observations[:2]]
+        steps += [{"case": "missing-rate", "http_status": 422, "native_effects_unchanged": True},
+                  {"case": "operator-denied", "http_status": 403, "native_effects_unchanged": True},
+                  {"case": "manager-authorized", "persisted": persisted},
+                  {"case": "MONEY-ROUND", "native_conversion": observations[2]}]
+        with tempfile.TemporaryDirectory() as tmp:
+            log = Path(tmp) / "run.log"
+            notices = [{"case": group, "step": s} for s in steps]
+            notices.append({"case": group, "reference": REFERENCE, "revision": 1, "status": "PASS", "complete": True})
+            log.write_text("\n".join("timestamp ##[notice]" + json.dumps(n) for n in notices) + "\n")
+            result = extract(log, Path(tmp) / "results", "synthetic", "1" * 40, FIXTURES)
+            row = next(r for r in result["groups"] if r["case"] == group)
+            self.assertEqual("UNRUN", row["status"])
+            self.assertFalse(row["complete"])
+            self.assertEqual("PASS", row["partial_conversion_status"])
+            saved = json.loads((Path(tmp) / "results" / (group + ".json")).read_text())
+            self.assertEqual("PASS", saved["reported_status"])
+            self.assertEqual("UNRUN", saved["status"])
 
     def test_fx_pass_notice_without_conversion_and_role_evidence_stays_unrun(self):
         import json

@@ -6,6 +6,7 @@ import com.axelor.db.JpaSecurity;
 import com.axelor.db.Model;
 import com.axelor.db.Query;
 import com.axelor.inject.Beans;
+import com.axelor.rpc.filter.Filter;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
@@ -67,5 +68,23 @@ public class CoreReadResource {
       items.add(row);
     }
     return Map.of("items", items, "total", count, "page", page, "page_size", size);
+  }
+
+  /** Diagnose the existing native reader filter without bypassing or broadening it. */
+  @GET @Path("/lab/search/diagnostics")
+  public Map<String, Object> diagnostics(@QueryParam("company_id") String companyCode,
+      @QueryParam("name") String name) {
+    Model current = company(companyCode);
+    if (name == null || name.length() > 200) throw new BadRequestException("LAB name required");
+    Class<Model> partner = type("com.axelor.apps.base.db.Partner");
+    JpaSecurity security = Beans.get(JpaSecurity.class);
+    security.check(JpaSecurity.AccessType.READ, partner);
+    Filter scope = security.getFilter(JpaSecurity.AccessType.READ, partner);
+    if (scope == null) throw new IllegalStateException("Expected scoped native Partner read filter");
+    Query<Model> selected = Filter.and(scope, Filter.equals("name", name)).build(partner);
+    return Map.of("actor", AuthUtils.getUser().getCode(), "company_id", current.getId(),
+        "native_scope", scope.getQuery(), "native_params", scope.getParams(),
+        "scoped_count", scope.build(partner).count(), "name_count", selected.count(),
+        "native_partner_ids", selected.fetch(100).stream().map(Model::getId).toList());
   }
 }

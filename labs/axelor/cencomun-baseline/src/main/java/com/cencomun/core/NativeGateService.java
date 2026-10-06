@@ -79,14 +79,16 @@ public class NativeGateService {
     // The native Partner repository initializes AccountingSituation for companySet.
     // It requires the company's real AccountConfig before any associated partner save.
     NativeFinance.configure(company);
+    NativeFinance.configureCompanyPartner(company);
     for (JsonNode fixture : FixtureBundle.json("customers.json")) {
       Model partner = one(BASE + "Partner", "self.partnerSeq = ?1", fixture.get("id").asText());
       if (partner == null) {
         Model email = record("com.axelor.message.db.EmailAddress", "address", fixture.get("email").asText());
-        record(BASE + "Partner", "partnerSeq", fixture.get("id").asText(),
+        partner = record(BASE + "Partner", "partnerSeq", fixture.get("id").asText(),
             "name", fixture.get("name").asText(), "mobilePhone", fixture.get("phone").asText(), "emailAddress", email,
-            "companySet", new HashSet<>(List.of(company)), "isCustomer", true, "partnerTypeSelect", 2);
+            "companySet", new HashSet<>(List.of(company)), "isCustomer", true, "partnerTypeSelect", 2, "currency", usd);
       }
+      NativeFinance.configurePartner(company, partner);
     }
     Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", "C001");
     set(AuthUtils.getUser(), "activeCompany", company);
@@ -208,6 +210,7 @@ public class NativeGateService {
   /** Fresh repository reads after success/rollback; transient IDs never count as evidence. */
   public Map<String, Object> inspect(String caseId) {
     Map<String, Object> result = new LinkedHashMap<>();
+    Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
     result.put("case", caseId);
     List<Map<String, Object>> quantities = new ArrayList<>();
     Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
@@ -221,6 +224,7 @@ public class NativeGateService {
       result.put("stock_move_ids", list(STOCK + "StockMove", "self.fromStockLocation = ?1 OR self.toStockLocation = ?1", warehouse)
           .stream().map(Model::getId).toList());
     } else { result.put("stock", List.of()); result.put("stock_move_ids", List.of()); }
+    result.put("fixture_configuration", company == null ? Map.of() : NativeFinance.inspectConfiguration(company));
     result.put("sale_order_ids", list(SALE + "SaleOrder", "self.externalReference = ?1", "CCM-" + caseId).stream().map(Model::getId).toList());
     List<Map<String, Object>> invoices = new ArrayList<>();
     List<Map<String, Object>> moves = new ArrayList<>();
@@ -228,6 +232,9 @@ public class NativeGateService {
       for (Model invoice : list(ACCOUNT + "Invoice", "self.saleOrder = ?1", so)) {
         Map<String, Object> inv = new LinkedHashMap<>();
         inv.put("id", invoice.getId());
+        Model address = (Model) get(invoice, "address");
+        inv.put("invoicing_address_id", address == null ? 0L : address.getId());
+        inv.put("native_vat_liability", get(invoice, "vatSystemSelect"));
         for (String field : List.of("statusSelect", "exTaxTotal", "taxTotal", "inTaxTotal", "amountPaid", "amountRemaining"))
           inv.put(field, String.valueOf(get(invoice, field)));
         List<Map<String, Object>> invoiceLines = new ArrayList<>();
@@ -258,7 +265,6 @@ public class NativeGateService {
     result.put("deliveries", deliveries);
     result.put("company_ids", list(BASE + "Company", "self.code = ?1", "CCM-LAB-001").stream().map(Model::getId).toList());
     List<Map<String, Object>> sequences = new ArrayList<>();
-    Model company = one(BASE + "Company", "self.code = ?1", "CCM-LAB-001");
     if (company != null) for (Model seq : list(BASE + "Sequence", "self.company = ?1", company)) {
       List<Map<String, Object>> versions = new ArrayList<>();
       for (Model version : list(BASE + "SequenceVersion", "self.sequence = ?1", seq))

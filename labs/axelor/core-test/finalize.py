@@ -7,7 +7,7 @@ import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
-from run import criteria_for, verified_build_status
+from run import criteria_for, verified_build_status, review_native_fx
 
 BASELINE = "e0190090fd137576ce273e350d7ce6686d66baf9"
 
@@ -45,6 +45,11 @@ def finalize(repo, host, output):
     (output / "build-evidence.json").write_text(json.dumps(proof, indent=2) + "\n")
     print("::notice title=Core build attestation::" + json.dumps(proof))
     coverage = json.loads((output / "coverage.json").read_text())
+    fx = next(r for r in coverage["groups"] if r["case"] == "FX01-03-MONEY01-03")
+    fx_path = output / "FX01-03-MONEY01-03.json"
+    review_native_fx(fx, json.loads(fx_path.read_text()) if fx_path.exists() else {},
+        json.loads((repo / "fixtures/ccm-core-v1/fx.json").read_bytes()))
+    coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
     coverage["criteria"] = criteria_for(coverage["groups"], proof)
     coverage["build_evidence"] = "build-evidence.json"
     (output / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n")
