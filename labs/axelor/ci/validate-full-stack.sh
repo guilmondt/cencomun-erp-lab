@@ -88,30 +88,8 @@ bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
   --write-locks > "$state_dir/private/full-build.log" 2>&1
-python3 - "$host_dir" "$results_dir" <<'PY'
-import json,sys,xml.etree.ElementTree as ET
-from pathlib import Path
-host,results=map(Path,sys.argv[1:])
-path=host/'modules/axelor-open-suite/axelor-base/build/test-results/test/TEST-com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper.xml'
-suite=ET.parse(path).getroot()
-assert int(suite.attrib['tests']) == 16, suite.attrib
-assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
-(results/'upstream-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
-print('Upstream representative suite: 16 tests passed, no failures/errors/skips')
-path=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeAddressTemplateTest.xml')
-suite=ET.parse(path).getroot()
-assert int(suite.attrib['tests']) == 8, suite.attrib
-assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
-(results/'native-fixture-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
-print('Native address callback regression: 8 cases passed, no failures/errors/skips; no database coverage claim')
-for name,count in [('NativePermissionFilterTest',5),('NativeInvoiceRuntimeTest',2),('NativeOrderModelTest',4),('NativeBankCsvTest',3),('NativeFinanceModelTest',5)]:
-    path=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/test-results/test')/f'TEST-com.cencomun.core.{name}.xml'
-    suite=ET.parse(path).getroot()
-    assert int(suite.attrib['tests']) == count, suite.attrib
-    assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
-    (results/f'{name}.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
-    print(f'{name}: {count} native unit cases passed; DB acceptance requires Core execution')
-PY
+python3 labs/axelor/ci/validate-test-suites.py "$host_dir" \
+  /workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline "$results_dir"
 echo '::notice title=Axelor full build::Full AOS/frontend WAR and embedded launcher compiled; 16 upstream unit cases passed.'
 python3 - <<'PY'
 from pathlib import Path

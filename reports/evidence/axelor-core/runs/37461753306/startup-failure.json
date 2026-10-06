@@ -1,0 +1,19 @@
+{
+  "lab_commit": "fab14b1dd914da2269796d7f0bd1e0fb6de9017b",
+  "run_id": "37461753306",
+  "stage": "Java suite receipts before PostgreSQL initialization and authenticated ERP startup",
+  "exact_errors": [
+    "baseline\tBaseline and native Core gates on disposable external runner\t2026-10-06T12:17:29.3127034Z AssertionError: {'name': 'com.cencomun.core.NativeFinanceModelTest', 'tests': '7', 'skipped': '0', 'failures': '0', 'errors': '0', 'timestamp': '2026-10-06T12:16:55.244Z', 'hostname': '928c7f674f76', 'time': '0.165'}",
+    "baseline\tBaseline and native Core gates on disposable external runner\tAssertionError: {'name': 'com.cencomun.core.NativeFinanceModelTest', 'tests': '7', 'skipped': '0', 'failures': '0', 'errors': '0', 'timestamp': '2026-10-06T12:16:55.244Z', 'hostname': '928c7f674f76', 'time': '0.165'}"
+  ],
+  "cause": "NativeFinanceModelTest now contains seven passing tests; validate-full-stack.sh still requires five",
+  "erp_started": false,
+  "core_groups_executed": 0,
+  "historical_passes_imported": false,
+  "log_sha256": "c3f75ad0119116c34af970cdbe817d92af92a783cd944e8eb53a9db10b474438",
+  "steps": [
+    "Preserve complete log and actual UNRUN matrix.",
+    "Require the current seven native finance tests and every other selected suite, zero failures/errors/skips.",
+    "Run regressions and a single new full-stack CI; verify all native effects after commit."
+  ]
+}

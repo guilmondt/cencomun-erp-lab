@@ -1,5 +1,28 @@
 # Core Test Axelor — ejecución en curso
 
+CI [37461753306](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37461753306),
+commit `fab14b1dd914da2269796d7f0bd1e0fb6de9017b`, FAILURE antes del arranque ERP.
+**34 UNRUN; criterios 13 UNRUN / 1 BLOCKED (actualización aplazada).**
+No se heredan PASS de CI20. El log completo contiene siete tests de finanzas
+sin fallos/errores/skips, pero el script exigía cinco y abortó antes de inicializar
+PostgreSQL/ERP. La evidencia y causa exacta quedan en
+[recibo](evidence/axelor-core/runs/37461753306/evidence-source.json) y
+[diagnóstico](evidence/axelor-core/runs/37461753306/startup-failure.json).
+ZIP403 `productionresultssa0.blob.core.windows.net`, un intento; red conservada.
+
+Se corrigió la comprobación, conservando todos los suites obligatorios y cero
+fallos/errores/skips. Cuatro regresiones específicas y81Python PASS; validación
+estrecha de los XML locales archivados7finanzas/4pedidos PASS. No se recompiló
+ni se ejecutó negocio local por esta corrección. Los67Java requeridos del próximo
+CI incluyen los dos tests nuevos. Sigue una única ejecución de aceptación de
+las cinco causas de B37, benchmark, ambas fases y matriz; no se cierra comparación.
+Coste negativo aceptado y cancelación confirmada rechazada conservan los dos
+FAIL funcionales demostrados en CI20, sin cambiar sus expectativas.
+
+## Historia — CI5660bc7
+
+# Core Test Axelor — ejecución en curso
+
 CI [37453727869](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37453727869),
 commit `5660bc7cedc30c910811691c16b0ef1f067068a3`, FAILURE, 39m45s.
 **Primaria:26 PASS / 8 FAIL / 0 BLOCKED / 0 UNRUN. Réplica:27 PASS / 7 FAIL.**

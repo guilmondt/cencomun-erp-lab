@@ -930,3 +930,22 @@ exige String request_rate. No se cambió contrato ni se omitió ningún campo.
 Los PASS locales no son aceptación ERP. CI20 y sus ocho FAIL quedan intactos;
 coste negativo y cancelaciones confirmadas conservan FAIL funcional esperado.
 Ejecutar una única siguiente validación CI para todo este bloque y la matriz.
+
+
+## B38 — CI21 detiene el runner por un conteo de tests antiguo
+
+Causa observada: CI37461753306@fab14b1 compila el perfil nativo y su suite
+NativeFinanceModelTest contiene7tests sin fallos/errores/skips; la comprobación
+inline aún requiere5. AssertionError de ese conteo aborta antes de inicializar
+PostgreSQL/ERP. No es un rechazo económico:34grupos UNRUN,13criterios UNRUN,
+13BLOCKED por actualización aplazada. Log completoSHA y error literal conservados.
+
+1. Sustituir la comprobación inline por validate-test-suites.py y exigir7finanzas,
+   manteniendo8dirección/5filtro/2invoice/4pedidos/3CSV/16upstream y22baseline.
+2. Regresar ausencia, conteo antiguo, fallos/errores/skips; no escribir recibos de
+   éxito si falta cualquier suite.81Python PASS; XML archivados reales7+4verificados.
+3. Ejecutar una única siguiente CI y comprobar arranque, pruebas nativas y matriz
+   del nuevo SHA. No trasladar los PASS históricos a un commit que no ejecutó ERP.
+
+ZIP403 sa0:un intento, artefacto remoto retenido y log completo local. Sin ampliación
+ni publicación de red. Los dos FAIL funcionales de CI20 siguen vigentes.
