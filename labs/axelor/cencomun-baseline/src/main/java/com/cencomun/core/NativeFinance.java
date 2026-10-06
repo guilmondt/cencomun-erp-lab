@@ -19,6 +19,10 @@ public final class NativeFinance {
   private static final LocalDate DATE = LocalDate.of(2026, 10, 1);
 
   public static void configure(Model company) {
+    NativeIndependentController.fixtureAdmin();
+    Model appInvoice = effectiveAppInvoice();
+    invoiceRuntime(appInvoice);
+    save(appInvoice);
     if (one(ACCOUNT + "AccountConfig", "self.company = ?1", company) != null) {
       configureJournalAccounts(company);
       return;
@@ -55,6 +59,30 @@ public final class NativeFinance {
       record(ACCOUNT + "AccountManagement", "company", company, "typeSelect", 1,
           "product", product, "saleAccount", acct(company, "REVENUE"), "purchaseAccount", acct(company, "COGS"));
     }
+  }
+
+  private static Model effectiveAppInvoice() {
+    Model app = (Model) call(service("com.axelor.apps.account.service.app.AppAccountService"), "getAppInvoice");
+    if (app == null) throw new IllegalStateException("Native AppInvoice configuration missing");
+    return app;
+  }
+
+  /** Explicit LAB-only PDF setting; ventilation and all economic services remain enabled. */
+  static void invoiceRuntime(Model app) {
+    if (!Boolean.FALSE.equals(get(app, "isVentilationSkipped")))
+      throw new IllegalStateException("Core LAB requires native invoice ventilation, isVentilationSkipped=false");
+    set(app, "autoGenerateInvoicePrintingFileOnSaleInvoice", false);
+  }
+
+  static Map<String, Object> inspectInvoiceRuntime() {
+    Model effective = effectiveAppInvoice();
+    Model persisted = one("com.axelor.studio.db.AppInvoice", "self.id = ?1", effective.getId());
+    if (persisted == null) throw new IllegalStateException("Committed native AppInvoice missing");
+    return Map.of("native_app_invoice_id", persisted.getId(),
+        "autoGenerateInvoicePrintingFileOnSaleInvoice", get(effective, "autoGenerateInvoicePrintingFileOnSaleInvoice"),
+        "isVentilationSkipped", get(effective, "isVentilationSkipped"),
+        "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice", get(persisted, "autoGenerateInvoicePrintingFileOnSaleInvoice"),
+        "persisted_isVentilationSkipped", get(persisted, "isVentilationSkipped"));
   }
 
   /** Native fixture prerequisites, not a relaxation of invoice/tax validation. */
@@ -152,7 +180,8 @@ public final class NativeFinance {
     for (Model account : list(ACCOUNT + "Account", "self.company = ?1", company))
       accounts.add(Map.of("code", get(account, "code"), "id", account.getId(), "vat_system", get(account, "vatSystemSelect")));
     return Map.of("company_id", company.getId(), "legal_partner_id", legal == null ? 0L : legal.getId(),
-        "legal_vat_system", situation == null ? 0 : get(situation, "vatSystemSelect"), "customers", customers, "accounts", accounts);
+        "legal_vat_system", situation == null ? 0 : get(situation, "vatSystemSelect"), "customers", customers, "accounts", accounts,
+        "invoice_runtime_configuration", inspectInvoiceRuntime());
   }
 
   public static void opening(Model company, Model customer, Model warehouse, String caseId) {

@@ -1,0 +1,114 @@
+{
+  "source": "Secondary evidence: complete structured Actions log notices only",
+  "run_id": "37425320931",
+  "lab_commit": "8b0a534b8c835aa01aadb753b65be7f4e4c3fbd6",
+  "artifact_id": 11395194586,
+  "artifact_status": "One ZIP download attempt returned Forbidden; no network policy change",
+  "blocked_host": "productionresultssa14.blob.core.windows.net",
+  "log_path": "/workspace/ccm-axelor-runtime/ci-evidence/37425320931.log",
+  "log_sha256": "b5857b48b639e2d2f7bb2fb16efed9b3f3cc86e005d746c75281d07eb8360191",
+  "raw_reported_counts": {
+    "BLOCKED": 2,
+    "UNRUN": 28,
+    "PASS": 2,
+    "FAIL": 2
+  },
+  "reviewed_counts": {
+    "BLOCKED": 2,
+    "UNRUN": 28,
+    "PASS": 2,
+    "FAIL": 2
+  },
+  "limitations": [
+    "Native address save/preflight passed with persisted metadata in this commit; not a Core group.",
+    "Economic transactions rolled back at optional PDF dependency; no gate or native FX payments passed.",
+    "Product and bank PASS were executed in this commit; no historical PASS carried forward.",
+    "All three FX payment cases attempted; successful rate/conversion checks remain partial."
+  ],
+  "validator_code_sha256": {
+    "labs/axelor/core-test/extract_log_evidence.py": "2d92913c3882e97b3ca17a87eaf36ec405ed11520e38c8ff90d804ba62d3bfe6",
+    "labs/axelor/core-test/run.py": "3d0bd6c0493575bed1053cc0486f740c8c5a86348f1f48d3f99b0ddbe574f1c5"
+  },
+  "files": [
+    {
+      "path": "BANK-BOOK-FIXTURE.json",
+      "bytes": 9038,
+      "sha256": "a8b01d504034678a27aced2a04b00bd99a59b4f5de90600325fc97c3ffa48fab"
+    },
+    {
+      "path": "CO00-committed-sequences.json",
+      "bytes": 3120,
+      "sha256": "a38d070a2a2009b6b0851b81d318ec86c029ed7d83991709648662e2f783bc4a"
+    },
+    {
+      "path": "CO00-gate.json",
+      "bytes": 1768,
+      "sha256": "0c6329667a947f675aaae246a27f123b8eecc0c0e8a5ef9436dee0503da3b4bf"
+    },
+    {
+      "path": "CO00-native-export.json",
+      "bytes": 2489,
+      "sha256": "846c684c3aa7dec5a4b03e6c20d11b9118c9f169fc1952a545a964d45811fe25"
+    },
+    {
+      "path": "FX01-03-MONEY01-03.json",
+      "bytes": 9222,
+      "sha256": "68682463489591b3d090730013250e47b9dfd124d4915f34ec0c3e73549e99e8"
+    },
+    {
+      "path": "PROD01-04.json",
+      "bytes": 9349,
+      "sha256": "53f7b6908e4f91fac1654e7c819603ff75055f26ba241f8126b5d375ef15270b"
+    },
+    {
+      "path": "SEARCH01-04-NATIVE.json",
+      "bytes": 7020,
+      "sha256": "d260f1dbd2377c76dfad0893888e130a849050c66fd0db3aa3d6e84b12cb0a2b"
+    },
+    {
+      "path": "TAX01-W-committed-sequences.json",
+      "bytes": 3123,
+      "sha256": "efd88018b393bee91185c3a9fa295b77eedfa7685ab1c4250f65cb930a2c78a2"
+    },
+    {
+      "path": "TAX01-W-gate.json",
+      "bytes": 1773,
+      "sha256": "fff9c8e3c9503d5e08a50945a63d1d88e2eb044e694b693239a9bb46664a2860"
+    },
+    {
+      "path": "TAX01-W-native-export.json",
+      "bytes": 2494,
+      "sha256": "5fbebfbfb18ed94527f97a6089a97fe58b28e5e0dec56656426cd61cf740a9c3"
+    },
+    {
+      "path": "address-preflight.json",
+      "bytes": 1782,
+      "sha256": "f1a37d6fc0e3b892463a6315cc7ed7c2fa46d32eb34663884da2de0ac95513fd"
+    },
+    {
+      "path": "build-evidence.json",
+      "bytes": 1010,
+      "sha256": "3db584394c701c6813577a8414af47a7455e81ed9bdec5dcc31eafd8f413f136"
+    },
+    {
+      "path": "coverage.json",
+      "bytes": 17328,
+      "sha256": "11fe09bfe3aab7cd79d2bf5296ba5f0f16d9079df50e698c622dc648b4dda7dc"
+    },
+    {
+      "path": "runtime-metrics.json",
+      "bytes": 1429,
+      "sha256": "efdc12378ad03c177bc667a907955c899bf6b34ea6218247a13e3135237c2208"
+    },
+    {
+      "path": "smoke-first.json",
+      "bytes": 328,
+      "sha256": "957dd69ef127d3babe9382d145be282a0128bece36e1a3e66b3a1b13848e4e8a"
+    },
+    {
+      "path": "smoke-restart.json",
+      "bytes": 328,
+      "sha256": "fbcf5fbd592a45cd8f471d622b0eeff0f0ce56fa7fc282592a6efde0393078df"
+    }
+  ]
+}

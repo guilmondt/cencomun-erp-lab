@@ -203,7 +203,8 @@ public class NativeFxService {
       }
     }
     return Map.of("rates", rates, "authorizations", authorizations, "company_id", company.getId(),
-        "company_code", get(company, "code"), "invoices", invoices, "payments", payments);
+        "company_code", get(company, "code"), "invoices", invoices, "payments", payments,
+        "invoice_runtime_configuration", NativeFinance.inspectInvoiceRuntime());
   }
 
   private static Map<String, Object> exportMove(Model move) {

@@ -1,0 +1,166 @@
+{
+  "case": "FX01-03-MONEY01-03",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 1,
+  "status": "FAIL",
+  "complete": false,
+  "seconds": 3.043,
+  "operator": "ccm-operator",
+  "manager": "ccm-manager",
+  "partial_conversion_status": "PASS",
+  "error": "Native payment cases failed: FX01: HTTP Error 500: ; FX02: HTTP Error 500: ; MONEY-ROUND: HTTP Error 500: ",
+  "error_type": "RuntimeError",
+  "native_http_error": "{\"error_type\":\"com.axelor.apps.base.AxelorException\",\"error\":\"La configuration pour imprimer ce mod\u00e8le est manquante\",\"native_stack\":[\"com.axelor.apps.account.service.config.AccountConfigService.getInvoicePrintTemplate(AccountConfigService.java:747)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilateProcess(InvoiceServiceImpl.java:323)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilate(InvoiceServiceImpl.java:294)\",\"com.axelor.apps.supplychain.service.invoice.InvoiceServiceSupplychainImpl.ventilate(InvoiceServiceSupplychainImpl.java:134)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.validateAndVentilate(InvoiceServiceImpl.java:245)\",\"com.cencomun.core.NativeAccess.call(NativeAccess.java:70)\",\"com.cencomun.core.NativeFxService.payment(NativeFxService.java:127)\",\"com.cencomun.core.NativeFxResource.payment(NativeFxResource.java:21)\",\"com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)\",\"com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)\",\"com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)\",\"com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)\"]}",
+  "full_evidence_file": "FX01-03-MONEY01-03.json",
+  "steps": [
+    {
+      "case": "FX01",
+      "native_conversion": {
+        "rate": "40.000000",
+        "total": "40.00",
+        "lines": [
+          "40.00"
+        ],
+        "native_conversion_id": 10,
+        "date": "2026-10-01",
+        "id": "FX01"
+      }
+    },
+    {
+      "case": "FX02",
+      "native_conversion": {
+        "rate": "41.000000",
+        "total": "41.00",
+        "lines": [
+          "41.00"
+        ],
+        "native_conversion_id": 11,
+        "date": "2026-10-02",
+        "id": "FX02"
+      }
+    },
+    {
+      "case": "missing-rate",
+      "http_status": 422,
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "operator-denied",
+      "http_status": 403,
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "manager-authorized",
+      "result": {
+        "native_conversion_id": 12,
+        "authorization_id": 1
+      },
+      "persisted": {
+        "invoices": [],
+        "company_id": 1,
+        "rates": [
+          {
+            "rate": "40.000000",
+            "source": "USD",
+            "target": "VES",
+            "from_date": "2026-10-01",
+            "to_date": "2026-10-01",
+            "id": 10
+          },
+          {
+            "rate": "41.000000",
+            "source": "USD",
+            "target": "VES",
+            "from_date": "2026-10-02",
+            "to_date": "2026-10-02",
+            "id": 11
+          },
+          {
+            "rate": "40.500000",
+            "source": "USD",
+            "target": "VES",
+            "from_date": "2026-10-03",
+            "to_date": "2026-10-03",
+            "id": 12
+          }
+        ],
+        "payments": [],
+        "authorizations": [
+          {
+            "external_id": "FX-AUTH",
+            "reason": "Synthetic authorized payment-day rate",
+            "approved_by": "ccm-manager",
+            "native_conversion_id": 12,
+            "company_id": 1,
+            "id": 1
+          }
+        ],
+        "company_code": "CCM-LAB-001"
+      }
+    },
+    {
+      "case": "MONEY-ROUND",
+      "native_conversion": {
+        "rate": "40.500000",
+        "total": "0.82",
+        "lines": [
+          "0.41",
+          "0.41"
+        ],
+        "native_conversion_id": 12,
+        "date": "2026-10-03",
+        "id": "MONEY-ROUND"
+      }
+    }
+  ],
+  "payment_failures": [
+    {
+      "case": "FX01-03-MONEY01-03",
+      "payment_case": "FX01",
+      "failure": {
+        "case": "FX01-03-MONEY01-03",
+        "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+        "revision": 1,
+        "status": "FAIL",
+        "complete": false,
+        "error": "HTTP Error 500: ",
+        "error_type": "HTTPError",
+        "native_http_error": "{\"error_type\":\"com.axelor.apps.base.AxelorException\",\"error\":\"La configuration pour imprimer ce mod\u00e8le est manquante\",\"native_stack\":[\"com.axelor.apps.account.service.config.AccountConfigService.getInvoicePrintTemplate(AccountConfigService.java:747)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilateProcess(InvoiceServiceImpl.java:323)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilate(InvoiceServiceImpl.java:294)\",\"com.axelor.apps.supplychain.service.invoice.InvoiceServiceSupplychainImpl.ventilate(InvoiceServiceSupplychainImpl.java:134)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.validateAndVentilate(InvoiceServiceImpl.java:245)\",\"com.cencomun.core.NativeAccess.call(NativeAccess.java:70)\",\"com.cencomun.core.NativeFxService.payment(NativeFxService.java:127)\",\"com.cencomun.core.NativeFxResource.payment(NativeFxResource.java:21)\",\"com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)\",\"com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)\",\"com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)\",\"com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)\"]}",
+        "full_evidence_file": "FX01-03-MONEY01-03.json"
+      },
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "payment_case": "FX02",
+      "failure": {
+        "case": "FX01-03-MONEY01-03",
+        "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+        "revision": 1,
+        "status": "FAIL",
+        "complete": false,
+        "error": "HTTP Error 500: ",
+        "error_type": "HTTPError",
+        "native_http_error": "{\"error_type\":\"com.axelor.apps.base.AxelorException\",\"error\":\"La configuration pour imprimer ce mod\u00e8le est manquante\",\"native_stack\":[\"com.axelor.apps.account.service.config.AccountConfigService.getInvoicePrintTemplate(AccountConfigService.java:747)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilateProcess(InvoiceServiceImpl.java:323)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilate(InvoiceServiceImpl.java:294)\",\"com.axelor.apps.supplychain.service.invoice.InvoiceServiceSupplychainImpl.ventilate(InvoiceServiceSupplychainImpl.java:134)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.validateAndVentilate(InvoiceServiceImpl.java:245)\",\"com.cencomun.core.NativeAccess.call(NativeAccess.java:70)\",\"com.cencomun.core.NativeFxService.payment(NativeFxService.java:127)\",\"com.cencomun.core.NativeFxResource.payment(NativeFxResource.java:21)\",\"com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)\",\"com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)\",\"com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)\",\"com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)\"]}",
+        "full_evidence_file": "FX01-03-MONEY01-03.json"
+      },
+      "native_effects_unchanged": true
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "payment_case": "MONEY-ROUND",
+      "failure": {
+        "case": "FX01-03-MONEY01-03",
+        "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+        "revision": 1,
+        "status": "FAIL",
+        "complete": false,
+        "error": "HTTP Error 500: ",
+        "error_type": "HTTPError",
+        "native_http_error": "{\"error_type\":\"com.axelor.apps.base.AxelorException\",\"error\":\"La configuration pour imprimer ce mod\u00e8le est manquante\",\"native_stack\":[\"com.axelor.apps.account.service.config.AccountConfigService.getInvoicePrintTemplate(AccountConfigService.java:747)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilateProcess(InvoiceServiceImpl.java:323)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.ventilate(InvoiceServiceImpl.java:294)\",\"com.axelor.apps.supplychain.service.invoice.InvoiceServiceSupplychainImpl.ventilate(InvoiceServiceSupplychainImpl.java:134)\",\"com.axelor.apps.account.service.invoice.InvoiceServiceImpl.validateAndVentilate(InvoiceServiceImpl.java:245)\",\"com.cencomun.core.NativeAccess.call(NativeAccess.java:70)\",\"com.cencomun.core.NativeFxService.payment(NativeFxService.java:127)\",\"com.cencomun.core.NativeFxResource.payment(NativeFxResource.java:21)\",\"com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)\",\"com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)\",\"com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)\",\"com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)\"]}",
+        "full_evidence_file": "FX01-03-MONEY01-03.json"
+      },
+      "native_effects_unchanged": true
+    }
+  ]
+}

@@ -143,9 +143,17 @@ class EvidenceTests(unittest.TestCase):
         import copy
         from run import assert_native_configuration
         configuration = {"company_id": 1, "legal_partner_id": 4, "legal_vat_system": 2,
+            "invoice_runtime_configuration": {"native_app_invoice_id": 1,
+                "autoGenerateInvoicePrintingFileOnSaleInvoice": False, "isVentilationSkipped": False,
+                "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": False, "persisted_isVentilationSkipped": False},
             "customers": [{"code": c, "invoicing_address_id": i} for i,c in enumerate(["C001", "C002", "CBANK"], 1)],
             "accounts": [{"code": c, "id": i, "vat_system": 1} for i,c in enumerate(["CCM-AR", "CCM-REVENUE", "CCM-TAX"], 1)]}
         assert_native_configuration(configuration)
+        for flag in configuration["invoice_runtime_configuration"]:
+            changed = copy.deepcopy(configuration)
+            changed["invoice_runtime_configuration"][flag] = 0 if flag == "native_app_invoice_id" else True
+            with self.assertRaises(AssertionError):
+                assert_native_configuration(changed)
         missing = copy.deepcopy(configuration); missing["customers"][0]["invoicing_address_id"] = 0
         with self.assertRaisesRegex(AssertionError, "Native invoicing address missing"):
             assert_native_configuration(missing)
@@ -194,11 +202,16 @@ class EvidenceTests(unittest.TestCase):
                 if payment["invoice_id"] == index:
                     payment.update(observed_payment_day_conversion_id=index, observed_payment_day_rate=rate)
         persisted = {"company_id": 1, "company_code": "CCM-LAB-001", "read_boundary": "separate-http-after-payment-commit",
+            "invoice_runtime_configuration": {"native_app_invoice_id": 1,
+                "autoGenerateInvoicePrintingFileOnSaleInvoice": False, "isVentilationSkipped": False,
+                "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": False, "persisted_isVentilationSkipped": False},
             "invoices": invoices, "payments": payments, "rates": rates,
             "authorizations": [{"id": 7, "company_id": 1, "native_conversion_id": 3, "approved_by": "ccm-manager",
                 "external_id": "FX-AUTH", "reason": fixture["manual_rate"]["reason"]}]}
         assert_native_fx(observed, fixture, persisted)
         mutations = []
+        skipped = copy.deepcopy(persisted); skipped["invoice_runtime_configuration"]["isVentilationSkipped"] = True; mutations.append(skipped)
+        wrong_pdf = copy.deepcopy(persisted); wrong_pdf["invoice_runtime_configuration"]["persisted_autoGenerateInvoicePrintingFileOnSaleInvoice"] = True; mutations.append(wrong_pdf)
         missing = copy.deepcopy(persisted); missing["payments"] = []; mutations.append(missing)
         before_commit = copy.deepcopy(persisted); before_commit.pop("read_boundary"); mutations.append(before_commit)
         draft = copy.deepcopy(persisted); draft["payments"][0]["move"]["status"] = 1; mutations.append(draft)

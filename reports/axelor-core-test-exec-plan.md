@@ -544,3 +544,14 @@ El compilador consume el proyecto axelor-account ya fijado del mismo host;
 la extensión se compila sólo en el perfil full-stack, sin nuevos pins de baseline.
 El reloj LAB avanza al último día de fx.json tras los gates para mantener
 activa la validación nativa contra facturas futuras. No cambian fechas ni tasas.
+### Continuación autorizada — SEARCH y PDF LAB (2026-10-06)
+
+CI37425320931 confirmó el guardado nativo de dirección y ejecutó PROD/BANK
+PASS, SEARCH/FX FAIL y gates BLOCKED por PDF opcional. Se registran B28/B29
+antes de ampliar trabajo. Corregir únicamente placeholders de Permission.condition,
+con scope y parámetros intactos; probar composición nativa y repetir búsquedas
+por lector/denegación ajena. Configurar AppInvoice PDF automático false sólo en
+LAB, con ventilación false (no omitida) y lectura efectiva/persistida posterior
+al commit. Las regresiones locales no sustituyen aceptación por CI. Continuar
+CO00 primero, TAX01-W segundo y casos independientes; conservar resultados
+parciales frente a grupos completos. No cambiar oráculo/fixtures/pins/upstream.

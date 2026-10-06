@@ -142,3 +142,28 @@
 - Evidence/tests: 8 native callback cases passed locally; local JPA stopped at
   RequestScoped initialization, save UNRUN. Current CI and evidence are recorded
   in reports/axelor-core-test.md; no historical Core PASS is carried forward.
+## ADR-006 — Placeholder nativo para Permission.condition
+
+2026-10-06. CI37425320931 reproduce búsquedas vacías por lector y error nativo
+String/Long. AOP8.2.3 Filter.build numera cada `?`; condiciones previamente
+numeradas producen una consulta final que reutiliza el primer binding para
+compañía y nombre. Se usan placeholders `?` exclusivamente en Permission.condition,
+como los permisos oficiales AOS fijado. Scope/conditionParams y grants quedan
+idénticos; consultas directas Query mantienen `?1`. Cinco regresiones ejecutan
+Filter/JPQLFilter/Query nativos, incluidas composición nombre/teléfono, factura,
+reproducción del defecto y Query directo. Aceptación autenticada del ERP pendiente.
+
+## ADR-007 — PDF automático de factura fuera del contrato Core LAB
+
+2026-10-06. Autorización expresa del usuario tras CI37425320931: configurar
+AppInvoice.autoGenerateInvoicePrintingFileOnSaleInvoice=false sólo con
+CCM_CORE_LAB=1 y administrador del fixture. Se usa repositorio AppInvoice
+nativo; no se modifica upstream ni se crean PrintingTemplates/demo. La
+configuración efectiva del AppAccountService y la persistida se exportan en
+lecturas posteriores al commit; ambas deben mostrar PDF automático false e
+isVentilationSkipped=false. Una configuración con ventilación omitida se rechaza.
+InvoiceService.validate/ventilate, reglas, roles, GL y oráculo permanecen íntegros.
+Contabilización y save preceden la rama opcional PDF en AOS fijado. Dos tests
+nativos de configuración PASS; la evidencia económica exige GL contabilizado,
+pagos y liquidación reales. PDF automático no se prueba ni equivale a validación
+económica. Repetición en CI pendiente.

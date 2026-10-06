@@ -139,7 +139,15 @@ def criteria_for(rows, build_evidence=None):
     return result
 
 
+def assert_invoice_runtime(configuration):
+    assert configuration.get("native_app_invoice_id", 0) > 0, "Missing native AppInvoice identity"
+    for field in ("autoGenerateInvoicePrintingFileOnSaleInvoice", "isVentilationSkipped",
+                  "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice", "persisted_isVentilationSkipped"):
+        assert configuration.get(field) is False, "Core LAB invoice runtime flag must be false: " + field
+
+
 def assert_native_configuration(configuration):
+    assert_invoice_runtime(configuration["invoice_runtime_configuration"])
     assert configuration["company_id"] > 0 and configuration["legal_partner_id"] > 0
     assert configuration["legal_vat_system"] == 2, "Native legal partner delivery/accrual regime required"
     customers = {p["code"]: p for p in configuration["customers"]}
@@ -364,6 +372,7 @@ def assert_native_fx_conversions(observed, fixture, persisted):
 def assert_native_fx(observed, fixture, persisted):
     """A conversion is partial; acceptance also needs four committed native receipts."""
     assert_native_fx_conversions(observed, fixture, persisted)
+    assert_invoice_runtime(persisted.get("invoice_runtime_configuration", {}))
     assert persisted.get("read_boundary") == "separate-http-after-payment-commit", "Missing post-commit native payment reads"
     assert persisted["company_id"] > 0 and persisted["company_code"] == "CCM-LAB-001"
     invoices, payments = persisted.get("invoices", []), persisted.get("payments", [])

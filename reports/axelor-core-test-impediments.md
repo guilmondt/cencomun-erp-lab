@@ -620,3 +620,53 @@ permisos del sistema ni red. El diagnóstico se conserva fuera del checkout en
 /workspace/ccm-axelor-runtime/address-preflight: logs sanitizados, XML, fuente de
 test y persistence.xml; hashes y extracto exacto en diagnostic.json del informe
 local. No se añade un test JPA fallido a las suites de aceptación del repositorio.
+## B28 — CI12: PDF automático bloquea la contabilización confirmada
+
+CI `37425320931`, commit `8b0a534b8c835aa01aadb753b65be7f4e4c3fbd6`:
+el preflight de AddressBaseRepository PASS (1.484 s) confirma cinco líneas
+nativas, tres campos requeridos, nombres derivados y replay idéntico después
+del commit. CO00/TAX01-W llegan a InvoiceService.validateAndVentilate, pero
+`getInvoicePrintTemplate` lanza `The configuration to print this model has not
+been found`. Los tres intentos de pagos FX fallan por la misma dependencia.
+La transacción revierte: no hay factura, entrega, GL de venta ni pagos
+confirmados. Sólo entrada inicial/valoración y asiento de apertura persisten.
+
+1. Configurar únicamente el runtime `CCM_CORE_LAB=1`, por repositorio nativo,
+   con AppInvoice.autoGenerateInvoicePrintingFileOnSaleInvoice=false, autorizado
+   expresamente. Rechazar una configuración con isVentilationSkipped=true.
+2. Conservar validate/ventilate íntegros. El upstream fijado contabiliza y guarda
+   antes de su rama opcional PDF; no crear PrintingTemplate ni importar demos.
+3. Leer la configuración efectiva y la persistida después del commit; exigir
+   flags false e IDs reales. Repetir gates y pagos con asientos status=3,
+   importes/oráculo intactos. PDF automático queda fuera del alcance probado.
+
+Corrección local implementada; dos tests del AppInvoice nativo PASS y 24
+regresiones Python PASS rechazan flags incorrectos/ausentes. Repetición del
+ERP pendiente; no cuenta como gate PASS.
+
+## B29 — CI12: placeholder de Permission.condition se renumera dos veces
+
+SEARCH con lector: nombre, teléfono y serial fallan. El diagnóstico nativo
+devuelve `org.hibernate.query.SemanticException: Cannot compare left expression
+of type 'java.lang.String' with right expression of type 'java.lang.Long'`.
+El bytecode fijado AOP 8.2.3 confirma que Filter.build sustituye cada carácter
+`?`: una condición `?1` pasa a `?11`. Los permisos oficiales AOS usan `?`.
+Scope de compañía y conditionParams deben conservarse exactamente.
+
+1. Cambiar exclusivamente los placeholders de Permission.condition a `?`.
+   No alterar filtros directos Query que admiten `?1`, ni grants de roles.
+2. Añadir regresión que ejecute JPQLFilter + Filter.equals + Filter.build
+   oficiales y compruebe texto y orden/tipos de parámetros; conservar un
+   test de Query directo y una reproducción negativa del placeholder antiguo.
+3. Repetir búsquedas autenticadas por lector y denegación de compañía ajena
+   en CI. Un test de composición sin DB no aprueba por sí solo SEARCH completo.
+
+Corrección local implementada: cinco tests de composición nativa PASS,
+incluida la reproducción de la consulta final defectuosa: compañía y nombre
+reutilizan ?1 mientras el primer parámetro sigue siendo Long. Se conservan
+exactamente scope, conditionParams y permisos. Repetición del ERP pendiente.
+CI12 conserva PROD/BANK
+PASS ejecutados, SEARCH/FX FAIL, gates BLOCKED y 28 grupos UNRUN; no se arrastran
+resultados de commits anteriores. ZIP: un intento, proxy Forbidden en
+productionresultssa14.blob.core.windows.net; se conservan avisos completos del
+log como evidencia secundaria, sin cambios de red ni publicación.

@@ -20,6 +20,11 @@ import java.util.Map;
 /** Fixture-only setup; acceptance writes use authenticated native REST and native repositories. */
 public class NativeIndependentController {
   public static final String PROFILE = "com.cencomun.core.db.CcmProductProfile";
+  // Permission conditions are composed by native Filter.build, which numbers plain '?'.
+  // Direct Query filters below intentionally retain their already numbered parameters.
+  static final String COMPANY_CONDITION = "self.company.id = ?";
+  static final String PARTNER_CONDITION = "self.id IN (SELECT p.id FROM Partner p JOIN p.companySet c WHERE c.id = ?)";
+  static final String SERIAL_CONDITION = "EXISTS (SELECT p FROM CcmProductProfile p WHERE p.product = self.product AND p.company.id = ?)";
   static void fixtureAdmin() {
     if (!"1".equals(System.getenv("CCM_CORE_LAB")) || AuthUtils.getUser() == null
         || !"admin".equals(AuthUtils.getUser().getCode()))
@@ -64,8 +69,8 @@ public class NativeIndependentController {
     if (permission == null) permission = record("com.axelor.auth.db.Permission",
         "name", "ccm.lab.product.profile.operator", "object", PROFILE,
         "canRead", true, "canWrite", true, "canCreate", false, "canRemove", false,
-        "condition", "self.company.id = ?1", "conditionParams", "__user__.activeCompany.id");
-    set(permission, "condition", "self.company.id = ?1");
+        "condition", COMPANY_CONDITION, "conditionParams", "__user__.activeCompany.id");
+    set(permission, "condition", COMPANY_CONDITION);
     set(permission, "conditionParams", "__user__.activeCompany.id"); save(permission);
     set(role, "permissions", new HashSet<>(List.of(permission))); save(role);
     Model user = one("com.axelor.auth.db.User", "self.code = ?1", "ccm-operator");
@@ -79,12 +84,12 @@ public class NativeIndependentController {
     Model readerRole = one("com.axelor.auth.db.Role", "self.name = ?1", "CCM Reader");
     if (readerRole == null) readerRole = record("com.axelor.auth.db.Role", "name", "CCM Reader");
     List<Model> reads = new ArrayList<>();
-    reads.add(readPermission("profile", PROFILE, "self.company.id = ?1"));
+    reads.add(readPermission("profile", PROFILE, COMPANY_CONDITION));
     reads.add(readPermission("partner", "com.axelor.apps.base.db.Partner",
-        "self.id IN (SELECT p.id FROM Partner p JOIN p.companySet c WHERE c.id = ?1)"));
-    reads.add(readPermission("invoice", "com.axelor.apps.account.db.Invoice", "self.company.id = ?1"));
+        PARTNER_CONDITION));
+    reads.add(readPermission("invoice", "com.axelor.apps.account.db.Invoice", COMPANY_CONDITION));
     reads.add(readPermission("serial", "com.axelor.apps.stock.db.TrackingNumber",
-        "EXISTS (SELECT p FROM CcmProductProfile p WHERE p.product = self.product AND p.company.id = ?1)"));
+        SERIAL_CONDITION));
     set(readerRole, "permissions", new HashSet<>(reads)); save(readerRole);
     Model reader = one("com.axelor.auth.db.User", "self.code = ?1", "ccm-reader");
     if (reader == null) reader = record("com.axelor.auth.db.User", "code", "ccm-reader", "name", "Synthetic Core Reader",

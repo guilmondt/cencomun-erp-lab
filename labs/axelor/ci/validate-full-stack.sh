@@ -83,6 +83,7 @@ init_flags=(--init-script /workspace/cencomun-erp-lab/labs/axelor/ci/full-stack.
 echo 'Phase: full AOS compilation, frontend, WAR, embedded runner and upstream tests'
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
   :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
+  --tests com.cencomun.core.NativePermissionFilterTest --tests com.cencomun.core.NativeInvoiceRuntimeTest \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
   --write-locks > "$state_dir/private/full-build.log" 2>&1
@@ -102,6 +103,13 @@ assert int(suite.attrib['tests']) == 8, suite.attrib
 assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
 (results/'native-fixture-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
 print('Native address callback regression: 8 cases passed, no failures/errors/skips; no database coverage claim')
+for name,count in [('NativePermissionFilterTest',5),('NativeInvoiceRuntimeTest',2)]:
+    path=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/test-results/test')/f'TEST-com.cencomun.core.{name}.xml'
+    suite=ET.parse(path).getroot()
+    assert int(suite.attrib['tests']) == count, suite.attrib
+    assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
+    (results/f'{name}.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
+    print(f'{name}: {count} native unit cases passed; DB acceptance requires Core execution')
 PY
 echo '::notice title=Axelor full build::Full AOS/frontend WAR and embedded launcher compiled; 16 upstream unit cases passed.'
 python3 - <<'PY'
@@ -117,6 +125,7 @@ PY
 echo 'Phase: replay Gradle targets with generated strict dependency locks'
 bash labs/axelor/scripts/gradle.sh "${init_flags[@]}" \
   :modules:cencomun-baseline:test --tests com.cencomun.core.NativeAddressTemplateTest \
+  --tests com.cencomun.core.NativePermissionFilterTest --tests com.cencomun.core.NativeInvoiceRuntimeTest \
   :war :generateRunner :modules:axelor-base:test \
   --tests com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper \
   --offline > "$state_dir/private/frozen-build.log" 2>&1
