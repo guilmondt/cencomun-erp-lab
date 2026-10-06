@@ -30,12 +30,16 @@ public class CorePurchaseService {
     try { BigDecimal value=new BigDecimal(input.path("amount").asText());MoneyPolicy.positiveMoney(value);return value; }
     catch(IllegalArgumentException error){throw new CoreFault(422,"Positive monetary purchase amount required");}
   }
-  private void creator() { CoreOrderPolicy.actor(CoreOrderService.roles(),"create","DRAFT"); }
+  private void creator(String operation) { CoreFinancePolicy.actor(CoreOrderService.roles(),operation); }
   private Model find(Model company,String id) {
     Model purchase=one(CoreOrderService.DB+"CcmPurchase","self.company = ?1 AND self.functionalId = ?2",company,id);
     if(purchase==null)throw new CoreFault(404,"Purchase not found in current company");return purchase;
   }
   private void compute(Model nativeOrder) {
+    // Native header compute consumes priceDiscounted; the native line compute
+    // initializes it and the line tax/company amounts. Do not synthesize totals.
+    Object lineService=service("com.axelor.apps.purchase.service.PurchaseOrderLineService");
+    for(Model line:(List<Model>)get(nativeOrder,"purchaseOrderLineList"))call(lineService,"compute",line,nativeOrder);
     call(service("com.axelor.apps.purchase.service.PurchaseOrderService"),"computePurchaseOrder",nativeOrder);
   }
   private Model currency(String code) {
@@ -83,7 +87,7 @@ public class CorePurchaseService {
   }
   @Transactional(rollbackOn=Exception.class)
   public Map<String,Object> createPurchase(JsonNode input) {
-    Model company=CoreOrderService.company(input);creator();JPA.em().refresh(company,LockModeType.PESSIMISTIC_WRITE);
+    Model company=CoreOrderService.company(input);creator("purchase.create");JPA.em().refresh(company,LockModeType.PESSIMISTIC_WRITE);
     Map<String,Object> replay=CoreRecordSupport.replay(company,"purchase.create",input);if(replay!=null)return replay;
     String id=id(input);amount(input);
     if(one(CoreOrderService.DB+"CcmPurchase","self.company = ?1 AND self.functionalId = ?2",company,id)!=null)throw new CoreFault(409,"Purchase functional ID exists");
@@ -106,7 +110,7 @@ public class CorePurchaseService {
   }
   @Transactional(rollbackOn=Exception.class)
   public Map<String,Object> request(JsonNode input) {
-    Model company=CoreOrderService.company(input);creator();Model purchase=find(company,id(input));JPA.em().refresh(purchase,LockModeType.PESSIMISTIC_WRITE);
+    Model company=CoreOrderService.company(input);creator("purchase.request");Model purchase=find(company,id(input));JPA.em().refresh(purchase,LockModeType.PESSIMISTIC_WRITE);
     Map<String,Object> replay=CoreRecordSupport.replay(company,"purchase.request",input);if(replay!=null)return replay;
     if(!get(purchase,"state").toString().equals("DRAFT"))throw new CoreFault(409,"Purchase request state conflict");
     Map<String,Object> before=view(purchase);Model nativeOrder=(Model)get(purchase,"purchaseOrder");compute(nativeOrder);
@@ -135,7 +139,7 @@ public class CorePurchaseService {
   }
   @Transactional(rollbackOn=Exception.class)
   public Map<String,Object> revise(JsonNode input) {
-    Model company=CoreOrderService.company(input);creator();Model purchase=find(company,id(input));JPA.em().refresh(purchase,LockModeType.PESSIMISTIC_WRITE);
+    Model company=CoreOrderService.company(input);creator("purchase.revise");Model purchase=find(company,id(input));JPA.em().refresh(purchase,LockModeType.PESSIMISTIC_WRITE);
     Map<String,Object> replay=CoreRecordSupport.replay(company,"purchase.revise",input);if(replay!=null)return replay;amount(input);
     Map<String,Object> before=view(purchase);Model nativeOrder=(Model)get(purchase,"purchaseOrder");
     Object workflow=service("com.axelor.apps.purchase.service.PurchaseOrderWorkflowService");

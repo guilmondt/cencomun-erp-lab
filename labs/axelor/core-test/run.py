@@ -621,7 +621,11 @@ def run_fx_cases(admin, base, fixtures, output, row, preparation=None):
     try:
         if preparation is not None and 'error' in preparation:
             raise RuntimeError('Committed FX fixture preparation failed: '+preparation['error'])
-        evidence["preparation"] = preparation if preparation is not None else admin.action("ccm-core-fx-prepare", "FX")
+        if preparation is not None:
+            evidence['configuration_prepared_before_day_one_cases']=preparation
+        # Day-one warehouse fixtures set the native LAB clock to their own day.
+        # Re-activate the fixed final payment day before FX; never permit future invoices.
+        evidence["preparation"] = admin.action("ccm-core-fx-prepare", "FX")
         before = admin.action("ccm-core-fx-inspect", "FX")
         assert len(before["rates"]) == 2 and before["authorizations"] == [], before
         assert {r["from_date"]: Decimal(r["rate"]) for r in before["rates"]} == {d: Decimal(v) for d,v in profile["rates"].items()}
@@ -923,6 +927,8 @@ def run(base, fixtures, output):
     orders = run_order_cases(client, base, fixtures, output, by_case)
     from finance_cases import run_finance_cases
     finance = run_finance_cases(client, base, fixtures, output, by_case)
+    from api_cases import run_api_cases
+    api = run_api_cases(client, base, fixtures, output, by_case)
     fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"], fx_preparation)
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
@@ -932,7 +938,7 @@ def run(base, fixtures, output):
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     metrics = {"metric_kind": "runtime", "reference": REFERENCE,
                                                    "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders+finance],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders+finance+api],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,

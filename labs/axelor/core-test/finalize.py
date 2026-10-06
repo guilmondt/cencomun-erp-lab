@@ -29,11 +29,14 @@ def finalize(repo, host, output):
     suites = {}
     paths = [("CencomunModuleTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.baseline.module.CencomunModuleTest.xml"),
              ("CoreOrderPolicyTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.CoreOrderPolicyTest.xml"),
+             ("CoreFinancePolicyTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.CoreFinancePolicyTest.xml"),
+             ("CoreNativeScopeTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.CoreNativeScopeTest.xml"),
              ("MoneyPolicyTest", repo / "labs/axelor/cencomun-baseline/build/test-results/test/TEST-com.cencomun.core.MoneyPolicyTest.xml"),
              ("NativeAddressTemplateTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeAddressTemplateTest.xml"),
              ("NativePermissionFilterTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativePermissionFilterTest.xml"),
              ("NativeOrderModelTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeOrderModelTest.xml"),
              ("NativeBankCsvTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeBankCsvTest.xml"),
+             ("NativeFinanceModelTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeFinanceModelTest.xml"),
              ("NativeInvoiceRuntimeTest", repo / "labs/axelor/cencomun-baseline/build/full/test-results/test/TEST-com.cencomun.core.NativeInvoiceRuntimeTest.xml"),
              ("TestTaxNumberHelper", host / "modules/axelor-open-suite/axelor-base/build/test-results/test/TEST-com.axelor.apps.base.service.partner.registrationnumber.TestTaxNumberHelper.xml")]
     for name, path in paths:
@@ -69,6 +72,12 @@ def finalize(repo, host, output):
         if row['case'] in FINANCE_CHECKS:
             path=output/(row['case']+'.json')
             review_finance_group(row,json.loads(path.read_text()) if path.exists() else {},repo/'fixtures/ccm-core-v1')
+    coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
+    from api_cases import API_CHECKS, review_api_group
+    for row in coverage['groups']:
+        if row['case'] in API_CHECKS:
+            path=output/(row['case']+'.json')
+            review_api_group(row,json.loads(path.read_text()) if path.exists() else {},repo/'fixtures/ccm-core-v1')
     coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
     coverage["criteria"] = criteria_for(coverage["groups"], proof)
     coverage["build_evidence"] = "build-evidence.json"

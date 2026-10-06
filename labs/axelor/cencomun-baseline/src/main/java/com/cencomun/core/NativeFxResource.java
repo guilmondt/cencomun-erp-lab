@@ -33,5 +33,12 @@ public class NativeFxResource {
   @POST @Path("convert")
   public Map<String, Object> convert(JsonNode input) { return Beans.get(NativeFxService.class).convert(input); }
   @POST @Path("authorize")
-  public Map<String, Object> authorize(JsonNode input) { return Beans.get(NativeFxService.class).authorize(input); }
+  public Response authorize(JsonNode input) {
+    try {return Response.ok(Beans.get(NativeFxService.class).authorize(input)).build();}
+    catch(WebApplicationException error) {
+      String reason=String.valueOf(error.getMessage());
+      Beans.get(NativeFxService.class).rejectedAuthorization(input,reason);
+      return Response.status(error.getResponse().getStatus()).entity(Map.of("error",reason,"error_type",error.getClass().getName())).build();
+    }
+  }
 }

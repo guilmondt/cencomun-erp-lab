@@ -636,3 +636,13 @@ efectos/FK/status/remaining nativos. IBAN público de ejemplo, cuenta/cliente
 sintéticos del LAB; no son credenciales ni datos de producción.
 Toda aceptación continúa pendiente de CI, con conjuntos cerrados de subcasos,
 controles de roles, snapshot independiente y agregador que rechaza pruebas vacías.
+
+
+Continuación B34 (2026-10-06): CI7d9702f ejecutó 22 grupos, 16PASS/6FAIL/12UNRUN.
+Los cuatro ciclos económicos completos y ambos grupos de caja pasan. Conservar
+coste/cancelaciones como FAIL funcional. Corregir línea de compra nativa no
+computada y campos Bank inexistentes, con regresiones de API oficial. Implementar
+un bloque de seis grupos API/stdio/permisos; restringir private audit/key/outbox
+y escrituras MCP en servicios, acciones oficiales y CRUD. Guardas Guice son
+extensión Cencomun LAB, upstream intacto. Todo PASS requiere runtime del commit;
+seguir impuestos concurrentes, auditoría, eventos, recuperación y benchmark.

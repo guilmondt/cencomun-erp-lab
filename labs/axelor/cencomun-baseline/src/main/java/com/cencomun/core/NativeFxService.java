@@ -156,7 +156,21 @@ public class NativeFxService {
     Model conversion = addRate(day, rate);
     Model authorization = record(AUTHORIZATION, "company", company, "conversion", conversion,
         "approvedBy", AuthUtils.getUser(), "externalId", id, "reason", reason);
+    CoreRecordSupport.audit(company,id,"rate.authorized",Map.of("date",day.toString(),"rate","ABSENT"),
+        Map.of("date",day.toString(),"rate",rate.toPlainString(),"native_conversion_id",conversion.getId(),"authorization_id",authorization.getId()),
+        reason,input.path("request_key").asText(id),false);
     return Map.of("native_conversion_id", conversion.getId(), "authorization_id", authorization.getId());
+  }
+
+  @Transactional(rollbackOn=Exception.class)
+  public void rejectedAuthorization(JsonNode input,String reason) {
+    if(AuthUtils.getUser()==null)return;
+    Model company=one(BASE+"Company","self.code = ?1",input.path("company_id").asText());if(company==null)return;
+    Map<String,Object> snapshot=new LinkedHashMap<>();snapshot.put("date",input.path("date").asText());
+    try {Model rate=rateAt(LocalDate.parse(input.path("date").asText()));snapshot.put("rate",rate==null?"ABSENT":get(rate,"exchangeRate").toString());}
+    catch(java.time.format.DateTimeParseException invalid){snapshot.put("rate","INVALID_DATE");}
+    CoreRecordSupport.audit(company,input.path("id").asText("invalid"),"rate.denied",snapshot,snapshot,
+        reason,input.path("request_key").asText("invalid-request"),true);
   }
 
   public Map<String, Object> inspect() {

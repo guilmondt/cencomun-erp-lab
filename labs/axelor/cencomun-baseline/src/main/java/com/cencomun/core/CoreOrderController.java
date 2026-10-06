@@ -35,9 +35,15 @@ public class CoreOrderController {
       String key = entry.getKey(); Model role = one("com.axelor.auth.db.Role", "self.name = ?1",entry.getValue());
       if (role == null) role = record("com.axelor.auth.db.Role","name",entry.getValue());
       HashSet<Model> grants = new HashSet<>(get(role,"permissions") == null ? Set.of() : (java.util.Set<Model>)get(role,"permissions"));
+      Set<String> privateModels=Set.of("CcmAudit","CcmRequestKey","CcmOutboxEvent");
+      // Revoke only fixture-owned stale private grants. A repeated preparation must
+      // not retain the old overbroad READ authority; unrelated grants are preserved.
+      if(!CoreFinancePolicy.privateRead(Set.of(key)))grants.removeIf(p ->
+          privateModels.stream().anyMatch(n -> ("ccm.lab.order.read."+n).equals(get(p,"name"))));
       if (!key.equals("other")) {
-        for (String name:List.of("CcmOrder","CcmOrderLine","CcmAudit","CcmRequestKey","CcmOutboxEvent","CcmPurchase","CcmCashClose","CcmBankImport","CcmBankRow")) {
-          // All roles read company-scoped evidence; no generic REST business writes.
+        for (String name:List.of("CcmProductProfile","CcmOrder","CcmOrderLine","CcmAudit","CcmRequestKey","CcmOutboxEvent","CcmPurchase","CcmCashClose","CcmBankImport","CcmBankRow")) {
+          if(privateModels.contains(name)&&!CoreFinancePolicy.privateRead(Set.of(key)))continue;
+          // Business reads are scoped; private audit/key/outbox reads are manager-only.
           String condition = name.equals("CcmOrderLine") ? "self.coreOrder.company.id = ?" : "self.company.id = ?";
           String permissionName = "ccm.lab.order.read."+name;
           Model permission = one("com.axelor.auth.db.Permission","self.name = ?1",permissionName);

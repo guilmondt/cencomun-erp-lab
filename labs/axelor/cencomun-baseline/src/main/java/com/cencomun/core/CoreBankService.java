@@ -48,7 +48,7 @@ public class CoreBankService {
   }
   @Transactional(rollbackOn=Exception.class)
   public Map<String,Object> importCsv(JsonNode input) throws Exception {
-    Model company=CoreOrderService.company(input);if(CoreOrderService.roles().stream().noneMatch(Set.of("operator","mcp")::contains))throw new CoreFault(403,"Bank import role required");
+    Model company=CoreOrderService.company(input);CoreFinancePolicy.actor(CoreOrderService.roles(),"bank.import");
     JPA.em().refresh(company,LockModeType.PESSIMISTIC_WRITE);
     String csv;try{csv=new String(Base64.getDecoder().decode(input.path("csv_base64").asText()),StandardCharsets.UTF_8);}catch(IllegalArgumentException error){throw new CoreFault(422,"Invalid bank CSV encoding");}
     if(csv.length()>2_000_000)throw new CoreFault(422,"LAB bank CSV too large");String account=input.path("account").asText();Model details=details(company,account);String fileHash=hash(csv);

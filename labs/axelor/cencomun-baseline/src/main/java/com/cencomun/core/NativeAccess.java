@@ -72,7 +72,7 @@ public final class NativeAccess {
     }).toList();
     if (candidates.size() != 1) throw new IllegalStateException("Pinned API signature mismatch: "
         + obj.getClass().getName() + "." + method + "/" + args.length + ", matches=" + candidates.size());
-    try { return candidates.getFirst().invoke(obj, args); }
+    try (CoreNativeScope scope=CoreNativeScope.enter()) { return candidates.getFirst().invoke(obj, args); }
     catch (InvocationTargetException e) {
       Throwable cause = e.getCause();
       if (cause instanceof RuntimeException r) throw r;

@@ -1,0 +1,142 @@
+{
+  "case": "PO07-09-REVISION-SELF",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 2,
+  "complete": false,
+  "steps": [
+    {
+      "name": "revision-native",
+      "actor": "ccm-operator",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "PO02",
+        "request_key": "PO02-revise",
+        "reason": "Synthetic LAB revise",
+        "amount": "200.01",
+        "currency": "USD"
+      },
+      "before": {
+        "purchase": {},
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [],
+        "events": [],
+        "audit": [],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "executed": true,
+      "status": "FAIL",
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Purchase not found in current company",
+        "native_stack": [
+          "com.cencomun.core.CorePurchaseService.find(CorePurchaseService.java:36)",
+          "com.cencomun.core.CorePurchaseService.revise(CorePurchaseService.java:138)",
+          "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:34)",
+          "com.cencomun.core.CoreFinanceResource.revise(CoreFinanceResource.java:23)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "http_status": 404,
+      "after": {
+        "purchase": {},
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [],
+        "events": [],
+        "audit": [
+          {
+            "id": 153,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.599655",
+            "kind": "finance.denied",
+            "correlation": "PO02-revise",
+            "reason": "Purchase not found in current company",
+            "beforeState": "{\"purchase\":{},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "assertion_error": "revision-native: expected HTTP 200, observed 404; native response={'error_type': 'com.cencomun.core.CoreFault', 'error': 'Purchase not found in current company', 'native_stack': ['com.cencomun.core.CorePurchaseService.find(CorePurchaseService.java:36)', 'com.cencomun.core.CorePurchaseService.revise(CorePurchaseService.java:138)', 'com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:34)', 'com.cencomun.core.CoreFinanceResource.revise(CoreFinanceResource.java:23)', 'com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)', 'com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)', 'com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)', 'com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)', 'com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)', 'com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)']}"
+    }
+  ],
+  "fixture_preparation": {
+    "response": {
+      "company_id": 1,
+      "fixture_scope": "PURCHASE",
+      "native_purchase_config_id": 1,
+      "native_sequence_id": 107,
+      "native_sequence_code": "purchaseOrder",
+      "native_supplier_id": 5,
+      "native_purchase_tax_id": 3,
+      "scope": "Synthetic LAB only; official create/workflow services unchanged"
+    }
+  },
+  "status": "FAIL",
+  "error": "revision-native: expected HTTP 200, observed 404; native response={'error_type': 'com.cencomun.core.CoreFault', 'error': 'Purchase not found in current company', 'native_stack': ['com.cencomun.core.CorePurchaseService.find(CorePurchaseService.java:36)', 'com.cencomun.core.CorePurchaseService.revise(CorePurchaseService.java:138)', 'com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:34)', 'com.cencomun.core.CoreFinanceResource.revise(CoreFinanceResource.java:23)', 'com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)', 'com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)', 'com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)', 'com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)', 'com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)', 'com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)']}",
+  "error_type": "AssertionError",
+  "seconds": 0.027
+}

@@ -54,7 +54,15 @@ with zipfile.ZipFile(artifact) as jar:
         assert 'ccm-core-v1/manifest.json' in entries
         import hashlib
         assert hashlib.sha256(jar.read('ccm-core-v1/manifest.json')).hexdigest() == '28496929050e7cfeea214dbf0ee5cbd589a08ab2adb60e1849877778baaf9aed'
-print(f'Validated: 2 baseline tests + {policy_count} money + {order_count} order policy unit tests passed; 0 failed/errors/skipped; custom JAR and metadata verified.')
+security_count=0
+for name in ['CoreFinancePolicyTest','CoreNativeScopeTest']:
+    path=module/f'build/test-results/test/TEST-com.cencomun.core.{name}.xml'
+    if path.exists():
+        security=ET.parse(path).getroot()
+        assert int(security.attrib['tests'])==2,security.attrib
+        assert all(int(security.attrib[k])==0 for k in ['errors','failures','skipped']),security.attrib
+        security_count+=int(security.attrib['tests'])
+print(f'Validated: 2 baseline + {policy_count} money + {order_count} order policy + {security_count} security unit tests passed; 0 failed/errors/skipped; custom JAR and metadata verified.')
 PY
 
 ./scripts/verify-repo.sh

@@ -32,7 +32,7 @@ public class CoreReadResource {
   private Model company(String code) {
     if (!"1".equals(System.getenv("CCM_CORE_LAB"))) throw new NotFoundException();
     if (AuthUtils.getUser() == null) throw new NotAuthorizedException("Session");
-    if (!AuthUtils.hasRole(AuthUtils.getUser(), "CCM Reader", "CCM Operator", "CCM Manager", "CCM Director", "CCM Simulator", "CCM MCP"))
+    if (!AuthUtils.hasRole(AuthUtils.getUser(), "CCM Reader", "CCM Operator", "CCM Buyer", "CCM Manager", "CCM Director", "CCM Simulator", "CCM MCP"))
       throw new ForbiddenException("Core read role required");
     Model current = (Model) get(AuthUtils.getUser(), "activeCompany");
     if (current == null || code == null || !code.equals(get(current, "code")))

@@ -1,6 +1,117 @@
 # Core Test Axelor — ejecución en curso
 
 Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
+34 grupos y 14 criterios, cobertura revisión 2; fixtures/oráculo/pins intactos.
+
+CI [37445387142](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37445387142),
+commit `7d9702ffaff6834fbf0dc19bfecc523716e007e9`, FAILURE: **16 PASS / 6 FAIL / 12 UNRUN**.
+Son los resultados ejecutados por ese commit. Los cuatro ciclos completos CO00,
+CO01, TAX01-S y TAX01-W pasan roles, estados, replay y rollback económico.
+La preparación cronológica del fixture corrigió el diagnóstico del run anterior
+sin cambiar fechas ni desactivar la validación nativa de facturas.
+Gates de administrador: CO00 13.377 s y TAX01-W 6.774 s, stock 3/4/5,
+valor 430, COGS 70, impuesto 0/12.50, GL ACCOUNTED, dos pagos y AR cero.
+Se conservan aparte del resultado de los grupos completos.
+
+Caja pasa ambos grupos: ocho movimientos fuente con GL nativo, factura pendiente
+125 excluida, cierres CS000/CS001, roles, justificación, replay e inmutabilidad.
+UNKNOWN-LAB pasa ambos canales con control válido y Mapper/ValueEnum causal.
+VAL01-04 sigue FAIL: el ERP realizó y releyó el coste -0.01, igual que el control
+30.00; ambos intentos, stacks y snapshots de rollback están conservados antes
+de asserts. Las tres cancelaciones confirmadas siguen FAIL funcional, con error
+nativo original y expectativa CANCELLED intacta. No se fuerza su aceptación.
+
+Problemas nuevos observados y resolución acotada:
+
+1. Compra PO01: native_gross y usd_base quedaron 0.00 y la aprobación rechazó
+   “Positive money with at most two decimals required”. El cómputo de cabecera
+   consume priceDiscounted, que seguía cero. Ejecutar primero el servicio nativo
+   PurchaseOrderLineService.compute por línea y después computePurchaseOrder.
+   Verificar create/request/approve con total 199.99 y los nueve umbrales/cargos.
+   PO02/revisión no existía porque el grupo anterior abortó; no se infiere paridad.
+2. Banca: preparación rechazó `Bank.setName/1, matches=0`; Bank tampoco tiene bic.
+   Usar campos oficiales bankName y code (BIC), manteniendo cuenta BANK-USD-001,
+   IBAN público de ejemplo y valores congelados. Verificar preparación/guardado,
+   importación, conciliación, negativo y mil filas concurrentes en CI.
+3. Seguridad/API/MCP: escrituras de caja/importación/request/revise requieren
+   operador; MCP conserva solo compra DRAFT y pedido NEW. Revocar grants privados
+   de audit/key/outbox del fixture a lectores/MCP/otros roles; conservar lectura
+   de pedidos. Comprobar las identidades reales por seis rutas, servicios internos,
+   acciones oficiales y CRUD, compañía ajena, snapshots y auditoría de denegación.
+   Interceptores Guice del módulo protegen llamadas directas a servicios críticos;
+   scope privado solo durante llamadas Cencomun autorizadas, sin editar upstream.
+   **Estos cambios y los seis grupos API/MCP aún no tienen aceptación runtime.**
+
+Validación de ese CI: 56 tests Java, cero fallos/errores/skips, WAR y diffs upstream
+cero. Arranque autenticado 377.17 s; reinicio 266.89 s. Criterio 2 deriva de esa
+atestación real; los otros criterios derivan de sus grupos. ZIP sa12 bloqueado
+por proxy, un intento; evidencia secundaria completa del log, SHA256 y revisor
+congelado del mismo commit. No se amplió ni publicó la red pendiente.
+
+| Grupo completo | Estado CI7d9702f |
+| --- | --- |
+| CO00-NATIVE | PASS |
+| CO01-NATIVE | PASS |
+| TAX01-S-NATIVE | PASS |
+| TAX01-W-NATIVE | PASS |
+| PROD01-04 | PASS |
+| VAL01-04 | FAIL |
+| STATE01-04 | PASS |
+| INV01-03-INSUFFICIENT | PASS |
+| FX01-03-MONEY01-03 | PASS |
+| PO01-09-NATIVE | FAIL |
+| PO07-09-REVISION-SELF | FAIL |
+| CASH00-06-NATIVE | PASS |
+| BANK-BOOK-FIXTURE | PASS |
+| BANK01-05-NATIVE | FAIL |
+| API01-06-SIX-ROUTES | UNRUN |
+| IDEM01-02-CREATE-CONCURRENT | UNRUN |
+| PERM-API-NATIVE | UNRUN |
+| CASH04-06-HTTP-IMMUTABLE | PASS |
+| SEARCH01-04-NATIVE | PASS |
+| TAX02-04-IDEM-CONCURRENT | UNRUN |
+| BANK-CONCURRENT-1000 | FAIL |
+| MCP01-06-STDIO | UNRUN |
+| IDEM03-LOST-RESTART | UNRUN |
+| IDEM04-EVENTS-RECOVERY | UNRUN |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS |
+| AUDIT01-03-NATIVE | UNRUN |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | UNRUN |
+| SUPPORTED-CONFIGURATION | UNRUN |
+| STATE-UNKNOWN-ATOMIC | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS |
+| STATE-WEB-NO-GUIDE | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | UNRUN |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | UNRUN |
+
+| Criterio | Estado |
+| --- | --- |
+| 1 | FAIL |
+| 2 | PASS |
+| 3 | FAIL |
+| 4 | FAIL |
+| 5 | FAIL |
+| 6 | UNRUN |
+| 7 | FAIL |
+| 8 | FAIL |
+| 9 | FAIL |
+| 10 | UNRUN |
+| 11 | UNRUN |
+| 12 | UNRUN |
+| 13 | BLOCKED |
+| 14 | UNRUN |
+
+Evidencia: [runs/37445387142](evidence/axelor-core/runs/37445387142/).
+
+La ejecución continúa con los grupos restantes; benchmark, recuperación y replay
+independiente requieren evidencia propia. Upgrade sigue aplazado por alcance.
+
+## Historial anterior — sin transferir PASS
+
+# Core Test Axelor — ejecución en curso
+
+Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
 34 grupos/14 criterios/revisión2, fixtures, oráculo, manifiesto y pins sin cambios.
 
 Último CI [37442873626](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37442873626),

@@ -213,6 +213,9 @@ class FinanceCases:
             def check(step):
                 step['create_response'],step['create_http']=self.call('operator','purchase/create',body);step['create_after']=self.snapshot(id)
                 assert step['create_http']==201,f'{id}: native create failed {step["create_response"]}'
+                base=Decimal(item['amount'])+sum(map(Decimal,item.get('charges',[])))
+                if item.get('currency','USD')=='VES':base=Decimal('200.00') if id=='PO08' else Decimal('200.01')
+                assert_purchase(step['create_after']['purchase'],base,1)
                 step['replay_response'],step['replay_http']=self.call('operator','purchase/create',body);step['replay_after']=self.snapshot(id)
                 assert step['replay_http']==200 and effects(step['replay_after'])==effects(step['create_after']),id+': create replay changed effects'
                 request=self.body(id,'request');step['request_response'],step['request_http']=self.call('operator','purchase/request',request);step['request_after']=self.snapshot(id)

@@ -85,7 +85,7 @@ public class CoreCashService {
   }
   @Transactional(rollbackOn=Exception.class)
   public Map<String,Object> prepare(JsonNode input) {
-    Model company=CoreOrderService.company(input);CoreOrderPolicy.actor(CoreOrderService.roles(),"create","DRAFT");
+    Model company=CoreOrderService.company(input);CoreFinancePolicy.actor(CoreOrderService.roles(),"cash.prepare");
     JPA.em().refresh(company,LockModeType.PESSIMISTIC_WRITE);Map<String,Object> replay=CoreRecordSupport.replay(company,"cash.prepare",input);if(replay!=null)return replay;
     String id=input.path("id").asText();if(!id.matches("[A-Z0-9][A-Z0-9-]{0,79}"))throw new CoreFault(422,"Invalid cash closing ID");
     Model close=one(CoreOrderService.DB+"CcmCashClose","self.company = ?1 AND self.functionalId = ?2",company,id);

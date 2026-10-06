@@ -6,6 +6,36 @@ import com.axelor.app.AxelorModule;
 public class CencomunModule extends AxelorModule {
   @Override @SuppressWarnings({"rawtypes", "unchecked"})
   protected void configure() {
+    if("1".equals(System.getenv("CCM_AXELOR_FULL_STACK"))) {
+      // Supported Guice interception, confined to this disposable Core runtime.
+      // Reflection keeps the independent AOP module free of native AOS dependency pins.
+      java.util.Map<String,java.util.Set<String>> guarded=java.util.Map.ofEntries(
+          java.util.Map.entry("com.axelor.apps.purchase.service.PurchaseOrderCreateService",java.util.Set.of("createPurchaseOrder")),
+          java.util.Map.entry("com.axelor.apps.purchase.service.PurchaseOrderService",java.util.Set.of("requestPurchaseOrder")),
+          java.util.Map.entry("com.axelor.apps.purchase.service.PurchaseOrderWorkflowService",java.util.Set.of("validatePurchaseOrder","cancelPurchaseOrder","draftPurchaseOrder")),
+          java.util.Map.entry("com.axelor.apps.sale.service.saleorder.SaleOrderCreateService",java.util.Set.of("createSaleOrder")),
+          java.util.Map.entry("com.axelor.apps.sale.service.saleorder.status.SaleOrderWorkflowService",java.util.Set.of("cancelSaleOrder")),
+          java.util.Map.entry("com.axelor.apps.sale.service.saleorder.status.SaleOrderConfirmService",java.util.Set.of("confirmSaleOrder")),
+          java.util.Map.entry("com.axelor.apps.sale.service.saleorder.status.SaleOrderFinalizeService",java.util.Set.of("finalizeQuotation")),
+          java.util.Map.entry("com.axelor.apps.stock.service.StockMoveService",java.util.Set.of("plan","realize","cancel")),
+          java.util.Map.entry("com.axelor.apps.account.service.invoice.InvoiceService",java.util.Set.of("validate","ventilate","validateAndVentilate")),
+          java.util.Map.entry("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentValidateService",java.util.Set.of("validate")),
+          java.util.Map.entry("com.axelor.apps.account.service.payment.paymentvoucher.PaymentVoucherConfirmService",java.util.Set.of("confirmPaymentVoucher")),
+          java.util.Map.entry("com.axelor.apps.account.service.move.MoveValidateService",java.util.Set.of("accounting")),
+          java.util.Map.entry("com.axelor.apps.bankpayment.service.bankreconciliation.BankReconciliationLineService",java.util.Set.of("reconcileBRLAndMoveLine")),
+          java.util.Map.entry("com.axelor.apps.bankpayment.service.bankreconciliation.BankReconciliationValidateService",java.util.Set.of("validate")));
+      guarded.forEach((name,methods)-> {
+        try {
+          Class<?> service=Class.forName(name);
+          for(String method:methods)if(java.util.Arrays.stream(service.getMethods()).noneMatch(m->m.getName().equals(method)))
+            throw new IllegalStateException("Pinned critical native method missing: "+name+"."+method);
+          bindInterceptor(com.google.inject.matcher.Matchers.subclassesOf(service),
+              new com.google.inject.matcher.AbstractMatcher<java.lang.reflect.Method>() {
+                @Override public boolean matches(java.lang.reflect.Method method){return methods.contains(method.getName());}
+              },new com.cencomun.core.CoreNativePermissionInterceptor());
+        }catch(ClassNotFoundException missing){throw new IllegalStateException("Pinned native permission service missing: "+name,missing);}
+      });
+    }
     for(String name : new String[]{"CcmOrder","CcmOrderLine","CcmRequestKey","CcmOutboxEvent","CcmAudit","CcmPurchase","CcmCashClose","CcmBankImport","CcmBankRow"}) {
       try {
         Class repository=Class.forName("com.cencomun.core.db.repo."+name+"Repository");

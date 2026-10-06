@@ -67,7 +67,7 @@ public class CoreFinanceController {
     if(scope.equals("BANK")) {
     Model bankDetails=one("com.axelor.apps.base.db.BankDetails","self.code = ?1","BANK-USD-001");
     if(bankDetails==null) {
-      Model bank=record("com.axelor.apps.base.db.Bank","name","Synthetic LAB bank","code","CCM-LAB-BANK","bic","LABOUS00XXX");
+      Model bank=record("com.axelor.apps.base.db.Bank","bankName","Synthetic LAB bank","code","LABOUS00XXX");
       bankDetails=record("com.axelor.apps.base.db.BankDetails","company",company,"partner",get(company,"partner"),"code","BANK-USD-001",
           "label","Synthetic account for shared Core fixture","ownerName","Synthetic LAB","bank",bank,"iban","GB82WEST12345698765432","currency",get(company,"currency"));
     }

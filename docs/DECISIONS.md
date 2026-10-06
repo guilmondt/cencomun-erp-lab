@@ -221,3 +221,17 @@ Cada grupo tiene una lista cerrada de subcasos, con snapshots posteriores a
 commit/rollback y regresiones del agregador. El éxito de administrador no
 sustituye roles/estados/atomicidad. Los resultados grandes del log se fragmentan
 con índices únicos, cantidad exacta y SHA256, sin aceptar evidencia truncada.
+
+
+### Core LAB: protección de servicios críticos frente a acciones nativas directas
+
+La matriz fija limita MCP a lecturas y creación DRAFT/NEW. El módulo instala
+interceptores Guice sobre los servicios críticos existentes únicamente cuando
+CCM_CORE_LAB=1. NativeAccess abre un scope privado durante sus llamadas después
+de los controles de actor/compañía de los servicios Cencomun; acciones oficiales
+fuera de ese flujo reciben denegación y no eluden umbrales/atomicidad. No cambia
+validación, estado, efectos, source ni pins de AOS/AOP. No representa una política
+aprobada de producción. Auditoría/key/outbox privados quedan legibles solo por
+manager, con retirada de grants antiguos del propio fixture. No ampliar grants
+para corregir tests. Su aceptación exige identidades reales, acción nativa/CRUD,
+rechazo causal y snapshots posteriores; las regresiones locales no la sustituyen.

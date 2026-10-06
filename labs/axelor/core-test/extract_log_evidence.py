@@ -199,6 +199,15 @@ def extract(log, output, run_id, commit, fixtures):
         if row['status']!=item['status'] or row['complete']!=item['complete']:
             item.update(reported_status=item['status'],status=row['status'],complete=row['complete'],review_reason=row['reason'])
         (output/(case+'.json')).write_text(json.dumps(item,indent=2)+'\n')
+    from api_cases import API_CHECKS, review_api_group
+    for case,item in complete_groups.items():
+        if case not in API_CHECKS:continue
+        row=by_case[case]
+        row.update(status=item['status'],observed_revision=item['revision'],complete=item['complete'],evidence=case+'.json',reason=item.get('error','Native API execution'))
+        review_api_group(row,item,fixtures)
+        if row['status']!=item['status'] or row['complete']!=item['complete']:
+            item.update(reported_status=item['status'],status=row['status'],complete=row['complete'],review_reason=row['reason'])
+        (output/(case+'.json')).write_text(json.dumps(item,indent=2)+'\n')
     results = {"source": "complete structured Actions log notices; ZIP availability tracked separately",
         "run_id": run_id, "lab_commit": commit, "reference": REFERENCE, "coverage_revision": 2,
         "log_sha256": hashlib.sha256(log.read_bytes()).hexdigest(),

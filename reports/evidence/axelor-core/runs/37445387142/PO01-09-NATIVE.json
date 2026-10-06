@@ -1,0 +1,2852 @@
+{
+  "case": "PO01-09-NATIVE",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "revision": 2,
+  "complete": false,
+  "steps": [
+    {
+      "name": "PO01",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "PO01",
+        "request_key": "PO01-create",
+        "reason": "Synthetic LAB create",
+        "amount": "199.99",
+        "currency": "USD"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "denials": [
+        {
+          "name": "purchase/approve-denied-operator",
+          "actor": "ccm-operator",
+          "request": {
+            "company_id": "CCM-LAB-001",
+            "id": "PO01",
+            "request_key": "PO01-approve",
+            "reason": "Synthetic LAB approve"
+          },
+          "response": {
+            "error_type": "com.cencomun.core.CoreFault",
+            "error": "Purchase approval role required",
+            "native_stack": [
+              "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:121)",
+              "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+              "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+              "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+              "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+              "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+              "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+              "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+              "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+            ]
+          },
+          "http_status": 403,
+          "expected_http_status": 403,
+          "before": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "after": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "read_boundary": "separate-http-after-business-commit-or-rollback",
+          "status": "PASS",
+          "executed": true
+        },
+        {
+          "name": "purchase/approve-denied-reader",
+          "actor": "ccm-reader",
+          "request": {
+            "company_id": "CCM-LAB-001",
+            "id": "PO01",
+            "request_key": "PO01-approve",
+            "reason": "Synthetic LAB approve"
+          },
+          "response": {
+            "error_type": "com.cencomun.core.CoreFault",
+            "error": "Purchase approval role required",
+            "native_stack": [
+              "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:121)",
+              "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+              "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+              "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+              "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+              "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+              "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+              "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+              "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+            ]
+          },
+          "http_status": 403,
+          "expected_http_status": 403,
+          "before": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "after": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 149,
+                "actor": "ccm-reader",
+                "actor_id": 3,
+                "created_on": "2026-10-06T10:01:11.268149",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "read_boundary": "separate-http-after-business-commit-or-rollback",
+          "status": "PASS",
+          "executed": true
+        },
+        {
+          "name": "purchase/approve-denied-mcp",
+          "actor": "ccm-mcp",
+          "request": {
+            "company_id": "CCM-LAB-001",
+            "id": "PO01",
+            "request_key": "PO01-approve",
+            "reason": "Synthetic LAB approve"
+          },
+          "response": {
+            "error_type": "com.cencomun.core.CoreFault",
+            "error": "Purchase approval role required",
+            "native_stack": [
+              "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:121)",
+              "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+              "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+              "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+              "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+              "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+              "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+              "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+              "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+            ]
+          },
+          "http_status": 403,
+          "expected_http_status": 403,
+          "before": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 149,
+                "actor": "ccm-reader",
+                "actor_id": 3,
+                "created_on": "2026-10-06T10:01:11.268149",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "after": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 149,
+                "actor": "ccm-reader",
+                "actor_id": 3,
+                "created_on": "2026-10-06T10:01:11.268149",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 150,
+                "actor": "ccm-mcp",
+                "actor_id": 6,
+                "created_on": "2026-10-06T10:01:11.366329",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "read_boundary": "separate-http-after-business-commit-or-rollback",
+          "status": "PASS",
+          "executed": true
+        },
+        {
+          "name": "purchase/approve-denied-other",
+          "actor": "ccm-other",
+          "request": {
+            "company_id": "CCM-LAB-001",
+            "id": "PO01",
+            "request_key": "PO01-approve",
+            "reason": "Synthetic LAB approve"
+          },
+          "response": {
+            "error_type": "com.cencomun.core.CoreFault",
+            "error": "Company denied",
+            "native_stack": [
+              "com.cencomun.core.CoreOrderService.company(CoreOrderService.java:38)",
+              "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:120)",
+              "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+              "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+              "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+              "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+              "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+              "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+              "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+              "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+            ]
+          },
+          "http_status": 403,
+          "expected_http_status": 403,
+          "before": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 149,
+                "actor": "ccm-reader",
+                "actor_id": 3,
+                "created_on": "2026-10-06T10:01:11.268149",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 150,
+                "actor": "ccm-mcp",
+                "actor_id": 6,
+                "created_on": "2026-10-06T10:01:11.366329",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "after": {
+            "purchase": {
+              "id": "PO01",
+              "native_id": 1,
+              "native_purchase_id": 1,
+              "company_id": "CCM-LAB-001",
+              "native_company_id": 1,
+              "creator": "ccm-operator",
+              "state": "PENDING",
+              "native_status": 2,
+              "usd_base": "0.00",
+              "native_gross": "0.000",
+              "native_tax": "0.000",
+              "currency": "USD",
+              "request_date": "2026-10-01",
+              "request_rate": "0.000000",
+              "decision_revision": 1,
+              "approved_by": null,
+              "approved_at": null,
+              "native_validated_by": null,
+              "lines": [
+                {
+                  "price": "199.9900000000",
+                  "in_tax": "0.000",
+                  "qty": "1.0000000000",
+                  "ex_tax": "0.000",
+                  "discount": "0E-20",
+                  "id": 1,
+                  "native_purchase_id": 1
+                }
+              ]
+            },
+            "cash_close": {},
+            "native_cash": {
+              "expected": {
+                "USD": "0.00",
+                "VES": "0.00",
+                "POS": "0.00",
+                "TRANSFER": "0.00"
+              },
+              "sources": [
+                {
+                  "lines": [],
+                  "channel": "USD"
+                },
+                {
+                  "lines": [],
+                  "channel": "VES"
+                },
+                {
+                  "lines": [],
+                  "channel": "POS"
+                },
+                {
+                  "lines": [],
+                  "channel": "TRANSFER"
+                }
+              ]
+            },
+            "bank_rows": [],
+            "bank_imports": [],
+            "keys": [
+              {
+                "key": "PO01-create",
+                "id": 63,
+                "domain": "purchase.create"
+              },
+              {
+                "key": "PO01-request",
+                "id": 64,
+                "domain": "purchase.request"
+              }
+            ],
+            "events": [],
+            "audit": [
+              {
+                "id": 146,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.014955",
+                "kind": "purchase.created",
+                "correlation": "PO01-create",
+                "reason": "Synthetic purchase draft",
+                "beforeState": "{}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 147,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.120333",
+                "kind": "purchase.requested",
+                "correlation": "PO01-request",
+                "reason": "Synthetic LAB request",
+                "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+                "rejected": false
+              },
+              {
+                "id": 148,
+                "actor": "ccm-operator",
+                "actor_id": 2,
+                "created_on": "2026-10-06T10:01:11.157889",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 149,
+                "actor": "ccm-reader",
+                "actor_id": 3,
+                "created_on": "2026-10-06T10:01:11.268149",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 150,
+                "actor": "ccm-mcp",
+                "actor_id": 6,
+                "created_on": "2026-10-06T10:01:11.366329",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Purchase approval role required",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              },
+              {
+                "id": 151,
+                "actor": "ccm-other",
+                "actor_id": 8,
+                "created_on": "2026-10-06T10:01:11.462598",
+                "kind": "finance.denied",
+                "correlation": "PO01-approve",
+                "reason": "Company denied",
+                "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+                "rejected": true
+              }
+            ],
+            "read_boundary": "separate-http-after-business-commit-or-rollback"
+          },
+          "read_boundary": "separate-http-after-business-commit-or-rollback",
+          "status": "PASS",
+          "executed": true
+        }
+      ],
+      "executed": true,
+      "status": "FAIL",
+      "create_response": {
+        "id": "PO01",
+        "native_id": 1,
+        "native_purchase_id": 1,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "creator": "ccm-operator",
+        "state": "DRAFT",
+        "native_status": 1,
+        "usd_base": "0.00",
+        "native_gross": "0.00",
+        "native_tax": "0.00",
+        "currency": "USD",
+        "request_date": "2026-10-01",
+        "request_rate": "0",
+        "decision_revision": 1,
+        "approved_by": null,
+        "approved_at": null,
+        "native_validated_by": null,
+        "lines": [
+          {
+            "price": "199.99",
+            "in_tax": "0",
+            "qty": "1",
+            "ex_tax": "0",
+            "discount": "0",
+            "id": 1,
+            "native_purchase_id": 1
+          }
+        ],
+        "replayed": false
+      },
+      "create_http": 201,
+      "create_after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "DRAFT",
+          "native_status": 1,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "replay_response": {
+        "id": "PO01",
+        "native_id": 1,
+        "native_purchase_id": 1,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "creator": "ccm-operator",
+        "state": "DRAFT",
+        "native_status": 1,
+        "usd_base": "0.00",
+        "native_gross": "0.00",
+        "native_tax": "0.00",
+        "currency": "USD",
+        "request_date": "2026-10-01",
+        "request_rate": 0,
+        "decision_revision": 1,
+        "approved_by": null,
+        "approved_at": null,
+        "native_validated_by": null,
+        "lines": [
+          {
+            "price": "199.99",
+            "in_tax": "0",
+            "qty": "1",
+            "ex_tax": "0",
+            "discount": "0",
+            "id": 1,
+            "native_purchase_id": 1
+          }
+        ],
+        "replayed": true
+      },
+      "replay_http": 200,
+      "replay_after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "DRAFT",
+          "native_status": 1,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "request_response": {
+        "id": "PO01",
+        "native_id": 1,
+        "native_purchase_id": 1,
+        "company_id": "CCM-LAB-001",
+        "native_company_id": 1,
+        "creator": "ccm-operator",
+        "state": "PENDING",
+        "native_status": 2,
+        "usd_base": "0.00",
+        "native_gross": "0.000",
+        "native_tax": "0.00",
+        "currency": "USD",
+        "request_date": "2026-10-01",
+        "request_rate": "0.000000",
+        "decision_revision": 1,
+        "approved_by": null,
+        "approved_at": null,
+        "native_validated_by": null,
+        "lines": [
+          {
+            "price": "199.9900000000",
+            "in_tax": "0.000",
+            "qty": "1.0000000000",
+            "ex_tax": "0.000",
+            "discount": "0E-20",
+            "id": 1,
+            "native_purchase_id": 1
+          }
+        ],
+        "replayed": false
+      },
+      "request_http": 200,
+      "request_after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "response": {
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "Positive money with at most two decimals required",
+        "native_stack": [
+          "com.cencomun.core.MoneyPolicy.positiveMoney(MoneyPolicy.java:16)",
+          "com.cencomun.core.MoneyPolicy.purchaseLevel(MoneyPolicy.java:31)",
+          "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:124)",
+          "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+          "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "http_status": 422,
+      "after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 149,
+            "actor": "ccm-reader",
+            "actor_id": 3,
+            "created_on": "2026-10-06T10:01:11.268149",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 150,
+            "actor": "ccm-mcp",
+            "actor_id": 6,
+            "created_on": "2026-10-06T10:01:11.366329",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 151,
+            "actor": "ccm-other",
+            "actor_id": 8,
+            "created_on": "2026-10-06T10:01:11.462598",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Company denied",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 152,
+            "actor": "ccm-buyer",
+            "actor_id": 10,
+            "created_on": "2026-10-06T10:01:11.560745",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Positive money with at most two decimals required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "assertion_error": "PO01: native approval failed {'error_type': 'java.lang.IllegalArgumentException', 'error': 'Positive money with at most two decimals required', 'native_stack': ['com.cencomun.core.MoneyPolicy.positiveMoney(MoneyPolicy.java:16)', 'com.cencomun.core.MoneyPolicy.purchaseLevel(MoneyPolicy.java:31)', 'com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:124)', 'com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)', 'com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)', 'com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)', 'com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)', 'com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)', 'com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)', 'com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)', 'com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)']}"
+    }
+  ],
+  "fixture_preparation": {
+    "response": {
+      "company_id": 1,
+      "fixture_scope": "PURCHASE",
+      "native_purchase_config_id": 1,
+      "native_sequence_id": 107,
+      "native_sequence_code": "purchaseOrder",
+      "native_supplier_id": 5,
+      "native_purchase_tax_id": 3,
+      "scope": "Synthetic LAB only; official create/workflow services unchanged"
+    }
+  },
+  "attempts": [
+    {
+      "name": "purchase/approve-denied-operator",
+      "actor": "ccm-operator",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "PO01",
+        "request_key": "PO01-approve",
+        "reason": "Synthetic LAB approve"
+      },
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Purchase approval role required",
+        "native_stack": [
+          "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:121)",
+          "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+          "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "http_status": 403,
+      "expected_http_status": 403,
+      "before": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS",
+      "executed": true
+    },
+    {
+      "name": "purchase/approve-denied-reader",
+      "actor": "ccm-reader",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "PO01",
+        "request_key": "PO01-approve",
+        "reason": "Synthetic LAB approve"
+      },
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Purchase approval role required",
+        "native_stack": [
+          "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:121)",
+          "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+          "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "http_status": 403,
+      "expected_http_status": 403,
+      "before": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 149,
+            "actor": "ccm-reader",
+            "actor_id": 3,
+            "created_on": "2026-10-06T10:01:11.268149",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS",
+      "executed": true
+    },
+    {
+      "name": "purchase/approve-denied-mcp",
+      "actor": "ccm-mcp",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "PO01",
+        "request_key": "PO01-approve",
+        "reason": "Synthetic LAB approve"
+      },
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Purchase approval role required",
+        "native_stack": [
+          "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:121)",
+          "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+          "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "http_status": 403,
+      "expected_http_status": 403,
+      "before": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 149,
+            "actor": "ccm-reader",
+            "actor_id": 3,
+            "created_on": "2026-10-06T10:01:11.268149",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 149,
+            "actor": "ccm-reader",
+            "actor_id": 3,
+            "created_on": "2026-10-06T10:01:11.268149",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 150,
+            "actor": "ccm-mcp",
+            "actor_id": 6,
+            "created_on": "2026-10-06T10:01:11.366329",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS",
+      "executed": true
+    },
+    {
+      "name": "purchase/approve-denied-other",
+      "actor": "ccm-other",
+      "request": {
+        "company_id": "CCM-LAB-001",
+        "id": "PO01",
+        "request_key": "PO01-approve",
+        "reason": "Synthetic LAB approve"
+      },
+      "response": {
+        "error_type": "com.cencomun.core.CoreFault",
+        "error": "Company denied",
+        "native_stack": [
+          "com.cencomun.core.CoreOrderService.company(CoreOrderService.java:38)",
+          "com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:120)",
+          "com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)",
+          "com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)",
+          "com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)",
+          "com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)",
+          "com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)",
+          "com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)",
+          "com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)",
+          "com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)"
+        ]
+      },
+      "http_status": 403,
+      "expected_http_status": 403,
+      "before": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 149,
+            "actor": "ccm-reader",
+            "actor_id": 3,
+            "created_on": "2026-10-06T10:01:11.268149",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 150,
+            "actor": "ccm-mcp",
+            "actor_id": 6,
+            "created_on": "2026-10-06T10:01:11.366329",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "after": {
+        "purchase": {
+          "id": "PO01",
+          "native_id": 1,
+          "native_purchase_id": 1,
+          "company_id": "CCM-LAB-001",
+          "native_company_id": 1,
+          "creator": "ccm-operator",
+          "state": "PENDING",
+          "native_status": 2,
+          "usd_base": "0.00",
+          "native_gross": "0.000",
+          "native_tax": "0.000",
+          "currency": "USD",
+          "request_date": "2026-10-01",
+          "request_rate": "0.000000",
+          "decision_revision": 1,
+          "approved_by": null,
+          "approved_at": null,
+          "native_validated_by": null,
+          "lines": [
+            {
+              "price": "199.9900000000",
+              "in_tax": "0.000",
+              "qty": "1.0000000000",
+              "ex_tax": "0.000",
+              "discount": "0E-20",
+              "id": 1,
+              "native_purchase_id": 1
+            }
+          ]
+        },
+        "cash_close": {},
+        "native_cash": {
+          "expected": {
+            "USD": "0.00",
+            "VES": "0.00",
+            "POS": "0.00",
+            "TRANSFER": "0.00"
+          },
+          "sources": [
+            {
+              "lines": [],
+              "channel": "USD"
+            },
+            {
+              "lines": [],
+              "channel": "VES"
+            },
+            {
+              "lines": [],
+              "channel": "POS"
+            },
+            {
+              "lines": [],
+              "channel": "TRANSFER"
+            }
+          ]
+        },
+        "bank_rows": [],
+        "bank_imports": [],
+        "keys": [
+          {
+            "key": "PO01-create",
+            "id": 63,
+            "domain": "purchase.create"
+          },
+          {
+            "key": "PO01-request",
+            "id": 64,
+            "domain": "purchase.request"
+          }
+        ],
+        "events": [],
+        "audit": [
+          {
+            "id": 146,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.014955",
+            "kind": "purchase.created",
+            "correlation": "PO01-create",
+            "reason": "Synthetic purchase draft",
+            "beforeState": "{}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.00\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.99\",\"in_tax\":\"0\",\"qty\":\"1\",\"ex_tax\":\"0\",\"discount\":\"0\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 147,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.120333",
+            "kind": "purchase.requested",
+            "correlation": "PO01-request",
+            "reason": "Synthetic LAB request",
+            "beforeState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"DRAFT\",\"native_status\":1,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "afterState": "{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.00\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]}",
+            "rejected": false
+          },
+          {
+            "id": 148,
+            "actor": "ccm-operator",
+            "actor_id": 2,
+            "created_on": "2026-10-06T10:01:11.157889",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 149,
+            "actor": "ccm-reader",
+            "actor_id": 3,
+            "created_on": "2026-10-06T10:01:11.268149",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 150,
+            "actor": "ccm-mcp",
+            "actor_id": 6,
+            "created_on": "2026-10-06T10:01:11.366329",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Purchase approval role required",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          },
+          {
+            "id": 151,
+            "actor": "ccm-other",
+            "actor_id": 8,
+            "created_on": "2026-10-06T10:01:11.462598",
+            "kind": "finance.denied",
+            "correlation": "PO01-approve",
+            "reason": "Company denied",
+            "beforeState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "afterState": "{\"purchase\":{\"id\":\"PO01\",\"native_id\":1,\"native_purchase_id\":1,\"company_id\":\"CCM-LAB-001\",\"native_company_id\":1,\"creator\":\"ccm-operator\",\"state\":\"PENDING\",\"native_status\":2,\"usd_base\":\"0.00\",\"native_gross\":\"0.000\",\"native_tax\":\"0.000\",\"currency\":\"USD\",\"request_date\":\"2026-10-01\",\"request_rate\":0.000000,\"decision_revision\":1,\"approved_by\":null,\"approved_at\":null,\"native_validated_by\":null,\"lines\":[{\"price\":\"199.9900000000\",\"in_tax\":\"0.000\",\"qty\":\"1.0000000000\",\"ex_tax\":\"0.000\",\"discount\":\"0E-20\",\"id\":1,\"native_purchase_id\":1}]},\"cash_close\":{}}",
+            "rejected": true
+          }
+        ],
+        "read_boundary": "separate-http-after-business-commit-or-rollback"
+      },
+      "read_boundary": "separate-http-after-business-commit-or-rollback",
+      "status": "PASS",
+      "executed": true
+    }
+  ],
+  "status": "FAIL",
+  "error": "PO01: native approval failed {'error_type': 'java.lang.IllegalArgumentException', 'error': 'Positive money with at most two decimals required', 'native_stack': ['com.cencomun.core.MoneyPolicy.positiveMoney(MoneyPolicy.java:16)', 'com.cencomun.core.MoneyPolicy.purchaseLevel(MoneyPolicy.java:31)', 'com.cencomun.core.CorePurchaseService.approve(CorePurchaseService.java:124)', 'com.cencomun.core.CoreFinanceResource.invoke(CoreFinanceResource.java:33)', 'com.cencomun.core.CoreFinanceResource.approve(CoreFinanceResource.java:22)', 'com.axelor.web.servlet.MaintenanceFilter.doFilter(MaintenanceFilter.java:49)', 'com.axelor.auth.pac4j.SessionInfoFilter.doFilterInternal(SessionInfoFilter.java:42)', 'com.axelor.app.internal.AppFilter.doFilter(AppFilter.java:86)', 'com.axelor.db.tenants.TenantFilter.doFilter(TenantFilter.java:69)', 'com.axelor.web.servlet.CorsFilter.doFilter(CorsFilter.java:124)', 'com.axelor.web.servlet.ProxyFilter.doFilter(ProxyFilter.java:34)']}",
+  "error_type": "AssertionError",
+  "seconds": 0.894
+}
