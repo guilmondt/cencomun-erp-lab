@@ -1,0 +1,46 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Cashea Line",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 1,
+  "autoname": "hash",
+  "track_changes": 0,
+  "fields": [
+    {
+      "fieldname": "product",
+      "fieldtype": "Link",
+      "label": "Product",
+      "options": "Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "qty",
+      "fieldtype": "Data",
+      "label": "Qty",
+      "reqd": 1
+    },
+    {
+      "fieldname": "unit_price",
+      "fieldtype": "Data",
+      "label": "Unit Price",
+      "reqd": 1
+    },
+    {
+      "fieldname": "unit_cost",
+      "fieldtype": "Data",
+      "label": "Unit Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "line_total",
+      "fieldtype": "Data",
+      "label": "Line Total",
+      "read_only": 1
+    }
+  ],
+  "permissions": [],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

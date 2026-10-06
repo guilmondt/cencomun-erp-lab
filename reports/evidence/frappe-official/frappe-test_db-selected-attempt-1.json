@@ -1,0 +1,472 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "frappe",
+  "site": "ccm-upstream-frappe-residual.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "frappe.tests.test_db",
+  "category": "all",
+  "attempt": 1,
+  "status": "FAIL",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_connect_fails_with_wrong_credentials_by_env"
+  ],
+  "offline": true,
+  "observe": true,
+  "auth_diagnostics": true,
+  "native_frame_profiling": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-residual.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-test_db-selected-attempt-1.xml --module frappe.tests.test_db --test test_connect_fails_with_wrong_credentials_by_env",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-residual.test serve --port 8002 --noreload",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T10:04:20.544354+00:00",
+  "elapsed_seconds": 20.369,
+  "upstream_sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+  "log_sha256": "1f6fc503661339e1b36140ac8b23a97781e5d0798d2ef265ee39ce0c66f2b9ed",
+  "actual_tests_run": 1,
+  "runner_counts_by_category": [
+    1
+  ],
+  "discovered_categories": [
+    {
+      "tests": 1,
+      "category": "integration",
+      "app": "frappe"
+    }
+  ],
+  "junit_records": 1,
+  "counts": {
+    "PASS": 0,
+    "FAIL": 1,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "frappe.tests.test_db.TestDbConnectWithEnvCredentials.test_connect_fails_with_wrong_credentials_by_env",
+      "seconds": 0.071,
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_db.py\", line 1500, in test_connect_fails_with_wrong_credentials_by_env"
+      ]
+    }
+  ],
+  "xml_documents": 1,
+  "web_telemetry": {
+    "samples": [
+      {
+        "epoch": 1791281040.1856904,
+        "stage": "before_readiness",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "R",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": []
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281047.3716154,
+        "stage": "before_native_runner_wait",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281047.3816173,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281048.3911548,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281049.4008088,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281050.4106104,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281051.4201014,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281052.429809,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281053.442175,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281054.4536867,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281055.4660063,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281056.4775772,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281057.4872015,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281058.4966822,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281059.5078015,
+        "stage": "during_native_runner",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281060.5173366,
+        "stage": "before_harness_cleanup",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "S",
+            "ppid": 1815,
+            "start_ticks": "112277",
+            "owned_listener_inodes": [
+              "7041"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "7041"
+          }
+        ],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      },
+      {
+        "epoch": 1791281060.5338855,
+        "stage": "after_harness_cleanup",
+        "web_processes": [
+          {
+            "pid": 1818,
+            "state": "GONE",
+            "start_ticks": null,
+            "ownership_unreadable": true
+          }
+        ],
+        "web_exit_code": -15,
+        "listeners": [],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281040.17578
+      }
+    ],
+    "web_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "web_log_bytes": 0,
+    "web_log_output_retained_privately": true,
+    "automatic_restarts_during_test": 0
+  }
+}

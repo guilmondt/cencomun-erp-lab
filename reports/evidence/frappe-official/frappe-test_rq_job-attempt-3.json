@@ -1,0 +1,103 @@
+{
+  "scope": "official module regression",
+  "app": "frappe",
+  "site": "ccm-upstream-frappe.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "frappe.core.doctype.rq_job.test_rq_job",
+  "category": "all",
+  "attempt": 3,
+  "status": "PASS",
+  "command": "bench --site ccm-upstream-frappe.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-test_rq_job-attempt-3.xml --module frappe.core.doctype.rq_job.test_rq_job",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe.test serve --port 8002 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T02:21:31.078256+00:00",
+  "elapsed_seconds": 34.109,
+  "upstream_sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+  "log_sha256": "6413c6de69f928abc4d45ed7678be019ea37f91940e8e48fdbe2fee1cd362fe5",
+  "actual_tests_run": 13,
+  "runner_counts_by_category": [
+    13
+  ],
+  "discovered_categories": [
+    {
+      "tests": 13,
+      "category": "integration",
+      "app": "frappe"
+    }
+  ],
+  "junit_records": 13,
+  "counts": {
+    "PASS": 13,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_auto_job_dedup",
+      "seconds": 4.038,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_clear_failed_jobs",
+      "seconds": 9.458,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_configurable_ttl",
+      "seconds": 0.013,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_delete_doc",
+      "seconds": 0.009,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_enqueue_after_commit",
+      "seconds": 0.015,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_func_obj_serialization",
+      "seconds": 0.019,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_get_list_filtering",
+      "seconds": 4.082,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_job_id_manual_dedup",
+      "seconds": 5.229,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_memory_usage",
+      "seconds": 0.208,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_multi_queue_burst_consumption",
+      "seconds": 3.648,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_multi_queue_burst_consumption_worker_pool",
+      "seconds": 2.217,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_pickle_lazy_doc_for_rq_job",
+      "seconds": 0.414,
+      "status": "PASS"
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_serialization",
+      "seconds": 0.213,
+      "status": "PASS"
+    }
+  ],
+  "xml_documents": 1
+}

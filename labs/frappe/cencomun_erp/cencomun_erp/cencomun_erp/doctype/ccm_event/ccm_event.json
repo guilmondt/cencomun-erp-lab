@@ -1,0 +1,70 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Event",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "hash",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "event_type",
+      "fieldtype": "Data",
+      "label": "Event Type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "payload",
+      "fieldtype": "Long Text",
+      "label": "Payload",
+      "reqd": 1
+    },
+    {
+      "fieldname": "delivered",
+      "fieldtype": "Check",
+      "label": "Delivered",
+      "default": 0
+    },
+    {
+      "fieldname": "attempts",
+      "fieldtype": "Int",
+      "label": "Attempts",
+      "default": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "CCM Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Director",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

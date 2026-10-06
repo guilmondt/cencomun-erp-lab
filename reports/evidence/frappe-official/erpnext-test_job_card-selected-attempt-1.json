@@ -1,0 +1,74 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-fixture-order.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.manufacturing.doctype.job_card.test_job_card",
+  "category": "all",
+  "attempt": 1,
+  "status": "PASS",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_completion_qty_capped_by_previous_operation",
+    "test_job_card_proccess_qty_and_completed_qty",
+    "test_op_cost_calculation",
+    "test_operating_cost_with_overproduction",
+    "test_process_loss_booked_once_across_partial_entries"
+  ],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-order.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_job_card-selected-attempt-1.xml --module erpnext.manufacturing.doctype.job_card.test_job_card --test test_completion_qty_capped_by_previous_operation --test test_job_card_proccess_qty_and_completed_qty --test test_op_cost_calculation --test test_operating_cost_with_overproduction --test test_process_loss_booked_once_across_partial_entries",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-order.test serve --port 8005 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T05:41:05.979886+00:00",
+  "elapsed_seconds": 22.877,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "8863b6aebe6d3e0835f4458894a9cb8d7e263b97a975de4ed296c19fee654688",
+  "actual_tests_run": 5,
+  "runner_counts_by_category": [
+    5
+  ],
+  "discovered_categories": [
+    {
+      "tests": 5,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 5,
+  "counts": {
+    "PASS": 5,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_completion_qty_capped_by_previous_operation",
+      "seconds": 2.26,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_job_card_proccess_qty_and_completed_qty",
+      "seconds": 1.047,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_op_cost_calculation",
+      "seconds": 1.003,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_operating_cost_with_overproduction",
+      "seconds": 3.169,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.manufacturing.doctype.job_card.test_job_card.TestJobCard.test_process_loss_booked_once_across_partial_entries",
+      "seconds": 1.116,
+      "status": "PASS"
+    }
+  ],
+  "xml_documents": 1
+}

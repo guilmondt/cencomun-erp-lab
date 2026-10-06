@@ -1,0 +1,1441 @@
+{
+  "native_result": "frappe-sequence-test_perf-attempt-1.json",
+  "native_count": 155,
+  "scope": "Bounded modules only; never a complete suite result",
+  "native_discovery": [],
+  "discovered_distinct_ids": 0,
+  "stopped_distinct_ids": 155,
+  "cases_by_id": [],
+  "no_result_ids": [],
+  "class_fixture_events": [],
+  "counts_by_event": {
+    "observer_started": 3,
+    "external_transport_rejected": 1,
+    "module_map_return": 196,
+    "native_http_served": 177,
+    "native_get_url": 483,
+    "native_mock_transition": 68,
+    "native_state": 310,
+    "http_attempt": 76,
+    "native_mock_dispatch": 17,
+    "http_response": 76,
+    "test_stopped": 155
+  },
+  "transport_events": [
+    {
+      "kind": "external_transport_rejected",
+      "pid": 32587,
+      "epoch": 1791275468.9994886,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275481.0334988,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275481.0336752,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275482.5522044,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275482.552378,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275483.1703806,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275483.1705363,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275483.7797942,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275483.7799497,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275484.331566,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275484.3317258,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275484.888847,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275484.889031,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275485.2595136,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275485.2596834,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275485.757513,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275485.7576704,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275485.7687285,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275485.7688844,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275486.559214,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275486.559371,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275486.569848,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275486.5699892,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275486.6958144,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275486.6959763,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275487.2456825,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275487.2458441,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275487.3212593,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/anything/%7B%7Bdoc.doctype%7D%7D",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/anything/%7B%7Bdoc.doctype%7D%7D"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275487.3214262,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "method": "POST",
+      "url": "https://httpbin.org/anything/%7B%7Bdoc.doctype%7D%7D",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/anything/%7B%7Bdoc.doctype%7D%7D"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275487.9341407,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275487.9343615,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275488.055618,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://httpbin.org/anything/Note",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/anything/Note"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275488.0558136,
+      "test": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "method": "POST",
+      "url": "https://httpbin.org/anything/Note",
+      "hostname": "httpbin.org",
+      "port": 443,
+      "path": "/anything/Note"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275493.6116078,
+      "test": "frappe.workflow.doctype.workflow.test_workflow.TestWorkflow.test_sync_tasks",
+      "method": "POST",
+      "adapter": {
+        "module": "responses",
+        "function": "RequestsMock.start.<locals>.unbound_on_send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py"
+      },
+      "url": "https://workflowtasks.org/post",
+      "hostname": "workflowtasks.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "native_mock_dispatch",
+      "pid": 32593,
+      "epoch": 1791275493.6117682,
+      "test": "frappe.workflow.doctype.workflow.test_workflow.TestWorkflow.test_sync_tasks",
+      "method": "POST",
+      "url": "https://workflowtasks.org/post",
+      "hostname": "workflowtasks.org",
+      "port": 443,
+      "path": "/post"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275524.2226639,
+      "test": "frappe.tests.test_api.TestResourceAPI.test_unauthorized_call_v1",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/User",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/User"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275549.7922313,
+      "test": "frappe.tests.test_api_v2.TestResourceAPIV2.test_unauthorized_call_v2",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/v2/document/User",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/v2/document/User"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275550.5502691,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_mobile",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275551.4933841,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_mobile",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275551.6160092,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_mobile",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275551.842061,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_only_email",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275552.2382462,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_only_email",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275552.2730072,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_only_email",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275552.8059735,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275553.2091947,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275553.6144829,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275553.8604767,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username_and_mobile",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275554.586376,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username_and_mobile",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275554.7024486,
+      "test": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username_and_mobile",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275554.8083937,
+      "test": "frappe.tests.test_auth.TestAuth.test_correct_cookie_expiry_set",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275554.9533799,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275555.8401814,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275555.8898673,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.0295594,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.0484018,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.130373,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.269044,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.2969434,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.323542,
+      "test": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275556.3566074,
+      "test": "frappe.tests.test_auth.TestAuth.test_disable_user_pass_login",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275557.1916537,
+      "test": "frappe.tests.test_auth.TestAuth.test_disable_user_pass_login",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/resource/ToDo",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/resource/ToDo"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275557.2432134,
+      "test": "frappe.tests.test_auth.TestAuth.test_disable_user_pass_login",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275561.3112538,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275562.069428,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275564.8177347,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.0237617,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.04639,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.1137466,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.1534877,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.201576,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.2447102,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.2979906,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": ""
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275565.3478723,
+      "test": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.www.login.login_via_key",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.www.login.login_via_key"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275574.9180977,
+      "test": "frappe.tests.test_client.TestClient.test_array_values_in_request_args",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.client.get_list",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.client.get_list"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.6401494,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.auth.get_logged_user",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.auth.get_logged_user"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.6647248,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.auth.get_logged_user",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.auth.get_logged_user"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.6841886,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.auth.get_logged_user",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.auth.get_logged_user"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.7080944,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.auth.get_logged_user",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.auth.get_logged_user"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.7329528,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.7857242,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_delete_doc",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.8357637,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_doc",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.8923664,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_single",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.9384918,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_filters",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275577.9861817,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_name",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275578.0350244,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_with_malicious_query",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275578.082034,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_insert_many",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275578.129661,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_list_docs",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275578.1754198,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_list_summary",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275578.2239065,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_update_child_doc",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275578.269543,
+      "test": "frappe.tests.test_frappe_client.TestFrappeClient.test_update_doc",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275579.9736745,
+      "test": "frappe.tests.test_oauth20.TestOAuth20.test_login_using_implicit_token",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/login",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/login"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275580.0200305,
+      "test": "frappe.tests.test_oauth20.TestOAuth20.test_login_using_implicit_token",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/api/method/frappe.integrations.oauth2.authorize",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/api/method/frappe.integrations.oauth2.authorize"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275580.0372055,
+      "test": "frappe.tests.test_oauth20.TestOAuth20.test_login_using_implicit_token",
+      "method": "GET",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/login",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/login"
+    },
+    {
+      "kind": "http_attempt",
+      "pid": 32593,
+      "epoch": 1791275585.3984075,
+      "test": "frappe.tests.test_perf.TestPerformance.test_req_per_seconds_basic",
+      "method": "POST",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "url": "http://127.0.0.1:8002/",
+      "hostname": "127.0.0.1",
+      "port": 8002,
+      "path": "/"
+    }
+  ],
+  "server_sites_observed": [
+    "ccm-upstream-frappe-cause-fixed.test"
+  ],
+  "automatic_restarts_during_test": 0,
+  "counts_not_added_to_full_CI": true
+}

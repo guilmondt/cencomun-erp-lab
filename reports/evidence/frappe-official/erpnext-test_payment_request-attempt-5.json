@@ -1,0 +1,153 @@
+{
+  "scope": "official module regression",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-diagnostic.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.accounts.doctype.payment_request.test_payment_request",
+  "category": "all",
+  "attempt": 5,
+  "status": "PASS",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_payment_request-attempt-5.xml --module erpnext.accounts.doctype.payment_request.test_payment_request",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test serve --port 8005 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T05:17:37.671879+00:00",
+  "elapsed_seconds": 26.517,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "3443c1e0664da18737a68391d8bca78a708bcd1f1de5cce3554edb51cdb232c2",
+  "actual_tests_run": 22,
+  "runner_counts_by_category": [
+    22
+  ],
+  "discovered_categories": [
+    {
+      "tests": 22,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 22,
+  "counts": {
+    "PASS": 22,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "seconds": 2.248,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "seconds": 0.672,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_draft_pr_reuse_merges_payment_references",
+      "seconds": 0.252,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entries_against_sales_order",
+      "seconds": 0.414,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "seconds": 0.851,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "seconds": 0.599,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "seconds": 0.621,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "seconds": 0.964,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "seconds": 0.521,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "seconds": 1.472,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "seconds": 0.533,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "seconds": 0.922,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "seconds": 1.036,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "seconds": 0.529,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "seconds": 0.311,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_grand_total_from_selected_schedules",
+      "seconds": 0.24,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "seconds": 0.394,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "seconds": 0.517,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "seconds": 0.421,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "seconds": 0.721,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "seconds": 0.511,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "seconds": 0.716,
+      "status": "PASS"
+    }
+  ],
+  "xml_documents": 1
+}

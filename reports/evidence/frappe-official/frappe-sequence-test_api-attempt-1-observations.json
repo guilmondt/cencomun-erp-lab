@@ -1,0 +1,151 @@
+{
+  "native_result": "frappe-sequence-test_api-attempt-1.json",
+  "scope": "selected official modules through native CI runner; not full suite",
+  "private_stream_sha256": "0507de0cac4bd54d80bb13f36d46b3c6b906851784711b2e2b56471d737fb820",
+  "counts_by_event": {
+    "observer_started": 3,
+    "external_transport_rejected": 1,
+    "module_map_return": 2,
+    "native_http_served": 1,
+    "native_mock_transition": 1
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "selection": "All allowed events",
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 32104,
+      "epoch": 1791275170.1418908,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 32104,
+      "epoch": 1791275170.3639116,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 32104,
+      "epoch": 1791275172.7305927,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32104,
+      "epoch": 1791275173.1386888,
+      "test": null,
+      "include_all_apps": false,
+      "payments": null,
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ]
+      },
+      "apps_read": [
+        "frappe"
+      ],
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_http_served",
+      "pid": 32104,
+      "epoch": 1791275173.4173033,
+      "test": null,
+      "site": "ccm-upstream-frappe-cause.test"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 32119,
+      "epoch": 1791275173.4893217,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 32119,
+      "epoch": 1791275174.151289,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "db_name": "ccm_upstream_frappe_cause"
+    },
+    {
+      "kind": "native_mock_transition",
+      "pid": 32119,
+      "epoch": 1791275177.6450841,
+      "test": null,
+      "operation": "reset",
+      "adapter": {
+        "module": "requests.adapters",
+        "function": "HTTPAdapter.send",
+        "source_file": "/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/adapters.py"
+      },
+      "registered": []
+    }
+  ]
+}

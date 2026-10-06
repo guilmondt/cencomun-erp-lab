@@ -1,0 +1,42 @@
+{
+  "scope": "full official server application discovery",
+  "app": "erpnext",
+  "site": "ccm-official-erpnext.test",
+  "module": null,
+  "category": "all",
+  "attempt": 1,
+  "status": "BLOCKED",
+  "command": "bench --site ccm-official-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-1.xml",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T02:04:52.119915+00:00",
+  "elapsed_seconds": 738.803,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "744639c031025ba9ff5665ca73a394f62252c0d61effeaf5d34755bb112827cb",
+  "actual_tests_run": null,
+  "runner_counts_by_category": [
+    2
+  ],
+  "discovered_categories": [
+    {
+      "tests": 2,
+      "category": "unit",
+      "app": "erpnext"
+    },
+    {
+      "tests": 3253,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": null,
+  "counts": {},
+  "cases": [],
+  "xml_documents": 1,
+  "diagnostic_tail": "Aborted; colliding logs are not valid evidence.",
+  "evidence_valid": false,
+  "reason": "Two concurrent ERPNext runs accidentally reused attempt-1 filenames before either published JSON. Files are quarantined; counts cannot be attributed reliably. Both were interrupted and will be repeated with exclusive attempt reservation.",
+  "affected_commands": [
+    "bench --site ccm-official-erpnext.test run-tests --app erpnext --junit-xml-output <private shared attempt-1.xml>",
+    "bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output <private shared attempt-1.xml>"
+  ]
+}

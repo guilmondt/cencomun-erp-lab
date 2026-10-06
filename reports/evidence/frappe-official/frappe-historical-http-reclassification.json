@@ -1,0 +1,458 @@
+{
+  "native_execution": "frappe-ci-attempt-1.json",
+  "native_result_unchanged": "FAIL",
+  "native_execution_repeated": false,
+  "original_diagnostic_preserved": true,
+  "prior_classification_incorrect": true,
+  "claimed_TCP_refusals": 26,
+  "demonstrated_OS_TCP_refusals_in_these_traces": 0,
+  "demonstrated_responses_mock_rejections": 26,
+  "cases": [
+    {
+      "id": "frappe.tests.test_api.TestResourceAPI.test_unauthorized_call_v1",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_api.py\", line 173, in test_unauthorized_call_v1",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "661c9d7d1eb98b43506245c72da62738ddc30417006069f9ddb4de6e6fe13a22"
+    },
+    {
+      "id": "frappe.tests.test_api_v2.TestResourceAPIV2.test_unauthorized_call_v2",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_api_v2.py\", line 45, in test_unauthorized_call_v2",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "23a9ff303196debf1e32b8987aacfa2cb97f3d4e2d2eb54939b44e1176d13614"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_mobile",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 70, in test_allow_login_using_mobile",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "19f10597d18025b62c673a1c7663e726ef84ad69858f19821e80305db223c1f8"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_only_email",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 83, in test_allow_login_using_only_email",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "d6bad4c589c5b696023154f51dc05031bab955c6adc1919921c69527be68360b"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 98, in test_allow_login_using_username",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "f1fc4deb00b206c245320614a5f8ee16415df709096f466ff668df9176faa9bd"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username_and_mobile",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 109, in test_allow_login_using_username_and_mobile",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "2241273bc1c66ecd0a5320f17367552fe71ad00aafdb11b15c8cc8344c0dcae0"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_correct_cookie_expiry_set",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 223, in test_correct_cookie_expiry_set",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "35bf73d400ca3d8133b76f9699d9011f6a981aa72442d61d2507a146406ea1c7"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 117, in test_deny_multiple_login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "6385159588618c5cfa625a6592da1b50e49f6a5dd8ed9fc5fdc525d63e7eb77b"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_disable_user_pass_login",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 133, in test_disable_user_pass_login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "441e01ba9d04687378d972284639239a15558e3a099561d271b3eb8e2f4ee602"
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 201, in test_login_with_email_link",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "a02a3f41da146657efc55fdd4edc7e03bcf6ffe9357de3d78349e804834cac17"
+    },
+    {
+      "id": "frappe.tests.test_client.TestClient.test_array_values_in_request_args",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_client.py\", line 155, in test_array_values_in_request_args",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 134, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "ed456ca620aa023ee5ae4d96d84f09e260bbc940a8114d636a2dd1fca0dd81ec"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 210, in test_auth_via_api_key_secret",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 134, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "3e44aa50c29fdf8e20a63f6e3dfed4f868436fe15062edb8ede51c45fe4778ec"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 40, in test_create_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "1672aca2dcbd7ee78f6f21ce40539c8019d35e4a369fcfb5f9b0c16735a725d4"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_delete_doc",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 195, in test_delete_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "422abc06cfddc2f9044ae73c10cb00d0c2ffb9f458fc9499f020f35471d0657e"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_doc",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 89, in test_get_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "921a05780880b3771b0d486916c925800f3f71d2830db076fa30214db43eeeab"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_single",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 129, in test_get_single",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "485181ccda396c7c4e00e1778ebcf19424c7901b6ca082bc5c867e79d167882a"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_filters",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 104, in test_get_value_by_filters",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "9139963cb5d7fe0999816fbacc2fe9d337630fa5e9ddda3409256698b3012777"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_name",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 110, in test_get_value_by_name",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "4298d53108995fa136ab77c77467d486eef04c291f3307b2033c517b276a1837"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_with_malicious_query",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 117, in test_get_value_with_malicious_query",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "990dcea36c13130d5c8755bf4079cecdd89a41f1eb71b5dacd70ca63256e0538"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_insert_many",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 20, in test_insert_many",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "5af894313a115635c157a5af25bcb2c8d43de190e01b46f48ac955ce690025ba"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_list_docs",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 50, in test_list_docs",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "6e9b0851d0f8d132fd70a78019907cca2a6671aa15c5473a4b2d5609ddf5d711"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_list_summary",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 56, in test_list_summary",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "a395806e3aa3d7518bd0b0d2b96d920cf2502fcff164c32417421376761b80e9"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_update_child_doc",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 153, in test_update_child_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "55f762d43db881ae223407dd5cb790155e0b8208123b16a6956613ed24e36191"
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_update_doc",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 143, in test_update_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "f1c1ae5dfcf7befc013cc6bb6a9a51d6d41d165e16b498774b6ca04acbd10868"
+    },
+    {
+      "id": "frappe.tests.test_oauth20.TestOAuth20.test_login_using_implicit_token",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_oauth20.py\", line 368, in test_login_using_implicit_token",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_oauth20.py\", line 497, in login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "f8b30676247bf4b54a7b39835f37960745456e0ea1e45462465d3cbeb8b85e8f"
+    },
+    {
+      "id": "frappe.tests.test_perf.TestPerformance.test_req_per_seconds_basic",
+      "status": "ERROR",
+      "corrected_classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 331, in wrapped_f",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 470, in __call__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 371, in iter",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 393, in <lambda>",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/concurrent/futures/_base.py\", line 443, in result",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/concurrent/futures/_base.py\", line 395, in __get_result",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 473, in __call__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_perf.py\", line 140, in test_req_per_seconds_basic",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "1a7f114f2f71abee6eab6a810f37c15eb6380f5a0dab0c9b14efa0bdf5b10f5b"
+    }
+  ],
+  "additional_mock_rejections_previously_UNKNOWN": 2,
+  "historical_server_lifetime_unknown": true,
+  "limit": "Old web log was empty and no PID/listener telemetry was captured. It cannot establish historical server lifetime. These 26 exceptions demonstrably arose before socket transport."
+}

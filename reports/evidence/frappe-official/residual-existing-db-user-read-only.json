@@ -1,0 +1,20 @@
+{
+  "scope": "Read-only retained native existing-user failure; no test/new-site/password/grant repeated",
+  "original_result": "frappe-ci-attempt-1.json",
+  "original_status": "FAIL",
+  "native_import_error_code": 1045,
+  "mysql_denied_host_localhost": true,
+  "password_used_yes": true,
+  "retained_user_found": true,
+  "retained_accounts": [
+    {
+      "host": "localhost",
+      "authentication_string_empty": true
+    }
+  ],
+  "native_test_creates_localhost_user_without_password": true,
+  "native_setup_create_user_uses_create_if_not_exists_without_alter": true,
+  "classification": "DEMONSTRATED_NATIVE_EXISTING_USER_PASSWORD_CONTRACT",
+  "next_step": "Changing that existing account/password or native installer is outside this task. Keep FAIL; review native create_user contract in a separately approved upstream/version task.",
+  "persistent_credentials_or_access_modified": false
+}

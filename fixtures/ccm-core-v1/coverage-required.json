@@ -1,0 +1,435 @@
+{
+  "coverage_revision": 2,
+  "production_policy": false,
+  "preserves_existing_money_oracle": true,
+  "requirements": [
+    {
+      "case": "CO00-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "CO01-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "PROD01-04",
+      "source": "business",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "VAL01-04",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "STATE01-04",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "source": "business",
+      "criteria": [
+        4,
+        5
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "source": "business",
+      "criteria": [
+        3,
+        5
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "PO01-09-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        7
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "source": "finance",
+      "criteria": [
+        3,
+        7
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "source": "finance",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "source": "finance",
+      "criteria": [
+        1,
+        3,
+        8
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "IDEM01-02-CREATE-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "CASH04-06-HTTP-IMMUTABLE",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "source": "http",
+      "criteria": [
+        3,
+        12
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "source": "http",
+      "criteria": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "source": "http",
+      "criteria": [
+        8,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "source": "http",
+      "criteria": [
+        3,
+        9,
+        10
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "source": "recovery",
+      "criteria": [
+        4,
+        9,
+        14
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "source": "recovery",
+      "criteria": [
+        3,
+        6,
+        7,
+        9,
+        14
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "source": "audit",
+      "criteria": [
+        1,
+        11
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "source": "audit",
+      "criteria": [
+        3,
+        6,
+        7,
+        8
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "source": "audit",
+      "criteria": [
+        1,
+        4,
+        5,
+        8,
+        9
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "source": "audit",
+      "criteria": [
+        1,
+        3,
+        11,
+        14
+      ],
+      "minimum_revision": 1
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "source": "business",
+      "criteria": [
+        3,
+        4
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "source": "business",
+      "criteria": [
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "source": "business",
+      "criteria": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "source": "http",
+      "criteria": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "minimum_revision": 2
+    },
+    {
+      "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+      "source": "audit",
+      "criteria": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "minimum_revision": 2
+    }
+  ],
+  "lab_supplement": {
+    "state_data": "orders.json[0], separate warehouse with stock5/5/5 and cost30/10/60; override id/channel/guide only",
+    "unknown_state": "UNKNOWN-LAB; target rejected409 and native Select rejects persistence; no domain effects",
+    "preacceptance_delivery": {
+      "STORE": [
+        "NEW",
+        "REVIEWED"
+      ],
+      "WEB": [
+        "NEW",
+        "REVIEWED",
+        "APPROVED"
+      ],
+      "expected_http": 409
+    },
+    "web_missing_guide": {
+      "initial": "PREPARING",
+      "guide": null,
+      "target": "SHIPPED",
+      "expected_http": 422
+    },
+    "cancellation": {
+      "STORE": [
+        "APPROVED"
+      ],
+      "WEB": [
+        "APPROVED",
+        "PREPARING"
+      ],
+      "expected": "CANCELLED, native SO cancelled, stock5/5/5, no delivery/invoice/payment or new success event"
+    },
+    "mcp_eligible_orders": {
+      "MCP-DENY-DELIVER-S": "orders[0] APPROVED",
+      "MCP-DENY-DELIVER-W": "orders[1] PREPARING",
+      "MCP-DENY-SETTLE-S": "orders[0] FULFILLED",
+      "MCP-DENY-SETTLE-W": "orders[1] SHIPPED"
+    },
+    "mcp_closing": {
+      "id": "MCP-DENY-CS",
+      "state": "DRAFT",
+      "channels": []
+    },
+    "mcp_rate": {
+      "date": "2026-10-04",
+      "initial": null,
+      "attempted": "42.000000",
+      "reason": "Synthetic permission check"
+    },
+    "mcp_bank": {
+      "account": "BANK-USD-001",
+      "date": "2026-10-01",
+      "reference": "MCP-DENY-BANK",
+      "currency": "USD",
+      "amount": "40.00",
+      "candidate": "AMB-BOOK-B",
+      "expected": "403, unallocated40, no matched payment"
+    },
+    "mcp_denials": [
+      "approval",
+      "STORE delivery",
+      "WEB dispatch",
+      "STORE settlement",
+      "WEB settlement",
+      "cash confirmation",
+      "manual rate",
+      "bank reconciliation"
+    ],
+    "api_mcp_equivalence": "Compare complete business results on all six routes; exclude only _meta and assert replay separately. Both first-create/replay directions preserve all native IDs.",
+    "event_sequence": [
+      "503",
+      "successful delivery and one consumer effect",
+      "consumer restart with persisted record",
+      "same event replay: deliveries2, effect applications1"
+    ],
+    "audit": "Parse before/after JSON, require actor/time/object/reason/correlation and assert semantic transitions, amounts and links; no null snapshots count as coverage."
+  }
+}

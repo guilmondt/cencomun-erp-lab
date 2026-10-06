@@ -1,0 +1,54 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-fixture-audit.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.stock.doctype.stock_entry.test_stock_entry",
+  "category": "all",
+  "attempt": 1,
+  "status": "FAIL",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_work_order_manufacture_with_material_consumption"
+  ],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-audit.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_stock_entry-selected-attempt-1.xml --module erpnext.stock.doctype.stock_entry.test_stock_entry --test test_work_order_manufacture_with_material_consumption",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-audit.test serve --port 8005 --noreload",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T05:30:59.477889+00:00",
+  "elapsed_seconds": 13.639,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "3597ffdbf4ce82801405ad1c99e38341e051afb881d5466c105f1ec2c5186ee9",
+  "actual_tests_run": 1,
+  "runner_counts_by_category": [
+    1
+  ],
+  "discovered_categories": [
+    {
+      "tests": 1,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 1,
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "ERROR": 1,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption",
+      "seconds": 1.253,
+      "status": "ERROR",
+      "exception": "NonNegativeError",
+      "message": "<strong>Stock Entry Detail</strong> Row #3: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 85, in inner\n    return func(*args, **kwds)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/doctype/stock_entry/test_stock_entry.py\", line 1155, in test_work_order_manufacture_with_material_consumption\n    s.submit()\n    ~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/typing_validations.py\", line 36, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1351, in submit\n    return self._submit()\n           ~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1332, in _submit\n    return self.save()\n           ~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 558, in save\n    return self._save(*args, **kwargs)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 598, in _save\n    self._validate()\n    ~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 845, in _validate\n    d._validate_non_negative()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 880, in _validate_non_negative\n    frappe.throw(msg, frappe.NonNegativeError, title=_(\"Negative Value\"))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.NonNegativeError: <strong>Stock Entry Detail</strong> Row #3: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>\n"
+    }
+  ],
+  "xml_documents": 1,
+  "diagnostic_tail": "Starting test run with parameters: site=ccm-upstream-erpnext-fixture-audit.test, app=erpnext, module=erpnext.stock.doctype.stock_entry.test_stock_entry, verbose=False, tests=('test_work_order_manufacture_with_material_consumption',), force=False, profile=False, junit_xml_output=/workspace/.local/frappe-integral/official-tests/erpnext-test_stock_entry-selected-attempt-1.xml, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]\nView detailed logs (using --verbose): /workspace/.local/frappe-integral/official-bench/logs/frappe.testing.log\n\nRunning 1 unspecified-category tests for erpnext\n\nRunning tests...\n----------------------------------------------------------------------\nE\n======================================================================\nERROR [1.253s]: test_work_order_manufacture_with_material_consumption (erpnext.stock.doctype.stock_entry.test_stock_entry.TestStockEntry.test_work_order_manufacture_with_material_consumption)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 85, in inner\n    return func(*args, **kwds)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/doctype/stock_entry/test_stock_entry.py\", line 1155, in test_work_order_manufacture_with_material_consumption\n    s.submit()\n    ~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/typing_validations.py\", line 36, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1351, in submit\n    return self._submit()\n           ~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1332, in _submit\n    return self.save()\n           ~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 558, in save\n    return self._save(*args, **kwargs)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 598, in _save\n    self._validate()\n    ~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 845, in _validate\n    d._validate_non_negative()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 880, in _validate_non_negative\n    frappe.throw(msg, frappe.NonNegativeError, title=_(\"Negative Value\"))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.NonNegativeError: <strong>Stock Entry Detail</strong> Row #3: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>\n\n----------------------------------------------------------------------\nRan 1 test in 1.254s\n\nFAILED (errors=1)\n\nGenerating XML reports..."
+}

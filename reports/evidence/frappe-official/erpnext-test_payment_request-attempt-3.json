@@ -1,0 +1,169 @@
+{
+  "scope": "official module regression",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-diagnostic.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.accounts.doctype.payment_request.test_payment_request",
+  "category": "all",
+  "attempt": 3,
+  "status": "FAIL",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_payment_request-attempt-3.xml --module erpnext.accounts.doctype.payment_request.test_payment_request",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test serve --port 8005 --noreload",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T05:13:51.203239+00:00",
+  "elapsed_seconds": 23.262,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "1cdd43c856fa0db1200324ec00418b203d0af6edfd9fe2e4169f73e78bdb27c4",
+  "actual_tests_run": 22,
+  "runner_counts_by_category": [
+    22
+  ],
+  "discovered_categories": [
+    {
+      "tests": 22,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 22,
+  "counts": {
+    "PASS": 17,
+    "FAIL": 0,
+    "ERROR": 5,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_consider_journal_entry_and_return_invoice",
+      "seconds": 1.922,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_draft_pr_reuse_merges_payment_references",
+      "seconds": 0.3,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entries_against_sales_order",
+      "seconds": 0.417,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_multi_currency",
+      "seconds": 0.523,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_if_partially_paid_for_same_currency",
+      "seconds": 0.583,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_more_payment_entry",
+      "seconds": 0.854,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_payment_request",
+      "seconds": 0.582,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_partial_paid_invoice_with_submitted_payment_entry",
+      "seconds": 1.635,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_cancel_process",
+      "seconds": 0.467,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry",
+      "seconds": 0.836,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_reference_details_fetched_from_invoice",
+      "seconds": 0.293,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_grand_total_from_selected_schedules",
+      "seconds": 0.232,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_linkings",
+      "seconds": 0.384,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_request_on_unreconcile",
+      "seconds": 0.5,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_schedule_pr_not_allowed_if_payment_entry_exists",
+      "seconds": 0.419,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_multi_currency",
+      "seconds": 0.676,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_single_payment_with_payment_term_for_same_currency",
+      "seconds": 0.511,
+      "status": "PASS"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "seconds": 0.304,
+      "status": "ERROR",
+      "exception": "ValidationError",
+      "message": "Exchange Rate is mandatory. Maybe Currency Exchange record is not created for USD to INR.",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/test_payment_request.py\", line 417, in test_conversion_on_foreign_currency_accounts\n    po_doc = create_purchase_order(supplier=\"_Test Supplier USD\", currency=\"USD\", do_not_submit=1)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/buying/doctype/purchase_order/test_purchase_order.py\", line 1787, in create_purchase_order\n    po.set_missing_values()\n    ~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/buying_controller.py\", line 227, in set_missing_values\n    self.set_missing_item_details(for_validate)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/accounts_controller.py\", line 1175, in set_missing_item_details\n    ret = get_item_details(ctx, self, for_validate=for_validate, overwrite_warehouse=False)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/typing_validations.py\", line 36, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/__init__.py\", line 194, in wrapper\n    return func(ctx, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/get_item_details.py\", line 156, in get_item_details\n    out.update(get_price_list_rate(ctx, item))\n               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/get_item_details.py\", line 1129, in get_price_list_rate\n    validate_conversion_rate(ctx, meta)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/get_item_details.py\", line 1472, in validate_conversion_rate\n    validate_conversion_rate(\n    ~~~~~~~~~~~~~~~~~~~~~~~~^\n    \tctx.currency, ctx.conversion_rate, meta.get_label(\"conversion_rate\"), ctx.company\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/accounts_controller.py\", line 3339, in validate_conversion_rate\n    throw(\n    ~~~~~^\n    \t_(\"{0} is mandatory. Maybe Currency Exchange record is not created for {1} to {2}.\").format(\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \t\tconversion_rate_label, currency, company_currency\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \t)\n     ^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Exchange Rate is mandatory. Maybe Currency Exchange record is not created for USD to INR.\n"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "seconds": 0.409,
+      "status": "ERROR",
+      "exception": "ValidationError",
+      "message": "Source Exchange Rate is mandatory",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/test_payment_request.py\", line 272, in test_multiple_payment_entry_against_purchase_invoice\n    pr.create_payment_entry()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/payment_request.py\", line 421, in create_payment_entry\n    payment_entry.insert(ignore_permissions=True)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 487, in insert\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1413, in run_before_save_methods\n    self.run_method(\"validate\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 182, in validate\n    self.validate_mandatory()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 674, in validate_mandatory\n    frappe.throw(_(\"{0} is mandatory\").format(_(self.meta.get_label(field))))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Source Exchange Rate is mandatory\n"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "seconds": 0.096,
+      "status": "ERROR",
+      "exception": "ValidationError",
+      "message": "Exchange Rate is mandatory. Maybe Currency Exchange record is not created for USD to INR.",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/test_payment_request.py\", line 133, in test_payment_channels\n    so = make_sales_order(currency=\"USD\")\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/selling/doctype/sales_order/test_sales_order.py\", line 3344, in make_sales_order\n    so.insert()\n    ~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 487, in insert\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1413, in run_before_save_methods\n    self.run_method(\"validate\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/selling/doctype/sales_order/sales_order.py\", line 262, in validate\n    super().validate()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/selling_controller.py\", line 52, in validate\n    super().validate()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/stock_controller.py\", line 107, in validate\n    super().validate()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/accounts_controller.py\", line 273, in validate\n    self.set_missing_values(for_validate=True)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/selling/doctype/sales_order/sales_order.py\", line 903, in set_missing_values\n    super().set_missing_values(for_validate)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/selling_controller.py\", line 107, in set_missing_values\n    self.set_price_list_and_item_details(for_validate=for_validate)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/selling_controller.py\", line 162, in set_price_list_and_item_details\n    self.set_missing_item_details(for_validate=for_validate)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/accounts_controller.py\", line 1175, in set_missing_item_details\n    ret = get_item_details(ctx, self, for_validate=for_validate, overwrite_warehouse=False)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/typing_validations.py\", line 36, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/__init__.py\", line 194, in wrapper\n    return func(ctx, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/get_item_details.py\", line 156, in get_item_details\n    out.update(get_price_list_rate(ctx, item))\n               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/get_item_details.py\", line 1129, in get_price_list_rate\n    validate_conversion_rate(ctx, meta)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/stock/get_item_details.py\", line 1472, in validate_conversion_rate\n    validate_conversion_rate(\n    ~~~~~~~~~~~~~~~~~~~~~~~~^\n    \tctx.currency, ctx.conversion_rate, meta.get_label(\"conversion_rate\"), ctx.company\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/controllers/accounts_controller.py\", line 3339, in validate_conversion_rate\n    throw(\n    ~~~~~^\n    \t_(\"{0} is mandatory. Maybe Currency Exchange record is not created for {1} to {2}.\").format(\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \t\tconversion_rate_label, currency, company_currency\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \t)\n     ^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Exchange Rate is mandatory. Maybe Currency Exchange record is not created for USD to INR.\n"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "seconds": 0.299,
+      "status": "ERROR",
+      "exception": "ValidationError",
+      "message": "Source Exchange Rate is mandatory",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/test_payment_request.py\", line 245, in test_payment_entry_against_purchase_invoice\n    pr.create_payment_entry()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/payment_request.py\", line 421, in create_payment_entry\n    payment_entry.insert(ignore_permissions=True)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 487, in insert\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1413, in run_before_save_methods\n    self.run_method(\"validate\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 182, in validate\n    self.validate_mandatory()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 674, in validate_mandatory\n    frappe.throw(_(\"{0} is mandatory\").format(_(self.meta.get_label(field))))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Source Exchange Rate is mandatory\n"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "seconds": 0.32,
+      "status": "ERROR",
+      "exception": "ValidationError",
+      "message": "Source Exchange Rate is mandatory",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/test_payment_request.py\", line 384, in test_status\n    pe = pr.create_payment_entry()\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/payment_request.py\", line 421, in create_payment_entry\n    payment_entry.insert(ignore_permissions=True)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 487, in insert\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1413, in run_before_save_methods\n    self.run_method(\"validate\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 182, in validate\n    self.validate_mandatory()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 674, in validate_mandatory\n    frappe.throw(_(\"{0} is mandatory\").format(_(self.meta.get_label(field))))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Source Exchange Rate is mandatory\n"
+    }
+  ],
+  "xml_documents": 1,
+  "diagnostic_tail": "    self.validate_mandatory()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 674, in validate_mandatory\n    frappe.throw(_(\"{0} is mandatory\").format(_(self.meta.get_label(field))))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Source Exchange Rate is mandatory\n\n======================================================================\nERROR [0.320s]: test_status (erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/test_payment_request.py\", line 384, in test_status\n    pe = pr.create_payment_entry()\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_request/payment_request.py\", line 421, in create_payment_entry\n    payment_entry.insert(ignore_permissions=True)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 487, in insert\n    self.run_before_save_methods()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1413, in run_before_save_methods\n    self.run_method(\"validate\")\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1261, in run_method\n    out = Document.hook(fn)(self, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1663, in composer\n    return composed(self, method, *args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1637, in runner\n    add_to_return_value(self, fn(self, *args, **kwargs))\n                              ~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/document.py\", line 1258, in fn\n    return method_object(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 182, in validate\n    self.validate_mandatory()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\", line 674, in validate_mandatory\n    frappe.throw(_(\"{0} is mandatory\").format(_(self.meta.get_label(field))))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw\n    msgprint(\n    ~~~~~~~~^\n    \tmsg,\n     ^^^^\n    ...<7 lines>...\n    \tallow_dangerous_html=allow_dangerous_html,\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint\n    _raise_exception()\n    ~~~~~~~~~~~~~~~~^^\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception\n    raise exc\nfrappe.exceptions.ValidationError: Source Exchange Rate is mandatory\n\n----------------------------------------------------------------------\nRan 22 tests in 12.563s\n\nFAILED (errors=5)\n\nGenerating XML reports..."
+}

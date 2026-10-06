@@ -1,0 +1,1560 @@
+{
+  "app": "frappe",
+  "site": "ccm-upstream-frappe-final.test",
+  "native_result": "frappe-ci-attempt-1.json",
+  "status": "FAIL",
+  "actual_tests_run": 2326,
+  "native_summary_complete": true,
+  "counter_not_inferred_from_events": true,
+  "cases": [
+    {
+      "id": "frappe.automation_engine.tests.test_actions.TestCallWebhook.test_internal_addresses_are_blocked",
+      "status": "ERROR",
+      "exception": "PermissionError",
+      "classification": "DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION",
+      "cause": "Explicit offline rejection is the terminal exception; no provider response is inferred.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/automation_engine/tests/test_actions.py\", line 383, in test_internal_addresses_are_blocked",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/case.py\", line 813, in assertRaises",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/case.py\", line 247, in handle",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/automation_engine/actions/core.py\", line 382, in execute",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/automation_engine/actions/core.py\", line 539, in _send_guarded_request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/automation_engine/actions/core.py\", line 517, in _guard_url",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socket.py\", line 983, in getaddrinfo",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 54, in audit"
+      ],
+      "private_trace_block_sha256": "f857254c59865ebdba2a66dc2a9442d2b7d319d0b40b2703226bc20449adb1ff",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 1,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.core.doctype.activity_log.test_activity_log.TestActivityLog.test_activity_log",
+      "status": "ERROR",
+      "exception": "frappe.exceptions.AuthenticationError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/activity_log/test_activity_log.py\", line 27, in test_activity_log",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 131, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 155, in login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 285, in authenticate",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 328, in fail"
+      ],
+      "private_trace_block_sha256": "3a67a097f114983ec3bb73686b81ccfd336e844ddf9befefcceb54e2bea30ef7",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.core.doctype.activity_log.test_activity_log.TestActivityLog.test_brute_security",
+      "status": "ERROR",
+      "exception": "frappe.exceptions.AuthenticationError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/activity_log/test_activity_log.py\", line 68, in test_brute_security",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 131, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 155, in login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 285, in authenticate",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/auth.py\", line 328, in fail"
+      ],
+      "private_trace_block_sha256": "4f629fda85efe1487f76529c0ebd30cf7bb1620e8129525cf44ff29562ef1c94",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.email.test_smtp.TestSMTP.test_smtp_ssl_session",
+      "status": "ERROR",
+      "exception": "frappe.exceptions.ValidationError",
+      "classification": "DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION",
+      "cause": "Explicit offline rejection is the terminal exception; no provider response is inferred.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/smtp.py\", line 77, in session",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 1034, in __init__",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 262, in __init__",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 348, in connect",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 1040, in _get_socket",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 319, in _get_socket",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socket.py\", line 846, in create_connection",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socket.py\", line 983, in getaddrinfo",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 54, in audit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/test_smtp.py\", line 13, in test_smtp_ssl_session",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/test_smtp.py\", line 104, in make_server",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/smtp.py\", line 108, in session",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception"
+      ],
+      "private_trace_block_sha256": "3907f3beccd8243a924b54b4a3caeeae0645df82522f636d96c9c88ae57085d2",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 1,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.email.test_smtp.TestSMTP.test_smtp_tls_session",
+      "status": "ERROR",
+      "exception": "frappe.exceptions.ValidationError",
+      "classification": "DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION",
+      "cause": "Explicit offline rejection is the terminal exception; no provider response is inferred.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/smtp.py\", line 77, in session",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 262, in __init__",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 348, in connect",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/smtplib.py\", line 319, in _get_socket",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socket.py\", line 846, in create_connection",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/socket.py\", line 983, in getaddrinfo",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 54, in audit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/test_smtp.py\", line 17, in test_smtp_tls_session",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/test_smtp.py\", line 104, in make_server",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/smtp.py\", line 108, in session",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 159, in throw",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 118, in msgprint",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/messages.py\", line 59, in _raise_exception"
+      ],
+      "private_trace_block_sha256": "0ff05bbf1c10ba1ed921ed1608944780abb16306ca096ab79983aa2115ebfe8c",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 1,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_doc_events",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "96834caaf4484a2f178587d9b377759d86c4927c635db77d157834772beb35d9",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_headers",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "168dacca53caadffa2351b566e9e96bd34382a9f02fe88dd4ea99e978f082df7",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_form",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "0d4d88ea2166f05f0dd40c3ade3da401527a55a7c910dbb069da254ab6dd2936",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_body_json",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "0b9b79326486a834770a419f1861f5340ced2d455ed7af147b198718ac9a58ca",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_validate_request_url",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "cd8208f18d66d6e30595a4757c0e8f5c65968dddb1d72812ce73d6f11d12215f",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_req_log_creation",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "af50d628fce6650c71a2da5044be665714058bd49ab2c29d6b0cd76c83bc47f9",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_trigger_with_enabled_webhooks",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "1bb5dfa48cca725535dc4136c67e9dbfa1b18027ffde284c4981811511dd56a9",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_array_body",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "7be8c34d39e611ae05aa20dfe90b9894d5c40c5763e43f65790c74a56ea1b279",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_disabled",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "b87db12e548ae3203a02681f57ccc510fad7110a5b57d05e74a776ab1b7f0575",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.integrations.doctype.webhook.test_webhook.TestWebhook.test_webhook_with_dynamic_url_enabled",
+      "status": "ERROR",
+      "exception": "Exception",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/test_webhook.py\", line 115, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 195, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 329, in __enter__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 134, in update_status",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_queue/email_queue.py\", line 131, in update_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/database.py\", line 1194, in commit",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 1140, in run",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/__init__.py\", line 113, in flush_webhook_execution_queue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/background_jobs.py\", line 154, in enqueue",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/__init__.py\", line 1147, in call",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 186, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 172, in _handle_timeout"
+      ],
+      "private_trace_block_sha256": "f0dbf60f7545365c738e84f803eee7300ab18e82283dbcb7e82477026b7f388c",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_api.TestResourceAPI.test_unauthorized_call_v1",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_api.py\", line 173, in test_unauthorized_call_v1",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "661c9d7d1eb98b43506245c72da62738ddc30417006069f9ddb4de6e6fe13a22",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_api_v2.TestResourceAPIV2.test_unauthorized_call_v2",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_api_v2.py\", line 45, in test_unauthorized_call_v2",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "23a9ff303196debf1e32b8987aacfa2cb97f3d4e2d2eb54939b44e1176d13614",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_mobile",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 70, in test_allow_login_using_mobile",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "19f10597d18025b62c673a1c7663e726ef84ad69858f19821e80305db223c1f8",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_only_email",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 83, in test_allow_login_using_only_email",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "d6bad4c589c5b696023154f51dc05031bab955c6adc1919921c69527be68360b",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 98, in test_allow_login_using_username",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "f1fc4deb00b206c245320614a5f8ee16415df709096f466ff668df9176faa9bd",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_allow_login_using_username_and_mobile",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 109, in test_allow_login_using_username_and_mobile",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "2241273bc1c66ecd0a5320f17367552fe71ad00aafdb11b15c8cc8344c0dcae0",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_correct_cookie_expiry_set",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 223, in test_correct_cookie_expiry_set",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "35bf73d400ca3d8133b76f9699d9011f6a981aa72442d61d2507a146406ea1c7",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_deny_multiple_login",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 117, in test_deny_multiple_login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "6385159588618c5cfa625a6592da1b50e49f6a5dd8ed9fc5fdc525d63e7eb77b",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_disable_user_pass_login",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 133, in test_disable_user_pass_login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "441e01ba9d04687378d972284639239a15558e3a099561d271b3eb8e2f4ee602",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_auth.TestAuth.test_login_with_email_link",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_auth.py\", line 201, in test_login_with_email_link",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "a02a3f41da146657efc55fdd4edc7e03bcf6ffe9357de3d78349e804834cac17",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_client.TestClient.test_array_values_in_request_args",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_client.py\", line 155, in test_array_values_in_request_args",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 134, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "ed456ca620aa023ee5ae4d96d84f09e260bbc940a8114d636a2dd1fca0dd81ec",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_db_update.TestDBUpdateSanityChecks.test_no_unnecessary_migrates",
+      "status": "ERROR",
+      "exception": "AttributeError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_db_update.py\", line 298, in test_no_unnecessary_migrates",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 148, in __exit__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/integration_test_case.py\", line 136, in assertQueryCount",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_db_update.py\", line 296, in test_no_unnecessary_migrates",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 162, in __exit__",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/case.py\", line 564, in subTest",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/contextlib.py\", line 162, in __exit__",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/case.py\", line 73, in testPartExecutor",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/runner.py\", line 85, in addSubTest",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/unittest/runner.py\", line 76, in _write_status"
+      ],
+      "private_trace_block_sha256": "e856292958ecc9076112b01ebef3d07ab51cf1a5cfee2e5365e724c0eb46f275",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.email.doctype.email_account.test_email_account.TestEmailAccount.test_threading_by_subject",
+      "status": "ERROR",
+      "exception": "IndexError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_account/test_email_account.py\", line 278, in test_threading_by_subject"
+      ],
+      "private_trace_block_sha256": "7843f14c17cc354e346ece91a8d1fd4aef7305cb81c884aef00f4e176e7f5820",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 1,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_email.TestEmailIntegrationTest.test_send_email",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_email.py\", line 418, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 180, in delete",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "3b7bd715455ca9dff01c47294de42ae80d2dae044e2145ebbcd08cdadb5f08a2",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_email.TestEmailIntegrationTest.test_store_attachments",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_email.py\", line 418, in setUp",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 180, in delete",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "96dbece44e090d0b616b48cb4280f81bf0a4e264b547dfc53243a409cbbe1f85",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_auth_via_api_key_secret",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 210, in test_auth_via_api_key_secret",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 134, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "3e44aa50c29fdf8e20a63f6e3dfed4f868436fe15062edb8ede51c45fe4778ec",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_create_doc",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 40, in test_create_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "1672aca2dcbd7ee78f6f21ce40539c8019d35e4a369fcfb5f9b0c16735a725d4",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_delete_doc",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 195, in test_delete_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "422abc06cfddc2f9044ae73c10cb00d0c2ffb9f458fc9499f020f35471d0657e",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_doc",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 89, in test_get_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "921a05780880b3771b0d486916c925800f3f71d2830db076fa30214db43eeeab",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_single",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 129, in test_get_single",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "485181ccda396c7c4e00e1778ebcf19424c7901b6ca082bc5c867e79d167882a",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_filters",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 104, in test_get_value_by_filters",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "9139963cb5d7fe0999816fbacc2fe9d337630fa5e9ddda3409256698b3012777",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_by_name",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 110, in test_get_value_by_name",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "4298d53108995fa136ab77c77467d486eef04c291f3307b2033c517b276a1837",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_get_value_with_malicious_query",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 117, in test_get_value_with_malicious_query",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "990dcea36c13130d5c8755bf4079cecdd89a41f1eb71b5dacd70ca63256e0538",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_insert_many",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 20, in test_insert_many",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "5af894313a115635c157a5af25bcb2c8d43de190e01b46f48ac955ce690025ba",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_list_docs",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 50, in test_list_docs",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "6e9b0851d0f8d132fd70a78019907cca2a6671aa15c5473a4b2d5609ddf5d711",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_list_summary",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 56, in test_list_summary",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "a395806e3aa3d7518bd0b0d2b96d920cf2502fcff164c32417421376761b80e9",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_update_child_doc",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 153, in test_update_child_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "55f762d43db881ae223407dd5cb790155e0b8208123b16a6956613ed24e36191",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_frappe_client.TestFrappeClient.test_update_doc",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_frappe_client.py\", line 143, in test_update_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "f1c1ae5dfcf7befc013cc6bb6a9a51d6d41d165e16b498774b6ca04acbd10868",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_oauth20.TestOAuth20.test_login_using_implicit_token",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_oauth20.py\", line 368, in test_login_using_implicit_token",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_oauth20.py\", line 497, in login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "f8b30676247bf4b54a7b39835f37960745456e0ea1e45462465d3cbeb8b85e8f",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_perf.TestPerformance.test_req_per_seconds_basic",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION",
+      "cause": "Native Responses interceptor rejected an unregistered request before socket transport. This is not evidence of TCP refusal or web process death; mock activation cause requires separate observation.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 331, in wrapped_f",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 470, in __call__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 371, in iter",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 393, in <lambda>",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/concurrent/futures/_base.py\", line 443, in result",
+        "  File \"/workspace/.tools/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/concurrent/futures/_base.py\", line 395, in __get_result",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/tenacity/__init__.py\", line 473, in __call__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_perf.py\", line 140, in test_req_per_seconds_basic",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 56, in __init__",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/frappeclient.py\", line 66, in _login",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 712, in post",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 131, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1104, in unbound_on_send",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/responses/__init__.py\", line 1046, in _on_request"
+      ],
+      "private_trace_block_sha256": "1a7f114f2f71abee6eab6a810f37c15eb6380f5a0dab0c9b14efa0bdf5b10f5b",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": true,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_utils.TestAppParser.test_app_name_parser",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION",
+      "cause": "Explicit offline rejection is the terminal exception; no provider response is inferred.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/installer.py\", line 234, in fetch_details_from_tag",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_utils.py\", line 1363, in test_app_name_parser",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/installer.py\", line 266, in parse_app_name",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/installer.py\", line 236, in fetch_details_from_tag",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/installer.py\", line 204, in find_org",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 114, in head",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "private_trace_block_sha256": "9906c5108a07de3882ef5f10613e45ba20f82754cf034d71797beefdf9683004",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 1,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.workflow.doctype.workflow.test_workflow.TestWorkflow.test_sync_tasks",
+      "status": "ERROR",
+      "exception": "requests.exceptions.ConnectionError",
+      "classification": "DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION",
+      "cause": "Explicit offline rejection is the terminal exception; no provider response is inferred.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/workflow/doctype/workflow/test_workflow.py\", line 279, in test_sync_tasks",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/typing_validations.py\", line 36, in wrapper",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/model/workflow.py\", line 200, in apply_workflow",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 73, in execute_for_doc",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 189, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/integrations/doctype/webhook/webhook.py\", line 166, in enqueue_webhook",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"/workspace/.local/frappe-integral/official-bench/env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "private_trace_block_sha256": "af001b9e0fb6ad41e4cbff1e764685ec583000370ec916dd0c939d0e98bc31aa",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 3,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.commands.test_commands.TestBackups.test_backup_with_custom_path",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/test_commands.py\", line 762, in test_backup_with_custom_path"
+      ],
+      "private_trace_block_sha256": "113c56b5c772fe9aeff1031f44451990a199e7ba907922e2056a2dd9a219e186",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.commands.test_commands.TestBackups.test_backup_with_different_file_paths",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/test_commands.py\", line 788, in test_backup_with_different_file_paths"
+      ],
+      "private_trace_block_sha256": "34cbfecc299fbfe7d1311519762fc64b057a81fb6508c518282f2d8a2023029b",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.commands.test_commands.TestCommands.test_existing_db_username",
+      "status": "FAIL",
+      "exception": "frappe.exceptions.CommandFailedError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/test_commands.py\", line 619, in test_existing_db_username",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/site.py\", line 126, in new_site",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/installer.py\", line 84, in _new_site",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/installer.py\", line 169, in install_db",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/__init__.py\", line 35, in bootstrap_database",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/mariadb/setup_db.py\", line 74, in bootstrap_database",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/mariadb/setup_db.py\", line 95, in import_db_from_sql",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/database/db_manager.py\", line 105, in restore_database",
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/utils/__init__.py\", line 498, in execute_in_shell"
+      ],
+      "private_trace_block_sha256": "5c975e1cd33441e4c69bf1aeb6aed1631e5ffe9d27bcb76f41e17943f2c14133",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.commands.test_commands.TestCommands.test_set_password",
+      "status": "FAIL",
+      "exception": "Error",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/test_commands.py\", line 471, in test_set_password"
+      ],
+      "private_trace_block_sha256": "e03335752713456c385e7207fb925bb93c0a9f177d928437fa3ccaa7ba8f9f39",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.commands.test_commands.TestRQWorker.test_rq_pool_idle_cpu_usage",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/commands/test_commands.py\", line 1158, in test_rq_pool_idle_cpu_usage"
+      ],
+      "private_trace_block_sha256": "9b81bfb38e8ea3433b171cf70925df774c1dd1d4486bb33f5ff7d9baedb4cec5",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.core.doctype.rq_job.test_rq_job.TestRQJob.test_memory_usage",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/core/doctype/rq_job/test_rq_job.py\", line 189, in test_memory_usage"
+      ],
+      "private_trace_block_sha256": "f84c3e2fe9899904e73311ca0e19c59d5c9d518b90833e8a23d6470fa8e9f152",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.tests.test_db.TestDbConnectWithEnvCredentials.test_connect_fails_with_wrong_credentials_by_env",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/test_db.py\", line 1500, in test_connect_fails_with_wrong_credentials_by_env"
+      ],
+      "private_trace_block_sha256": "4de3dc92f39237996bdd6bb04dcfeedb311b93724fd54d7df7b1396a95b45a36",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.email.doctype.email_account.test_email_account.TestEmailAccount.test_threading_by_message_id",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_account/test_email_account.py\", line 323, in test_threading_by_message_id"
+      ],
+      "private_trace_block_sha256": "992bc08446c5c5c86760068005f8cb70be0c483d1856fb74abd9f8d0568f6d77",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 2,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    },
+    {
+      "id": "frappe.email.doctype.email_account.test_email_account.TestEmailAccount.test_unread_notification",
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "classification": "UNKNOWN",
+      "cause": "Failure reproduced in this full pass; available evidence does not establish its cause.",
+      "native_trace_frames": [
+        "  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/email/doctype/email_account/test_email_account.py\", line 81, in test_unread_notification"
+      ],
+      "private_trace_block_sha256": "f69348a508c45c69202d68ad2d0e3db705962afa0e944c8e996f1065083d9274",
+      "evidence_flags": {
+        "read_only_errno30": false,
+        "loopback_connection_refused": false,
+        "responses_mock_refused": false,
+        "external_rejection_events": 0,
+        "native_fx_error_logs": 0,
+        "http_domain_forbidden": false
+      }
+    }
+  ],
+  "classification_counts": {
+    "DEMONSTRATED_OFFLINE_TRANSPORT_REJECTION": 5,
+    "UNKNOWN": 23,
+    "DEMONSTRATED_NATIVE_HTTP_MOCK_REJECTION": 28
+  },
+  "unknowns_not_pass_or_inevitable_blocks": true,
+  "external_transport_rejections": {
+    "external_transport_rejected": 21,
+    "external_http_rejected": 28
+  },
+  "no_final_summary": null,
+  "diagnostic_revision": 2,
+  "supersedes": "frappe-final-failure-diagnostics.json",
+  "native_execution_repeated": false
+}

@@ -1,0 +1,936 @@
+{
+  "profile": "LAB-ONLY-v1",
+  "cases": [
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "criteria": [
+        3,
+        9
+      ],
+      "status": "PASS",
+      "actual": {
+        "reads": [
+          {
+            "route": "/products/search?company_id=CCM-LAB-001&q=P001",
+            "status": 200,
+            "result": {
+              "items": [
+                {
+                  "id": "P001",
+                  "name": "Equipo ficticio Alfa",
+                  "supplier_reference": "SUP-ALFA-01",
+                  "marketplace_enabled": true,
+                  "cashea_enabled": true,
+                  "price": "50.00",
+                  "warranty_quantity": 12,
+                  "warranty_unit": "MONTH",
+                  "condition": "NEW"
+                }
+              ],
+              "total": 1,
+              "page": 1,
+              "page_size": 20,
+              "_meta": {
+                "correlation_id": "1b73853e-0290-411d-96e4-fba7040c9111",
+                "server_ms": 3.4955
+              }
+            }
+          },
+          {
+            "route": "/inventory/P001?company_id=CCM-LAB-001&warehouse=WH-LAB-001-HTTP+-+CLAB",
+            "status": 200,
+            "result": {
+              "product_id": "P001",
+              "warehouse": "WH-LAB-001-HTTP - CLAB",
+              "unit": "Nos",
+              "on_hand": "5",
+              "reserved": "0",
+              "available": "5",
+              "value": "150.00",
+              "unit_cost": "30.00",
+              "_meta": {
+                "correlation_id": "056a3883-eb05-460e-9e2d-04896dcb243a",
+                "server_ms": 24.8444
+              }
+            }
+          },
+          {
+            "route": "/customers/C002/balance?company_id=CCM-LAB-001",
+            "status": 200,
+            "result": {
+              "customer_id": "C002",
+              "balances": {
+                "USD": "0.00"
+              },
+              "_meta": {
+                "correlation_id": "bea2dbc7-a3ae-4b12-b7bb-81a59f5d34f4",
+                "server_ms": 7.6109
+              }
+            }
+          },
+          {
+            "route": "/cash/status?company_id=CCM-LAB-001&id=CS001",
+            "status": 200,
+            "result": {
+              "id": "CS001",
+              "state": "CONFIRMED",
+              "channels": [
+                {
+                  "channel": "USD",
+                  "currency": "USD",
+                  "expected": "100.00",
+                  "observed": "98.00",
+                  "difference": "-2.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00001",
+                    "ACC-JV-2026-00002",
+                    "ACC-JV-2026-00003",
+                    "ACC-JV-2026-00004"
+                  ]
+                },
+                {
+                  "channel": "VES",
+                  "currency": "VES",
+                  "expected": "4000.00",
+                  "observed": "4010.00",
+                  "difference": "10.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00005",
+                    "ACC-JV-2026-00006"
+                  ]
+                },
+                {
+                  "channel": "POS",
+                  "currency": "USD",
+                  "expected": "50.00",
+                  "observed": "50.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00007"
+                  ]
+                },
+                {
+                  "channel": "TRANSFER",
+                  "currency": "USD",
+                  "expected": "30.00",
+                  "observed": "30.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00008"
+                  ]
+                }
+              ],
+              "cashea_pending": "125.00",
+              "cashea_received": "0.00",
+              "_meta": {
+                "correlation_id": "b070d6ac-63af-419a-934b-d057e313f653",
+                "server_ms": 3.8608
+              }
+            }
+          }
+        ],
+        "purchase": {
+          "id": "API-PO",
+          "state": "Draft",
+          "approval_amount": "199.99",
+          "native_order": "PUR-ORD-2026-00011",
+          "replay": false,
+          "_meta": {
+            "correlation_id": "1c91645b-14b1-46fb-8db8-200ebd5246ec",
+            "server_ms": 148.5507
+          }
+        },
+        "order": {
+          "id": "API-CO",
+          "company_id": "CCM-LAB-001",
+          "status": "NEW",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false,
+          "_meta": {
+            "correlation_id": "82d6601d-71c2-4066-a2c3-054ce630125d",
+            "server_ms": 26.6646
+          }
+        },
+        "replay": {
+          "id": "API-CO",
+          "company_id": "CCM-LAB-001",
+          "status": "NEW",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true,
+          "_meta": {
+            "correlation_id": "d75179b4-32b8-4ada-8392-6f6a729b7eba",
+            "server_ms": 1.345
+          }
+        },
+        "conflict": 409
+      },
+      "seconds": 0.3371
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "criteria": [
+        3,
+        9
+      ],
+      "status": "PASS",
+      "actual": {
+        "neutral_errors": [
+          401,
+          403,
+          422,
+          409
+        ],
+        "matrix": [
+          {
+            "actor": "reader",
+            "action": "draft",
+            "code": 403
+          },
+          {
+            "actor": "buyer",
+            "action": "draft",
+            "code": 403
+          },
+          {
+            "actor": "manager",
+            "action": "draft",
+            "code": 403
+          },
+          {
+            "actor": "director",
+            "action": "draft",
+            "code": 403
+          },
+          {
+            "actor": "simulator",
+            "action": "draft",
+            "code": 403
+          },
+          {
+            "actor": "other",
+            "action": "draft",
+            "code": 403
+          },
+          {
+            "actor": "operator",
+            "action": "purchaseAction",
+            "code": 403
+          },
+          {
+            "actor": "director",
+            "action": "confirmClosing",
+            "code": 403
+          },
+          {
+            "actor": "director",
+            "action": "authorizeRate",
+            "code": 403
+          },
+          {
+            "actor": "mcp",
+            "action": "transitionOrder",
+            "code": 403
+          },
+          {
+            "actor": "simulator",
+            "action": "transitionOrder",
+            "code": 403
+          },
+          {
+            "actor": "operator",
+            "action": "transitionOrder",
+            "code": 403
+          }
+        ],
+        "native_read_write_denials": true
+      },
+      "seconds": 1.6146
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "criteria": [
+        3,
+        12
+      ],
+      "status": "PASS",
+      "actual": {
+        "queries": [
+          {
+            "q": "P001",
+            "ids": [
+              "P001"
+            ]
+          },
+          {
+            "q": "Equipo ficticio Alfa",
+            "ids": [
+              "P001"
+            ]
+          },
+          {
+            "q": "SUP-BETA-02",
+            "ids": [
+              "P002"
+            ]
+          },
+          {
+            "q": "NOT-EXISTS",
+            "ids": []
+          },
+          {
+            "native_field": "customer_name",
+            "ids": [
+              "C001"
+            ]
+          },
+          {
+            "native_field": "mobile_no",
+            "ids": [
+              "C001"
+            ]
+          }
+        ],
+        "complete_pages": [
+          "P001",
+          "P002",
+          "P003"
+        ],
+        "invoice_reference": "INV-CCM-001",
+        "native_invoice": "ACC-SINV-2026-00001",
+        "serial": "SER-P001-001",
+        "serial_inventory_tracking_tested": false
+      },
+      "seconds": 0.1021
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "criteria": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "id": "TAX-CONC-S",
+          "physical": [
+            [
+              200,
+              {
+                "id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "status": "FULFILLED",
+                "channel": "STORE",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "8.80",
+                "cost": "70.00",
+                "net": "128.70",
+                "indicator": "58.70",
+                "accounting_profit": "46.20",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.00",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": false
+              }
+            ],
+            [
+              200,
+              {
+                "id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "status": "FULFILLED",
+                "channel": "STORE",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "8.80",
+                "cost": "70.00",
+                "net": "128.70",
+                "indicator": "58.70",
+                "accounting_profit": "46.20",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.00",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": true
+              }
+            ]
+          ],
+          "state_conflict": [
+            409,
+            {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "66e03cb1-acf7-4c69-84e1-4733c0c14940"
+            }
+          ],
+          "settlement": [
+            [
+              200,
+              {
+                "id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "status": "SETTLED",
+                "channel": "STORE",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "8.80",
+                "cost": "70.00",
+                "net": "128.70",
+                "indicator": "58.70",
+                "accounting_profit": "46.20",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.00",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": false
+              }
+            ],
+            [
+              200,
+              {
+                "id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "status": "SETTLED",
+                "channel": "STORE",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "8.80",
+                "cost": "70.00",
+                "net": "128.70",
+                "indicator": "58.70",
+                "accounting_profit": "46.20",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.00",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": true
+              }
+            ]
+          ]
+        },
+        {
+          "id": "TAX-CONC-W",
+          "physical": [
+            [
+              200,
+              {
+                "id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "status": "SHIPPED",
+                "channel": "WEB",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "11.55",
+                "cost": "70.00",
+                "net": "125.25",
+                "indicator": "55.25",
+                "accounting_profit": "42.75",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.70",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": false
+              }
+            ],
+            [
+              200,
+              {
+                "id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "status": "SHIPPED",
+                "channel": "WEB",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "11.55",
+                "cost": "70.00",
+                "net": "125.25",
+                "indicator": "55.25",
+                "accounting_profit": "42.75",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.70",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": true
+              }
+            ]
+          ],
+          "state_conflict": [
+            409,
+            {
+              "code": "409",
+              "message": "Invalid state transition",
+              "correlation_id": "05135eb1-763f-48df-b7f5-b79c6d0f13ac"
+            }
+          ],
+          "settlement": [
+            [
+              200,
+              {
+                "id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "status": "SETTLED",
+                "channel": "WEB",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "11.55",
+                "cost": "70.00",
+                "net": "125.25",
+                "indicator": "55.25",
+                "accounting_profit": "42.75",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.70",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": false
+              }
+            ],
+            [
+              200,
+              {
+                "id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "status": "SETTLED",
+                "channel": "WEB",
+                "currency": "USD",
+                "gross": "137.50",
+                "revenue": "125.00",
+                "tax": "12.50",
+                "commission": "11.55",
+                "cost": "70.00",
+                "net": "125.25",
+                "indicator": "55.25",
+                "accounting_profit": "42.75",
+                "financed_amount": "82.50",
+                "shipping_expense": "0.70",
+                "lines": [
+                  {
+                    "product_id": "P001",
+                    "qty": "2",
+                    "unit_price": "55.00",
+                    "line_total": "110.00",
+                    "unit_cost": "30.00"
+                  },
+                  {
+                    "product_id": "P002",
+                    "qty": "1",
+                    "unit_price": "27.50",
+                    "line_total": "27.50",
+                    "unit_cost": "10.00"
+                  }
+                ],
+                "replay": true
+              }
+            ]
+          ]
+        }
+      ],
+      "seconds": 1.5882
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "criteria": [
+        8,
+        9
+      ],
+      "status": "PASS",
+      "actual": {
+        "responses": [
+          {
+            "status": 200,
+            "created": 1000,
+            "replay": true
+          },
+          {
+            "status": 200,
+            "created": 1000,
+            "replay": false
+          }
+        ],
+        "expected_native_unique": 1000
+      },
+      "seconds": 12.864
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "criteria": [
+        3,
+        9,
+        10
+      ],
+      "status": "PASS",
+      "actual": {
+        "initialize": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "protocolVersion": "2025-03-26",
+            "capabilities": {
+              "tools": {}
+            },
+            "serverInfo": {
+              "name": "ccm-core-lab",
+              "version": "0.1.0"
+            }
+          }
+        },
+        "tools": [
+          "searchProducts",
+          "getInventory",
+          "getCustomerBalance",
+          "createPurchaseDraft",
+          "getCashStatus",
+          "createCasheaOrder"
+        ],
+        "operations": [
+          {
+            "tool": "searchProducts",
+            "status": 200,
+            "result": {
+              "items": [
+                {
+                  "id": "P001",
+                  "name": "Equipo ficticio Alfa",
+                  "supplier_reference": "SUP-ALFA-01",
+                  "marketplace_enabled": true,
+                  "cashea_enabled": true,
+                  "price": "50.00",
+                  "warranty_quantity": 12,
+                  "warranty_unit": "MONTH",
+                  "condition": "NEW"
+                }
+              ],
+              "total": 1,
+              "page": 1,
+              "page_size": 20,
+              "_meta": {
+                "correlation_id": "17626d75-f6e0-44a9-b881-e7ae79c27d74",
+                "server_ms": 4.0338
+              }
+            }
+          },
+          {
+            "tool": "getInventory",
+            "status": 200,
+            "result": {
+              "product_id": "P001",
+              "warehouse": "WH-LAB-001-HTTP - CLAB",
+              "unit": "Nos",
+              "on_hand": "5",
+              "reserved": "0",
+              "available": "5",
+              "value": "150.00",
+              "unit_cost": "30.00",
+              "_meta": {
+                "correlation_id": "cdac2ef7-ffa5-449f-8342-24fdff1a52fd",
+                "server_ms": 31.8918
+              }
+            }
+          },
+          {
+            "tool": "getCustomerBalance",
+            "status": 200,
+            "result": {
+              "customer_id": "C002",
+              "balances": {
+                "USD": "0.00"
+              },
+              "_meta": {
+                "correlation_id": "8a874202-67ad-4e96-b9ec-b229fdad518c",
+                "server_ms": 5.6885
+              }
+            }
+          },
+          {
+            "tool": "getCashStatus",
+            "status": 200,
+            "result": {
+              "id": "CS001",
+              "state": "CONFIRMED",
+              "channels": [
+                {
+                  "channel": "USD",
+                  "currency": "USD",
+                  "expected": "100.00",
+                  "observed": "98.00",
+                  "difference": "-2.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00001",
+                    "ACC-JV-2026-00002",
+                    "ACC-JV-2026-00003",
+                    "ACC-JV-2026-00004"
+                  ]
+                },
+                {
+                  "channel": "VES",
+                  "currency": "VES",
+                  "expected": "4000.00",
+                  "observed": "4010.00",
+                  "difference": "10.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00005",
+                    "ACC-JV-2026-00006"
+                  ]
+                },
+                {
+                  "channel": "POS",
+                  "currency": "USD",
+                  "expected": "50.00",
+                  "observed": "50.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00007"
+                  ]
+                },
+                {
+                  "channel": "TRANSFER",
+                  "currency": "USD",
+                  "expected": "30.00",
+                  "observed": "30.00",
+                  "difference": "0.00",
+                  "vouchers": [
+                    "ACC-JV-2026-00008"
+                  ]
+                }
+              ],
+              "cashea_pending": "125.00",
+              "cashea_received": "0.00",
+              "_meta": {
+                "correlation_id": "ead19012-87e1-4165-b877-a6d24645cbe3",
+                "server_ms": 2.4097
+              }
+            }
+          },
+          {
+            "tool": "createPurchaseDraft",
+            "status": 200,
+            "result": {
+              "id": "MCP-PO",
+              "state": "Draft",
+              "approval_amount": "199.99",
+              "native_order": "PUR-ORD-2026-00012",
+              "replay": true,
+              "_meta": {
+                "correlation_id": "949d8c80-6a77-4229-b350-9cf188501d91",
+                "server_ms": 1.435
+              }
+            }
+          },
+          {
+            "tool": "createCasheaOrder",
+            "status": 200,
+            "result": {
+              "id": "MCP-CO",
+              "company_id": "CCM-LAB-001",
+              "status": "NEW",
+              "channel": "STORE",
+              "currency": "USD",
+              "gross": "125.00",
+              "revenue": "125.00",
+              "tax": "0.00",
+              "commission": "8.00",
+              "cost": "70.00",
+              "net": "117.00",
+              "indicator": "47.00",
+              "accounting_profit": "47.00",
+              "financed_amount": "75.00",
+              "shipping_expense": "0.00",
+              "lines": [
+                {
+                  "product_id": "P001",
+                  "qty": "2",
+                  "unit_price": "50.00",
+                  "line_total": "100.00",
+                  "unit_cost": "30.00"
+                },
+                {
+                  "product_id": "P002",
+                  "qty": "1",
+                  "unit_price": "25.00",
+                  "line_total": "25.00",
+                  "unit_cost": "10.00"
+                }
+              ],
+              "replay": true,
+              "_meta": {
+                "correlation_id": "27c0e006-a183-45fa-9a18-6a98a05328a5",
+                "server_ms": 1.25
+              }
+            }
+          }
+        ],
+        "replay": true,
+        "approval_denied": true
+      },
+      "seconds": 0.2934
+    }
+  ]
+}

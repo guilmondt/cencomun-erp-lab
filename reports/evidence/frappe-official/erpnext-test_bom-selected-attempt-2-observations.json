@@ -1,0 +1,305 @@
+{
+  "native_result": "erpnext-test_bom-selected-attempt-2.json",
+  "scope": "selected official methods; not full module or suite",
+  "private_stream_sha256": "211ff6e06af0a62a18bacf8c5f1ff0198aa76354bc4828a825120e83c1f38e50",
+  "counts_by_event": {
+    "observer_started": 4,
+    "external_transport_rejected": 1,
+    "module_map_return": 1,
+    "native_state": 2,
+    "test_stopped": 1
+  },
+  "provider_response_or_rate_fabricated": false,
+  "fx_error_log_test_links": [],
+  "events": [
+    {
+      "kind": "observer_started",
+      "pid": 20455,
+      "epoch": 1791264453.6057706,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 20455,
+      "epoch": 1791264453.8697314,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "external_transport_rejected",
+      "pid": 20455,
+      "epoch": 1791264455.3239837,
+      "test": null,
+      "transport": "socket.connect"
+    },
+    {
+      "kind": "observer_started",
+      "pid": 20469,
+      "epoch": 1791264455.6744168,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "observer_started",
+      "pid": 20469,
+      "epoch": 1791264455.8937664,
+      "test": null,
+      "offline": true,
+      "upstream_functions_replaced": false
+    },
+    {
+      "kind": "module_map_return",
+      "pid": 20469,
+      "epoch": 1791264456.3666034,
+      "test": null,
+      "include_all_apps": true,
+      "payments": "payments",
+      "app_modules": {
+        "frappe": [
+          "core",
+          "website",
+          "workflow",
+          "email",
+          "custom",
+          "geo",
+          "desk",
+          "integrations",
+          "printing",
+          "contacts",
+          "automation"
+        ],
+        "erpnext": [
+          "accounts",
+          "crm",
+          "buying",
+          "projects",
+          "selling",
+          "setup",
+          "manufacturing",
+          "stock",
+          "support",
+          "utilities",
+          "assets",
+          "portal",
+          "maintenance",
+          "regional",
+          "erpnext_integrations",
+          "quality_management",
+          "communication",
+          "telephony",
+          "bulk_transaction",
+          "subcontracting",
+          "edi"
+        ],
+        "payments": [
+          "payments",
+          "payment_gateways"
+        ]
+      },
+      "apps_read": null,
+      "db_name": "ccm_upstream_erpnext_fixture_audit"
+    },
+    {
+      "kind": "native_state",
+      "pid": 20469,
+      "epoch": 1791264467.2183838,
+      "test": "erpnext.manufacturing.doctype.bom.test_bom.TestBOM.test_update_bom_cost_in_all_boms",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-fixture-audit.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ],
+      "bom_item_2": [
+        {
+          "parent": "BOM-_Test Item Home Desktop Manufactured-001",
+          "rate": 100.0,
+          "base_rate": 0.0,
+          "qty": 2.0
+        }
+      ],
+      "bins_item_2": [
+        {
+          "warehouse": "_Test Warehouse - _TC",
+          "actual_qty": 10.0,
+          "stock_value": 1000.0,
+          "valuation_rate": 100.0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 20469,
+      "epoch": 1791264467.9135954,
+      "test": "erpnext.manufacturing.doctype.bom.test_bom.TestBOM.test_update_bom_cost_in_all_boms",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-fixture-audit.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ],
+      "bom_item_2": [
+        {
+          "parent": "BOM-_Test Item Home Desktop Manufactured-001",
+          "rate": 100.0,
+          "base_rate": 0.0,
+          "qty": 2.0
+        }
+      ],
+      "bins_item_2": [
+        {
+          "warehouse": "_Test Warehouse - _TC",
+          "actual_qty": 10.0,
+          "stock_value": 1000.0,
+          "valuation_rate": 100.0
+        }
+      ]
+    }
+  ]
+}

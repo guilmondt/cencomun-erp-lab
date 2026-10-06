@@ -1,0 +1,31 @@
+{
+  "scope": "full official server application discovery",
+  "app": "frappe",
+  "site": "ccm-upstream-frappe-fresh.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": null,
+  "category": "old-frappe-test-class-category",
+  "attempt": 1,
+  "status": "BLOCKED",
+  "ci_parallel": false,
+  "command": "bench --site ccm-upstream-frappe-fresh.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-old-frappe-test-class-category-attempt-1.xml --test-category old-frappe-test-class-category",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-fresh.test serve --port 8002 --noreload",
+  "exit_code": 2,
+  "recorded_utc": "2026-10-06T03:40:10.852774+00:00",
+  "elapsed_seconds": 1.507,
+  "upstream_sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+  "log_sha256": "a646c525fa169cb977302c51637ee0a1919370025c0b08d061d09f6ed66ca753",
+  "actual_tests_run": 0,
+  "runner_counts_by_category": [],
+  "discovered_categories": [],
+  "junit_records": 0,
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [],
+  "xml_documents": 0,
+  "diagnostic_tail": "Usage: bench  run-tests [OPTIONS]\nTry 'bench  run-tests --help' for help.\n\nError: Invalid value for '--test-category': 'old-frappe-test-class-category' is not one of 'unit', 'integration', 'all'."
+}

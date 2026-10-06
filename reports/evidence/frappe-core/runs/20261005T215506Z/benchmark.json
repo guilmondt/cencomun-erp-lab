@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "seed": 100,
+  "loaded": {
+    "counts": {
+      "products": 1000,
+      "customers": 100,
+      "orders": 1000,
+      "bank_rows": 1000
+    },
+    "warehouse": "WH-LAB-001-BENCH - CLAB",
+    "seed": 100
+  },
+  "operations": [
+    {
+      "operation": "search",
+      "samples": 1000,
+      "warmup": 20,
+      "errors": 0,
+      "p50": 15.66837,
+      "p95": 21.615,
+      "p99": 74.67186
+    },
+    {
+      "operation": "inventory",
+      "samples": 1000,
+      "warmup": 20,
+      "errors": 0,
+      "p50": 13.98772,
+      "p95": 20.32047,
+      "p99": 74.67508
+    },
+    {
+      "operation": "create",
+      "samples": 1000,
+      "warmup": 20,
+      "errors": 0,
+      "p50": 24.3776,
+      "p95": 33.06661,
+      "p99": 84.767
+    }
+  ],
+  "resources": {
+    "python": "3.14.0",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "logical_cpus": 5,
+    "cpu_affinity": 5,
+    "memory_total_kb": 34906040,
+    "cgroup_cpu_max": "400000 100000",
+    "cgroup_memory_max": "34359738368"
+  },
+  "units": "milliseconds",
+  "percentile": "nearest-rank",
+  "serial": true,
+  "native_query_recorder": true,
+  "note": "Fixed business payload; deterministic per-sample IDs exercise real creation. Warmup and measured IDs are disjoint; no replay timed as creation. Read operations do not mutate their initial state; NEW creation does not change stock/accounting."
+}

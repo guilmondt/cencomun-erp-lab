@@ -1,0 +1,1149 @@
+{
+  "site": "ccm-core.test",
+  "profile": "LAB-ONLY-v1",
+  "cases": [
+    {
+      "case": "CO00-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "expected": {
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "shipping": "0.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "upfront": "50.00",
+          "transfer": "67.00",
+          "stock": [
+            3,
+            4,
+            5
+          ],
+          "stock_value": "430.00",
+          "customer_balance_final": "0.00"
+        },
+        "order": {
+          "id": "CO00",
+          "company_id": "CCM-LAB-001",
+          "status": "SETTLED",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        "warehouse": "WH-LAB-001-CO00 - CLAB",
+        "native_invoice": "ACC-SINV-2026-00001",
+        "invoice_lines": [
+          {
+            "item": "P001",
+            "gross": "100.00",
+            "base": "100.00",
+            "tax": "0.00"
+          },
+          {
+            "item": "P002",
+            "gross": "25.00",
+            "base": "25.00",
+            "tax": "0.00"
+          }
+        ],
+        "ledger": {
+          "account_effects": {
+            "income": "-125.00",
+            "cogs": "70.00",
+            "stock": "-70.00",
+            "receivable": "0.00",
+            "cash": "50.00",
+            "bank": "67.00",
+            "tax": "0.00",
+            "commission": "8.00",
+            "shipping": "0.00"
+          },
+          "native_gl": [
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00002",
+              "account": "CCM Commission - CLAB",
+              "debit": 8.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 8.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00002",
+              "account": "CCM Bank - CLAB",
+              "debit": 67.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 67.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00002",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 75.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 75.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00001",
+              "account": "Cash - CLAB",
+              "debit": 50.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 50.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00001",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 50.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 50.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00001",
+              "account": "Sales - CLAB",
+              "debit": 0.0,
+              "credit": 125.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 125.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00001",
+              "account": "Debtors - CLAB",
+              "debit": 125.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 125.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00001",
+              "account": "Cost of Goods Sold - CLAB",
+              "debit": 70.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 70.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00001",
+              "account": "Stock In Hand - CLAB",
+              "debit": 0.0,
+              "credit": 70.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 70.0,
+              "account_currency": "USD"
+            }
+          ],
+          "balanced_vouchers": [
+            "ACC-PAY-2026-00002",
+            "ACC-PAY-2026-00001",
+            "ACC-SINV-2026-00001",
+            "MAT-DN-2026-00001"
+          ]
+        },
+        "payment_allocations": [
+          "50.00",
+          "75.00"
+        ],
+        "final_customer_balance": "0.00"
+      },
+      "seconds": 2.0738
+    },
+    {
+      "case": "CO01-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "expected": {
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "10.50",
+          "shipping": "0.70",
+          "cost": "70.00",
+          "net": "113.80",
+          "indicator": "43.80",
+          "accounting_profit": "43.80",
+          "upfront": "50.00",
+          "transfer": "63.80",
+          "stock": [
+            3,
+            4,
+            5
+          ],
+          "stock_value": "430.00",
+          "customer_balance_final": "0.00"
+        },
+        "order": {
+          "id": "CO01",
+          "company_id": "CCM-LAB-001",
+          "status": "SETTLED",
+          "channel": "WEB",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "10.50",
+          "cost": "70.00",
+          "net": "113.80",
+          "indicator": "43.80",
+          "accounting_profit": "43.80",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.70",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        "warehouse": "WH-LAB-001-CO01 - CLAB",
+        "native_invoice": "ACC-SINV-2026-00002",
+        "invoice_lines": [
+          {
+            "item": "P001",
+            "gross": "100.00",
+            "base": "100.00",
+            "tax": "0.00"
+          },
+          {
+            "item": "P002",
+            "gross": "25.00",
+            "base": "25.00",
+            "tax": "0.00"
+          }
+        ],
+        "ledger": {
+          "account_effects": {
+            "income": "-125.00",
+            "cogs": "70.00",
+            "stock": "-70.00",
+            "receivable": "0.00",
+            "cash": "50.00",
+            "bank": "63.80",
+            "tax": "0.00",
+            "commission": "10.50",
+            "shipping": "0.70"
+          },
+          "native_gl": [
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00004",
+              "account": "CCM Delivery - CLAB",
+              "debit": 0.7,
+              "credit": 0.0,
+              "debit_in_account_currency": 0.7,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00004",
+              "account": "CCM Commission - CLAB",
+              "debit": 10.5,
+              "credit": 0.0,
+              "debit_in_account_currency": 10.5,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00004",
+              "account": "CCM Bank - CLAB",
+              "debit": 63.8,
+              "credit": 0.0,
+              "debit_in_account_currency": 63.8,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00004",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 75.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 75.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00003",
+              "account": "Cash - CLAB",
+              "debit": 50.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 50.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00003",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 50.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 50.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00002",
+              "account": "Sales - CLAB",
+              "debit": 0.0,
+              "credit": 125.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 125.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00002",
+              "account": "Debtors - CLAB",
+              "debit": 125.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 125.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00002",
+              "account": "Cost of Goods Sold - CLAB",
+              "debit": 70.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 70.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00002",
+              "account": "Stock In Hand - CLAB",
+              "debit": 0.0,
+              "credit": 70.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 70.0,
+              "account_currency": "USD"
+            }
+          ],
+          "balanced_vouchers": [
+            "ACC-PAY-2026-00004",
+            "ACC-PAY-2026-00003",
+            "ACC-SINV-2026-00002",
+            "MAT-DN-2026-00002"
+          ]
+        },
+        "payment_allocations": [
+          "50.00",
+          "75.00"
+        ],
+        "final_customer_balance": "0.00"
+      },
+      "seconds": 0.8358
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "expected": {
+          "gross": "137.50",
+          "revenue": "125.00",
+          "tax": "12.50",
+          "commission": "8.80",
+          "shipping": "0.00",
+          "cost": "70.00",
+          "net": "128.70",
+          "indicator": "58.70",
+          "accounting_profit": "46.20",
+          "upfront": "55.00",
+          "transfer": "73.70",
+          "stock": [
+            3,
+            4,
+            5
+          ],
+          "stock_value": "430.00",
+          "customer_balance_final": "0.00"
+        },
+        "order": {
+          "id": "TAX01-S",
+          "company_id": "CCM-LAB-001",
+          "status": "SETTLED",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "137.50",
+          "revenue": "125.00",
+          "tax": "12.50",
+          "commission": "8.80",
+          "cost": "70.00",
+          "net": "128.70",
+          "indicator": "58.70",
+          "accounting_profit": "46.20",
+          "financed_amount": "82.50",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "55.00",
+              "line_total": "110.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "27.50",
+              "line_total": "27.50",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        "warehouse": "WH-LAB-001-TAX01-S - CLAB",
+        "native_invoice": "ACC-SINV-2026-00003",
+        "invoice_lines": [
+          {
+            "item": "P001",
+            "gross": "110.00",
+            "base": "100.00",
+            "tax": "10.00"
+          },
+          {
+            "item": "P002",
+            "gross": "27.50",
+            "base": "25.00",
+            "tax": "2.50"
+          }
+        ],
+        "ledger": {
+          "account_effects": {
+            "income": "-125.00",
+            "cogs": "70.00",
+            "stock": "-70.00",
+            "receivable": "0.00",
+            "cash": "55.00",
+            "bank": "73.70",
+            "tax": "-12.50",
+            "commission": "8.80",
+            "shipping": "0.00"
+          },
+          "native_gl": [
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00006",
+              "account": "CCM Commission - CLAB",
+              "debit": 8.8,
+              "credit": 0.0,
+              "debit_in_account_currency": 8.8,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00006",
+              "account": "CCM Bank - CLAB",
+              "debit": 73.7,
+              "credit": 0.0,
+              "debit_in_account_currency": 73.7,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00006",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 82.5,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 82.5,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00005",
+              "account": "Cash - CLAB",
+              "debit": 55.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 55.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00005",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 55.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 55.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00003",
+              "account": "Sales - CLAB",
+              "debit": 0.0,
+              "credit": 125.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 125.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00003",
+              "account": "CCM Synthetic Tax - CLAB",
+              "debit": 0.0,
+              "credit": 12.5,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 12.5,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00003",
+              "account": "Debtors - CLAB",
+              "debit": 137.5,
+              "credit": 0.0,
+              "debit_in_account_currency": 137.5,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00003",
+              "account": "Cost of Goods Sold - CLAB",
+              "debit": 70.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 70.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00003",
+              "account": "Stock In Hand - CLAB",
+              "debit": 0.0,
+              "credit": 70.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 70.0,
+              "account_currency": "USD"
+            }
+          ],
+          "balanced_vouchers": [
+            "ACC-PAY-2026-00006",
+            "ACC-PAY-2026-00005",
+            "ACC-SINV-2026-00003",
+            "MAT-DN-2026-00003"
+          ]
+        },
+        "payment_allocations": [
+          "55.00",
+          "82.50"
+        ],
+        "final_customer_balance": "0.00"
+      },
+      "seconds": 0.8345
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "criteria": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "expected": {
+          "gross": "137.50",
+          "revenue": "125.00",
+          "tax": "12.50",
+          "commission": "11.55",
+          "shipping": "0.70",
+          "cost": "70.00",
+          "net": "125.25",
+          "indicator": "55.25",
+          "accounting_profit": "42.75",
+          "upfront": "55.00",
+          "transfer": "70.25",
+          "stock": [
+            3,
+            4,
+            5
+          ],
+          "stock_value": "430.00",
+          "customer_balance_final": "0.00"
+        },
+        "order": {
+          "id": "TAX01-W",
+          "company_id": "CCM-LAB-001",
+          "status": "SETTLED",
+          "channel": "WEB",
+          "currency": "USD",
+          "gross": "137.50",
+          "revenue": "125.00",
+          "tax": "12.50",
+          "commission": "11.55",
+          "cost": "70.00",
+          "net": "125.25",
+          "indicator": "55.25",
+          "accounting_profit": "42.75",
+          "financed_amount": "82.50",
+          "shipping_expense": "0.70",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "55.00",
+              "line_total": "110.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "27.50",
+              "line_total": "27.50",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        "warehouse": "WH-LAB-001-TAX01-W - CLAB",
+        "native_invoice": "ACC-SINV-2026-00004",
+        "invoice_lines": [
+          {
+            "item": "P001",
+            "gross": "110.00",
+            "base": "100.00",
+            "tax": "10.00"
+          },
+          {
+            "item": "P002",
+            "gross": "27.50",
+            "base": "25.00",
+            "tax": "2.50"
+          }
+        ],
+        "ledger": {
+          "account_effects": {
+            "income": "-125.00",
+            "cogs": "70.00",
+            "stock": "-70.00",
+            "receivable": "0.00",
+            "cash": "55.00",
+            "bank": "70.25",
+            "tax": "-12.50",
+            "commission": "11.55",
+            "shipping": "0.70"
+          },
+          "native_gl": [
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00008",
+              "account": "CCM Delivery - CLAB",
+              "debit": 0.7,
+              "credit": 0.0,
+              "debit_in_account_currency": 0.7,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00008",
+              "account": "CCM Commission - CLAB",
+              "debit": 11.55,
+              "credit": 0.0,
+              "debit_in_account_currency": 11.55,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00008",
+              "account": "CCM Bank - CLAB",
+              "debit": 70.25,
+              "credit": 0.0,
+              "debit_in_account_currency": 70.25,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00008",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 82.5,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 82.5,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00007",
+              "account": "Cash - CLAB",
+              "debit": 55.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 55.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Payment Entry",
+              "voucher_no": "ACC-PAY-2026-00007",
+              "account": "Debtors - CLAB",
+              "debit": 0.0,
+              "credit": 55.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 55.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00004",
+              "account": "Sales - CLAB",
+              "debit": 0.0,
+              "credit": 125.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 125.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00004",
+              "account": "CCM Synthetic Tax - CLAB",
+              "debit": 0.0,
+              "credit": 12.5,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 12.5,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Sales Invoice",
+              "voucher_no": "ACC-SINV-2026-00004",
+              "account": "Debtors - CLAB",
+              "debit": 137.5,
+              "credit": 0.0,
+              "debit_in_account_currency": 137.5,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00004",
+              "account": "Cost of Goods Sold - CLAB",
+              "debit": 70.0,
+              "credit": 0.0,
+              "debit_in_account_currency": 70.0,
+              "credit_in_account_currency": 0.0,
+              "account_currency": "USD"
+            },
+            {
+              "voucher_type": "Delivery Note",
+              "voucher_no": "MAT-DN-2026-00004",
+              "account": "Stock In Hand - CLAB",
+              "debit": 0.0,
+              "credit": 70.0,
+              "debit_in_account_currency": 0.0,
+              "credit_in_account_currency": 70.0,
+              "account_currency": "USD"
+            }
+          ],
+          "balanced_vouchers": [
+            "ACC-PAY-2026-00008",
+            "ACC-PAY-2026-00007",
+            "ACC-SINV-2026-00004",
+            "MAT-DN-2026-00004"
+          ]
+        },
+        "payment_allocations": [
+          "55.00",
+          "82.50"
+        ],
+        "final_customer_balance": "0.00"
+      },
+      "seconds": 0.8873
+    },
+    {
+      "case": "PROD01-04",
+      "criteria": [
+        1,
+        5,
+        11
+      ],
+      "status": "PASS",
+      "actual": {
+        "warranties": [
+          [
+            30,
+            "DAY"
+          ],
+          [
+            6,
+            "MONTH"
+          ],
+          [
+            1,
+            "YEAR"
+          ],
+          [
+            0,
+            "DAY"
+          ],
+          [
+            0,
+            "MONTH"
+          ],
+          [
+            0,
+            "YEAR"
+          ]
+        ],
+        "retained_disabled_price": "50.00",
+        "native_fields": [
+          "marketplace_enabled",
+          "cashea_enabled",
+          "cashea_price",
+          "supplier_reference",
+          "warranty_quantity",
+          "warranty_unit",
+          "ccm_condition"
+        ]
+      },
+      "seconds": 0.1127
+    },
+    {
+      "case": "VAL01-04",
+      "criteria": [
+        4,
+        5
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "case": "quantity",
+          "code": 422
+        },
+        {
+          "case": "fractional",
+          "code": 422
+        },
+        {
+          "case": "negative",
+          "code": 422
+        },
+        {
+          "case": "price-zero",
+          "code": 422
+        },
+        {
+          "case": "price-negative",
+          "code": 422
+        },
+        {
+          "case": "price-precision",
+          "code": 422
+        },
+        {
+          "case": "disabled",
+          "code": 422
+        },
+        {
+          "case": "negative-native-cost",
+          "code": 422,
+          "native_error": "<strong>Stock Entry Detail</strong> Row #1: Value cannot be negative for <strong>Basic Rate (as per Stock UOM)</strong>"
+        }
+      ],
+      "seconds": 0.1809
+    },
+    {
+      "case": "STATE01-04",
+      "criteria": [
+        3,
+        4
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "id": "STATE-STORE-REJECTED",
+          "company_id": "CCM-LAB-001",
+          "status": "REJECTED",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        {
+          "id": "STATE-STORE-CANCELLED",
+          "company_id": "CCM-LAB-001",
+          "status": "CANCELLED",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        {
+          "id": "STATE-WEB-REJECTED",
+          "company_id": "CCM-LAB-001",
+          "status": "REJECTED",
+          "channel": "WEB",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "10.50",
+          "cost": "70.00",
+          "net": "114.50",
+          "indicator": "44.50",
+          "accounting_profit": "44.50",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        },
+        {
+          "id": "STATE-WEB-CANCELLED",
+          "company_id": "CCM-LAB-001",
+          "status": "CANCELLED",
+          "channel": "WEB",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "10.50",
+          "cost": "70.00",
+          "net": "114.50",
+          "indicator": "44.50",
+          "accounting_profit": "44.50",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": false
+        }
+      ],
+      "seconds": 0.2322
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "criteria": [
+        4,
+        5
+      ],
+      "status": "PASS",
+      "actual": {
+        "state": "APPROVED",
+        "stock": 5,
+        "delivery_note": null,
+        "sales_invoice": null
+      },
+      "seconds": 0.2065
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "criteria": [
+        3,
+        5
+      ],
+      "status": "PASS",
+      "actual": [
+        {
+          "date": "2026-10-01",
+          "rate": "40.0",
+          "lines": [
+            "40.00"
+          ],
+          "total": "40.00",
+          "payments": [
+            "ACC-PAY-2026-00009"
+          ],
+          "replay": false
+        },
+        {
+          "date": "2026-10-02",
+          "rate": "41.0",
+          "lines": [
+            "41.00"
+          ],
+          "total": "41.00",
+          "payments": [
+            "ACC-PAY-2026-00010"
+          ],
+          "replay": false
+        },
+        {
+          "date": "2026-10-03",
+          "rate": "40.5",
+          "lines": [
+            "0.41",
+            "0.41"
+          ],
+          "total": "0.82",
+          "payments": [
+            "ACC-PAY-2026-00011",
+            "ACC-PAY-2026-00012"
+          ],
+          "replay": false
+        }
+      ],
+      "seconds": 0.6862
+    }
+  ]
+}

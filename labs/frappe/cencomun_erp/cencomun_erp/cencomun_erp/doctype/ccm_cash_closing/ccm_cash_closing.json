@@ -1,0 +1,117 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Cash Closing",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "hash",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "state",
+      "fieldtype": "Select",
+      "label": "State",
+      "options": "DRAFT\nCONFIRMED",
+      "default": "DRAFT"
+    },
+    {
+      "fieldname": "snapshot",
+      "fieldtype": "Long Text",
+      "label": "Snapshot",
+      "reqd": 1
+    },
+    {
+      "fieldname": "note",
+      "fieldtype": "Small Text",
+      "label": "Note"
+    },
+    {
+      "fieldname": "confirmed_by",
+      "fieldtype": "Link",
+      "label": "Confirmed By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "confirmed_at",
+      "fieldtype": "Datetime",
+      "label": "Confirmed At",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "CCM Reader",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Operator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Buyer",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Director",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Simulator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM MCP",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

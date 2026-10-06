@@ -1,0 +1,373 @@
+{
+  "run_id": "95cb0046cca34b19a8662a6f9cbba493",
+  "recorded_utc": "2026-10-04T20:48:24.834725+00:00",
+  "branch": "lab/frappe-baseline",
+  "repository_base_commit": "41836fd5fd1ce7f286b260e5191fbdc086210c5b",
+  "scope": "Real-site installation/authentication/API/persistence/graceful restart with fictitious data",
+  "bootstrap": {
+    "installed_apps": [
+      "frappe",
+      "erpnext",
+      "cencomun_erp"
+    ],
+    "versions": {
+      "frappe": "16.36.1",
+      "erpnext": "16.36.1",
+      "cencomun_erp": "0.0.1"
+    },
+    "module_registration": "passed",
+    "database_version": "11.8.6-MariaDB-0+deb13u1 from Debian",
+    "synthetic_user_created": true,
+    "api_credentials_generated": true
+  },
+  "upstream": {
+    "frappe": {
+      "commit": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+      "tracked_and_untracked_status": "clean"
+    },
+    "erpnext": {
+      "commit": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+      "tracked_and_untracked_status": "clean"
+    }
+  },
+  "functional_checks_passed": 39,
+  "functional_checks_failed": 0,
+  "functional_checks_skipped": 0,
+  "skeleton_tests_passed": 5,
+  "install_refresh": "passed, including frozen frontend and Python dependency locks",
+  "outcomes": {
+    "http-before": {
+      "run_id": "95cb0046cca34b19a8662a6f9cbba493",
+      "phase": "before",
+      "site": "ccm-frappe.test",
+      "all_executed_checks_passed": true,
+      "checks": [
+        {
+          "check": "public_api_health",
+          "status": "passed",
+          "seconds": 0.0041,
+          "http_status": 200,
+          "response": "pong"
+        },
+        {
+          "check": "login_page_served",
+          "status": "passed",
+          "seconds": 0.2226,
+          "http_status": 200,
+          "html_verified": true
+        },
+        {
+          "check": "built_desk_asset_served",
+          "status": "passed",
+          "seconds": 0.0023,
+          "http_status": 200,
+          "bytes": 1334179,
+          "manifest_asset_verified": true
+        },
+        {
+          "check": "anonymous_identity_denied",
+          "status": "passed",
+          "seconds": 0.0108,
+          "http_status": 403
+        },
+        {
+          "check": "password_login",
+          "status": "passed",
+          "seconds": 0.1722
+        },
+        {
+          "check": "session_identity",
+          "status": "passed",
+          "seconds": 0.0026,
+          "http_status": 200,
+          "identity": "validation@example.invalid"
+        },
+        {
+          "check": "token_identity",
+          "status": "passed",
+          "seconds": 0.0034,
+          "http_status": 200,
+          "identity": "validation@example.invalid"
+        },
+        {
+          "check": "invalid_token_denied",
+          "status": "passed",
+          "seconds": 0.0061,
+          "http_status": 401
+        },
+        {
+          "check": "api_document_create",
+          "status": "passed",
+          "seconds": 0.0403,
+          "http_status": 200,
+          "doctype": "Note",
+          "synthetic": true
+        },
+        {
+          "check": "api_document_read",
+          "status": "passed",
+          "seconds": 0.0065,
+          "http_status": 200,
+          "doctype": "Note",
+          "content_verified": true
+        },
+        {
+          "check": "anonymous_private_document_denied",
+          "status": "passed",
+          "seconds": 0.0048,
+          "http_status": 403
+        },
+        {
+          "check": "api_document_update",
+          "status": "passed",
+          "seconds": 0.0124,
+          "http_status": 200,
+          "content_verified": true
+        },
+        {
+          "check": "updated_document_readback",
+          "status": "passed",
+          "seconds": 0.0061,
+          "http_status": 200,
+          "doctype": "Note",
+          "content_verified": true
+        },
+        {
+          "check": "logout",
+          "status": "passed",
+          "seconds": 0.0431,
+          "http_status": 200,
+          "client_session_cleared": true
+        },
+        {
+          "check": "logged_out_session_denied",
+          "status": "passed",
+          "seconds": 0.0042,
+          "http_status": 403
+        },
+        {
+          "check": "revoked_session_replay_denied",
+          "status": "passed",
+          "seconds": 0.0061,
+          "http_status": 403
+        },
+        {
+          "check": "incorrect_password_denied",
+          "status": "passed",
+          "seconds": 0.016,
+          "http_status": 401
+        }
+      ]
+    },
+    "http-after": {
+      "run_id": "95cb0046cca34b19a8662a6f9cbba493",
+      "phase": "after",
+      "site": "ccm-frappe.test",
+      "all_executed_checks_passed": true,
+      "checks": [
+        {
+          "check": "public_api_health",
+          "status": "passed",
+          "seconds": 0.0046,
+          "http_status": 200,
+          "response": "pong"
+        },
+        {
+          "check": "login_page_served",
+          "status": "passed",
+          "seconds": 0.2371,
+          "http_status": 200,
+          "html_verified": true
+        },
+        {
+          "check": "built_desk_asset_served",
+          "status": "passed",
+          "seconds": 0.0024,
+          "http_status": 200,
+          "bytes": 1334179,
+          "manifest_asset_verified": true
+        },
+        {
+          "check": "anonymous_identity_denied",
+          "status": "passed",
+          "seconds": 0.0133,
+          "http_status": 403
+        },
+        {
+          "check": "password_login",
+          "status": "passed",
+          "seconds": 0.2559
+        },
+        {
+          "check": "session_identity",
+          "status": "passed",
+          "seconds": 0.0027,
+          "http_status": 200,
+          "identity": "validation@example.invalid"
+        },
+        {
+          "check": "token_identity",
+          "status": "passed",
+          "seconds": 0.0045,
+          "http_status": 200,
+          "identity": "validation@example.invalid"
+        },
+        {
+          "check": "invalid_token_denied",
+          "status": "passed",
+          "seconds": 0.0161,
+          "http_status": 401
+        },
+        {
+          "check": "document_survives_restart",
+          "status": "passed",
+          "seconds": 0.0219,
+          "http_status": 200,
+          "doctype": "Note",
+          "content_verified": true
+        },
+        {
+          "check": "anonymous_private_document_denied",
+          "status": "passed",
+          "seconds": 0.0066,
+          "http_status": 403
+        },
+        {
+          "check": "logout",
+          "status": "passed",
+          "seconds": 0.0453,
+          "http_status": 200,
+          "client_session_cleared": true
+        },
+        {
+          "check": "logged_out_session_denied",
+          "status": "passed",
+          "seconds": 0.0042,
+          "http_status": 403
+        },
+        {
+          "check": "revoked_session_replay_denied",
+          "status": "passed",
+          "seconds": 0.0075,
+          "http_status": 403
+        },
+        {
+          "check": "incorrect_password_denied",
+          "status": "passed",
+          "seconds": 0.0167,
+          "http_status": 401
+        }
+      ]
+    },
+    "infrastructure-before": {
+      "run_id": "95cb0046cca34b19a8662a6f9cbba493",
+      "phase": "before",
+      "checks": [
+        {
+          "check": "redis_cache_ping",
+          "status": "passed",
+          "redis_version": "8.0.2"
+        },
+        {
+          "check": "redis_queue_ping",
+          "status": "passed",
+          "redis_version": "8.0.2"
+        },
+        {
+          "check": "frappe_redis_worker_job",
+          "status": "passed",
+          "result": 41
+        },
+        {
+          "check": "socketio_proxy_handshake",
+          "status": "passed",
+          "http_status": 200
+        }
+      ]
+    },
+    "infrastructure-after": {
+      "run_id": "95cb0046cca34b19a8662a6f9cbba493",
+      "phase": "after",
+      "checks": [
+        {
+          "check": "redis_cache_ping",
+          "status": "passed",
+          "redis_version": "8.0.2"
+        },
+        {
+          "check": "redis_queue_ping",
+          "status": "passed",
+          "redis_version": "8.0.2"
+        },
+        {
+          "check": "frappe_redis_worker_job",
+          "status": "passed",
+          "result": 41
+        },
+        {
+          "check": "socketio_proxy_handshake",
+          "status": "passed",
+          "http_status": 200
+        }
+      ]
+    },
+    "restart-evidence": {
+      "run_id": "95cb0046cca34b19a8662a6f9cbba493",
+      "status": "passed",
+      "graceful_stop": true,
+      "ports_confirmed_closed": [
+        3307,
+        13000,
+        11000,
+        8000,
+        8080
+      ],
+      "restarted_services": [
+        "mariadb",
+        "redis_cache",
+        "redis_queue",
+        "web",
+        "socketio",
+        "worker",
+        "nginx"
+      ],
+      "all_process_identities_changed": true,
+      "site_ready_with_real_http_response": true,
+      "updated_document_persisted": true,
+      "existing_api_token_survived": true,
+      "password_reauthentication_passed": true,
+      "wall_seconds": 3.64
+    }
+  },
+  "runner_and_lock_sha256": {
+    "scripts/frappe-integral/bootstrap_validation.py": "b429a7d9c11fd7e4baa30d80d5253a6fac0a0796efe687e007b9a2616c6585ed",
+    "scripts/frappe-integral/create_site.py": "b075fee1ae689bc9668613389a5bbf92ee8e29ddddd45717b37677376ea8afc8",
+    "scripts/frappe-integral/prepare_runtime.py": "ff90c96f2f91e4539ce65931c0245ae3c6f44ea1955b5e73027ab234022a9278",
+    "scripts/frappe-integral/publish_evidence.py": "99f4374eef3d7f7ce11ef10fb1ab892822f38c2b4bea43e46557516da05ea419",
+    "scripts/frappe-integral/services.py": "668324a768d0164b5fa8422ea5ac3ed001d0373345ad274dd514db4a6d0a2de6",
+    "scripts/frappe-integral/system_packages.py": "10d3b572b9e73c4da60fa2f889146dfbb82cf7d77f8add4328c9088cf9e56797",
+    "scripts/frappe-integral/validate_http.py": "4ba0e6dbc250f34ae9aa89f13ec503c74840cd9bf7872abc036c3e36f38e7c4c",
+    "scripts/frappe-integral/validate_infrastructure.py": "97b8bc4f6c890f64400fc7d99357683f76956c3ce0e01d3dd340c0db2e9b2e6e",
+    "scripts/frappe-integral/validate_restart.py": "1835c0ad6a63e1b88c0924c544dd91e15e3d12fafef15c88ef2921bdd2975e3d",
+    "scripts/frappe-integral/env.sh": "04d91b96dc3007829e74217ced94a6e577b656febe363f67974c2dc6716a0b24",
+    "scripts/frappe-integral/install.sh": "b5069aaba58e26913726217e87c1bddc2f88870a0e441c2c54cfa6c3bf6d24b8",
+    "scripts/frappe-integral/run.sh": "2f7ea43a04491447b369a779f1915d5989ab5cbe1f3d5cb49d6f4a6c486738ff",
+    "labs/frappe/integral/bench-tools.lock": "cfc6257aa26062c251b5a017bb1d4e01085d819f6adf6f03a95d92bc7abfb456",
+    "labs/frappe/integral/debian-packages.lock.json": "e3e90a4dbd1593971c0747f80b3d7d0405eaa9e99fa5280aa2a670505143d6d7",
+    "labs/frappe/integral/erpnext-banking.yarn.lock": "b49a91d3151f6f42cab7928bb682b65a9a42feb1a042154b99517658ec7f53ff",
+    "labs/frappe/integral/mariadb.cnf.template": "98d5142ea8d398e9a289bc2d07404588880147f2be0fc8d8aae71568684a4fd8",
+    "labs/frappe/integral/nginx.conf.template": "17ed49047ab4c518ce4584d772d7327a3a5bf1c05d234642dd1aa7631d777d48",
+    "labs/frappe/integral/node-tools.package-lock.json": "035b653c876660da5590bb9856beeadb3efd8d047dbb7d083f9e31763ccb6774",
+    "labs/frappe/integral/node-tools.package.json": "8f42ea527de72752412f21ca0d0d30e6c5f8e3e8d38dddc7df7104317b2d3954",
+    "labs/frappe/integral/python-runtime.lock": "533da5741bbf21cba044ee639d7d23c5c0bad6d5b4acf57a831c1d3a0b50fda9",
+    "versions.lock": "6b8a6b9e013df7756b9b1b14a296081cc9aee73885e970be1f634380cc1bb816"
+  },
+  "limitations": [
+    "Debian 13 amd64 cloud machine; independent fresh-machine restore not tested",
+    "Synthetic System Manager account; Core Test/business correctness/full upstream suite not tested",
+    "Graceful restart only; crash/power failure/backup restore not tested",
+    "Loopback HTTP; no public deployment/TLS/browser UI/end-to-end realtime authorization test",
+    "Contact/license metadata remain placeholders; no production data or production credentials",
+    "CI guardrails are separate from these live-machine functional checks"
+  ]
+}

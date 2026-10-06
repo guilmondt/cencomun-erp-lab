@@ -1,0 +1,314 @@
+{
+  "site": "ccm-upstream-erpnext-fresh.test",
+  "recorded_utc": "2026-10-06T05:09:00.464800+00:00",
+  "provider_requests_performed_by_capture": 0,
+  "fixture_source": "apps/erpnext/erpnext/setup/doctype/currency_exchange/test_records.json",
+  "fixture_sha256": "77ad01f9b7d1b336c847a9bc0411cc28a33eaa9c76afa307eb46765c7b613d36",
+  "official_fixture_records": [
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-01",
+      "exchange_rate": 60.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-01",
+      "exchange_rate": 0.773,
+      "from_currency": "USD",
+      "to_currency": "EUR",
+      "for_buying": 0,
+      "for_selling": 1
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-01",
+      "exchange_rate": 0.0167,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-10",
+      "exchange_rate": 65.1,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "for_buying": 1,
+      "for_selling": 0
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-30",
+      "exchange_rate": 62.9,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "for_buying": 1,
+      "for_selling": 1
+    },
+    {
+      "doctype": "Currency Exchange",
+      "date": "2016-01-10",
+      "exchange_rate": 65.1,
+      "from_currency": "INR",
+      "to_currency": "NGN",
+      "for_buying": 1,
+      "for_selling": 1
+    }
+  ],
+  "native_fixture_load_requested": false,
+  "currency_records_before": [],
+  "currency_records_after": [],
+  "settings": {
+    "disabled": 0,
+    "service_provider": "frankfurter.dev - v2",
+    "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+    "use_http": 0
+  },
+  "request_parameters": [
+    {
+      "key": "date",
+      "value": "{transaction_date}"
+    }
+  ],
+  "result_keys": [
+    "rate"
+  ],
+  "accounts_settings": {
+    "allow_stale": 1,
+    "stale_days": 1,
+    "allow_pegged_currencies_exchange_rates": 0
+  },
+  "site_time_zone": "Asia/Kolkata",
+  "historical_attempt": "erpnext-test_payment_request-attempt-1",
+  "historical_interval_utc": [
+    "2026-10-06T04:34:38.208985+00:00",
+    "2026-10-06T04:34:51.735985+00:00"
+  ],
+  "historical_error_logs": [
+    {
+      "name": "hvn41n2lju",
+      "creation_site_time": "2026-10-06 10:04:45.583884",
+      "creation_utc": "2026-10-06T04:34:45.583884+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "9c2ab2329907be9d15b26391ee4e91a34e50ce3b89b1922c42e3975e6b5104de"
+    },
+    {
+      "name": "hvvcea35bg",
+      "creation_site_time": "2026-10-06 10:04:46.330806",
+      "creation_utc": "2026-10-06T04:34:46.330806+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "afc1550514041f68a7f00d12a59034a2ef40b08abc6e5711fca9ed15a3d60092"
+    },
+    {
+      "name": "hvvfdilq2u",
+      "creation_site_time": "2026-10-06 10:04:46.351618",
+      "creation_utc": "2026-10-06T04:34:46.351618+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "b84906d3e143d38fe73c6f396901582104e06385567ceb8eb2e954d9a839641b"
+    },
+    {
+      "name": "i0pt3orans",
+      "creation_site_time": "2026-10-06 10:04:48.947063",
+      "creation_utc": "2026-10-06T04:34:48.947063+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "856a5db6b912b03eff43d372472365b0d2f9069e392813520e396386aaa73d2f"
+    },
+    {
+      "name": "i0td7abk96",
+      "creation_site_time": "2026-10-06 10:04:49.315639",
+      "creation_utc": "2026-10-06T04:34:49.315639+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "0b3ff2d22868fc5e830a2300c0c3219a906e22c597170185a93a971bcdf2eb8a"
+    },
+    {
+      "name": "i0v2b6fonp",
+      "creation_site_time": "2026-10-06 10:04:49.536344",
+      "creation_utc": "2026-10-06T04:34:49.536344+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "60a3322a9c372733478185178bdc5139ae59806469eef14ac97a4b46816605ed"
+    },
+    {
+      "name": "i0vioi5b3r",
+      "creation_site_time": "2026-10-06 10:04:49.550248",
+      "creation_utc": "2026-10-06T04:34:49.550248+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "d66b947d317ab521310286e475af12d521a6ec5d8b8663c419db6dc9e26623cf"
+    },
+    {
+      "name": "i12eeoqfvt",
+      "creation_site_time": "2026-10-06 10:04:49.883656",
+      "creation_utc": "2026-10-06T04:34:49.883656+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "d89fe00ef31ab7ad4cd0242f1d4dbc2ad50d52d013c07baa56cdfa2b08fbe1e7"
+    },
+    {
+      "name": "i13fluq2bl",
+      "creation_site_time": "2026-10-06 10:04:49.909482",
+      "creation_utc": "2026-10-06T04:34:49.909482+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "f0d87d3a3bd8920f14064622ae3ac4567a9784522f1fa7f3e9889b0f2e7e5b7c"
+    },
+    {
+      "name": "i13dgjt4l1",
+      "creation_site_time": "2026-10-06 10:04:49.953706",
+      "creation_utc": "2026-10-06T04:34:49.953706+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "29dc003dc192bef4f6b8b7153283998db0ed4f9a48bc083ade003220bf0e3c86"
+    },
+    {
+      "name": "i1fnjeurgh",
+      "creation_site_time": "2026-10-06 10:04:51.169312",
+      "creation_utc": "2026-10-06T04:34:51.169312+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "f5f59126dc4a3d3cf6bce5b089f9df278b860a25fb89596cbe701da8e2b28d02"
+    },
+    {
+      "name": "i1fovvbma3",
+      "creation_site_time": "2026-10-06 10:04:51.186832",
+      "creation_utc": "2026-10-06T04:34:51.186832+00:00",
+      "method": "Unable to fetch exchange rate",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 784, in send",
+        "  File \"env/lib/python3.14/site-packages/requests/adapters.py\", line 723, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.frankfurter.dev', port=443): Max retries exceeded with url: /v2/rate/USD/INR?date=2026-10-06 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+      "raw_sha256": "523b7a7a7f4373b02037e7e0048ad5ce09a2e72d6752eef1489ae80d4c701120"
+    }
+  ],
+  "five_failed_cases": [
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_conversion_on_foreign_currency_accounts",
+      "exception": "ValidationError",
+      "message": "Exchange Rate is mandatory. Maybe Currency Exchange record is not created for USD to INR."
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_multiple_payment_entry_against_purchase_invoice",
+      "exception": "ValidationError",
+      "message": "Source Exchange Rate is mandatory"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_channels",
+      "exception": "ValidationError",
+      "message": "Exchange Rate is mandatory. Maybe Currency Exchange record is not created for USD to INR."
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_payment_entry_against_purchase_invoice",
+      "exception": "ValidationError",
+      "message": "Source Exchange Rate is mandatory"
+    },
+    {
+      "id": "erpnext.accounts.doctype.payment_request.test_payment_request.TestPaymentRequest.test_status",
+      "exception": "ValidationError",
+      "message": "Source Exchange Rate is mandatory"
+    }
+  ],
+  "correlation_limit": "Historical Error Log has no test ID. Interval and JUnit second-resolution timestamps associate the module, not an unambiguous log per case. New observer records the current native test ID."
+}

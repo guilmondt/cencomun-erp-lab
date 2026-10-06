@@ -1,0 +1,69 @@
+{
+  "status": "BLOCKED",
+  "current": "v16.36.1",
+  "queries": [
+    {
+      "app": "frappe",
+      "command": "git ls-remote --tags https://github.com/frappe/frappe.git refs/tags/v16.36.*",
+      "exit_code": 0,
+      "tags": [
+        {
+          "sha": "f3f0c0b13c77a419487150a198fed42964e1919e",
+          "ref": "refs/tags/v16.36.0"
+        },
+        {
+          "sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+          "ref": "refs/tags/v16.36.1"
+        }
+      ]
+    },
+    {
+      "app": "erpnext",
+      "command": "git ls-remote --tags https://github.com/frappe/erpnext.git refs/tags/v16.36.*",
+      "exit_code": 0,
+      "tags": [
+        {
+          "sha": "b30aa5334bcea94dba74f5b866af13c43a861948",
+          "ref": "refs/tags/v16.36.0"
+        },
+        {
+          "sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+          "ref": "refs/tags/v16.36.1"
+        }
+      ]
+    }
+  ],
+  "reason": "Neither official Frappe nor ERPNext tags provide a compatible patch after v16.36.1 in the pinned 16.36 series. Existing runtime pins stay fixed; baseline suites do not satisfy post-patch scenarios.",
+  "dependent_cases": [
+    {
+      "case": "PATCH-TARGET",
+      "status": "UNRUN",
+      "blocked_by": "criterion-13"
+    },
+    {
+      "case": "PATCH-UPGRADE",
+      "status": "UNRUN",
+      "blocked_by": "criterion-13"
+    },
+    {
+      "case": "PATCH-MIGRATE",
+      "status": "UNRUN",
+      "blocked_by": "criterion-13"
+    },
+    {
+      "case": "PATCH-PLATFORM-FULL-REGRESSION",
+      "status": "UNRUN",
+      "blocked_by": "criterion-13"
+    },
+    {
+      "case": "PATCH-CENCOMUN-FULL-REGRESSION",
+      "status": "UNRUN",
+      "blocked_by": "criterion-13"
+    },
+    {
+      "case": "PATCH-RESTORE",
+      "status": "UNRUN",
+      "blocked_by": "criterion-13"
+    }
+  ]
+}

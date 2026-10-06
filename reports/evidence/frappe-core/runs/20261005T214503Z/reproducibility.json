@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "source_checkpoint_sha256": "2b6d105656fee932bda914f2b483912b5dc84bc99acb7b639d7cd944ef92817a",
+  "target_site": "ccm-core-recovery.test",
+  "target_database": "ccm_core_recovery",
+  "suites_replayed": [
+    "business",
+    "finance"
+  ],
+  "commands": [
+    {
+      "step": "recovery-new-site",
+      "exit_code": 0,
+      "seconds": 11.965
+    },
+    {
+      "step": "recovery-restore",
+      "exit_code": 0,
+      "seconds": 5.727
+    },
+    {
+      "step": "recovery-migrate",
+      "exit_code": 0,
+      "seconds": 38.252
+    },
+    {
+      "step": "recovery-replay-seed",
+      "exit_code": 0,
+      "seconds": 8.284
+    },
+    {
+      "step": "recovery-replay-business_cases",
+      "exit_code": 0,
+      "seconds": 6.407
+    },
+    {
+      "step": "recovery-replay-finance_cases",
+      "exit_code": 0,
+      "seconds": 4.381
+    },
+    {
+      "step": "platform-enable-tests",
+      "exit_code": 0,
+      "seconds": 0.442
+    },
+    {
+      "step": "platform-utils",
+      "exit_code": 0,
+      "seconds": 0.434
+    }
+  ],
+  "native_core_suite": "frappe.tests.test_utils",
+  "production_touched": false
+}

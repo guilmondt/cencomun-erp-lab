@@ -1,0 +1,1213 @@
+{
+  "native_result": "erpnext-ci-attempt-2.json",
+  "diagnostics": "erpnext-final-failure-diagnostics-v2.json",
+  "native_execution_repeated": false,
+  "source_observations": "erpnext-ci-attempt-2-observations.json",
+  "scope": "Exact whitelisted observations linked to four errors in the new full pass; no new provider calls, rate fixtures or native execution",
+  "events": [
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791268198.5883574,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791268200.6122413,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791268200.6244776,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 1,
+      "from_currency": "INR",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": null
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791268200.7167346,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791268200.7429726,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "name": "lgnaii53kn",
+      "creation": "2026-10-06 12:00:00.734473",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "022068d24dafe61b26bb804c1faa471044030dd0d5ebbd284c7378aa10c7b498",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791268200.7432482,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791268200.8056607,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791268200.814648,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "name": "lgon0655e4",
+      "creation": "2026-10-06 12:00:00.810835",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "022068d24dafe61b26bb804c1faa471044030dd0d5ebbd284c7378aa10c7b498",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791268200.8148642,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791268200.8416383,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791268200.85064,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "name": "lgoae98mba",
+      "creation": "2026-10-06 12:00:00.846711",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "9d1b6765ebbc8486c9bef1ed89e4901c85b49693d37700d87b677cfdd2e3e8d4",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791268200.850867,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791268200.8742929,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791270592.6974328,
+      "test": "erpnext.selling.doctype.quotation.test_quotation.TestQuotation.test_make_quotation_qar_to_inr",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791270592.8053095,
+      "test": "erpnext.selling.doctype.quotation.test_quotation.TestQuotation.test_make_quotation_qar_to_inr",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/USD/INR"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791270592.8354087,
+      "test": "erpnext.selling.doctype.quotation.test_quotation.TestQuotation.test_make_quotation_qar_to_inr",
+      "name": "cs833dnei6",
+      "creation": "2026-10-06 12:39:52.823463",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "d0587d4cd6e6e19393b177a1162a713384075b62744c3c8cb82c990e3d62e042",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791270592.8356917,
+      "test": "erpnext.selling.doctype.quotation.test_quotation.TestQuotation.test_make_quotation_qar_to_inr",
+      "result": 0.0,
+      "from_currency": "QAR",
+      "to_currency": "INR",
+      "transaction_date": "2026-01-01",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791270592.8524916,
+      "test": "erpnext.selling.doctype.quotation.test_quotation.TestQuotation.test_make_quotation_qar_to_inr",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791272135.939499,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 28107,
+      "epoch": 1791272135.9666326,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Serialized Item With Series",
+          "qty": 2,
+          "basic_rate": 100.0,
+          "amount": 200.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 28107,
+      "epoch": 1791272135.9966083,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Serialized Item With Series",
+          "qty": 2,
+          "basic_rate": 100.0,
+          "amount": 200.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272136.6571038,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "result": 0.0167,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 0.0167
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272136.6585202,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "result": 0.0167,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 0.0167
+        }
+      ]
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791272137.0514154,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/INR/USD"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791272137.0837703,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "name": "ruqp2npfc4",
+      "creation": "2026-10-06 13:05:37.068555",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "f3479a53f27132bf86007ba3a65447c394fa89b14b6ec5b9b37d491ff127194e",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272137.0840287,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "result": 0.0,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791272137.0870054,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/INR/USD"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791272137.101282,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "name": "ruq11o1qnk",
+      "creation": "2026-10-06 13:05:37.091916",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "f3479a53f27132bf86007ba3a65447c394fa89b14b6ec5b9b37d491ff127194e",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272137.1015017,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "result": 0.0,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791272137.1215343,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/INR/USD"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791272137.135727,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "name": "rurme5hi7q",
+      "creation": "2026-10-06 13:05:37.126200",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "f3479a53f27132bf86007ba3a65447c394fa89b14b6ec5b9b37d491ff127194e",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272137.1359532,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "result": 0.0,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791272137.1868343,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_fallback_on_cancel",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791272137.189894,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "stage": "before_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 28107,
+      "epoch": 1791272137.2159457,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Serialized Item With Series",
+          "qty": 2,
+          "basic_rate": 100.0,
+          "amount": 200.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "stock_entry_validation",
+      "pid": 28107,
+      "epoch": 1791272137.2415752,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "items": [
+        {
+          "idx": 1,
+          "item_code": "_Test Serialized Item With Series",
+          "qty": 2,
+          "basic_rate": 100.0,
+          "amount": 200.0,
+          "s_warehouse": null,
+          "t_warehouse": "_Test Warehouse - _TC",
+          "secondary_item_type": ""
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272138.0351005,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "result": 0.0167,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 0.0167
+        }
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272138.0363424,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "result": 0.0167,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_buying",
+      "entries": [
+        {
+          "exchange_rate": 0.0167
+        }
+      ]
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791272138.5446928,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/INR/USD"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791272138.5602744,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "name": "rv9ahoijsa",
+      "creation": "2026-10-06 13:05:38.549447",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "f3479a53f27132bf86007ba3a65447c394fa89b14b6ec5b9b37d491ff127194e",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272138.560537,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "result": 0.0,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791272138.5652204,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/INR/USD"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791272138.5859113,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "name": "rv9npcvh3b",
+      "creation": "2026-10-06 13:05:38.571199",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "f3479a53f27132bf86007ba3a65447c394fa89b14b6ec5b9b37d491ff127194e",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272138.5868905,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "result": 0.0,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "external_http_rejected",
+      "pid": 28107,
+      "epoch": 1791272138.5941315,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "hostname": "api.frankfurter.dev",
+      "path": "/v2/rate/INR/USD"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 28107,
+      "epoch": 1791272138.6084692,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "name": "rv9pibi7sc",
+      "creation": "2026-10-06 13:05:38.598990",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "f3479a53f27132bf86007ba3a65447c394fa89b14b6ec5b9b37d491ff127194e",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 130, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "fx_return",
+      "pid": 28107,
+      "epoch": 1791272138.6087565,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "result": 0.0,
+      "from_currency": "INR",
+      "to_currency": "USD",
+      "transaction_date": "2026-10-06",
+      "args": "for_selling",
+      "entries": []
+    },
+    {
+      "kind": "native_state",
+      "pid": 28107,
+      "epoch": 1791272138.663028,
+      "test": "erpnext.stock.doctype.serial_no.test_serial_no.TestSerialNo.test_inter_company_transfer_intermediate_cancellation",
+      "stage": "after_test",
+      "site": "ccm-upstream-erpnext-final.test",
+      "user": "Administrator",
+      "module_payments": "payments",
+      "installed_apps": [
+        "frappe",
+        "payments",
+        "erpnext"
+      ],
+      "apps_on_bench": [
+        "frappe",
+        "erpnext",
+        "payments"
+      ],
+      "cached_app_modules": null,
+      "request_is_none": true,
+      "fx_settings": {
+        "disabled": 0,
+        "service_provider": "frankfurter.dev - v2",
+        "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+        "use_http": 0
+      },
+      "fx_accounts": {
+        "allow_stale": 1,
+        "stale_days": 1,
+        "allow_pegged_currencies_exchange_rates": 0
+      },
+      "fx_rows": [
+        {
+          "date": "2016-01-30",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 62.9,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-10",
+          "from_currency": "INR",
+          "to_currency": "NGN",
+          "exchange_rate": 65.1,
+          "for_buying": 1,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "INR",
+          "exchange_rate": 60.0,
+          "for_buying": 1,
+          "for_selling": 0
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "USD",
+          "to_currency": "EUR",
+          "exchange_rate": 0.773,
+          "for_buying": 0,
+          "for_selling": 1
+        },
+        {
+          "date": "2016-01-01",
+          "from_currency": "INR",
+          "to_currency": "USD",
+          "exchange_rate": 0.0167,
+          "for_buying": 1,
+          "for_selling": 0
+        }
+      ]
+    }
+  ]
+}

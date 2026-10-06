@@ -1,0 +1,2237 @@
+{
+  "cases": [
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "criteria": [
+        4,
+        9,
+        14
+      ],
+      "status": "PASS",
+      "actual": {
+        "lost_transport": "RemoteDisconnected",
+        "adapter_exit_injection": 73,
+        "before_restart": {
+          "id": "IDEM-LOST",
+          "company_id": "CCM-LAB-001",
+          "status": "NEW",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true,
+          "_meta": {
+            "correlation_id": "f4d65a59-2f78-42a8-bc1b-2a2be2497b09",
+            "server_ms": 1.4841
+          }
+        },
+        "after_restart": {
+          "id": "IDEM-LOST",
+          "company_id": "CCM-LAB-001",
+          "status": "NEW",
+          "channel": "STORE",
+          "currency": "USD",
+          "gross": "125.00",
+          "revenue": "125.00",
+          "tax": "0.00",
+          "commission": "8.00",
+          "cost": "70.00",
+          "net": "117.00",
+          "indicator": "47.00",
+          "accounting_profit": "47.00",
+          "financed_amount": "75.00",
+          "shipping_expense": "0.00",
+          "lines": [
+            {
+              "product_id": "P001",
+              "qty": "2",
+              "unit_price": "50.00",
+              "line_total": "100.00",
+              "unit_cost": "30.00"
+            },
+            {
+              "product_id": "P002",
+              "qty": "1",
+              "unit_price": "25.00",
+              "line_total": "25.00",
+              "unit_cost": "10.00"
+            }
+          ],
+          "replay": true,
+          "_meta": {
+            "correlation_id": "da38b842-4895-4528-b2ee-767215741c9a",
+            "server_ms": 17.2407
+          }
+        },
+        "recovered_http": 200,
+        "services": [
+          "mariadb",
+          "redis_cache",
+          "redis_queue",
+          "web",
+          "worker"
+        ]
+      },
+      "coverage_revision": 2
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "criteria": [
+        3,
+        6,
+        7,
+        9
+      ],
+      "status": "PASS",
+      "actual": {
+        "failed_transport": {
+          "attempted": 28,
+          "delivered": 0,
+          "failed": 28
+        },
+        "retry": {
+          "attempted": 28,
+          "delivered": 28,
+          "failed": 0
+        },
+        "replay": {
+          "attempted": 28,
+          "delivered": 28,
+          "failed": 0
+        },
+        "sequence": [
+          "503_failure",
+          "successful_delivery",
+          "consumer_restart",
+          "same_event_replay"
+        ],
+        "before_restart": {
+          "receipts": [
+            {
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+                "object_id": "MCP-DENY-DELIVER-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.468669",
+                "correlation_id": "cf4bc73ace2006fa68e979a2cb84bbcf8ad8b9b18e27b4ef02c2932f671b4719",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+                "object_id": "CO01",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:09.778942",
+                "correlation_id": "0cb38668f681279fb8fc6cd5dcffa367e7e355fc64424d4a4a8e848180f89b3f",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+                "object_id": "PO06",
+                "company_id": "CCM-LAB-001",
+                "actor": "director@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.331469",
+                "correlation_id": "31db5184b8d9bc5c345f95a2b65d4c2d4d68d1616d9ef4c353cb9f8c95cfaa02",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+                "object_id": "PO05",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.132650",
+                "correlation_id": "5b0fbba47bfc327cb4f3a6e18c7f760057618699ca956fc81640694a079ad44f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+                "object_id": "MCP-DENY-SETTLE-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.989602",
+                "correlation_id": "a2c33ffff777fda3008e956d70379d7f75fe6377aab532e5e1acb88a8892aca9",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+                "object_id": "PO09",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.882133",
+                "correlation_id": "eed786a0be49c6133e5447c0c8e5f667b811f9b187c9713f9ffcb42a64c07368",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+                "object_id": "STATE-WEB-NO-GUIDE",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.414864",
+                "correlation_id": "c72e779d7c34b5a06345013e8ba089e9960e1e99cb28d38d7e85844eae4e4976",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+                "object_id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.180802",
+                "correlation_id": "a39130ad7dcbd3f23557ee51953b802f7dc1e9150d18d076602270ae52dfb29a",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+                "object_id": "MCP-DENY-DELIVER-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.721925",
+                "correlation_id": "f68837b68e08f3348d664d3d961c8499ffe008c2e65c1f1dbbd7ad21b7143e20",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+                "object_id": "STATE-CANCEL-STORE-APPROVED",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.701726",
+                "correlation_id": "ba2e4ca7ebc35af2e4a4419cbded56fa53f761d804f4264c34a724baae39979d",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+                "object_id": "PO02",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.582404",
+                "correlation_id": "80ffd3b0506e3fadd6c05dcd12a9dd21e7f5c3f80346f7c4c04b654538189d9f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+                "object_id": "PO07",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.536215",
+                "correlation_id": "c49207c2427a69b9cfec907e6da8d89287a9e26da9f30145531c4c680e04a783",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+                "object_id": "PO02",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.226679",
+                "correlation_id": "9c751b7ff92e93fa0edf0964ac2b498763ede0cec9616a2b9434ee4bbf13eb48",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+                "object_id": "TAX01-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:10.763646",
+                "correlation_id": "4b8e8f77087b3eccbe64584bc6d9e17abeaa7bcdc44c4bafbebda6f083c7aa70",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+                "object_id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.006437",
+                "correlation_id": "1435c3bdb60d472183ac6b10f85824d2d93018b6771374ae81e560fcb120b2ce",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+                "object_id": "STATE-CANCEL-WEB-APPROVED",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:15.654188",
+                "correlation_id": "0cb537139c809bb6a34fdd841f2c992d5e7ba48fd58ee211dc5ee40f1d780630",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+                "object_id": "MCP-DENY-SETTLE-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:24.658773",
+                "correlation_id": "03974d3b24bec12c8dd9aa060402ccba2760c66374861c9a74a208d08db70be2",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+                "object_id": "STATE-WEB-SKIP-PREPARING",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.144529",
+                "correlation_id": "f15908389f9bf43c635ad6b521ba13f124a2c5f72d6aab29485ec330532f89b4",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+                "object_id": "CO00",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:08.481462",
+                "correlation_id": "67c2a33aa9e6516854ccd79da656dc4f90042b4246b14225ffea24b40c8dedb3",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+                "object_id": "PO08",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.703336",
+                "correlation_id": "7cc17311ab043937f08c87470614a2ac2b9e98624473d9d504042e0a8633b407",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+                "object_id": "STATE-CANCEL-WEB-PREPARING",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:15.973809",
+                "correlation_id": "ffe8356db6c4091474ce838d7fc4eae1fba1b03ef6383c7f6a68ab2019f05ccb",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+                "object_id": "TAX01-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:11.716438",
+                "correlation_id": "168237579614919fb5cce99b020f37aa4d564944242a94676191caf99594a67d",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+                "object_id": "PO01",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.407124",
+                "correlation_id": "e77da663e9f78813664dfde305574c94cdfedb718806aa1e0024810fd098549f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+                "object_id": "PO04",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.949029",
+                "correlation_id": "8675d0eff41933eb59b8cfc36858ecfea6cd46e3c292b19a2fb325e76dfd3902",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+                "object_id": "INV-INSUFFICIENT",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:16.288010",
+                "correlation_id": "e98721196d0b0296faf4ee12c3387207a7d987c5831e57ec16c7732a9382073c",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+                "object_id": "PO03",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.764038",
+                "correlation_id": "d35f21237db7d4e3a1581338e62b385f14f815893181608ab5283b619aa370ac",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+                "object_id": "CS000",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.846892",
+                "correlation_id": "fcb5ac13eaccccb47b708a64f9d0e2e032b810d3c8d98dee6ac8111b992c97a9",
+                "type": "cash.closing.confirmed"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+                "object_id": "CS001",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.890377",
+                "correlation_id": "1253716adb1ccba977de71ee11df8a935ed8959d954a6380879634280e8dd628",
+                "type": "cash.closing.confirmed"
+              },
+              "deliveries": 1
+            }
+          ],
+          "effects": [
+            {
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-DELIVER-S",
+              "applications": 1
+            },
+            {
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "type": "cashea.approved",
+              "object_id": "CO01",
+              "applications": 1
+            },
+            {
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "type": "purchase.approved",
+              "object_id": "PO06",
+              "applications": 1
+            },
+            {
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "type": "purchase.approved",
+              "object_id": "PO05",
+              "applications": 1
+            },
+            {
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-SETTLE-S",
+              "applications": 1
+            },
+            {
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "type": "purchase.approved",
+              "object_id": "PO09",
+              "applications": 1
+            },
+            {
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "type": "cashea.approved",
+              "object_id": "STATE-WEB-NO-GUIDE",
+              "applications": 1
+            },
+            {
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "type": "cashea.approved",
+              "object_id": "TAX-CONC-W",
+              "applications": 1
+            },
+            {
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-DELIVER-W",
+              "applications": 1
+            },
+            {
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-STORE-APPROVED",
+              "applications": 1
+            },
+            {
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "type": "purchase.approved",
+              "object_id": "PO02",
+              "applications": 1
+            },
+            {
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "type": "purchase.approved",
+              "object_id": "PO07",
+              "applications": 1
+            },
+            {
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "type": "purchase.approved",
+              "object_id": "PO02",
+              "applications": 1
+            },
+            {
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "type": "cashea.approved",
+              "object_id": "TAX01-S",
+              "applications": 1
+            },
+            {
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "type": "cashea.approved",
+              "object_id": "TAX-CONC-S",
+              "applications": 1
+            },
+            {
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-WEB-APPROVED",
+              "applications": 1
+            },
+            {
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-SETTLE-W",
+              "applications": 1
+            },
+            {
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "type": "cashea.approved",
+              "object_id": "STATE-WEB-SKIP-PREPARING",
+              "applications": 1
+            },
+            {
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "type": "cashea.approved",
+              "object_id": "CO00",
+              "applications": 1
+            },
+            {
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "type": "purchase.approved",
+              "object_id": "PO08",
+              "applications": 1
+            },
+            {
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-WEB-PREPARING",
+              "applications": 1
+            },
+            {
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "type": "cashea.approved",
+              "object_id": "TAX01-W",
+              "applications": 1
+            },
+            {
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "type": "purchase.approved",
+              "object_id": "PO01",
+              "applications": 1
+            },
+            {
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "type": "purchase.approved",
+              "object_id": "PO04",
+              "applications": 1
+            },
+            {
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "type": "cashea.approved",
+              "object_id": "INV-INSUFFICIENT",
+              "applications": 1
+            },
+            {
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "type": "purchase.approved",
+              "object_id": "PO03",
+              "applications": 1
+            },
+            {
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "type": "cash.closing.confirmed",
+              "object_id": "CS000",
+              "applications": 1
+            },
+            {
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "type": "cash.closing.confirmed",
+              "object_id": "CS001",
+              "applications": 1
+            }
+          ]
+        },
+        "after_restart_before_replay": {
+          "receipts": [
+            {
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+                "object_id": "MCP-DENY-DELIVER-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.468669",
+                "correlation_id": "cf4bc73ace2006fa68e979a2cb84bbcf8ad8b9b18e27b4ef02c2932f671b4719",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+                "object_id": "CO01",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:09.778942",
+                "correlation_id": "0cb38668f681279fb8fc6cd5dcffa367e7e355fc64424d4a4a8e848180f89b3f",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+                "object_id": "PO06",
+                "company_id": "CCM-LAB-001",
+                "actor": "director@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.331469",
+                "correlation_id": "31db5184b8d9bc5c345f95a2b65d4c2d4d68d1616d9ef4c353cb9f8c95cfaa02",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+                "object_id": "PO05",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.132650",
+                "correlation_id": "5b0fbba47bfc327cb4f3a6e18c7f760057618699ca956fc81640694a079ad44f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+                "object_id": "MCP-DENY-SETTLE-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.989602",
+                "correlation_id": "a2c33ffff777fda3008e956d70379d7f75fe6377aab532e5e1acb88a8892aca9",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+                "object_id": "PO09",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.882133",
+                "correlation_id": "eed786a0be49c6133e5447c0c8e5f667b811f9b187c9713f9ffcb42a64c07368",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+                "object_id": "STATE-WEB-NO-GUIDE",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.414864",
+                "correlation_id": "c72e779d7c34b5a06345013e8ba089e9960e1e99cb28d38d7e85844eae4e4976",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+                "object_id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.180802",
+                "correlation_id": "a39130ad7dcbd3f23557ee51953b802f7dc1e9150d18d076602270ae52dfb29a",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+                "object_id": "MCP-DENY-DELIVER-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.721925",
+                "correlation_id": "f68837b68e08f3348d664d3d961c8499ffe008c2e65c1f1dbbd7ad21b7143e20",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+                "object_id": "STATE-CANCEL-STORE-APPROVED",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.701726",
+                "correlation_id": "ba2e4ca7ebc35af2e4a4419cbded56fa53f761d804f4264c34a724baae39979d",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+                "object_id": "PO02",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.582404",
+                "correlation_id": "80ffd3b0506e3fadd6c05dcd12a9dd21e7f5c3f80346f7c4c04b654538189d9f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+                "object_id": "PO07",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.536215",
+                "correlation_id": "c49207c2427a69b9cfec907e6da8d89287a9e26da9f30145531c4c680e04a783",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+                "object_id": "PO02",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.226679",
+                "correlation_id": "9c751b7ff92e93fa0edf0964ac2b498763ede0cec9616a2b9434ee4bbf13eb48",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+                "object_id": "TAX01-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:10.763646",
+                "correlation_id": "4b8e8f77087b3eccbe64584bc6d9e17abeaa7bcdc44c4bafbebda6f083c7aa70",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+                "object_id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.006437",
+                "correlation_id": "1435c3bdb60d472183ac6b10f85824d2d93018b6771374ae81e560fcb120b2ce",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+                "object_id": "STATE-CANCEL-WEB-APPROVED",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:15.654188",
+                "correlation_id": "0cb537139c809bb6a34fdd841f2c992d5e7ba48fd58ee211dc5ee40f1d780630",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+                "object_id": "MCP-DENY-SETTLE-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:24.658773",
+                "correlation_id": "03974d3b24bec12c8dd9aa060402ccba2760c66374861c9a74a208d08db70be2",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+                "object_id": "STATE-WEB-SKIP-PREPARING",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.144529",
+                "correlation_id": "f15908389f9bf43c635ad6b521ba13f124a2c5f72d6aab29485ec330532f89b4",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+                "object_id": "CO00",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:08.481462",
+                "correlation_id": "67c2a33aa9e6516854ccd79da656dc4f90042b4246b14225ffea24b40c8dedb3",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+                "object_id": "PO08",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.703336",
+                "correlation_id": "7cc17311ab043937f08c87470614a2ac2b9e98624473d9d504042e0a8633b407",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+                "object_id": "STATE-CANCEL-WEB-PREPARING",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:15.973809",
+                "correlation_id": "ffe8356db6c4091474ce838d7fc4eae1fba1b03ef6383c7f6a68ab2019f05ccb",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+                "object_id": "TAX01-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:11.716438",
+                "correlation_id": "168237579614919fb5cce99b020f37aa4d564944242a94676191caf99594a67d",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+                "object_id": "PO01",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.407124",
+                "correlation_id": "e77da663e9f78813664dfde305574c94cdfedb718806aa1e0024810fd098549f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+                "object_id": "PO04",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.949029",
+                "correlation_id": "8675d0eff41933eb59b8cfc36858ecfea6cd46e3c292b19a2fb325e76dfd3902",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+                "object_id": "INV-INSUFFICIENT",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:16.288010",
+                "correlation_id": "e98721196d0b0296faf4ee12c3387207a7d987c5831e57ec16c7732a9382073c",
+                "type": "cashea.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+                "object_id": "PO03",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.764038",
+                "correlation_id": "d35f21237db7d4e3a1581338e62b385f14f815893181608ab5283b619aa370ac",
+                "type": "purchase.approved"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+                "object_id": "CS000",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.846892",
+                "correlation_id": "fcb5ac13eaccccb47b708a64f9d0e2e032b810d3c8d98dee6ac8111b992c97a9",
+                "type": "cash.closing.confirmed"
+              },
+              "deliveries": 1
+            },
+            {
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+                "object_id": "CS001",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.890377",
+                "correlation_id": "1253716adb1ccba977de71ee11df8a935ed8959d954a6380879634280e8dd628",
+                "type": "cash.closing.confirmed"
+              },
+              "deliveries": 1
+            }
+          ],
+          "effects": [
+            {
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-DELIVER-S",
+              "applications": 1
+            },
+            {
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "type": "cashea.approved",
+              "object_id": "CO01",
+              "applications": 1
+            },
+            {
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "type": "purchase.approved",
+              "object_id": "PO06",
+              "applications": 1
+            },
+            {
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "type": "purchase.approved",
+              "object_id": "PO05",
+              "applications": 1
+            },
+            {
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-SETTLE-S",
+              "applications": 1
+            },
+            {
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "type": "purchase.approved",
+              "object_id": "PO09",
+              "applications": 1
+            },
+            {
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "type": "cashea.approved",
+              "object_id": "STATE-WEB-NO-GUIDE",
+              "applications": 1
+            },
+            {
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "type": "cashea.approved",
+              "object_id": "TAX-CONC-W",
+              "applications": 1
+            },
+            {
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-DELIVER-W",
+              "applications": 1
+            },
+            {
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-STORE-APPROVED",
+              "applications": 1
+            },
+            {
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "type": "purchase.approved",
+              "object_id": "PO02",
+              "applications": 1
+            },
+            {
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "type": "purchase.approved",
+              "object_id": "PO07",
+              "applications": 1
+            },
+            {
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "type": "purchase.approved",
+              "object_id": "PO02",
+              "applications": 1
+            },
+            {
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "type": "cashea.approved",
+              "object_id": "TAX01-S",
+              "applications": 1
+            },
+            {
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "type": "cashea.approved",
+              "object_id": "TAX-CONC-S",
+              "applications": 1
+            },
+            {
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-WEB-APPROVED",
+              "applications": 1
+            },
+            {
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-SETTLE-W",
+              "applications": 1
+            },
+            {
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "type": "cashea.approved",
+              "object_id": "STATE-WEB-SKIP-PREPARING",
+              "applications": 1
+            },
+            {
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "type": "cashea.approved",
+              "object_id": "CO00",
+              "applications": 1
+            },
+            {
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "type": "purchase.approved",
+              "object_id": "PO08",
+              "applications": 1
+            },
+            {
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-WEB-PREPARING",
+              "applications": 1
+            },
+            {
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "type": "cashea.approved",
+              "object_id": "TAX01-W",
+              "applications": 1
+            },
+            {
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "type": "purchase.approved",
+              "object_id": "PO01",
+              "applications": 1
+            },
+            {
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "type": "purchase.approved",
+              "object_id": "PO04",
+              "applications": 1
+            },
+            {
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "type": "cashea.approved",
+              "object_id": "INV-INSUFFICIENT",
+              "applications": 1
+            },
+            {
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "type": "purchase.approved",
+              "object_id": "PO03",
+              "applications": 1
+            },
+            {
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "type": "cash.closing.confirmed",
+              "object_id": "CS000",
+              "applications": 1
+            },
+            {
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "type": "cash.closing.confirmed",
+              "object_id": "CS001",
+              "applications": 1
+            }
+          ]
+        },
+        "after_replay": {
+          "receipts": [
+            {
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+                "object_id": "MCP-DENY-DELIVER-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.468669",
+                "correlation_id": "cf4bc73ace2006fa68e979a2cb84bbcf8ad8b9b18e27b4ef02c2932f671b4719",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+                "object_id": "CO01",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:09.778942",
+                "correlation_id": "0cb38668f681279fb8fc6cd5dcffa367e7e355fc64424d4a4a8e848180f89b3f",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+                "object_id": "PO06",
+                "company_id": "CCM-LAB-001",
+                "actor": "director@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.331469",
+                "correlation_id": "31db5184b8d9bc5c345f95a2b65d4c2d4d68d1616d9ef4c353cb9f8c95cfaa02",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+                "object_id": "PO05",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.132650",
+                "correlation_id": "5b0fbba47bfc327cb4f3a6e18c7f760057618699ca956fc81640694a079ad44f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+                "object_id": "MCP-DENY-SETTLE-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.989602",
+                "correlation_id": "a2c33ffff777fda3008e956d70379d7f75fe6377aab532e5e1acb88a8892aca9",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+                "object_id": "PO09",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.882133",
+                "correlation_id": "eed786a0be49c6133e5447c0c8e5f667b811f9b187c9713f9ffcb42a64c07368",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+                "object_id": "STATE-WEB-NO-GUIDE",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.414864",
+                "correlation_id": "c72e779d7c34b5a06345013e8ba089e9960e1e99cb28d38d7e85844eae4e4976",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+                "object_id": "TAX-CONC-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.180802",
+                "correlation_id": "a39130ad7dcbd3f23557ee51953b802f7dc1e9150d18d076602270ae52dfb29a",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+                "object_id": "MCP-DENY-DELIVER-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.721925",
+                "correlation_id": "f68837b68e08f3348d664d3d961c8499ffe008c2e65c1f1dbbd7ad21b7143e20",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+                "object_id": "STATE-CANCEL-STORE-APPROVED",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.701726",
+                "correlation_id": "ba2e4ca7ebc35af2e4a4419cbded56fa53f761d804f4264c34a724baae39979d",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+                "object_id": "PO02",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.582404",
+                "correlation_id": "80ffd3b0506e3fadd6c05dcd12a9dd21e7f5c3f80346f7c4c04b654538189d9f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+                "object_id": "PO07",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.536215",
+                "correlation_id": "c49207c2427a69b9cfec907e6da8d89287a9e26da9f30145531c4c680e04a783",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+                "object_id": "PO02",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.226679",
+                "correlation_id": "9c751b7ff92e93fa0edf0964ac2b498763ede0cec9616a2b9434ee4bbf13eb48",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+                "object_id": "TAX01-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:10.763646",
+                "correlation_id": "4b8e8f77087b3eccbe64584bc6d9e17abeaa7bcdc44c4bafbebda6f083c7aa70",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+                "object_id": "TAX-CONC-S",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:23.006437",
+                "correlation_id": "1435c3bdb60d472183ac6b10f85824d2d93018b6771374ae81e560fcb120b2ce",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+                "object_id": "STATE-CANCEL-WEB-APPROVED",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:15.654188",
+                "correlation_id": "0cb537139c809bb6a34fdd841f2c992d5e7ba48fd58ee211dc5ee40f1d780630",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+                "object_id": "MCP-DENY-SETTLE-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:24.658773",
+                "correlation_id": "03974d3b24bec12c8dd9aa060402ccba2760c66374861c9a74a208d08db70be2",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+                "object_id": "STATE-WEB-SKIP-PREPARING",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:14.144529",
+                "correlation_id": "f15908389f9bf43c635ad6b521ba13f124a2c5f72d6aab29485ec330532f89b4",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+                "object_id": "CO00",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:08.481462",
+                "correlation_id": "67c2a33aa9e6516854ccd79da656dc4f90042b4246b14225ffea24b40c8dedb3",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+                "object_id": "PO08",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:19.703336",
+                "correlation_id": "7cc17311ab043937f08c87470614a2ac2b9e98624473d9d504042e0a8633b407",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+                "object_id": "STATE-CANCEL-WEB-PREPARING",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:15.973809",
+                "correlation_id": "ffe8356db6c4091474ce838d7fc4eae1fba1b03ef6383c7f6a68ab2019f05ccb",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+                "object_id": "TAX01-W",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:11.716438",
+                "correlation_id": "168237579614919fb5cce99b020f37aa4d564944242a94676191caf99594a67d",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+                "object_id": "PO01",
+                "company_id": "CCM-LAB-001",
+                "actor": "buyer@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.407124",
+                "correlation_id": "e77da663e9f78813664dfde305574c94cdfedb718806aa1e0024810fd098549f",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+                "object_id": "PO04",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.949029",
+                "correlation_id": "8675d0eff41933eb59b8cfc36858ecfea6cd46e3c292b19a2fb325e76dfd3902",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+                "object_id": "INV-INSUFFICIENT",
+                "company_id": "CCM-LAB-001",
+                "actor": "simulator@example.invalid",
+                "occurred_at": "2026-10-06T04:21:16.288010",
+                "correlation_id": "e98721196d0b0296faf4ee12c3387207a7d987c5831e57ec16c7732a9382073c",
+                "type": "cashea.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+                "object_id": "PO03",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:18.764038",
+                "correlation_id": "d35f21237db7d4e3a1581338e62b385f14f815893181608ab5283b619aa370ac",
+                "type": "purchase.approved"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+                "object_id": "CS000",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.846892",
+                "correlation_id": "fcb5ac13eaccccb47b708a64f9d0e2e032b810d3c8d98dee6ac8111b992c97a9",
+                "type": "cash.closing.confirmed"
+              },
+              "deliveries": 2
+            },
+            {
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "payload": {
+                "schema_version": 1,
+                "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+                "object_id": "CS001",
+                "company_id": "CCM-LAB-001",
+                "actor": "manager@example.invalid",
+                "occurred_at": "2026-10-06T04:21:20.890377",
+                "correlation_id": "1253716adb1ccba977de71ee11df8a935ed8959d954a6380879634280e8dd628",
+                "type": "cash.closing.confirmed"
+              },
+              "deliveries": 2
+            }
+          ],
+          "effects": [
+            {
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-DELIVER-S",
+              "applications": 1
+            },
+            {
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "type": "cashea.approved",
+              "object_id": "CO01",
+              "applications": 1
+            },
+            {
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "type": "purchase.approved",
+              "object_id": "PO06",
+              "applications": 1
+            },
+            {
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "type": "purchase.approved",
+              "object_id": "PO05",
+              "applications": 1
+            },
+            {
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-SETTLE-S",
+              "applications": 1
+            },
+            {
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "type": "purchase.approved",
+              "object_id": "PO09",
+              "applications": 1
+            },
+            {
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "type": "cashea.approved",
+              "object_id": "STATE-WEB-NO-GUIDE",
+              "applications": 1
+            },
+            {
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "type": "cashea.approved",
+              "object_id": "TAX-CONC-W",
+              "applications": 1
+            },
+            {
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-DELIVER-W",
+              "applications": 1
+            },
+            {
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-STORE-APPROVED",
+              "applications": 1
+            },
+            {
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "type": "purchase.approved",
+              "object_id": "PO02",
+              "applications": 1
+            },
+            {
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "type": "purchase.approved",
+              "object_id": "PO07",
+              "applications": 1
+            },
+            {
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "type": "purchase.approved",
+              "object_id": "PO02",
+              "applications": 1
+            },
+            {
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "type": "cashea.approved",
+              "object_id": "TAX01-S",
+              "applications": 1
+            },
+            {
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "type": "cashea.approved",
+              "object_id": "TAX-CONC-S",
+              "applications": 1
+            },
+            {
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-WEB-APPROVED",
+              "applications": 1
+            },
+            {
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "type": "cashea.approved",
+              "object_id": "MCP-DENY-SETTLE-W",
+              "applications": 1
+            },
+            {
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "type": "cashea.approved",
+              "object_id": "STATE-WEB-SKIP-PREPARING",
+              "applications": 1
+            },
+            {
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "type": "cashea.approved",
+              "object_id": "CO00",
+              "applications": 1
+            },
+            {
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "type": "purchase.approved",
+              "object_id": "PO08",
+              "applications": 1
+            },
+            {
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "type": "cashea.approved",
+              "object_id": "STATE-CANCEL-WEB-PREPARING",
+              "applications": 1
+            },
+            {
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "type": "cashea.approved",
+              "object_id": "TAX01-W",
+              "applications": 1
+            },
+            {
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "type": "purchase.approved",
+              "object_id": "PO01",
+              "applications": 1
+            },
+            {
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "type": "purchase.approved",
+              "object_id": "PO04",
+              "applications": 1
+            },
+            {
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "type": "cashea.approved",
+              "object_id": "INV-INSUFFICIENT",
+              "applications": 1
+            },
+            {
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "type": "purchase.approved",
+              "object_id": "PO03",
+              "applications": 1
+            },
+            {
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "type": "cash.closing.confirmed",
+              "object_id": "CS000",
+              "applications": 1
+            },
+            {
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "type": "cash.closing.confirmed",
+              "object_id": "CS001",
+              "applications": 1
+            }
+          ]
+        },
+        "consumer_process_before": {
+          "pid": 1605,
+          "birth": "96385"
+        },
+        "consumer_process_after": {
+          "pid": 1780,
+          "birth": "98780"
+        },
+        "consumer_unique_effects": 28,
+        "receipts": [
+          {
+            "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "072154ec647e23ef35908299a4d29bd4001056dc7c2f4eac20ff3f6c08e0bc57",
+              "object_id": "MCP-DENY-DELIVER-S",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:23.468669",
+              "correlation_id": "cf4bc73ace2006fa68e979a2cb84bbcf8ad8b9b18e27b4ef02c2932f671b4719",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "0908991cd834ccdb58e07ea0c5f8cb1255714a62e4324e8dc922eb17fba067fe",
+              "object_id": "CO01",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:09.778942",
+              "correlation_id": "0cb38668f681279fb8fc6cd5dcffa367e7e355fc64424d4a4a8e848180f89b3f",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "0cea6f5de01523c9e1536da32aaeb5ecacf150fe94b7054706e71dcf3eed0c74",
+              "object_id": "PO06",
+              "company_id": "CCM-LAB-001",
+              "actor": "director@example.invalid",
+              "occurred_at": "2026-10-06T04:21:19.331469",
+              "correlation_id": "31db5184b8d9bc5c345f95a2b65d4c2d4d68d1616d9ef4c353cb9f8c95cfaa02",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "44904690c7e8815ec15c033bbe83f14175c352796f22eb99e5ef275d4ca6373e",
+              "object_id": "PO05",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:19.132650",
+              "correlation_id": "5b0fbba47bfc327cb4f3a6e18c7f760057618699ca956fc81640694a079ad44f",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "5364a84d350d74714f6c69cf63faa820b08647324afdb56a09e5ec5030cf4b28",
+              "object_id": "MCP-DENY-SETTLE-S",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:23.989602",
+              "correlation_id": "a2c33ffff777fda3008e956d70379d7f75fe6377aab532e5e1acb88a8892aca9",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "566a00eaf6e7912e6985f01911c4880eaec789ac3668f2bcb20b3de0727df233",
+              "object_id": "PO09",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:19.882133",
+              "correlation_id": "eed786a0be49c6133e5447c0c8e5f667b811f9b187c9713f9ffcb42a64c07368",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "57cfe7626412c8bc58207f6155e65e6ab02795051dddfe70adccbe07f6ff0ff6",
+              "object_id": "STATE-WEB-NO-GUIDE",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:14.414864",
+              "correlation_id": "c72e779d7c34b5a06345013e8ba089e9960e1e99cb28d38d7e85844eae4e4976",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "5b77119ae7043a725bb3c60bf6a0161d31aed47739925e125cb72fed1703a0e3",
+              "object_id": "TAX-CONC-W",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:23.180802",
+              "correlation_id": "a39130ad7dcbd3f23557ee51953b802f7dc1e9150d18d076602270ae52dfb29a",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "60db7418acfad00144f8a8a49a43c9e33166ff8996fd775ec2b29c7c25168290",
+              "object_id": "MCP-DENY-DELIVER-W",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:23.721925",
+              "correlation_id": "f68837b68e08f3348d664d3d961c8499ffe008c2e65c1f1dbbd7ad21b7143e20",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "60dc900211580d687f5842d47a7f7a12ee597308f489dc37899db890b0df5873",
+              "object_id": "STATE-CANCEL-STORE-APPROVED",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:14.701726",
+              "correlation_id": "ba2e4ca7ebc35af2e4a4419cbded56fa53f761d804f4264c34a724baae39979d",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "67522807ac5c36ce86ca46e5b457f7a4d66277ada93ca13269fd6e60a29fab1d",
+              "object_id": "PO02",
+              "company_id": "CCM-LAB-001",
+              "actor": "buyer@example.invalid",
+              "occurred_at": "2026-10-06T04:21:18.582404",
+              "correlation_id": "80ffd3b0506e3fadd6c05dcd12a9dd21e7f5c3f80346f7c4c04b654538189d9f",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "703a07d855da5def001c9a42d0429cffe3c6f3dcf6b7c334db4ef6fd31b0fe62",
+              "object_id": "PO07",
+              "company_id": "CCM-LAB-001",
+              "actor": "buyer@example.invalid",
+              "occurred_at": "2026-10-06T04:21:19.536215",
+              "correlation_id": "c49207c2427a69b9cfec907e6da8d89287a9e26da9f30145531c4c680e04a783",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "72c4c141b7f135251714af54d01efccdfdc0d5cc253e428c324683a08b3c56a8",
+              "object_id": "PO02",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:20.226679",
+              "correlation_id": "9c751b7ff92e93fa0edf0964ac2b498763ede0cec9616a2b9434ee4bbf13eb48",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "87bbc14a9251bcdf8a341aa08ceaa2df07fab9e73b1b1b114cc728c8100561de",
+              "object_id": "TAX01-S",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:10.763646",
+              "correlation_id": "4b8e8f77087b3eccbe64584bc6d9e17abeaa7bcdc44c4bafbebda6f083c7aa70",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "9b61869860774ab0cd7f64f069faabc8e0e73cac27c5d020259f8d7bcefa08d8",
+              "object_id": "TAX-CONC-S",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:23.006437",
+              "correlation_id": "1435c3bdb60d472183ac6b10f85824d2d93018b6771374ae81e560fcb120b2ce",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "a7a57e3942957068441730d6ed5c304d0468434343b453cfa96b31672257d4b0",
+              "object_id": "STATE-CANCEL-WEB-APPROVED",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:15.654188",
+              "correlation_id": "0cb537139c809bb6a34fdd841f2c992d5e7ba48fd58ee211dc5ee40f1d780630",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "afb2d73f6f2bdd449867e9f9bc39c8647f45237fd3758aba87980fb44b9f1a21",
+              "object_id": "MCP-DENY-SETTLE-W",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:24.658773",
+              "correlation_id": "03974d3b24bec12c8dd9aa060402ccba2760c66374861c9a74a208d08db70be2",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "b94055572962ffbc58a53f9ef19df8c9118fba9e5b0e23b94eab2a601c10700d",
+              "object_id": "STATE-WEB-SKIP-PREPARING",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:14.144529",
+              "correlation_id": "f15908389f9bf43c635ad6b521ba13f124a2c5f72d6aab29485ec330532f89b4",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "b9e7a699fbbf9c43afb8921b703dfdf210a1da54720d7519dde21f1173c4ae70",
+              "object_id": "CO00",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:08.481462",
+              "correlation_id": "67c2a33aa9e6516854ccd79da656dc4f90042b4246b14225ffea24b40c8dedb3",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "ba2d2de166a61e7eb0fb13106e4420b14e50450f24603edcb51dd3257e296e50",
+              "object_id": "PO08",
+              "company_id": "CCM-LAB-001",
+              "actor": "buyer@example.invalid",
+              "occurred_at": "2026-10-06T04:21:19.703336",
+              "correlation_id": "7cc17311ab043937f08c87470614a2ac2b9e98624473d9d504042e0a8633b407",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "c813d5cce0a2107d17c2712cf036d91d4f7be9a15e4f6e4e8a975a2a17bee7a8",
+              "object_id": "STATE-CANCEL-WEB-PREPARING",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:15.973809",
+              "correlation_id": "ffe8356db6c4091474ce838d7fc4eae1fba1b03ef6383c7f6a68ab2019f05ccb",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "e71ab9e181370ba3aa5f12868f81ef3d592c26adb61a553e3fcc10419b82e78e",
+              "object_id": "TAX01-W",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:11.716438",
+              "correlation_id": "168237579614919fb5cce99b020f37aa4d564944242a94676191caf99594a67d",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "e902a2eb6b049b3a111e1ff526600272f2b5a7eea45bcbb76afb88d265b7be4a",
+              "object_id": "PO01",
+              "company_id": "CCM-LAB-001",
+              "actor": "buyer@example.invalid",
+              "occurred_at": "2026-10-06T04:21:18.407124",
+              "correlation_id": "e77da663e9f78813664dfde305574c94cdfedb718806aa1e0024810fd098549f",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "ea591a4afeedf3c104dae17777507e9810e79fe6fb4e8fb32b50326c9decdef6",
+              "object_id": "PO04",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:18.949029",
+              "correlation_id": "8675d0eff41933eb59b8cfc36858ecfea6cd46e3c292b19a2fb325e76dfd3902",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "f041cef54e87703a8f41ff9babc72eef06a292c0f0acd5c7d98004401d3315f0",
+              "object_id": "INV-INSUFFICIENT",
+              "company_id": "CCM-LAB-001",
+              "actor": "simulator@example.invalid",
+              "occurred_at": "2026-10-06T04:21:16.288010",
+              "correlation_id": "e98721196d0b0296faf4ee12c3387207a7d987c5831e57ec16c7732a9382073c",
+              "type": "cashea.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "f3016fb45d4dda61ac6f736bdae80cd9466a185c6388bfb014ac804891296cd5",
+              "object_id": "PO03",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:18.764038",
+              "correlation_id": "d35f21237db7d4e3a1581338e62b385f14f815893181608ab5283b619aa370ac",
+              "type": "purchase.approved"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "f937a66a4baaed3ba084d92c541e35e69c4cfd859ffe7c9d2573caa2e9c00332",
+              "object_id": "CS000",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:20.846892",
+              "correlation_id": "fcb5ac13eaccccb47b708a64f9d0e2e032b810d3c8d98dee6ac8111b992c97a9",
+              "type": "cash.closing.confirmed"
+            },
+            "deliveries": 2
+          },
+          {
+            "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+            "payload": {
+              "schema_version": 1,
+              "event_id": "f95833e666d097ddcc7219ee0bd7b7433d8f3930b93cdbbb6ae843d769be4480",
+              "object_id": "CS001",
+              "company_id": "CCM-LAB-001",
+              "actor": "manager@example.invalid",
+              "occurred_at": "2026-10-06T04:21:20.890377",
+              "correlation_id": "1253716adb1ccba977de71ee11df8a935ed8959d954a6380879634280e8dd628",
+              "type": "cash.closing.confirmed"
+            },
+            "deliveries": 2
+          }
+        ]
+      },
+      "coverage_revision": 2
+    }
+  ]
+}

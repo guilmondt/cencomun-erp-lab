@@ -1,0 +1,13 @@
+{
+  "scope": "Read-only native DB transport precedence; not a selected test result",
+  "site": "ccm-upstream-frappe-residual.test",
+  "native_db_socket_present": true,
+  "native_connection_uses_unix_socket": true,
+  "native_connection_uses_host": false,
+  "configured_host_loopback": true,
+  "configured_port": 3307,
+  "native_first_failure": "Wrong FRAPPE_DB_HOST did not raise OperationalError at test_db.py:1500",
+  "hypothesis": "Own explicit db_socket has native precedence over host, so that host-negative assertion never selects TCP.",
+  "native_source": "frappe/database/mariadb/database.py:137-142",
+  "credentials_or_access_changed": false
+}

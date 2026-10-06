@@ -1,0 +1,13 @@
+{
+  "phase": "initial snapshot resume before checkpoint rerun",
+  "status": "FAIL",
+  "exception": "HTTPError",
+  "http_status": "not captured; no specific root cause inferred",
+  "resolution": [
+    "Start the managed services using env.sh and services.py",
+    "Use the authorized runner to back up and restore only the marked fictional Core site and reseed its credentials/fixtures",
+    "Repeat the authenticated read-only readiness probe after the runner finishes"
+  ],
+  "final_status": "PASS",
+  "verification": "scripts/core-test/readiness.py"
+}

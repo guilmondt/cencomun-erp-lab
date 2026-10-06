@@ -1,0 +1,50 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-fixture-order.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.manufacturing.doctype.work_order.test_work_order",
+  "category": "all",
+  "attempt": 1,
+  "status": "PASS",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_operations_time_planning_calculation"
+  ],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-order.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_work_order-selected-attempt-1.xml --module erpnext.manufacturing.doctype.work_order.test_work_order --test test_operations_time_planning_calculation",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-fixture-order.test serve --port 8005 --noreload",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-06T05:41:38.989499+00:00",
+  "elapsed_seconds": 15.734,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "8e5f7ed9d29ad65ab350c8888572a688acc16c9afa90336d3fd2ebac68150e8a",
+  "actual_tests_run": 1,
+  "runner_counts_by_category": [
+    1
+  ],
+  "discovered_categories": [
+    {
+      "tests": 1,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 1,
+  "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.manufacturing.doctype.work_order.test_work_order.TestWorkOrder.test_operations_time_planning_calculation",
+      "seconds": 1.944,
+      "status": "PASS"
+    }
+  ],
+  "xml_documents": 1
+}

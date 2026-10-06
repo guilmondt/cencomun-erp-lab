@@ -1,0 +1,414 @@
+{
+  "site": "ccm-core-recovery.test",
+  "profile": "LAB-ONLY-v1",
+  "cases": [
+    {
+      "case": "PO01-09-NATIVE",
+      "criteria": [
+        1,
+        3,
+        7
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": [
+        {
+          "id": "PO01",
+          "state": "Approved",
+          "approval_amount": "199.99",
+          "native_order": "PUR-ORD-2026-00001",
+          "replay": false
+        },
+        {
+          "id": "PO02",
+          "state": "Approved",
+          "approval_amount": "200.00",
+          "native_order": "PUR-ORD-2026-00002",
+          "replay": false
+        },
+        {
+          "id": "PO03",
+          "state": "Approved",
+          "approval_amount": "200.01",
+          "native_order": "PUR-ORD-2026-00003",
+          "replay": false
+        },
+        {
+          "id": "PO04",
+          "state": "Approved",
+          "approval_amount": "999.99",
+          "native_order": "PUR-ORD-2026-00004",
+          "replay": false
+        },
+        {
+          "id": "PO05",
+          "state": "Approved",
+          "approval_amount": "1000.00",
+          "native_order": "PUR-ORD-2026-00005",
+          "replay": false
+        },
+        {
+          "id": "PO06",
+          "state": "Approved",
+          "approval_amount": "1000.01",
+          "native_order": "PUR-ORD-2026-00006",
+          "replay": false
+        },
+        {
+          "id": "PO07",
+          "state": "Approved",
+          "approval_amount": "200.00",
+          "native_order": "PUR-ORD-2026-00007",
+          "replay": false
+        },
+        {
+          "id": "PO08",
+          "state": "Approved",
+          "approval_amount": "200.00",
+          "native_order": "PUR-ORD-2026-00008",
+          "replay": false
+        },
+        {
+          "id": "PO09",
+          "state": "Approved",
+          "approval_amount": "200.01",
+          "native_order": "PUR-ORD-2026-00009",
+          "replay": false
+        }
+      ],
+      "seconds": 1.9777
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "criteria": [
+        3,
+        7
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": {
+        "id": "PO02",
+        "state": "Approved",
+        "approval_amount": "200.01",
+        "native_order": "PUR-ORD-2026-00002-1",
+        "replay": false
+      },
+      "seconds": 0.3891
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "criteria": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": [
+        {
+          "id": "CS000",
+          "state": "CONFIRMED",
+          "channels": [
+            {
+              "channel": "USD",
+              "currency": "USD",
+              "expected": "100.00",
+              "observed": "100.00",
+              "difference": "0.00",
+              "vouchers": [
+                "ACC-JV-2026-00001",
+                "ACC-JV-2026-00002",
+                "ACC-JV-2026-00003",
+                "ACC-JV-2026-00004"
+              ]
+            },
+            {
+              "channel": "VES",
+              "currency": "VES",
+              "expected": "4000.00",
+              "observed": "4000.00",
+              "difference": "0.00",
+              "vouchers": [
+                "ACC-JV-2026-00005",
+                "ACC-JV-2026-00006"
+              ]
+            },
+            {
+              "channel": "POS",
+              "currency": "USD",
+              "expected": "50.00",
+              "observed": "50.00",
+              "difference": "0.00",
+              "vouchers": [
+                "ACC-JV-2026-00007"
+              ]
+            },
+            {
+              "channel": "TRANSFER",
+              "currency": "USD",
+              "expected": "30.00",
+              "observed": "30.00",
+              "difference": "0.00",
+              "vouchers": [
+                "ACC-JV-2026-00008"
+              ]
+            }
+          ],
+          "cashea_pending": "125.00",
+          "cashea_received": "0.00",
+          "replay": false,
+          "confirmed_by": "manager@example.invalid",
+          "confirmed_at": "2026-10-06 10:01:32.625354",
+          "immutable": true,
+          "native_sources": [
+            {
+              "channel": "USD",
+              "account": "Cash - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00001",
+                "ACC-JV-2026-00002",
+                "ACC-JV-2026-00003",
+                "ACC-JV-2026-00004"
+              ]
+            },
+            {
+              "channel": "VES",
+              "account": "CCM VES Cash - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00005",
+                "ACC-JV-2026-00006"
+              ]
+            },
+            {
+              "channel": "POS",
+              "account": "CCM POS Captured - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00007"
+              ]
+            },
+            {
+              "channel": "TRANSFER",
+              "account": "CCM Transfers - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00008"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CS001",
+          "state": "CONFIRMED",
+          "channels": [
+            {
+              "channel": "USD",
+              "currency": "USD",
+              "expected": "100.00",
+              "observed": "98.00",
+              "difference": "-2.00",
+              "vouchers": [
+                "ACC-JV-2026-00001",
+                "ACC-JV-2026-00002",
+                "ACC-JV-2026-00003",
+                "ACC-JV-2026-00004"
+              ]
+            },
+            {
+              "channel": "VES",
+              "currency": "VES",
+              "expected": "4000.00",
+              "observed": "4010.00",
+              "difference": "10.00",
+              "vouchers": [
+                "ACC-JV-2026-00005",
+                "ACC-JV-2026-00006"
+              ]
+            },
+            {
+              "channel": "POS",
+              "currency": "USD",
+              "expected": "50.00",
+              "observed": "50.00",
+              "difference": "0.00",
+              "vouchers": [
+                "ACC-JV-2026-00007"
+              ]
+            },
+            {
+              "channel": "TRANSFER",
+              "currency": "USD",
+              "expected": "30.00",
+              "observed": "30.00",
+              "difference": "0.00",
+              "vouchers": [
+                "ACC-JV-2026-00008"
+              ]
+            }
+          ],
+          "cashea_pending": "125.00",
+          "cashea_received": "0.00",
+          "replay": false,
+          "confirmed_by": "manager@example.invalid",
+          "confirmed_at": "2026-10-06 10:01:32.660376",
+          "immutable": true,
+          "native_sources": [
+            {
+              "channel": "USD",
+              "account": "Cash - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00001",
+                "ACC-JV-2026-00002",
+                "ACC-JV-2026-00003",
+                "ACC-JV-2026-00004"
+              ]
+            },
+            {
+              "channel": "VES",
+              "account": "CCM VES Cash - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00005",
+                "ACC-JV-2026-00006"
+              ]
+            },
+            {
+              "channel": "POS",
+              "account": "CCM POS Captured - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00007"
+              ]
+            },
+            {
+              "channel": "TRANSFER",
+              "account": "CCM Transfers - CLAB",
+              "vouchers": [
+                "ACC-JV-2026-00008"
+              ]
+            }
+          ]
+        }
+      ],
+      "seconds": 0.4592
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "criteria": [
+        1,
+        11
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": [
+        {
+          "functional": "BK001",
+          "native": "ACC-PAY-2026-00013"
+        },
+        {
+          "functional": "BK002",
+          "native": "ACC-PAY-2026-00014"
+        },
+        {
+          "functional": "BK003",
+          "native": "ACC-PAY-2026-00015"
+        },
+        {
+          "functional": "BK004",
+          "native": "ACC-PAY-2026-00016"
+        }
+      ],
+      "seconds": 0.1109
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "criteria": [
+        1,
+        3,
+        8
+      ],
+      "status": "PASS",
+      "coverage_revision": 2,
+      "actual": {
+        "first_import": {
+          "rows": 5,
+          "created": 4,
+          "duplicates": 1,
+          "results": [
+            {
+              "classification": "EXACT",
+              "key": "00560f6531bd9c422730be4b6482c6a645beb97088cbe4ad980dc20b150b88dc",
+              "native_transaction": "ACC-BTN-2026-00001",
+              "reconciled": true,
+              "candidates": [
+                "ACC-PAY-2026-00013"
+              ]
+            },
+            {
+              "classification": "PROBABLE",
+              "key": "f7073f81491a27a30d522ae5ebc1753790e6d93328b2b9886d0b00c01eadf47b",
+              "native_transaction": "ACC-BTN-2026-00002",
+              "reconciled": false,
+              "candidates": [
+                "ACC-PAY-2026-00014"
+              ]
+            },
+            {
+              "classification": "AMBIGUOUS",
+              "key": "95cb27b9cbba074165a6f072859693a7e29d228bf1308de649ae1354c769cee6",
+              "native_transaction": "ACC-BTN-2026-00003",
+              "reconciled": false,
+              "candidates": [
+                "ACC-PAY-2026-00016",
+                "ACC-PAY-2026-00015"
+              ]
+            },
+            {
+              "classification": "DUPLICATE",
+              "key": "00560f6531bd9c422730be4b6482c6a645beb97088cbe4ad980dc20b150b88dc"
+            },
+            {
+              "classification": "UNMATCHED",
+              "key": "134ba875e84b25782fd944365f839b266f9d872d98acfa27676c8a7290cf6396",
+              "native_transaction": "ACC-BTN-2026-00004",
+              "reconciled": false,
+              "candidates": []
+            }
+          ],
+          "replay": false
+        },
+        "alternate_import": {
+          "rows": 5,
+          "created": 0,
+          "duplicates": 5,
+          "results": [
+            {
+              "classification": "DUPLICATE",
+              "key": "00560f6531bd9c422730be4b6482c6a645beb97088cbe4ad980dc20b150b88dc"
+            },
+            {
+              "classification": "DUPLICATE",
+              "key": "f7073f81491a27a30d522ae5ebc1753790e6d93328b2b9886d0b00c01eadf47b"
+            },
+            {
+              "classification": "DUPLICATE",
+              "key": "95cb27b9cbba074165a6f072859693a7e29d228bf1308de649ae1354c769cee6"
+            },
+            {
+              "classification": "DUPLICATE",
+              "key": "00560f6531bd9c422730be4b6482c6a645beb97088cbe4ad980dc20b150b88dc"
+            },
+            {
+              "classification": "DUPLICATE",
+              "key": "134ba875e84b25782fd944365f839b266f9d872d98acfa27676c8a7290cf6396"
+            }
+          ],
+          "replay": false
+        },
+        "reconciled": 3,
+        "negative_native": {
+          "deposit": "0.00",
+          "withdrawal": "10.00"
+        }
+      },
+      "seconds": 0.1647
+    }
+  ]
+}

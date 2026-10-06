@@ -1,0 +1,105 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "frappe",
+  "site": "ccm-upstream-frappe-residual.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "frappe.tests.test_db",
+  "category": "all",
+  "attempt": 2,
+  "status": "BLOCKED",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_connect_fails_with_wrong_credentials_by_env"
+  ],
+  "offline": true,
+  "observe": true,
+  "auth_diagnostics": true,
+  "native_frame_profiling": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-residual.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-test_db-selected-attempt-2.xml --module frappe.tests.test_db --test test_connect_fails_with_wrong_credentials_by_env",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-frappe-residual.test serve --port 8002 --noreload",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T10:06:13.914435+00:00",
+  "elapsed_seconds": 30.66,
+  "upstream_sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+  "log_sha256": "5a6b73b188989b315bccb8ff40a35816dc1da682e38e9a413a150b979860b237",
+  "actual_tests_run": 0,
+  "runner_counts_by_category": [],
+  "discovered_categories": [],
+  "junit_records": 0,
+  "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [],
+  "xml_documents": 0,
+  "web_telemetry": {
+    "samples": [
+      {
+        "epoch": 1791281143.264929,
+        "stage": "before_readiness",
+        "web_processes": [
+          {
+            "pid": 1908,
+            "state": "R",
+            "ppid": 1901,
+            "start_ticks": "122585",
+            "owned_listener_inodes": []
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [],
+        "web_log_bytes": 0,
+        "web_log_mtime_epoch": 1791281143.254181
+      },
+      {
+        "epoch": 1791281173.8974495,
+        "stage": "before_harness_cleanup",
+        "web_processes": [
+          {
+            "pid": 1908,
+            "state": "S",
+            "ppid": 1901,
+            "start_ticks": "122585",
+            "owned_listener_inodes": [
+              "8030"
+            ]
+          }
+        ],
+        "web_exit_code": null,
+        "listeners": [
+          {
+            "address_hex": "00000000",
+            "port": 8002,
+            "inode": "8030"
+          }
+        ],
+        "web_log_bytes": 513240,
+        "web_log_mtime_epoch": 1791281173.4211
+      },
+      {
+        "epoch": 1791281173.9140096,
+        "stage": "after_harness_cleanup",
+        "web_processes": [
+          {
+            "pid": 1908,
+            "state": "GONE",
+            "start_ticks": null,
+            "ownership_unreadable": true
+          }
+        ],
+        "web_exit_code": -15,
+        "listeners": [],
+        "web_log_bytes": 513240,
+        "web_log_mtime_epoch": 1791281173.4211
+      }
+    ],
+    "web_log_sha256": "520d87b20369e8c5074d18519784a7b12ef12f2cc40c8af08bd5cfc48bc7d1d1",
+    "web_log_bytes": 513240,
+    "web_log_output_retained_privately": true,
+    "automatic_restarts_during_test": 0
+  },
+  "startup_error": "RuntimeError: Official site HTTP readiness timeout."
+}

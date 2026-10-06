@@ -1,0 +1,122 @@
+{
+  "doctype": "DocType",
+  "name": "CCM Bank Match",
+  "module": "Cencomun ERP",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "hash",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_id",
+      "fieldtype": "Data",
+      "label": "External Id",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "transaction_key",
+      "fieldtype": "Data",
+      "label": "Transaction Key",
+      "unique": 1,
+      "reqd": 1
+    },
+    {
+      "fieldname": "bank_transaction",
+      "fieldtype": "Link",
+      "label": "Bank Transaction",
+      "options": "Bank Transaction"
+    },
+    {
+      "fieldname": "classification",
+      "fieldtype": "Select",
+      "label": "Classification",
+      "options": "EXACT\nPROBABLE\nAMBIGUOUS\nUNMATCHED"
+    },
+    {
+      "fieldname": "candidates",
+      "fieldtype": "Long Text",
+      "label": "Candidates"
+    },
+    {
+      "fieldname": "matched_payment",
+      "fieldtype": "Link",
+      "label": "Matched Payment",
+      "options": "Payment Entry"
+    },
+    {
+      "fieldname": "reconciled",
+      "fieldtype": "Check",
+      "label": "Reconciled",
+      "default": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "CCM Reader",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Operator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Buyer",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Director",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM Simulator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "CCM MCP",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "engine": "InnoDB",
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

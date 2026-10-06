@@ -1,0 +1,4 @@
+# Preserve fixture/evidence bytes: CSV writers use valid CRLF record endings.
+# SHA256 manifests and raw-file idempotency must survive checkout unchanged.
+fixtures/ccm-core-v1/*.csv -text whitespace=cr-at-eol
+reports/evidence/frappe-core/**/*.csv -text whitespace=cr-at-eol

@@ -1,0 +1,472 @@
+{
+  "native_result": "erpnext-test_exchange_rate_revaluation-selected-attempt-1.json",
+  "native_case_status": "ERROR",
+  "classification": "DEMONSTRATED_NATIVE_JOURNAL_FALLBACK_IMBALANCE_UNDER_OFFLINE",
+  "preceding_modules_executed_in_this_process": [],
+  "native_preparation_state": {
+    "kind": "native_state",
+    "pid": 31858,
+    "epoch": 1791275048.7335262,
+    "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+    "stage": "before_test",
+    "site": "ccm-upstream-erpnext-cause.test",
+    "user": "Administrator",
+    "module_payments": "payments",
+    "installed_apps": [
+      "frappe",
+      "payments",
+      "erpnext"
+    ],
+    "apps_on_bench": [
+      "frappe",
+      "erpnext",
+      "payments"
+    ],
+    "cached_app_modules": null,
+    "request_is_none": true,
+    "url_config": {
+      "host_name": "http://127.0.0.1:8005",
+      "hostname": null,
+      "http_port": null,
+      "webserver_port": 8000,
+      "developer_mode": null,
+      "restart_supervisor_on_update": false,
+      "restart_systemd_on_update": false
+    },
+    "fx_settings": {
+      "disabled": 0,
+      "service_provider": "frankfurter.dev - v2",
+      "api_endpoint": "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}",
+      "use_http": 0
+    },
+    "fx_accounts": {
+      "allow_stale": 1,
+      "stale_days": 1,
+      "allow_pegged_currencies_exchange_rates": 0
+    },
+    "fx_rows": [
+      {
+        "date": "2016-01-30",
+        "from_currency": "USD",
+        "to_currency": "INR",
+        "exchange_rate": 62.9,
+        "for_buying": 1,
+        "for_selling": 1
+      },
+      {
+        "date": "2016-01-10",
+        "from_currency": "USD",
+        "to_currency": "INR",
+        "exchange_rate": 65.1,
+        "for_buying": 1,
+        "for_selling": 0
+      },
+      {
+        "date": "2016-01-10",
+        "from_currency": "INR",
+        "to_currency": "NGN",
+        "exchange_rate": 65.1,
+        "for_buying": 1,
+        "for_selling": 1
+      },
+      {
+        "date": "2016-01-01",
+        "from_currency": "USD",
+        "to_currency": "INR",
+        "exchange_rate": 60.0,
+        "for_buying": 1,
+        "for_selling": 0
+      },
+      {
+        "date": "2016-01-01",
+        "from_currency": "USD",
+        "to_currency": "EUR",
+        "exchange_rate": 0.773,
+        "for_buying": 0,
+        "for_selling": 1
+      },
+      {
+        "date": "2016-01-01",
+        "from_currency": "INR",
+        "to_currency": "USD",
+        "exchange_rate": 0.0167,
+        "for_buying": 1,
+        "for_selling": 0
+      }
+    ]
+  },
+  "journal_before_native_save_validation": {
+    "kind": "journal_state",
+    "pid": 31858,
+    "epoch": 1791275053.153824,
+    "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+    "stage": "set_exchange_rate_call",
+    "name": "ACC-JV-2026-00001",
+    "docstatus": 0,
+    "voucher_type": "Exchange Rate Revaluation",
+    "company": "_Test Company",
+    "company_currency": null,
+    "posting_date": "2026-10-06",
+    "multi_currency": 1,
+    "total_debit": 8000.0,
+    "total_credit": 8000.0,
+    "difference": 0.0,
+    "reversal_of": null,
+    "accounts": [
+      {
+        "idx": 1,
+        "account": "_Test Receivable USD - _TC",
+        "account_currency": "USD",
+        "exchange_rate": 0.0,
+        "debit": 0.0,
+        "credit": 0.0,
+        "debit_in_account_currency": 100.0,
+        "credit_in_account_currency": 0.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      },
+      {
+        "idx": 2,
+        "account": "_Test Receivable USD - _TC",
+        "account_currency": "USD",
+        "exchange_rate": 80.0,
+        "debit": 0.0,
+        "credit": 8000.0,
+        "debit_in_account_currency": 0.0,
+        "credit_in_account_currency": 100.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      },
+      {
+        "idx": 3,
+        "account": "Exchange Gain/Loss - _TC",
+        "account_currency": "INR",
+        "exchange_rate": 1,
+        "debit": 8000.0,
+        "credit": 0.0,
+        "debit_in_account_currency": 8000.0,
+        "credit_in_account_currency": 0.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      }
+    ]
+  },
+  "journal_after_native_rate_resolution": {
+    "kind": "journal_state",
+    "pid": 31858,
+    "epoch": 1791275053.1756864,
+    "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+    "stage": "set_exchange_rate_return",
+    "name": "ACC-JV-2026-00001",
+    "docstatus": 0,
+    "voucher_type": "Exchange Rate Revaluation",
+    "company": "_Test Company",
+    "company_currency": null,
+    "posting_date": "2026-10-06",
+    "multi_currency": 1,
+    "total_debit": 8000.0,
+    "total_credit": 8000.0,
+    "difference": 0.0,
+    "reversal_of": null,
+    "accounts": [
+      {
+        "idx": 1,
+        "account": "_Test Receivable USD - _TC",
+        "account_currency": "USD",
+        "exchange_rate": 1,
+        "debit": 0.0,
+        "credit": 0.0,
+        "debit_in_account_currency": 100.0,
+        "credit_in_account_currency": 0.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      },
+      {
+        "idx": 2,
+        "account": "_Test Receivable USD - _TC",
+        "account_currency": "USD",
+        "exchange_rate": 80.0,
+        "debit": 0.0,
+        "credit": 8000.0,
+        "debit_in_account_currency": 0.0,
+        "credit_in_account_currency": 100.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      },
+      {
+        "idx": 3,
+        "account": "Exchange Gain/Loss - _TC",
+        "account_currency": "INR",
+        "exchange_rate": 1,
+        "debit": 8000.0,
+        "credit": 0.0,
+        "debit_in_account_currency": 8000.0,
+        "credit_in_account_currency": 0.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      }
+    ]
+  },
+  "journal_before_native_submit_validation": {
+    "kind": "journal_state",
+    "pid": 31858,
+    "epoch": 1791275053.2642736,
+    "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+    "stage": "before_submit_call",
+    "name": "ACC-JV-2026-00001",
+    "docstatus": 1,
+    "voucher_type": "Exchange Rate Revaluation",
+    "company": "_Test Company",
+    "company_currency": null,
+    "posting_date": "2026-10-06",
+    "multi_currency": 1,
+    "total_debit": 8100.0,
+    "total_credit": 8000.0,
+    "difference": 100.0,
+    "reversal_of": null,
+    "accounts": [
+      {
+        "idx": 1,
+        "account": "_Test Receivable USD - _TC",
+        "account_currency": "USD",
+        "exchange_rate": 1,
+        "debit": 100.0,
+        "credit": 0.0,
+        "debit_in_account_currency": 100.0,
+        "credit_in_account_currency": 0.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      },
+      {
+        "idx": 2,
+        "account": "_Test Receivable USD - _TC",
+        "account_currency": "USD",
+        "exchange_rate": 80.0,
+        "debit": 0.0,
+        "credit": 8000.0,
+        "debit_in_account_currency": 0.0,
+        "credit_in_account_currency": 100.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      },
+      {
+        "idx": 3,
+        "account": "Exchange Gain/Loss - _TC",
+        "account_currency": "INR",
+        "exchange_rate": 1,
+        "debit": 8000.0,
+        "credit": 0.0,
+        "debit_in_account_currency": 8000.0,
+        "credit_in_account_currency": 0.0,
+        "reference_type": "Exchange Rate Revaluation",
+        "reference_name": "ACC-ERR-2026-00001"
+      }
+    ]
+  },
+  "native_fx_returns_with_filters": [
+    {
+      "kind": "fx_return",
+      "pid": 31858,
+      "epoch": 1791275053.0438507,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [],
+      "filters": [
+        [
+          "date",
+          "<=",
+          "2026-10-06 00:00:00.000000"
+        ],
+        [
+          "from_currency",
+          "=",
+          "USD"
+        ],
+        [
+          "to_currency",
+          "=",
+          "INR"
+        ],
+        [
+          "date",
+          ">",
+          "2026-10-05 00:00:00.000000"
+        ]
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 31858,
+      "epoch": 1791275053.1755583,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [],
+      "filters": [
+        [
+          "date",
+          "<=",
+          "2026-10-06 00:00:00.000000"
+        ],
+        [
+          "from_currency",
+          "=",
+          "USD"
+        ],
+        [
+          "to_currency",
+          "=",
+          "INR"
+        ],
+        [
+          "date",
+          ">",
+          "2026-10-05 00:00:00.000000"
+        ]
+      ]
+    },
+    {
+      "kind": "fx_return",
+      "pid": 31858,
+      "epoch": 1791275053.2569492,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 0.0,
+      "from_currency": "USD",
+      "to_currency": "INR",
+      "transaction_date": "2026-10-06",
+      "args": null,
+      "entries": [],
+      "filters": [
+        [
+          "date",
+          "<=",
+          "2026-10-06 00:00:00.000000"
+        ],
+        [
+          "from_currency",
+          "=",
+          "USD"
+        ],
+        [
+          "to_currency",
+          "=",
+          "INR"
+        ],
+        [
+          "date",
+          ">",
+          "2026-10-05 00:00:00.000000"
+        ]
+      ]
+    }
+  ],
+  "journal_fx_returns": [
+    {
+      "kind": "journal_fx_return",
+      "pid": 31858,
+      "epoch": 1791275053.1755984,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 1,
+      "posting_date": "2026-10-06",
+      "account": "_Test Receivable USD - _TC",
+      "account_currency": "USD",
+      "company": "_Test Company",
+      "reference_type": "Exchange Rate Revaluation",
+      "reference_name": "ACC-ERR-2026-00001",
+      "debit": 0.0,
+      "credit": 0.0,
+      "exchange_rate": 0.0
+    },
+    {
+      "kind": "journal_fx_return",
+      "pid": 31858,
+      "epoch": 1791275053.256996,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "result": 1,
+      "posting_date": "2026-10-06",
+      "account": "_Test Receivable USD - _TC",
+      "account_currency": "USD",
+      "company": "_Test Company",
+      "reference_type": "Exchange Rate Revaluation",
+      "reference_name": "ACC-ERR-2026-00001",
+      "debit": 100.0,
+      "credit": 0.0,
+      "exchange_rate": 0.0
+    }
+  ],
+  "native_error_logs": [
+    {
+      "kind": "native_fx_error_log",
+      "pid": 31858,
+      "epoch": 1791275053.0435398,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "name": "oe2edt61s2",
+      "creation": "2026-10-06 13:54:13.027390",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "ad7826e8894c7f02fed0ea2df50bd9ab7ecd8e600c57391cc0d4e9221a60cf9b",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 174, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 31858,
+      "epoch": 1791275053.1752837,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "name": "oe3j5rgldc",
+      "creation": "2026-10-06 13:54:13.168474",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "ad7826e8894c7f02fed0ea2df50bd9ab7ecd8e600c57391cc0d4e9221a60cf9b",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 174, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    },
+    {
+      "kind": "native_fx_error_log",
+      "pid": 31858,
+      "epoch": 1791275053.2566009,
+      "test": "erpnext.accounts.doctype.exchange_rate_revaluation.test_exchange_rate_revaluation.TestExchangeRateRevaluation.test_05_revaluation_journal_reversal",
+      "name": "oe4r4u35ru",
+      "creation": "2026-10-06 13:54:13.246905",
+      "method": "Unable to fetch exchange rate",
+      "raw_sha256": "7603af4fa1c29c70e10b90445d38fdb63aabfcf5dac3472208ba496092a33343",
+      "frames": [
+        "  File \"apps/erpnext/erpnext/setup/utils.py\", line 129, in get_exchange_rate",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 87, in get",
+        "  File \"env/lib/python3.14/site-packages/requests/api.py\", line 71, in request",
+        "  File \"env/lib/python3.14/site-packages/requests/sessions.py\", line 651, in request",
+        "  File \"/workspace/cencomun-erp-lab/scripts/official-tests/observer/sitecustomize.py\", line 174, in send"
+      ],
+      "terminal_exception": "requests.exceptions.ConnectionError: Official offline reproduction: external HTTP prohibited"
+    }
+  ],
+  "arithmetic": {
+    "debit": "8100.0",
+    "credit": "8000.0",
+    "difference": "100.0",
+    "increment": "100 USD in account currency * (native fallback 1 - initial 0) = 100 INR",
+    "initial_balancing_loss_row_unchanged": "8000 INR debit"
+  },
+  "cause": "Official test disables stale rates. Six 2016 records remain intact but no record satisfies posting-date window. Native provider request is rejected offline; Journal Entry resolver returns exchange_rate or 1, changing the USD debit row from 0 to 100 INR after the loss row was computed. Native submit correctly rejects 8100/8000.",
+  "limit": "No eligible native rate within the test date window with these exact fixtures and offline mode. Passing requires an out-of-scope fixture/date policy, upstream behavior/pin change or provider access. None was attempted; no preparation defect demonstrated.",
+  "rates_fabricated": 0,
+  "assertions_or_validators_changed": false,
+  "native_case_repeated_after_cause_demonstrated": false
+}

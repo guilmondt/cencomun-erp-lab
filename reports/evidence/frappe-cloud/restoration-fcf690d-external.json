@@ -1,0 +1,205 @@
+{
+  "resultado": "PASS",
+  "alcance": "Restauración cloud y lectura autenticada; sin suites oficiales ni Core Test completo.",
+  "repositorio": {
+    "nombre": "guilmondt/cencomun-erp-lab",
+    "rama_observada": "lab/frappe-baseline",
+    "commit": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+    "checkout_limpio_inicial": true,
+    "checkout_limpio_revalidado": true,
+    "git_status_porcelain": {
+      "exit_code": 0,
+      "stdout": ""
+    }
+  },
+  "instancia": {
+    "environment_id": "ccarenv_b64_Y2NhcmVudl8wMjg3YjE1MzY2Nzg4MTkxYjYxOWRiYjYzNWIyYzk3MA",
+    "hostname": "b69de0b409b4",
+    "boot_id": "36bec36b-46f7-48a3-9c7c-0ea89772514d",
+    "identidad_sin_cambios_en_revalidacion": true,
+    "primera_observacion_utc": "2026-10-06T02:31:11Z",
+    "uptime_inicial_mostrado": "0 min",
+    "evidencia_restaurada": "Archivos site_config.json de los tres sitios con fechas del 4 y 5 de octubre; runtime existente y servicios principales inicialmente detenidos.",
+    "sitios_creados_durante_esta_tarea": 0,
+    "instalacion_o_restauracion_manual_ejecutada": false,
+    "limite_identidad": "No se dispone del hostname o boot_id del ejecutor original para una comparación directa."
+  },
+  "momentos": {
+    "preflight_inicial_utc": "2026-10-06T02:31:20Z",
+    "comparacion_autenticada_inicial_utc": "2026-10-06T02:32:19.146849+00:00",
+    "revalidacion_inicio_utc": "2026-10-06T02:43:59.477937+00:00",
+    "revalidacion_fin_utc": "2026-10-06T02:44:03.505743+00:00",
+    "uptime_revalidacion_segundos": 800.8
+  },
+  "servicios": {
+    "iniciales": {
+      "mariadb": "stopped",
+      "redis_cache": "stopped",
+      "redis_queue": "stopped",
+      "web": "stopped",
+      "socketio": "stopped",
+      "worker": "stopped",
+      "nginx": "stopped",
+      "adapter": "Estado previo no registrado; start informó started.",
+      "consumer": "Estado previo no registrado; start informó started."
+    },
+    "arranque_observado": "Los supervisores informaron started para los nueve servicios.",
+    "actuales": {
+      "mariadb": "running",
+      "redis_cache": "running",
+      "redis_queue": "running",
+      "web": "running",
+      "socketio": "running",
+      "worker": "running",
+      "nginx": "running",
+      "adapter": "running",
+      "consumer": "running"
+    },
+    "metodo_revalidacion": "PID existente, proceso no zombie y start tick coincidente con el registro privado del supervisor.",
+    "limite": "La existencia de procesos no equivale por sí sola a salud funcional; HTTP y readiness se verificaron aparte."
+  },
+  "aplicaciones": {
+    "sitios_revalidados": [
+      "ccm-frappe.test",
+      "ccm-core.test",
+      "ccm-core-recovery.test"
+    ],
+    "versiones_instaladas_en_cada_sitio": {
+      "frappe": "16.36.1",
+      "erpnext": "16.36.1",
+      "cencomun_erp": "0.0.1"
+    },
+    "list_apps_exit_code_por_sitio": 0,
+    "upstream": {
+      "frappe": {
+        "commit": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
+        "limpio": true,
+        "git_status_exit_code": 0,
+        "git_status_stdout": ""
+      },
+      "erpnext": {
+        "commit": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+        "limpio": true,
+        "git_status_exit_code": 0,
+        "git_status_stdout": ""
+      }
+    }
+  },
+  "runtime_observado_en_verificacion_inicial": {
+    "python": "3.14.0",
+    "node": "24.19.0",
+    "bench": "5.29.0",
+    "yarn": "1.22.22",
+    "mariadb": "11.8.6",
+    "redis": "8.0.2",
+    "nginx": "1.26.3"
+  },
+  "peticiones_revalidadas": {
+    "autenticacion": "Token del actor reader restaurado, cargado en memoria desde el archivo privado existente. Valores omitidos.",
+    "solicitudes": [
+      {
+        "method": "GET",
+        "base": "http://127.0.0.1:8090",
+        "path": "/products/search?company_id=CCM-LAB-001&q=P001",
+        "http_status": 200
+      },
+      {
+        "method": "GET",
+        "base": "http://127.0.0.1:8000",
+        "host": "ccm-core.test",
+        "path": "/api/resource/Item/P001",
+        "http_status": 200
+      },
+      {
+        "method": "GET",
+        "base": "http://127.0.0.1:8090",
+        "path": "/inventory/P001?company_id=CCM-LAB-001&warehouse=WH-LAB-001-HTTP+-+CLAB",
+        "http_status": 200
+      },
+      {
+        "method": "GET",
+        "base": "http://127.0.0.1:8000",
+        "host": "ccm-core.test",
+        "path": "/api/resource/Bin?filters=%7B%22item_code%22%3A+%22P001%22%2C+%22warehouse%22%3A+%22WH-LAB-001-HTTP+-+CLAB%22%7D&fields=%5B%22actual_qty%22%5D",
+        "http_status": 200
+      }
+    ]
+  },
+  "comparacion": {
+    "sitio": "ccm-core.test",
+    "producto_adaptador": "P001",
+    "item_nativo": "P001",
+    "item_ccm_id": "P001",
+    "precio_adaptador": "50.00",
+    "item_cashea_price": 50.0,
+    "almacen": "WH-LAB-001-HTTP - CLAB",
+    "stock_adaptador_on_hand": "5",
+    "bin_actual_qty": 5.0,
+    "coincidencia_numerica": true,
+    "mismos_valores_en_verificacion_inicial": true
+  },
+  "readiness": {
+    "script": "scripts/core-test/readiness.py",
+    "exit_code_revalidado": 0,
+    "stdout": "PASS Core readiness: LAB flag active, metrics off, authenticated product/price/stock match native records.",
+    "verifica": [
+      "ccm_lab_enabled = 1",
+      "ccm_measure_queries = 0",
+      "Producto y precio esperados",
+      "Identificador y precio coincidentes con Item nativo",
+      "Stock coincidente con Bin nativo"
+    ]
+  },
+  "incidencias_iniciales": {
+    "intentos_fallidos_readiness": 2,
+    "stdout": "FAIL Core readiness: HTTPError — follow scripts/core-test/README.md startup diagnosis.",
+    "exit_code_del_script_en_rama_de_fallo": 1,
+    "exit_code_shell_primer_intento": 1,
+    "exit_code_shell_segundo_intento": 0,
+    "nota_segundo_exit_code": "El shell continuó con services.py status; su salida cero no corresponde al readiness fallido.",
+    "codigos_http_iniciales": null,
+    "causa": null,
+    "explicacion": "Los códigos HTTP iniciales y su causa no se registraron. No se atribuyen a autenticación, sitio ausente ni una causa concreta.",
+    "resolucion_observada": "Una ejecución posterior pasó sin reiniciar servicios, regenerar credenciales ni modificar configuración."
+  },
+  "comandos_reproducibles_sin_secretos": {
+    "preparacion_shell": [
+      "cd /workspace/cencomun-erp-lab",
+      "source scripts/frappe-integral/env.sh",
+      "export PATH=\"$CCM_FRAPPE_ROOT/core-tools/usr/bin:$PATH\""
+    ],
+    "lectura_y_verificacion": [
+      "date -u",
+      "hostname",
+      "cat /proc/sys/kernel/random/boot_id",
+      "cat /proc/uptime",
+      "git rev-parse HEAD",
+      "git status --porcelain",
+      "python -B scripts/frappe-integral/services.py status",
+      "\"$CCM_FRAPPE_ROOT/bench/env/bin/python\" -B scripts/core-test/readiness.py",
+      "(cd \"$CCM_FRAPPE_ROOT/bench\" && bench --site ccm-core.test list-apps)",
+      "(cd \"$CCM_FRAPPE_ROOT/bench\" && bench --site ccm-frappe.test list-apps)",
+      "(cd \"$CCM_FRAPPE_ROOT/bench\" && bench --site ccm-core-recovery.test list-apps)",
+      "git -C \"$CCM_FRAPPE_ROOT/bench/apps/frappe\" rev-parse HEAD",
+      "git -C \"$CCM_FRAPPE_ROOT/bench/apps/frappe\" status --porcelain",
+      "git -C \"$CCM_FRAPPE_ROOT/bench/apps/erpnext\" rev-parse HEAD",
+      "git -C \"$CCM_FRAPPE_ROOT/bench/apps/erpnext\" status --porcelain"
+    ],
+    "arranque_ejecutado_solo_en_verificacion_inicial": [
+      "python scripts/frappe-integral/services.py start",
+      "python scripts/core-test/http_services.py start"
+    ]
+  },
+  "limites": [
+    "La revalidación actual fue de lectura; no se arrancaron ni reiniciaron servicios.",
+    "No se ejecutaron suites oficiales, Core Test completo ni descubrimiento de tests.",
+    "No se crearon sitios ni accesos persistentes.",
+    "No se ejecutaron reset, seed, migraciones ni restauraciones de bases de datos.",
+    "No se modificó ni publicó el repositorio; sin commit, push o merge.",
+    "No se cambiaron pins, configuración de red, producción ni Axelor.",
+    "Las lecturas HTTP pueden generar registros operativos normales del framework.",
+    "Los resultados del otro ejecutor no se contabilizan como evidencia de esta instancia.",
+    "Este registro se entrega únicamente en la respuesta; no se creó un artefacto en el repositorio."
+  ],
+  "bloqueos_actuales_para_esta_verificacion": []
+}

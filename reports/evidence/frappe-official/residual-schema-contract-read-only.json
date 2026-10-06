@@ -1,0 +1,32 @@
+{
+  "scope": "Read-only original schema contract; no test rerun or source writes",
+  "doctype": "Automation Trigger Queue",
+  "native_metadata_has_dedup_key": false,
+  "native_table_has_dedup_key": true,
+  "native_table_has_unique_index": [
+    [
+      "tabAutomation Trigger Queue",
+      0,
+      "unique_dedup_key",
+      1,
+      "dedup_key",
+      "A",
+      0,
+      null,
+      null,
+      "YES",
+      "BTREE",
+      "",
+      "",
+      "NO"
+    ]
+  ],
+  "original_first_assertion_query_count": 2,
+  "expected_query_count": 0,
+  "original_first_native_ddl": [
+    "ALTER TABLE `tabAutomation Trigger Queue` DROP INDEX `unique_dedup_key`",
+    "ALTER TABLE `tabAutomation Trigger Queue` ADD UNIQUE INDEX `unique_dedup_key` (`dedup_key`)"
+  ],
+  "secondary_native_exception": "AttributeError: '_io.TextIOWrapper' object has no attribute 'writeln'",
+  "original_first_native_contract": "Schema removes the unique constraint on a generated column absent from metadata; on_doctype_update restores its native index."
+}

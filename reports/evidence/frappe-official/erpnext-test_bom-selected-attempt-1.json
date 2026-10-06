@@ -1,0 +1,54 @@
+{
+  "scope": "selected official methods; not full module or suite",
+  "app": "erpnext",
+  "site": "ccm-upstream-erpnext-diagnostic.test",
+  "bench": "/workspace/.local/frappe-integral/official-bench",
+  "module": "erpnext.manufacturing.doctype.bom.test_bom",
+  "category": "all",
+  "attempt": 1,
+  "status": "FAIL",
+  "ci_parallel": false,
+  "sequence": [],
+  "selected_tests": [
+    "test_update_bom_cost_in_all_boms"
+  ],
+  "offline": true,
+  "observe": true,
+  "command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-test_bom-selected-attempt-1.xml --module erpnext.manufacturing.doctype.bom.test_bom --test test_update_bom_cost_in_all_boms",
+  "web_command": "/workspace/.local/frappe-integral/bench-tools/bin/bench --site ccm-upstream-erpnext-diagnostic.test serve --port 8005 --noreload",
+  "exit_code": 1,
+  "recorded_utc": "2026-10-06T05:20:45.559735+00:00",
+  "elapsed_seconds": 14.82,
+  "upstream_sha": "fb78e58b8c037bcff4f90b7361ad81ff7b1c42ba",
+  "log_sha256": "d14adea7dd422a9e4e616314169e7532e0a168088424106e518b7a4e256e38bd",
+  "actual_tests_run": 1,
+  "runner_counts_by_category": [
+    1
+  ],
+  "discovered_categories": [
+    {
+      "tests": 1,
+      "category": "unspecified-category",
+      "app": "erpnext"
+    }
+  ],
+  "junit_records": 1,
+  "counts": {
+    "PASS": 0,
+    "FAIL": 1,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "cases": [
+    {
+      "id": "erpnext.manufacturing.doctype.bom.test_bom.TestBOM.test_update_bom_cost_in_all_boms",
+      "seconds": 0.606,
+      "status": "FAIL",
+      "exception": "AssertionError",
+      "message": "0.0 != 10.0",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/manufacturing/doctype/bom/test_bom.py\", line 145, in test_update_bom_cost_in_all_boms\n    self.assertEqual(d.base_rate, rm_base_rate + 10)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0.0 != 10.0\n"
+    }
+  ],
+  "xml_documents": 1,
+  "diagnostic_tail": "Starting test run with parameters: site=ccm-upstream-erpnext-diagnostic.test, app=erpnext, module=erpnext.manufacturing.doctype.bom.test_bom, verbose=False, tests=('test_update_bom_cost_in_all_boms',), force=False, profile=False, junit_xml_output=/workspace/.local/frappe-integral/official-tests/erpnext-test_bom-selected-attempt-1.xml, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]\nView detailed logs (using --verbose): /workspace/.local/frappe-integral/official-bench/logs/frappe.testing.log\n\nRunning 1 unspecified-category tests for erpnext\n\nRunning tests...\n----------------------------------------------------------------------\nF\n======================================================================\nFAIL [0.606s]: test_update_bom_cost_in_all_boms (erpnext.manufacturing.doctype.bom.test_bom.TestBOM.test_update_bom_cost_in_all_boms)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/.local/frappe-integral/official-bench/apps/frappe/frappe/tests/classes/context_managers.py\", line 187, in wrapper\n    return func(*args, **kwargs)\n  File \"/workspace/.local/frappe-integral/official-bench/apps/erpnext/erpnext/manufacturing/doctype/bom/test_bom.py\", line 145, in test_update_bom_cost_in_all_boms\n    self.assertEqual(d.base_rate, rm_base_rate + 10)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0.0 != 10.0\n\n----------------------------------------------------------------------\nRan 1 test in 0.606s\n\nFAILED (failures=1)\n\nGenerating XML reports..."
+}
