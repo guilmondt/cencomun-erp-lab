@@ -167,3 +167,19 @@ Contabilización y save preceden la rama opcional PDF en AOS fijado. Dos tests
 nativos de configuración PASS; la evidencia económica exige GL contabilizado,
 pagos y liquidación reales. PDF automático no se prueba ni equivale a validación
 económica. Repetición en CI pendiente.
+
+## ADR-008 — Facturación completa INVOICE_ALL y trazabilidad nativa
+
+2026-10-06. CI37429209635 confirmó stock/COGS/liquidación nativos y cuatro
+pagos FX, pero el overload corto no asignó Invoice.saleOrder. El inspector de
+cabecera omitió facturas/GL/pagos del gate y SEARCH no probó su vínculo.
+Se ejecuta el overload completo del wizard fijado con INVOICE_ALL de la clase
+oficial SaleOrderRepository y su guard de facturabilidad. La cabecera la asigna
+y guarda AOS; Cencomun no repara FK ni modifica upstream. Se conserva getInvoices
+como lectura oficial y se exige después del commit tanto cabecera como cadena
+InvoiceLine.saleOrderLine.saleOrder y propiedad InvoiceLine.invoice, con misma
+venta/compañía. La consulta por referencia externa es sólo un selector; nunca
+sustituye las FK. El lector usa sus permisos Invoice existentes y la denegación
+ajena sigue siendo 403. No se cambian oráculo, estados, pins ni transacciones
+económicas. La regresión rechaza cabecera null, fuente ausente, factura/venta
+equivocada y compañía ajena. Compilación local no sustituye aceptación ERP.

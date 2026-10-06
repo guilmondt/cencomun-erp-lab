@@ -460,13 +460,43 @@ class EvidenceTests(unittest.TestCase):
         expected = json.loads((FIXTURES / "oracle.json").read_bytes())["TAX01-W"]
         native = {"stock": [{"code": code, "current_qty": qty, "avg_price": price} for code, qty, price in
                   [("P001", "3", "30"), ("P002", "4", "10"), ("P003", "5", "60")]],
-                  "sale_order_ids": [1], "deliveries": [{"status": 3}],
-                  "invoices": [{"statusSelect": 3, "exTaxTotal": "125.00", "taxTotal": "12.50",
+                  "case": "TAX01-W", "company_ids": [1], "sale_order_ids": [1], "deliveries": [{"status": 3}],
+                  "invoices": [{"id": 1, "native_source_linkage": {"native_invoice_id": 1, "native_company_id": 1,
+                       "header_sale_order_id": 1, "header_sale_order_company_id": 1,
+                       "header_sale_order_reference": "CCM-TAX01-W", "source": "InvoiceLine.saleOrderLine.saleOrder",
+                       "line_links": [{"invoice_line_id": i, "sale_order_line_id": i, "sale_order_id": 1,
+                            "sale_order_reference": "CCM-TAX01-W", "sale_order_company_id": 1,
+                            "parent_invoice_id": 1, "product_code": code}
+                            for i,code in enumerate(["P001", "P002"],1)]},
+                     "statusSelect": 3, "exTaxTotal": "125.00", "taxTotal": "12.50",
                      "inTaxTotal": "137.50", "amountRemaining": "0.00",
-                     "lines": [{"code": "P001", "qty": "2", "ex_tax_total": "100.00", "in_tax_total": "119.00"},
-                               {"code": "P002", "qty": "1", "ex_tax_total": "25.00", "in_tax_total": "18.50"}]}]}
+                     "lines": [{"id": 1, "code": "P001", "qty": "2", "ex_tax_total": "100.00", "in_tax_total": "119.00"},
+                               {"id": 2, "code": "P002", "qty": "1", "ex_tax_total": "25.00", "in_tax_total": "18.50"}]}]}
         with self.assertRaisesRegex(AssertionError, "native invoice product line"):
             assert_native_economics(native, expected)
+
+    def test_invoice_linkage_requires_full_native_header_and_real_source_fks(self):
+        import copy
+        from run import assert_native_invoice_linkage
+        link = {"source": "InvoiceLine.saleOrderLine.saleOrder", "native_invoice_id": 7, "native_company_id": 1,
+            "header_sale_order_id": 3, "header_sale_order_company_id": 1,
+            "header_sale_order_reference": "CCM-CO00", "line_links": [
+                {"invoice_line_id": i+10, "sale_order_line_id": i+20, "sale_order_id": 3,
+                 "sale_order_reference": "CCM-CO00", "sale_order_company_id": 1,
+                 "parent_invoice_id": 7, "product_code": code}
+                for i,code in enumerate(["P001", "P002"],1)]}
+        assert_native_invoice_linkage(link, 7, 1, 3, "CCM-CO00")
+        for field,value in [("invoice_line_id",0),("sale_order_line_id",0),("sale_order_id",4),
+                            ("sale_order_reference","CCM-OTHER"),("sale_order_company_id",2),("parent_invoice_id",8)]:
+            wrong=copy.deepcopy(link);wrong["line_links"][0][field]=value
+            with self.subTest(field=field), self.assertRaises(AssertionError):
+                assert_native_invoice_linkage(wrong, 7, 1, 3, "CCM-CO00")
+        for field,value in [("native_invoice_id",8),("native_company_id",2),("header_sale_order_id",4),
+                            ("header_sale_order_id",0),("header_sale_order_company_id",2),
+                            ("header_sale_order_reference","CCM-OTHER"),("line_links",[])]:
+            wrong=copy.deepcopy(link);wrong[field]=value
+            with self.subTest(field=field), self.assertRaises(AssertionError):
+                assert_native_invoice_linkage(wrong, 7, 1, 3, "CCM-CO00")
 
     def test_non_native_fixture_bytes_are_rejected(self):
         import tempfile

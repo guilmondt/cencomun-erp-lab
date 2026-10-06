@@ -555,3 +555,16 @@ LAB, con ventilación false (no omitida) y lectura efectiva/persistida posterior
 al commit. Las regresiones locales no sustituyen aceptación por CI. Continuar
 CO00 primero, TAX01-W segundo y casos independientes; conservar resultados
 parciales frente a grupos completos. No cambiar oráculo/fixtures/pins/upstream.
+
+### CI37429209635 y revisión de vínculo nativo — 2026-10-06
+
+CI finalizado FAILURE: 3PASS/3FAIL/28UNRUN, criterios1PASS/6FAIL/6UNRUN/1BLOCKED.
+Dirección nativa, configuración PDF=false/ventilación=false, PROD/BANK y los
+cuatro pagos FX se verificaron en este commit. Gates y SEARCH fallan por vínculo
+de factura no exportado; B30 documenta causa/impacto antes de ampliar trabajo.
+Usar el overload completo INVOICE_ALL con guard nativo, conservar getInvoices
+y verificar cabecera/FK de líneas/compañía/GL después del commit. Lectura de
+lector conserva scope y prueba denegación403; no agregar permisos. Regresiones
+rechazan cabecera null y vínculos aparentes por referencia. Repetir CO00 antes
+de TAX01-W y después casos independientes en un solo CI. Gates administrador
+PASS seguirán siendo parciales; 34 grupos/14 criterios completos no se infieren.

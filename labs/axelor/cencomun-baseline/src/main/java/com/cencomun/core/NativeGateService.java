@@ -192,7 +192,18 @@ public class NativeGateService {
     call(stock, "copyQtyToRealQty", delivery); delivery = managed(delivery);
     call(stock, "realize", delivery); delivery = managed(delivery); so = managed(so);
     p.stage("native-invoice-generation");
-    Model invoice = (Model) call(service("com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceService"), "generateInvoice", so);
+    int invoiceAll;
+    try { invoiceAll = type(SALE + "repo.SaleOrderRepository").getField("INVOICE_ALL").getInt(null); }
+    catch (ReflectiveOperationException error) {
+      throw new IllegalStateException("Pinned native INVOICE_ALL unavailable", error);
+    }
+    Object invoicing = service("com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceService");
+    // Same native guard and full overload as the pinned invoicing wizard.
+    // INVOICE_ALL does not consume quantity maps or timetable selections.
+    call(invoicing, "displayErrorMessageIfSaleOrderIsInvoiceable", so, BigDecimal.ZERO,
+        invoiceAll, Map.of(), Map.of(), Map.of(), false);
+    Model invoice = (Model) call(invoicing, "generateInvoice", so, invoiceAll,
+        BigDecimal.ZERO, false, Map.of(), List.of());
     if (caseId.equals("CO00")) try {
       set(invoice, "externalReference", FixtureBundle.json("scenarios.json").get("search").get("invoice").get("reference").asText());
     } catch (java.io.IOException error) { throw new IllegalStateException("Fixed search fixture unavailable", error); }
@@ -229,9 +240,12 @@ public class NativeGateService {
     List<Map<String, Object>> invoices = new ArrayList<>();
     List<Map<String, Object>> moves = new ArrayList<>();
     for (Model so : list(SALE + "SaleOrder", "self.externalReference = ?1", "CCM-" + caseId)) {
-      for (Model invoice : list(ACCOUNT + "Invoice", "self.saleOrder = ?1", so)) {
+      // Preserve the official reader and independently verify header and line FKs.
+      for (Model invoice : (List<Model>) call(service(
+          "com.axelor.apps.supplychain.service.saleorder.SaleOrderInvoiceService"), "getInvoices", so)) {
         Map<String, Object> inv = new LinkedHashMap<>();
         inv.put("id", invoice.getId());
+        inv.put("native_source_linkage", NativeInvoiceLinks.inspect(invoice));
         Model address = (Model) get(invoice, "address");
         inv.put("invoicing_address_id", address == null ? 0L : address.getId());
         inv.put("native_vat_liability", get(invoice, "vatSystemSelect"));

@@ -670,3 +670,41 @@ PASS ejecutados, SEARCH/FX FAIL, gates BLOCKED y 28 grupos UNRUN; no se arrastra
 resultados de commits anteriores. ZIP: un intento, proxy Forbidden en
 productionresultssa14.blob.core.windows.net; se conservan avisos completos del
 log como evidencia secundaria, sin cambios de red ni publicación.
+## B30 — CI13: inspección incompleta del vínculo nativo venta/factura
+
+CI37429209635, commit27bdbd840f733eb3355658d3016b87edb4f3826d, FAILURE:
+AppInvoice efectivo/persistido id1 confirma PDF automático false y
+isVentilationSkipped=false. Dirección, PROD/BANK y cuatro pagos FX PASS;
+nombre/teléfono/serial por lector y denegación ajena403 ejecutados.
+CO00/TAX01-W llegan al final del flujo, pero la aserción encuentra invoices=[]
+al filtrar exclusivamente Invoice.saleOrder. SEARCH encuentra INV-CCM-001,
+pero su cabecera saleOrder es null. AOS fijado proporciona getInvoices(SaleOrder)
+con fallback explícito por InvoiceLine.saleOrderLine; el overload corto usado
+no asigna la cabecera como el wizard. No cambiar datos ni resultados esperados
+para acomodar el inspector.
+
+Stock confirmado3/4/5, WAP30/10/60, COGS70 contabilizado; liquidación nativa
+CO00 move5 (banco67/comisión8/AR75) y TAX01-W move10 se leen. Faltan la factura,
+su asiento y pago directo en el export del gate: éxito económico completo aún
+FAIL, aunque el servicio no revirtió. FX sí tiene sus cuatro InvoicePayment
+ids5/6/7/8, tres facturas3/4/5 y siete asientos15–21 status3 con conciliación
+confirmada y saldos0 después del commit. Se conservan parciales separados.
+
+1. Ejecutar el overload completo de generateInvoice con la constante oficial
+   SaleOrderRepository.INVOICE_ALL, la validación de facturabilidad del wizard,
+   amount=0/isPercent=false y selecciones vacías (no usadas en INVOICE_ALL).
+   AOS asigna y guarda la cabecera; no fabricar enlaces ni duplicar facturas.
+   Conservar la transacción económica de sell y todos los servicios posteriores.
+2. Conservar getInvoices(SaleOrder) y exportar además cabecera, compañía y FK
+   InvoiceLine.invoice/InvoiceLine.saleOrderLine/SaleOrderLine.saleOrder.
+   Exigir que ambas líneas pertenezcan a la factura y misma venta/compañía.
+   Leer el vínculo bajo el scope Invoice existente del lector y comprobar 403
+   ajeno. La referencia externa sólo selecciona la factura, no prueba el vínculo.
+3. Añadir regresión del comprobador: rechazar factura sin vínculo, ID equivocado
+   o compañía ajena. Repetir ERP/lecturas/oráculo; no sustituir FAIL por PASS
+   hasta demostrar facturas, todos los GL y saldos nativos completos.
+
+Matriz actual3PASS/3FAIL/28UNRUN; 14 criterios1PASS/6FAIL/6UNRUN/1BLOCKED.
+ZIP11396837860: un intento Forbidden productionresultssa12.blob.core.windows.net;
+se conservan logs estructurados, sin ampliar/publicar red. Corrección compilada
+localmente y regresiones del inspector ejecutadas; aceptación ERP pendiente.

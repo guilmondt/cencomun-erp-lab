@@ -158,19 +158,40 @@ def assert_native_configuration(configuration):
         assert accounts[code]["id"] > 0 and accounts[code]["vat_system"] == 1, "Native accrual account regime required: " + code
 
 
+def assert_native_invoice_linkage(link, invoice_id, company_id, order_id, order_reference):
+    assert link["source"] == "InvoiceLine.saleOrderLine.saleOrder", "Native source FK chain required"
+    assert link["native_invoice_id"] == invoice_id > 0
+    assert link["native_company_id"] == company_id > 0, "Foreign company invoice linkage"
+    assert link["header_sale_order_id"] == order_id > 0, "Native INVOICE_ALL header order required"
+    assert link["header_sale_order_company_id"] == company_id, "Foreign company header order"
+    assert link["header_sale_order_reference"] == order_reference, "Wrong native header reference"
+    lines = link["line_links"]
+    assert len(lines) == 2, "Two actual source-linked native invoice product lines required"
+    assert {l["product_code"] for l in lines} == {"P001", "P002"}
+    assert len({l["invoice_line_id"] for l in lines}) == len({l["sale_order_line_id"] for l in lines}) == 2
+    for line in lines:
+        assert line["invoice_line_id"] > 0 and line["sale_order_line_id"] > 0
+        assert line["parent_invoice_id"] == invoice_id, "Native source line belongs to another invoice"
+        assert line["sale_order_id"] == order_id > 0 and line["sale_order_reference"] == order_reference
+        assert line["sale_order_company_id"] == company_id, "Foreign company source order"
+
+
 def assert_native_economics(native, expected):
     quantities = {x["code"]: Decimal(x["current_qty"]) for x in native["stock"]}
     assert [quantities[f"P{i:03}"] for i in (1, 2, 3)] == list(map(Decimal, expected["stock"])), quantities
     value = sum(Decimal(x["current_qty"]) * Decimal(x["avg_price"]) for x in native["stock"])
     assert value == Decimal(expected["stock_value"]), ("native stock valuation", value)
-    assert len(native["sale_order_ids"]) == len(native["deliveries"]) == len(native["invoices"]) == 1
+    assert len(native["sale_order_ids"]) == len(native["deliveries"]) == len(native["invoices"]) == 1, "One committed native sale/delivery/invoice required"
     assert native["deliveries"][0]["status"] == 3, native["deliveries"]
     invoice = native["invoices"][0]
+    assert_native_invoice_linkage(invoice["native_source_linkage"], invoice["id"], native["company_ids"][0],
+                                  native["sale_order_ids"][0], "CCM-" + native["case"])
     assert int(invoice["statusSelect"]) == 3, invoice
     for key, field in [("revenue", "exTaxTotal"), ("tax", "taxTotal"), ("gross", "inTaxTotal"), ("customer_balance_final", "amountRemaining")]:
         assert Decimal(invoice[field]) == Decimal(expected[key]), (field, invoice[field], expected[key])
     invoice_lines = invoice.get("lines", [])
     assert len(invoice_lines) == 2, ("native invoice product lines", invoice_lines)
+    assert {l["id"] for l in invoice_lines} == {l["invoice_line_id"] for l in invoice["native_source_linkage"]["line_links"]}, "Invoice product lines differ from native source-linked lines"
     taxable = Decimal(expected["tax"]) != 0
     expected_lines = {"P001": (Decimal(2), Decimal("100.00"), Decimal("110.00" if taxable else "100.00")),
                       "P002": (Decimal(1), Decimal("25.00"), Decimal("27.50" if taxable else "25.00"))}
@@ -624,6 +645,14 @@ def run_search_cases(admin, base, fixtures, output, row):
             evidence["steps"].append({"case": "foreign-company-denied", "http_status": error.code})
         else:
             raise AssertionError("Foreign company search was accepted")
+        try:
+            reader.request("/ws/ccm/lab/invoice-links?" + urllib.parse.urlencode({
+                "company_id": "OTHER-LAB", "reference": specification["invoice"]["reference"]}))
+        except urllib.error.HTTPError as error:
+            assert error.code == 403, error.code
+            evidence["steps"][-1]["invoice_links_http_status"] = error.code
+        else:
+            raise AssertionError("Foreign company invoice linkage was accepted")
         for text, expected in specification["products"].items():
             response = reader.request("/ws/ccm/products/search?" + urllib.parse.urlencode({"company_id": "CCM-LAB-001", "q": text}))
             assert [r["id"] for r in response["items"]] == expected, response
@@ -659,8 +688,15 @@ def run_search_cases(admin, base, fixtures, output, row):
             if not found:
                 invoice_blocked = True
             else:
-                assert len(found) == 1 and found[0].get("saleOrder.externalReference", found[0].get("saleOrder", {}).get("externalReference")) == "CCM-CO00", found
-                evidence["steps"].append({"case": "native-invoice-query", "persisted": found})
+                assert len(found) == 1 and found[0]["externalReference"] == specification["invoice"]["reference"], found
+                links = reader.request("/ws/ccm/lab/invoice-links?" + urllib.parse.urlencode({
+                    "company_id": "CCM-LAB-001", "reference": specification["invoice"]["reference"]}))
+                assert links["actor"] == "ccm-reader" and len(links["invoices"]) == 1, links
+                linkage = links["invoices"][0]
+                order_ids = {l["sale_order_id"] for l in linkage["line_links"]}
+                assert len(order_ids) == 1, linkage
+                assert_native_invoice_linkage(linkage, found[0]["id"], links["reader_company_id"], order_ids.pop(), "CCM-CO00")
+                evidence["steps"].append({"case": "native-invoice-query", "persisted": found, "native_links": links})
         except Exception as error:
             failed("native-invoice-query", error)
         evidence["subcase_failures"] = failures

@@ -70,6 +70,28 @@ public class CoreReadResource {
     return Map.of("items", items, "total", count, "page", page, "page_size", size);
   }
 
+  /** Read the generator's real source links under the existing native Invoice scope. */
+  @GET @Path("/lab/invoice-links")
+  public Map<String, Object> invoiceLinks(@QueryParam("company_id") String companyCode,
+      @QueryParam("reference") String reference) {
+    Model current = company(companyCode);
+    if (reference == null || reference.isBlank() || reference.length() > 200)
+      throw new BadRequestException("LAB invoice reference required");
+    Class<Model> invoiceType = type("com.axelor.apps.account.db.Invoice");
+    JpaSecurity security = Beans.get(JpaSecurity.class);
+    security.check(JpaSecurity.AccessType.READ, invoiceType);
+    Filter scope = security.getFilter(JpaSecurity.AccessType.READ, invoiceType);
+    if (scope == null) throw new IllegalStateException("Expected scoped native Invoice read filter");
+    List<Map<String, Object>> results = new ArrayList<>();
+    for (Model invoice : Filter.and(scope, Filter.equals("externalReference", reference)).build(invoiceType).fetch(100)) {
+      if (!current.getId().equals(((Model) get(invoice, "company")).getId()))
+        throw new ForbiddenException("Invoice company denied");
+      results.add(NativeInvoiceLinks.inspect(invoice));
+    }
+    return Map.of("actor", AuthUtils.getUser().getCode(), "reader_company_id", current.getId(),
+        "invoices", results);
+  }
+
   /** Diagnose the existing native reader filter without bypassing or broadening it. */
   @GET @Path("/lab/search/diagnostics")
   public Map<String, Object> diagnostics(@QueryParam("company_id") String companyCode,
