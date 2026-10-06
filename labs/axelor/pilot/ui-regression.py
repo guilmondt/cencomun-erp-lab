@@ -12,7 +12,8 @@ if os.environ.get('CCM_PILOT_DISPOSABLE')!='1':
     raise SystemExit('Set CCM_PILOT_DISPOSABLE=1 only for an isolated fresh fixture database')
 secrets=json.loads(Path(os.environ['CCM_PILOT_ACTORS_FILE']).read_text())
 out=Path(os.environ.get('CCM_PILOT_RESULTS','/tmp/ccm-pilot-ui'));out.mkdir(parents=True,exist_ok=True)
-resume_web=os.environ.get('CCM_PILOT_RESUME_THROUGH_WEB')=='1'
+resume_prefix=int(os.environ.get('CCM_PILOT_RESUME_PREFIX','0'))
+resume_web=resume_prefix>=3 or os.environ.get('CCM_PILOT_RESUME_THROUGH_WEB')=='1'
 resume=resume_web or os.environ.get('CCM_PILOT_RESUME_FIRST')=='1'
 receipts=json.loads((out/'receipts.json').read_text()) if resume else []
 network_actions=[]
@@ -64,7 +65,9 @@ with sync_playwright() as p:
         supervisor.get_by_role('button').filter(has_text='add').first.click()
         click(supervisor,'Abrir sesión de caja','ccm-pilot-open')
     def new_sale(products,financed=0,web=False,shipping=0):
-        page=operator;page.get_by_text('Venta y pedido',exact=True).click()
+        global operator
+        operator.close();operator=actor('operator');page=operator
+        page.get_by_text('Venta y pedido',exact=True).click()
         page.get_by_role('button').filter(has_text='add').first.click()
         widget(page,'customer').get_by_role('combobox').fill('C001')
         page.get_by_text('C001 - Cliente ficticio Alfa',exact=True).click()
@@ -87,11 +90,14 @@ with sync_playwright() as p:
         from http_client import Client
         existing=Client(password=os.environ.get('CCM_PILOT_ADMIN_PASSWORD','admin')).request('/ws/rest/com.cencomun.core.db.CcmPilotSale/search',{'limit':10})
         records={r['id']:r for r in existing['data']}
-        assert existing['total']==(3 if resume_web else 1) and records[1]['state']=='PAID' and float(records[1]['gross'])==75
+        assert existing['total']==(resume_prefix or (3 if resume_web else 1)) and records[1]['state']=='PAID' and float(records[1]['gross'])==75
         refs['cash']=records[1]['reference']
         if resume_web:
-            assert records[2]['state']=='SETTLED' and records[3]['state']=='DELIVERED' and records[3]['initialVoucher']
+            assert records[2]['state']=='SETTLED' and records[3]['state'] in ('DELIVERED','SETTLED') and records[3]['initialVoucher']
             refs['cashea']=records[2]['reference'];refs['web']=records[3]['reference']
+            if resume_prefix>=4:
+                assert records[4]['state']=='RESERVED' and records[4]['initialVoucher']
+                refs['pending']=records[4]['reference']
     else:
         refs['cash']=new_sale(products)
         click(operator,'Entregar productos','ccm-pilot-deliver')
@@ -110,9 +116,11 @@ with sync_playwright() as p:
         # Regression: native UI sends temporary guide as `guide`, not `$guide`.
         field(operator,'$guide','UI-REGRESSION-WEB');click(operator,'Entregar productos','ccm-pilot-deliver')
         click(operator,'Registrar cobro inicial real','ccm-pilot-collect')
-    open_sale(supervisor,refs['web']);click(supervisor,'Registrar liquidación Cashea','ccm-pilot-settle')
-    refs['pending']=new_sale([('P006','Producto ficticio 6')],36)
-    click(operator,'Registrar cobro inicial real','ccm-pilot-collect')
+    if not resume_web or records[3]['state']=='DELIVERED':
+        open_sale(supervisor,refs['web']);click(supervisor,'Registrar liquidación Cashea','ccm-pilot-settle')
+    if resume_prefix<4:
+        refs['pending']=new_sale([('P006','Producto ficticio 6')],36)
+        click(operator,'Registrar cobro inicial real','ccm-pilot-collect')
     operator.get_by_text('Entrega y liquidación',exact=True).click()
     expect(operator.get_by_text(refs['pending'],exact=True)).to_be_visible()
     operator.screenshot(path=str(out/'pending-before-delivery-operator.png'))
