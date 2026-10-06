@@ -1,5 +1,148 @@
 # Core Test Axelor — resultados ejecutados
 
+CI [37479552848](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37479552848),
+commit `a2f462f67526af94409bd050bf277d78f4782387`, conclusión `FAILURE`, 3246s.
+Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, cobertura revisión2.
+**Primaria: 32 PASS / 2 FAIL / 0 BLOCKED / 0 UNRUN. Réplica: 32 PASS / 2 FAIL / 0 BLOCKED / 0 UNRUN.**
+Criterios primaria: 9 PASS / 4 FAIL / 1 BLOCKED / 0 UNRUN; réplica: 9 PASS / 4 FAIL / 1 BLOCKED / 0 UNRUN.
+No se declara terminada ni aprobada la comparación. Criterio13 BLOCKED y seis
+escenarios de patch UNRUN: el usuario aplazó actualización y objetivo.
+
+[Procedencia](evidence/axelor-core/runs/37479552848/evidence-source.json),
+[verificación de correcciones](evidence/axelor-core/runs/37479552848/corrections-verification.json),
+[índice completo](evidence/axelor-core/runs/37479552848/isolated-repeat.json) y
+[métricas](axelor-core-metrics.md). Revisores congelados del SHA ejecutadoa2f462f; log completo
+con SHA256, un intento ZIP y red restringida conservada.
+
+Índice 23857bytes; 103 archivos originales,
+124905094bytes cargados y verificados. Archivo
+máximo 28207818bytes. Ningún árbol de casos duplicado dentro del índice ni
+aceptación basada sólo en sus etiquetas. Repetición derivada:
+**PASS**.
+
+La descarga ZIP tuvo un único intento y fue bloqueada HTTP403 por
+`productionresultssa5.blob.core.windows.net`. El ZIP no fue recuperado ni
+verificado contra su digest; los103 originales del índice se reconstruyeron
+íntegros desde el log y todos sus tamaños/SHA256 coinciden. Los logs auxiliares
+Gradle y los XML JUnit del ZIP no están descargados. Los67tests Java se acreditan
+por la atestación del mismo SHA, que lee sus XML reales en CI; las duraciones
+Gradle ausentes no se imputan. El log completo se conserva fuera deGit en
+`/workspace/ccm-axelor-runtime/ci-evidence/37479552848.log`, con SHA256
+`e92590e7cc451b2be70b4de6fbb95c215946cec59133790e417ba5eb36bb5005`.
+No se añadió ni publicó el dominio bloqueado. El bloqueo limita el transporte
+del ZIP y no deja incompleta la evidencia de negocio de las dos fases.
+
+Cada fase intenta los34grupos. PASS significa grupo completo revalidado; FAIL
+conserva los subcasos ejecutados y sus errores, sin afirmar cobertura completa.
+Los gates de administrador y los grupos completos se mantienen separados.
+
+- Gate CO00: PASS, 16.002s; no sustituye roles/estados/atomicidad.
+
+- Gate TAX01-W: PASS, 8.547s; no sustituye roles/estados/atomicidad.
+
+Las correcciones conservan los mecanismos ERP: mutex JPA de compañía antes de
+cargar el pedido, FK BankStatementLine.reference real, causa exacta de denegación
+RPC sin datos/efectos, orden de MoveLine por ID y request_rate texto estable
+comparando el resultado MCP completo. Los estados de aceptación de cada una
+son los del recibo del CI, con todas las solicitudes/errores/lecturas originales.
+Además, los tres grupos de B39 se ejecutan con POST/removeAll y la versión
+real del control manager para el borrado admin. MCP/API conservan el POST
+completo y comparan transporte/clave, resultados completos y lecturas durables
+para seis herramientas y dos replays inversos. Los recibos del run muestran
+qué intentos realmente completaron;404/409 y errores genéricos no aprueban
+permisos, inmutabilidad ni paridad.
+El adaptador mantiene403 estricto. PDF automático está desactivado sólo en LAB,
+fuera del contrato probado; isVentilationSkipped=false y GL nativo se inspeccionan.
+
+Los dos hallazgos funcionales se conservan sin cambiar expectativas:
+VAL01-04 exige rechazo de coste negativo y el ERP realiza -0.01 con control válido;
+STATE-CANCEL-BEFORE-HANDOVER exige CANCELLED y el ERP rechaza los tres intentos
+confirmados. Se preservan sus errores y snapshots tras rollback. Su repetición
+no convierte esos FAIL en PASS. Ver archivos originales de ambas fases.
+
+| Grupo requerido | Primaria | Réplica |
+| --- | --- | --- |
+| CO00-NATIVE | PASS | PASS |
+| CO01-NATIVE | PASS | PASS |
+| TAX01-S-NATIVE | PASS | PASS |
+| TAX01-W-NATIVE | PASS | PASS |
+| PROD01-04 | PASS | PASS |
+| VAL01-04 | FAIL | FAIL |
+| STATE01-04 | PASS | PASS |
+| INV01-03-INSUFFICIENT | PASS | PASS |
+| FX01-03-MONEY01-03 | PASS | PASS |
+| PO01-09-NATIVE | PASS | PASS |
+| PO07-09-REVISION-SELF | PASS | PASS |
+| CASH00-06-NATIVE | PASS | PASS |
+| BANK-BOOK-FIXTURE | PASS | PASS |
+| BANK01-05-NATIVE | PASS | PASS |
+| API01-06-SIX-ROUTES | PASS | PASS |
+| IDEM01-02-CREATE-CONCURRENT | PASS | PASS |
+| PERM-API-NATIVE | PASS | PASS |
+| CASH04-06-HTTP-IMMUTABLE | PASS | PASS |
+| SEARCH01-04-NATIVE | PASS | PASS |
+| TAX02-04-IDEM-CONCURRENT | PASS | PASS |
+| BANK-CONCURRENT-1000 | PASS | PASS |
+| MCP01-06-STDIO | PASS | PASS |
+| IDEM03-LOST-RESTART | PASS | PASS |
+| IDEM04-EVENTS-RECOVERY | PASS | PASS |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS | PASS |
+| AUDIT01-03-NATIVE | PASS | PASS |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | PASS | PASS |
+| SUPPORTED-CONFIGURATION | PASS | PASS |
+| STATE-UNKNOWN-ATOMIC | PASS | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS | PASS |
+| STATE-WEB-NO-GUIDE | PASS | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | PASS | PASS |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | PASS | PASS |
+
+| Criterio | Contrato | Primaria | Réplica |
+| --- | --- | --- | --- |
+| 1 | Shared domain objects use supported framework mechanisms. | FAIL | FAIL |
+| 2 | No Cencomun feature requires upstream core edits. | PASS | PASS |
+| 3 | Critical actions enforce permissions server-side. | FAIL | FAIL |
+| 4 | Invalid state transitions are rejected. | FAIL | FAIL |
+| 5 | Monetary calculations are deterministic and tested. | FAIL | FAIL |
+| 6 | Confirmed cash closing leaves an audit trail and cannot be silently changed. | PASS | PASS |
+| 7 | Purchase thresholds are automated and tested. | PASS | PASS |
+| 8 | Bank import is idempotent for repeated transaction/file keys. | PASS | PASS |
+| 9 | APIs require no direct DB access. | PASS | PASS |
+| 10 | MCP-facing operations can use the neutral adapter. | PASS | PASS |
+| 11 | Synthetic fixtures load successfully. | PASS | PASS |
+| 12 | Search/list results are complete and non-duplicated. | PASS | PASS |
+| 13 | Platform + Cencomun tests pass after a patch upgrade trial. | BLOCKED | BLOCKED |
+| 14 | Setup is reproducible from repository instructions. | PASS | PASS |
+
+Dependencias de criterios que no pasan; todos los grupos se revalidaron con
+el código de este SHA y cada archivo original completo.
+
+| Criterio | Grupos adjuntos que no pasan | Estado observado |
+| --- | --- | --- |
+| 1 | STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 3 | STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 4 | VAL01-04, STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 5 | VAL01-04, STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| 13 | User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN | BLOCKED |
+
+Comprobaciones B40 del código ejecutado, sin trasladar PASS históricos:
+
+| Fase | Inmutabilidad admin causal | Eventos originales | Primera entrega | Reinicio real | Replay | Efectos únicos finales |
+| --- | --- | --- | --- | --- | --- | --- |
+| primary | PASS | 42 | 42 | PASS | 42 | 42 |
+| repeat | PASS | 42 | 42 | PASS | 42 | 42 |
+
+Los intentos y snapshots completos están en AUDIT01-03-NATIVE.json e
+IDEM04-EVENTS-RECOVERY.json de cada fase. El recibo derivado conserva la causa
+exacta, hash del stack, igualdad completa de snapshots, PIDs antes/después,
+contadores de entregas, efectos, intentos nativos y stderr de ambos procesos.
+El consumidor permanece privado y sintético; la entrega usa el Outbox nativo
+real, sin reintentos ocultos ni cambios en validaciones/servicios económicos.
+
+## Historia anterior
+
+# Core Test Axelor — resultados ejecutados
+
 CI [37469716840](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37469716840),
 commit `4230b2b32b1fbfd6b45c4f6efea6052498f6e4d9`, conclusión `FAILURE`, 3223s.
 Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, cobertura revisión2.

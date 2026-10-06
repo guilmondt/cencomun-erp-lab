@@ -1,0 +1,56 @@
+{
+  "case": "CO00",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "PASS",
+  "phase_evidence": {
+    "planned_initial_stock_move_id": 1,
+    "planned_initial_stock_move_status": 2,
+    "initial_stock_move_id": 1,
+    "initial_stock_move_status": 3,
+    "native_created_sale_order_status": 1,
+    "sale_order_id": 1,
+    "delivery_id": 2,
+    "invoice_id": 1,
+    "finance": {
+      "reconcile_id": 2,
+      "calculation": {
+        "gross": "125.00",
+        "revenue": "125.00",
+        "tax": "0.00",
+        "commission": "8.00",
+        "shipping": "0.00",
+        "cost": "70.00",
+        "net": "117.00",
+        "indicator": "47.00",
+        "accounting_profit": "47.00",
+        "upfront": "50.00",
+        "transfer": "67.00"
+      },
+      "upfront_payment_id": 1,
+      "settlement_move_id": 5,
+      "native_wap_costs": {
+        "P001": "30.0000000000",
+        "P002": "10.0000000000"
+      },
+      "cogs_move_id": 3
+    }
+  },
+  "committed_native_export": "CO00-native-export.json",
+  "asserted_native_economics": {
+    "stock_value": "430.00000000000000000000",
+    "account_balances": {
+      "CCM-CASH": "50.000",
+      "CCM-AR": "0.000",
+      "CCM-BANK": "67.000",
+      "CCM-COMMISSION": "8.000",
+      "CCM-REVENUE": "-125.000",
+      "CCM-COGS": "70.000",
+      "CCM-STOCK": "-70.000"
+    },
+    "accounting_profit": "47.000"
+  },
+  "seconds": 40.169,
+  "sequence": 1
+}

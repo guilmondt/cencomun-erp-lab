@@ -1003,7 +1003,7 @@ completo iguales. Dos FAIL funcionales de coste/cancelación permanecen intactos
 Causa admin observada en ambas fases: POST/removeAll llega al repositorio y
 respondeHTTP200/status-1, causeClass=jakarta.ws.rs.ForbiddenException,
 causeString y message contienen exactamente Semantic audit cannot be deleted
-by generic CRUD;91frames Java, sin registros en respuesta y before==after.
+by generic CRUD;91líneas de stack incluyendo cabecera; frames Java, sin registros en respuesta y before==after.
 El evaluador4230b2b rechaza causeClass/causeString. AOP8.2.3 ResponseException
 verificado en JAR añade esos campos sólo a admin/técnico. Se conserva ese FAIL
 original; la corrección no reescribe archivos ni veredictos del CI anterior.
@@ -1038,3 +1038,57 @@ ciegamente una entrega fallida. Repetición sigueFAIL hasta nueva ejecución.
 
 Recibo local: reports/evidence/axelor-core/ci23-corrections-local-20261006/diagnostic.json.
 Artefacto y log del CI23 íntegros; pins, fixtures/oráculo y upstream intactos.
+
+
+## B41 — Ejecución y revisión del ajuste acotado B40
+
+CI [37479552848](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37479552848), SHA `a2f462f67526af94409bd050bf277d78f4782387`, conclusión `failure`.
+primary: 32 PASS, 2 FAIL, 0 BLOCKED, 0 UNRUN; criterios: 9 PASS, 4 FAIL, 1 BLOCKED, 0 UNRUN.
+repeat: 32 PASS, 2 FAIL, 0 BLOCKED, 0 UNRUN; criterios: 9 PASS, 4 FAIL, 1 BLOCKED, 0 UNRUN.
+Se cargaron 103 originales completos, 124905094 bytes, con SHA256. Repetición derivada: PASS.
+Los grupos FAIL conservan sus subcasos y no se declaran completos. Los gates
+de administrador son parciales separados de la matriz34. Los dos hallazgos
+funcionales no se cambian; criterio13 BLOCKED y seis ensayos patch UNRUN.
+
+1. Inmutabilidad: verificar la respuesta real del mismo SHA, actor admin,
+   ruta soportada removeAll, ForbiddenException y mensaje fijo, sin registros
+   ni datos privados en la respuesta; comparar snapshots completos posteriores
+   al rollback. No aceptar diagnósticos genéricos,404 o403 sin causa.
+   primary: grupo PASS; causa exacta=True; snapshots iguales=True; frames públicos=90; stackSHA=3ea36a61be364bc2e1c3941b4c4e7d0bd20ed9a98d418f5638300792b0f9dde5.
+   repeat: grupo PASS; causa exacta=True; snapshots iguales=True; frames públicos=90; stackSHA=3ea36a61be364bc2e1c3941b4c4e7d0bd20ed9a98d418f5638300792b0f9dde5.
+2. Recuperación: verificar cada intento nativo503 sin excepción de transporte,
+   primera entrega de42eventos, cambio real de PID conservando SQLite, replay42
+   y lecturas durables (deliveries2, applications1, native attempts3). No
+   reintentos ocultos ni sustitución de primaria por réplica.
+   primary: grupo PASS;503reales=42; primera entrega=42; restart=6456→6466; replay=42; efectos únicos=42; errores=None.
+   repeat: grupo PASS;503reales=42; primera entrega=42; restart=11760→11772; replay=42; efectos únicos=42; errores=None.
+3. Revalidar TODOS los archivos de ambas fases con los24revisores congelados
+   del commit ejecutado y aplicar las aserciones de cada familia, benchmark
+   y repetición. El recibo derivado conserva rutas/bytes/hashes; no duplica
+   árboles ni aprueba desde el índice. No se reescriben CI23 ni sus FAIL.
+
+Procedencia: reports/evidence/axelor-core/runs/37479552848/evidence-source.json.
+Verificación: corrections-verification.json e isolated-repeat.json del mismo directorio.
+Regresiones locales previas:93Python y300HTTPJava (100503,100entregas,100replays);
+la aceptación anterior es del ERP en CI, no de esa prueba local. Comprobar
+67JUnit acreditados por build-evidence.json, generado de los XML reales por
+finalize.py del SHA ejecutado. Las93regresiones Python se contaron localmente;
+en CI el mismo comando completó antes del setup, pero su log sólo está en el
+ZIP bloqueado y no se imputa un conteo observado de CI. Red/instalación/secrets del
+borrador preservados; sólo guía start_skill actualizada, sin publicación.
+Fixtures/oráculo/revisión2, pins, upstream y Frappe intactos.
+
+
+B41 — Transporte del ZIP: causa observada HTTP403 del proxy al único intento
+hacia productionresultssa5.blob.core.windows.net; lectura anticipada del log
+también Forbidden. Impacto: ZIP/auxiliares no recuperados; evidencia de negocio
+103archivos íntegros y log completo disponibles. No bloquea esta revisión ni
+permite declarar verificado el SHA del ZIP descargado (no existe).
+
+1. Usar los originales reconstruidos y cargar TODOS los archivos referenciados
+   por isolated-repeat.json; verificar bytes/SHA antes de revisar cada grupo.
+2. Conservar el log original y su SHA y el recibo de descarga fallida; no repetir
+   el negocio sólo para obtener otro transporte y no ampliar la red pendiente.
+3. Si el usuario aprueba posteriormente el acceso al dominio o revisa el ZIP
+   desde GitHub, comparar el SHA oficial del artefacto y después cada original
+   contra el índice. Esto añade auxiliares y no reescribe los resultados del CI.
