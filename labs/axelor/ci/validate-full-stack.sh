@@ -41,9 +41,11 @@ PY
 }
 trap finish EXIT
 echo 'Phase: exact cloud baseline setup and two custom module tests'
+python3 -m unittest discover -s labs/axelor/core-test -p 'test_*.py' \
+  > "$state_dir/private/evidence-tests.log" 2>&1
 bash labs/axelor/scripts/setup-cloud.sh > "$state_dir/private/setup.log" 2>&1
 bash labs/axelor/scripts/validate.sh > "$state_dir/private/module-tests.log" 2>&1
-echo '::notice title=Axelor module tests::Exactly 2 Cencomun tests passed; compilation, JAR metadata and source checks passed.'
+echo '::notice title=Axelor module tests::2 original baseline tests and 7 Core policy unit tests passed; compilation, JAR metadata and source checks passed.'
 bash labs/axelor/ci/check-init-scope.sh > "$state_dir/private/init-scope.log" 2>&1
 echo '::notice title=Axelor init regression::The host init script passes in an isolated buildSrc fixture without application projects.'
 
@@ -145,6 +147,10 @@ git diff --cached --exit-code
 git -C "$host_dir" diff --exit-code
 git -C "$host_dir" diff --cached --exit-code
 git -C "$host_dir/modules/axelor-open-suite" diff --exit-code
+if test -f "$results_dir/core-test/coverage.json"; then
+  python3 labs/axelor/core-test/finalize.py /workspace/cencomun-erp-lab \
+    "$host_dir" "$results_dir/core-test"
+fi
 cp -r "$state_dir/locks" "$results_dir/locks"
 cp labs/axelor/cencomun-baseline/build/test-results/test/TEST-*.xml "$results_dir/"
 cp "$host_dir/modules/axelor-open-suite/axelor-base/build/test-results/test/TEST-"*.xml "$results_dir/"

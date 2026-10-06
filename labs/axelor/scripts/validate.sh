@@ -31,13 +31,24 @@ assert {case.attrib['name'] for case in suite.findall('testcase')} == {
     'registersWithThePlatformInjectorWithoutADatabase()',
     'generatedMetadataIdentifiesTheCustomModule()',
 }
+policy_path = module / 'build/test-results/test/TEST-com.cencomun.core.MoneyPolicyTest.xml'
+policy_count = 0
+if policy_path.exists():
+    policy = ET.parse(policy_path).getroot()
+    policy_count = int(policy.attrib['tests'])
+    assert policy_count == 7, policy.attrib
+    assert all(int(policy.attrib[k]) == 0 for k in ['failures','errors','skipped']), policy.attrib
 artifact = module / 'build/libs/cencomun-baseline-0.1.0.jar'
 with zipfile.ZipFile(artifact) as jar:
     entries = set(jar.namelist())
     assert 'com/cencomun/baseline/module/CencomunModule.class' in entries
     assert 'META-INF/axelor-module.properties' in entries
     assert not any(name.startswith('com/axelor/') for name in entries)
-print('Validated: 2 tests passed, 0 failed/errors/skipped; custom module JAR contains generated metadata.')
+    if policy_count:
+        assert 'ccm-core-v1/manifest.json' in entries
+        import hashlib
+        assert hashlib.sha256(jar.read('ccm-core-v1/manifest.json')).hexdigest() == '28496929050e7cfeea214dbf0ee5cbd589a08ab2adb60e1849877778baaf9aed'
+print(f'Validated: 2 baseline tests + {policy_count} Core policy unit tests passed; 0 failed/errors/skipped; custom JAR and metadata verified.')
 PY
 
 ./scripts/verify-repo.sh

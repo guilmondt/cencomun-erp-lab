@@ -49,7 +49,7 @@ public final class MoneyPolicy {
       costs = costs.add(money(qty.multiply(c)));
     }
     BigDecimal financed = decimal(order.get("financed_amount").asText());
-    if (financed.signum() <= 0 || financed.compareTo(gross) > 0 || financed.stripTrailingZeros().scale() > 2)
+    if (financed.signum() < 0 || financed.compareTo(gross) > 0 || financed.stripTrailingZeros().scale() > 2)
       throw new IllegalArgumentException("Invalid financed amount");
     BigDecimal shipping = decimal(order.get("shipping_expense").asText());
     if (shipping.signum() < 0 || shipping.stripTrailingZeros().scale() > 2

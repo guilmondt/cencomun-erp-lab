@@ -24,6 +24,7 @@ public final class NativeFinance {
     account(company, "COGS", "charge", false); account(company, "COMMISSION", "charge", false);
     account(company, "SHIPPING", "charge", false); account(company, "TAX", "tax", false);
     account(company, "CASH", "cash", false); account(company, "BANK", "cash", false);
+    account(company, "OPENING", "equity", false);
     Model sale = journal(company, "SALE", 2); Model general = journal(company, "GENERAL", 5);
     Model cash = journal(company, "CASH", 4); Model bank = journal(company, "BANK", 4);
     Model config = record(ACCOUNT + "AccountConfig", "company", company,
@@ -33,15 +34,35 @@ public final class NativeFinance {
         "autoMiscOpeJournal", general, "manualMiscOpeJournal", general,
         "saleJournalType", get(sale, "journalType"), "cashJournalType", get(cash, "journalType"));
     set(company, "accountConfig", config); save(company);
+    Model invoiceSeq = sequence(company, "invoice", "INV");
+    set(config, "custInvSequence", invoiceSeq); set(config, "custRefSequence", sequence(company, "invoice", "REF")); save(config);
+    for (String code : List.of("reconcile", "reconcileGroupDraft", "reconcileGroupFinal")) sequence(company, code, code);
     Model year = record(BASE + "Year", "company", company, "code", "CCM-2026", "name", "CCM LAB fiscal 2026",
         "fromDate", LocalDate.of(2026, 1, 1), "toDate", LocalDate.of(2026, 12, 31), "typeSelect", 1);
     record(BASE + "Period", "year", year, "name", "CCM October 2026", "code", "CCM-2026-10",
         "fromDate", LocalDate.of(2026, 10, 1), "toDate", LocalDate.of(2026, 10, 31));
     mode(company, "CASH", 5, cash); mode(company, "BANK", 9, bank);
+    Model condition = record(ACCOUNT + "PaymentCondition", "code", "CCM-NET0", "name", "CCM LAB due immediately");
+    Model term = record(ACCOUNT + "PaymentConditionLine", "paymentCondition", condition,
+        "typeSelect", 1, "sequence", 1, "periodTypeSelect", 1, "paymentTime", 0, "paymentPercentage", new BigDecimal("100"));
+    set(condition, "paymentConditionLineList", new ArrayList<>(List.of(term))); save(condition);
     for (Model product : list(BASE + "Product", "self.code in (?1, ?2, ?3)", "P001", "P002", "P003")) {
       record(ACCOUNT + "AccountManagement", "company", company, "typeSelect", 1,
           "product", product, "saleAccount", acct(company, "REVENUE"), "purchaseAccount", acct(company, "COGS"));
     }
+  }
+
+  public static void opening(Model company, Model customer, Model warehouse, String caseId) {
+    BigDecimal amount = BigDecimal.ZERO;
+    for (Model row : list("com.axelor.apps.stock.db.StockLocationLine", "self.stockLocation = ?1", warehouse))
+      amount = amount.add(((BigDecimal) get(row, "currentQty")).multiply((BigDecimal) get(row, "avgPrice")));
+    if (amount.signum() <= 0) throw new IllegalStateException("Native initial stock has no positive valuation");
+    Model opening = move(company, customer, "GENERAL", null, "CCM-" + caseId + "-OPENING");
+    List<Model> lines = new ArrayList<>();
+    lines.add(line(opening, customer, acct(company, "STOCK"), MoneyPolicy.money(amount), true, 1));
+    lines.add(line(opening, customer, acct(company, "OPENING"), MoneyPolicy.money(amount), false, 2));
+    set(opening, "moveLineList", lines); save(opening);
+    call(service("com.axelor.apps.account.service.move.MoveValidateService"), "accounting", opening);
   }
 
   public static Model tax(Model company, BigDecimal fraction) {
@@ -104,7 +125,7 @@ public final class NativeFinance {
   private static Model move(Model company, Model partner, String journal, Model mode, String origin) {
     Model j = one(ACCOUNT + "Journal", "self.company = ?1 AND self.code = ?2", company, "CCM-" + journal);
     return (Model) call(service("com.axelor.apps.account.service.move.MoveCreateService"), "createMove", j, company,
-        get(company, "currency"), partner, DATE, DATE, mode, null, 2, 0, origin, origin, null);
+        get(company, "currency"), partner, DATE, DATE, mode, null, 2, mode == null ? 6 : 5, origin, origin, null);
   }
   private static Model line(Model move, Model partner, Model account, BigDecimal amount, boolean debit, int n) {
     return (Model) call(service("com.axelor.apps.account.service.moveline.MoveLineCreateService"), "createMoveLine", move, partner, account,
@@ -120,11 +141,18 @@ public final class NativeFinance {
   private static Model journal(Model company, String code, int kind) {
     Model type = one(ACCOUNT + "JournalType", "self.code = ?1", "CCM-" + code);
     if (type == null) type = record(ACCOUNT + "JournalType", "name", "CCM LAB " + code, "code", "CCM-" + code, "technicalTypeSelect", kind);
-    Model sequence = record(BASE + "Sequence", "company", company, "name", "CCM journal " + code, "codeSelect", "accountingMove",
+    Model sequence = record(BASE + "Sequence", "company", company, "name", "CCM journal " + code, "codeSelect", "move",
         "prefixe", "CCM-" + code + "-", "padding", 6, "toBeAdded", 1);
     record(BASE + "SequenceVersion", "sequence", sequence, "startDate", LocalDate.of(2026, 1, 1), "endDate", LocalDate.of(2026, 12, 31), "nextNum", 1L);
     return record(ACCOUNT + "Journal", "company", company, "name", "CCM LAB " + code, "code", "CCM-" + code, "journalType", type,
         "statusSelect", 1, "sequence", sequence);
+  }
+  private static Model sequence(Model company, String code, String prefix) {
+    Model seq = record(BASE + "Sequence", "company", company, "name", "CCM " + prefix,
+        "codeSelect", code, "prefixe", "CCM-" + prefix + "-", "padding", 6, "toBeAdded", 1);
+    record(BASE + "SequenceVersion", "sequence", seq, "startDate", LocalDate.of(2026, 1, 1),
+        "endDate", LocalDate.of(2026, 12, 31), "nextNum", 1L);
+    return seq;
   }
   private static void mode(Model company, String code, int kind, Model journal) {
     Model mode = record(ACCOUNT + "PaymentMode", "name", "CCM LAB " + code, "code", "CCM-" + code, "typeSelect", kind,

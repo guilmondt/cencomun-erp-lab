@@ -73,7 +73,8 @@ public class NativeGateService {
       Model product = one(BASE + "Product", "self.code = ?1", code);
       if (product == null) product = record(BASE + "Product", "code", code, "name", fixture.get("name").asText(),
           "unit", unit, "salePrice", dec(fixture, "price"), "purchasePrice", dec(fixture, "cost"),
-          "costPrice", dec(fixture, "cost"), "stockManaged", true, "costTypeSelect", 3);
+          "costPrice", dec(fixture, "cost"), "stockManaged", true, "costTypeSelect", 3, "productTypeSelect", "storable",
+          "saleCurrency", usd, "purchaseCurrency", usd);
     }
     Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", "C001");
     if (customer == null) customer = record(BASE + "Partner", "partnerSeq", "C001", "name", "CCM synthetic customer C001",
@@ -103,8 +104,11 @@ public class NativeGateService {
           BigDecimal.valueOf(fixture.get("stock").asInt()), cost, cost, unit, move, 2, false,
           BigDecimal.ZERO, supplierLocation, warehouse);
       set(line, "realQty", BigDecimal.valueOf(fixture.get("stock").asInt()));
+      call(move, "addStockMoveLineListItem", line);
     }
     save(move); call(stock, "plan", move); call(stock, "realize", move);
+    p.stage("native-initial-stock-accounting");
+    NativeFinance.opening(company, customer, warehouse, caseId);
     p.evidence.put("initial_stock_move_id", move.getId());
     p.evidence.put("initial_stock_move_status", get(move, "statusSelect"));
   }
@@ -120,6 +124,8 @@ public class NativeGateService {
     set(so, "company", company); set(so, "clientPartner", customer);
     set(so, "currency", get(company, "currency")); set(so, "creationDate", DATE); set(so, "orderDate", DATE);
     set(so, "externalReference", "CCM-" + caseId); set(so, "stockLocation", warehouse); set(so, "inAti", true);
+    set(so, "paymentMode", one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-CASH"));
+    set(so, "paymentCondition", one(ACCOUNT + "PaymentCondition", "self.code = ?1", "CCM-NET0"));
     List<Model> saleLines = new ArrayList<>();
     for (JsonNode item : input.get("lines")) {
       Model product = one(BASE + "Product", "self.code = ?1", item.get("product_id").asText());

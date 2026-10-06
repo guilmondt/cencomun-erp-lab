@@ -37,7 +37,9 @@ public class NativeGateController {
     } catch (Exception error) {
       Throwable root = error;
       while (root.getCause() != null && root.getCause() != root) root = root.getCause();
-      result.put("status", "BLOCKED"); result.put("failed_stage", progress.stage);
+      boolean implementationFailure = root instanceof IllegalStateException
+          || root instanceof IllegalArgumentException || root instanceof ClassCastException;
+      result.put("status", implementationFailure ? "FAIL" : "BLOCKED"); result.put("failed_stage", progress.stage);
       result.put("error_type", root.getClass().getName());
       String message = root.getMessage();
       result.put("error", message == null ? root.getClass().getSimpleName() : message.substring(0, Math.min(1500, message.length())));

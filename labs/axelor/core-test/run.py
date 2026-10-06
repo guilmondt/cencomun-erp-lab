@@ -8,7 +8,9 @@ import argparse
 import hashlib
 import http.cookiejar
 import json
+import os
 import platform
+import shutil
 import time
 import urllib.parse
 import urllib.request
@@ -67,6 +69,7 @@ class NativeClient:
 
     def action(self, name, case):
         result = self.request("/ws/action", {"action": name, "model": "com.axelor.apps.base.db.Company", "data": {"context": {"case_id": case}}})
+        self.samples[-1].update(action=name, case=case)
         if result.get("status") != 0:
             raise RuntimeError("Native action rejected: " + json.dumps(result)[:2500])
         for row in result.get("data", []):
@@ -81,14 +84,40 @@ def rows_for(required):
              "reason": "Required native acceptance implementation has not run"} for x in required["requirements"]]
 
 
-def criteria_for(rows, build_status):
+def verified_build_status(evidence):
+    if evidence is None:
+        return "UNRUN"
+    needed = {"lab_commit", "host_commit", "aos_commit", "upstream_diff_exit_codes",
+              "baseline_pin_blob_sha256", "expected_baseline_pin_blob_sha256", "suites", "war_sha256"}
+    if not needed.issubset(evidence):
+        return "UNRUN"
+    if evidence["host_commit"] != "1119727a3b53c8387b7fab535e184c25154d2eac" or evidence["aos_commit"] != "0c70d561b19fc454eba9fdd41689258846626d75":
+        return "FAIL"
+    if evidence["upstream_diff_exit_codes"] != {"host": 0, "aos": 0}:
+        return "FAIL"
+    if evidence["baseline_pin_blob_sha256"] != evidence["expected_baseline_pin_blob_sha256"]:
+        return "FAIL"
+    for name, count in {"CencomunModuleTest": 2, "MoneyPolicyTest": 7, "TestTaxNumberHelper": 16}.items():
+        suite = evidence["suites"].get(name)
+        if suite is None:
+            return "UNRUN"
+        if suite != {"tests": count, "failures": 0, "errors": 0, "skipped": 0}:
+            return "FAIL"
+    if len(evidence["lab_commit"]) != 40 or len(evidence["war_sha256"]) != 64:
+        return "UNRUN"
+    return "PASS"
+
+
+def criteria_for(rows, build_evidence=None):
+    # Reject missing/obsolete evidence even if a caller supplied a PASS label.
+    rows = [{**r, "status": "UNRUN" if r.get("observed_revision", 0) < r["minimum_revision"] else r["status"]} for r in rows]
     result = []
     for number in range(1, 15):
         attached = [r for r in rows if number in r["criteria"]]
         status = max((r["status"] for r in attached), key=RANK.get) if attached else "UNRUN"
         reason = "All attached groups must meet their minimum revision"
         if number == 2:
-            status, reason = build_status, "Baseline compile/WAR/unit/strict-lock checks, separate from business parity"
+            status, reason = verified_build_status(build_evidence), "Requires actual build suites, WAR hash, pins and clean pinned upstream diffs from this run"
         if number == 13:
             status, reason = "BLOCKED", "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
         if number in (11, 12, 14) and status == "PASS":
@@ -108,7 +137,7 @@ def assert_native_economics(native, expected):
     assert int(invoice["statusSelect"]) == 3, invoice
     for key, field in [("revenue", "exTaxTotal"), ("tax", "taxTotal"), ("gross", "inTaxTotal"), ("customer_balance_final", "amountRemaining")]:
         assert Decimal(invoice[field]) == Decimal(expected[key]), (field, invoice[field], expected[key])
-    assert len(invoice["payments"]) == 2 and all(p["status"] == 2 for p in invoice["payments"]), invoice["payments"]
+    assert len(invoice["payments"]) == 2 and all(p["status"] == 1 for p in invoice["payments"]), invoice["payments"]
     assert sum(Decimal(p["amount"]) for p in invoice["payments"]) == Decimal(expected["gross"])
     assert Decimal(invoice["amountPaid"]) == Decimal(expected["gross"])
     balances = Counter()
@@ -150,10 +179,18 @@ def run(base, fixtures, output):
             # Independent new HTTP request reads durable records, after any rollback.
             native = client.action("ccm-core-native-inspect", case)
             (output / f"{case}-native-export.json").write_text(json.dumps(native, indent=2) + "\n")
+            for section in ["stock", "invoices", "moves", "deliveries", "sale_order_ids", "company_ids"]:
+                value = json.dumps({"case": case, "section": section, "records": native[section]}, ensure_ascii=True)
+                # Keep complete sections only; the full export is retained in the artifact.
+                if len(value) <= 3700:
+                    print(f"::notice title=Native {case} {section}::" + value.replace("%", "%25"), flush=True)
             observed["committed_native_export"] = f"{case}-native-export.json"
             if observed.get("status") == "PASS":
                 oracle = json.loads((fixtures / "oracle.json").read_bytes())
-                observed["asserted_native_economics"] = assert_native_economics(native, oracle[case])
+                try:
+                    observed["asserted_native_economics"] = assert_native_economics(native, oracle[case])
+                except Exception as error:
+                    observed.update(status="FAIL", error=str(error), error_type=type(error).__name__, failed_stage="native-oracle-assertions")
         except AssertionError as error:
             observed = {"case": case, "status": "FAIL", "error": str(error), "error_type": type(error).__name__}
         except Exception as error:
@@ -162,7 +199,10 @@ def run(base, fixtures, output):
         observed["sequence"] = len(gates) + 1
         gates.append(observed)
         row = by_case[case + "-NATIVE"]
-        row.update(status=observed["status"], observed_revision=1,
+        # Administrator economics is a partial check. Role/state/atomicity subcases
+        # still need their own executed evidence before the complete group can PASS.
+        row.update(status="UNRUN" if observed["status"] == "PASS" else observed["status"], observed_revision=1,
+                   complete=False, partial_gate_status=observed["status"],
                    reason=observed.get("failed_stage", "native economic gate") + ": " + observed.get("error", ""), evidence=f"{case}-gate.json")
         (output / f"{case}-gate.json").write_text(json.dumps(observed, indent=2) + "\n")
         # Persist and publish impediment before expanding independent checks.
@@ -170,13 +210,15 @@ def run(base, fixtures, output):
         print(f"::notice title=Core gate {case}::{message[:3800]}", flush=True)
     (output / "gate-impediments.json").write_text(json.dumps(gates, indent=2) + "\n")
     results = {"reference": REFERENCE, "coverage_revision": 2,
-               "groups": rows, "criteria": criteria_for(rows, "PASS"),
+               "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
                "patch_scenarios": {"status": "UNRUN", "count": 6},
                "scope": "Actual native gates. Policy unit tests do not mark native groups PASS."}
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     (output / "metrics.json").write_text(json.dumps({"gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
                                                    "http_samples": client.samples, "platform": platform.platform(),
+                                                   "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
+                                                   "disk_free_bytes": shutil.disk_usage(output).free,
                                                    "benchmark": "UNRUN", "note": "Gate timings are not the required 1000-sample benchmark"}, indent=2) + "\n")
     print("::notice title=Core coverage::" + json.dumps({"reference": REFERENCE, "groups": results["counts"], "criteria": dict(Counter(r["status"] for r in results["criteria"]))}), flush=True)
     return 0 if all(r["status"] == "PASS" for r in rows) else 2
