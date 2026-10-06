@@ -105,7 +105,7 @@ public class CorePurchaseService {
       set(purchase,"requestRate",get(rate,"exchangeRate"));save(purchase);
     }
     Map<String,Object> result=view(purchase);
-    CoreRecordSupport.audit(company,id,"purchase.created",Map.of(),result,"Synthetic purchase draft",CoreRecordSupport.key(input),false);
+    CoreRecordSupport.audit(company,id,"purchase.created",Map.of("exists",false),result,"Synthetic purchase draft",CoreRecordSupport.key(input),false);
     return CoreRecordSupport.remember(company,"purchase.create",input,result);
   }
   @Transactional(rollbackOn=Exception.class)
@@ -134,7 +134,7 @@ public class CorePurchaseService {
     nativeOrder=managed(nativeOrder);purchase=managed(purchase);
     setEnum(purchase,"state","APPROVED");set(purchase,"approvedBy",AuthUtils.getUser());set(purchase,"approvedAt",get(nativeOrder,"validationDateTime"));save(purchase);
     Map<String,Object> result=view(purchase);CoreRecordSupport.audit(company,id(input),"purchase.approved",before,result,input.path("reason").asText(),CoreRecordSupport.key(input),false);
-    CoreRecordSupport.event(company,id(input),"purchase.approved",get(purchase,"decisionRevision").toString(),result);
+    CoreRecordSupport.event(company,id(input),"purchase.approved",get(purchase,"decisionRevision").toString(),result,CoreRecordSupport.key(input),null);
     return CoreRecordSupport.remember(company,"purchase.approve",input,result);
   }
   @Transactional(rollbackOn=Exception.class)
@@ -161,7 +161,8 @@ public class CorePurchaseService {
     result.put("approved_by",get(purchase,"approvedBy")==null?null:get(get(purchase,"approvedBy"),"code"));result.put("approved_at",get(purchase,"approvedAt")==null?null:get(purchase,"approvedAt").toString());
     result.put("native_validated_by",get(nativeOrder,"validatedByUser")==null?null:get(get(nativeOrder,"validatedByUser"),"code"));
     List<Map<String,Object>> lines=new ArrayList<>();for(Model line:(List<Model>)get(nativeOrder,"purchaseOrderLineList"))
-      lines.add(Map.of("id",line.getId(),"native_purchase_id",((Model)get(line,"purchaseOrder")).getId(),"qty",get(line,"qty").toString(),"price",get(line,"price").toString(),"discount",get(line,"discountAmount").toString(),"ex_tax",get(line,"exTaxTotal").toString(),"in_tax",get(line,"inTaxTotal").toString()));
+      lines.add(Map.of("id",line.getId(),"native_purchase_id",((Model)get(line,"purchaseOrder")).getId(),"qty",decimal(get(line,"qty")),"price",decimal(get(line,"price")),"discount",decimal(get(line,"discountAmount")),"ex_tax",decimal(get(line,"exTaxTotal")),"in_tax",decimal(get(line,"inTaxTotal"))));
     result.put("lines",lines);return result;
   }
+  static String decimal(Object value) { return ((BigDecimal)value).stripTrailingZeros().toPlainString(); }
 }

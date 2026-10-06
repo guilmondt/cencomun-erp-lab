@@ -34,7 +34,12 @@ public final class NativeAccess {
         return JpaRepository.of(EntityHelper.getEntityClass(model)).save(model);
       }
     }
-    return JpaRepository.of(EntityHelper.getEntityClass(model)).save(model);
+    // Repository callbacks can invoke guarded ERP services (notably native
+    // InvoicePayment validation). Keep that save inside the same trusted call
+    // boundary; direct CRUD never enters this private module method.
+    try (CoreNativeScope scope = CoreNativeScope.enter()) {
+      return JpaRepository.of(EntityHelper.getEntityClass(model)).save(model);
+    }
   }
   /** Same AOP contract as the pinned stock JpaModelHelper, after native batch clears. */
   public static Model managed(Model model) {

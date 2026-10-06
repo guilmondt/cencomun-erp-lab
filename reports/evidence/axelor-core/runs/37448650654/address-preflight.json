@@ -1,0 +1,65 @@
+{
+  "scope": "native address fixture prerequisite, not a Core group",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "lab_commit": "34192b3b7292dc69a31dda7c95014c2683afee2b",
+  "prepared": {
+    "repository": "com.axelor.apps.base.db.repo.AddressBaseRepository",
+    "address_id": 1
+  },
+  "committed": {
+    "template_id": 5,
+    "full_name": "SYNTHETIC LAB PREFLIGHT 1 SYNTHETIC LAB STREET SYNTHETIC LAB CITY 00000",
+    "lines": [
+      {
+        "field_id": 5276,
+        "required": false,
+        "model": "com.axelor.apps.base.db.Address",
+        "template_id": 5,
+        "field": "floor",
+        "id": 23
+      },
+      {
+        "field_id": 5264,
+        "required": true,
+        "model": "com.axelor.apps.base.db.Address",
+        "template_id": 5,
+        "field": "streetName",
+        "id": 24
+      },
+      {
+        "field_id": 5290,
+        "required": false,
+        "model": "com.axelor.apps.base.db.Address",
+        "template_id": 5,
+        "field": "postBox",
+        "id": 25
+      },
+      {
+        "field_id": 5256,
+        "required": true,
+        "model": "com.axelor.apps.base.db.Address",
+        "template_id": 5,
+        "field": "city",
+        "id": 26
+      },
+      {
+        "field_id": 5278,
+        "required": true,
+        "model": "com.axelor.apps.base.db.Address",
+        "template_id": 5,
+        "field": "zip",
+        "id": 27
+      }
+    ],
+    "read_boundary": "separate-http-after-address-commit",
+    "address_id": 1,
+    "street": "1 Synthetic LAB Street",
+    "country_id": 5,
+    "zip": "00000",
+    "formatted_full_name": "Synthetic LAB preflight\n1 Synthetic LAB Street\nSynthetic LAB City 00000",
+    "city": "Synthetic LAB City"
+  },
+  "status": "PASS",
+  "replay_identical": true,
+  "seconds": 1.504
+}

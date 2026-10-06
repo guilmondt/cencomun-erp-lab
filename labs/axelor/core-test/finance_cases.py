@@ -199,6 +199,7 @@ class FinanceCases:
             operation(evidence);assert_finance_group(evidence,self.fixtures);evidence.update(status='PASS',complete=True)
         except Exception as error:
             evidence.update(status=exception_status(error),error=str(error)[:2500],error_type=type(error).__name__)
+            if hasattr(error,'native_failure'):evidence['native_action_failure']=error.native_failure
             if 'scope' in locals() and scope in self.setups:evidence['fixture_preparation']=self.setups[scope]
         evidence['seconds']=round(time.perf_counter()-start,3);self.results.append(evidence)
         (self.output/(case+'.json')).write_text(json.dumps(evidence,indent=2)+'\n')

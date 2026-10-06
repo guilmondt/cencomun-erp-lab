@@ -90,7 +90,7 @@ public class CoreCashService {
     String id=input.path("id").asText();if(!id.matches("[A-Z0-9][A-Z0-9-]{0,79}"))throw new CoreFault(422,"Invalid cash closing ID");
     Model close=one(CoreOrderService.DB+"CcmCashClose","self.company = ?1 AND self.functionalId = ?2",company,id);
     if(close!=null&&get(close,"state").toString().equals("CONFIRMED"))throw new CoreFault(409,"Confirmed cash closing immutable");
-    Map<String,Object> before=close==null?Map.of():view(close),source=source(company);
+    Map<String,Object> before=close==null?Map.of("exists",false):view(close),source=source(company);
     Map<String,String> expected=(Map<String,String>)source.get("expected"),observed=new LinkedHashMap<>(),differences=new LinkedHashMap<>();
     if(!input.path("observed").isObject() || input.path("observed").size()!=4)throw new CoreFault(422,"All four cash channels required");
     for(String channel:List.of("USD","VES","POS","TRANSFER")) {
@@ -119,8 +119,8 @@ public class CoreCashService {
     setEnum(close,"state","CONFIRMED");set(close,"confirmedBy",AuthUtils.getUser());
     set(close,"confirmedAt",call(service("com.axelor.apps.base.service.app.AppBaseService"),"getTodayDateTime",company) instanceof java.time.ZonedDateTime dt?dt.toLocalDateTime():null);
     set(close,"note",note);save(close);Map<String,Object> result=view(close);
-    CoreRecordSupport.audit(company,input.path("id").asText(),"cash.confirmed",before,result,input.path("reason").asText(),CoreRecordSupport.key(input),false);
-    CoreRecordSupport.event(company,input.path("id").asText(),"cash.confirmed","1",result);
+    CoreRecordSupport.audit(company,input.path("id").asText(),"cash.confirmed",before,result,note.isBlank()?"Synthetic closing matches native ledger":note,CoreRecordSupport.key(input),false);
+    CoreRecordSupport.event(company,input.path("id").asText(),"cash.closing.confirmed","1",result,CoreRecordSupport.key(input),null);
     return CoreRecordSupport.remember(company,"cash.confirm",input,result);
   }
   public static Map<String,Object> view(Model close) {

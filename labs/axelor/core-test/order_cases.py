@@ -45,6 +45,7 @@ def capture_probe(evidence, step, request, read, invoke, validate, result_key,
         step[result_key] = invoke()
     except Exception as error:
         step['probe_exception'] = {'type': type(error).__name__, 'error': str(error)}
+        if hasattr(error,'native_failure'):step['probe_exception']['native_failure']=error.native_failure
         step['status'] = exception_status(error)
         raise
     finally:

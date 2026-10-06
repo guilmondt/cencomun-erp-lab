@@ -24,7 +24,9 @@ public class CoreOrderResource {
   private Response invoke(JsonNode input, boolean create) {
     CoreOrderService service = Beans.get(CoreOrderService.class);
     try {
+      CoreRequestMetrics metrics=CoreRequestMetrics.begin();
       Map<String,Object> result = create ? service.createOrder(input) : service.transition(input);
+      if(metrics!=null){result=new LinkedHashMap<>(result);result.put("_meta",metrics.finish());}
       return Response.status(create && !Boolean.TRUE.equals(result.get("replayed")) ? 201 : 200).entity(result).build();
     } catch (Exception error) {
       Throwable root = error;

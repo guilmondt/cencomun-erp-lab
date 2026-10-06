@@ -50,8 +50,8 @@ class NativeOrderModelTest {
   @Test void semanticAuditCannotBeEditedEvenWithinWorkflowScope() {
     CcmAudit audit=new CcmAudit();audit.setId(1L);
     try(CoreWriteScope scope=CoreWriteScope.enter()) {
-      assertEquals(403,assertThrows(CoreFault.class,()->new CcmAuditWorkflowRepository().save(audit)).status);
-      assertEquals(403,assertThrows(CoreFault.class,()->new CcmAuditWorkflowRepository().remove(audit)).status);
+      assertEquals(403,assertThrows(jakarta.ws.rs.ForbiddenException.class,()->new CcmAuditWorkflowRepository().save(audit)).getResponse().getStatus());
+      assertEquals(403,assertThrows(jakarta.ws.rs.ForbiddenException.class,()->new CcmAuditWorkflowRepository().remove(audit)).getResponse().getStatus());
     }
     assertThrows(CoreFault.class,CoreWriteScope::require);
   }

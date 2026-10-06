@@ -84,4 +84,50 @@ docker run --name "$prefix-app" --network "$prefix" \
   --env CCM_CI_STATE=/workspace/ccm-ci-state \
   --env CCM_AXELOR_RUNTIME=/workspace/ccm-ci-state/runtime \
   --workdir /workspace/cencomun-erp-lab \
-  "$CCM_BUILD_IMAGE" bash labs/axelor/ci/bootstrap.sh
+  "$CCM_BUILD_IMAGE" bash labs/axelor/ci/bootstrap.sh &
+app_runner_pid=$!
+# Supervise only our disposable containers. The build container has no Docker
+# socket; native service recovery requests a DB restart through a private marker.
+while kill -0 "$app_runner_pid" 2>/dev/null; do
+  if test -f "$state_dir/private/baseline-backup.request" && ! test -f "$state_dir/private/baseline-backup.done"; then
+    docker exec "$prefix-db" pg_dump -U ccm_ci -d ccm_axelor_ci -Fc > "$state_dir/private/baseline.dump"
+    sha256sum "$state_dir/private/baseline.dump" | cut -d ' ' -f 1 > "$state_dir/results/baseline-backup.sha256"
+    touch "$state_dir/private/baseline-backup.done"
+  fi
+  if test -f "$state_dir/private/isolated-restore.request" && ! test -f "$state_dir/private/isolated-restore.done"; then
+    docker exec "$prefix-db" createdb -U ccm_ci ccm_axelor_replay
+    docker exec -i "$prefix-db" pg_restore -U ccm_ci -d ccm_axelor_replay --exit-on-error < "$state_dir/private/baseline.dump"
+    python3 - "$state_dir" <<'PY'
+import json,sys
+from pathlib import Path
+root=Path(sys.argv[1]);receipt={'source_database':'ccm_axelor_ci','target_database':'ccm_axelor_replay','backup_sha256':(root/'results/baseline-backup.sha256').read_text().strip(),'restore_exit_code':0,'scope':'Fresh disposable database; same frozen baseline; no upgrade'}
+(root/'results/isolated-restore.json').write_text(json.dumps(receipt)+'\n')
+print('::notice title=Core isolated database restore::'+json.dumps(receipt),flush=True)
+PY
+    touch "$state_dir/private/isolated-restore.done"
+  fi
+  for recovery_phase in primary repeat; do
+  if test -f "$state_dir/private/restart-db-$recovery_phase.request" && ! test -f "$state_dir/private/restart-db-$recovery_phase.done"; then
+    docker exec "$prefix-db" psql -U ccm_ci -d ccm_axelor_ci -Atc 'SELECT pg_postmaster_start_time();' > "$state_dir/private/postgres-before.txt"
+    docker restart "$prefix-db" > /dev/null
+    pg_ready=0
+    for pg_attempt in {1..30}; do
+      if docker exec "$prefix-db" pg_isready -U ccm_ci -d ccm_axelor_ci > /dev/null 2>&1; then pg_ready=1; break; fi
+      sleep 2
+    done
+    test "$pg_ready" = 1
+    docker exec "$prefix-db" psql -U ccm_ci -d ccm_axelor_ci -Atc 'SELECT pg_postmaster_start_time();' > "$state_dir/private/postgres-after.txt"
+    python3 - "$state_dir" "$recovery_phase" <<'PY'
+import json,sys
+from pathlib import Path
+state=Path(sys.argv[1]);before=(state/'private/postgres-before.txt').read_text().strip();after=(state/'private/postgres-after.txt').read_text().strip()
+assert before and after and before!=after,'PostgreSQL was not restarted'
+phase=sys.argv[2]
+(state/'results'/('postgres-restart-'+phase+'.json')).write_text(json.dumps({'postgres_before':before,'postgres_after':after,'postgres_restart_status':'PASS','scope':'Owned disposable CI database only','phase':phase})+'\n')
+(state/'private'/('restart-db-'+phase+'.done')).touch()
+PY
+  fi
+  done
+  sleep 2
+done
+wait "$app_runner_pid"

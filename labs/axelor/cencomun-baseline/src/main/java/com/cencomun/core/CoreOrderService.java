@@ -104,7 +104,7 @@ public class CoreOrderService {
     set(order, "lineList", lines); order = save(order);
     Map<String,Object> result = view(order); result.put("replayed", false);
     remember(company, "order.create", input, result);
-    audit(company, order, "order.created", Map.of(), view(order), "Synthetic LAB create", key(input), false);
+    audit(company, order, "order.created", Map.of("exists",false), view(order), "Synthetic LAB create", key(input), false);
     return result;
   }
 
@@ -151,8 +151,7 @@ public class CoreOrderService {
     remember(managed(company), "order.transition", input, result);
     audit(managed(company), order, "order.transition", before, view(order), reason, key(input), false);
     if (Set.of("APPROVED", "FULFILLED", "SHIPPED", "SETTLED").contains(target))
-      record(DB+"CcmOutboxEvent", "company", managed(company), "coreOrder", order,
-          "objectRef", String.valueOf(get(order,"functionalId")), "eventKey", "order:"+order.getId()+":"+target, "kind", "cashea."+target.toLowerCase(), "payload", encode(view(order)));
+      CoreRecordSupport.event(managed(company),String.valueOf(get(order,"functionalId")),"cashea."+target.toLowerCase(),"1",view(order),key(input),order);
     return result;
   }
 
@@ -168,7 +167,7 @@ public class CoreOrderService {
     Model company = one("com.axelor.apps.base.db.Company", "self.code = ?1", input.path("company_id").asText());
     if (company == null) return;
     Model order = one(DB+"CcmOrder", "self.company = ?1 AND self.functionalId = ?2", company, input.path("id").asText());
-    Map<String,Object> snapshot = order == null ? Map.of() : view(order);
+    Map<String,Object> snapshot = order == null ? Map.of("exists",false) : view(order);
     record(DB+"CcmAudit", "company", company, "actor", AuthUtils.getUser(), "actorCode", AuthUtils.getUser().getCode(),
         "objectRef", input.path("id").asText("invalid"), "kind", "order.denied", "beforeState", encode(snapshot),
         "afterState", encode(snapshot), "reason", reason, "correlation", input.path("request_key").asText("invalid-request"), "rejected", true);

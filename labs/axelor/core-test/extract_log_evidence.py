@@ -8,6 +8,7 @@ import argparse
 import base64
 import hashlib
 import json
+import zlib
 from collections import Counter
 from pathlib import Path
 from run import REFERENCE, assert_native_bank_book, assert_native_fx, assert_native_fx_conversions, criteria_for, rows_for, verify_bundle, review_native_fixture
@@ -31,21 +32,26 @@ def extract(log, output, run_id, commit, fixtures):
             continue  # Truncated or mixed output never establishes a result.
         objects.append(item)
     complete_fragments = {}
+    latest_bundle = {}
     for item in objects:
         if item.get("complete_evidence_case") and item.get("reference") == REFERENCE:
-            complete_fragments.setdefault(item["complete_evidence_case"], []).append(item)
+            key=(item['complete_evidence_case'],item.get('content_sha256'),item.get('encoding','base64'))
+            complete_fragments.setdefault(key,[]).append(item);latest_bundle[item['complete_evidence_case']]=key
     complete_groups = {}
-    for case, parts in complete_fragments.items():
+    for case,key in latest_bundle.items():
+        parts=complete_fragments[key]
         try:
             count = parts[0]["fragment_count"]
             assert count > 0 and len(parts) == count and {p["fragment_index"] for p in parts} == set(range(count))
             assert all(p["fragment_count"] == count and p["content_sha256"] == parts[0]["content_sha256"] for p in parts)
             raw = base64.b64decode("".join(p["base64_fragment"] for p in sorted(parts, key=lambda p: p["fragment_index"])), validate=True)
+            if key[2]=='zlib+base64':raw=zlib.decompress(raw)
+            else:assert key[2]=='base64','Unknown proof encoding'
             assert hashlib.sha256(raw).hexdigest() == parts[0]["content_sha256"]
             item = json.loads(raw)
             assert item["case"] == case and item["reference"] == REFERENCE
             complete_groups[case] = item
-        except (AssertionError, KeyError, TypeError, ValueError):
+        except (AssertionError, KeyError, TypeError, ValueError,zlib.error):
             continue  # No inferred result from missing, duplicate or altered fragments.
     rows = rows_for(verify_bundle(fixtures))
     by_case = {r["case"]: r for r in rows}
@@ -208,10 +214,24 @@ def extract(log, output, run_id, commit, fixtures):
         if row['status']!=item['status'] or row['complete']!=item['complete']:
             item.update(reported_status=item['status'],status=row['status'],complete=row['complete'],review_reason=row['reason'])
         (output/(case+'.json')).write_text(json.dumps(item,indent=2)+'\n')
+    from audit_cases import RUNTIME_CHECKS, review_runtime_group
+    from recovery_cases import RECOVERY_CHECKS, review_recovery_group
+    for cases,review in [(RUNTIME_CHECKS,review_runtime_group),(RECOVERY_CHECKS,review_recovery_group)]:
+        for case,item in complete_groups.items():
+            if case not in cases:continue
+            row=by_case[case];row.update(status=item['status'],observed_revision=item['revision'],complete=item['complete'],evidence=case+'.json',reason=item.get('error','Native runtime execution'))
+            review(row,item,fixtures)
+            if row['status']!=item['status'] or row['complete']!=item['complete']:
+                item.update(reported_status=item['status'],status=row['status'],complete=row['complete'],review_reason=row['reason'])
+            (output/(case+'.json')).write_text(json.dumps(item,indent=2)+'\n')
+    benchmark=complete_groups.get("BENCHMARK-FIXED-PROFILE")
+    repeat=complete_groups.get("ISOLATED-FRESH-REPLAY")
+    for name,item in [("benchmark.json",benchmark),("isolated-repeat.json",repeat)]:
+        if item:(output/name).write_text(json.dumps(item,indent=2)+"\n")
     results = {"source": "complete structured Actions log notices; ZIP availability tracked separately",
         "run_id": run_id, "lab_commit": commit, "reference": REFERENCE, "coverage_revision": 2,
         "log_sha256": hashlib.sha256(log.read_bytes()).hexdigest(),
-        "groups": rows, "counts": dict(Counter(r["status"] for r in rows)), "criteria": criteria_for(rows, proof),
+        "groups": rows, "counts": dict(Counter(r["status"] for r in rows)), "criteria": criteria_for(rows, proof,benchmark,repeat,fixtures),
         "patch_scenarios": {"status": "UNRUN", "count": 6},
         "limitations": "No missing notice is inferred. Economic gates retain incomplete role/state/atomicity coverage. Full metrics/recovery evidence require their actual result files."}
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")

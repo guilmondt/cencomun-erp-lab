@@ -79,7 +79,16 @@ def finalize(repo, host, output):
             path=output/(row['case']+'.json')
             review_api_group(row,json.loads(path.read_text()) if path.exists() else {},repo/'fixtures/ccm-core-v1')
     coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
-    coverage["criteria"] = criteria_for(coverage["groups"], proof)
+    from audit_cases import RUNTIME_CHECKS, review_runtime_group
+    from recovery_cases import RECOVERY_CHECKS, review_recovery_group
+    for cases,review in [(RUNTIME_CHECKS,review_runtime_group),(RECOVERY_CHECKS,review_recovery_group)]:
+        for row in coverage['groups']:
+            if row['case'] in cases:
+                path=output/(row['case']+'.json');review(row,json.loads(path.read_text()) if path.exists() else {},repo/'fixtures/ccm-core-v1')
+    coverage["counts"] = dict(Counter(r["status"] for r in coverage["groups"]))
+    benchmark=json.loads((output/"benchmark.json").read_text()) if (output/"benchmark.json").exists() else None
+    repeat=json.loads((output/"isolated-repeat.json").read_text()) if (output/"isolated-repeat.json").exists() else None
+    coverage["criteria"] = criteria_for(coverage["groups"], proof,benchmark,repeat,repo/"fixtures/ccm-core-v1")
     coverage["build_evidence"] = "build-evidence.json"
     (output / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n")
     print("::notice title=Core verified coverage::" + json.dumps({"groups": coverage["counts"], "criteria": dict(Counter(c["status"] for c in coverage["criteria"])), "upstream_diff_exit_codes": diffs, "build": verified_build_status(proof)}))

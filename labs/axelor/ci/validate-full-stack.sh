@@ -51,7 +51,7 @@ python3 -m unittest discover -s labs/axelor/core-test -p 'test_*.py' \
   }
 bash labs/axelor/scripts/setup-cloud.sh > "$state_dir/private/setup.log" 2>&1
 bash labs/axelor/scripts/validate.sh > "$state_dir/private/module-tests.log" 2>&1
-echo '::notice title=Axelor module tests::2 original baseline tests and 7 Core policy unit tests passed; compilation, JAR metadata and source checks passed.'
+echo '::notice title=Axelor module tests::22 baseline/money/order/security unit tests passed; compilation, JAR metadata and source checks passed.'
 bash labs/axelor/ci/check-init-scope.sh > "$state_dir/private/init-scope.log" 2>&1
 echo '::notice title=Axelor init regression::The host init script passes in an isolated buildSrc fixture without application projects.'
 
@@ -104,7 +104,7 @@ assert int(suite.attrib['tests']) == 8, suite.attrib
 assert all(int(suite.attrib[k]) == 0 for k in ['errors','failures','skipped']), suite.attrib
 (results/'native-fixture-tests.json').write_text(json.dumps(suite.attrib,indent=2)+'\n')
 print('Native address callback regression: 8 cases passed, no failures/errors/skips; no database coverage claim')
-for name,count in [('NativePermissionFilterTest',5),('NativeInvoiceRuntimeTest',2),('NativeOrderModelTest',4),('NativeBankCsvTest',3),('NativeFinanceModelTest',2)]:
+for name,count in [('NativePermissionFilterTest',5),('NativeInvoiceRuntimeTest',2),('NativeOrderModelTest',4),('NativeBankCsvTest',3),('NativeFinanceModelTest',5)]:
     path=Path('/workspace/cencomun-erp-lab/labs/axelor/cencomun-baseline/build/full/test-results/test')/f'TEST-com.cencomun.core.{name}.xml'
     suite=ET.parse(path).getroot()
     assert int(suite.attrib['tests']) == count, suite.attrib
@@ -167,17 +167,76 @@ python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
 echo 'Phase: focused native address save, required metadata and post-commit replay'
 python3 /workspace/cencomun-erp-lab/labs/axelor/ci/address-preflight.py \
   http://127.0.0.1:8080/axelor-erp "$results_dir/address-preflight.json"
-echo 'Phase: CO00 then TAX01-W, native Core gates and strict coverage publication'
-python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/run.py \
-  --base http://127.0.0.1:8080/axelor-erp \
-  --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 \
-  --output "$results_dir/core-test" || core_status=$?
-stop_app
-echo 'Phase: server restart against the same disposable database'
-start_app restart
-python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
-  http://127.0.0.1:8080/axelor-erp "$results_dir/smoke-restart.json" 900
-stop_app
+request_host() {
+  local operation=$1
+  touch "$state_dir/private/$operation.request"
+  local completed=0
+  for host_attempt in {1..60}; do
+    if test -f "$state_dir/private/$operation.done"; then completed=1; break; fi
+    sleep 2
+  done
+  test "$completed" = 1
+}
+# This dump is private: it can contain synthetic login hashes. Never upload it.
+# The snapshot precedes all Core fixtures, actors, orders and benchmark loads.
+request_host baseline-backup
+for execution_phase in primary repeat; do
+  phase_output="$results_dir/core-test"
+  if test "$execution_phase" = repeat; then
+    phase_output="$results_dir/core-test-repeat"
+    request_host isolated-restore
+    python3 - "$AXELOR_CONFIG" <<'PYCONFIG'
+from pathlib import Path
+import sys
+p=Path(sys.argv[1]);text=p.read_text();assert 'jdbc:postgresql://postgres:5432/ccm_axelor_ci' in text
+p.write_text(text.replace('jdbc:postgresql://postgres:5432/ccm_axelor_ci','jdbc:postgresql://postgres:5432/ccm_axelor_replay'))
+PYCONFIG
+    start_app repeat
+    python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
+      http://127.0.0.1:8080/axelor-erp "$results_dir/smoke-repeat.json" 900
+  fi
+  echo "Phase: $execution_phase all 34 groups, then frozen benchmark"
+  phase_status=0
+  if test "$execution_phase" = primary; then
+    python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/run.py \
+      --base http://127.0.0.1:8080/axelor-erp --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 --output "$phase_output" || phase_status=$?
+    python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/benchmark.py \
+      --base http://127.0.0.1:8080/axelor-erp --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 --output "$phase_output"
+  else
+    python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/run.py \
+      --base http://127.0.0.1:8080/axelor-erp --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 --output "$phase_output" > "$state_dir/private/repeat-core.log" 2>&1 || phase_status=$?
+    python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/benchmark.py \
+      --base http://127.0.0.1:8080/axelor-erp --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 --output "$phase_output" > "$state_dir/private/repeat-benchmark.log" 2>&1
+  fi
+  # Recovery is independently attempted even when economic contract groups FAIL.
+  app_pid_before="$app_pid"
+  stop_app
+  request_host "restart-db-$execution_phase"
+  start_app "$execution_phase-restart"
+  smoke_output="$results_dir/smoke-restart.json"
+  if test "$execution_phase" = repeat; then smoke_output="$results_dir/smoke-repeat-restart.json"; fi
+  python3 /workspace/cencomun-erp-lab/labs/axelor/ci/smoke.py \
+    http://127.0.0.1:8080/axelor-erp "$smoke_output" 900
+  python3 - "$results_dir" "$app_pid_before" "$app_pid" "$execution_phase" "$phase_output" <<'PYRESTART'
+import json,sys
+from pathlib import Path
+root=Path(sys.argv[1]);phase=sys.argv[4];receipt=json.loads((root/('postgres-restart-'+phase+'.json')).read_text());receipt.update(app_pid_before=int(sys.argv[2]),app_pid_after=int(sys.argv[3]))
+assert receipt['app_pid_before']!=receipt['app_pid_after']
+(Path(sys.argv[5])/'services-restart.json').write_text(json.dumps(receipt,indent=2)+'\n')
+print('Actual Core service restart:',json.dumps(receipt))
+PYRESTART
+  if test "$execution_phase" = primary; then
+    python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/recovery_cases.py \
+      --base http://127.0.0.1:8080/axelor-erp --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 --output "$phase_output" --restart-receipt "$phase_output/services-restart.json"
+  else
+    python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/recovery_cases.py \
+      --base http://127.0.0.1:8080/axelor-erp --fixtures /workspace/cencomun-erp-lab/fixtures/ccm-core-v1 --output "$phase_output" --restart-receipt "$phase_output/services-restart.json" > "$state_dir/private/repeat-recovery.log" 2>&1
+  fi
+  stop_app
+  python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/finalize.py /workspace/cencomun-erp-lab "$host_dir" "$phase_output" > "$state_dir/private/finalize-$execution_phase.log" 2>&1
+  if test "$phase_status" != 0; then core_status=$phase_status; fi
+ done
+python3 /workspace/cencomun-erp-lab/labs/axelor/core-test/repeat.py "$results_dir" /workspace/cencomun-erp-lab/fixtures/ccm-core-v1
 cd /workspace/cencomun-erp-lab
 ./scripts/verify-repo.sh
 git diff --exit-code

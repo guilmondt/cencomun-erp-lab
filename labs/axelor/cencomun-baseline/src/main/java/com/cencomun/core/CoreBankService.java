@@ -81,7 +81,7 @@ public class CoreBankService {
     }
     Map<String,Object> result=new LinkedHashMap<>();result.put("id",input.path("id").asText());result.put("rows",rows.size());result.put("created",created);result.put("duplicates",duplicates);result.put("results",results);result.put("native_statement_id",statement.getId());result.put("file_hash",fileHash);
     record(CoreOrderService.DB+"CcmBankImport","company",company,"accountCode",account,"fileHash",fileHash,"bankStatement",statement,"result",CoreOrderService.encode(result));
-    CoreRecordSupport.audit(company,input.path("id").asText(),"bank.imported",Map.of(),result,input.path("reason").asText(),CoreRecordSupport.key(input),false);
+    CoreRecordSupport.audit(company,input.path("id").asText(),"bank.imported",Map.of("exists",false),result,input.path("reason").asText(),CoreRecordSupport.key(input),false);
     return CoreRecordSupport.remember(company,"bank.import",input,result);
   }
   static void reconcileNative(Model row,Model candidate,String reason) {

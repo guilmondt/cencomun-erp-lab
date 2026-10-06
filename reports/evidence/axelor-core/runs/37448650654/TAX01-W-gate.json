@@ -1,0 +1,37 @@
+{
+  "case": "TAX01-W",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "actor": "admin",
+  "verified_files": 16,
+  "status": "BLOCKED",
+  "failed_stage": "native-cogs-and-settlement",
+  "error_type": "jakarta.ws.rs.ForbiddenException",
+  "error": "Permission denied: authenticated Core workflow required for native writes",
+  "native_stack": [
+    "com.cencomun.core.CoreNativeScope.require(CoreNativeScope.java:10)",
+    "com.cencomun.core.CoreNativePermissionInterceptor.invoke(CoreNativePermissionInterceptor.java:9)",
+    "com.axelor.apps.account.db.repo.InvoicePaymentManagementRepository.save(InvoicePaymentManagementRepository.java:33)",
+    "com.axelor.apps.account.db.repo.InvoicePaymentManagementRepository.save(InvoicePaymentManagementRepository.java:27)",
+    "com.cencomun.core.NativeAccess.save(NativeAccess.java:37)",
+    "com.cencomun.core.NativeFinance.postSettlement(NativeFinance.java:255)",
+    "com.cencomun.core.NativeFinance.post(NativeFinance.java:218)",
+    "com.cencomun.core.NativeGateService.sell(NativeGateService.java:156)",
+    "com.cencomun.core.NativeGateController.run(NativeGateController.java:45)",
+    "com.cencomun.core.NativeGateController.execute(NativeGateController.java:24)",
+    "com.axelor.meta.ActionHandler.call(ActionHandler.java:230)",
+    "com.axelor.meta.schema.actions.ActionMethod.evaluate(ActionMethod.java:63)"
+  ],
+  "phase_evidence": {
+    "planned_initial_stock_move_id": 3,
+    "planned_initial_stock_move_status": 2,
+    "initial_stock_move_id": 3,
+    "initial_stock_move_status": 3,
+    "native_created_sale_order_status": 1,
+    "sale_order_id": 2,
+    "delivery_id": 4,
+    "invoice_id": 2
+  },
+  "committed_native_export": "TAX01-W-native-export.json",
+  "seconds": 6.447,
+  "sequence": 2
+}

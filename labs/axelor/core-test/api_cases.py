@@ -164,7 +164,17 @@ class ApiCases:
         self.orders=OrderCases(admin,base,fixtures,output,rows);self.finance=FinanceCases(admin,base,fixtures,output,rows)
         self.results=[];self.denials=[];self.adapter=None;self.setup_error=None
     def actor(self,role):return self.orders.actor(role)
-    def snapshot(self,id,kind='order'):return self.orders.snapshot(id) if kind=='order' else self.finance.snapshot(id)
+    def snapshot(self,id,kind='order'):
+        if kind=='order':return self.orders.snapshot(id)
+        value=self.finance.snapshot(id)
+        # Retain actual identities for this object and a canonical digest/count of
+        # all bank rows, rather than duplicating a thousand unrelated rows in
+        # every role denial. Finance/concurrency acceptance exports full rows.
+        bank_rows=sorted(value['bank_rows'],key=lambda row:row['native_transaction_id'])
+        value['native_bank_rows_summary']={'count':len(bank_rows),'canonical_sha256':hashlib.sha256(json.dumps(bank_rows,sort_keys=True,separators=(',',':')).encode()).hexdigest()}
+        value['bank_rows']=[row for row in bank_rows if row['reference'].startswith(id)]
+        if kind=='rate':value['native_fx']=self.admin.action('ccm-core-fx-inspect','FX')
+        return value
     def native_call(self,role,path,payload=None,client=None):
         c=client or self.actor(role)
         try:result=c.request(path,payload);return {'http_status':c.last_status,'response':result}
@@ -188,7 +198,14 @@ class ApiCases:
     def step(self,evidence,name,operation):
         step={'name':name,'executed':True,'status':'UNRUN','read_boundary':BOUNDARY};evidence['steps'].append(step)
         try:operation(step);step['status']='PASS'
-        except Exception as error:step.update(status=exception_status(error),error=str(error));raise
+        except Exception as error:
+            step.update(status=exception_status(error),error=str(error))
+            if hasattr(error,'native_failure'):step['native_action_failure']=error.native_failure
+            if isinstance(error,urllib.error.HTTPError):
+                raw=error.read().decode(errors='replace');step['http_status']=error.code
+                try:step['response']=json.loads(raw)
+                except ValueError:step['response']={'error':raw[:3000]}
+            raise
         return step
     def attempted(self,evidence,name,id,kind,role,path,payload,expected,key=None,native=False):
         def operation(step):
@@ -203,7 +220,7 @@ class ApiCases:
         record.update(self.native_call(role,path,payload) if native else self.api(role,path,payload,payload.get('request_key')))
         record['after']=self.snapshot(id,kind)
         try:assert_permission_denial(record);record.update(status='PASS',executed=True)
-        except Exception as error:record.update(status='FAIL',executed=True,error=str(error));raise
+        except Exception as error:record.update(status='FAIL',executed=True,error=str(error))
         return record
     def group(self,case,operation):
         evidence={'case':case,'reference':REFERENCE,'revision':2,'complete':False,'steps':[]};self.current=evidence;start=time.perf_counter()
@@ -353,7 +370,7 @@ class ApiCases:
             body=self.finance.body('MCP-DENY-CS','prepare',observed={'USD':'100.00','VES':'4000.00','POS':'50.00','TRANSFER':'30.00'});r=self.native_call('operator','/ws/ccm/lab/finance/cash/prepare',body);e['fixture_attempts'].append({'request':body,**r});assert r['http_status']==200,r
             baseline['confirmClosing']=self.snapshot('MCP-DENY-CS','finance');cases.append(('confirmClosing','MCP-DENY-CS','finance','/ws/ccm/lab/finance/cash/confirm',self.finance.body('MCP-DENY-CS','mcp-deny-confirm',note='Synthetic permission check')))
             fx=self.admin.action('ccm-core-fx-inspect','FX');assert not any(r['from_date']=='2026-10-04' for r in fx['rates'])
-            baseline['authorizeRate']={'date':'2026-10-04','rate':'ABSENT'};cases.append(('authorizeRate','MCP-DENY-RATE','finance','/ws/ccm/lab/currency/authorize',self.finance.body('MCP-DENY-RATE','mcp-deny-rate',date='2026-10-04',rate='42.000000',reason='Synthetic permission check')))
+            baseline['authorizeRate']={'date':'2026-10-04','rate':'ABSENT','native_fx':fx};cases.append(('authorizeRate','MCP-DENY-RATE','rate','/ws/ccm/lab/currency/authorize',self.finance.body('MCP-DENY-RATE','mcp-deny-rate',date='2026-10-04',rate='42.000000',reason='Synthetic permission check')))
             csv='account,date,reference,currency,amount,description\r\nBANK-USD-001,2026-10-01,MCP-DENY-BANK,USD,40.00,Synthetic permission check\r\n'
             body=self.finance.body('MCP-DENY-BANK','import',account='BANK-USD-001',csv_base64=base64.b64encode(csv.encode()).decode());r=self.native_call('operator','/ws/ccm/lab/finance/bank/import',body);e['fixture_attempts'].append({'request':body,**r});assert r['http_status']==200,r
             row=next(row for row in self.snapshot('MCP-DENY-BANK','finance')['bank_rows'] if row['reference']=='MCP-DENY-BANK');baseline['reconcileBank']=row

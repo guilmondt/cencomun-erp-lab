@@ -834,3 +834,36 @@ VAL/cancelación siguen FAIL funcionales. Matriz10PASS/6FAIL/18UNRUN.
 3. Repetir cuatro ciclos completos, verificando503 real y snapshots de rollback,
    entrega/factura/COGS/liquidación nativos, denegaciones, replay y oráculo.
    Agrupar esa validación con seis grupos financieros; aún no verificada en ERP.
+
+
+## B35 — CI19 (34192b3): callback de pago fuera del scope; revisor no canónico
+
+Causa observada: InvoicePaymentManagementRepository.save llama al servicio
+guardado InvoicePaymentValidateService; NativeAccess.save no abría el scope
+privado que sí abre NativeAccess.call. ForbiddenException abortó la liquidación
+y sus cuatro ciclos. Dos gates admin BLOCKED, cuatro ciclos y pagos FX FAIL.
+No es un fallo nuevo del ERP ni resuelve la comparación. Compra y banca nativas
+fueron PASS en ese mismo SHA; evitar transferir los PASS económicos anteriores.
+
+1. Abrir scope también alrededor del save del repositorio ERP, después de
+   políticas de rol/compañía, sin tocar callbacks/validaciones/upstream.
+2. Repetir ambos gates, cuatro ciclos completos, rollbacks503 y pagos FX después
+   de commit; deben verse invoice/payment/Move ACCOUNTED y AR/stock/oráculo.
+3. Repetir denegaciones de servicios internos/nativos y CRUD. El scope es
+   package-private, ThreadLocal, no accesible desde la fachada o CRUD.
+
+PERM-API-NATIVE respondió403 pero su revisor comparó 1.005 filas bancarias en
+otro orden. El diagnóstico del run confirma mismas filas por ID, no se cambia
+su FAIL congelado. Ordenar export por ID y digest canónico conserva cada valor.
+La paridad MCP de compra comparó199.99 contra199.9900000000 (y qty/discount
+con otras escalas); serializar BigDecimal nativo sin ceros sobrantes conserva
+importe/FK y permite comparar respuesta completa, nunca sólo un marcador.
+Verificar toda matriz de runtime de nuevo; no aprobar READ privado ni seguridad
+por el diagnóstico o tests sin base de datos. Nuevos guards cubren importación
+y creación de línea bancaria directas, sin ampliar permisos.
+
+Validación local:61Python/22módulo/9ABI+guard nativosPASS, compile/JAR offline.
+Una prueba aislada inicial falló por constructor de repo sin Guice; se inicializó
+con los helpers nativos reales existentes y se repitió, sin ejecutar persistencia.
+Aceptación de nuevos eventos/auditoría/recuperación/benchmark/repetición todavía
+pendiente del CI siguiente. ZIP sa16 bloqueado una vez; red conservada.

@@ -46,6 +46,9 @@ public class CoreReadResource {
       @QueryParam("q") @DefaultValue("") String text,
       @QueryParam("page") @DefaultValue("1") int page,
       @QueryParam("page_size") @DefaultValue("100") int size) {
+    return CoreRequestMetrics.measured(() -> searchMeasured(companyCode,text,page,size));
+  }
+  private Map<String,Object> searchMeasured(String companyCode,String text,int page,int size) {
     Model company = company(companyCode);
     if (page < 1 || size < 1 || size > 1000 || text.length() > 200) throw new BadRequestException("Invalid search bounds");
     String pattern = "%" + text.toLowerCase(Locale.ROOT) + "%";

@@ -32,9 +32,14 @@ final class CoreRecordSupport {
         "objectRef",id,"kind",kind,"beforeState",CoreOrderService.encode(before),"afterState",CoreOrderService.encode(after),
         "reason",reason,"correlation",correlation,"rejected",denied);
   }
-  static void event(Model company,String id,String kind,String suffix,Map<String,Object> payload) {
-    record(CoreOrderService.DB+"CcmOutboxEvent","company",managed(company),"objectRef",id,"eventKey",kind+":"+id+":"+suffix,
-        "kind",kind,"payload",CoreOrderService.encode(payload));
+  static void event(Model company,String id,String kind,String suffix,Map<String,Object> payload,String correlation,Model order) {
+    String eventId=kind+":"+id+":"+suffix;
+    Object occurred=call(service("com.axelor.apps.base.service.app.AppBaseService"),"getTodayDateTime",company);
+    Map<String,Object> envelope=new LinkedHashMap<>();envelope.put("schema_version",1);envelope.put("event_id",eventId);
+    envelope.put("type",kind);envelope.put("object_id",id);envelope.put("company_id",get(company,"code"));
+    envelope.put("actor",AuthUtils.getUser().getCode());envelope.put("occurred_at",occurred.toString());envelope.put("correlation_id",correlation);envelope.put("data",payload);
+    record(CoreOrderService.DB+"CcmOutboxEvent","company",managed(company),"coreOrder",order,"objectRef",id,"eventKey",eventId,
+        "kind",kind,"payload",CoreOrderService.encode(envelope));
   }
   private CoreRecordSupport(){}
 }

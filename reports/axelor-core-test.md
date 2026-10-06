@@ -1,5 +1,114 @@
 # Core Test Axelor — ejecución en curso
 
+Último CI revisado: [37448650654](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37448650654), commit `34192b3b7292dc69a31dda7c95014c2683afee2b`, FAILURE.
+**18 PASS / 9 FAIL / 1 BLOCKED / 6 UNRUN**. No se declara terminada la comparación.
+Fuente secundaria: notices completos del log, revisores congelados del SHA,
+`reports/evidence/axelor-core/runs/37448650654/evidence-source.json`.
+ZIP bloqueado en productionresultssa16.blob.core.windows.net, un intento;
+no se amplió ni publicó la red pendiente.
+
+Compras PO01–09/revisión, caja, conciliación BANK01–05 y 1.000 filas concurrentes
+PASS en este commit. Las seis rutas API y creación concurrente PASS. MCP conserva
+cuatro lecturas verificadas, pero la comparación completa de creación falla por
+escalas decimales distintas del resultado nativo persistido. Los ocho comandos
+críticos MCP y sus denegaciones/auditorías nativas PASS; **PERM-API-NATIVE FAIL**,
+no hay aprobación completa de seguridad ni CRUD privado en este run.
+
+Gates económicos de administrador CO00/TAX01-W: BLOCKED por una regresión del
+módulo: el guard del servicio InvoicePaymentValidate se invoca desde el callback
+de InvoicePaymentManagementRepository.save fuera del scope privado. El rollback
+real impidió la liquidación. Los cuatro ciclos completos y pagos FX FAIL;
+SEARCH quedó BLOCKED sólo en sus subcasos dependientes de factura CO00.
+Los PASS del CI anterior se conservan únicamente como historia.
+
+Correcciones preparadas para el próximo CI:
+
+1. Abrir el scope nativo privado también alrededor de NativeAccess.save de entidades
+   ERP, después de las políticas del servicio. Conservar guards de llamadas directas,
+   roles, compañía, validaciones y atomicidad; repetir pagos, rollback y asientos.
+2. Ordenar filas bancarias por identidad nativa y serializar decimales de líneas de
+   compra en formato estable. CI19 devolvió HTTP403 y las mismas 1.005 filas después
+   de ordenar; su FAIL original no se cambia. Verificar de nuevo toda la matriz,
+   CRUD privado, endpoints internos/nativos, lectura autorizada de pedidos y MCP.
+3. Ejecutar agrupados impuestos concurrentes, conteos nativos, auditoría semántica
+   e inmutabilidad, metadatos, pérdida real de respuesta y reinicio, outbox durable.
+   El consumidor SQLite pertenece sólo al consumidor externo, nunca al ERP.
+4. Cargar benchmark congelado: 1.000 productos, 100 clientes, 1.000 pedidos NEW,
+   1.000 filas bancarias; 20 warmups y 1.000 solicitudes seriales por búsqueda,
+   inventario y creación. Contadores JDBC reales de Hibernate por sesión, sin SQL
+   ni datos sensibles; excluir autenticación/serialización/hilos de secuencia.
+5. Respaldar antes de fixtures Core y restaurar en otra base desechable del runner;
+   repetir los 34 grupos y benchmark con el mismo WAR/pins. Dumps y credenciales
+   sintéticas quedan privados. No es una actualización ni habilita criterio 13.
+
+Validación local del bloque nuevo: 61 regresiones Python; 22 tests de módulo y
+9 de API/modelos/repositorios nativos, 0 fallos/errores/skips; compile/JAR offline.
+La primera prueba aislada del repositorio encontró Guice sin inicializar; se usó
+el fixture constructor nativo existente y se repitió con éxito. No valida DB.
+CI19 ejecutó 62 tests Java sin fallos y arranque/reinicio autenticados en
+428,56/354,46 s. Métricas de gates/arranque no sustituyen al benchmark congelado.
+
+| Grupo completo | Estado CI34192b3 |
+| --- | --- |
+| CO00-NATIVE | FAIL |
+| CO01-NATIVE | FAIL |
+| TAX01-S-NATIVE | FAIL |
+| TAX01-W-NATIVE | FAIL |
+| PROD01-04 | PASS |
+| VAL01-04 | FAIL |
+| STATE01-04 | PASS |
+| INV01-03-INSUFFICIENT | PASS |
+| FX01-03-MONEY01-03 | FAIL |
+| PO01-09-NATIVE | PASS |
+| PO07-09-REVISION-SELF | PASS |
+| CASH00-06-NATIVE | PASS |
+| BANK-BOOK-FIXTURE | PASS |
+| BANK01-05-NATIVE | PASS |
+| API01-06-SIX-ROUTES | PASS |
+| IDEM01-02-CREATE-CONCURRENT | PASS |
+| PERM-API-NATIVE | FAIL |
+| CASH04-06-HTTP-IMMUTABLE | PASS |
+| SEARCH01-04-NATIVE | BLOCKED |
+| TAX02-04-IDEM-CONCURRENT | UNRUN |
+| BANK-CONCURRENT-1000 | PASS |
+| MCP01-06-STDIO | FAIL |
+| IDEM03-LOST-RESTART | UNRUN |
+| IDEM04-EVENTS-RECOVERY | UNRUN |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS |
+| AUDIT01-03-NATIVE | UNRUN |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | UNRUN |
+| SUPPORTED-CONFIGURATION | UNRUN |
+| STATE-UNKNOWN-ATOMIC | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS |
+| STATE-WEB-NO-GUIDE | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | PASS |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | PASS |
+
+| Criterio | Estado CI34192b3 |
+| --- | --- |
+| 1 | FAIL |
+| 2 | PASS |
+| 3 | FAIL |
+| 4 | FAIL |
+| 5 | FAIL |
+| 6 | UNRUN |
+| 7 | UNRUN |
+| 8 | UNRUN |
+| 9 | FAIL |
+| 10 | FAIL |
+| 11 | FAIL |
+| 12 | BLOCKED |
+| 13 | BLOCKED |
+| 14 | UNRUN |
+
+Coste negativo aceptado y las tres cancelaciones confirmadas rechazadas siguen
+siendo FAIL funcionales; se conservan expectativas y evidencia causal. Criterio 2
+deriva de builds/pins/diffs reales; 13 BLOCKED por actualización aplazada, seis
+escenarios UNRUN. Todo lo nuevo requiere ejecución CI del nuevo commit.
+
+## Historia — CI7d9702f
+
 Comparación **incompleta**. Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`,
 34 grupos y 14 criterios, cobertura revisión 2; fixtures/oráculo/pins intactos.
 

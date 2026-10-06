@@ -32,6 +32,9 @@ public class CoreApiReadResource {
   }
   @GET @Path("inventory/{productId}")
   public Map<String,Object> inventory(@PathParam("productId")String productCode,@QueryParam("company_id")String companyCode,@QueryParam("warehouse")String warehouseName) {
+    return CoreRequestMetrics.measured(() -> inventoryMeasured(productCode,companyCode,warehouseName));
+  }
+  private Map<String,Object> inventoryMeasured(String productCode,String companyCode,String warehouseName) {
     Model company=company(companyCode),warehouse=one("com.axelor.apps.stock.db.StockLocation","self.company = ?1 AND self.name = ?2",company,warehouseName);
     if(warehouse==null)throw new ForbiddenException("Native inventory warehouse company denied");
     Model product=one("com.axelor.apps.base.db.Product","self.code = ?1",productCode);

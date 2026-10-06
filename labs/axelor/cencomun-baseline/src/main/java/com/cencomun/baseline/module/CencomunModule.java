@@ -22,6 +22,8 @@ public class CencomunModule extends AxelorModule {
           java.util.Map.entry("com.axelor.apps.account.service.payment.invoice.payment.InvoicePaymentValidateService",java.util.Set.of("validate")),
           java.util.Map.entry("com.axelor.apps.account.service.payment.paymentvoucher.PaymentVoucherConfirmService",java.util.Set.of("confirmPaymentVoucher")),
           java.util.Map.entry("com.axelor.apps.account.service.move.MoveValidateService",java.util.Set.of("accounting")),
+          java.util.Map.entry("com.axelor.apps.bankpayment.service.bankstatement.BankStatementImportService",java.util.Set.of("runImport")),
+          java.util.Map.entry("com.axelor.apps.bankpayment.service.bankstatementline.BankStatementLineCreationService",java.util.Set.of("createBankStatementLine")),
           java.util.Map.entry("com.axelor.apps.bankpayment.service.bankreconciliation.BankReconciliationLineService",java.util.Set.of("reconcileBRLAndMoveLine")),
           java.util.Map.entry("com.axelor.apps.bankpayment.service.bankreconciliation.BankReconciliationValidateService",java.util.Set.of("validate")));
       guarded.forEach((name,methods)-> {

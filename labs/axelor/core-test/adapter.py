@@ -42,6 +42,9 @@ def normalize(path,result):
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args):pass
     def reply(self,status,value):
+        if status>=400 and 'code' not in value:
+            value={'code':str(status),'message':str(value.get('error','Request rejected')),
+                   'correlation_id':self.headers.get('Idempotency-Key') or str(uuid.uuid4())}
         raw=json.dumps(value).encode();self.send_response(status);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(raw)));self.end_headers();self.wfile.write(raw)
     def dispatch(self):
         url=urllib.parse.urlsplit(self.path);target=route(self.command,url.path)

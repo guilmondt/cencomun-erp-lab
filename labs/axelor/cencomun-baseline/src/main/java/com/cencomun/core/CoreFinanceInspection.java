@@ -22,7 +22,7 @@ public class CoreFinanceInspection {
   public Map<String,Object> inspect(String id) {
     NativeIndependentController.fixtureAdmin();Model company=one("com.axelor.apps.base.db.Company","self.code = ?1","CCM-LAB-001");
     Map<String,Object> result=business(company,id);result.put("native_cash",CoreCashService.source(company));
-    result.put("bank_rows",list(CoreOrderService.DB+"CcmBankRow","self.company = ?1",company).stream().map(CoreBankService::view).toList());
+    result.put("bank_rows",list(CoreOrderService.DB+"CcmBankRow","self.company = ?1",company).stream().sorted(java.util.Comparator.comparing(Model::getId)).map(CoreBankService::view).toList());
     result.put("bank_imports",list(CoreOrderService.DB+"CcmBankImport","self.company = ?1",company).stream().map(m->Map.of("id",m.getId(),"file_hash",get(m,"fileHash"),"native_statement_id",((Model)get(m,"bankStatement")).getId())).toList());
     result.put("keys",list(CoreOrderService.DB+"CcmRequestKey","self.company = ?1 AND self.objectRef = ?2",company,id).stream().map(k->Map.of("id",k.getId(),"domain",get(k,"domain"),"key",get(k,"requestKey"))).toList());
     result.put("events",list(CoreOrderService.DB+"CcmOutboxEvent","self.company = ?1 AND self.objectRef = ?2",company,id).stream().map(e->Map.of("id",e.getId(),"event_key",get(e,"eventKey"),"kind",get(e,"kind"),"delivered",get(e,"delivered"),"attempts",get(e,"attempts"))).toList());

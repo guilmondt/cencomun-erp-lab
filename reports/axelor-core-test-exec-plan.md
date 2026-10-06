@@ -646,3 +646,23 @@ un bloque de seis grupos API/stdio/permisos; restringir private audit/key/outbox
 y escrituras MCP en servicios, acciones oficiales y CRUD. Guardas Guice son
 extensión Cencomun LAB, upstream intacto. Todo PASS requiere runtime del commit;
 seguir impuestos concurrentes, auditoría, eventos, recuperación y benchmark.
+
+
+Continuación B35 (2026-10-06): CI34192b3 ejecutó los seis grupos API/MCP y el
+bloque financiero. Matriz18PASS/9FAIL/1BLOCKED/6UNRUN; compra/caja/banco1000
+PASS. Scope de servicios nativos perdió el callback del repositorio de pagos:
+corregir sólo NativeAccess.save autorizado, conservar denegación de llamadas
+directas. Filas bancarias iguales pero desordenadas y escalas de líneas de
+compra causaron dos FAIL del revisor; estabilizar representación, no valores.
+Implementar juntos los seis grupos restantes (tax concurrency, effect counts,
+semantic audit, supported config, lost response+restart, durable outbox).
+Completar benchmark congelado20+1000×3 con métricas JDBC nativas; reiniciar sólo
+servicios CI propios. Backup privado previo al Core; restore en otra DB CI para
+repetición del mismo WAR/pins/fixture de34grupos+benchmark, no upgrade.
+El workflow dispone90min para ambas ejecuciones sin compilar de nuevo; no
+permite aprobar desde metadatos, scripts guardados o resultados de otro commit.
+Criterios11/12/14 necesitan revisión de benchmark y réplica ejecutados;13 sigue
+BLOCKED por objetivo de actualización aplazado. Conservar coste y cancelación
+como FAIL funcionales cuando ocurran. Publicar solicitudes fallidas completas
+y separar matriz del run primario y réplica. Validaciones locales31Java+61Python
+no sustituyen aceptación runtime. No más de un CI activo ni red ampliada.

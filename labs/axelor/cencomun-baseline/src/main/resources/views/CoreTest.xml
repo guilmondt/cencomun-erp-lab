@@ -53,4 +53,10 @@
   <action-method name="ccm-core-finance-prepare"><call class="com.cencomun.core.CoreFinanceController" method="prepare"/></action-method>
   <action-method name="ccm-core-finance-inspect"><call class="com.cencomun.core.CoreFinanceController" method="inspect"/></action-method>
   <action-method name="ccm-core-finance-cash-seed"><call class="com.cencomun.core.CoreFinanceController" method="cashSeed"/></action-method>
+  <action-method name="ccm-core-audit-inspect">
+    <call class="com.cencomun.core.CoreAuditController" method="inspect"/>
+  </action-method>
+  <action-method name="ccm-core-benchmark-prepare"><call class="com.cencomun.core.NativeBenchmarkController" method="prepare"/></action-method>
+  <action-method name="ccm-core-benchmark-seed"><call class="com.cencomun.core.NativeBenchmarkController" method="seed"/></action-method>
+  <action-method name="ccm-core-benchmark-inspect"><call class="com.cencomun.core.NativeBenchmarkController" method="inspect"/></action-method>
 </object-views>

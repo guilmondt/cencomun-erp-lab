@@ -13,6 +13,7 @@ import os
 import platform
 import shutil
 import time
+import zlib
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -43,6 +44,12 @@ def verify_bundle(root):
     required = json.loads((root / "coverage-required.json").read_bytes())
     assert required["coverage_revision"] == 2 and len(required["requirements"]) == 34
     return required
+
+
+class NativeActionError(RuntimeError):
+    def __init__(self,failure):
+        self.native_failure=failure
+        super().__init__('Native action rejected: '+json.dumps(failure['response'])[:2500])
 
 
 class NativeClient:
@@ -82,7 +89,7 @@ class NativeClient:
         result = self.request("/ws/action", {"action": name, "model": "com.axelor.apps.base.db.Company", "data": {"context": {"case_id": case}}})
         self.samples[-1].update(action=name, case=case)
         if result.get("status") != 0:
-            raise RuntimeError("Native action rejected: " + json.dumps(result)[:2500])
+            raise NativeActionError({'action':name,'case_id':case,'response':result})
         for row in result.get("data", []):
             values = row.get("values", {})
             if "core_result" in values:
@@ -122,7 +129,7 @@ def verified_build_status(evidence):
     return "PASS"
 
 
-def criteria_for(rows, build_evidence=None):
+def criteria_for(rows, build_evidence=None, benchmark=None, repeat=None, fixtures=None):
     # Reject missing/obsolete evidence even if a caller supplied a PASS label.
     rows = [{**r, "status": "UNRUN" if r.get("observed_revision", 0) < r["minimum_revision"]
              or (r["status"] == "PASS" and (not r.get("complete") or not r.get("evidence"))) else r["status"]} for r in rows]
@@ -137,6 +144,14 @@ def criteria_for(rows, build_evidence=None):
             status, reason = "BLOCKED", "User deferred upgrade to an isolated copy with a separately approved target; six patch scenarios UNRUN"
         if number in (11, 12, 14) and status == "PASS":
             status, reason = "UNRUN", "Benchmark/restored independent replay additional evidence not yet executed"
+            if benchmark and repeat and fixtures:
+                try:
+                    from benchmark import assert_benchmark
+                    from repeat import assert_repeat
+                    assert_benchmark(benchmark,fixtures);assert_repeat(repeat,fixtures)
+                except (AssertionError,KeyError,TypeError,ValueError):
+                    status,reason="FAIL","Executed benchmark or independent restored replay did not satisfy frozen proof"
+                else:status,reason="PASS","All attached executed groups, frozen benchmark and fresh restored same-pin replay verified"
         result.append({"criterion": number, "status": status, "groups": [r["case"] for r in attached], "reason": reason})
     return result
 
@@ -833,10 +848,11 @@ def publish_native_section(case, section, records):
 def publish_complete_evidence(evidence):
     """Hash-checked complete result fragments; truncated Actions notices cannot imply PASS."""
     raw = json.dumps(evidence, ensure_ascii=True, separators=(",", ":")).encode()
-    encoded = base64.b64encode(raw).decode()
+    encoded = base64.b64encode(zlib.compress(raw,9)).decode()
     parts = [encoded[i:i+2800] for i in range(0, len(encoded), 2800)]
     for index, part in enumerate(parts):
         notice = {"complete_evidence_case": evidence["case"], "reference": REFERENCE,
+                  "encoding":"zlib+base64",
                   "content_sha256": hashlib.sha256(raw).hexdigest(), "fragment_index": index,
                   "fragment_count": len(parts), "base64_fragment": part}
         print("::notice title=Core executed group evidence::" + json.dumps(notice), flush=True)
@@ -929,7 +945,12 @@ def run(base, fixtures, output):
     finance = run_finance_cases(client, base, fixtures, output, by_case)
     from api_cases import run_api_cases
     api = run_api_cases(client, base, fixtures, output, by_case)
+    from audit_cases import run_tax_cases, run_audit_cases
+    tax_concurrency = run_tax_cases(client, base, fixtures, output, by_case)
+    from recovery_cases import prepare_recovery
+    recovery = prepare_recovery(client, base, fixtures, output, by_case)
     fx = run_fx_cases(client, base, fixtures, output, by_case["FX01-03-MONEY01-03"], fx_preparation)
+    audit = run_audit_cases(client, base, fixtures, output, by_case)
     results = {"reference": REFERENCE, "coverage_revision": 2,
                "groups": rows, "criteria": criteria_for(rows),
                "counts": dict(Counter(r["status"] for r in rows)),
@@ -938,7 +959,7 @@ def run(base, fixtures, output):
     (output / "coverage.json").write_text(json.dumps(results, indent=2) + "\n")
     metrics = {"metric_kind": "runtime", "reference": REFERENCE,
                                                    "gates": [{"case": g["case"], "seconds": g["seconds"], "status": g["status"]} for g in gates],
-                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders+finance+api],
+                                                   "independent": [{"case": c["case"], "seconds": c["seconds"], "status": c["status"]} for c in [products, search, book, fx, fixture]+orders+finance+api+tax_concurrency+recovery+audit],
                                                    "http_samples": client.samples, "platform": platform.platform(),
                                                    "cpu_count": os.cpu_count(), "cpu_affinity": len(os.sched_getaffinity(0)),
                                                    "disk_free_bytes": shutil.disk_usage(output).free,
