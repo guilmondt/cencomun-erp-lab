@@ -6,7 +6,7 @@ import hashlib
 import json
 import subprocess
 from pathlib import Path
-from run import PRIVATE, REPO, ROOT, OUT, parse_results, redact
+from run import PRIVATE, REPO, ROOT, OUT, parse_results, parse_parallel_results, redact
 
 
 def sanitize(value):
@@ -31,7 +31,8 @@ def main():
             log = PRIVATE / (basename + '.log')
             xml = PRIVATE / (basename + '.xml')
             if log.exists() and not data.get('interrupted'):
-                data.update(parse_results(xml.read_text() if xml.exists() else '', log.read_text()))
+                data.update(parse_parallel_results(log.read_text(), data['app']) if data.get('ci_parallel') else
+                            parse_results(xml.read_text() if xml.exists() else '', log.read_text()))
                 if data.get('diagnostic_tail'):
                     data['diagnostic_tail'] = redact('\n'.join(log.read_text().splitlines()[-75:]))
             data = sanitize(data)
@@ -41,7 +42,7 @@ def main():
     for app in ['frappe', 'erpnext']:
         eligible = [a for a in attempts if a['app'] == app and not a.get('module')
                     and a.get('category', 'all') == 'all' and a.get('evidence_valid', True)]
-        selected = max(eligible, key=lambda a: a['attempt']) if eligible else None
+        selected = max(eligible, key=lambda a: (a.get('ci_parallel', False), a['attempt'])) if eligible else None
         discovery = json.loads((OUT / (app + '-discovery.json')).read_text())
         preparation = json.loads((OUT / (app + '-preparation.json')).read_text())
         if selected:
@@ -52,11 +53,12 @@ def main():
             selected['discovered_test_count'] = discovery['discovered_test_count']
             selected['unobserved_test_ids'] = not_observed
             selected['unobserved_test_count'] = len(not_observed)
-            selected['count_note'] = ('actual_tests_run is the official Ran N counter, including native skips. '
-                'JUnit counts are result events and include fixture errors/subtests; they are not additional tests. '
-                'Unobserved methods have no result; interrupted attempts remain UNKNOWN, not inferred as UNRUN/PASS.')
+            if not selected.get('ci_parallel'):
+                selected['count_note'] = ('actual_tests_run is the official Ran N counter, including native skips. '
+                    'JUnit counts are result events and include fixture errors/subtests; they are not additional tests. '
+                    'Unobserved methods have no result; interrupted attempts remain UNKNOWN, not inferred as UNRUN/PASS.')
             selected['failure_exception_counts'] = dict(collections.Counter(c.get('exception', '')
-                for c in selected['cases'] if c['status'] in ['FAIL', 'ERROR']))
+                for c in selected.get('failure_headers', selected['cases']) if c['status'] in ['FAIL', 'ERROR']))
             (OUT / (app + '-latest.json')).write_text(json.dumps(selected, indent=2) + '\n')
             results.append({'app': app, 'status': selected['status'], 'actual_tests_run': selected['actual_tests_run'],
                             'discovered_test_count': selected['discovered_test_count'],
@@ -65,9 +67,12 @@ def main():
                             'evidence': str((OUT / (app + '-latest.json')).relative_to(REPO)),
                             'command': selected['command'], 'exit_code': selected['exit_code'],
                             'site': selected['site'], 'seconds': selected['elapsed_seconds'],
+                            'ci_parallel': selected.get('ci_parallel', False),
                             'interrupted': selected.get('interrupted', False),
                             'completed_native_category_counts': selected.get('completed_native_category_counts'),
-                            'fixture_preparation_status': preparation['status']})
+                            'fixture_preparation_status': preparation['status'],
+                            'fixture_preparation_site': preparation['site'],
+                            'fixture_metadata_matches_attempt_site': preparation['site'] == selected['site']})
         else:
             results.append({'app': app, 'status': 'UNRUN', 'actual_tests_run': None,
                             'discovered_test_count': discovery['discovered_test_count']})
@@ -145,8 +150,9 @@ def main():
     rows += ['', 'Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). '
              'El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: '
              'ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con '
-             'reserva exclusiva de nombres. Diez tests del harness verifican cero-test, categorías, '
-             'subtests/fixtures, concurrencia, recuperación incompleta, assets y redacción; no son tests oficiales. '
+             'reserva exclusiva de nombres. Quince tests del harness verifican cero-test, categorías, '
+             'subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación '
+             'de archivos generados; no son tests oficiales. '
              'El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; '
              '[informe de recuperación](frappe-executor-recovery.md).', '',
              'No se ejecutan UI/Cypress, PostgreSQL, SQLite ni migraciones a otra versión. '

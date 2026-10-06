@@ -627,11 +627,11 @@ las reglas LAB. No modifica Axelor, main, producción ni las fuentes upstream.
 - [ ] Actualizar informe/evidencias y publicar exclusivamente lab/frappe-baseline;
   conservar PR #4 como borrador. No repetir Guardar/Publicar del entorno cloud.
 
-Estado de recuperación del 2026-10-06: el ejecutor volvió a ser accesible, los
+Observación inicial de recuperación del 2026-10-06: el ejecutor volvió a ser accesible, los
 cambios siguen sobre `fcf690d` y se conservaron copias privadas de cambios, logs
 y archivos MariaDB retenidos. ERPNext intento 2 no tiene proceso activo ni
 resultado final: BLOCKED por interrupción, con solo dos unitarias cuyo resumen
-se completó. No se relanzaron suites ni servicios. La regresión Cencomun y la
+se completó. En ese momento no se habían relanzado suites ni servicios. La regresión Cencomun y la
 publicación final siguen pendientes. La comprobación de restauración en una
 tarea cloud nueva fue iniciada por separado por el coordinador y no acredita
 ejecución de estas suites. Detalles: [recuperación](../reports/frappe-executor-recovery.md).
@@ -644,3 +644,30 @@ atribución y límites en [restauración externa](../reports/frappe-cloud-restor
 No se reejecutó ni modifica las suites oficiales o el criterio 13. La
 preparación de rutas HOME para backups oficiales tiene un bloqueo de filesystem
 de solo lectura, conservado con instrucciones; no se cambia HOME ni upstream.
+
+Continuación posterior al checkpoint `2b3192663ca3977320855434e75584abd819ec65`:
+
+- Frappe completo, sitio vacío `ccm-upstream-frappe-fresh.test`: 2.319 pruebas
+  realmente ejecutadas, FAIL; 2.198 PASS, 24 FAIL, 46 ERROR y 51 SKIP. Las siete
+  legacy quedaron sin resultado por un archivo generado por la propia suite;
+  el módulo oficial `frappe.tests.test_timeline`, con fuentes copiadas limpias
+  en los mismos SHAs, ejecutó sus siete tests y pasó. No convierte el comando
+  completo en PASS ni suma sus conteos como una sola ejecución.
+- ERPNext serial, intento 3: 3.255 tests realmente ejecutados, FAIL;
+  3.256 eventos JUnit: 2.675 PASS, 9 FAIL y 572 ERROR. Se conservan los fallos
+  anteriores, incluido el intento 2 interrumpido. El contador JUnit no infla
+  la cantidad real de pruebas.
+- La CI upstream exige Payments; develop ya pide Frappe 17. Se fijó únicamente
+  el SHA compatible version-16 `cca07d9f9392e2ea0e521c5975151db9e4b6c321`, con
+  siete SDKs exactos y hashes, solo en el Bench/venv oficial copiado. Ningún
+  paquete existente cambió; Cencomun no instala Payments. El sitio ERPNext
+  fresh confirmó Standard Buying INR y ausencia de objetos/datos Cencomun.
+- La repetición con el runner nativo CI ERPNext, un shard con todos los módulos,
+  sigue **RUNNING** en el momento de este checkpoint. No tiene conteo final ni
+  PASS. Ese runner restablece Administrator antes de cada módulo mediante su
+  propio código; no se añaden roles ni bypasses. Quince tests del harness PASS
+  comprueban conteos, interrupciones, exclusión, saneamiento y fuentes generadas.
+- La regresión Cencomun queda pendiente hasta terminar la suite activa. Los
+  pins, fixtures compartidos y el oráculo no cambiaron; criterio 13 BLOCKED y
+  sus seis escenarios UNRUN. La lectura local de ping no demostró un problema
+  de proxy: no se cambió el proxy ni se atribuyen a él los errores HTTP nativos.

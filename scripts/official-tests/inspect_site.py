@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import subprocess
+import datetime
 from pathlib import Path
 
 ROOT = Path('/workspace/.local/frappe-integral')
@@ -12,30 +13,35 @@ BENCH = ROOT / 'official-bench'
 REPO = Path(__file__).resolve().parents[2]
 
 
-def main(app):
+def main(app, fresh=False):
     import frappe
 
-    site = 'ccm-upstream-' + app + '.test'
+    suffix = '-fresh' if fresh else ''
+    site = 'ccm-upstream-' + app + suffix + '.test'
     os.chdir(BENCH / 'sites')
     frappe.init(site, sites_path=str(BENCH / 'sites'))
     frappe.connect()
     try:
         apps = frappe.get_installed_apps()
-        expected = ['frappe'] + (['erpnext'] if app == 'erpnext' else [])
+        creation = json.loads((ROOT / 'official-tests' / (app + suffix + '-isolated-created.json')).read_text())
+        expected = creation['allowed_apps']
         assert apps == expected
         assert not frappe.db.exists('DocType', 'CCM Order')
         assert not frappe.conf.get('ccm_lab_enabled')
         data = {'site': site, 'bench': str(BENCH), 'installed_apps': apps,
+                'inspected_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                'scope': 'Read-only site isolation inspection; not a suite result',
                 'cencomun_installed': False, 'lab_enabled': False,
                 'test_permissions': {'allow_tests': frappe.conf.allow_tests,
                                      'server_script_enabled': frappe.conf.server_script_enabled},
-                'creation': json.loads((ROOT / 'official-tests' / (app + '-isolated-created.json')).read_text()),
+                'creation': creation,
                 'sources': []}
         for application in apps:
             directory = BENCH / 'apps' / application
+            tag = subprocess.run(['git', 'describe', '--tags', '--exact-match'], cwd=directory, text=True, capture_output=True)
             data['sources'].append({'app': application,
                 'sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=directory, text=True).strip(),
-                'tag': subprocess.check_output(['git', 'describe', '--tags', '--exact-match'], cwd=directory, text=True).strip(),
+                'tag': tag.stdout.strip() if tag.returncode == 0 else None,
                 'changes': subprocess.check_output(['git', 'status', '--porcelain'], cwd=directory, text=True).splitlines()})
         if app == 'erpnext':
             data['standard_buying'] = frappe.get_doc('Price List', 'Standard Buying').as_dict()
@@ -49,6 +55,7 @@ def main(app):
         data['status'] = 'PASS'
         out = REPO / 'reports/evidence/frappe-official'
         out.mkdir(parents=True, exist_ok=True)
+        (out / (app + '-preparation' + (suffix or '-primary') + '.json')).write_text(json.dumps(data, indent=2, default=str) + '\n')
         (out / (app + '-preparation.json')).write_text(json.dumps(data, indent=2, default=str) + '\n')
         print('PASS official-only fixture isolation:', app)
     finally:
@@ -58,4 +65,6 @@ def main(app):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('app', choices=['frappe', 'erpnext'])
-    main(parser.parse_args().app)
+    parser.add_argument('--fresh', action='store_true')
+    args = parser.parse_args()
+    main(args.app, args.fresh)

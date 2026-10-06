@@ -1,9 +1,8 @@
 {
-  "site": "ccm-upstream-erpnext-fresh.test",
+  "site": "ccm-upstream-erpnext.test",
   "bench": "/workspace/.local/frappe-integral/official-bench",
   "installed_apps": [
     "frappe",
-    "payments",
     "erpnext"
   ],
   "cencomun_installed": false,
@@ -13,11 +12,10 @@
     "server_script_enabled": 1
   },
   "creation": {
-    "site": "ccm-upstream-erpnext-fresh.test",
+    "site": "ccm-upstream-erpnext.test",
     "initial_state": "new empty Frappe site",
     "allowed_apps": [
       "frappe",
-      "payments",
       "erpnext"
     ]
   },
@@ -26,13 +24,19 @@
       "app": "frappe",
       "sha": "97a5dd93ca5883bcc9c4ef9834120c5cba397b67",
       "tag": "v16.36.1",
-      "changes": []
-    },
-    {
-      "app": "payments",
-      "sha": "cca07d9f9392e2ea0e521c5975151db9e4b6c321",
-      "tag": null,
-      "changes": []
+      "changes": [
+        " M frappe/locale/main.pot",
+        " M frappe/modules.txt",
+        "?? frappe/core/doctype/test_aoskctqmhj/",
+        "?? frappe/core/doctype/test_field_order_doctype/",
+        "?? frappe/core/doctype/test_webviewdoctype/",
+        "?? frappe/core/doctype/virtualdoctypetest/",
+        "?? frappe/core/doctype/virtualdoctypetestchild/",
+        "?? frappe/core/print_format/",
+        "?? frappe/fixtures/",
+        "?? frappe/locale/test.po",
+        "?? frappe/othermodule/"
+      ]
     },
     {
       "app": "erpnext",

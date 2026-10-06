@@ -1,52 +1,56 @@
 {
   "scope": "official default server suites on pinned MariaDB; baseline, not post-patch regression",
-  "recorded_utc": "2026-10-06T02:52:11.701022+00:00",
+  "recorded_utc": "2026-10-06T03:49:22.821046+00:00",
   "results": [
     {
       "app": "frappe",
       "status": "FAIL",
-      "actual_tests_run": 2275,
+      "actual_tests_run": 2319,
       "discovered_test_count": 2326,
-      "junit_records": 2279,
+      "junit_records": 2319,
       "counts": {
-        "PASS": 2006,
-        "FAIL": 10,
-        "ERROR": 212,
+        "PASS": 2198,
+        "FAIL": 24,
+        "ERROR": 46,
         "SKIP": 51
       },
-      "unobserved_test_count": 51,
+      "unobserved_test_count": 7,
       "evidence": "reports/evidence/frappe-official/frappe-latest.json",
-      "command": "bench --site ccm-upstream-frappe.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-2.xml",
+      "command": "bench --site ccm-upstream-frappe-fresh.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-4.xml",
       "exit_code": 1,
-      "site": "ccm-upstream-frappe.test",
-      "seconds": 856.902,
+      "site": "ccm-upstream-frappe-fresh.test",
+      "seconds": 814.858,
+      "ci_parallel": false,
       "interrupted": false,
       "completed_native_category_counts": null,
-      "fixture_preparation_status": "PASS"
+      "fixture_preparation_status": "PASS",
+      "fixture_preparation_site": "ccm-upstream-frappe-fresh.test",
+      "fixture_metadata_matches_attempt_site": true
     },
     {
       "app": "erpnext",
-      "status": "BLOCKED",
-      "actual_tests_run": null,
+      "status": "FAIL",
+      "actual_tests_run": 3255,
       "discovered_test_count": 3255,
-      "junit_records": 0,
+      "junit_records": 3256,
       "counts": {
-        "PASS": 0,
-        "FAIL": 0,
-        "ERROR": 0,
+        "PASS": 2675,
+        "FAIL": 9,
+        "ERROR": 572,
         "SKIP": 0
       },
-      "unobserved_test_count": 3255,
+      "unobserved_test_count": 0,
       "evidence": "reports/evidence/frappe-official/erpnext-latest.json",
-      "command": "bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-2.xml",
-      "exit_code": null,
+      "command": "bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-3.xml",
+      "exit_code": 1,
       "site": "ccm-upstream-erpnext.test",
-      "seconds": null,
-      "interrupted": true,
-      "completed_native_category_counts": [
-        2
-      ],
-      "fixture_preparation_status": "PASS"
+      "seconds": 1981.974,
+      "ci_parallel": false,
+      "interrupted": false,
+      "completed_native_category_counts": null,
+      "fixture_preparation_status": "PASS",
+      "fixture_preparation_site": "ccm-upstream-erpnext-fresh.test",
+      "fixture_metadata_matches_attempt_site": false
     }
   ],
   "pip_check": {
@@ -86,6 +90,16 @@
       "evidence_valid": true
     },
     {
+      "app": "erpnext",
+      "attempt": 3,
+      "status": "FAIL",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": 3255,
+      "evidence": "reports/evidence/frappe-official/erpnext-full-attempt-3.json",
+      "evidence_valid": true
+    },
+    {
       "app": "frappe",
       "attempt": 1,
       "status": "BLOCKED",
@@ -107,12 +121,52 @@
     },
     {
       "app": "frappe",
+      "attempt": 3,
+      "status": "BLOCKED",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": 32,
+      "evidence": "reports/evidence/frappe-official/frappe-full-attempt-3.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 4,
+      "status": "FAIL",
+      "module": null,
+      "category": "all",
+      "actual_tests_run": 2319,
+      "evidence": "reports/evidence/frappe-official/frappe-full-attempt-4.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
       "attempt": 1,
       "status": "FAIL",
       "module": null,
       "category": "integration",
       "actual_tests_run": 333,
       "evidence": "reports/evidence/frappe-official/frappe-full-integration-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "BLOCKED",
+      "module": null,
+      "category": "old-frappe-test-class-category",
+      "actual_tests_run": 0,
+      "evidence": "reports/evidence/frappe-official/frappe-full-old-frappe-test-class-category-attempt-1.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "BLOCKED",
+      "module": "frappe.tests.test_auth",
+      "category": "all",
+      "actual_tests_run": 1,
+      "evidence": "reports/evidence/frappe-official/frappe-test_auth-attempt-1.json",
       "evidence_valid": true
     },
     {
@@ -143,6 +197,16 @@
       "category": "all",
       "actual_tests_run": 13,
       "evidence": "reports/evidence/frappe-official/frappe-test_rq_job-attempt-3.json",
+      "evidence_valid": true
+    },
+    {
+      "app": "frappe",
+      "attempt": 1,
+      "status": "PASS",
+      "module": "frappe.tests.test_timeline",
+      "category": "all",
+      "actual_tests_run": 7,
+      "evidence": "reports/evidence/frappe-official/frappe-test_timeline-attempt-1.json",
       "evidence_valid": true
     }
   ]

@@ -4,12 +4,44 @@ import unittest
 import tempfile
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
-from run import parse_results, reserve_attempt, SuiteLock, redact
-from isolate_bench import copy_compiled_assets
+from run import parse_results, parse_parallel_results, reserve_attempt, SuiteLock, redact
+from isolate_bench import copy_compiled_assets, archive_test_sources
 from recover import interrupted_record
 
 
 class ResultCountingTests(unittest.TestCase):
+    def test_native_ci_counter_is_not_inflated_by_verbose_subtest_events(self):
+        log = ('erpnext.tests.TestOfficial\n  ✔ test_one\n  ✖ test_two\n'
+               '  ✖ test_two\n  = test_three\nTests: 3, Failing: 2, Errors: 0\n')
+        result = parse_parallel_results(log, 'erpnext')
+        self.assertEqual(result['actual_tests_run'], 3)
+        self.assertEqual(result['observed_result_events'], 4)
+        self.assertEqual(result['counts'], {'PASS': 1, 'SKIP': 1, 'FAIL': 2, 'ERROR': 0})
+        self.assertEqual(result['junit_records'], 0)
+
+    def test_native_ci_interruption_keeps_final_count_unknown(self):
+        result = parse_parallel_results('erpnext.tests.TestOfficial\n  ✔ test_one\n', 'erpnext')
+        self.assertIsNone(result['actual_tests_run'])
+        self.assertIsNone(result['counts']['ERROR'])
+        self.assertFalse(result['native_summary_complete'])
+
+    def test_native_ci_private_traceback_is_not_published(self):
+        result = parse_parallel_results('erpnext.tests.TestOfficial\n  ✖ test_one\n'
+                                        'Traceback: password=private-example\n'
+                                        'Tests: 1, Failing: 0, Errors: 1\n', 'erpnext')
+        self.assertNotIn('private-example', str(result))
+        self.assertEqual(result['cases'][0]['status'], 'FAILED_EVENT')
+
+    def test_native_ci_failure_headers_keep_only_id_and_exception_type(self):
+        log = ('erpnext.tests.TestOfficial\n  ✖ test_one\n'
+               ' ERROR test_one (erpnext.tests.TestOfficial.test_one)\n'
+               'Traceback (most recent call last):\n  password = private-example\n'
+               'frappe.exceptions.PermissionError\nTests: 1, Failing: 0, Errors: 1\n')
+        result = parse_parallel_results(log, 'erpnext')
+        self.assertEqual(result['failure_headers'], [{'id': 'erpnext.tests.TestOfficial.test_one',
+            'status': 'ERROR', 'exception': 'frappe.exceptions.PermissionError'}])
+        self.assertNotIn('private-example', str(result))
+
     def test_categories_are_separate_xml_documents(self):
         doc = '<?xml version="1.0"?><testsuites><testsuite><testcase classname="Official" name="{name}" time="0.1"/></testsuite></testsuites>'
         result = parse_results(doc.format(name='unit') + doc.format(name='integration'),
@@ -83,11 +115,13 @@ class ResultCountingTests(unittest.TestCase):
             self.assertEqual(result.read_text(), '{"status":"BLOCKED"}')
 
     def test_generated_temporary_site_passwords_are_redacted_after_config_deletion(self):
-        text = 'bench new-site sample --admin-password=generated-demo-secret --db-root-password another-demo-secret'
+        text = ('bench new-site sample --admin-password=generated-demo-secret '
+                '--db-root-password another-demo-secret --password=mysql-demo-secret')
         output = redact(text)
         self.assertNotIn('generated-demo-secret', output)
         self.assertNotIn('another-demo-secret', output)
-        self.assertEqual(output.count('[REDACTED]'), 2)
+        self.assertNotIn('mysql-demo-secret', output)
+        self.assertEqual(output.count('[REDACTED]'), 3)
 
     def test_cloned_bench_receives_ignored_compiled_assets_and_manifests(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -104,6 +138,17 @@ class ResultCountingTests(unittest.TestCase):
             for app in ['frappe', 'erpnext']:
                 self.assertEqual((target / 'apps' / app / app / 'public/dist/bundle.css').read_text(), app + '-pinned-css')
             self.assertTrue((target / 'sites/assets/assets-rtl.json').exists())
+
+    def test_source_refresh_archives_generated_fixtures_without_deleting_them(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); apps = root / 'apps'; apps.mkdir()
+            (apps / 'generated-test.py').write_text('old fixture data')
+            archived = root / 'history/one/apps'
+            archive_test_sources(apps, archived)
+            self.assertEqual((archived / 'generated-test.py').read_text(), 'old fixture data')
+            self.assertFalse(apps.exists())
+            with self.assertRaisesRegex(RuntimeError, 'never overwrite'):
+                archive_test_sources(apps, archived)
 
 
 if __name__ == '__main__':

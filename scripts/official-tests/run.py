@@ -24,6 +24,8 @@ ROOT = Path('/workspace/.local/frappe-integral')
 BENCH = ROOT / 'official-bench'
 PRIVATE = ROOT / 'official-tests'
 OUT = REPO / 'reports/evidence/frappe-official'
+ALLOWED_SITES = ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test',
+                 'ccm-upstream-frappe-fresh.test', 'ccm-upstream-erpnext-fresh.test']
 
 
 class SuiteLock:
@@ -53,7 +55,7 @@ def active_runners(bench=BENCH):
             continue
         try:
             command = (process / 'cmdline').read_bytes().split(b'\0')
-            if b'run-tests' not in command:
+            if not {b'run-tests', b'run-parallel-tests'}.intersection(command):
                 continue
             cwd = Path(os.readlink(process / 'cwd')).resolve()
             if bench.resolve() not in [cwd, *cwd.parents]:
@@ -110,7 +112,7 @@ def redact(text):
         text = text.replace(value, '[REDACTED]')
     # Native command tests generate temporary credentials and may delete their
     # site configs before result publication. Redact command/config fields too.
-    text = re.sub(r'(--(?:admin|db-root|db)-password(?:\s+|=))(\S+)', r'\1[REDACTED]', text)
+    text = re.sub(r'(--(?:(?:admin|db-root|db)-)?password(?:\s+|=))(\S+)', r'\1[REDACTED]', text)
     text = re.sub(r'(["\'](?:password|db_password|root_password|admin_password|api_key|api_secret|encryption_key)["\']\s*:\s*["\'])([^"\']*)(["\'])',
                   r'\1[REDACTED]\3', text, flags=re.I)
     return text
@@ -142,10 +144,54 @@ def parse_results(xml, log):
             'counts': counts, 'cases': cases, 'xml_documents': len(documents)}
 
 
-def run_suite(app, module=None, category=None, port=None, site=None):
+def parse_parallel_results(log, app):
+    """Read the official CI runner's own counter and verbose result events.
+
+    It does not emit JUnit. Never infer its final count from dots or announced
+    discovery. Keep raw tracebacks/locals private; publish method outcomes only.
+    """
+    clean = re.sub(r'\x1b\[[0-9;]*m', '', log)
+    summary = re.findall(r'^Tests: (\d+), Failing: (\d+), Errors: (\d+)\s*$', clean, re.M)
+    current = None
+    cases = []
+    for line in clean.splitlines():
+        if re.fullmatch(re.escape(app) + r'\.[\w.]+', line.strip()):
+            current = line.strip()
+        match = re.match(r'^\s+([✔✖=])\s+(test\w+)\b', line)
+        if current and match:
+            cases.append({'id': current + '.' + match[2],
+                          'status': {'✔': 'PASS', '✖': 'FAILED_EVENT', '=': 'SKIP'}[match[1]]})
+    complete = bool(summary)
+    final = tuple(map(int, summary[-1])) if complete else None
+    failures = []
+    for match in re.finditer(r'^\s*(ERROR|FAIL)\s+(test\w+|setUpClass|tearDownClass)\s+\((' +
+                             re.escape(app) + r'\.[\w.]+)\)', clean, re.M):
+        method, qualified = match[2], match[3]
+        identifier = qualified if qualified.endswith('.' + method) else qualified + '.' + method
+        block_end = clean.find('=' * 30, match.end())
+        block = clean[match.end():block_end if block_end >= 0 else len(clean)]
+        exception = re.findall(r'^((?:\w+\.)*\w*(?:Error|Exception))(?::|\s*$)', block, re.M)
+        failures.append({'id': identifier, 'status': match[1],
+                         'exception': exception[-1] if exception else 'UNKNOWN'})
+    counts = {'PASS': sum(c['status'] == 'PASS' for c in cases),
+              'SKIP': sum(c['status'] == 'SKIP' for c in cases),
+              'FAIL': final[1] if final else None, 'ERROR': final[2] if final else None}
+    return {'actual_tests_run': final[0] if final else None,
+            'runner_counts_by_category': [], 'discovered_categories': [],
+            'junit_records': 0, 'xml_documents': 0, 'cases': cases, 'counts': counts,
+            'native_summary_complete': complete, 'observed_result_events': len(cases),
+            'failure_headers': failures,
+            'result_format': 'official CI verbose text; not JUnit',
+            'count_note': 'Native Tests counter is authoritative; events may include subtests/fixtures. '
+                          'FAILED_EVENT has no inferred FAIL/ERROR subtype. Missing final summary leaves count unknown.'}
+
+
+def run_suite(app, module=None, category=None, port=None, site=None, ci_parallel=False):
     PRIVATE.mkdir(mode=0o700, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    label = app + ('-' + module.rsplit('.', 1)[-1] if module else '-full')
+    if ci_parallel and (module or category):
+        raise ValueError('CI runner covers every module; do not combine selection flags.')
+    label = app + ('-ci' if ci_parallel else ('-' + module.rsplit('.', 1)[-1] if module else '-full'))
     if category:
         label += '-' + category
     # Reserve against BOTH completed and still-running attempts. Exclusive file
@@ -153,9 +199,14 @@ def run_suite(app, module=None, category=None, port=None, site=None):
     attempt, base = reserve_attempt(label)
     logpath, xmlpath = PRIVATE / (base + '.log'), PRIVATE / (base + '.xml')
     site = site or ('ccm-upstream-' + app + '.test')
-    if site not in ['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test']:
+    if site not in ALLOWED_SITES:
         raise ValueError('Only marked upstream sites are accepted.')
     args = ['--site', site, 'run-tests', '--app', app, '--junit-xml-output', str(xmlpath)]
+    if ci_parallel:
+        args = ['--site', site, 'run-parallel-tests', '--app', app,
+                '--total-builds', '1', '--build-number', '1']
+        if app == 'erpnext':
+            args.append('--lightmode')
     if module:
         args += ['--module', module]
     if category:
@@ -167,7 +218,7 @@ def run_suite(app, module=None, category=None, port=None, site=None):
     state = {'app': app, 'site': site, 'bench': str(BENCH), 'module': module,
              'category': category or 'all', 'attempt': attempt, 'command': 'bench ' + ' '.join(args),
              'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-             'driver_pid': os.getpid(), 'port': port}
+             'driver_pid': os.getpid(), 'port': port, 'ci_parallel': ci_parallel}
     statepath.write_text(json.dumps(state, indent=2) + '\n')
     statepath.chmod(0o600)
     webargs = [str(ROOT / 'bench-tools/bin/bench'), '--site', site, 'serve',
@@ -192,7 +243,8 @@ def run_suite(app, module=None, category=None, port=None, site=None):
                 raise RuntimeError('Official site HTTP readiness timeout.')
             with logpath.open('x') as log:
                 runner = subprocess.Popen([str(ROOT / 'bench-tools/bin/bench'), *args],
-                                          cwd=BENCH, stdout=log, stderr=subprocess.STDOUT)
+                                          cwd=BENCH, env={**os.environ, 'CI': 'Yes'},
+                                          stdout=log, stderr=subprocess.STDOUT)
                 state['runner_pid'] = runner.pid
                 statepath.write_text(json.dumps(state, indent=2) + '\n')
                 result_code = runner.wait()
@@ -201,18 +253,20 @@ def run_suite(app, module=None, category=None, port=None, site=None):
                 os.killpg(web.pid, signal.SIGTERM)
                 web.wait(timeout=20)
     rawlog = logpath.read_text()
-    parsed = parse_results(xmlpath.read_text() if xmlpath.exists() else '', rawlog)
+    parsed = (parse_parallel_results(rawlog, app) if ci_parallel else
+              parse_results(xmlpath.read_text() if xmlpath.exists() else '', rawlog))
     status = 'FAIL' if parsed['counts']['FAIL'] or parsed['counts']['ERROR'] else (
         'BLOCKED' if result_code or not parsed['actual_tests_run'] else 'PASS')
     record = {'scope': 'full official server application discovery' if not module else 'official module regression',
               'app': app, 'site': site, 'bench': str(BENCH), 'module': module, 'category': category or 'all', 'attempt': attempt, 'status': status,
+              'ci_parallel': ci_parallel,
               'command': 'bench ' + ' '.join(args), 'web_command': ' '.join(webargs), 'exit_code': result_code,
               'recorded_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'elapsed_seconds': round(time.monotonic() - start, 3),
               'upstream_sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=BENCH / 'apps' / app, text=True).strip(),
               'log_sha256': hashlib.sha256(logpath.read_bytes()).hexdigest(),
               **parsed}
-    if result_code or not parsed['actual_tests_run']:
+    if (result_code or not parsed['actual_tests_run']) and not ci_parallel:
         record['diagnostic_tail'] = redact('\n'.join(rawlog.splitlines()[-75:]))
     (OUT / (base + '.json')).write_text(json.dumps(record, indent=2) + '\n')
     statepath.unlink(missing_ok=True)
@@ -233,6 +287,8 @@ if __name__ == '__main__':
     parser.add_argument('--module')
     parser.add_argument('--category', choices=['unit', 'integration'])
     parser.add_argument('--port', type=int)
-    parser.add_argument('--site', choices=['ccm-upstream-frappe.test', 'ccm-upstream-erpnext.test'])
+    parser.add_argument('--site', choices=ALLOWED_SITES)
+    parser.add_argument('--ci-parallel', action='store_true',
+                        help='Native official CI runner, one shard covering all modules; ERPNext uses its CI lightmode.')
     args = parser.parse_args()
-    raise SystemExit(main(args.app, args.module, args.category, args.port, args.site))
+    raise SystemExit(main(args.app, args.module, args.category, args.port, args.site, args.ci_parallel))

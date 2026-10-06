@@ -43,9 +43,10 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    ```bash
    "$CCM_FRAPPE_ROOT/bench/env/bin/python" scripts/official-tests/isolate_bench.py
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare.py frappe
-   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare.py erpnext
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/payments.py
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/prepare.py erpnext --fresh
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/inspect_site.py frappe
-   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/inspect_site.py erpnext
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/inspect_site.py erpnext --fresh
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/discover.py frappe
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/discover.py erpnext
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/infrastructure.py
@@ -55,12 +56,23 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    ```
 
    Sitios nuevos marcados: `ccm-upstream-frappe.test` (solo Frappe),
-   `ccm-upstream-erpnext.test` (Frappe+ERPNext), DBs `ccm_upstream_frappe` y
-   `ccm_upstream_erpnext`. `prepare.py` rechaza sitios/Bench preexistentes sin
+   `ccm-upstream-erpnext-fresh.test` (Frappe+Payments+ERPNext), DBs `ccm_upstream_frappe` y
+   `ccm_upstream_erpnext_fresh`. El intento anterior sin Payments permanece
+   conservado en `ccm-upstream-erpnext.test`. `prepare.py` rechaza sitios/Bench preexistentes sin
    marcador y nunca los elimina/restaura. El bootstrap oficial ERPNext usa
    `run-tests --lightmode --module erpnext.tests.bootstrap_test_data`, igual al
    workflow fijado; sus cero tests **solo preparan fixtures**. Frappe ejecuta
    su hook oficial `frappe.utils.install.before_tests` antes de categorías.
+
+   ERPNext CI instala Payments. Su `develop` ahora exige Frappe 17 y no es
+   compatible: se usa únicamente el commit oficial version-16
+   `cca07d9f9392e2ea0e521c5975151db9e4b6c321`, Frappe >=16,<17, Python >=3.14.
+   Los siete SDKs están fijados con hashes en `official-payments.lock.txt`;
+   `payments.py` rechaza un runner/worker activo y comprueba que ninguna versión
+   previamente instalada cambió. Solo modifica el venv del Bench oficial
+   copiado; Payments no se instala en sitios ni venv Cencomun. Los sources
+   originales y `versions.lock` siguen intactos. No se usa `bench get-app`
+   sobre una rama flotante ni se configuran gateways o credenciales reales.
 
    Los tests de comandos necesitan crear sitios temporales y pueden cambiar
    configuración global; las credenciales de bootstrap quedan solo en
@@ -85,7 +97,7 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
 
    ```bash
    "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/run.py frappe
-   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/run.py erpnext
+   "$CCM_FRAPPE_ROOT/official-bench/env/bin/python" scripts/official-tests/run.py erpnext --site ccm-upstream-erpnext-fresh.test --ci-parallel
    ```
 
    Cada llamada inicia y termina su propio servidor oficial `bench --site
@@ -96,6 +108,21 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    Un lock exclusivo y la revisión de runners nativos activos rechazan una
    segunda llamada, incluso si solicita otra aplicación o puerto. Se guardan
    metadatos privados de driver/runner antes de esperar su finalización.
+
+   La repetición ERPNext usa el runner **nativo de su CI**:
+   `bench --site ccm-upstream-erpnext-fresh.test run-parallel-tests --app erpnext
+   --total-builds 1 --build-number 1 --lightmode`. Un único shard incluye todos
+   los módulos. El bootstrap oficial se ejecuta previamente; no se debilitan
+   validaciones. Ese runner restablece Administrator antes de cada módulo
+   (`frappe/parallel_test_runner.py`), mientras que el runner serial previo
+   deja pasar estado entre módulos y no prepara `unspecified-category`.
+   Esto es comportamiento upstream; no se añaden roles ni bypasses.
+   Sus resultados se publican como texto nativo con contador `Tests: N`, no
+   como JUnit: conserva estados por método y totales FAIL/ERROR del resumen.
+   Un evento marcado `FAILED_EVENT` no inventa un subtipo ni causa; trazas y
+   variables locales quedan privadas. Sin resumen final, cantidad desconocida.
+   El intento serial anterior sigue FAIL con su JUnit; no se suman ambos
+   conteos como una ejecución ni se atribuyen todos sus errores a una sola causa.
 
    Una categoría o módulo independiente puede repetirse así, conservando el
    intento completo anterior:
@@ -146,7 +173,7 @@ forman parte de esta ejecución de servidor sobre MariaDB fijada.
    resúmenes de categorías terminadas por separado. Resultados no observados
    durante la interrupción son desconocidos; no se convierten en PASS/UNRUN
    mediante conteo de puntos, E o F.
-5. Ejecutar los diez tests del harness y regenerar el informe saneado:
+5. Ejecutar los once tests del harness y regenerar el informe saneado:
 
    ```bash
    python scripts/official-tests/test_results.py
@@ -185,6 +212,33 @@ su PASS externo no modifica estas suites ni el criterio 13.
    hace `prepare.py`; no modificar `auth.py`, simular login ni quitar validaciones.
 3. Ejecutar el comando completo. Si una categoría sigue bloqueada, ejecutarla
    aparte en otro proceso y distinguir su alcance del comando completo.
+
+**Fixtures generados por tests contaminan el descubrimiento siguiente:**
+
+1. Consultar `git status --short` en `official-bench/apps/<app>` y distinguir
+   archivos generados por tests de las fuentes originales, que deben seguir
+   limpias. Por ejemplo, los tests de DocType exportan archivos de
+   `VirtualDoctypeTest` y luego borran su registro; el bootstrap legacy puede
+   intentar cargar ese archivo residual aunque el DocType ya no exista.
+2. Esperar a que termine el runner activo. Detener solo el worker oficial;
+   conservar logs, JUnit y resultados. No limpiar el Bench Cencomun ni modificar
+   validaciones o fixtures compartidos.
+3. Ejecutar `isolate_bench.py --refresh-test-sources`. Archiva íntegramente las
+   copias de apps y archivos generados en el directorio privado `source-history`,
+   y recrea únicamente esas copias desde los SHAs originales fijados. Rechaza
+   runners/worker activos; no resetea sitios ni cambia versiones.
+4. Repreparar el sitio con el hook/fixtures oficiales, revisar apps/Standard
+   Buying, regenerar discovery y arrancar el worker oficial. Ejecutar el intento
+   nuevo. Si la ejecución completa vuelve a producir el residuo antes de la
+   categoría legacy, conservar el fallo del comando completo; repetir el
+   módulo que contiene sus siete tests con copia limpia en otro proceso:
+   `run.py frappe --site ccm-upstream-frappe-fresh.test --module frappe.tests.test_timeline`.
+   La CLI upstream 16.36.1 solo admite categorías unit/integration/all; no
+   admite seleccionar directamente el nombre interno de la categoría legacy.
+   El intento de selección rechazado se conserva BLOCKED, cero tests, y no
+   acredita fallo de esas siete pruebas.
+5. Una categoría repetida no convierte en PASS una ejecución completa anterior
+   ni suma sus conteos como si fueran una sola suite.
 
 **mariadb-dump ausente o creación de sitios pide credenciales:**
 

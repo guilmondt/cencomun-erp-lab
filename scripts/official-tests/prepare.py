@@ -5,26 +5,29 @@ import json
 import secrets
 import subprocess
 from pathlib import Path
+from run import SuiteLock, active_runners
 
 ROOT = Path('/workspace/.local/frappe-integral')
 BENCH = ROOT / 'official-bench'
 CLI = str(ROOT / 'bench-tools/bin/bench')
 
 
-def main(app):
-    site = 'ccm-upstream-' + app + '.test'
+def prepare(app, fresh=False):
+    suffix = '-fresh' if fresh else ''
+    site = 'ccm-upstream-' + app + suffix + '.test'
     private_dir = ROOT / 'official-tests'
     private_dir.mkdir(mode=0o700, exist_ok=True)
-    marker = private_dir / (app + '-isolated-created.json')
-    private = private_dir / (app + '-private.json')
+    marker = private_dir / (app + suffix + '-isolated-created.json')
+    private = private_dir / (app + suffix + '-private.json')
     if not private.exists():
         private.write_text(json.dumps({'admin_password': secrets.token_urlsafe(32)}))
         private.chmod(0o600)
     credentials = json.loads(private.read_text())
     bootstrap = json.loads((ROOT / 'secrets.json').read_text())
+    payments = app == 'erpnext' and (private_dir / 'payments-prepared.json').exists()
 
     def run(label, args):
-        with (private_dir / (app + '-' + label + '.log')).open('w') as log:
+        with (private_dir / (app + suffix + '-' + label + '.log')).open('w') as log:
             result = subprocess.run([CLI, *args], cwd=BENCH, stdout=log, stderr=subprocess.STDOUT)
         print(app, label, 'exit', result.returncode, flush=True)
         if result.returncode:
@@ -33,13 +36,15 @@ def main(app):
     if not marker.exists():
         if (BENCH / 'sites' / site).exists():
             raise SystemExit('Unmarked existing official site: inspect; never drop/force it.')
-        run('new-site', ['new-site', site, '--db-name', 'ccm_upstream_' + app,
+        run('new-site', ['new-site', site, '--db-name', 'ccm_upstream_' + app + ('_fresh' if fresh else ''),
             '--db-host', '127.0.0.1', '--db-port', '3307', '--db-socket', str(ROOT / 'mariadb.sock'),
             '--db-root-username', 'ccm_bootstrap', '--db-root-password', bootstrap['bootstrap_password'],
             '--admin-password', credentials['admin_password']])
         marker.write_text(json.dumps({'site': site, 'initial_state': 'new empty Frappe site',
-            'allowed_apps': ['frappe'] + (['erpnext'] if app == 'erpnext' else [])}))
+            'allowed_apps': ['frappe'] + (['payments'] if payments else []) + (['erpnext'] if app == 'erpnext' else [])}))
     if app == 'erpnext':
+        if payments:
+            run('install-payments', ['--site', site, 'install-app', 'payments'])
         run('install', ['--site', site, 'install-app', 'erpnext'])
     # These site-local switches are the official Frappe CI test preparation.
     # Server Script remains disabled on Cencomun/baseline/recovery sites.
@@ -71,7 +76,16 @@ def main(app):
     print('Prepared official-only site:', site, flush=True)
 
 
+def main(app, fresh=False):
+    with SuiteLock():
+        if active_runners():
+            raise RuntimeError('An official runner is active; do not change its sites or fixtures.')
+        prepare(app, fresh)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('app', choices=['frappe', 'erpnext'])
-    main(parser.parse_args().app)
+    parser.add_argument('--fresh', action='store_true', help='Use a separate new marked site; preserve the previous site intact.')
+    args = parser.parse_args()
+    main(args.app, args.fresh)

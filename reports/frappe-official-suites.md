@@ -4,23 +4,20 @@ Se ejecutan runners, fuentes y fixtures oficiales, sin cambiar el oráculo LAB, 
 
 | Aplicación | Sitio del último intento registrado | Descubiertas | Ejecutadas (Ran N) | Estado | Exit | Segundos | Evidencia |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| frappe | ccm-upstream-frappe.test | 2326 | 2275 | FAIL | 1 | 856.902 | [frappe-latest.json](evidence/frappe-official/frappe-latest.json) |
-| erpnext | ccm-upstream-erpnext.test | 3255 | desconocidas | BLOCKED | — | — | [erpnext-latest.json](evidence/frappe-official/erpnext-latest.json) |
+| frappe | ccm-upstream-frappe-fresh.test | 2326 | 2319 | FAIL | 1 | 814.858 | [frappe-latest.json](evidence/frappe-official/frappe-latest.json) |
+| erpnext | ccm-upstream-erpnext.test | 3255 | 3255 | FAIL | 1 | 1981.974 | [erpnext-latest.json](evidence/frappe-official/erpnext-latest.json) |
 
 | Aplicación | Eventos PASS | FAIL | ERROR | SKIP | Total JUnit | Métodos descubiertos sin resultado |
 | --- | --- | --- | --- | --- | --- | --- |
-| frappe | 2006 | 10 | 212 | 51 | 2279 | 51 |
-| erpnext | 0 | 0 | 0 | 0 | 0 | 3255 |
+| frappe | 2198 | 24 | 46 | 51 | 2319 | 7 |
+| erpnext | 2675 | 9 | 572 | 0 | 3256 | 0 |
 
 **Los eventos JUnit no son el contador real de pruebas.** setUpClass/tearDownClass y subtests producen registros adicionales; SKIP no aprueba. Los JSON guardan cada ID, excepción y traza redactada; en intentos interrumpidos los resultados no observados son desconocidos. Un comando interrumpido no se convierte en suite aprobada.
 
 ## Comandos ejecutados
 
-- `bench --site ccm-upstream-frappe.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-2.xml`
-- `bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-2.xml`
-
-**erpnext: intento interrumpido, BLOCKED.** No existe resumen final. Los resúmenes de categorías completadas son [2]; no son el conteo completo. Se conserva log/XML privados y no se inventan resultados.
-
+- `bench --site ccm-upstream-frappe-fresh.test run-tests --app frappe --junit-xml-output /workspace/.local/frappe-integral/official-tests/frappe-full-attempt-4.xml`
+- `bench --site ccm-upstream-erpnext.test run-tests --app erpnext --junit-xml-output /workspace/.local/frappe-integral/official-tests/erpnext-full-attempt-3.xml`
 
 Preparación, repetición por categoría/módulo y diagnóstico paso a paso: [README](../scripts/official-tests/README.md). Discovery ejecuta cero pruebas. El bootstrap ERPNext de CI también ejecuta cero: carga fixtures oficiales; su éxito no es resultado de suite. Frappe usa su hook oficial antes del comando completo. Los servidores HTTP pertenecen a los sitios explícitos, sin cambiar el proxy baseline.
 
@@ -36,23 +33,34 @@ Resuelta usando sitios creados vacíos sin Cencomun y bootstrap oficial ERPNext.
 
 | Excepción | Eventos fallidos |
 | --- | --- |
-| AssertionError | 10 |
+| AssertionError | 24 |
 | AttributeError | 5 |
-| ConnectionError | 2 |
-| DuplicateEntryError | 3 |
-| Exception | 15 |
-| FileNotFoundError | 2 |
+| AuthError | 20 |
+| AuthenticationError | 2 |
+| DoesNotExistError | 7 |
+| DuplicateEntryError | 2 |
+| FileNotFoundError | 1 |
+| HTTPError | 1 |
 | IndexError | 1 |
+| JSONDecodeError | 3 |
 | LinkValidationError | 1 |
-| OSError | 180 |
 | TypeError | 1 |
 | ValidationError | 2 |
 ### erpnext: excepciones observadas
 
 | Excepción | Eventos fallidos |
 | --- | --- |
+| AssertionError | 9 |
+| AttributeError | 1 |
+| IndexError | 1 |
+| NonNegativeError | 1 |
+| PermissionError | 520 |
+| ProgrammingError | 22 |
+| ReportingCurrencyExchangeNotFoundError | 3 |
+| ValidationError | 10 |
+| ZeroDivisionError | 14 |
 
-Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con reserva exclusiva de nombres. Diez tests del harness verifican cero-test, categorías, subtests/fixtures, concurrencia, recuperación incompleta, assets y redacción; no son tests oficiales. El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; [informe de recuperación](frappe-executor-recovery.md).
+Los intentos anteriores se conservan en [summary.json](evidence/frappe-official/summary.json). El primer ERPNext tuvo una colisión de nombres de evidencia entre procesos concurrentes: ambos se interrumpieron, sus conteos quedaron desconocidos/no válidos y se repitió con reserva exclusiva de nombres. Quince tests del harness verifican cero-test, categorías, subtests/fixtures, concurrencia, recuperación incompleta, assets, redacción y conservación de archivos generados; no son tests oficiales. El intento ERPNext 2 se conserva incompleto tras perder acceso al ejecutor; [informe de recuperación](frappe-executor-recovery.md).
 
 No se ejecutan UI/Cypress, PostgreSQL, SQLite ni migraciones a otra versión. No se modifican validaciones para aprobar. Para cada excepción nativa: localizar ID/traza, identificar causa comprobada, corregir únicamente preparación autorizada, repetir módulo y conservar el fallo anterior; seguir el diagnóstico del README. Un FAIL o UNRUN nunca se convierte automáticamente en PASS por una prueba de otro alcance.
 

@@ -4,19 +4,20 @@ import argparse
 import json
 import os
 from pathlib import Path
+from run import SuiteLock, active_runners
 
 ROOT = Path('/workspace/.local/frappe-integral')
 BENCH = ROOT / 'official-bench'
 REPO = Path(__file__).resolve().parents[2]
 
 
-def main(app):
+def discover(app, fresh=False):
     os.chdir(BENCH / 'sites')
     import frappe
     from frappe.testing import TestConfig, TestRunner, discover_all_tests
     from frappe.testing.environment import _initialize_test_environment
 
-    site = 'ccm-upstream-' + app + '.test'
+    site = 'ccm-upstream-' + app + ('-fresh' if fresh else '') + '.test'
     cfg = TestConfig()
     _initialize_test_environment(site, cfg)
     try:
@@ -37,7 +38,16 @@ def main(app):
         frappe.destroy()
 
 
+def main(app, fresh=False):
+    with SuiteLock():
+        if active_runners():
+            raise RuntimeError('An official runner is active; defer fixture-aware discovery.')
+        discover(app, fresh)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('app', choices=['frappe', 'erpnext'])
-    main(parser.parse_args().app)
+    parser.add_argument('--fresh', action='store_true')
+    args = parser.parse_args()
+    main(args.app, args.fresh)

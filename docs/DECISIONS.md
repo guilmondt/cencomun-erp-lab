@@ -312,6 +312,16 @@
   previous attempts. An interrupted ERPNext log collision is quarantined;
   exclusive attempt reservations and concurrency regression tests prevent reuse.
   Modular repetitions retain their scope and do not rewrite a failed full suite.
+  The pinned ERPNext CI requires Payments. Its current develop requires Frappe
+  17, so only the compatible official version-16 SHA
+  cca07d9f9392e2ea0e521c5975151db9e4b6c321 is used as an isolated test fixture,
+  with seven hashed SDK pins in official-payments.lock.txt. It is absent from
+  the Cencomun Bench/venv/sites; existing packages and framework pins do not
+  change. Repeat on a separate fresh official site using the native CI runner
+  (one shard covering all modules; official bootstrap then ERPNext lightmode).
+  Its own per-module Administrator reset is preserved without permission
+  changes. Record native Tests counts and verbose outcomes separately from
+  serial JUnit; keep original failures and unknown interrupted counts.
 - Patch: Official Frappe and ERPNext 16.36 tags currently end at 16.36.1. Keep
   criterion 13 BLOCKED and all six dependent scenarios UNRUN. No minor upgrade
   is proposed or executed; such a change needs a separate reviewed plan.
