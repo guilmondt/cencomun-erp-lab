@@ -1,0 +1,1554 @@
+[
+  {
+    "action": "ccm-pilot-open",
+    "request": {
+      "action": "ccm-pilot-open",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "expected": "0.00",
+          "counted": "0.00",
+          "difference": "0.00",
+          "supervisor": true,
+          "_source": "open",
+          "_signal": "open"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-create",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-9B46975A-FDDE-453A-B474-A858C8DF226D",
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "50.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P001",
+                "fullName": "[P001] Equipo ficticio Alfa",
+                "id": 1,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -1
+            },
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "25.00",
+              "warrantyQuantity": 6,
+              "product": {
+                "code": "P002",
+                "fullName": "[P002] Accesorio ficticio Beta",
+                "id": 2,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -2
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-deliver",
+    "request": {
+      "action": "ccm-pilot-deliver",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-9B46975A-FDDE-453A-B474-A858C8DF226D",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "handover",
+          "_signal": "handover"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-collect",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-9B46975A-FDDE-453A-B474-A858C8DF226D",
+          "costMove": {
+            "reference": "CCM-GENERAL-000002",
+            "id": 3
+          },
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000001",
+            "id": 2
+          },
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": {
+            "invoiceId": "CCM-INV-000001",
+            "id": 1
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-create",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "45.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-83C47987-62E9-46F2-AD6D-56384A9BE1E1",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "50.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P001",
+                "fullName": "[P001] Equipo ficticio Alfa",
+                "id": 1,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -3
+            },
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "25.00",
+              "warrantyQuantity": 6,
+              "product": {
+                "code": "P002",
+                "fullName": "[P002] Accesorio ficticio Beta",
+                "id": 2,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -4
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-collect",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-83C47987-62E9-46F2-AD6D-56384A9BE1E1",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-deliver",
+    "request": {
+      "action": "ccm-pilot-deliver",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-83C47987-62E9-46F2-AD6D-56384A9BE1E1",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-83C47987-62E9-46F2-AD6D-56384A9BE1E1-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "handover",
+          "_signal": "handover"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-settle",
+    "request": {
+      "action": "ccm-pilot-settle",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-83C47987-62E9-46F2-AD6D-56384A9BE1E1",
+          "costMove": {
+            "reference": "CCM-GENERAL-000003",
+            "id": 7
+          },
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000002",
+            "id": 3
+          },
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-83C47987-62E9-46F2-AD6D-56384A9BE1E1-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": {
+            "invoiceId": "CCM-INV-000002",
+            "id": 2
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": true,
+          "_source": "settle",
+          "_signal": "settle"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-create",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "54.00",
+          "transfer": "0.00",
+          "shipping": "2.00",
+          "commission": "0.00",
+          "reference": "P-F31F2177-923B-4CF4-A4FE-F369B3FC4332",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "40.00",
+              "warrantyQuantity": 90,
+              "product": {
+                "code": "P004",
+                "fullName": "[P004] Producto ficticio 4",
+                "id": 4,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "DAY",
+              "cid": -5
+            },
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "50.00",
+              "warrantyQuantity": 1,
+              "product": {
+                "code": "P005",
+                "fullName": "[P005] Producto ficticio 5",
+                "id": 5,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "YEAR",
+              "cid": -6
+            }
+          ],
+          "channel": "WEB",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-deliver",
+    "request": {
+      "action": "ccm-pilot-deliver",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-F31F2177-923B-4CF4-A4FE-F369B3FC4332",
+          "costMove": null,
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": null,
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "guide": "UI-REGRESSION-WEB",
+          "_source": "handover",
+          "_signal": "handover"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-collect",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-F31F2177-923B-4CF4-A4FE-F369B3FC4332",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-settle",
+    "request": {
+      "action": "ccm-pilot-settle",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-F31F2177-923B-4CF4-A4FE-F369B3FC4332",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": {
+            "ref": "P-F31F2177-923B-4CF4-A4FE-F369B3FC4332-INITIAL",
+            "id": 3
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": true,
+          "_source": "settle",
+          "_signal": "settle"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-create",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "36.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-F67F9E6E-607C-4B30-8B56-15E4124A1206",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "60.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P006",
+                "fullName": "[P006] Producto ficticio 6",
+                "id": 6,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -7
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 4
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-collect",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-F67F9E6E-607C-4B30-8B56-15E4124A1206",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "3.84",
+          "id": 4,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000004-Cliente ficticio Alfa",
+            "id": 4
+          },
+          "delivery": null,
+          "gross": "60.00",
+          "initial": "24.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 7
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "36.00",
+          "transfer": "32.16",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 4
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-create",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "42.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-7585F7AB-F048-4B20-A2BE-0D74EB7197CD",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "70.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P007",
+                "fullName": "[P007] Producto ficticio 7",
+                "id": 7,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -1
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 5
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-collect",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-7585F7AB-F048-4B20-A2BE-0D74EB7197CD",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 5
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-cancel",
+    "request": {
+      "action": "ccm-pilot-cancel",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-7585F7AB-F048-4B20-A2BE-0D74EB7197CD",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": {
+            "ref": "P-7585F7AB-F048-4B20-A2BE-0D74EB7197CD-INITIAL",
+            "id": 5
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": true,
+          "reason": "Cliente ficticio desiste; devoluci\u00f3n f\u00edsica realizada",
+          "_source": "cancel",
+          "_signal": "cancel"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 5
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-preview",
+    "request": {
+      "action": "ccm-pilot-preview",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true,
+          "_source": "preview",
+          "_signal": "preview"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$cashExpectedPreview": "165.00"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ccm-pilot-close",
+    "request": {
+      "action": "ccm-pilot-close",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true,
+          "cashExpectedPreview": "165.00",
+          "cashCountedInput": "164.00",
+          "_source": "confirm",
+          "_signal": "confirm"
+        }
+      }
+    },
+    "response": {
+      "status": -1,
+      "data": {
+        "message": "Explain the cash difference before confirming"
+      }
+    }
+  },
+  {
+    "action": "ccm-pilot-close",
+    "request": {
+      "action": "ccm-pilot-close",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true,
+          "cashExpectedPreview": "165.00",
+          "cashCountedInput": "164.00",
+          "cashDifferenceReason": "Faltante ficticio de 1 USD en recuento",
+          "_source": "confirm",
+          "_signal": "confirm"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  }
+]
