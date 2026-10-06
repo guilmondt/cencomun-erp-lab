@@ -275,3 +275,17 @@ de ese contexto llama al comportamiento nativo. No altera importes, estados,
 asientos, upstream ni el oráculo histórico. Las pruebas rechazan diferencias
 equilibradas de uno y dos centavos y un asiento descuadrado. Validación runtime
 pendiente al escribir esta nota; el informe de estado registra el resultado final.
+
+### Piloto v1 — cierre de aceptación local
+
+La cohorte v6 (`753728b`, WAR `35efd7cc…`) confirmó por UI y lectura nativa el
+impuesto exacto con tolerancia cero, cobros independientes de entrega, liquidación
+separada y cierre integrado. Los controles servidor y recargas/reingresos conservan
+snapshots completos idénticos; el backup se restauró y abrió en Chromium con ambos
+perfiles. Acceso externo sigue pendiente de servidor autorizado.
+
+Una regresión local Core detectó distinto orden de los mismos registros de stock.
+Se conservó el FAIL completo y se ordenó sólo el lector propio de evidencia por ID,
+sin cambiar campos, contrato ni comparador. Una prueba con modelos nativos distingue
+ese orden de un cambio real de costo; la repetición limpia obtuvo 32 PASS y los dos
+FAIL históricos. No se atribuyen los resultados de cohortes anteriores al WAR final.

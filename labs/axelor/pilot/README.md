@@ -1,11 +1,12 @@
 # Piloto Axelor v1 (laboratorio)
 
-Estado: implementación en validación. No desplegar como producción ni presentar
-los escenarios sin evidencia como aprobados. Evaluación histórica inmutable:
+Estado: piloto probado en Chromium local; acceso externo pendiente de servidor
+autorizado. La matriz versionada está en `reports/axelor-pilot-v1-status.md`.
+No desplegar como producción. Evaluación histórica inmutable:
 `bc0183ea6fd40ea97d6be5c11ce0db0c00b5d35a`; código probado entonces:
 `a2f462f67526af94409bd050bf277d78f4782387`. Sus dos FAIL nativos se conservan.
 
-## Funcionamiento previsto
+## Guía operativa
 
 Menú **Cencomun · Piloto**: Productos e inventario, Venta y pedido,
 Entrega y liquidación, Cierre de caja. Operador registra/entrega; supervisor
@@ -35,11 +36,13 @@ del flujo: los repositorios exigen el servicio propio.
    no forman parte del efectivo. La fuente son líneas nativas de recibos/devoluciones
    de esa sesión, incluso si todavía no hay entrega ni factura.
 
-## Supuestos de laboratorio y límites pendientes de validación
+## Supuestos de laboratorio y restricciones
 
 - Sólo datos ficticios, USD, una caja/empresa/almacén, fecha fija 2026-10-01,
   IVA sintético 10%; ninguna afirmación de validez fiscal venezolana.
-- Diez productos y tres clientes. Varias líneas, sin duplicar producto en un mismo
+- Catálogo e inventario precargados de consulta: diez productos y tres clientes.
+  Altas de productos, compras y ajustes de stock quedan fuera de las pantallas
+  operativas de este primer piloto. Varias líneas, sin duplicar producto en un mismo
   pedido; se aumenta su cantidad entera en la línea existente.
 - El precio se obtiene del catálogo en servidor e incluye impuesto; no se
   aceptan descuentos manuales ni precios enviados por el navegador.
@@ -112,3 +115,28 @@ El impuesto se redondea por línea y se suma mediante la política confirmada.
 La extensión de comprobación de factura exige igualdad exacta y asiento equilibrado;
 `allowedTaxGap` permanece en cero. El diagnóstico con tolerancia de un centavo
 fue descartado y no constituye política ni aceptación.
+
+
+Para verificar la base creada desde UI, ejecutar los controles en este orden
+(con las mismas variables privadas del guion de navegador):
+
+```sh
+python3 labs/axelor/pilot/verify-server.py
+python3 labs/axelor/pilot/verify-native.py
+python3 labs/axelor/pilot/verify-views.py
+```
+
+`verify-server.py` guarda snapshots de campos de 15 modelos aun si una aserción
+falla. `verify-native.py` debe ejecutarse **después** de las negativas para volver
+a comprobar documentos, pagos, stock y caja. No basta con comparar conteos.
+Para restauración se usa `verify-restore.py`, indicando una nueva DB destino
+y un nuevo archivo de backup privado; sólo entonces `verify-isolation.py` añade
+centinelas ficticios ajenos a la compañía operativa. No ejecutar estos guiones
+en un servidor de uso real ni sobre una base con trabajo previo.
+
+
+La cohorte de aceptación tiene la caja cerrada y conserva sus operaciones.
+Para una nueva revisión operativa, preparar una base nueva con la semilla privada
+aprobada; no borrar ni reabrir el cierre aceptado. El laboratorio usa una fecha
+fija y una sesión. La copia restaurada se comprueba por navegador y lecturas
+nativas; no equivale a habilitar un servidor externo ni nuevas cuentas persistentes.

@@ -26,7 +26,7 @@ Contrato, fixtures, oráculo y evidencias históricas se conservan sin cambios;
   antes de entrega, el piloto mantendrá el documento nativo finalizado hasta
   entregar; confirmación + entrega constituyen una operación transaccional.
   No se presentará un pedido nativo confirmado como cancelado ni se alterará
-  un estado nativo a mano. Esta restricción pasó UI y comprobación nativa en v5 (ver matriz).
+  un estado nativo a mano. Esta restricción pasó UI y comprobación nativa en v6 (ver matriz).
 - Revisión de alcance: múltiples líneas; cobro real independiente de entrega, mediante
   PaymentVoucher nativo no aplicado y conciliación posterior a factura. La propuesta
   inicial de un solo producto/cobro al entregar fue retirada antes de aceptación.
@@ -52,3 +52,17 @@ Las extensiones y las cuatro áreas operativas están implementadas. La matriz
 incluidos errores de guion y diagnósticos descartados. El acceso Chromium
 local está probado; el acceso externo continúa bloqueado por falta de destino
 y autorización de instalación. PR borrador #5, sin merge.
+
+
+## Cierre de la implementación local
+
+- Extensiones, cuatro áreas UI y cinco escenarios: PASS en cohorte v6 desde cero.
+- 64 pruebas Java del módulo, 16 upstream, 93 Python Core y 2 de evidencia: PASS.
+- Core nativo final, con reinicio real: 32 PASS / 2 FAIL históricos; criterios
+  6 PASS / 4 FAIL / 3 UNRUN / 1 BLOCKED. No se convierte en aceptación histórica total.
+- Replays/negativas, snapshots completos, recarga/reingreso, aislamiento y
+  restauración con nuevo arranque/navegador: PASS.
+- Evidencia de errores anteriores preservada y clasificada; sin cambios de
+  contrato, oráculo, fixtures, pins, upstream ni referencias históricas.
+- Entrega externa: BLOCKED por falta de conexión/autorización del servidor.
+  No hay otra implementación local pendiente para los escenarios aceptados.

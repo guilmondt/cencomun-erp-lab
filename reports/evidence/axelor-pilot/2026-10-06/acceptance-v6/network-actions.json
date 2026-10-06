@@ -1,0 +1,5906 @@
+[
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-cash-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6867,
+            "model": "com.cencomun.core.db.CcmPilotSession",
+            "title": "Cierre de caja",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-cash-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-cash-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-cash-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "expected": "0.00",
+          "counted": "0.00",
+          "difference": "0.00"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-open",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "expected": "0.00",
+          "counted": "0.00",
+          "difference": "0.00",
+          "supervisor": true,
+          "_source": "open",
+          "_signal": "open"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-defaults,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+            "$supervisor": false,
+            "shipping": "0",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "financed": "0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P001",
+            "fullName": "[P001] Equipo ficticio Alfa",
+            "id": 1,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 12,
+            "price": "50.00",
+            "warrantyUnit": "MONTH"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P002",
+            "fullName": "[P002] Accesorio ficticio Beta",
+            "id": 2,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+            "kind": "CASH",
+            "lineList": [
+              {
+                "id": null,
+                "qty": "1.00",
+                "price": "50.00",
+                "warrantyQuantity": 12,
+                "product": {
+                  "code": "P001",
+                  "fullName": "[P001] Equipo ficticio Alfa",
+                  "id": 1,
+                  "isCartManagementEnabled": false
+                },
+                "warrantyUnit": "MONTH",
+                "cid": -1
+              }
+            ],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 6,
+            "price": "25.00",
+            "warrantyUnit": "MONTH"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "50.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P001",
+                "fullName": "[P001] Equipo ficticio Alfa",
+                "id": 1,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -1
+            },
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "25.00",
+              "warrantyQuantity": 6,
+              "product": {
+                "code": "P002",
+                "fullName": "[P002] Accesorio ficticio Beta",
+                "id": 2,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -2
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-deliver",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "handover",
+          "_signal": "handover"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "costMove": {
+            "reference": "CCM-GENERAL-000002",
+            "id": 3
+          },
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000001",
+            "id": 2
+          },
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": {
+            "invoiceId": "CCM-INV-000001",
+            "id": 1
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "costMove": {
+            "reference": "CCM-GENERAL-000002",
+            "id": 3
+          },
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000001",
+            "id": 2
+          },
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": {
+            "invoiceId": "CCM-INV-000001",
+            "id": 1
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-67FB07D3-D5DE-47BE-A282-DFCF5E64EEEB",
+          "costMove": {
+            "reference": "CCM-GENERAL-000002",
+            "id": 3
+          },
+          "shipping": "0.00",
+          "commission": "0.00",
+          "id": 1,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000001-Cliente ficticio Alfa",
+            "id": 1
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000001",
+            "id": 2
+          },
+          "gross": "75.00",
+          "initial": "75.00",
+          "initialVoucher": null,
+          "kind": "CASH",
+          "lineList": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "0.00",
+          "transfer": "0.00",
+          "invoice": {
+            "invoiceId": "CCM-INV-000001",
+            "id": 1
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-defaults,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+            "$supervisor": false,
+            "shipping": "0",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "financed": "0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P001",
+            "fullName": "[P001] Equipo ficticio Alfa",
+            "id": 1,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 12,
+            "price": "50.00",
+            "warrantyUnit": "MONTH"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P002",
+            "fullName": "[P002] Accesorio ficticio Beta",
+            "id": 2,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+            "kind": "CASH",
+            "lineList": [
+              {
+                "id": null,
+                "qty": "1.00",
+                "price": "50.00",
+                "warrantyQuantity": 12,
+                "product": {
+                  "code": "P001",
+                  "fullName": "[P001] Equipo ficticio Alfa",
+                  "id": 1,
+                  "isCartManagementEnabled": false
+                },
+                "warrantyUnit": "MONTH",
+                "cid": -1
+              }
+            ],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 6,
+            "price": "25.00",
+            "warrantyUnit": "MONTH"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "45.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "50.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P001",
+                "fullName": "[P001] Equipo ficticio Alfa",
+                "id": 1,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -1
+            },
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "25.00",
+              "warrantyQuantity": 6,
+              "product": {
+                "code": "P002",
+                "fullName": "[P002] Accesorio ficticio Beta",
+                "id": 2,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -2
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-deliver",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": null,
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "handover",
+          "_signal": "handover"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": {
+            "reference": "CCM-GENERAL-000003",
+            "id": 7
+          },
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000002",
+            "id": 3
+          },
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": {
+            "invoiceId": "CCM-INV-000002",
+            "id": 2
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": {
+            "reference": "CCM-GENERAL-000003",
+            "id": 7
+          },
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000002",
+            "id": 3
+          },
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": {
+            "invoiceId": "CCM-INV-000002",
+            "id": 2
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-settle",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": {
+            "reference": "CCM-GENERAL-000003",
+            "id": 7
+          },
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000002",
+            "id": 3
+          },
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": {
+            "invoiceId": "CCM-INV-000002",
+            "id": 2
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": true,
+          "_source": "settle",
+          "_signal": "settle"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 2
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": {
+            "reference": "CCM-BANK-000001",
+            "id": 8
+          },
+          "reference": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70",
+          "costMove": {
+            "reference": "CCM-GENERAL-000003",
+            "id": 7
+          },
+          "shipping": "0.00",
+          "commission": "4.80",
+          "id": 2,
+          "state": "SETTLED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000002-Cliente ficticio Alfa",
+            "id": 2
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000002",
+            "id": 3
+          },
+          "gross": "75.00",
+          "initial": "30.00",
+          "initialVoucher": {
+            "ref": "P-DD20BF6B-7D25-47D3-80DD-8CF09E166A70-INITIAL",
+            "id": 2
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 3
+            },
+            {
+              "id": 4
+            }
+          ],
+          "version": 5,
+          "attrs": null,
+          "financed": "45.00",
+          "transfer": "40.20",
+          "invoice": {
+            "invoiceId": "CCM-INV-000002",
+            "id": 2
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-defaults,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+            "$supervisor": false,
+            "shipping": "0",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "financed": "0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P004",
+            "fullName": "[P004] Producto ficticio 4",
+            "id": 4,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 90,
+            "price": "40.00",
+            "warrantyUnit": "DAY"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P005",
+            "fullName": "[P005] Producto ficticio 5",
+            "id": 5,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+            "kind": "CASH",
+            "lineList": [
+              {
+                "id": null,
+                "qty": "1.00",
+                "price": "40.00",
+                "warrantyQuantity": 90,
+                "product": {
+                  "code": "P004",
+                  "fullName": "[P004] Producto ficticio 4",
+                  "id": 4,
+                  "isCartManagementEnabled": false
+                },
+                "warrantyUnit": "DAY",
+                "cid": -1
+              }
+            ],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 1,
+            "price": "50.00",
+            "warrantyUnit": "YEAR"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "54.00",
+          "transfer": "0.00",
+          "shipping": "2.00",
+          "commission": "0.00",
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "40.00",
+              "warrantyQuantity": 90,
+              "product": {
+                "code": "P004",
+                "fullName": "[P004] Producto ficticio 4",
+                "id": 4,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "DAY",
+              "cid": -1
+            },
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "50.00",
+              "warrantyQuantity": 1,
+              "product": {
+                "code": "P005",
+                "fullName": "[P005] Producto ficticio 5",
+                "id": 5,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "YEAR",
+              "cid": -2
+            }
+          ],
+          "channel": "WEB",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": null,
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": null,
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": null,
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": null,
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-deliver",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": null,
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": null,
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "guide": "UI-REGRESSION-WEB",
+          "_source": "handover",
+          "_signal": "handover"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 3,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": {
+            "ref": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56-INITIAL",
+            "id": 3
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": {
+            "ref": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56-INITIAL",
+            "id": 3
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-settle",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "DELIVERED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": {
+            "ref": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56-INITIAL",
+            "id": 3
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": true,
+          "_source": "settle",
+          "_signal": "settle"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 3
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "WEB",
+          "refundVoucher": null,
+          "settlement": {
+            "reference": "CCM-BANK-000002",
+            "id": 12
+          },
+          "reference": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56",
+          "costMove": {
+            "reference": "CCM-GENERAL-000004",
+            "id": 10
+          },
+          "shipping": "2.00",
+          "commission": "7.56",
+          "id": 3,
+          "state": "SETTLED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000003-Cliente ficticio Alfa",
+            "id": 3
+          },
+          "delivery": {
+            "stockMoveSeq": "CCM-outStockMove-000003",
+            "id": 4
+          },
+          "gross": "90.00",
+          "initial": "36.00",
+          "initialVoucher": {
+            "ref": "P-2B1F6575-A612-41DB-88C0-9AA2FCE81B56-INITIAL",
+            "id": 3
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 5
+            },
+            {
+              "id": 6
+            }
+          ],
+          "version": 5,
+          "attrs": null,
+          "financed": "54.00",
+          "transfer": "44.44",
+          "invoice": {
+            "invoiceId": "CCM-INV-000003",
+            "id": 3
+          },
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-defaults,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+            "$supervisor": false,
+            "shipping": "0",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "financed": "0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P006",
+            "fullName": "[P006] Producto ficticio 6",
+            "id": 6,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 12,
+            "price": "60.00",
+            "warrantyUnit": "MONTH"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "36.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "60.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P006",
+                "fullName": "[P006] Producto ficticio 6",
+                "id": 6,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -1
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 4
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "3.84",
+          "id": 4,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000004-Cliente ficticio Alfa",
+            "id": 4
+          },
+          "delivery": null,
+          "gross": "60.00",
+          "initial": "24.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 7
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "36.00",
+          "transfer": "32.16",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "3.84",
+          "id": 4,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000004-Cliente ficticio Alfa",
+            "id": 4
+          },
+          "delivery": null,
+          "gross": "60.00",
+          "initial": "24.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 7
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "36.00",
+          "transfer": "32.16",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "3.84",
+          "id": 4,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000004-Cliente ficticio Alfa",
+            "id": 4
+          },
+          "delivery": null,
+          "gross": "60.00",
+          "initial": "24.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 7
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "36.00",
+          "transfer": "32.16",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 4
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "3.84",
+          "id": 4,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000004-Cliente ficticio Alfa",
+            "id": 4
+          },
+          "delivery": null,
+          "gross": "60.00",
+          "initial": "24.00",
+          "initialVoucher": {
+            "ref": "P-15862541-CEB2-4EBD-823D-BFC240E29DAF-INITIAL",
+            "id": 4
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 7
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "36.00",
+          "transfer": "32.16",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-pending-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId AND self.state IN ('RESERVED', 'DELIVERED')",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6866,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Entrega y liquidaci\u00f3n",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-pending-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-defaults,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "0.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+            "$supervisor": false,
+            "shipping": "0",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "financed": "0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-line",
+      "model": "com.cencomun.core.db.CcmPilotLine",
+      "data": {
+        "context": {
+          "_source": "product",
+          "_viewType": "grid",
+          "_views": [],
+          "id": null,
+          "qty": "0",
+          "price": "0.00",
+          "warrantyQuantity": 0,
+          "product": {
+            "code": "P007",
+            "fullName": "[P007] Producto ficticio 7",
+            "id": 7,
+            "isCartManagementEnabled": false
+          },
+          "_model": "com.cencomun.core.db.CcmPilotLine",
+          "_parent": {
+            "companyId": 1,
+            "_id": null,
+            "_model": "com.cencomun.core.db.CcmPilotSale",
+            "_viewName": "ccm-pilot-sale-form",
+            "_viewType": "form",
+            "_views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ],
+            "gross": "0.00",
+            "initial": "0.00",
+            "financed": "0.00",
+            "transfer": "0.00",
+            "shipping": "0.00",
+            "commission": "0.00",
+            "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+            "kind": "CASH",
+            "lineList": [],
+            "channel": "STORE",
+            "customer": {
+              "fullName": "C001 - Cliente ficticio Alfa",
+              "id": 2
+            },
+            "supervisor": false
+          }
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "warrantyQuantity": 12,
+            "price": "70.00",
+            "warrantyUnit": "MONTH"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-create",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "gross": "0.00",
+          "initial": "0.00",
+          "financed": "42.00",
+          "transfer": "0.00",
+          "shipping": "0.00",
+          "commission": "0.00",
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": null,
+              "qty": "1.00",
+              "price": "70.00",
+              "warrantyQuantity": 12,
+              "product": {
+                "code": "P007",
+                "fullName": "[P007] Producto ficticio 7",
+                "id": 7,
+                "isCartManagementEnabled": false
+              },
+              "warrantyUnit": "MONTH",
+              "cid": -1
+            }
+          ],
+          "channel": "STORE",
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "supervisor": false,
+          "_source": "reserve",
+          "_signal": "reserve"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 5
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-collect",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": null,
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 1,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": false,
+          "_source": "collect",
+          "_signal": "collect"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 5
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": {
+            "ref": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A-INITIAL",
+            "id": 5
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/all",
+    "request": {},
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "name": "ccm-pilot",
+          "title": "Cencomun \u00b7 Piloto",
+          "hidden": false,
+          "order": -9999,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-catalog",
+          "title": "Productos e inventario",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-catalog-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-sales",
+          "title": "Venta y pedido",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-sales-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-pending",
+          "title": "Entrega y liquidaci\u00f3n",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-pending-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        },
+        {
+          "name": "ccm-pilot-cash",
+          "title": "Cierre de caja",
+          "hidden": false,
+          "parent": "ccm-pilot",
+          "action": "ccm-pilot-cash-open",
+          "order": 0,
+          "left": true,
+          "mobile": false,
+          "hasTag": false
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/menu/quick",
+    "request": {},
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-sales-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6865,
+            "model": "com.cencomun.core.db.CcmPilotSale",
+            "title": "Venta y pedido",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-sale-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-sale-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-sales-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": {
+            "ref": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A-INITIAL",
+            "id": 5
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-cancel",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": null,
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "RESERVED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": {
+            "ref": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A-INITIAL",
+            "id": 5
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 2,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0,
+          "supervisor": true,
+          "reason": "Cliente ficticio desiste; devoluci\u00f3n f\u00edsica realizada",
+          "_source": "cancel",
+          "_signal": "cancel"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 5
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSale",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSale",
+          "_viewName": "ccm-pilot-sale-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-sale-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-sale-form",
+              "type": "form"
+            }
+          ],
+          "session": {
+            "id": 1
+          },
+          "channel": "STORE",
+          "refundVoucher": {
+            "ref": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A-REFUND",
+            "id": 6
+          },
+          "settlement": null,
+          "reference": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A",
+          "costMove": null,
+          "shipping": "0.00",
+          "commission": "4.48",
+          "id": 5,
+          "state": "CANCELLED",
+          "saleOrder": {
+            "fullName": "CCM-saleOrder-000005-Cliente ficticio Alfa",
+            "id": 5
+          },
+          "delivery": null,
+          "gross": "70.00",
+          "initial": "28.00",
+          "initialVoucher": {
+            "ref": "P-72CF865A-E438-43D2-AE9F-0D8F47AEB93A-INITIAL",
+            "id": 5
+          },
+          "kind": "CASHEA",
+          "lineList": [
+            {
+              "id": 8
+            }
+          ],
+          "version": 4,
+          "attrs": null,
+          "financed": "42.00",
+          "transfer": "37.52",
+          "invoice": null,
+          "customer": {
+            "fullName": "C001 - Cliente ficticio Alfa",
+            "id": 2
+          },
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/ccm-pilot-cash-open",
+    "request": {
+      "model": "com.axelor.meta.db.MetaAction"
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "view": {
+            "domain": "self.company.id = :companyId",
+            "icon": null,
+            "viewType": "grid",
+            "context": {
+              "companyId": 1,
+              "_id": null
+            },
+            "actionId": 6867,
+            "model": "com.cencomun.core.db.CcmPilotSession",
+            "title": "Cierre de caja",
+            "params": {},
+            "views": [
+              {
+                "name": "ccm-pilot-cash-grid",
+                "type": "grid"
+              },
+              {
+                "name": "ccm-pilot-cash-form",
+                "type": "form"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action/com.axelor.meta.web.MetaFilterController:findFilters",
+    "request": {
+      "data": {
+        "context": {
+          "filterView": "act:ccm-pilot-cash-open"
+        },
+        "model": "com.axelor.meta.db.MetaFilter"
+      },
+      "model": "com.axelor.meta.db.MetaFilter"
+    },
+    "response": {
+      "status": 0
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-preview",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true,
+          "_source": "preview",
+          "_signal": "preview"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$cashExpectedPreview": "165.00"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-close",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true,
+          "cashExpectedPreview": "165.00",
+          "cashCountedInput": "164.00",
+          "_source": "confirm",
+          "_signal": "confirm"
+        }
+      }
+    },
+    "response": {
+      "status": -1,
+      "data": {
+        "message": "Explain the cash difference before confirming"
+      }
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-close",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": null,
+          "expected": "0.00",
+          "sourceSnapshot": null,
+          "version": 0,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": null,
+          "counted": "0.00",
+          "difference": "0.00",
+          "id": 1,
+          "state": "OPEN",
+          "confirmedAt": null,
+          "attachments": 0,
+          "supervisor": true,
+          "cashExpectedPreview": "165.00",
+          "cashCountedInput": "164.00",
+          "cashDifferenceReason": "Faltante ficticio de 1 USD en recuento",
+          "_source": "confirm",
+          "_signal": "confirm"
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "reload": true,
+          "values": {
+            "id": 1
+          },
+          "notify": {
+            "message": "Operaci\u00f3n registrada. Revise los documentos nativos vinculados."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://127.0.0.1:18080/axelor-erp/ws/action",
+    "request": {
+      "action": "ccm-pilot-flags,com.axelor.meta.web.MetaController:moreAttrs",
+      "model": "com.cencomun.core.db.CcmPilotSession",
+      "data": {
+        "context": {
+          "companyId": 1,
+          "_id": null,
+          "_model": "com.cencomun.core.db.CcmPilotSession",
+          "_viewName": "ccm-pilot-cash-form",
+          "_viewType": "form",
+          "_views": [
+            {
+              "name": "ccm-pilot-cash-grid",
+              "type": "grid"
+            },
+            {
+              "name": "ccm-pilot-cash-form",
+              "type": "form"
+            }
+          ],
+          "reason": "Faltante ficticio de 1 USD en recuento",
+          "expected": "165.00",
+          "sourceSnapshot": "{\"expected\":165.00,\"sources\":[{\"move\":4,\"line\":9,\"sale\":1,\"kind\":\"initialVoucher\",\"amount\":\"75.000\",\"voucher\":1},{\"move\":14,\"line\":36,\"sale\":5,\"kind\":\"initialVoucher\",\"amount\":\"28.000\",\"voucher\":5},{\"move\":15,\"line\":38,\"sale\":5,\"kind\":\"refundVoucher\",\"amount\":\"-28.000\",\"voucher\":6},{\"move\":5,\"line\":11,\"sale\":2,\"kind\":\"initialVoucher\",\"amount\":\"30.000\",\"voucher\":2},{\"move\":11,\"line\":28,\"sale\":3,\"kind\":\"initialVoucher\",\"amount\":\"36.000\",\"voucher\":3},{\"move\":13,\"line\":34,\"sale\":4,\"kind\":\"initialVoucher\",\"amount\":\"24.000\",\"voucher\":4}],\"date\":\"2026-10-01\",\"session\":1}",
+          "version": 1,
+          "attrs": null,
+          "businessDate": "2026-10-01",
+          "confirmedBy": {
+            "code": "pilot-supervisor",
+            "fullName": "CCM Pilot Supervisor",
+            "id": 3
+          },
+          "counted": "164.00",
+          "difference": "-1.00",
+          "id": 1,
+          "state": "CONFIRMED",
+          "confirmedAt": "2026-10-06T21:40:12.560168Z",
+          "attachments": 0
+        }
+      }
+    },
+    "response": {
+      "status": 0,
+      "data": [
+        {
+          "values": {
+            "$supervisor": true
+          }
+        }
+      ]
+    }
+  }
+]
