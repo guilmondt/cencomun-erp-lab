@@ -349,7 +349,9 @@ def run_fx_cases(admin, base, fixtures, output, row):
     specification = json.loads((fixtures / "fx.json").read_bytes())
     profile = json.loads((fixtures / "profile.json").read_bytes())
     def body(item):
-        return {**item, "company_id": profile["company_id"]}
+        # Expected fixture values remain client assertions, never service input.
+        return {**{k: v for k, v in item.items() if k in ("id", "date", "lines", "rate", "reason")},
+            "company_id": profile["company_id"]}
     def rejected(client, path, payload, status):
         try:
             client.request(path, payload)
