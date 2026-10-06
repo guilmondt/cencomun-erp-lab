@@ -1,0 +1,978 @@
+{
+  "lab_commit": "068e76822da103c44934bf81a6bb0db4b8e12588",
+  "baseline_commit": "e0190090fd137576ce273e350d7ce6686d66baf9",
+  "definition": "Tracked physical and nonblank source lines including comments; excludes generated code, build outputs, dependencies, evidence and Frappe. Does not estimate executed performance or code complexity.",
+  "categories": {
+    "CI runner": {
+      "files": 12,
+      "physical_lines": 682,
+      "nonblank_lines": 655
+    },
+    "Core harness": {
+      "files": 16,
+      "physical_lines": 3664,
+      "nonblank_lines": 3428
+    },
+    "Java runtime": {
+      "files": 52,
+      "physical_lines": 3638,
+      "nonblank_lines": 3493
+    },
+    "Java tests": {
+      "files": 11,
+      "physical_lines": 544,
+      "nonblank_lines": 505
+    },
+    "Python regression tests": {
+      "files": 8,
+      "physical_lines": 1193,
+      "nonblank_lines": 1126
+    },
+    "module resources": {
+      "files": 5,
+      "physical_lines": 237,
+      "nonblank_lines": 237
+    }
+  },
+  "axelor_files_changed_from_pre_core_baseline": 99,
+  "changed_paths": [
+    "labs/axelor/cencomun-baseline/build.gradle",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/baseline/module/CencomunModule.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreApiReadResource.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreAuditController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreBankService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreCashService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreEventResource.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFault.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinanceController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinanceInspection.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinancePolicy.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinanceResource.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreNativePermissionInterceptor.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreNativeScope.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderPolicy.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderResource.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOutboxService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CorePurchaseService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreReadResource.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreRecordSupport.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreRequestMetrics.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreWriteScope.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/FixtureBundle.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/MoneyPolicy.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeAccess.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeAddressPreflightService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBankBookController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBankBookService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBenchmarkController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeEnumProbe.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFinance.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFixtureController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxResource.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeGateController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeGateService.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeIndependentController.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeInvoiceLinks.java",
+    "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeNegativeCostProbe.java",
+    "labs/axelor/cencomun-baseline/src/main/resources/domains/CcmProductProfile.xml",
+    "labs/axelor/cencomun-baseline/src/main/resources/domains/CcmRateAuthorization.xml",
+    "labs/axelor/cencomun-baseline/src/main/resources/domains/CoreFinance.xml",
+    "labs/axelor/cencomun-baseline/src/main/resources/domains/CoreOrders.xml",
+    "labs/axelor/cencomun-baseline/src/main/resources/views/CoreTest.xml",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeAddressTemplateTest.java",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeBankCsvTest.java",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeFinanceModelTest.java",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeInvoiceRuntimeTest.java",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeOrderModelTest.java",
+    "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativePermissionFilterTest.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmAuditWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmBankImportWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmBankRowWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmCashCloseWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmOrderLineWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmOrderWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmOutboxEventWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmPurchaseWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmRequestKeyWorkflowRepository.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/NativeBankCsv.java",
+    "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/NativeFxInvoiceFactory.java",
+    "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/CoreFinancePolicyTest.java",
+    "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/CoreNativeScopeTest.java",
+    "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/CoreOrderPolicyTest.java",
+    "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/MoneyPolicyTest.java",
+    "labs/axelor/ci/address-preflight.py",
+    "labs/axelor/ci/full-stack.init.gradle",
+    "labs/axelor/ci/run-host.sh",
+    "labs/axelor/ci/validate-full-stack.sh",
+    "labs/axelor/ci/validate-test-suites.py",
+    "labs/axelor/ci/verify-baseline-history.sh",
+    "labs/axelor/core-test/adapter.py",
+    "labs/axelor/core-test/api_cases.py",
+    "labs/axelor/core-test/audit_cases.py",
+    "labs/axelor/core-test/benchmark.py",
+    "labs/axelor/core-test/consumer.py",
+    "labs/axelor/core-test/evidence_index.py",
+    "labs/axelor/core-test/extract_log_evidence.py",
+    "labs/axelor/core-test/finalize.py",
+    "labs/axelor/core-test/finance_cases.py",
+    "labs/axelor/core-test/mcp.py",
+    "labs/axelor/core-test/order_cases.py",
+    "labs/axelor/core-test/publish_phase_evidence.py",
+    "labs/axelor/core-test/recovery_cases.py",
+    "labs/axelor/core-test/repackage_repeat.py",
+    "labs/axelor/core-test/repeat.py",
+    "labs/axelor/core-test/run.py",
+    "labs/axelor/core-test/test_api.py",
+    "labs/axelor/core-test/test_benchmark_replay.py",
+    "labs/axelor/core-test/test_ci_suites.py",
+    "labs/axelor/core-test/test_evidence.py",
+    "labs/axelor/core-test/test_evidence_index.py",
+    "labs/axelor/core-test/test_finance.py",
+    "labs/axelor/core-test/test_orders.py",
+    "labs/axelor/core-test/test_recovery.py",
+    "labs/axelor/scripts/validate.sh"
+  ],
+  "source_files": [
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/baseline/module/CencomunModule.java",
+      "category": "Java runtime",
+      "bytes": 4445,
+      "physical_lines": 52,
+      "nonblank_lines": 50,
+      "sha256": "1318a24bd48d451ec41f21de073a6d007a43869816bf2ea040c29a22a52cdd94"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreApiReadResource.java",
+      "category": "Java runtime",
+      "bytes": 6592,
+      "physical_lines": 75,
+      "nonblank_lines": 73,
+      "sha256": "8d16a2e2f3a25a45754191ca1be73bdadbf6fa1d32f85a02c16a31cf02d187a8"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreAuditController.java",
+      "category": "Java runtime",
+      "bytes": 3210,
+      "physical_lines": 41,
+      "nonblank_lines": 39,
+      "sha256": "70ba13eb4f9b728b40a6fb3582e783699530f47188095cb716b31d2abfb2df48"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreBankService.java",
+      "category": "Java runtime",
+      "bytes": 12888,
+      "physical_lines": 133,
+      "nonblank_lines": 131,
+      "sha256": "31d535677a7a842358e87d4a1dfa2ffbf6a6e08b6cc7aec680a48707ee66c561"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreCashService.java",
+      "category": "Java runtime",
+      "bytes": 12052,
+      "physical_lines": 133,
+      "nonblank_lines": 131,
+      "sha256": "c793d3d87abf4c68ac84a492908a7ba76ef9f4cee7e7e630a475e6e7a2990f70"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreEventResource.java",
+      "category": "Java runtime",
+      "bytes": 557,
+      "physical_lines": 15,
+      "nonblank_lines": 13,
+      "sha256": "69ddd9aaf7d3ccd8919e8fb82e87cf0ccc0ee304060cb749a1af03a24588356a"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFault.java",
+      "category": "Java runtime",
+      "bytes": 294,
+      "physical_lines": 7,
+      "nonblank_lines": 6,
+      "sha256": "82105e4cd9e5fa2f5846895678cdcbc27eec23759e8347c599a588f164ce9d91"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinanceController.java",
+      "category": "Java runtime",
+      "bytes": 6304,
+      "physical_lines": 85,
+      "nonblank_lines": 83,
+      "sha256": "fccd99844d811294be14bc1d79595326497bc56e4ea879c7fea0ab4dc72b2bb7"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinanceInspection.java",
+      "category": "Java runtime",
+      "bytes": 3450,
+      "physical_lines": 42,
+      "nonblank_lines": 40,
+      "sha256": "76cdb797d2dd181529da84602f2f64ee049f8eebbe3d34307de2956938b72c87"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinancePolicy.java",
+      "category": "Java runtime",
+      "bytes": 609,
+      "physical_lines": 15,
+      "nonblank_lines": 13,
+      "sha256": "1cdda960882b4388187c944673d8956cad46b492d21b734e76d4c00f53a528cd"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreFinanceResource.java",
+      "category": "Java runtime",
+      "bytes": 3431,
+      "physical_lines": 52,
+      "nonblank_lines": 50,
+      "sha256": "37a7f766520d209f49d15608bed7bf044e8ca28d99b95d9a92f9a9dddcf0bf25"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreNativePermissionInterceptor.java",
+      "category": "Java runtime",
+      "bytes": 494,
+      "physical_lines": 12,
+      "nonblank_lines": 10,
+      "sha256": "624b727a0c926bd89fc10c8df5b23219e80a4c5b959f094f2c2c5abdf3cce459"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreNativeScope.java",
+      "category": "Java runtime",
+      "bytes": 668,
+      "physical_lines": 12,
+      "nonblank_lines": 10,
+      "sha256": "081d1816871aacd9f9767dbee1adea3862a21786ff1aafd589d98e1e35e8560e"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderController.java",
+      "category": "Java runtime",
+      "bytes": 8909,
+      "physical_lines": 128,
+      "nonblank_lines": 126,
+      "sha256": "5f3b673de3a89bb1d8a12e393c9aae4dda9095dfde47d67720d70cd51904d0ef"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderPolicy.java",
+      "category": "Java runtime",
+      "bytes": 3818,
+      "physical_lines": 53,
+      "nonblank_lines": 51,
+      "sha256": "8fcea7f2e053c259e9dd9ce427aced25bd2b5d487c9bea555709343de78418bc"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderResource.java",
+      "category": "Java runtime",
+      "bytes": 2360,
+      "physical_lines": 47,
+      "nonblank_lines": 45,
+      "sha256": "e15dd997a95cc168afd3a47137f18fb5fff18427a928566a2cce7050587ddb81"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOrderService.java",
+      "category": "Java runtime",
+      "bytes": 14749,
+      "physical_lines": 212,
+      "nonblank_lines": 207,
+      "sha256": "1a80c34aaae055576b3ccb8777c64df5010346453e44c892483c290cb8c13f07"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreOutboxService.java",
+      "category": "Java runtime",
+      "bytes": 3210,
+      "physical_lines": 53,
+      "nonblank_lines": 51,
+      "sha256": "7255f2b53732915e627059b6b22c229775f3da9715aa2cc226a6eba99c0a7d42"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CorePurchaseService.java",
+      "category": "Java runtime",
+      "bytes": 14427,
+      "physical_lines": 168,
+      "nonblank_lines": 166,
+      "sha256": "7d3a7f0bf40e869cce6770d66a3b438d8832dfd869c71beaa5fd2c6dc9b4505b"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreReadResource.java",
+      "category": "Java runtime",
+      "bytes": 6448,
+      "physical_lines": 115,
+      "nonblank_lines": 111,
+      "sha256": "f464385f620cf1d7530b374bf1cf5876494210d58b1fb53e0be0da5b60f5fa82"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreRecordSupport.java",
+      "category": "Java runtime",
+      "bytes": 3226,
+      "physical_lines": 45,
+      "nonblank_lines": 43,
+      "sha256": "a7bf850ac4b74d3d9af3b7650e903ab8db36bb1d728760a38d9c9aa4002659f1"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreRequestMetrics.java",
+      "category": "Java runtime",
+      "bytes": 2702,
+      "physical_lines": 47,
+      "nonblank_lines": 45,
+      "sha256": "666e1cff1337a1e5ceda5dfa7696876ae7cafb9ba55ffa148c74d886b1101388"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/CoreWriteScope.java",
+      "category": "Java runtime",
+      "bytes": 625,
+      "physical_lines": 10,
+      "nonblank_lines": 9,
+      "sha256": "819f63d4d25e9b94fb5c77bacfe6cc8895046859a8cdfe3ff80a0044f3799ebb"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/FixtureBundle.java",
+      "category": "Java runtime",
+      "bytes": 2319,
+      "physical_lines": 51,
+      "nonblank_lines": 44,
+      "sha256": "2176bb2f0d5a29b013100669a9733d1d97eb98010c424cba3cf9659125c2ab27"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/MoneyPolicy.java",
+      "category": "Java runtime",
+      "bytes": 4213,
+      "physical_lines": 71,
+      "nonblank_lines": 69,
+      "sha256": "8fec86818a0a43253c9bd43f1174cc9295895957e73775134a50a582d28ba5ac"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeAccess.java",
+      "category": "Java runtime",
+      "bytes": 4952,
+      "physical_lines": 91,
+      "nonblank_lines": 89,
+      "sha256": "3951033fc29e0c36293a73f595947612cd83a5fd850b6e1a77250302de6a5659"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeAddressPreflightService.java",
+      "category": "Java runtime",
+      "bytes": 2169,
+      "physical_lines": 38,
+      "nonblank_lines": 34,
+      "sha256": "8f01de83a1d010fc0f0b2064942a385ab55a7a6e70782c29be382dd8b6edcd63"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBankBookController.java",
+      "category": "Java runtime",
+      "bytes": 1167,
+      "physical_lines": 25,
+      "nonblank_lines": 23,
+      "sha256": "9c4dcd4e4c7c5d03d138fc55df449d53ae8c6af0b80131d0f12b8386ad347df4"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBankBookService.java",
+      "category": "Java runtime",
+      "bytes": 7221,
+      "physical_lines": 114,
+      "nonblank_lines": 108,
+      "sha256": "0e5f139badf1f453d36098944519e7db4c54a36f7544875cd542b9f4349c2214"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeBenchmarkController.java",
+      "category": "Java runtime",
+      "bytes": 6393,
+      "physical_lines": 69,
+      "nonblank_lines": 67,
+      "sha256": "9635f57b6b3622084dd5206e7bc5ef9fac0e5bb226e37277341dc2385b9ff692"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeEnumProbe.java",
+      "category": "Java runtime",
+      "bytes": 2316,
+      "physical_lines": 42,
+      "nonblank_lines": 40,
+      "sha256": "522f2c3b7be10fa47053977e326c51e9d121252d2835b18ba7aed3f3d4438870"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFinance.java",
+      "category": "Java runtime",
+      "bytes": 22505,
+      "physical_lines": 338,
+      "nonblank_lines": 322,
+      "sha256": "6291317b69650827e87ca85afe42367f7a135348ae0bf4bf8a77b14fd0a5d326"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFixtureController.java",
+      "category": "Java runtime",
+      "bytes": 5660,
+      "physical_lines": 98,
+      "nonblank_lines": 93,
+      "sha256": "634cdd0083d284d58ae327093a70b4d1d08b44b41ca0bc044ed8ebbe6187344e"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxController.java",
+      "category": "Java runtime",
+      "bytes": 601,
+      "physical_lines": 16,
+      "nonblank_lines": 14,
+      "sha256": "d8c0e99819243ba6f99b05addfe3c7c9920010fb1030aec5643eef4d817a46cc"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxResource.java",
+      "category": "Java runtime",
+      "bytes": 2016,
+      "physical_lines": 44,
+      "nonblank_lines": 42,
+      "sha256": "bd9d57f26ab495caaa9b2a4b7d784f54a748eb1f2d9844af2592c8c422c346af"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeFxService.java",
+      "category": "Java runtime",
+      "bytes": 18903,
+      "physical_lines": 269,
+      "nonblank_lines": 257,
+      "sha256": "41b5639b9f9f193662cd6444f4af6d7878b651a345c57e96950f78bf25cfe998"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeGateController.java",
+      "category": "Java runtime",
+      "bytes": 4130,
+      "physical_lines": 75,
+      "nonblank_lines": 73,
+      "sha256": "3a8145bc87247f66545e4dd11dc2e9b0148c4b1967bddffd4faa6a08fa3fabcb"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeGateService.java",
+      "category": "Java runtime",
+      "bytes": 22834,
+      "physical_lines": 346,
+      "nonblank_lines": 337,
+      "sha256": "2e2510496d1ca085e18c4cf276051eeefcaeefa4c8e88b41a86d93e0a31f3f7a"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeIndependentController.java",
+      "category": "Java runtime",
+      "bytes": 9753,
+      "physical_lines": 147,
+      "nonblank_lines": 144,
+      "sha256": "150729c99b8c7c90654fe3b97ffb6eeb90c26754b29adebdfd61983b54eb216b"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeInvoiceLinks.java",
+      "category": "Java runtime",
+      "bytes": 1921,
+      "physical_lines": 37,
+      "nonblank_lines": 35,
+      "sha256": "7505c2ba5096162e6a0d2be82ca81efe43b4286f23f2dc181a901a0070ccbd88"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/java/com/cencomun/core/NativeNegativeCostProbe.java",
+      "category": "Java runtime",
+      "bytes": 3565,
+      "physical_lines": 54,
+      "nonblank_lines": 52,
+      "sha256": "d1c5aa5087f2038926fbc50aa99820668dc11ebf9a9bce95f07d304b96737cec"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/resources/domains/CcmProductProfile.xml",
+      "category": "module resources",
+      "bytes": 1623,
+      "physical_lines": 37,
+      "nonblank_lines": 37,
+      "sha256": "ed924a6d7603c80d9555a33476f7fec1bd2fd17913dfd51a3308b26d4d082329"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/resources/domains/CcmRateAuthorization.xml",
+      "category": "module resources",
+      "bytes": 1039,
+      "physical_lines": 20,
+      "nonblank_lines": 20,
+      "sha256": "1c80a39a090337be2c88f47d8dd300f577b907a71ce072f88bcacec13a8dcff3"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/resources/domains/CoreFinance.xml",
+      "category": "module resources",
+      "bytes": 3283,
+      "physical_lines": 55,
+      "nonblank_lines": 55,
+      "sha256": "6b8ca2424d369965ed08dbf3c65584b3d686d1ed57c5f6b508a325276832a6ed"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/resources/domains/CoreOrders.xml",
+      "category": "module resources",
+      "bytes": 3349,
+      "physical_lines": 63,
+      "nonblank_lines": 63,
+      "sha256": "a5b720ae1ccf3267a94a3fcab6f5e75abae55694c3c3693655650a84e0247a5e"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/main/resources/views/CoreTest.xml",
+      "category": "module resources",
+      "bytes": 4179,
+      "physical_lines": 62,
+      "nonblank_lines": 62,
+      "sha256": "14606bd17b94a362f183caff6100484b97ff4686fef1f1a06e0c56835eef51ab"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeAddressTemplateTest.java",
+      "category": "Java tests",
+      "bytes": 5103,
+      "physical_lines": 107,
+      "nonblank_lines": 96,
+      "sha256": "58a02ee1d0d9af8a587ef75774ffdf029590f978694ac169361b5a2e86cda2d4"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeBankCsvTest.java",
+      "category": "Java tests",
+      "bytes": 1025,
+      "physical_lines": 20,
+      "nonblank_lines": 18,
+      "sha256": "d8cbb795c97dada80d5673213f319ead2de1a7d58b0a8fa7f71b61d6cb650947"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeFinanceModelTest.java",
+      "category": "Java tests",
+      "bytes": 5438,
+      "physical_lines": 68,
+      "nonblank_lines": 66,
+      "sha256": "23a0ba73f2176c33f92738180e682ea80ae9511c06ecf8b56796e8ff4d0db835"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeInvoiceRuntimeTest.java",
+      "category": "Java tests",
+      "bytes": 1147,
+      "physical_lines": 29,
+      "nonblank_lines": 25,
+      "sha256": "a0bdc5bb862b1dcc8f1691323078b71d494be955ed81b2d994dd2a26e45d6a25"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativeOrderModelTest.java",
+      "category": "Java tests",
+      "bytes": 3238,
+      "physical_lines": 58,
+      "nonblank_lines": 56,
+      "sha256": "4c2d86abc53eb9a2859b2221b54456fd950b03052c920201bd6f3d77d95c4e1e"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native-test/java/com/cencomun/core/NativePermissionFilterTest.java",
+      "category": "Java tests",
+      "bytes": 3284,
+      "physical_lines": 63,
+      "nonblank_lines": 58,
+      "sha256": "251ba13d0c33ac19c39b3edd4e1258632fb79a037d2816b264885c99fd16da03"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmAuditWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 627,
+      "physical_lines": 16,
+      "nonblank_lines": 14,
+      "sha256": "8266d27ac70ac34c44058940af7885a92d9edc8130a981f8ecbc297e366e86ce"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmBankImportWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 529,
+      "physical_lines": 8,
+      "nonblank_lines": 8,
+      "sha256": "2c37f4e6d26e1c256d9f318ee11249a46ac356191c0487a54d932383817476d5"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmBankRowWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 508,
+      "physical_lines": 8,
+      "nonblank_lines": 8,
+      "sha256": "240f6c41f95300c0c308fabaa37395aa7229a705766ee6de8b2e1105f30d4ffc"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmCashCloseWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 522,
+      "physical_lines": 8,
+      "nonblank_lines": 8,
+      "sha256": "f2766571ed306c63d66e9cd3f3f8dca753de6e529917dbbc3b431baa82a3d591"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmOrderLineWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 538,
+      "physical_lines": 15,
+      "nonblank_lines": 13,
+      "sha256": "72ca7222ca99d00b8f73e575a34e9db50e0616ff9c24ec9666a5e5b7bc98d87c"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmOrderWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 510,
+      "physical_lines": 15,
+      "nonblank_lines": 13,
+      "sha256": "e7b6c70a1d8c630105add0ba76ea1b5843d7a9be42efd9efb0f7722b20a0ddad"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmOutboxEventWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 552,
+      "physical_lines": 15,
+      "nonblank_lines": 13,
+      "sha256": "2c2840e82c20f5738ae7f02fe9251bc344dca369f4e53a460b83fbcc16a1d161"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmPurchaseWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 515,
+      "physical_lines": 8,
+      "nonblank_lines": 8,
+      "sha256": "92a3fb1fe75cb16e3bf0cd1bc960f3310a35e645111699dd6a04dc36e9a00d0a"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/CcmRequestKeyWorkflowRepository.java",
+      "category": "Java runtime",
+      "bytes": 545,
+      "physical_lines": 15,
+      "nonblank_lines": 13,
+      "sha256": "a1eb433c187f79bf5b71daeeb783a0f8f9a7fa7ea1ed4798a8c6cfbaeed2611b"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/NativeBankCsv.java",
+      "category": "Java runtime",
+      "bytes": 1074,
+      "physical_lines": 25,
+      "nonblank_lines": 23,
+      "sha256": "1d52fdf85fbc477bd80d8310821a5ae032c962df1fb4c6bd261239ca193a564e"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/native/java/com/cencomun/core/NativeFxInvoiceFactory.java",
+      "category": "Java runtime",
+      "bytes": 1280,
+      "physical_lines": 28,
+      "nonblank_lines": 26,
+      "sha256": "5709ffa39dfd17d4a168eb98aa5db41bb4147a47a6103aaffc39a3a2c1fad2cb"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/baseline/module/CencomunModuleTest.java",
+      "category": "Java tests",
+      "bytes": 1527,
+      "physical_lines": 42,
+      "nonblank_lines": 37,
+      "sha256": "d7d16047cc88aa86ccedc76fe592ca20644c9118eb9bd0a0aa42d3cc5ee19501"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/CoreFinancePolicyTest.java",
+      "category": "Java tests",
+      "bytes": 928,
+      "physical_lines": 21,
+      "nonblank_lines": 19,
+      "sha256": "c8802742cfca84fc468df1145aceab990c1ca519d5e4fb270a820ef804073f85"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/CoreNativeScopeTest.java",
+      "category": "Java tests",
+      "bytes": 1175,
+      "physical_lines": 22,
+      "nonblank_lines": 20,
+      "sha256": "f07990d23d355221f3b1537c2b37e44e21050af9d5ec1c39be6124c65b097702"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/CoreOrderPolicyTest.java",
+      "category": "Java tests",
+      "bytes": 3904,
+      "physical_lines": 64,
+      "nonblank_lines": 62,
+      "sha256": "f4f847fcfda0d3f231213043717e484730fafa63114dd924e8115322ee4d2743"
+    },
+    {
+      "path": "labs/axelor/cencomun-baseline/src/test/java/com/cencomun/core/MoneyPolicyTest.java",
+      "category": "Java tests",
+      "bytes": 3251,
+      "physical_lines": 50,
+      "nonblank_lines": 48,
+      "sha256": "1c4bdd495c2db398e69eead0125d2dc70074e34fbdbc08266e6e8e9dee33136b"
+    },
+    {
+      "path": "labs/axelor/ci/.gitignore",
+      "category": "CI runner",
+      "bytes": 13,
+      "physical_lines": 1,
+      "nonblank_lines": 1,
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "labs/axelor/ci/address-preflight.py",
+      "category": "CI runner",
+      "bytes": 3156,
+      "physical_lines": 60,
+      "nonblank_lines": 52,
+      "sha256": "6f9e19b0462a2e85ed470ea5c40d974e8bde326661a5cb9632eb9b9a26138ca4"
+    },
+    {
+      "path": "labs/axelor/ci/bootstrap.sh",
+      "category": "CI runner",
+      "bytes": 989,
+      "physical_lines": 19,
+      "nonblank_lines": 19,
+      "sha256": "9baa81cfcdc352f484b1c93f923f2a3dde3b7891ba4004645b65fa0257d01088"
+    },
+    {
+      "path": "labs/axelor/ci/check-init-scope.sh",
+      "category": "CI runner",
+      "bytes": 2093,
+      "physical_lines": 45,
+      "nonblank_lines": 44,
+      "sha256": "0cea2b3e0beb4343fe9d074cd4f039c18442d6df4cf1deb93bd62922ae9fd577"
+    },
+    {
+      "path": "labs/axelor/ci/check-workflow.sh",
+      "category": "CI runner",
+      "bytes": 771,
+      "physical_lines": 15,
+      "nonblank_lines": 15,
+      "sha256": "b52d7b9dda9edbe218ba9861484244b1c9bbd5d3a442b0ffa24455768ebd096e"
+    },
+    {
+      "path": "labs/axelor/ci/full-stack.init.gradle",
+      "category": "CI runner",
+      "bytes": 1708,
+      "physical_lines": 42,
+      "nonblank_lines": 42,
+      "sha256": "e973413b3ecab7017adf1615fb4426f1a1a7df7a6ad9593d7ea3d1d57c98a4bc"
+    },
+    {
+      "path": "labs/axelor/ci/pins.sh",
+      "category": "CI runner",
+      "bytes": 601,
+      "physical_lines": 8,
+      "nonblank_lines": 8,
+      "sha256": "9c51347a6d801c2ee0c8aea16c432709268513c60a15f05119652e4087c2abfc"
+    },
+    {
+      "path": "labs/axelor/ci/run-host.sh",
+      "category": "CI runner",
+      "bytes": 7713,
+      "physical_lines": 133,
+      "nonblank_lines": 133,
+      "sha256": "f2f4d95e4897463fe313488fb1a874db4e3dc0d61f1d560ee3c71f6d6b97d597"
+    },
+    {
+      "path": "labs/axelor/ci/smoke.py",
+      "category": "CI runner",
+      "bytes": 3172,
+      "physical_lines": 71,
+      "nonblank_lines": 64,
+      "sha256": "a883667732bfa1b1028a1e3c51f59bd5bf3ff7dd96291784c6dbd045437da9c4"
+    },
+    {
+      "path": "labs/axelor/ci/validate-full-stack.sh",
+      "category": "CI runner",
+      "bytes": 13294,
+      "physical_lines": 239,
+      "nonblank_lines": 236,
+      "sha256": "8ac944ab62fd838e377e49cbfa3c00d7774efec6bd01e4321e0b830ce8c29eb2"
+    },
+    {
+      "path": "labs/axelor/ci/validate-test-suites.py",
+      "category": "CI runner",
+      "bytes": 1708,
+      "physical_lines": 41,
+      "nonblank_lines": 33,
+      "sha256": "ca096905fd77c41dfee3431a15a397e1be8432606070b4a44b996646c1c87f54"
+    },
+    {
+      "path": "labs/axelor/ci/verify-baseline-history.sh",
+      "category": "CI runner",
+      "bytes": 415,
+      "physical_lines": 8,
+      "nonblank_lines": 8,
+      "sha256": "be30fc89bb11f007f4696111dbe6be9e6d3430f087ecce68478d84fce80e2825"
+    },
+    {
+      "path": "labs/axelor/core-test/adapter.py",
+      "category": "Core harness",
+      "bytes": 5271,
+      "physical_lines": 97,
+      "nonblank_lines": 86,
+      "sha256": "fc2d5dd38b9485b009bf09a03a4e0b9403e0d49618416e94b8ea564aeb5cc6af"
+    },
+    {
+      "path": "labs/axelor/core-test/api_cases.py",
+      "category": "Core harness",
+      "bytes": 37232,
+      "physical_lines": 457,
+      "nonblank_lines": 438,
+      "sha256": "0e44118debd7d95a37221d01b5fecc6ed65572b2badf5d8983f1910f56aa0155"
+    },
+    {
+      "path": "labs/axelor/core-test/audit_cases.py",
+      "category": "Core harness",
+      "bytes": 15752,
+      "physical_lines": 198,
+      "nonblank_lines": 183,
+      "sha256": "07923a5d7e5595eacb600760d39478b9d87381829af60926cafd25d462329420"
+    },
+    {
+      "path": "labs/axelor/core-test/benchmark.py",
+      "category": "Core harness",
+      "bytes": 9155,
+      "physical_lines": 94,
+      "nonblank_lines": 91,
+      "sha256": "d6e33e73ad5c2118f030c57413d66875e7e33c6d3971c2918c0326665cf38371"
+    },
+    {
+      "path": "labs/axelor/core-test/consumer.py",
+      "category": "Core harness",
+      "bytes": 3533,
+      "physical_lines": 55,
+      "nonblank_lines": 44,
+      "sha256": "23432863d109930bd91f4b4cb18b466c78dc3fe6edf57a7505c2e89ac46133d8"
+    },
+    {
+      "path": "labs/axelor/core-test/evidence_index.py",
+      "category": "Core harness",
+      "bytes": 8768,
+      "physical_lines": 131,
+      "nonblank_lines": 119,
+      "sha256": "1f101c25250f908ee6f828c78e27e7ccb02e11eca7c97e17910c923ce8858136"
+    },
+    {
+      "path": "labs/axelor/core-test/extract_log_evidence.py",
+      "category": "Core harness",
+      "bytes": 22639,
+      "physical_lines": 323,
+      "nonblank_lines": 315,
+      "sha256": "8b0d0ae6aa8add2f43d33ac7ae8a8ecd494fc55d691e70738b563dacf1b121df"
+    },
+    {
+      "path": "labs/axelor/core-test/finalize.py",
+      "category": "Core harness",
+      "bytes": 7028,
+      "physical_lines": 98,
+      "nonblank_lines": 89,
+      "sha256": "e93dc23aae1472302e45844acc70b974521636a5174edffe4b0d09c3da2afb98"
+    },
+    {
+      "path": "labs/axelor/core-test/finance_cases.py",
+      "category": "Core harness",
+      "bytes": 28652,
+      "physical_lines": 317,
+      "nonblank_lines": 300,
+      "sha256": "74d1ab7565a72dfdc156741580a14d0a33595cd3022ad6e4ee4223b857ecad81"
+    },
+    {
+      "path": "labs/axelor/core-test/mcp.py",
+      "category": "Core harness",
+      "bytes": 2784,
+      "physical_lines": 56,
+      "nonblank_lines": 49,
+      "sha256": "1d0ca03a9573235f182a3613ef1342c6c51c73d6857279da3cadbf071a65e49d"
+    },
+    {
+      "path": "labs/axelor/core-test/order_cases.py",
+      "category": "Core harness",
+      "bytes": 35912,
+      "physical_lines": 529,
+      "nonblank_lines": 488,
+      "sha256": "9dc2af6934991a18f3cc17865999f14cd399ddab9a636abf82f6d73487c6443f"
+    },
+    {
+      "path": "labs/axelor/core-test/publish_phase_evidence.py",
+      "category": "Core harness",
+      "bytes": 631,
+      "physical_lines": 13,
+      "nonblank_lines": 12,
+      "sha256": "840946fbc7bd5287e5dcb7bd1cef881321fc0464f1ffacae132f28393be09263"
+    },
+    {
+      "path": "labs/axelor/core-test/recovery_cases.py",
+      "category": "Core harness",
+      "bytes": 12684,
+      "physical_lines": 166,
+      "nonblank_lines": 155,
+      "sha256": "e79e0776f49144cd7d8bf921f9d781a1dffd71b0e8ac9de0a01a4ac8508b0777"
+    },
+    {
+      "path": "labs/axelor/core-test/repackage_repeat.py",
+      "category": "Core harness",
+      "bytes": 5259,
+      "physical_lines": 79,
+      "nonblank_lines": 75,
+      "sha256": "4595756a4dc61a8bc182c59d5d17be213eeb2dc0d5f5c10a9256714e24ec687c"
+    },
+    {
+      "path": "labs/axelor/core-test/repeat.py",
+      "category": "Core harness",
+      "bytes": 4547,
+      "physical_lines": 62,
+      "nonblank_lines": 58,
+      "sha256": "990050588dc652b9af1a89d916520ea66eb3b7c55e1345f812d75590df279722"
+    },
+    {
+      "path": "labs/axelor/core-test/run.py",
+      "category": "Core harness",
+      "bytes": 66644,
+      "physical_lines": 989,
+      "nonblank_lines": 926,
+      "sha256": "84490000067326cc8869ddbd19f84b388a0137971150afb991dd57d70e2b291d"
+    },
+    {
+      "path": "labs/axelor/core-test/test_api.py",
+      "category": "Python regression tests",
+      "bytes": 5383,
+      "physical_lines": 63,
+      "nonblank_lines": 60,
+      "sha256": "56f912b8a37389ef47654ea9d10df2b93049dc01807f3f6a6ce10b3e765c986c"
+    },
+    {
+      "path": "labs/axelor/core-test/test_benchmark_replay.py",
+      "category": "Python regression tests",
+      "bytes": 5077,
+      "physical_lines": 54,
+      "nonblank_lines": 51,
+      "sha256": "fdc49f6b20428e143d7c38129778115dbb8b60583074d348d352d0cff1345c1f"
+    },
+    {
+      "path": "labs/axelor/core-test/test_ci_suites.py",
+      "category": "Python regression tests",
+      "bytes": 2841,
+      "physical_lines": 60,
+      "nonblank_lines": 49,
+      "sha256": "03a93e80c1c40f60e199b67758f804bb8a064aef8f819ad9d75d5cba90cdfdb5"
+    },
+    {
+      "path": "labs/axelor/core-test/test_evidence.py",
+      "category": "Python regression tests",
+      "bytes": 41863,
+      "physical_lines": 633,
+      "nonblank_lines": 597,
+      "sha256": "34bffe3ad8f14292ac57c87b3005a575f5983d96166d15b52bcb65214dcde7da"
+    },
+    {
+      "path": "labs/axelor/core-test/test_evidence_index.py",
+      "category": "Python regression tests",
+      "bytes": 12771,
+      "physical_lines": 148,
+      "nonblank_lines": 146,
+      "sha256": "c947b07828bc18875f67a6d058ebac1f9535c6f376ca140638afd0ddd325e072"
+    },
+    {
+      "path": "labs/axelor/core-test/test_finance.py",
+      "category": "Python regression tests",
+      "bytes": 2039,
+      "physical_lines": 29,
+      "nonblank_lines": 26,
+      "sha256": "35370e65a496eddf37b0dbcfe9c4651c543fc8889e8a3ec3c71c31f90d2ffaa3"
+    },
+    {
+      "path": "labs/axelor/core-test/test_orders.py",
+      "category": "Python regression tests",
+      "bytes": 13533,
+      "physical_lines": 162,
+      "nonblank_lines": 156,
+      "sha256": "3ac5c58870180a90bc423a486925c4cfd95c91b4293f22a548f5ef86a230c080"
+    },
+    {
+      "path": "labs/axelor/core-test/test_recovery.py",
+      "category": "Python regression tests",
+      "bytes": 3352,
+      "physical_lines": 44,
+      "nonblank_lines": 41,
+      "sha256": "eb3e1755ef8fb730355bea71374348c47a858e1bfa61c4558338d1df8789763c"
+    }
+  ],
+  "manual_interventions_in_this_correction_block": [
+    "B37: native company lock before order load; native bank statement FK; exact causal RPC permission denials; stable cash ordering by native ID; stable complete MCP request_rate type.",
+    "B38: outdated native finance Java test-count guard fixed without weakening required suites."
+  ],
+  "schema": "11 native ORM models verified only when SUPPORTED-CONFIGURATION runtime succeeds; no manually applied SQL migration and no upgrade trial."
+}

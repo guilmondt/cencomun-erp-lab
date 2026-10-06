@@ -1,3 +1,109 @@
+# Core Test Axelor — resultados ejecutados
+
+CI [37462836624](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37462836624),
+commit `068e76822da103c44934bf81a6bb0db4b8e12588`, conclusión `FAILURE`, 2325s.
+Referencia fija `fcf690dbc58b2b2dcf8d045c49976e3613e804cf`, cobertura revisión2.
+**Primaria: 29 PASS / 5 FAIL / 0 BLOCKED / 0 UNRUN. Réplica: 29 PASS / 5 FAIL / 0 BLOCKED / 0 UNRUN.**
+Criterios primaria: 4 PASS / 9 FAIL / 1 BLOCKED / 0 UNRUN; réplica: 4 PASS / 9 FAIL / 1 BLOCKED / 0 UNRUN.
+No se declara terminada ni aprobada la comparación. Criterio13 BLOCKED y seis
+escenarios de patch UNRUN: el usuario aplazó actualización y objetivo.
+
+[Procedencia](evidence/axelor-core/runs/37462836624/evidence-source.json),
+[verificación de correcciones](evidence/axelor-core/runs/37462836624/corrections-verification.json),
+[índice completo](evidence/axelor-core/runs/37462836624/isolated-repeat.json) y
+[métricas](axelor-core-metrics.md). Revisores congelados del SHA real; log completo
+con SHA256, un intento ZIP y red restringida conservada.
+
+Índice 23852bytes; 103 archivos originales,
+71583655bytes cargados y verificados. Archivo
+máximo 5194879bytes. Ningún árbol de casos duplicado dentro del índice ni
+aceptación basada sólo en sus etiquetas. Repetición derivada:
+**PASS**.
+
+Los gates de administrador y los grupos completos se mantienen separados.
+
+- Gate CO00: PASS, 14.753s; no sustituye roles/estados/atomicidad.
+
+- Gate TAX01-W: PASS, 8.186s; no sustituye roles/estados/atomicidad.
+
+Las correcciones conservan los mecanismos ERP: mutex JPA de compañía antes de
+cargar el pedido, FK BankStatementLine.reference real, causa exacta de denegación
+RPC sin datos/efectos, orden de MoveLine por ID y request_rate texto estable
+comparando el resultado MCP completo. Los estados de aceptación de cada una
+son los del recibo del CI, con todas las solicitudes/errores/lecturas originales.
+El adaptador mantiene403 estricto. PDF automático está desactivado sólo en LAB,
+fuera del contrato probado; isVentilationSkipped=false y GL nativo se inspeccionan.
+
+Los dos hallazgos funcionales se conservan sin cambiar expectativas:
+VAL01-04 exige rechazo de coste negativo y el ERP realiza -0.01 con control válido;
+STATE-CANCEL-BEFORE-HANDOVER exige CANCELLED y el ERP rechaza los tres intentos
+confirmados. Se preservan sus errores y snapshots tras rollback. Su repetición
+no convierte esos FAIL en PASS. Ver archivos originales de ambas fases.
+
+| Grupo completo | Primaria | Réplica |
+| --- | --- | --- |
+| CO00-NATIVE | PASS | PASS |
+| CO01-NATIVE | PASS | PASS |
+| TAX01-S-NATIVE | PASS | PASS |
+| TAX01-W-NATIVE | PASS | PASS |
+| PROD01-04 | PASS | PASS |
+| VAL01-04 | FAIL | FAIL |
+| STATE01-04 | PASS | PASS |
+| INV01-03-INSUFFICIENT | PASS | PASS |
+| FX01-03-MONEY01-03 | PASS | PASS |
+| PO01-09-NATIVE | PASS | PASS |
+| PO07-09-REVISION-SELF | PASS | PASS |
+| CASH00-06-NATIVE | PASS | PASS |
+| BANK-BOOK-FIXTURE | PASS | PASS |
+| BANK01-05-NATIVE | PASS | PASS |
+| API01-06-SIX-ROUTES | PASS | PASS |
+| IDEM01-02-CREATE-CONCURRENT | PASS | PASS |
+| PERM-API-NATIVE | FAIL | FAIL |
+| CASH04-06-HTTP-IMMUTABLE | PASS | PASS |
+| SEARCH01-04-NATIVE | PASS | PASS |
+| TAX02-04-IDEM-CONCURRENT | PASS | PASS |
+| BANK-CONCURRENT-1000 | PASS | PASS |
+| MCP01-06-STDIO | FAIL | FAIL |
+| IDEM03-LOST-RESTART | PASS | PASS |
+| IDEM04-EVENTS-RECOVERY | PASS | PASS |
+| FIXTURE-HASH-NATIVE-EXPORT | PASS | PASS |
+| AUDIT01-03-NATIVE | FAIL | FAIL |
+| IDEM-TAX-NATIVE-EFFECT-COUNTS | PASS | PASS |
+| SUPPORTED-CONFIGURATION | PASS | PASS |
+| STATE-UNKNOWN-ATOMIC | PASS | PASS |
+| STATE-DELIVERY-WITHOUT-ACCEPTANCE | PASS | PASS |
+| STATE-WEB-NO-GUIDE | PASS | PASS |
+| STATE-CANCEL-BEFORE-HANDOVER | FAIL | FAIL |
+| MCP-FORBIDDEN-CRITICAL-ACTIONS | PASS | PASS |
+| MCP-DENIALS-NATIVE-EFFECTS-AUDIT | PASS | PASS |
+
+| Criterio | Primaria | Réplica |
+| --- | --- | --- |
+| 1 | FAIL | FAIL |
+| 2 | PASS | PASS |
+| 3 | FAIL | FAIL |
+| 4 | FAIL | FAIL |
+| 5 | FAIL | FAIL |
+| 6 | FAIL | FAIL |
+| 7 | FAIL | FAIL |
+| 8 | FAIL | FAIL |
+| 9 | FAIL | FAIL |
+| 10 | FAIL | FAIL |
+| 11 | PASS | PASS |
+| 12 | PASS | PASS |
+| 13 | BLOCKED | BLOCKED |
+| 14 | PASS | PASS |
+
+## B39 — Validación de transporte pendiente
+
+Se corrigieron /removeAll y la pérdida de customer_id en el POST del replay.
+88 regresiones Python y la ABI fijada pasan localmente; la aceptación ERP del
+nuevo código queda pendiente de una única CI con matriz y réplica completas.
+No hay runtime previo: conexión local rechazada, contenedores ausentes.
+Los29PASS/5FAIL anteriores corresponden exclusivamente a068e768.
+
+## Historia anterior
+
 # Core Test Axelor — ejecución en curso
 
 CI [37461753306](https://github.com/guilmondt/cencomun-erp-lab/actions/runs/37461753306),

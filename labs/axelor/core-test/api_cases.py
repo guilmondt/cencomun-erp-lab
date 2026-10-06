@@ -20,7 +20,7 @@ from pathlib import Path
 from run import REFERENCE, NativeClient, exception_status, publish_complete_evidence
 from order_cases import OrderCases, effects, assert_denied_step
 from finance_cases import FinanceCases
-from mcp import TOOLS
+from mcp import TOOLS,adapter_arguments
 
 BOUNDARY='separate-http-after-business-commit-or-rollback'
 API_CHECKS={
@@ -35,6 +35,23 @@ API_CHECKS={
 
 def functional(value):return {k:v for k,v in value.items() if k not in ('_meta','replay')}
 
+def adapter_transport(name,args):
+    method,path,body,key=adapter_arguments(name,args)
+    if method=='GET':path+='?'+urllib.parse.urlencode(body)
+    return {'method':method,'path':path,'body':copy.deepcopy(body) if method=='POST' else None,'idempotency_key':key}
+
+def assert_mcp_pair(record):
+    expected=adapter_transport(record['tool'],record['request'])
+    assert record['mcp_adapter_request']==record['api_request']==expected,record['tool']+': complete transported payload and key parity required'
+    assert functional(record['api']['response'])==functional(record['mcp']['response']),record['tool']+': complete business result parity required'
+    if record['tool'].startswith('create'):
+        first,second=(record['mcp'],record['api']) if record['direction']=='MCP_then_API' else (record['api'],record['mcp'])
+        assert first['http_status']==201 and first['response']['replay'] is False,record['tool']+': first native creation required'
+        assert second['http_status']==200 and second['response']['replay'] is True,record['tool']+': replay must succeed; a conflict is not parity'
+        assert first['response']['native_id']>0
+        assert effects(record['after_first'])==effects(record['after_replay']),record['tool']+': replay changed durable effects'
+    else:assert record['api']['http_status']==record['mcp']['http_status']==200
+
 NATIVE_RESOURCE_DENIALS={
     'You are not authorized to '+verb+' this resource.' for verb in ('create','read','remove','update')
 }|{'Vous n’êtes pas autorisé(e) à '+verb+' cette ressource.' for verb in ('créer','lire','supprimer','modifier')}
@@ -47,13 +64,26 @@ CRITICAL_MODELS={'com.axelor.apps.purchase.db.PurchaseOrder','com.cencomun.core.
     'com.cencomun.core.db.CcmBankRow','com.axelor.apps.bankpayment.db.BankStatement',
     'com.axelor.apps.bankpayment.db.BankStatementLine','com.axelor.apps.account.db.Move'}
 
+def native_crud_request(operation,id,version=None):
+    """AOP 8.2.3 RestService POST removeAll consumes Request.records."""
+    record={'id':id}
+    if version is not None:record['version']=version
+    if operation=='read':return '/'+str(id),None
+    if operation=='create':return '',{'data':{'id':None}}
+    if operation=='write':return '',{'data':record}
+    if operation=='remove':return '/removeAll',{'records':[record]}
+    raise ValueError('Unknown native CRUD operation: '+operation)
+
 def native_permission_denied(result):
     """AOP 8.2.3 RPC error envelope is HTTP200; status=-1 alone proves nothing."""
     response=result.get('response',{});data=response.get('data')
     if set(response)-{'status','data','title','message','error','error_type','native_stack','code','correlation_id'}:return False
     if isinstance(data,list) and data:return False
     if isinstance(data,dict) and set(data)-{'title','message','causeStack'}:return False
-    if result.get('http_status')==403:return True
+    if result.get('http_status')==403:
+        messages=[response.get('message')]
+        if isinstance(data,dict):messages.append(data.get('message'))
+        return any(message in NATIVE_RESOURCE_DENIALS|NATIVE_GUARD_DENIALS for message in messages)
     if result.get('http_status')!=200 or response.get('status')!=-1 or not isinstance(data,dict):return False
     if data.get('title') in ('Access error',"Erreur d'accès") and data.get('message') in NATIVE_RESOURCE_DENIALS:return True
     if data.get('message') in NATIVE_GUARD_DENIALS:return True
@@ -135,14 +165,7 @@ def assert_api_group(evidence, fixtures):
         pairs=indexed['six-complete-results']['pairs'];assert {r['tool'] for r in pairs}==set(TOOLS) and len(pairs)==6
         reverse=indexed['reverse-write-replays']['pairs'];assert {r['tool'] for r in reverse}=={'createPurchaseDraft','createCasheaOrder'}
         for r in pairs+reverse:
-            assert functional(r['api']['response'])==functional(r['mcp']['response']), 'Complete business result parity required'
-            if r['tool'].startswith('create'):
-                first,second=(r['mcp'],r['api']) if r['direction']=='MCP_then_API' else (r['api'],r['mcp'])
-                assert first['http_status']==201 and first['response']['replay'] is False
-                assert second['http_status']==200 and second['response']['replay'] is True
-                assert first['response']['native_id']>0
-                assert effects(r['after_first'])==effects(r['after_replay'])
-            else:assert r['api']['http_status']==r['mcp']['http_status']==200
+            assert_mcp_pair(r)
     elif case=='MCP-FORBIDDEN-CRITICAL-ACTIONS':
         baseline=indexed['eligible-fixtures']['baseline'];assert len(baseline)==8
         tools=indexed['eight-forbidden-tools']['attempts'];native=indexed['eight-native-denials']['attempts']
@@ -331,7 +354,8 @@ class ApiCases:
             ids['CcmOutboxEvent']=event_snapshot['events'][0]['id']
             for role in ('reader','mcp','other'):
                 for model,id in ids.items():
-                    for operation,path,payload in [('read','/'+str(id),None),('write','',{'data':{'id':id}}),('remove','/remove',{'records':[{'id':id}]})]:
+                    for operation in ('read','write','remove'):
+                        path,payload=native_crud_request(operation,id)
                         before={'order':self.snapshot('API-CO'),'event_order':self.snapshot('CYCLE-CO00')}
                         r={'name':role+'-'+model+'-'+operation,'actor':'ccm-'+role,'model':model,'operation':operation,'request':payload,'before':before,'read_boundary':BOUNDARY}
                         step['attempts'].append(r);r.update(self.native_call(role,'/ws/rest/com.cencomun.core.db.'+model+path,payload))
@@ -351,7 +375,8 @@ class ApiCases:
             def snapshot():return {'order':self.snapshot('API-CO'),'purchase':self.snapshot('API-PO','finance'),'cash':self.snapshot('CS001','finance')}
             for role in ('reader','mcp','other'):
                 for model,id in models:
-                    for operation,suffix,body in [('create','',{'data':{'id':None}}),('write','',{'data':{'id':id}}),('remove','/remove',{'records':[{'id':id}]})]:
+                    for operation in ('create','write','remove'):
+                        suffix,body=native_crud_request(operation,id)
                         r={'name':role+'-'+model+'-'+operation,'actor':'ccm-'+role,'model':model,'operation':operation,'request':body,'before':snapshot(),'read_boundary':BOUNDARY};step['attempts'].append(r)
                         r.update(self.native_call(role,'/ws/rest/'+model+suffix,body));r['after']=snapshot()
                         r['permission_denied']=native_permission_denied(r);assert_native_permission_denial(r)
@@ -380,24 +405,27 @@ class ApiCases:
             def pairs(step):
                 step['pairs']=[]
                 for name,arg in args:
-                    method,path=TOOLS[name];api_arg={k:v for k,v in arg.items() if k not in ('product_id','customer_id','idempotency_key')}
-                    path=path.replace('{product_id}','P001').replace('{customer_id}','C002');kind='finance' if name=='createPurchaseDraft' else 'order'
-                    r={'tool':name,'direction':'MCP_then_API','request':arg};step['pairs'].append(r)
+                    method,path,api_arg,key=adapter_arguments(name,arg)
+                    kind='finance' if name=='createPurchaseDraft' else 'order'
+                    actual_path=path if method=='POST' else path+'?'+urllib.parse.urlencode(api_arg)
+                    r={'tool':name,'direction':'MCP_then_API','request':copy.deepcopy(arg),'mcp_adapter_request':adapter_transport(name,arg),
+                       'api_request':{'method':method,'path':actual_path,'body':copy.deepcopy(api_arg) if method=='POST' else None,'idempotency_key':key}};step['pairs'].append(r)
                     r['mcp']=process.tool(name,arg)
-                    if method=='POST':r['after_first']=self.snapshot(arg['id'],kind);r['api']=self.api('mcp',path,api_arg,arg['idempotency_key']);r['after_replay']=self.snapshot(arg['id'],kind)
-                    else:r['api']=self.api('mcp',path+'?'+urllib.parse.urlencode(api_arg))
-                    assert r['mcp'].get('http_status') in (200,201),r
-                    assert functional(r['api']['response'])==functional(r['mcp']['response']),r
+                    if method=='POST':r['after_first']=self.snapshot(arg['id'],kind);r['api']=self.api('mcp',actual_path,api_arg,key);r['after_replay']=self.snapshot(arg['id'],kind)
+                    else:r['api']=self.api('mcp',actual_path)
+                    assert_mcp_pair(r)
             self.step(e,'six-complete-results',pairs)
             def reverse(step):
                 step['pairs']=[]
                 for name,arg in args[-2:]:
-                    arg={**arg,'id':arg['id']+'-API-FIRST'};arg['idempotency_key']=arg['id'];_,path=TOOLS[name]
-                    kind='finance' if name=='createPurchaseDraft' else 'order';body={k:v for k,v in arg.items() if k!='idempotency_key'}
-                    r={'tool':name,'direction':'API_then_MCP','request':arg};step['pairs'].append(r)
-                    r['api']=self.api('mcp',path,body,arg['id']);r['after_first']=self.snapshot(arg['id'],kind)
+                    arg={**arg,'id':arg['id']+'-API-FIRST'};arg['idempotency_key']=arg['id']
+                    method,path,body,key=adapter_arguments(name,arg)
+                    kind='finance' if name=='createPurchaseDraft' else 'order'
+                    r={'tool':name,'direction':'API_then_MCP','request':copy.deepcopy(arg),'mcp_adapter_request':adapter_transport(name,arg),
+                       'api_request':{'method':method,'path':path,'body':copy.deepcopy(body),'idempotency_key':key}};step['pairs'].append(r)
+                    r['api']=self.api('mcp',path,body,key);r['after_first']=self.snapshot(arg['id'],kind)
                     r['mcp']=process.tool(name,arg);r['after_replay']=self.snapshot(arg['id'],kind)
-                    assert r['api']['http_status']==201 and r['mcp'].get('http_status')==200,r
+                    assert_mcp_pair(r)
             self.step(e,'reverse-write-replays',reverse)
         finally:process.stop()
     def forbidden(self,e):

@@ -17,10 +17,16 @@ TOOLS={
 }
 
 
-def call(name,args):
+def adapter_arguments(name,args):
+    """Remove only transport keys and fields actually consumed by URL placeholders."""
     method,path=TOOLS[name];payload=dict(args);key=payload.pop('idempotency_key',None)
     for field in ('product_id','customer_id'):
         if '{'+field+'}' in path:path=path.replace('{'+field+'}',urllib.parse.quote(str(payload.pop(field)),safe=''))
+    return method,path,payload,key
+
+
+def call(name,args):
+    method,path,payload,key=adapter_arguments(name,args)
     headers={'Cookie':os.environ['CCM_MCP_COOKIE'],'Content-Type':'application/json'}
     if os.environ.get('CCM_MCP_CSRF'):headers['X-CSRF-Token']=os.environ['CCM_MCP_CSRF']
     if key:headers['Idempotency-Key']=key

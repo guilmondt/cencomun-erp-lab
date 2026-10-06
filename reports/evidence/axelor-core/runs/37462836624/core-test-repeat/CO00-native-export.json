@@ -1,0 +1,522 @@
+{
+  "case": "CO00",
+  "stock": [
+    {
+      "code": "P001",
+      "product_id": 1,
+      "current_qty": "3.0000000000",
+      "id": 2,
+      "avg_price": "30.0000000000"
+    },
+    {
+      "code": "P002",
+      "product_id": 2,
+      "current_qty": "4.0000000000",
+      "id": 4,
+      "avg_price": "10.0000000000"
+    },
+    {
+      "code": "P003",
+      "product_id": 3,
+      "current_qty": "5.0000000000",
+      "id": 6,
+      "avg_price": "60.0000000000"
+    }
+  ],
+  "stock_move_ids": [
+    2,
+    1
+  ],
+  "fixture_configuration": {
+    "accounts": [
+      {
+        "id": 1,
+        "code": "CCM-AR",
+        "vat_system": 1
+      },
+      {
+        "id": 2,
+        "code": "CCM-AP",
+        "vat_system": 1
+      },
+      {
+        "id": 3,
+        "code": "CCM-STOCK",
+        "vat_system": 1
+      },
+      {
+        "id": 4,
+        "code": "CCM-REVENUE",
+        "vat_system": 1
+      },
+      {
+        "id": 5,
+        "code": "CCM-COGS",
+        "vat_system": 1
+      },
+      {
+        "id": 6,
+        "code": "CCM-COMMISSION",
+        "vat_system": 1
+      },
+      {
+        "id": 7,
+        "code": "CCM-SHIPPING",
+        "vat_system": 1
+      },
+      {
+        "id": 8,
+        "code": "CCM-TAX",
+        "vat_system": 1
+      },
+      {
+        "id": 9,
+        "code": "CCM-CASH",
+        "vat_system": 1
+      },
+      {
+        "id": 10,
+        "code": "CCM-BANK",
+        "vat_system": 1
+      },
+      {
+        "id": 11,
+        "code": "CCM-OPENING",
+        "vat_system": 1
+      }
+    ],
+    "customers": [
+      {
+        "partner_id": 3,
+        "invoicing_address_id": 4,
+        "code": "C002"
+      },
+      {
+        "partner_id": 4,
+        "invoicing_address_id": 5,
+        "code": "CBANK"
+      },
+      {
+        "partner_id": 2,
+        "invoicing_address_id": 3,
+        "code": "C001"
+      }
+    ],
+    "company_id": 1,
+    "legal_vat_system": 2,
+    "invoice_runtime_configuration": {
+      "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+      "persisted_isVentilationSkipped": false,
+      "isVentilationSkipped": false,
+      "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+      "native_app_invoice_id": 1
+    },
+    "legal_partner_id": 1
+  },
+  "sale_order_ids": [
+    1
+  ],
+  "invoices": [
+    {
+      "id": 1,
+      "native_source_linkage": {
+        "native_invoice_id": 1,
+        "native_company_id": 1,
+        "header_sale_order_id": 1,
+        "header_sale_order_company_id": 1,
+        "header_sale_order_reference": "CCM-CO00",
+        "line_links": [
+          {
+            "sale_order_id": 1,
+            "sale_order_line_id": 1,
+            "parent_invoice_id": 1,
+            "sale_order_reference": "CCM-CO00",
+            "product_code": "P001",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 1
+          },
+          {
+            "sale_order_id": 1,
+            "sale_order_line_id": 2,
+            "parent_invoice_id": 1,
+            "sale_order_reference": "CCM-CO00",
+            "product_code": "P002",
+            "sale_order_company_id": 1,
+            "invoice_line_id": 2
+          }
+        ],
+        "source": "InvoiceLine.saleOrderLine.saleOrder"
+      },
+      "invoicing_address_id": 3,
+      "native_vat_liability": 2,
+      "statusSelect": "3",
+      "exTaxTotal": "125.000",
+      "taxTotal": "0.000",
+      "inTaxTotal": "125.000",
+      "amountPaid": "125.000",
+      "amountRemaining": "0.000",
+      "lines": [
+        {
+          "ex_tax_total": "100.000",
+          "product_id": 1,
+          "qty": "2.0000000000",
+          "code": "P001",
+          "id": 1,
+          "in_tax_total": "100.000"
+        },
+        {
+          "ex_tax_total": "25.000",
+          "product_id": 2,
+          "qty": "1.0000000000",
+          "code": "P002",
+          "id": 2,
+          "in_tax_total": "25.000"
+        }
+      ],
+      "payments": [
+        {
+          "id": 1,
+          "status": 1,
+          "amount": "50.000"
+        },
+        {
+          "id": 2,
+          "status": 1,
+          "amount": "75.000"
+        }
+      ]
+    }
+  ],
+  "moves": [
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "remaining": "0",
+          "parent_move_id": 4,
+          "account_company_id": 1,
+          "account_code": "CCM-CASH",
+          "account_id": 9,
+          "debit": "50.000",
+          "id": 8,
+          "credit": "0.000"
+        },
+        {
+          "remaining": "0.000",
+          "parent_move_id": 4,
+          "account_company_id": 1,
+          "account_code": "CCM-AR",
+          "account_id": 1,
+          "debit": "0.000",
+          "id": 9,
+          "credit": "50.000"
+        }
+      ],
+      "company_id": 1,
+      "id": 4
+    },
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "remaining": "0",
+          "parent_move_id": 5,
+          "account_company_id": 1,
+          "account_code": "CCM-BANK",
+          "account_id": 10,
+          "debit": "67.000",
+          "id": 10,
+          "credit": "0.000"
+        },
+        {
+          "remaining": "0",
+          "parent_move_id": 5,
+          "account_company_id": 1,
+          "account_code": "CCM-COMMISSION",
+          "account_id": 6,
+          "debit": "8.000",
+          "id": 11,
+          "credit": "0.000"
+        },
+        {
+          "remaining": "0.000",
+          "parent_move_id": 5,
+          "account_company_id": 1,
+          "account_code": "CCM-AR",
+          "account_id": 1,
+          "debit": "0.000",
+          "id": 12,
+          "credit": "75.000"
+        }
+      ],
+      "company_id": 1,
+      "id": 5
+    },
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "remaining": "0",
+          "parent_move_id": 2,
+          "account_company_id": 1,
+          "account_code": "CCM-REVENUE",
+          "account_id": 4,
+          "debit": "0.000",
+          "id": 4,
+          "credit": "100.000"
+        },
+        {
+          "remaining": "0",
+          "parent_move_id": 2,
+          "account_company_id": 1,
+          "account_code": "CCM-REVENUE",
+          "account_id": 4,
+          "debit": "0.000",
+          "id": 5,
+          "credit": "25.000"
+        },
+        {
+          "remaining": "0.000",
+          "parent_move_id": 2,
+          "account_company_id": 1,
+          "account_code": "CCM-AR",
+          "account_id": 1,
+          "debit": "125.000",
+          "id": 3,
+          "credit": "0.000"
+        }
+      ],
+      "company_id": 1,
+      "id": 2
+    },
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "remaining": "0",
+          "parent_move_id": 3,
+          "account_company_id": 1,
+          "account_code": "CCM-COGS",
+          "account_id": 5,
+          "debit": "70.000",
+          "id": 6,
+          "credit": "0.000"
+        },
+        {
+          "remaining": "0",
+          "parent_move_id": 3,
+          "account_company_id": 1,
+          "account_code": "CCM-STOCK",
+          "account_id": 3,
+          "debit": "0.000",
+          "id": 7,
+          "credit": "70.000"
+        }
+      ],
+      "company_id": 1,
+      "id": 3
+    }
+  ],
+  "fixture_opening_moves": [
+    {
+      "company_code": "CCM-LAB-001",
+      "status": 3,
+      "lines": [
+        {
+          "remaining": "0",
+          "parent_move_id": 1,
+          "account_company_id": 1,
+          "account_code": "CCM-STOCK",
+          "account_id": 3,
+          "debit": "500.000",
+          "id": 1,
+          "credit": "0.000"
+        },
+        {
+          "remaining": "0",
+          "parent_move_id": 1,
+          "account_company_id": 1,
+          "account_code": "CCM-OPENING",
+          "account_id": 11,
+          "debit": "0.000",
+          "id": 2,
+          "credit": "500.000"
+        }
+      ],
+      "company_id": 1,
+      "id": 1
+    }
+  ],
+  "deliveries": [
+    {
+      "id": 2,
+      "status": 3,
+      "type": 2
+    }
+  ],
+  "company_ids": [
+    1
+  ],
+  "sequences": [
+    {
+      "prefix": "CCM-inStockMove-",
+      "code": "inStockMove",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 92
+        }
+      ],
+      "id": 93
+    },
+    {
+      "prefix": "CCM-outStockMove-",
+      "code": "outStockMove",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 93
+        }
+      ],
+      "id": 94
+    },
+    {
+      "prefix": "CCM-saleOrder-",
+      "code": "saleOrder",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 94
+        }
+      ],
+      "id": 95
+    },
+    {
+      "prefix": "CCM-SALE-",
+      "code": "move",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 95
+        }
+      ],
+      "id": 96
+    },
+    {
+      "prefix": "CCM-GENERAL-",
+      "code": "move",
+      "versions": [
+        {
+          "next_num": 3,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 96
+        }
+      ],
+      "id": 97
+    },
+    {
+      "prefix": "CCM-CASH-",
+      "code": "move",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 97
+        }
+      ],
+      "id": 98
+    },
+    {
+      "prefix": "CCM-BANK-",
+      "code": "move",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 98
+        }
+      ],
+      "id": 99
+    },
+    {
+      "prefix": "CCM-INV-",
+      "code": "invoice",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 99
+        }
+      ],
+      "id": 100
+    },
+    {
+      "prefix": "CCM-REF-",
+      "code": "invoice",
+      "versions": [
+        {
+          "next_num": 1,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 100
+        }
+      ],
+      "id": 101
+    },
+    {
+      "prefix": "CCM-reconcile-",
+      "code": "reconcile",
+      "versions": [
+        {
+          "next_num": 3,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 101
+        }
+      ],
+      "id": 102
+    },
+    {
+      "prefix": "CCM-reconcileGroupDraft-",
+      "code": "reconcileGroupDraft",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 102
+        }
+      ],
+      "id": 103
+    },
+    {
+      "prefix": "CCM-reconcileGroupFinal-",
+      "code": "reconcileGroupFinal",
+      "versions": [
+        {
+          "next_num": 2,
+          "end_date": "2026-12-31",
+          "start_date": "2026-01-01",
+          "id": 103
+        }
+      ],
+      "id": 104
+    }
+  ]
+}

@@ -1,0 +1,5123 @@
+{
+  "metric_kind": "runtime",
+  "reference": "fcf690dbc58b2b2dcf8d045c49976e3613e804cf",
+  "gates": [
+    {
+      "case": "CO00",
+      "seconds": 14.753,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-W",
+      "seconds": 8.186,
+      "status": "PASS"
+    }
+  ],
+  "independent": [
+    {
+      "case": "PROD01-04",
+      "seconds": 2.115,
+      "status": "PASS"
+    },
+    {
+      "case": "SEARCH01-04-NATIVE",
+      "seconds": 0.455,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK-BOOK-FIXTURE",
+      "seconds": 0.945,
+      "status": "PASS"
+    },
+    {
+      "case": "FX01-03-MONEY01-03",
+      "seconds": 3.445,
+      "status": "PASS"
+    },
+    {
+      "case": "FIXTURE-HASH-NATIVE-EXPORT",
+      "seconds": 0.072,
+      "status": "PASS"
+    },
+    {
+      "case": "CO00-NATIVE",
+      "seconds": 13.52,
+      "status": "PASS"
+    },
+    {
+      "case": "CO01-NATIVE",
+      "seconds": 11.887,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-S-NATIVE",
+      "seconds": 11.383,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX01-W-NATIVE",
+      "seconds": 11.534,
+      "status": "PASS"
+    },
+    {
+      "case": "VAL01-04",
+      "seconds": 4.547,
+      "status": "FAIL"
+    },
+    {
+      "case": "STATE01-04",
+      "seconds": 2.467,
+      "status": "PASS"
+    },
+    {
+      "case": "INV01-03-INSUFFICIENT",
+      "seconds": 4.771,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-UNKNOWN-ATOMIC",
+      "seconds": 1.754,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-DELIVERY-WITHOUT-ACCEPTANCE",
+      "seconds": 7.158,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-WEB-NO-GUIDE",
+      "seconds": 4.922,
+      "status": "PASS"
+    },
+    {
+      "case": "STATE-CANCEL-BEFORE-HANDOVER",
+      "seconds": 14.473,
+      "status": "FAIL"
+    },
+    {
+      "case": "PO01-09-NATIVE",
+      "seconds": 5.201,
+      "status": "PASS"
+    },
+    {
+      "case": "PO07-09-REVISION-SELF",
+      "seconds": 0.567,
+      "status": "PASS"
+    },
+    {
+      "case": "CASH00-06-NATIVE",
+      "seconds": 2.389,
+      "status": "PASS"
+    },
+    {
+      "case": "CASH04-06-HTTP-IMMUTABLE",
+      "seconds": 0.27,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK01-05-NATIVE",
+      "seconds": 1.759,
+      "status": "PASS"
+    },
+    {
+      "case": "BANK-CONCURRENT-1000",
+      "seconds": 19.014,
+      "status": "PASS"
+    },
+    {
+      "case": "API01-06-SIX-ROUTES",
+      "seconds": 1.329,
+      "status": "PASS"
+    },
+    {
+      "case": "IDEM01-02-CREATE-CONCURRENT",
+      "seconds": 0.458,
+      "status": "PASS"
+    },
+    {
+      "case": "PERM-API-NATIVE",
+      "seconds": 12.119,
+      "status": "FAIL"
+    },
+    {
+      "case": "MCP01-06-STDIO",
+      "seconds": 0.935,
+      "status": "FAIL"
+    },
+    {
+      "case": "MCP-FORBIDDEN-CRITICAL-ACTIONS",
+      "seconds": 25.806,
+      "status": "PASS"
+    },
+    {
+      "case": "MCP-DENIALS-NATIVE-EFFECTS-AUDIT",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "case": "TAX02-04-IDEM-CONCURRENT",
+      "seconds": 15.772,
+      "status": "PASS"
+    },
+    {
+      "case": "IDEM03-LOST-RESTART",
+      "seconds": 0.879,
+      "status": "UNRUN"
+    },
+    {
+      "case": "IDEM04-EVENTS-RECOVERY",
+      "seconds": 0.911,
+      "status": "PASS"
+    },
+    {
+      "case": "IDEM-TAX-NATIVE-EFFECT-COUNTS",
+      "seconds": 0.911,
+      "status": "PASS"
+    },
+    {
+      "case": "AUDIT01-03-NATIVE",
+      "seconds": 0.418,
+      "status": "FAIL"
+    },
+    {
+      "case": "SUPPORTED-CONFIGURATION",
+      "seconds": 0.155,
+      "status": "PASS"
+    }
+  ],
+  "http_samples": [
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 4.248
+    },
+    {
+      "operation": "/callback",
+      "http_ms": 72.497
+    },
+    {
+      "operation": "/ws/public/app/info",
+      "http_ms": 4.805
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 4004.239,
+      "action": "ccm-core-native-prepare",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 78.965,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10513.436,
+      "action": "ccm-core-native-gate",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 154.72,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 339.964,
+      "action": "ccm-core-native-prepare",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 42.549,
+      "action": "ccm-core-native-inspect",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 7697.291,
+      "action": "ccm-core-native-gate",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 103.899,
+      "action": "ccm-core-native-inspect",
+      "case": "TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 559.064,
+      "action": "ccm-core-products-prepare",
+      "case": "PROD"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 267.885,
+      "action": "ccm-core-products-inspect",
+      "case": "PROD"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 276.531,
+      "action": "ccm-core-bank-book-prepare",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 593.933,
+      "action": "ccm-core-bank-book-post",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.718,
+      "action": "ccm-core-bank-book-inspect",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.77,
+      "action": "ccm-core-bank-book-post",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 18.39,
+      "action": "ccm-core-bank-book-inspect",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 249.031,
+      "action": "ccm-core-fx-prepare",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.969,
+      "action": "ccm-core-fixtures-prepare",
+      "case": "FIXTURE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 36.015,
+      "action": "ccm-core-fixtures-inspect",
+      "case": "FIXTURE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 588.83,
+      "action": "ccm-core-cycle-actors",
+      "case": "CYCLE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 139.382,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 487.619,
+      "action": "ccm-core-cycle-seed",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 38.782,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 48.81,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 37.026,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 35.146,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.337,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 43.359,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 47.68,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.707,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.167,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.572,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.007,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.448,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.42,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 37.697,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 40.893,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.936,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.101,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.776,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.109,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.383,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.635,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 91.122,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 183.187,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 121.83,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 100.232,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 88.739,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.308,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 85.079,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.636,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 128.648,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.321,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 90.443,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.961,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 84.028,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.138,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 85.141,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 78.991,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.961,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.477,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.89,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.478,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 102.116,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.407,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 89.176,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.038,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.35,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 134.008,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 408.871,
+      "action": "ccm-core-cycle-seed",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.534,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.272,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.859,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.743,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.497,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.521,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.416,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.373,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.294,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.48,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.065,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.366,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.154,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.119,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.078,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.935,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.003,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.416,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.046,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.889,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.069,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.433,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.396,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 85.016,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.604,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.962,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.781,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 111.256,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 82.08,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.39,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 90.134,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.099,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.287,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.134,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.75,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.84,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.482,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.791,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.319,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.518,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 115.497,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 88.561,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 102.782,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 103.437,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.719,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.591,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.382,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 134.835,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 412.956,
+      "action": "ccm-core-cycle-seed",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.721,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.176,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.418,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.08,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.718,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.564,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.216,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.87,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.806,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.478,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.388,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.339,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.462,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.06,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.43,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.761,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.85,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.572,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.894,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.754,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 69.083,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 82.02,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.079,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.967,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 69.489,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 68.98,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 91.662,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 88.949,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 87.938,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 100.674,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 84.462,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.746,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.415,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.688,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.231,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.481,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.872,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.903,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.978,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.91,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.421,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.67,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.518,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.771,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 103.007,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.927,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 145.243,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 444.049,
+      "action": "ccm-core-cycle-seed",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.981,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.219,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.108,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.763,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.398,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.073,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.99,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.426,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.361,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.349,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.692,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.195,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.452,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.737,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.95,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.945,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.738,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.481,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.322,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.73,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.009,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 161.504,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 72.752,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.337,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.277,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 72.501,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.806,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 91.083,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 96.389,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 82.114,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.212,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 93.059,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.852,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.337,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.53,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.207,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.586,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 85.816,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.518,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 78.595,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 82.884,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 78.413,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.11,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.435,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.932,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.586,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.952,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-TAX01-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 113.926,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-QUANTITY-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 404.18,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-QUANTITY-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.102,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.349,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.19,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 123.997,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-QUANTITY-FRACTION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 404.032,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-QUANTITY-FRACTION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.697,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-FRACTION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.175,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-FRACTION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.047,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-FRACTION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 119.097,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-QUANTITY-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 327.748,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-QUANTITY-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.246,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.492,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.246,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-QUANTITY-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 102.571,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-PRICE-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 333.028,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-PRICE-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.743,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.259,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.485,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.927,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-PRICE-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 325.758,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-PRICE-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.18,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.193,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.451,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 95.096,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-PRICE-PRECISION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 321.894,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-PRICE-PRECISION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.349,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-PRECISION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.81,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-PRECISION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.538,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-PRICE-PRECISION"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 95.486,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-DISABLED-PRODUCT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 350.736,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-DISABLED-PRODUCT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.141,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-DISABLED-PRODUCT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.819,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-DISABLED-PRODUCT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.557,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-DISABLED-PRODUCT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 95.599,
+      "action": "ccm-core-cycle-prepare",
+      "case": "VAL-NEGATIVE-NATIVE-COST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 316.902,
+      "action": "ccm-core-cycle-seed",
+      "case": "VAL-NEGATIVE-NATIVE-COST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.599,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-NEGATIVE-NATIVE-COST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.515,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-NEGATIVE-NATIVE-COST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 218.743,
+      "action": "ccm-core-cycle-negative-cost",
+      "case": "VAL-NEGATIVE-NATIVE-COST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.38,
+      "action": "ccm-core-cycle-inspect",
+      "case": "VAL-NEGATIVE-NATIVE-COST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.95,
+      "action": "ccm-core-cycle-prepare",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 313.991,
+      "action": "ccm-core-cycle-seed",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.327,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.659,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.669,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.451,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.495,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.405,
+      "action": "ccm-core-cycle-prepare",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 326.206,
+      "action": "ccm-core-cycle-seed",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.393,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.989,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.767,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.922,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.695,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-STORE-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 93.472,
+      "action": "ccm-core-cycle-prepare",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 306.001,
+      "action": "ccm-core-cycle-seed",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.238,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.464,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.598,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.793,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.84,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-REJECTED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 99.162,
+      "action": "ccm-core-cycle-prepare",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 331.046,
+      "action": "ccm-core-cycle-seed",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.538,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.35,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.888,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.396,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.608,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-WEB-CANCELLED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 101.389,
+      "action": "ccm-core-cycle-prepare",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 306.536,
+      "action": "ccm-core-cycle-seed",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.721,
+      "action": "ccm-core-cycle-inspect",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.733,
+      "action": "ccm-core-cycle-inspect",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.063,
+      "action": "ccm-core-cycle-inspect",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.273,
+      "action": "ccm-core-cycle-inspect",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.134,
+      "action": "ccm-core-cycle-inspect",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 91.244,
+      "action": "ccm-core-cycle-inspect",
+      "case": "INV-INSUFFICIENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 110.63,
+      "action": "ccm-core-cycle-prepare",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 376.834,
+      "action": "ccm-core-cycle-seed",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.523,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 47.841,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.691,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.052,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 38.807,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmOrder",
+      "http_ms": 28.833
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.981,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmOrder",
+      "http_ms": 17.895
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 31.982,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.791,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 36.41,
+      "action": "ccm-core-cycle-enum-probe",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.767,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-STORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 100.554,
+      "action": "ccm-core-cycle-prepare",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 346.776,
+      "action": "ccm-core-cycle-seed",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.275,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 102.059,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.414,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.269,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.587,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmOrder",
+      "http_ms": 12.839
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.733,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmOrder",
+      "http_ms": 11.953
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.909,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.701,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.917,
+      "action": "ccm-core-cycle-enum-probe",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.432,
+      "action": "ccm-core-cycle-inspect",
+      "case": "STATE-UNKNOWN-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 89.556,
+      "action": "ccm-core-cycle-prepare",
+      "case": "NO-ACCEPT-STORE-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 324.58,
+      "action": "ccm-core-cycle-seed",
+      "case": "NO-ACCEPT-STORE-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.55,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.851,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.453,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.948,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 96.608,
+      "action": "ccm-core-cycle-prepare",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 315.008,
+      "action": "ccm-core-cycle-seed",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.688,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.271,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.29,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.49,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.037,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-STORE-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 87.189,
+      "action": "ccm-core-cycle-prepare",
+      "case": "NO-ACCEPT-WEB-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 330.161,
+      "action": "ccm-core-cycle-seed",
+      "case": "NO-ACCEPT-WEB-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.239,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.073,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.375,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.849,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-NEW"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 93.455,
+      "action": "ccm-core-cycle-prepare",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 306.951,
+      "action": "ccm-core-cycle-seed",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.962,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.162,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.223,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.215,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.845,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-REVIEWED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.681,
+      "action": "ccm-core-cycle-prepare",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 316.881,
+      "action": "ccm-core-cycle-seed",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.962,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.247,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.268,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.743,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.111,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.231,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-ACCEPT-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 93.264,
+      "action": "ccm-core-cycle-prepare",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 312.972,
+      "action": "ccm-core-cycle-seed",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.25,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.985,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.202,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.395,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 71.207,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.582,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 72.738,
+      "action": "ccm-core-cycle-inspect",
+      "case": "NO-GUIDE-WEB"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 93.927,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 343.175,
+      "action": "ccm-core-cycle-seed",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.697,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.724,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.26,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 78.027,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.31,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.63,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-STORE-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 90.8,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 447.68,
+      "action": "ccm-core-cycle-seed",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.99,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.238,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.553,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 75.508,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 71.934,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.493,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-APPROVED"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.043,
+      "action": "ccm-core-cycle-prepare",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 306.324,
+      "action": "ccm-core-cycle-seed",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.942,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.831,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.611,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.118,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.649,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 252.501,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 71.029,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CANCEL-WEB-PREPARING"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 103.437,
+      "action": "ccm-core-cycle-actors",
+      "case": "FINANCE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 68.007,
+      "action": "ccm-core-finance-prepare",
+      "case": "PURCHASE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.243,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.68,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 15.204,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.984,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.32,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.589,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.312,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.04,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.397,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.948,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.494,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.041,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 15.019,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.285,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.585,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO01"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.741,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.346,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.303,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.038,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.043,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.8,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.637,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.161,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.899,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.113,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.957,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.152,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.405,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.627,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.675,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.075,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.928,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.111,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.26,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.648,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.735,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.424,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.799,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.576,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.969,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.527,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.986,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.308,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.322,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.589,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.629,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.389,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO03"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.803,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.547,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.8,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.123,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.562,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.782,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.916,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.38,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.61,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.87,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.395,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.527,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.484,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 15.269,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.529,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.086,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.346,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO04"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.713,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.546,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.113,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.86,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.545,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.747,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.75,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.62,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.542,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.885,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.207,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.336,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.906,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.189,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.276,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.125,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.587,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO05"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.767,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.144,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.841,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.282,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.961,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.741,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.584,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.768,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.497,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.116,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.43,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.698,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.408,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.402,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.051,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.092,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.693,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.764,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.985,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO06"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.651,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.204,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.116,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.827,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.444,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.168,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.441,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.082,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.101,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.105,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 13.73,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.765,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.839,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.709,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.02,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO07"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.496,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.488,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.636,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.434,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.024,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.487,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.182,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.376,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.546,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.703,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.034,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.515,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.568,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.463,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.031,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO08"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.93,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.964,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.233,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.491,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.671,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.013,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.527,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.531,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.559,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.566,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.384,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.449,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.863,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.642,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.141,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.006,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.26,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO09"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.096,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.025,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.649,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.284,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.879,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.021,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.245,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO02"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.415,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-SELF"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.49,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-SELF"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 11.607,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-SELF"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.105,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.636,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-ZERO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 8.241,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 8.262,
+      "action": "ccm-core-finance-inspect",
+      "case": "PO-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.479,
+      "action": "ccm-core-finance-prepare",
+      "case": "CASH"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 1143.385,
+      "action": "ccm-core-finance-cash-seed",
+      "case": "CASH"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 36.231,
+      "action": "ccm-core-finance-inspect",
+      "case": "CASH"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 52.401,
+      "action": "ccm-core-finance-cash-seed",
+      "case": "CASH"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 63.071,
+      "action": "ccm-core-finance-inspect",
+      "case": "CASH"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 37.905,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 62.663,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 57.231,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 49.928,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.786,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.12,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.772,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.587,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.374,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.774,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.749,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.599,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.446,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.499,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.596,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.295,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.089,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.664,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.805,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.029,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.796,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.953,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.802,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.806,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS001"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.885,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.842,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.536,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.205,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.198,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.983,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.462,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmCashClose",
+      "http_ms": 18.875
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.657,
+      "action": "ccm-core-finance-inspect",
+      "case": "CS000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 514.57,
+      "action": "ccm-core-finance-prepare",
+      "case": "BANK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.402,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 39.854,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.808,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.895,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.702,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE-ALT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.098,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE-ALT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.068,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 16.515,
+      "action": "ccm-core-bank-book-inspect",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.556,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.427,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.661,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 15.562,
+      "action": "ccm-core-bank-book-inspect",
+      "case": "BANKBOOK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.8,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.708,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 31.282,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.998,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.452,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CORE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.049,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.183,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-NEGATIVE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 357.558,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-1000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 277.64,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-1000"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 131.048,
+      "action": "ccm-core-cycle-prepare",
+      "case": "API-BASE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 404.593,
+      "action": "ccm-core-cycle-seed",
+      "case": "API-BASE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.102,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-BASE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 18.354,
+      "action": "ccm-core-finance-prepare",
+      "case": "PURCHASE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 279.017,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 302.64,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 51.493,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.173,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.581,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.716,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.742,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.235,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.472,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-CREATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.159,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-CREATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.904,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-CREATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.388,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-CREATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.815,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-CREATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.283,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-CREATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 277.935,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 256.48,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.251,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.221,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 272.853,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-BUYER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 256.484,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-BUYER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 17.972,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-BUYER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 16.794,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-BUYER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 235.291,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-MANAGER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 250.94,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-MANAGER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 17.673,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-MANAGER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.413,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-MANAGER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 246.509,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-DIRECTOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 286.304,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-DIRECTOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.432,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-DIRECTOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 17.388,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-DIRECTOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 269.236,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-SIMULATOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 232.268,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-SIMULATOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.395,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-SIMULATOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 16.29,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-SIMULATOR"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 220.917,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 225.276,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-PO-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 17.83,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.176,
+      "action": "ccm-core-cycle-inspect",
+      "case": "DENY-ORDER-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 220.052,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-CS-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 259.124,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-CS-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 271.467,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-BANK-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 219.258,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-BANK-READER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 317.551,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 323.669,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 279.493,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 255.103,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 268.942,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-CS-MCP"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 232.584,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-CS-MCP"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 262.756,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-BANK-MCP"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 230.928,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-BANK-MCP"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 263.697,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 232.96,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 215.374,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 229.623,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 257.382,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-CS-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 252.762,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-CS-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 259.327,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-BANK-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 242.227,
+      "action": "ccm-core-finance-inspect",
+      "case": "DENY-BANK-OTHER"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 219.661,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 214.675,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 259.264,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 281.499,
+      "action": "ccm-core-finance-inspect",
+      "case": "API-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.744,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 115.348,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 33.925,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 96.928,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 29.504,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 93.905,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.18,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.402,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.848,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 106.287,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 31.644,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 85.584,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.739,
+      "action": "ccm-core-cycle-inspect",
+      "case": "API-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 87.905,
+      "action": "ccm-core-cycle-inspect",
+      "case": "CYCLE-CO00"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 224.465,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 226.373,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 17.063,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.146,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-CO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 231.522,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 125.155,
+      "action": "ccm-core-cycle-prepare",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 353.316,
+      "action": "ccm-core-cycle-seed",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 19.671,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.915,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 21.233,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 82.372,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 71.376,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 104.894,
+      "action": "ccm-core-cycle-prepare",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 437.908,
+      "action": "ccm-core-cycle-seed",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.952,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.122,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.165,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 90.249,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.469,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.464,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 114.579,
+      "action": "ccm-core-cycle-prepare",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 487.531,
+      "action": "ccm-core-cycle-seed",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 30.972,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.735,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 25.556,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 87.734,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 90.501,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 94.331,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 139.945,
+      "action": "ccm-core-cycle-prepare",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 345.437,
+      "action": "ccm-core-cycle-seed",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 35.444,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 31.005,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.758,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 86.996,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 81.216,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 87.317,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 80.324,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 335.858,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-CS"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 16.85,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 285.5,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-BANK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.449,
+      "action": "ccm-core-bank-book-inspect",
+      "case": "BANK-BOOK-FIXTURE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 232.951,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 242.22,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-PO"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.79,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.972,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.433,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 72.443,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-DELIVER-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.658,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 73.976,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 78.761,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 91.734,
+      "action": "ccm-core-cycle-inspect",
+      "case": "MCP-DENY-SETTLE-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 284.122,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-CS"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 295.439,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-CS"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 290.68,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-RATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 12.807,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 251.373,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-RATE"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.072,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 266.162,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-BANK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 229.276,
+      "action": "ccm-core-finance-inspect",
+      "case": "MCP-DENY-BANK"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 104.145,
+      "action": "ccm-core-cycle-prepare",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 376.889,
+      "action": "ccm-core-cycle-seed",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.106,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.975,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 26.061,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 76.85,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 68.927,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 109.0,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 92.135,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 141.224,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 87.189,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 84.311,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 116.938,
+      "action": "ccm-core-cycle-prepare",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 369.481,
+      "action": "ccm-core-cycle-seed",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 23.54,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.826,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.931,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 79.583,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 77.059,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 96.328,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 123.596,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 105.099,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 119.471,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 115.506,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 121.261,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 110.529,
+      "action": "ccm-core-cycle-prepare",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 358.621,
+      "action": "ccm-core-cycle-seed",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.361,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 28.008,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.122,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 22.347,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 24.632,
+      "action": "ccm-core-cycle-inspect",
+      "case": "IDEM-LOST"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 69.489,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/ccm/lab/events/dispatch",
+      "http_ms": 210.376
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 45.282,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 52.6,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/ccm/lab/events/dispatch",
+      "http_ms": 166.395
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 35.485,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 35.02,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/ccm/lab/events/dispatch",
+      "http_ms": 156.207
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 37.142,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 55.371,
+      "action": "ccm-core-fx-prepare",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.461,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 8.368,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 9.757,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 10.032,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 8.806,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.416,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 14.784,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 17.796,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 18.678,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 27.91,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 20.761,
+      "action": "ccm-core-fx-inspect",
+      "case": "FX"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 82.698,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 131.059,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-S"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 98.204,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 111.932,
+      "action": "ccm-core-cycle-inspect",
+      "case": "TAX-CONC-W"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 45.876,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 313.548,
+      "action": "ccm-core-finance-inspect",
+      "case": "BANK-CONCURRENT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 40.08,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 43.277,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 46.423,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 74.556,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 46.679,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/rest/com.cencomun.core.db.CcmAudit/remove",
+      "http_ms": 3.441
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 32.626,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 36.112,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 34.864,
+      "action": "ccm-core-audit-inspect",
+      "case": "AUDIT"
+    },
+    {
+      "operation": "/ws/action",
+      "http_ms": 83.863,
+      "action": "ccm-core-native-inspect",
+      "case": "CO00"
+    }
+  ],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.41",
+  "cpu_count": 4,
+  "cpu_affinity": 4,
+  "disk_free_bytes": 86899924992,
+  "http_call_counts": {
+    "administrator": 820,
+    "product_operator": 30,
+    "search_reader": 16,
+    "fx_operator": 11,
+    "fx_manager": 4
+  },
+  "native_action_counts": {
+    "ccm-core-native-prepare": 2,
+    "ccm-core-native-inspect": 5,
+    "ccm-core-native-gate": 2,
+    "ccm-core-products-prepare": 1,
+    "ccm-core-products-inspect": 1,
+    "ccm-core-bank-book-prepare": 1,
+    "ccm-core-bank-book-post": 2,
+    "ccm-core-bank-book-inspect": 5,
+    "ccm-core-fx-prepare": 2,
+    "ccm-core-fixtures-prepare": 1,
+    "ccm-core-fixtures-inspect": 1,
+    "ccm-core-cycle-actors": 2,
+    "ccm-core-cycle-prepare": 36,
+    "ccm-core-cycle-seed": 36,
+    "ccm-core-cycle-inspect": 407,
+    "ccm-core-cycle-negative-cost": 1,
+    "ccm-core-cycle-enum-probe": 2,
+    "ccm-core-finance-prepare": 4,
+    "ccm-core-finance-inspect": 266,
+    "ccm-core-finance-cash-seed": 2,
+    "ccm-core-fx-inspect": 14,
+    "ccm-core-audit-inspect": 15
+  },
+  "benchmark": "UNRUN",
+  "note": "Gate timings are not the required 1000-sample benchmark"
+}

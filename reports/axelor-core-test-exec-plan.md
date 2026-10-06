@@ -734,3 +734,43 @@ PostgreSQL/ERP. No es un rechazo económico:34grupos UNRUN,13criterios UNRUN,
 
 ZIP403 sa0:un intento, artefacto remoto retenido y log completo local. Sin ampliación
 ni publicación de red. Los dos FAIL funcionales de CI20 siguen vigentes.
+
+
+## B39 — Transporte de tres grupos; aceptación del nuevo código pendiente
+
+CI37462836624@068e768 terminó con29PASS/5FAIL por fase y4PASS/9FAIL/1BLOCKED
+por criterios. Se cargaron103archivos originales/71.583.655bytes con SHA256;
+ambas repeticiones conservaron los resultados. Concurrencia TAX, fuente caja,
+benchmark1000×3 y request_rate texto se verificaron en ese runtime. Quedan los
+dos FAIL funcionales de coste y cancelación y tres fallos causados por transporte.
+
+Causas observadas: reader-CcmAudit-remove e immutable-admin-delete enviaron
+POST /ws/rest/{model}/remove y recibieron404 sin causa de autorización. El JAR
+fijado AOP8.2.3 expone /removeAll para Request.records, /{id}/remove para
+Request.data y DELETE /{id}. En MCP_then_API/createCasheaOrder, el helper de
+prueba quitó customer_id del cuerpo POST y produjo un conflicto409 legítimo.
+No son prueba de permisos/inmutabilidad ni paridad. Los archivos originales
+de ambas fases se conservan completos, sin reinterpretar los tres FAIL.
+
+1. Usar POST /removeAll y conservar IDs; para administrador obtener primero
+   la versión real mediante el control manager autorizado, evitando atribuir
+   un error de versión a inmutabilidad. Exigir mensaje nativo específico, sin
+   datos privados, y snapshots posteriores iguales. Rechazar404 y errores
+   genéricos, incluso si el código HTTP fuera403. Adaptador conserva403 estricto.
+2. Eliminar sólo idempotency_key como transporte y parámetros consumidos por
+   placeholders GET. Mantener customer_id y todo el POST. Guardar solicitudes
+   normalizadas de ambos transportes, resultados completos y efectos antes
+   de aserciones; verificar payload/clave y replay200 en ambas direcciones.
+3. Regresar petición HTTP real de MCP, igualdad de payload/resultados/tipos,
+   ausencia de customer/conflicto409 y ruta/denegación causal:88Python PASS.
+   ABI de RestService/Resource verificada localmente en los JAR fijados; esto
+   diagnostica el transporte y no sustituye runtime ERP del nuevo commit.
+4. Runtime anterior destruido por cleanup del runner; Docker no lista servicios
+   y GET público local falla URLError: <urlopen error [Errno 111] Connection refused>.
+   Usar una única CI soportada: verificar los tres grupos durante la primaria,
+   después matriz34/criterios14 y réplica con el mismo código ejecutado. No
+   crear credenciales locales ni ampliar permisos/red para sustituir ese runtime.
+
+Recibo local: reports/evidence/axelor-core/ci22-transport-local-20261006/diagnostic.json.
+No cambia negocio Java, ERP, permisos concedidos, fixtures/oráculo/revisión2,
+pins ni upstream. No se anticipan PASS; conservar los dos FAIL funcionales.

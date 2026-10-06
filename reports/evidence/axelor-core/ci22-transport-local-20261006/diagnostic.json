@@ -1,0 +1,68 @@
+{
+  "scope": "Local harness regression and pinned native ABI diagnostics only; no ERP acceptance",
+  "parent_commit": "068e76822da103c44934bf81a6bb0db4b8e12588",
+  "python_tests": 88,
+  "python_result": "PASS",
+  "native_routes": {
+    "class": "com.axelor.web.service.RestService",
+    "class_path": "/rest/{model}",
+    "mass_remove": "POST /removeAll; Request.records",
+    "single_remove": "POST /{id}/remove; Request.data",
+    "delete": "DELETE /{id}; query version"
+  },
+  "native_remove_execution": "Resource.remove(Request) performs JPA.runInTransaction; CAN_REMOVE precedes find/version/repository.remove. Admin immutable probe uses version read from the actual manager control.",
+  "runtime": {
+    "running_containers": [],
+    "public_endpoint": "http://127.0.0.1:8080/axelor-erp/ws/public/app/info",
+    "available": false,
+    "error_type": "URLError",
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "ci_acceptance": "PENDING on the next executed commit; previous CI22 results remain unchanged",
+  "network_policy_changed": false,
+  "jars": [
+    {
+      "path": "/workspace/ccm-axelor-runtime/gradle-home/caches/modules-2/files-2.1/com.axelor/axelor-web/8.2.3/b8d5f0d54fc8661fc1c96dd73d4d23ed0233b8ee/axelor-web-8.2.3.jar",
+      "sha256": "40c7aa9d1f23dcd4d872353bd3309c4cf9607b3559f8fb6177fc57c2ae10dfce"
+    },
+    {
+      "path": "/workspace/ccm-axelor-runtime/gradle-home/caches/modules-2/files-2.1/com.axelor/axelor-core/8.2.3/a4ed22da30b4d815bd706a6edcca669ebd7d758c/axelor-core-8.2.3.jar",
+      "sha256": "678100a945868afaf7e1e4e278da90273ba637fb7f55cb2774a70f81b7b9f32d"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "labs/axelor/core-test/api_cases.py",
+      "sha256": "e5fa7e283f03e535079e3bd68e01504d547ba01402a7ab0c244f5a13445693ae"
+    },
+    {
+      "path": "labs/axelor/core-test/audit_cases.py",
+      "sha256": "ab514bcb47120582f119e7419c527ab9fefddbd2ef9b30c69f2512673d16d568"
+    },
+    {
+      "path": "labs/axelor/core-test/mcp.py",
+      "sha256": "f9a9f8837d9871ee5ae063df66511a158667a60e6e802d90372da63c74e78f84"
+    },
+    {
+      "path": "labs/axelor/core-test/test_api.py",
+      "sha256": "fba6464cdb80f693eb9fc7e080ce331e451f602b2ece8d2c081e7d795d35ed32"
+    }
+  ],
+  "files": [
+    {
+      "path": "python-regressions.log",
+      "bytes": 268,
+      "sha256": "43b8a3a79b2849c86b3c64d9db560f6aa02aca768a7a85ca050dd989484a4140"
+    },
+    {
+      "path": "resource-javap.txt",
+      "bytes": 300127,
+      "sha256": "efde350394b0cdfccf9ebbf943926b68893dcf74a3dc7ef054f771e928052046"
+    },
+    {
+      "path": "rest-service-javap.txt",
+      "bytes": 315238,
+      "sha256": "94a812826f25ddf53b2691b139e69dd2bea1525a83767aa80636989d8c0a8d53"
+    }
+  ]
+}

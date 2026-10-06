@@ -1,0 +1,257 @@
+{
+  "case": "TAX01-W",
+  "stock": [],
+  "stock_move_ids": [],
+  "fixture_configuration": {
+    "legal_partner_id": 1,
+    "invoice_runtime_configuration": {
+      "autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+      "isVentilationSkipped": false,
+      "persisted_isVentilationSkipped": false,
+      "persisted_autoGenerateInvoicePrintingFileOnSaleInvoice": false,
+      "native_app_invoice_id": 1
+    },
+    "legal_vat_system": 2,
+    "company_id": 1,
+    "customers": [
+      {
+        "invoicing_address_id": 4,
+        "partner_id": 3,
+        "code": "C002"
+      },
+      {
+        "invoicing_address_id": 5,
+        "partner_id": 4,
+        "code": "CBANK"
+      },
+      {
+        "invoicing_address_id": 3,
+        "partner_id": 2,
+        "code": "C001"
+      }
+    ],
+    "accounts": [
+      {
+        "id": 1,
+        "vat_system": 1,
+        "code": "CCM-AR"
+      },
+      {
+        "id": 2,
+        "vat_system": 1,
+        "code": "CCM-AP"
+      },
+      {
+        "id": 3,
+        "vat_system": 1,
+        "code": "CCM-STOCK"
+      },
+      {
+        "id": 4,
+        "vat_system": 1,
+        "code": "CCM-REVENUE"
+      },
+      {
+        "id": 5,
+        "vat_system": 1,
+        "code": "CCM-COGS"
+      },
+      {
+        "id": 6,
+        "vat_system": 1,
+        "code": "CCM-COMMISSION"
+      },
+      {
+        "id": 7,
+        "vat_system": 1,
+        "code": "CCM-SHIPPING"
+      },
+      {
+        "id": 8,
+        "vat_system": 1,
+        "code": "CCM-TAX"
+      },
+      {
+        "id": 9,
+        "vat_system": 1,
+        "code": "CCM-CASH"
+      },
+      {
+        "id": 10,
+        "vat_system": 1,
+        "code": "CCM-BANK"
+      },
+      {
+        "id": 11,
+        "vat_system": 1,
+        "code": "CCM-OPENING"
+      }
+    ]
+  },
+  "sale_order_ids": [],
+  "invoices": [],
+  "moves": [],
+  "fixture_opening_moves": [],
+  "deliveries": [],
+  "company_ids": [
+    1
+  ],
+  "sequences": [
+    {
+      "code": "inStockMove",
+      "prefix": "CCM-inStockMove-",
+      "id": 93,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 92,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "invoice",
+      "prefix": "CCM-INV-",
+      "id": 100,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 99,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "invoice",
+      "prefix": "CCM-REF-",
+      "id": 101,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 1,
+          "id": 100,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "move",
+      "prefix": "CCM-BANK-",
+      "id": 99,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 98,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "move",
+      "prefix": "CCM-CASH-",
+      "id": 98,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 97,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "move",
+      "prefix": "CCM-GENERAL-",
+      "id": 97,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 3,
+          "id": 96,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "move",
+      "prefix": "CCM-SALE-",
+      "id": 96,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 95,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "outStockMove",
+      "prefix": "CCM-outStockMove-",
+      "id": 94,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 93,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "reconcile",
+      "prefix": "CCM-reconcile-",
+      "id": 102,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 3,
+          "id": 101,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "reconcileGroupDraft",
+      "prefix": "CCM-reconcileGroupDraft-",
+      "id": 103,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 102,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "reconcileGroupFinal",
+      "prefix": "CCM-reconcileGroupFinal-",
+      "id": 104,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 103,
+          "start_date": "2026-01-01"
+        }
+      ]
+    },
+    {
+      "code": "saleOrder",
+      "prefix": "CCM-saleOrder-",
+      "id": 95,
+      "versions": [
+        {
+          "end_date": "2026-12-31",
+          "next_num": 2,
+          "id": 94,
+          "start_date": "2026-01-01"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from run import REFERENCE, NativeClient, exception_status, publish_complete_evidence, assert_native_economics, assert_native_configuration
 from order_cases import OrderCases, effects
-from api_cases import ApiCases, BOUNDARY,assert_native_permission_denial
+from api_cases import ApiCases, BOUNDARY,assert_native_permission_denial,native_crud_request
 
 RUNTIME_CHECKS={
  'TAX02-04-IDEM-CONCURRENT': {'TAX-CONC-S','TAX-CONC-W'},
@@ -176,7 +176,14 @@ class RuntimeCases(ApiCases):
         self.step(e,'semantic-native-records',semantic)
         id=self.audit_snapshot()['audit'][0]['id'];path='/ws/rest/com.cencomun.core.db.CcmAudit'
         self.step(e,'authorized-manager-read',lambda step:step.update(native_audit_id=id,**self.native_call('manager',path+'/'+str(id))))
-        for name,role,url,body in [('immutable-manager-edit','manager',path,{'data':{'id':id,'reason':'Attempt overwrite'}}),('immutable-admin-delete','admin',path+'/remove',{'records':[{'id':id}]})]:
+        # Use the real current version, so a stale/missing version cannot be
+        # confused with the required immutable repository rejection.
+        read=next(s for s in e['steps'] if s['name']=='authorized-manager-read')
+        assert read['http_status']==200 and read['response']['status']==0,'Manager read control failed before native immutable delete probe'
+        version=read['response']['data'][0]['version']
+        assert isinstance(version,int) and version>=0,'Native audit read control must expose its current version'
+        suffix,delete=native_crud_request('remove',id,version)
+        for name,role,url,body in [('immutable-manager-edit','manager',path,{'data':{'id':id,'version':version,'reason':'Attempt overwrite'}}),('immutable-admin-delete','admin',path+suffix,delete)]:
             def operation(step,role=role,url=url,body=body):
                 step.update(actor=role,request=body,before=self.audit_snapshot())
                 step.update(self.native_call(role,url,body,self.admin if role=='admin' else None));step['after']=self.audit_snapshot()
