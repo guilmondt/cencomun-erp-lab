@@ -8,6 +8,27 @@ FIXTURES = Path(__file__).resolve().parents[3] / "fixtures/ccm-core-v1"
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_bank_book_keeps_signed_native_credit_and_positive_unallocated_amount(self):
+        import json
+        import copy
+        from decimal import Decimal
+        fixtures = json.loads((FIXTURES / "bank-book.json").read_bytes())
+        vouchers = []
+        for index, row in enumerate(fixtures, 1):
+            vouchers.append({"id": index, "reference": row["reference"], "status": 2,
+                "company_id": 1, "company_code": "CCM-LAB-001", "partner_id": 9,
+                "customer_id": row["customer_id"], "currency": row["currency"], "payment_date": row["date"],
+                "paid_amount": row["amount"], "remaining_amount": row["amount"], "allocation_ids": [],
+                "move": {"id": index, "status": 3, "voucher_id": index, "company_id": 1, "date": row["date"],
+                    "lines": [{"id": index*2, "account": "CCM-BANK", "debit": row["amount"], "credit": "0", "remaining": row["amount"]},
+                              {"id": index*2+1, "account": "CCM-AR", "debit": "0", "credit": row["amount"], "remaining": str(-Decimal(row["amount"]))}]}})
+        native = {"company_id": 1, "vouchers": vouchers}
+        self.assertEqual("255.00", assert_native_bank_book(native, fixtures)["unallocated_total"])
+        wrong = copy.deepcopy(native)
+        wrong["vouchers"][0]["move"]["lines"][1]["remaining"] = "100.00"
+        with self.assertRaises(AssertionError):
+            assert_native_bank_book(wrong, fixtures)
+
     def test_fx_aggregate_rounding_and_unauthorized_approver_are_rejected(self):
         import json
         import copy

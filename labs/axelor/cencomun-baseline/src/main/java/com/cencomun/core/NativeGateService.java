@@ -153,9 +153,11 @@ public class NativeGateService {
     Model customer = one(BASE + "Partner", "self.partnerSeq = ?1", "C001");
     Model warehouse = one(STOCK + "StockLocation", "self.name = ?1", "WH-LAB-001-" + caseId);
     p.stage("native-sale-order");
-    Model so = create(SALE + "SaleOrder");
-    set(so, "company", company); set(so, "clientPartner", customer);
-    set(so, "currency", get(company, "currency")); set(so, "creationDate", DATE); set(so, "orderDate", DATE);
+    Model so = (Model) call(service("com.axelor.apps.sale.service.saleorder.SaleOrderCreateService"), "createSaleOrder",
+        AuthUtils.getUser(), company, null, get(company, "currency"), DATE,
+        null, "CCM-" + caseId, null, customer, null, null, null, null);
+    p.evidence.put("native_created_sale_order_status", get(so, "statusSelect"));
+    set(so, "orderDate", DATE);
     set(so, "externalReference", "CCM-" + caseId); set(so, "stockLocation", warehouse); set(so, "inAti", true);
     set(so, "paymentMode", one(ACCOUNT + "PaymentMode", "self.code = ?1", "CCM-CASH"));
     set(so, "paymentCondition", one(ACCOUNT + "PaymentCondition", "self.code = ?1", "CCM-NET0"));
@@ -248,6 +250,8 @@ public class NativeGateService {
     for (Model move : list(ACCOUNT + "Move", "self.origin = ?1 OR self.origin = ?2", "CCM-" + caseId + "-COGS", "CCM-" + caseId + "-SETTLE"))
       if (moves.stream().noneMatch(m -> move.getId().equals(m.get("id")))) moves.add(exportMove(move));
     result.put("invoices", invoices); result.put("moves", moves);
+    result.put("fixture_opening_moves", list(ACCOUNT + "Move", "self.origin = ?1", "CCM-" + caseId + "-OPENING")
+        .stream().map(this::exportMove).toList());
     List<Map<String, Object>> deliveries = new ArrayList<>();
     if (warehouse != null) for (Model move : list(STOCK + "StockMove", "self.fromStockLocation = ?1", warehouse))
       deliveries.add(Map.of("id", move.getId(), "status", get(move, "statusSelect"), "type", get(move, "typeSelect")));

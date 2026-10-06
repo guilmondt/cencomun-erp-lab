@@ -211,7 +211,9 @@ def assert_native_bank_book(native, fixtures):
             assert line["account"] not in amounts
             amounts[line["account"]] = (Decimal(line["debit"]), Decimal(line["credit"]))
             if line["account"] == "CCM-AR":
-                assert Decimal(line["remaining"]) == amount, line
+                # AOS stores pending credits as -(credit - amountPaid). The
+                # voucher's unallocated business amount above remains positive.
+                assert Decimal(line["remaining"]) == -amount, line
         assert amounts == {"CCM-BANK": (amount, Decimal(0)), "CCM-AR": (Decimal(0), amount)}, amounts
     return {"native_voucher_ids": sorted(v["id"] for v in vouchers), "native_move_ids": sorted(moves),
             "native_move_line_ids": sorted(lines), "unallocated_total": str(sum(Decimal(v["remaining_amount"]) for v in vouchers))}
@@ -225,6 +227,9 @@ def run_bank_book_cases(admin, fixtures, output, row):
         evidence["setup"] = admin.action("ccm-core-bank-book-prepare", "BANKBOOK")
         admin.action("ccm-core-bank-book-post", "BANKBOOK")
         native = admin.action("ccm-core-bank-book-inspect", "BANKBOOK")
+        evidence["native_export"] = native
+        for voucher in native["vouchers"]:
+            print("::notice title=Native bank book inspected receipt::" + json.dumps({"case": evidence["case"], "inspected_receipt": voucher}), flush=True)
         evidence["native_assertions"] = assert_native_bank_book(native, expected)
         for voucher in native["vouchers"]:
             step = {"case": "native-advance-receipt", "persisted": voucher}
@@ -246,7 +251,7 @@ def run_bank_book_cases(admin, fixtures, output, row):
     (output / "BANK-BOOK-FIXTURE.json").write_text(json.dumps(evidence, indent=2) + "\n")
     row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"], evidence="BANK-BOOK-FIXTURE.json",
                reason=evidence.get("error", "Four confirmed native advance payments with posted GL and unallocated balances"))
-    print("::notice title=Core independent BANK-BOOK-FIXTURE::" + json.dumps({k: v for k, v in evidence.items() if k != "steps"})[:3800], flush=True)
+    print("::notice title=Core independent BANK-BOOK-FIXTURE::" + json.dumps({k: v for k, v in evidence.items() if k != "steps"}), flush=True)
     return evidence
 
 
@@ -315,7 +320,7 @@ def run_product_cases(admin, base, fixtures, output, row):
     (output / "PROD01-04.json").write_text(json.dumps(evidence, indent=2) + "\n")
     row.update(status=evidence["status"], observed_revision=1, complete=evidence["complete"],
                evidence="PROD01-04.json", reason=evidence.get("error", "Executed native operator CRUD with committed rereads"))
-    print("::notice title=Core independent PROD01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["steps", "http_samples"]})[:3800], flush=True)
+    print("::notice title=Core independent PROD01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["steps", "http_samples"]}), flush=True)
     return evidence
 
 
@@ -407,6 +412,9 @@ def run_search_cases(base, fixtures, output, row):
     specification = json.loads((fixtures / "scenarios.json").read_bytes())["search"]
     def native_search(model, criteria, fields):
         result = reader.request(f"/ws/rest/{model}/search", {"data": {"criteria": criteria}, "fields": fields, "limit": 100})
+        observation = {"case": "native-rest-inspection", "model": model, "criteria": criteria, "response": result}
+        evidence.setdefault("native_queries", []).append(observation)
+        print("::notice title=Native search inspection::" + json.dumps({"case": evidence["case"], "inspection": observation}), flush=True)
         assert result.get("status") == 0, result
         return result.get("data", [])
     try:
@@ -455,7 +463,7 @@ def run_search_cases(base, fixtures, output, row):
                reason=evidence.get("error", "Native queries and complete nonduplicated pages under the real reader"))
     for step in evidence["steps"]:
         print("::notice title=Native search step::" + json.dumps({"case": evidence["case"], "step": step}), flush=True)
-    print("::notice title=Core independent SEARCH01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["http_samples", "steps"]})[:3800], flush=True)
+    print("::notice title=Core independent SEARCH01-04::" + json.dumps({k: v for k, v in evidence.items() if k not in ["http_samples", "steps"]}), flush=True)
     return evidence
 
 
@@ -489,7 +497,7 @@ def run(base, fixtures, output):
             # Independent new HTTP request reads durable records, after any rollback.
             native = client.action("ccm-core-native-inspect", case)
             (output / f"{case}-native-export.json").write_text(json.dumps(native, indent=2) + "\n")
-            for section in ["stock", "invoices", "moves", "deliveries", "sale_order_ids", "company_ids"]:
+            for section in ["stock", "invoices", "moves", "fixture_opening_moves", "deliveries", "sale_order_ids", "company_ids"]:
                 value = json.dumps({"case": case, "section": section, "records": native[section]}, ensure_ascii=True)
                 # Keep complete sections only; the full export is retained in the artifact.
                 if len(value) <= 3700:
@@ -526,7 +534,7 @@ def run(base, fixtures, output):
         (output / f"{case}-gate.json").write_text(json.dumps(observed, indent=2) + "\n")
         # Persist and publish impediment before expanding independent checks.
         message = json.dumps(observed, ensure_ascii=True).replace("%", "%25").replace("\n", "%0A").replace("\r", "%0D")
-        print(f"::notice title=Core gate {case}::{message[:3800]}", flush=True)
+        print(f"::notice title=Core gate {case}::{message}", flush=True)
     (output / "gate-impediments.json").write_text(json.dumps(gates, indent=2) + "\n")
     # Independent catalog fields run after the economic impediments have been persisted.
     products = run_product_cases(client, base, fixtures, output, by_case["PROD01-04"])

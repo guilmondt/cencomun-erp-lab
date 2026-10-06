@@ -352,3 +352,56 @@ vacíos. Es configuración del fixture, no un motivo para saltar ese control.
 
 Estos impedimentos se registran antes de continuar otras ampliaciones. El
 oráculo, datos compartidos y pins permanecen intactos.
+
+## B15–B18 — repetición 37413918081
+
+Commit 66199825dcc333e9001a05b3b94cc68e6d843d2c, CI FAILURE. B11/B12/B13/B14
+dejaron de reproducirse: stock inicial REALIZED=3, 5/5/5 con costos 30/10/60
+persistidos; CRUD por operador completo PASS; búsquedas/páginas de productos
+correctas; journal bancario permitió confirmar sus recibos. Gates aún incompletos.
+
+### B15 — cotización creada sin inicialización nativa
+
+Ambos gates: `Can only finalize a drafted quotation`, en finalización. SaleOrder.xml
+no tiene default para statusSelect; instanciar el modelo no lo inicia como draft.
+SaleOrderCreateServiceImpl.createSaleOrder es el mecanismo nativo que lo prepara
+(línea 198 del commit fijado), además de fechas/direcciones/configuración.
+
+1. Usar ese factory oficial antes de agregar líneas; no escribir statusSelect.
+2. Registrar su estado inicial y mantener sell como una transacción completa.
+3. Repetir ambos gates y exigir lecturas nuevas de todos los efectos económicos.
+
+### B16 — búsqueda nativa de cliente vacía
+
+Reader real ejecutó correctamente siete pasos de productos/aislamiento/paginación;
+la primera consulta de Partner devolvió []. El log no prueba si falló el scope,
+la preparación del cliente o la forma de la consulta. No se elimina el permiso.
+
+1. Exportar por admin los clientes preparados, nombre/teléfono y companySet.
+2. Guardar la respuesta REST completa y la consulta antes de la aserción.
+3. Repetir con lector; diagnosticar con esos datos y conservar resultado esperado C001.
+
+### B17 — saldo firmado de crédito comparado con importe sin signo
+
+Libro bancario falló al exigir +100 en MoveLine.amountRemaining: AOS exportó
+-100 para el crédito AR. MoveLineToolServiceImpl, líneas 444–445 del pin, documenta
+que los créditos pendientes tienen -(credit-amountPaid). El importe no aplicado
+del voucher y el fixture siguen siendo positivos; no cambia el resultado económico.
+
+1. Conservar el saldo firmado nativo en el export, sin abs silencioso.
+2. Exigir crédito AR pendiente=-importe y voucher restante=importe, más débito
+   BANK, asiento ACCOUNTED, ausencia de aplicaciones y replay sin duplicación.
+3. Guardar exports antes de evaluar y añadir regresión que rechace el signo incorrecto.
+
+### B18 — artefacto bloqueado por proxy, log recuperable
+
+Artefacto 11390399358 subido correctamente. Dos intentos de descarga fallaron
+`Forbidden` en productionresultssa17.blob.core.windows.net. No se añadió ni
+publicó ese dominio. El log completo sí se descargó a
+`/workspace/ccm-axelor-runtime/ci-evidence/37413918081.log`; los avisos JSON completos
+se recuperan como fuente secundaria etiquetada. No se infiere lo ausente.
+
+1. Conservar hash/log/resultados recuperados; no guardar URLs SAS temporales.
+2. Continuar compilación y casos independientes por los canales ya disponibles.
+3. La disponibilidad futura del ZIP permitiría verificar sus archivos/hashes;
+   no ampliar red ni declarar ese ZIP descargado mientras siga bloqueado.

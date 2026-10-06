@@ -496,3 +496,20 @@ La API de prueba exige CCM_CORE_LAB y compañía LAB. No añade herramientas MCP
 ni aprueba los seis endpoints, auditoría integral o idempotencia. El grupo
 conserva UNRUN hasta el siguiente CI; los tests locales sólo validan compilación
 y rechazo de evidencias incorrectas. Pins/fixtures originales intactos.
+
+### Repetición 37413918081 y siguiente ejecución
+
+PROD completo PASS; stock inicial real 5/5/5 persistido, sin Sequence NoResult.
+Gates bloqueados al finalizar el SaleOrder construido sin estado inicial.
+Se usa SaleOrderCreateService, conservando todos los servicios posteriores y
+sell como una transacción. El inspector añade el asiento de apertura separado
+de efectos de venta. SEARCH se instrumenta para distinguir cliente/scope/consulta;
+no se modifica su permiso sin causa demostrada. BANK conserva saldo nativo firmado
+y exige el importe no aplicado positivo del fixture. FX/MONEY entra al siguiente
+CI como independiente, sin preceder los dos gates. 17 regresiones locales.
+
+Artefacto 11390399358 bloqueado por proxy (sa17, Forbidden, dos intentos);
+no se añade dominio ni se publica red. Se conserva log completo y avisos JSON
+etiquetados como fuente secundaria. Los avisos controlados no se recortan a mitad
+de JSON; exports fallidos se guardan antes de evaluar. El CI anterior ya terminó,
+por lo que el siguiente push no cancela ni duplica tareas.

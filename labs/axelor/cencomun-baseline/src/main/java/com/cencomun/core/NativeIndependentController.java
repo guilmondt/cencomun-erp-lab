@@ -122,7 +122,12 @@ public class NativeIndependentController {
           "credentials_match", AuthService.getInstance().match(password, user.getPassword()),
           "company_id", ((Model) get(user, "activeCompany")).getId()));
     }
-    response.setValue("core_result", Map.of("company_id", company.getId(), "profiles", profiles, "users", users));
+    List<Map<String, Object>> customers = new ArrayList<>();
+    for (Model partner : list("com.axelor.apps.base.db.Partner", "self.partnerSeq in (?1, ?2, ?3)", "C001", "C002", "CBANK"))
+      customers.add(Map.of("id", partner.getId(), "code", get(partner, "partnerSeq"),
+          "name", get(partner, "name"), "mobile_phone", get(partner, "mobilePhone"),
+          "company_ids", ((java.util.Set<Model>) get(partner, "companySet")).stream().map(Model::getId).toList()));
+    response.setValue("core_result", Map.of("company_id", company.getId(), "profiles", profiles, "users", users, "customers", customers));
   }
   private Model readPermission(String label, String model, String condition) {
     String name = "ccm.lab.reader." + label;
